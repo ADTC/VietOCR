@@ -1,0 +1,68 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033\deflangfe1033{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\fmodern\fprq1\fcharset0 Courier New;}{\f2\froman\fprq2\fcharset163 Times New Roman;}{\f3\fswiss\fcharset0 Arial;}}
+{\colortbl ;\red0\green0\blue255;}
+{\stylesheet{ Normal;}{\s1 heading 1;}{\s2 heading 2;}{\s3 heading 3;}}
+{\*\generator Msftedit 5.41.15.1515;}\viewkind4\uc1\pard\s2\sb100\sa100\qc\b\f0\fs36 VietOCR.NET\par
+\pard\qc\b0\fs24 English | {\field{\*\fldinst{HYPERLINK "file://readme_vi.rtf" }}{\fldrslt{\cf1\ul Vietnamese}}}\cf0\ulnone\f0\fs24\par
+\pard\s3\sb100\sa100\b\fs27 DESCRIPTION\par
+\pard\b0\fs24{\field{\*\fldinst{HYPERLINK "http://sourceforge.net/project/showfiles.php?group_id=153105" }}{\fldrslt{\cf1\ul VietOCR.NET}}}\cf0\ulnone\f0\fs24  is a .NET GUI frontend for {\field{\*\fldinst{HYPERLINK "http://code.google.com/p/tesseract-ocr/" }}{\fldrslt{\cf1\ul Tesseract OCR engine}}}\cf0\ulnone\f0\fs24 , providing character recognition support for various image formats, and multi-page images. The program has postprocessing which helps correct errors regularly encountered in the OCR process, boosting the accuracy rate on the result.\par
+\pard\s3\sb100\sa100\b\fs27 SYSTEM REQUIREMENTS\par
+\pard\b0\fs24{\field{\*\fldinst{HYPERLINK "http://msdn2.microsoft.com/en-us/netframework/aa731542.aspx" }}{\fldrslt{\cf1\ul Microsoft .NET Framework 2.0 Redistributable}}}\cf0\ulnone\f0\fs24 .\b\fs27\par
+\pard\s3\sb100\sa100 INSTALLATION\par
+\pard\sb100\sa100\b0\fs24 If you do not have authority to install under \f1\fs20 C:\\Program Files\f0\fs24  folder, you can specify another folder in Install Installation Folder dialog.\par
+\pard\s3\sb100\sa100\b\fs27 INSTRUCTIONS\par
+\pard\b0\fs24{\field{\*\fldinst{HYPERLINK "http://code.google.com/p/tesseract-ocr/downloads/list" }}{\fldrslt{\cf1\ul Language data packs}}}\cf0\ulnone\f0\fs24  for Tesseract should be decompressed into \f1\fs20 tesseract\f0\fs24  installation folder; the data files, whose names start with ISO6639-3 codes, will be placed in the \f1\fs20 tessdata\f0\fs24  subdirectory. Tesseract currently can only recognize uncompressed TIFF images; however, VietOCR.NET enables recognition of other image formats.\par
+\par
+The Vietnamese language data were generated for Times New Roman, Arial, Verdana, and Courier New fonts. Therefore, the recognition would have better success rate for images having similar font glyphs. OCRing images that have font glyphs look different from the supported fonts generally will require {\field{\*\fldinst{HYPERLINK "http://code.google.com/p/tesseract-ocr/wiki/TrainingTesseract" }}{\fldrslt{\cf1\ul training}}}\cf0\ulnone\f0\fs24  Tesseract to create another language data pack specifically for those typefaces.\par
+\par
+Images to be OCRed should be scanned at resolution from at least 200 DPI (dot per inch) to 400 DPI in monochrome (black&white) or grayscale. Scanning at higher resolutions will not necessarily result in better recognition accuracy, which currently can be higher than 97% for Vietnamese, and the next release of Tesseract may improve it even further. Even so, the actual rates still depend greatly on the quality of the scanned image. The settings for scanning are typically 300 DPI and 1 bpp (bit per pixel) black&white or 8 bpp grayscale TIFF format.\par
+\par
+The following information pertains to the OCR process of Vietnamese text. The recognition errors involving Vietnamese characters can be classified into three categories. Many of the errors are related to the letter cases \emdash  for example: hOa, nh\u7855?C \emdash  which can be easily corrected by popular Unicode text editors. Many other errors are\~a result of the OCR process\f2 , such as missing diacritical marks, wrong letters with similar shape, etc. \emdash  huu \endash  h\'fdu, mang \endash  marg, h0a \endash  hoa, la \endash  1a, uh\f0\'ecu - nh\'ecn. These can also be easily fixed by Vietnamese spell checker programs.\par
+\par
+The last category of\~ errors is the most difficult to detect because they are semantic errors, which means that the words are valid entries in the dictionary but are wrong in the context \emdash  e.g., tinh \endash  t\'ecnh, v\'e2n \endash  v\u7845?n. These errors require the editor to read though and manually correct them according to the original image.\par
+\par
+Following are instructions on how to correct the OCR errors in a speedy and effective way the first two groups of errors using {\field{\*\fldinst{HYPERLINK "http://vietpad.sourceforge.net/" }}{\fldrslt{\cf1\ul VietPad}}}\cf0\ulnone\f0\fs24  text editor. The process can be summarized as follows:\par
+\pard\fi-360\li720\sb100\sa100\tx720 1.\tab Group lines. The lines need to be grouped to the paragraph they belong, as being OCRed, each line becomes a separate 1-line paragraph. Use \i Remove Line Breaks\i0  function under \i Format\i0  menu. Note that this operation may not be needed for poems.\par
+\pard\fi-360\li720\sb100\sa100 2.\tab Select \i Change Case\i0 , also under \i Format\i0  menu, and choose \i Sentence case\i0  to correct most of the letter case errors. Locate and fix the rest of remaing letter case errors.\par
+3.\tab Correct the mispelled errors using the \i Spell Check\i0  under \i Tool\i0  menu.\par
+\pard\sb100\sa100 Through the above steps, the accurary can exceed 99%. The remaining, sematic errors are few, but it requires a human editor to read though and make necessary edits to make the document like the original scanned document, and error-free if desired.\par
+\pard If there is any questions, please post in {\field{\*\fldinst{HYPERLINK "http://vietunicode.sourceforge.net/forum/" }}{\fldrslt{\cf1\ul VietUnicode Forum}}}\cf0\ulnone\f0\fs24 .\par
+\pard\qc\f3\fs20{\pict\wmetafile8\picwgoal18671\pichgoal29 
+010009000003bd02000006000202000000000202000026060f00fa03574d464301000000000001
+000bf00000000001000000d803000000000000d8030000010000006c000000ffffffff00000000
+d32d0000580000000000000000000000555400007101000020454d4600000100d80300001a0000
+00030000000000000000000000000000002c13000008190000d00000000f010000000000000000
+000000000000802c030098220400160000000c000000180000000a000000100000000df3ffff00
+0000000900000010000000d32d000058000000250000000c0000000e0000805200000070010000
+010000009cffffff000000000000000000000000900100000000000004400012540069006d0065
+00730020004e0065007700200052006f006d0061006e0000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000cb30093000000000040000000000ae30083109300000
+000047169001000002020603050405020304877a0020000000800800000000000000ff01000000
+000000540069006d00650073002000000065007700200052006f006d0061006e00000000000000
+bd2d093050bbae3000331400010000000000000004481100aab40230044811004c3eaf301c4811
+006476000800000000250000000c00000001000000120000000c00000001000000180000000c00
+0000000000025400000054000000f30c0000000000001f0d00005700000001000000869d8740b2
+548740000000005a000000010000004c000000040000000000000000000000ec13000058000000
+50000000200065002d00000046000000280000001c00000047444943020000000cf3ffff000000
+00e020000058000000000000002100000008000000620000000c000000010000000a0000001000
+0000000000000000000024000000240000000000003f00000000000000000000003f0000000000
+0000000200000027000000180000000200000000000000aca8990000000000250000000c000000
+02000000250000000c000000080000805600000030000000ffffffff00000000d32d0000580000
+0005000000ffff0000ffffaf00a55baf00a55b0000ffff0000250000000c000000070000802500
+00000c000000000000802400000024000000000000400000000000000000000000400000000000
+00000002000000220000000c000000ffffffff4600000014000000080000004744494303000000
+250000000c0000000e0000800e0000001400000000000000100000001400000004000000030108
+00050000000b0200000000050000000c020e002a03040000002e0118001c000000fb0203000100
+00000000bc02000000000102022253797374656d00000000000000000000000000000000000000
+00000000000000040000002d0100001c000000fb02f0ff00000000000090010000000004400012
+54696d6573204e657720526f6d616e0000000000000000000000000000000000040000002d0101
+000400000002010100050000000902000000020d000000320a0e000f02010004000f0200003905
+0e0020000700030000001e0007000000fc020000aca899000000040000002d01020008000000fa
+02050000000000ffffff00040000002d0103000e000000240305000000000000000e0048070e00
+480700000000000008000000fa0200000000000000000000040000002d01040007000000fc0200
+00ffffff000000040000002d010500040000002701ffff040000002d010000030000000000
+}\f0\fs24\par
+}
+ 
