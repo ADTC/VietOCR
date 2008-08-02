@@ -21,6 +21,14 @@ thường gặp trong quy trình OCR, tăng độ chính xác trên kết quả.
 <h3>ĐÒI HỎI KỸ THUẬT</h3>
 <p><a href="http://msdn2.microsoft.com/en-us/netframework/aa731542.aspx">
 Microsoft .NET Framework 2.0 Redistributable</a>.</p>
+<p>Nếu bạn gặp FileLoadException với message &quot;<i>Could not load file or assembly 
+&#39;tessnet2, Version=2.0.3.2, Culture=neutral, PublicKeyToken=null&#39; or one of its 
+dependencies. This application has failed to start because the application 
+configuration is incorrect. Reinstalling the application may fix this problem. 
+(Exception from HRESULT: 0x800736B1)</i>&quot; trong khi đang chạy VietOCR.NET, xin 
+hãy cài đặt
+<a href="http://www.microsoft.com/downloads/details.aspx?familyid=200b2fd9-ae1a-4a14-984d-389c36f85647&displaylang=en">
+Microsoft Visual C++ 2005 SP1 Redistributable Package</a>.</p>
 <h3>CÀI ĐẶT</h3>
 <p>Nếu bạn không có quyền cài đặt (install) dưới <tt>C:\Program Files</tt> folder, bạn 
 hãy chỉ định một folder khác trong Install Installation Folder dialog.</p>
@@ -77,7 +85,7 @@ quả 2 loại lỗi đầu tiên, sử dụng chương trình
 	menu <i>Công cụ</i>.</li>
 </ol>
 
-<p>Qua các bước trên, mức chính xác có thể vượt hơn 99%. Những 
+<p>Qua các bước trên, hầu hết các lỗi thông thường sẽ được loại trừ. Những 
 lỗi ngữ nghĩa semantic còn lại ít, nhưng đòi hỏi người duyệt đọc dò 
 lại toàn bộ văn bản để được giống y như văn bản gốc quét, và toàn thiện nếu 
 muốn.</p>
