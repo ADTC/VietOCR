@@ -197,7 +197,7 @@ namespace VietOCR.NET
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HelpForm helpForm = new HelpForm("readme.rtf", strProgName + " Help");
+            HtmlHelpForm helpForm = new HtmlHelpForm("readme_cs.html", strProgName + " Help");
             helpForm.Owner = this;
             helpForm.Show();
         }
