@@ -34,7 +34,6 @@ namespace VietOCR.NET.Controls
             // ScrollablePictureBox
             // 
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ScrollablePictureBox_MouseMove);
-            //this.Click += new System.EventHandler(this.ScrollablePictureBox_Click);
             this.GotFocus += new System.EventHandler(this.ScrollablePictureBox_GotFocus);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ScrollablePictureBox_MouseClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ScrollablePictureBox_MouseDown);

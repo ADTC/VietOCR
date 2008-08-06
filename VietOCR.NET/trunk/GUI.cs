@@ -50,6 +50,8 @@ namespace VietOCR.NET
         private Rectangle rect = Rectangle.Empty;
         private Rectangle box = Rectangle.Empty;
 
+        private float scaleX, scaleY;
+        
         public GUI()
         {
             InitializeComponent();
@@ -110,6 +112,7 @@ namespace VietOCR.NET
                     //Image croppedImage = ImageIOHelper.Crop(this.pictureBox1.Image, rect);
                     //IList<Image> list = new List<Image>();
                     //list.Add(croppedImage);
+                    rect = new Rectangle((int)(rect.X * scaleX), (int)(rect.Y * scaleY), (int)(rect.Width * scaleX), (int)(rect.Height * scaleY));
                     performOCR(imageList, imageIndex, rect);
                 }
                 catch (Exception exc)
@@ -242,6 +245,8 @@ namespace VietOCR.NET
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 openFile(openFileDialog1.FileName);
+                scaleX = 1f;
+                scaleY = 1f;
             }
 
         }
@@ -366,6 +371,8 @@ namespace VietOCR.NET
             this.pictureBox1.Dock = DockStyle.Fill;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             this.pictureBox1.deselect();
+            scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
+            scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
         }
 
         private void toolStripBtnFitHeight_Click(object sender, EventArgs e)
@@ -373,6 +380,7 @@ namespace VietOCR.NET
             this.pictureBox1.Dock = DockStyle.None;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             this.pictureBox1.deselect();
+            scaleX = scaleY = 1f;
         }
 
         private void toolStripBtnFitWidth_Click(object sender, EventArgs e)
@@ -380,6 +388,7 @@ namespace VietOCR.NET
             this.pictureBox1.Dock = DockStyle.None;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             this.pictureBox1.deselect();
+            scaleX = scaleY = 1f;
         }
 
         /// <summary>
@@ -519,6 +528,14 @@ namespace VietOCR.NET
                 {
                     openFile(astr[0]);
                 }
+            }
+        }
+
+        private void textBox1_MouseEnter(object sender, EventArgs e)
+        {
+            if (!this.textBox1.Focused)
+            {
+                this.textBox1.Focus();
             }
         }
 
