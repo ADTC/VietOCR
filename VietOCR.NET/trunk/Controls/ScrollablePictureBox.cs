@@ -140,15 +140,6 @@ namespace VietOCR.NET.Controls
                 this.Focus();
             }
         }
-        
-        //private void ScrollablePictureBox_Click(object sender, EventArgs e)
-        //{
-        //    if (!this.Focused)
-        //    {
-        //        currentScrollPos = ((Panel)this.Parent).AutoScrollPosition;
-        //        this.Focus();
-        //    }
-        //}
 
         private void ScrollablePictureBox_GotFocus(object sender, EventArgs e) 
         {
