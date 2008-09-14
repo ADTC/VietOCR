@@ -70,7 +70,7 @@ namespace VietOCR.NET
             //doc.Load(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("VietOCR.NET.Data.ISO639-3.xml"));
 
             XmlNodeList list = doc.GetElementsByTagName("entry");
-            Hashtable ht = new Hashtable();
+            Dictionary<string, string> ht = new Dictionary<string, string>();
             foreach (XmlNode node in list)
             {
                 ht.Add(node.Attributes[0].Value, node.InnerText);
@@ -91,7 +91,7 @@ namespace VietOCR.NET
             {
                 langCodes[i] = langCodes[i].Replace(".inttemp", "").Replace("tessdata\\", "");
                 // translate ISO codes to full English names for user-friendliness
-                langs[i] = ht[langCodes[i]].ToString();
+                langs[i] = ht[langCodes[i]];
             }
         }
 
