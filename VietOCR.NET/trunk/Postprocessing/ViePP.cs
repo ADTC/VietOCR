@@ -51,18 +51,20 @@ namespace net.sourceforge.vietocr.postprocessing
                 //                    .ReplaceAll("(?<![cn])h\\b", "n")
             ;
 
-            text = text.Replace("êĩ-", "ết")
-                        .Replace("ug", "ng")
-                        .Replace("uh", "nh")
-                        .Replace("rn", "m")
-                        .Replace("iii", "m")
-                        .Replace("ll", "u")
-                        .Replace("II", "u")
-                        .Replace("ôh", "ốn");
+            StringBuilder strB = new StringBuilder(text);
+
+            strB.Replace("êĩ-", "ết")
+                .Replace("ug", "ng")
+                .Replace("uh", "nh")
+                .Replace("rn", "m")
+                .Replace("iii", "m")
+                .Replace("ll", "u")
+                .Replace("II", "u")
+                .Replace("ôh", "ốn");
 
             // lower uppercase letters ended by lowercase letters except the first letter
             Regex regex = new Regex("(?<=\\p{L}+)(\\p{Lu}+)(?=\\p{Ll}+)");
-            text = regex.Replace(text, new MatchEvaluator(LowerCaseText));
+            text = regex.Replace(strB.ToString(), new MatchEvaluator(LowerCaseText));
 
             //// lower uppercase letters begun by lowercase letters
             regex = new Regex("(?<=\\p{Ll}+)(\\p{Lu}+)");
