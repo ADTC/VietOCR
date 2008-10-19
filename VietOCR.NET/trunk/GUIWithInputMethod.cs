@@ -44,7 +44,7 @@ namespace VietOCR.NET
         public GUIWithInputMethod()
         {
             // Sets the UI culture to Vietnamese.
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("vi-VN");
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("vi-VN");
 
             InitializeComponent();
 
@@ -114,7 +114,7 @@ namespace VietOCR.NET
                 if (this.uILanguageToolStripMenuItem.DropDownItems[i].Tag.ToString() == selectedUILanguage)
                 {
                     // Select UI Language last saved
-                    miuilChecked = (ToolStripMenuItem)vietInputMethodToolStripMenuItem.DropDownItems[i];
+                    miuilChecked = (ToolStripMenuItem)uILanguageToolStripMenuItem.DropDownItems[i];
                     miuilChecked.Checked = true;
                     break;
                 }
@@ -135,7 +135,11 @@ namespace VietOCR.NET
             miuilChecked.Checked = false;
             miuilChecked = (ToolStripMenuItem)obj;
             miuilChecked.Checked = true;
-            selectedUILanguage = miuilChecked.Tag.ToString();
+            if (selectedUILanguage != miuilChecked.Tag.ToString())
+            {
+                selectedUILanguage = miuilChecked.Tag.ToString();
+                MessageBox.Show(this, "Please restart the application to take effect.", "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         protected override void LoadRegistryInfo(RegistryKey regkey)
         {
