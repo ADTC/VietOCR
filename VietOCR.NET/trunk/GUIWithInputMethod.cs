@@ -34,14 +34,17 @@ namespace VietOCR.NET
     public partial class GUIWithInputMethod : VietOCR.NET.GUIWithRegistry
     {
         string selectedInputMethod;
+        string selectedUILanguage;
         ToolStripMenuItem miimChecked;
+        ToolStripMenuItem miuilChecked;
 
         const string strInputMethod = "InputMethod";
+        const string strUILang = "UILanguage";
 
         public GUIWithInputMethod()
         {
             // Sets the UI culture to Vietnamese.
-            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("vi-VN");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("vi-VN");
 
             InitializeComponent();
 
@@ -61,8 +64,29 @@ namespace VietOCR.NET
                 ar.Add(miim);
             }
 
-            vietInputMethodToolStripMenuItem.DropDownItems.AddRange(ar.ToArray());
+            this.vietInputMethodToolStripMenuItem.DropDownItems.AddRange(ar.ToArray());
             this.textBox1.KeyPress += new KeyPressEventHandler(new VietKeyHandler(this.textBox1).OnKeyPress);
+
+
+            //
+            // Keyboard UI Language submenu
+            //
+            EventHandler eh1 = new EventHandler(MenuKeyboardUILangOnClick);
+
+            ar.Clear();
+
+            String[] uiLangs = { "en", "vi" };
+            foreach (string uiLang in uiLangs)
+            {
+                ToolStripRadioButtonMenuItem miuil = new ToolStripRadioButtonMenuItem();
+                CultureInfo ci = new CultureInfo(uiLang);
+                miuil.Tag = uiLang;
+                miuil.Text = ci.DisplayName;
+                miuil.CheckOnClick = true;
+                miuil.Click += eh1;
+                ar.Add(miuil);
+            }
+            this.uILanguageToolStripMenuItem.DropDownItems.AddRange(ar.ToArray());
 
         }
 
@@ -70,9 +94,9 @@ namespace VietOCR.NET
         {
             base.OnLoad(ea);
 
-            for (int i = 0; i < vietInputMethodToolStripMenuItem.DropDownItems.Count; i++)
+            for (int i = 0; i < this.vietInputMethodToolStripMenuItem.DropDownItems.Count; i++)
             {
-                if (vietInputMethodToolStripMenuItem.DropDownItems[i].Text == selectedInputMethod)
+                if (this.vietInputMethodToolStripMenuItem.DropDownItems[i].Text == selectedInputMethod)
                 {
                     // Select InputMethod last saved
                     miimChecked = (ToolStripMenuItem)vietInputMethodToolStripMenuItem.DropDownItems[i];
@@ -84,6 +108,17 @@ namespace VietOCR.NET
             VietKeyHandler.InputMethod = (InputMethods)Enum.Parse(typeof(InputMethods), selectedInputMethod);
             VietKeyHandler.SmartMark = true;
             VietKeyHandler.ConsumeRepeatKey = true;
+
+            for (int i = 0; i < this.uILanguageToolStripMenuItem.DropDownItems.Count; i++)
+            {
+                if (this.uILanguageToolStripMenuItem.DropDownItems[i].Tag.ToString() == selectedUILanguage)
+                {
+                    // Select UI Language last saved
+                    miuilChecked = (ToolStripMenuItem)vietInputMethodToolStripMenuItem.DropDownItems[i];
+                    miuilChecked.Checked = true;
+                    break;
+                }
+            }
         }
 
         void MenuKeyboardInputMethodOnClick(object obj, EventArgs ea)
@@ -95,16 +130,25 @@ namespace VietOCR.NET
             VietKeyHandler.InputMethod = (InputMethods)Enum.Parse(typeof(InputMethods), selectedInputMethod);
         }
 
+        void MenuKeyboardUILangOnClick(object obj, EventArgs ea)
+        {
+            miuilChecked.Checked = false;
+            miuilChecked = (ToolStripMenuItem)obj;
+            miuilChecked.Checked = true;
+            selectedUILanguage = miuilChecked.Tag.ToString();
+        }
         protected override void LoadRegistryInfo(RegistryKey regkey)
         {
             base.LoadRegistryInfo(regkey);
             selectedInputMethod = (string)regkey.GetValue(strInputMethod, Enum.GetName(typeof(InputMethods), InputMethods.Telex));
+            selectedUILanguage = (string)regkey.GetValue(strUILang, "en");
         }
 
         protected override void SaveRegistryInfo(RegistryKey regkey)
         {
             base.SaveRegistryInfo(regkey);
             regkey.SetValue(strInputMethod, selectedInputMethod);
+            regkey.SetValue(strUILang, selectedUILanguage);
         }
         
     }
