@@ -83,6 +83,55 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\ClonableToolStripMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ScrollablePictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ScrollablePictureBox.Designer.cs">
+      <DependentUpon>ScrollablePictureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToolStripRadioButtonMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUIWithInputMethod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIWithInputMethod.Designer.cs">
+      <DependentUpon>GUIWithInputMethod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIWithRegistry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIWithRegistry.Designer.cs">
+      <DependentUpon>GUIWithRegistry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HtmlHelpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HtmlHelpForm.Designer.cs">
+      <DependentUpon>HtmlHelpForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageIOHelper.cs" />
+    <Compile Include="OCR.cs" />
+    <Compile Include="OCRImageEntity.cs" />
+    <Compile Include="Postprocessing\IPostProcessor.cs" />
+    <Compile Include="Postprocessing\Processor.cs" />
+    <Compile Include="Postprocessing\ProcessorFactory.cs" />
+    <Compile Include="Postprocessing\ViePP.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\ISO639-3.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="tessdata\configs\api_config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -158,55 +207,18 @@
     <None Include="tessdata\vie.word-dawg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Controls\ClonableToolStripMenuItem.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\ScrollablePictureBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\ScrollablePictureBox.Designer.cs">
-      <DependentUpon>ScrollablePictureBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ToolStripRadioButtonMenuItem.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="GUIWithInputMethod.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUIWithInputMethod.Designer.cs">
+    <EmbeddedResource Include="GUI.vi.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIWithInputMethod.resx">
+      <SubType>Designer</SubType>
       <DependentUpon>GUIWithInputMethod.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUIWithRegistry.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUIWithRegistry.Designer.cs">
-      <DependentUpon>GUIWithRegistry.cs</DependentUpon>
-    </Compile>
-    <Compile Include="HtmlHelpForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="HtmlHelpForm.Designer.cs">
-      <DependentUpon>HtmlHelpForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ImageIOHelper.cs" />
-    <Compile Include="OCR.cs" />
-    <Compile Include="OCRImageEntity.cs" />
-    <Compile Include="Postprocessing\IPostProcessor.cs" />
-    <Compile Include="Postprocessing\Processor.cs" />
-    <Compile Include="Postprocessing\ProcessorFactory.cs" />
-    <Compile Include="Postprocessing\ViePP.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\ISO639-3.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIWithInputMethod.vi.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GUIWithInputMethod.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="readme_cs.html" />
     <EmbeddedResource Include="readme_cs_vi.html" />
     <Content Include="samples\vietsample.tif">

@@ -24,6 +24,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Xml;
 using Microsoft.Win32;
+using System.Globalization;
+using System.Threading;
 
 using net.sourceforge.vietocr.postprocessing;
 using Vietpad.NET.Controls;
@@ -54,6 +56,9 @@ namespace VietOCR.NET
         
         public GUI()
         {
+            // Sets the UI culture to Vietnamese.
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("vi-VN");
+
             InitializeComponent();
 
             //rectNormal = DesktopBounds;
@@ -65,8 +70,9 @@ namespace VietOCR.NET
         void LoadLang()
         {
             XmlDocument doc = new XmlDocument();
-            doc.Load("Data/ISO639-3.xml");
-            //doc.Load(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase), "Data/ISO639-3.xml"));
+            //doc.Load("Data/ISO639-3.xml");
+            String path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            doc.Load(Path.Combine(path, "Data/ISO639-3.xml"));
             //doc.Load(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("VietOCR.NET.Data.ISO639-3.xml"));
 
             XmlNodeList list = doc.GetElementsByTagName("entry");

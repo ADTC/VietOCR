@@ -21,6 +21,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
+using System.Globalization;
+using System.Threading;
 
 using Net.SourceForge.Vietpad.InputMethod;
 
@@ -38,6 +40,9 @@ namespace VietOCR.NET
 
         public GUIWithInputMethod()
         {
+            // Sets the UI culture to Vietnamese.
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("vi-VN");
+
             InitializeComponent();
 
             //

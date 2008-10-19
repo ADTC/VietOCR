@@ -29,6 +29,19 @@ namespace VietOCR.NET
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUI));
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.lblCurIndex = new System.Windows.Forms.Label();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripBtnPrev = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnNext = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnFitImage = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnFitHeight = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnFitWidth = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnZoomIn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnZoomOut = new System.Windows.Forms.ToolStripButton();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,344 +67,108 @@ namespace VietOCR.NET
             this.toolStripBtnOpen = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnOCR = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnClear = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripCbLang = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.lblCurIndex = new System.Windows.Forms.Label();
-            this.pictureBox1 = new VietOCR.NET.Controls.ScrollablePictureBox();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripBtnPrev = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtnNext = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtnFitImage = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtnFitHeight = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtnFitWidth = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtnZoomIn = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtnZoomOut = new System.Windows.Forms.ToolStripButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.menuStrip1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.pictureBox1 = new VietOCR.NET.Controls.ScrollablePictureBox();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // splitContainer2
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.commandToolStripMenuItem,
-            this.settingsToolStripMenuItem,
-            this.aboutToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(792, 31);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.splitContainer2.AccessibleDescription = null;
+            this.splitContainer2.AccessibleName = null;
+            resources.ApplyResources(this.splitContainer2, "splitContainer2");
+            this.splitContainer2.BackgroundImage = null;
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer2.Font = null;
+            this.splitContainer2.Name = "splitContainer2";
             // 
-            // fileToolStripMenuItem
+            // splitContainer2.Panel1
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.quitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(50, 27);
-            this.fileToolStripMenuItem.Text = "File";
+            this.splitContainer2.Panel1.AccessibleDescription = null;
+            this.splitContainer2.Panel1.AccessibleName = null;
+            resources.ApplyResources(this.splitContainer2.Panel1, "splitContainer2.Panel1");
+            this.splitContainer2.Panel1.BackgroundImage = null;
+            this.splitContainer2.Panel1.Controls.Add(this.lblCurIndex);
+            this.splitContainer2.Panel1.Font = null;
             // 
-            // openToolStripMenuItem
+            // splitContainer2.Panel2
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(227, 28);
-            this.openToolStripMenuItem.Text = "Open...";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.splitContainer2.Panel2.AccessibleDescription = null;
+            this.splitContainer2.Panel2.AccessibleName = null;
+            this.splitContainer2.Panel2.AllowDrop = true;
+            resources.ApplyResources(this.splitContainer2.Panel2, "splitContainer2.Panel2");
+            this.splitContainer2.Panel2.BackgroundImage = null;
+            this.splitContainer2.Panel2.Controls.Add(this.pictureBox1);
+            this.splitContainer2.Panel2.Font = null;
+            this.splitContainer2.Panel2.DragOver += new System.Windows.Forms.DragEventHandler(this.splitContainer2_Panel2_DragOver);
+            this.splitContainer2.Panel2.DragDrop += new System.Windows.Forms.DragEventHandler(this.splitContainer2_Panel2_DragDrop);
             // 
-            // saveToolStripMenuItem
+            // lblCurIndex
             // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(227, 28);
-            this.saveToolStripMenuItem.Text = "Save...";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(224, 6);
-            // 
-            // quitToolStripMenuItem
-            // 
-            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(227, 28);
-            this.quitToolStripMenuItem.Text = "Exit";
-            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
-            // 
-            // commandToolStripMenuItem
-            // 
-            this.commandToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.oCRToolStripMenuItem,
-            this.oCRAllPagesToolStripMenuItem,
-            this.toolStripMenuItem2,
-            this.postprocessToolStripMenuItem});
-            this.commandToolStripMenuItem.Name = "commandToolStripMenuItem";
-            this.commandToolStripMenuItem.Size = new System.Drawing.Size(107, 27);
-            this.commandToolStripMenuItem.Text = "Command";
-            // 
-            // oCRToolStripMenuItem
-            // 
-            this.oCRToolStripMenuItem.Name = "oCRToolStripMenuItem";
-            this.oCRToolStripMenuItem.Size = new System.Drawing.Size(215, 28);
-            this.oCRToolStripMenuItem.Text = "OCR";
-            this.oCRToolStripMenuItem.Click += new System.EventHandler(this.oCRToolStripMenuItem_Click);
-            // 
-            // oCRAllPagesToolStripMenuItem
-            // 
-            this.oCRAllPagesToolStripMenuItem.Name = "oCRAllPagesToolStripMenuItem";
-            this.oCRAllPagesToolStripMenuItem.Size = new System.Drawing.Size(215, 28);
-            this.oCRAllPagesToolStripMenuItem.Text = "OCR All Pages";
-            this.oCRAllPagesToolStripMenuItem.Click += new System.EventHandler(this.oCRAllPagesToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(212, 6);
-            // 
-            // postprocessToolStripMenuItem
-            // 
-            this.postprocessToolStripMenuItem.Name = "postprocessToolStripMenuItem";
-            this.postprocessToolStripMenuItem.Size = new System.Drawing.Size(215, 28);
-            this.postprocessToolStripMenuItem.Text = "Post-process";
-            this.postprocessToolStripMenuItem.Click += new System.EventHandler(this.postprocessToolStripMenuItem_Click);
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.wordWrapToolStripMenuItem,
-            this.fontToolStripMenuItem});
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(89, 27);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            this.settingsToolStripMenuItem.DropDownOpening += new System.EventHandler(this.settingsToolStripMenuItem_DropDownOpening);
-            // 
-            // wordWrapToolStripMenuItem
-            // 
-            this.wordWrapToolStripMenuItem.Name = "wordWrapToolStripMenuItem";
-            this.wordWrapToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
-            this.wordWrapToolStripMenuItem.Text = "Word Wrap";
-            this.wordWrapToolStripMenuItem.Click += new System.EventHandler(this.wordWrapToolStripMenuItem_Click);
-            // 
-            // fontToolStripMenuItem
-            // 
-            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
-            this.fontToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
-            this.fontToolStripMenuItem.Text = "Font...";
-            this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.helpToolStripMenuItem,
-            this.aboutToolStripMenuItem1,
-            this.aboutToolStripMenuItem2});
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(71, 27);
-            this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(262, 28);
-            this.helpToolStripMenuItem.Text = "VietOCR.NET Help";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
-            // 
-            // aboutToolStripMenuItem1
-            // 
-            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(259, 6);
-            // 
-            // aboutToolStripMenuItem2
-            // 
-            this.aboutToolStripMenuItem2.Name = "aboutToolStripMenuItem2";
-            this.aboutToolStripMenuItem2.Size = new System.Drawing.Size(262, 28);
-            this.aboutToolStripMenuItem2.Text = "About VietOCR.NET";
-            this.aboutToolStripMenuItem2.Click += new System.EventHandler(this.aboutToolStripMenuItem2_Click);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripProgressBar1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 544);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(792, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
-            // 
-            // toolStripProgressBar1
-            // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
-            this.toolStripProgressBar1.Visible = false;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripBtnOpen,
-            this.toolStripBtnOCR,
-            this.toolStripBtnClear,
-            this.toolStripSeparator1,
-            this.toolStripCbLang,
-            this.toolStripLabel1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 31);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(792, 31);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
-            // 
-            // toolStripBtnOpen
-            // 
-            this.toolStripBtnOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripBtnOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnOpen.Image")));
-            this.toolStripBtnOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripBtnOpen.Name = "toolStripBtnOpen";
-            this.toolStripBtnOpen.Size = new System.Drawing.Size(59, 28);
-            this.toolStripBtnOpen.Tag = this.openToolStripMenuItem;
-            this.toolStripBtnOpen.Text = "Open";
-            this.toolStripBtnOpen.ToolTipText = "Open";
-            // 
-            // toolStripBtnOCR
-            // 
-            this.toolStripBtnOCR.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripBtnOCR.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnOCR.Image")));
-            this.toolStripBtnOCR.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripBtnOCR.Name = "toolStripBtnOCR";
-            this.toolStripBtnOCR.Size = new System.Drawing.Size(50, 28);
-            this.toolStripBtnOCR.Tag = this.oCRToolStripMenuItem;
-            this.toolStripBtnOCR.Text = "OCR";
-            this.toolStripBtnOCR.ToolTipText = "OCR";
-            // 
-            // toolStripBtnClear
-            // 
-            this.toolStripBtnClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripBtnClear.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnClear.Image")));
-            this.toolStripBtnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripBtnClear.Name = "toolStripBtnClear";
-            this.toolStripBtnClear.Size = new System.Drawing.Size(56, 28);
-            this.toolStripBtnClear.Text = "Clear";
-            this.toolStripBtnClear.ToolTipText = "Clear";
-            this.toolStripBtnClear.Click += new System.EventHandler(this.toolStripBtnClear_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Margin = new System.Windows.Forms.Padding(0, 0, 100, 0);
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
-            // 
-            // toolStripCbLang
-            // 
-            this.toolStripCbLang.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripCbLang.Name = "toolStripCbLang";
-            this.toolStripCbLang.Size = new System.Drawing.Size(121, 31);
-            this.toolStripCbLang.SelectedIndexChanged += new System.EventHandler(this.toolStripCbLang_SelectedIndexChanged);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(135, 28);
-            this.toolStripLabel1.Text = "OCR Language";
+            this.lblCurIndex.AccessibleDescription = null;
+            this.lblCurIndex.AccessibleName = null;
+            resources.ApplyResources(this.lblCurIndex, "lblCurIndex");
+            this.lblCurIndex.Font = null;
+            this.lblCurIndex.Name = "lblCurIndex";
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 62);
+            this.splitContainer1.AccessibleDescription = null;
+            this.splitContainer1.AccessibleName = null;
+            resources.ApplyResources(this.splitContainer1, "splitContainer1");
+            this.splitContainer1.BackgroundImage = null;
+            this.splitContainer1.Font = null;
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.AccessibleDescription = null;
+            this.splitContainer1.Panel1.AccessibleName = null;
+            resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
+            this.splitContainer1.Panel1.BackgroundImage = null;
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
             this.splitContainer1.Panel1.Controls.Add(this.toolStrip2);
+            this.splitContainer1.Panel1.Font = null;
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.AccessibleDescription = null;
+            this.splitContainer1.Panel2.AccessibleName = null;
+            resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
+            this.splitContainer1.Panel2.BackgroundImage = null;
             this.splitContainer1.Panel2.Controls.Add(this.textBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(792, 482);
-            this.splitContainer1.SplitterDistance = 383;
-            this.splitContainer1.TabIndex = 3;
+            this.splitContainer1.Panel2.Font = null;
             // 
             // panel1
             // 
-            this.panel1.AutoScroll = true;
+            this.panel1.AccessibleDescription = null;
+            this.panel1.AccessibleName = null;
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.BackgroundImage = null;
             this.panel1.Controls.Add(this.splitContainer2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(43, 0);
+            this.panel1.Font = null;
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(340, 482);
-            this.panel1.TabIndex = 2;
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer2.IsSplitterFixed = true;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.lblCurIndex);
-            this.splitContainer2.Panel1MinSize = 20;
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.AllowDrop = true;
-            this.splitContainer2.Panel2.AutoScroll = true;
-            this.splitContainer2.Panel2.Controls.Add(this.pictureBox1);
-            this.splitContainer2.Panel2.DragOver += new System.Windows.Forms.DragEventHandler(this.splitContainer2_Panel2_DragOver);
-            this.splitContainer2.Panel2.DragDrop += new System.Windows.Forms.DragEventHandler(this.splitContainer2_Panel2_DragDrop);
-            this.splitContainer2.Size = new System.Drawing.Size(340, 482);
-            this.splitContainer2.SplitterDistance = 20;
-            this.splitContainer2.SplitterWidth = 1;
-            this.splitContainer2.TabIndex = 5;
-            // 
-            // lblCurIndex
-            // 
-            this.lblCurIndex.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblCurIndex.Location = new System.Drawing.Point(134, 5);
-            this.lblCurIndex.Name = "lblCurIndex";
-            this.lblCurIndex.Size = new System.Drawing.Size(70, 13);
-            this.lblCurIndex.TabIndex = 4;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // toolStrip2
             // 
-            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.toolStrip2.AccessibleDescription = null;
+            this.toolStrip2.AccessibleName = null;
+            resources.ApplyResources(this.toolStrip2, "toolStrip2");
+            this.toolStrip2.BackgroundImage = null;
+            this.toolStrip2.Font = null;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripBtnPrev,
             this.toolStripBtnNext,
@@ -400,108 +177,364 @@ namespace VietOCR.NET
             this.toolStripBtnFitWidth,
             this.toolStripBtnZoomIn,
             this.toolStripBtnZoomOut});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(43, 482);
-            this.toolStrip2.TabIndex = 1;
-            this.toolStrip2.Text = "toolStrip2";
             // 
             // toolStripBtnPrev
             // 
+            this.toolStripBtnPrev.AccessibleDescription = null;
+            this.toolStripBtnPrev.AccessibleName = null;
+            resources.ApplyResources(this.toolStripBtnPrev, "toolStripBtnPrev");
+            this.toolStripBtnPrev.BackgroundImage = null;
             this.toolStripBtnPrev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripBtnPrev.Enabled = false;
-            this.toolStripBtnPrev.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnPrev.Image")));
-            this.toolStripBtnPrev.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnPrev.Name = "toolStripBtnPrev";
-            this.toolStripBtnPrev.Size = new System.Drawing.Size(40, 27);
-            this.toolStripBtnPrev.Text = "<";
-            this.toolStripBtnPrev.ToolTipText = "Previous Page";
             this.toolStripBtnPrev.Click += new System.EventHandler(this.toolStripBtnPrev_Click);
             // 
             // toolStripBtnNext
             // 
+            this.toolStripBtnNext.AccessibleDescription = null;
+            this.toolStripBtnNext.AccessibleName = null;
+            resources.ApplyResources(this.toolStripBtnNext, "toolStripBtnNext");
+            this.toolStripBtnNext.BackgroundImage = null;
             this.toolStripBtnNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripBtnNext.Enabled = false;
-            this.toolStripBtnNext.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnNext.Image")));
-            this.toolStripBtnNext.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnNext.Name = "toolStripBtnNext";
-            this.toolStripBtnNext.Size = new System.Drawing.Size(40, 27);
-            this.toolStripBtnNext.Text = ">";
-            this.toolStripBtnNext.ToolTipText = "Next Page";
             this.toolStripBtnNext.Click += new System.EventHandler(this.toolStripBtnNext_Click);
             // 
             // toolStripBtnFitImage
             // 
+            this.toolStripBtnFitImage.AccessibleDescription = null;
+            this.toolStripBtnFitImage.AccessibleName = null;
+            resources.ApplyResources(this.toolStripBtnFitImage, "toolStripBtnFitImage");
+            this.toolStripBtnFitImage.BackgroundImage = null;
             this.toolStripBtnFitImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripBtnFitImage.Enabled = false;
-            this.toolStripBtnFitImage.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripBtnFitImage.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnFitImage.Image")));
-            this.toolStripBtnFitImage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnFitImage.Name = "toolStripBtnFitImage";
-            this.toolStripBtnFitImage.Size = new System.Drawing.Size(40, 18);
-            this.toolStripBtnFitImage.Text = "┼";
-            this.toolStripBtnFitImage.ToolTipText = "Fit Image";
             this.toolStripBtnFitImage.Click += new System.EventHandler(this.toolStripBtnFitImage_Click);
             // 
             // toolStripBtnFitHeight
             // 
+            this.toolStripBtnFitHeight.AccessibleDescription = null;
+            this.toolStripBtnFitHeight.AccessibleName = null;
+            resources.ApplyResources(this.toolStripBtnFitHeight, "toolStripBtnFitHeight");
+            this.toolStripBtnFitHeight.BackgroundImage = null;
             this.toolStripBtnFitHeight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripBtnFitHeight.Enabled = false;
-            this.toolStripBtnFitHeight.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripBtnFitHeight.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnFitHeight.Image")));
-            this.toolStripBtnFitHeight.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnFitHeight.Name = "toolStripBtnFitHeight";
-            this.toolStripBtnFitHeight.Size = new System.Drawing.Size(40, 18);
-            this.toolStripBtnFitHeight.Text = "↕";
-            this.toolStripBtnFitHeight.ToolTipText = "Fit Height";
             this.toolStripBtnFitHeight.Click += new System.EventHandler(this.toolStripBtnFitHeight_Click);
             // 
             // toolStripBtnFitWidth
             // 
+            this.toolStripBtnFitWidth.AccessibleDescription = null;
+            this.toolStripBtnFitWidth.AccessibleName = null;
+            resources.ApplyResources(this.toolStripBtnFitWidth, "toolStripBtnFitWidth");
+            this.toolStripBtnFitWidth.BackgroundImage = null;
             this.toolStripBtnFitWidth.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripBtnFitWidth.Enabled = false;
-            this.toolStripBtnFitWidth.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.toolStripBtnFitWidth.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnFitWidth.Image")));
-            this.toolStripBtnFitWidth.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnFitWidth.Name = "toolStripBtnFitWidth";
-            this.toolStripBtnFitWidth.Size = new System.Drawing.Size(40, 18);
-            this.toolStripBtnFitWidth.Text = "↔";
-            this.toolStripBtnFitWidth.ToolTipText = "Fit Width";
             this.toolStripBtnFitWidth.Click += new System.EventHandler(this.toolStripBtnFitWidth_Click);
             // 
             // toolStripBtnZoomIn
             // 
+            this.toolStripBtnZoomIn.AccessibleDescription = null;
+            this.toolStripBtnZoomIn.AccessibleName = null;
+            resources.ApplyResources(this.toolStripBtnZoomIn, "toolStripBtnZoomIn");
+            this.toolStripBtnZoomIn.BackgroundImage = null;
             this.toolStripBtnZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripBtnZoomIn.Enabled = false;
-            this.toolStripBtnZoomIn.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnZoomIn.Image")));
-            this.toolStripBtnZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnZoomIn.Name = "toolStripBtnZoomIn";
-            this.toolStripBtnZoomIn.Size = new System.Drawing.Size(40, 27);
-            this.toolStripBtnZoomIn.Text = "(+)";
-            this.toolStripBtnZoomIn.ToolTipText = "Zoom In";
             // 
             // toolStripBtnZoomOut
             // 
+            this.toolStripBtnZoomOut.AccessibleDescription = null;
+            this.toolStripBtnZoomOut.AccessibleName = null;
+            resources.ApplyResources(this.toolStripBtnZoomOut, "toolStripBtnZoomOut");
+            this.toolStripBtnZoomOut.BackgroundImage = null;
             this.toolStripBtnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripBtnZoomOut.Enabled = false;
-            this.toolStripBtnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnZoomOut.Image")));
-            this.toolStripBtnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnZoomOut.Name = "toolStripBtnZoomOut";
-            this.toolStripBtnZoomOut.Size = new System.Drawing.Size(40, 27);
-            this.toolStripBtnZoomOut.Text = "(-)";
-            this.toolStripBtnZoomOut.ToolTipText = "Zoom Out";
             // 
             // textBox1
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Multiline = true;
+            this.textBox1.AccessibleDescription = null;
+            this.textBox1.AccessibleName = null;
+            resources.ApplyResources(this.textBox1, "textBox1");
+            this.textBox1.BackgroundImage = null;
             this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(405, 482);
-            this.textBox1.TabIndex = 0;
             this.textBox1.MouseEnter += new System.EventHandler(this.textBox1_MouseEnter);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.AccessibleDescription = null;
+            this.menuStrip1.AccessibleName = null;
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
+            this.menuStrip1.BackgroundImage = null;
+            this.menuStrip1.Font = null;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.commandToolStripMenuItem,
+            this.settingsToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.menuStrip1.Name = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.AccessibleDescription = null;
+            this.fileToolStripMenuItem.AccessibleName = null;
+            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
+            this.fileToolStripMenuItem.BackgroundImage = null;
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.quitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.ShortcutKeyDisplayString = null;
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.AccessibleDescription = null;
+            this.openToolStripMenuItem.AccessibleName = null;
+            resources.ApplyResources(this.openToolStripMenuItem, "openToolStripMenuItem");
+            this.openToolStripMenuItem.BackgroundImage = null;
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.ShortcutKeyDisplayString = null;
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.AccessibleDescription = null;
+            this.saveToolStripMenuItem.AccessibleName = null;
+            resources.ApplyResources(this.saveToolStripMenuItem, "saveToolStripMenuItem");
+            this.saveToolStripMenuItem.BackgroundImage = null;
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.ShortcutKeyDisplayString = null;
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.AccessibleDescription = null;
+            this.toolStripMenuItem1.AccessibleName = null;
+            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            // 
+            // quitToolStripMenuItem
+            // 
+            this.quitToolStripMenuItem.AccessibleDescription = null;
+            this.quitToolStripMenuItem.AccessibleName = null;
+            resources.ApplyResources(this.quitToolStripMenuItem, "quitToolStripMenuItem");
+            this.quitToolStripMenuItem.BackgroundImage = null;
+            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
+            this.quitToolStripMenuItem.ShortcutKeyDisplayString = null;
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
+            // 
+            // commandToolStripMenuItem
+            // 
+            this.commandToolStripMenuItem.AccessibleDescription = null;
+            this.commandToolStripMenuItem.AccessibleName = null;
+            resources.ApplyResources(this.commandToolStripMenuItem, "commandToolStripMenuItem");
+            this.commandToolStripMenuItem.BackgroundImage = null;
+            this.commandToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.oCRToolStripMenuItem,
+            this.oCRAllPagesToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.postprocessToolStripMenuItem});
+            this.commandToolStripMenuItem.Name = "commandToolStripMenuItem";
+            this.commandToolStripMenuItem.ShortcutKeyDisplayString = null;
+            // 
+            // oCRToolStripMenuItem
+            // 
+            this.oCRToolStripMenuItem.AccessibleDescription = null;
+            this.oCRToolStripMenuItem.AccessibleName = null;
+            resources.ApplyResources(this.oCRToolStripMenuItem, "oCRToolStripMenuItem");
+            this.oCRToolStripMenuItem.BackgroundImage = null;
+            this.oCRToolStripMenuItem.Name = "oCRToolStripMenuItem";
+            this.oCRToolStripMenuItem.ShortcutKeyDisplayString = null;
+            this.oCRToolStripMenuItem.Click += new System.EventHandler(this.oCRToolStripMenuItem_Click);
+            // 
+            // oCRAllPagesToolStripMenuItem
+            // 
+            this.oCRAllPagesToolStripMenuItem.AccessibleDescription = null;
+            this.oCRAllPagesToolStripMenuItem.AccessibleName = null;
+            resources.ApplyResources(this.oCRAllPagesToolStripMenuItem, "oCRAllPagesToolStripMenuItem");
+            this.oCRAllPagesToolStripMenuItem.BackgroundImage = null;
+            this.oCRAllPagesToolStripMenuItem.Name = "oCRAllPagesToolStripMenuItem";
+            this.oCRAllPagesToolStripMenuItem.ShortcutKeyDisplayString = null;
+            this.oCRAllPagesToolStripMenuItem.Click += new System.EventHandler(this.oCRAllPagesToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.AccessibleDescription = null;
+            this.toolStripMenuItem2.AccessibleName = null;
+            resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            // 
+            // postprocessToolStripMenuItem
+            // 
+            this.postprocessToolStripMenuItem.AccessibleDescription = null;
+            this.postprocessToolStripMenuItem.AccessibleName = null;
+            resources.ApplyResources(this.postprocessToolStripMenuItem, "postprocessToolStripMenuItem");
+            this.postprocessToolStripMenuItem.BackgroundImage = null;
+            this.postprocessToolStripMenuItem.Name = "postprocessToolStripMenuItem";
+            this.postprocessToolStripMenuItem.ShortcutKeyDisplayString = null;
+            this.postprocessToolStripMenuItem.Click += new System.EventHandler(this.postprocessToolStripMenuItem_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.AccessibleDescription = null;
+            this.settingsToolStripMenuItem.AccessibleName = null;
+            resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
+            this.settingsToolStripMenuItem.BackgroundImage = null;
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.wordWrapToolStripMenuItem,
+            this.fontToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.ShortcutKeyDisplayString = null;
+            this.settingsToolStripMenuItem.DropDownOpening += new System.EventHandler(this.settingsToolStripMenuItem_DropDownOpening);
+            // 
+            // wordWrapToolStripMenuItem
+            // 
+            this.wordWrapToolStripMenuItem.AccessibleDescription = null;
+            this.wordWrapToolStripMenuItem.AccessibleName = null;
+            resources.ApplyResources(this.wordWrapToolStripMenuItem, "wordWrapToolStripMenuItem");
+            this.wordWrapToolStripMenuItem.BackgroundImage = null;
+            this.wordWrapToolStripMenuItem.Name = "wordWrapToolStripMenuItem";
+            this.wordWrapToolStripMenuItem.ShortcutKeyDisplayString = null;
+            this.wordWrapToolStripMenuItem.Click += new System.EventHandler(this.wordWrapToolStripMenuItem_Click);
+            // 
+            // fontToolStripMenuItem
+            // 
+            this.fontToolStripMenuItem.AccessibleDescription = null;
+            this.fontToolStripMenuItem.AccessibleName = null;
+            resources.ApplyResources(this.fontToolStripMenuItem, "fontToolStripMenuItem");
+            this.fontToolStripMenuItem.BackgroundImage = null;
+            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
+            this.fontToolStripMenuItem.ShortcutKeyDisplayString = null;
+            this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.AccessibleDescription = null;
+            this.aboutToolStripMenuItem.AccessibleName = null;
+            resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
+            this.aboutToolStripMenuItem.BackgroundImage = null;
+            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpToolStripMenuItem,
+            this.aboutToolStripMenuItem1,
+            this.aboutToolStripMenuItem2});
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.ShortcutKeyDisplayString = null;
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.AccessibleDescription = null;
+            this.helpToolStripMenuItem.AccessibleName = null;
+            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
+            this.helpToolStripMenuItem.BackgroundImage = null;
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.ShortcutKeyDisplayString = null;
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem1
+            // 
+            this.aboutToolStripMenuItem1.AccessibleDescription = null;
+            this.aboutToolStripMenuItem1.AccessibleName = null;
+            resources.ApplyResources(this.aboutToolStripMenuItem1, "aboutToolStripMenuItem1");
+            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
+            // 
+            // aboutToolStripMenuItem2
+            // 
+            this.aboutToolStripMenuItem2.AccessibleDescription = null;
+            this.aboutToolStripMenuItem2.AccessibleName = null;
+            resources.ApplyResources(this.aboutToolStripMenuItem2, "aboutToolStripMenuItem2");
+            this.aboutToolStripMenuItem2.BackgroundImage = null;
+            this.aboutToolStripMenuItem2.Name = "aboutToolStripMenuItem2";
+            this.aboutToolStripMenuItem2.ShortcutKeyDisplayString = null;
+            this.aboutToolStripMenuItem2.Click += new System.EventHandler(this.aboutToolStripMenuItem2_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.AccessibleDescription = null;
+            this.statusStrip1.AccessibleName = null;
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
+            this.statusStrip1.BackgroundImage = null;
+            this.statusStrip1.Font = null;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripProgressBar1});
+            this.statusStrip1.Name = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.AccessibleDescription = null;
+            this.toolStripStatusLabel1.AccessibleName = null;
+            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
+            this.toolStripStatusLabel1.BackgroundImage = null;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.AccessibleDescription = null;
+            this.toolStripProgressBar1.AccessibleName = null;
+            resources.ApplyResources(this.toolStripProgressBar1, "toolStripProgressBar1");
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.AccessibleDescription = null;
+            this.toolStrip1.AccessibleName = null;
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
+            this.toolStrip1.BackgroundImage = null;
+            this.toolStrip1.Font = null;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripBtnOpen,
+            this.toolStripBtnOCR,
+            this.toolStripBtnClear,
+            this.toolStripCbLang,
+            this.toolStripLabel1});
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
+            // 
+            // toolStripBtnOpen
+            // 
+            this.toolStripBtnOpen.AccessibleDescription = null;
+            this.toolStripBtnOpen.AccessibleName = null;
+            resources.ApplyResources(this.toolStripBtnOpen, "toolStripBtnOpen");
+            this.toolStripBtnOpen.BackgroundImage = null;
+            this.toolStripBtnOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripBtnOpen.Name = "toolStripBtnOpen";
+            this.toolStripBtnOpen.Tag = this.openToolStripMenuItem;
+            // 
+            // toolStripBtnOCR
+            // 
+            this.toolStripBtnOCR.AccessibleDescription = null;
+            this.toolStripBtnOCR.AccessibleName = null;
+            resources.ApplyResources(this.toolStripBtnOCR, "toolStripBtnOCR");
+            this.toolStripBtnOCR.BackgroundImage = null;
+            this.toolStripBtnOCR.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripBtnOCR.Name = "toolStripBtnOCR";
+            this.toolStripBtnOCR.Tag = this.oCRToolStripMenuItem;
+            // 
+            // toolStripBtnClear
+            // 
+            this.toolStripBtnClear.AccessibleDescription = null;
+            this.toolStripBtnClear.AccessibleName = null;
+            resources.ApplyResources(this.toolStripBtnClear, "toolStripBtnClear");
+            this.toolStripBtnClear.BackgroundImage = null;
+            this.toolStripBtnClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripBtnClear.Name = "toolStripBtnClear";
+            this.toolStripBtnClear.Click += new System.EventHandler(this.toolStripBtnClear_Click);
+            // 
+            // toolStripCbLang
+            // 
+            this.toolStripCbLang.AccessibleDescription = null;
+            this.toolStripCbLang.AccessibleName = null;
+            this.toolStripCbLang.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            resources.ApplyResources(this.toolStripCbLang, "toolStripCbLang");
+            this.toolStripCbLang.Name = "toolStripCbLang";
+            this.toolStripCbLang.SelectedIndexChanged += new System.EventHandler(this.toolStripCbLang_SelectedIndexChanged);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.AccessibleDescription = null;
+            this.toolStripLabel1.AccessibleName = null;
+            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            resources.ApplyResources(this.toolStripLabel1, "toolStripLabel1");
+            this.toolStripLabel1.BackgroundImage = null;
+            this.toolStripLabel1.Name = "toolStripLabel1";
             // 
             // backgroundWorker1
             // 
@@ -511,36 +544,50 @@ namespace VietOCR.NET
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.AccessibleDescription = null;
+            this.pictureBox1.AccessibleName = null;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.BackgroundImage = null;
+            this.pictureBox1.Font = null;
+            this.pictureBox1.ImageLocation = null;
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
+            // 
             // GUI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AccessibleDescription = null;
+            this.AccessibleName = null;
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 566);
+            this.BackgroundImage = null;
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Font = null;
+            this.Icon = null;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "GUI";
-            this.Text = "VietOCR.NET";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer2.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             this.splitContainer1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -573,7 +620,6 @@ namespace VietOCR.NET
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator aboutToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         protected System.Windows.Forms.ToolStripComboBox toolStripCbLang;
         private System.Windows.Forms.ToolStrip toolStrip2;
