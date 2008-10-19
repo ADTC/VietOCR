@@ -28,35 +28,49 @@ namespace VietOCR.NET
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-
-            //
-            // toolStripMenuItem3
-            //
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUIWithInputMethod));
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            //
-            // vietInputMethodToolStripMenuItem
-            //
             this.vietInputMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.uILanguageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SuspendLayout();
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem3,
-            this.vietInputMethodToolStripMenuItem
+            this.vietInputMethodToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.uILanguageToolStripMenuItem
             });
 
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(248, 6);
+            resources.ApplyResources(this.toolStripMenuItem3, "toolStripMenuItem3");
             // 
             // vietInputMethodToolStripMenuItem
             // 
             this.vietInputMethodToolStripMenuItem.Name = "vietInputMethodToolStripMenuItem";
-            this.vietInputMethodToolStripMenuItem.Size = new System.Drawing.Size(251, 28);
-            this.vietInputMethodToolStripMenuItem.Text = "Viet Input Method";
+            resources.ApplyResources(this.vietInputMethodToolStripMenuItem, "vietInputMethodToolStripMenuItem");
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            // 
+            // uILanguageToolStripMenuItem
+            // 
+            this.uILanguageToolStripMenuItem.Name = "uILanguageToolStripMenuItem";
+            resources.ApplyResources(this.uILanguageToolStripMenuItem, "uILanguageToolStripMenuItem");
+            // 
+            // GUIWithInputMethod
+            // 
+            resources.ApplyResources(this, "$this");
+            this.Name = "GUIWithInputMethod";
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -64,6 +78,7 @@ namespace VietOCR.NET
 
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem vietInputMethodToolStripMenuItem;
-
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem uILanguageToolStripMenuItem;
     }
 }
