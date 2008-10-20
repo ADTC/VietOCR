@@ -58,6 +58,8 @@ namespace VietOCR.NET
         protected const string strUILang = "UILanguage";
         protected string strRegKey = "Software\\VietUnicode\\";
 
+        System.ComponentModel.ComponentResourceManager resources;
+
         public GUI()
         {
             // Access registry to determine which UI Language to be loaded.
@@ -75,6 +77,8 @@ namespace VietOCR.NET
             
             // Sets the UI culture to the selected language.
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(selectedUILanguage);
+            
+            resources = new System.ComponentModel.ComponentResourceManager(typeof(GUI));
 
             InitializeComponent();
 
@@ -241,8 +245,6 @@ namespace VietOCR.NET
             if (OwnedForms.Length > 0)
                 return;
 
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUI));
-
             HtmlHelpForm helpForm = new HtmlHelpForm(resources.GetString("readme"), strProgName + resources.GetString("_Help"));
             helpForm.Owner = this;
             helpForm.Show();
@@ -252,7 +254,6 @@ namespace VietOCR.NET
         {
             string releaseDate = System.Configuration.ConfigurationManager.AppSettings["ReleaseDate"];
             string version = System.Configuration.ConfigurationManager.AppSettings["Version"];
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUI));
 
             MessageBox.Show(this, strProgName + " " + version + " © 2008\n" +
                 ".NET GUI Frontend for Tesseract OCR\n" +
