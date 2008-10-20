@@ -26,7 +26,6 @@ namespace VietOCR.NET
 {
     public partial class GUIWithRegistry : VietOCR.NET.GUI
     {
-        string strRegKey = "Software\\VietUnicode\\";
         const string strWinState = "WindowState";
         const string strLocationX = "LocationX";
         const string strLocationY = "LocationY";
@@ -67,10 +66,6 @@ namespace VietOCR.NET
         protected override void OnLoad(EventArgs ea)
         {
             base.OnLoad(ea);
-
-            // Construct complete registry key.
-
-            strRegKey += strProgName;
 
             // Load registry information.
 

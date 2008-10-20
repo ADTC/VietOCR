@@ -34,17 +34,15 @@ namespace VietOCR.NET
     public partial class GUIWithInputMethod : VietOCR.NET.GUIWithRegistry
     {
         string selectedInputMethod;
-        string selectedUILanguage;
         ToolStripMenuItem miimChecked;
         ToolStripMenuItem miuilChecked;
 
         const string strInputMethod = "InputMethod";
-        const string strUILang = "UILanguage";
 
         public GUIWithInputMethod()
         {
-            // Sets the UI culture to Vietnamese.
-            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("vi-VN");
+            // Sets the UI culture to the selected language.
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(selectedUILanguage);
 
             InitializeComponent();
 
@@ -75,13 +73,13 @@ namespace VietOCR.NET
 
             ar.Clear();
 
-            String[] uiLangs = { "en", "vi" };
+            String[] uiLangs = { "en-US", "vi-VN" };
             foreach (string uiLang in uiLangs)
             {
                 ToolStripRadioButtonMenuItem miuil = new ToolStripRadioButtonMenuItem();
                 CultureInfo ci = new CultureInfo(uiLang);
-                miuil.Tag = uiLang;
-                miuil.Text = ci.DisplayName;
+                miuil.Tag = ci.Name;
+                miuil.Text = ci.Parent.DisplayName;
                 miuil.CheckOnClick = true;
                 miuil.Click += eh1;
                 ar.Add(miuil);
@@ -138,14 +136,15 @@ namespace VietOCR.NET
             if (selectedUILanguage != miuilChecked.Tag.ToString())
             {
                 selectedUILanguage = miuilChecked.Tag.ToString();
-                MessageBox.Show(this, "Please restart the application to take effect.", "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUIWithInputMethod));
+                MessageBox.Show(this, resources.GetString("Restart_me"), "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         protected override void LoadRegistryInfo(RegistryKey regkey)
         {
             base.LoadRegistryInfo(regkey);
             selectedInputMethod = (string)regkey.GetValue(strInputMethod, Enum.GetName(typeof(InputMethods), InputMethods.Telex));
-            selectedUILanguage = (string)regkey.GetValue(strUILang, "en");
+            selectedUILanguage = (string)regkey.GetValue(strUILang, "en-US");
         }
 
         protected override void SaveRegistryInfo(RegistryKey regkey)

@@ -53,11 +53,28 @@ namespace VietOCR.NET
         private Rectangle box = Rectangle.Empty;
 
         private float scaleX, scaleY;
-        
+
+        protected string selectedUILanguage;
+        protected const string strUILang = "UILanguage";
+        protected string strRegKey = "Software\\VietUnicode\\";
+
         public GUI()
         {
-            // Sets the UI culture to Vietnamese.
-            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("vi-VN");
+            // Access registry to determine which UI Language to be loaded.
+            // The desired locale must be known before initializing visual components
+            // with language text. Waiting until OnLoad would be too late.
+            strRegKey += strProgName;
+
+            RegistryKey regkey = Registry.CurrentUser.OpenSubKey(strRegKey);
+
+            if (regkey == null)
+                regkey = Registry.CurrentUser.CreateSubKey(strRegKey);
+
+            selectedUILanguage = (string)regkey.GetValue(strUILang, "en-US");
+            regkey.Close();
+            
+            // Sets the UI culture to the selected language.
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(selectedUILanguage);
 
             InitializeComponent();
 
@@ -221,7 +238,12 @@ namespace VietOCR.NET
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HtmlHelpForm helpForm = new HtmlHelpForm("readme_cs.html", strProgName + " Help");
+            if (OwnedForms.Length > 0)
+                return;
+
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUI));
+
+            HtmlHelpForm helpForm = new HtmlHelpForm(resources.GetString("readme"), strProgName + resources.GetString("_Help"));
             helpForm.Owner = this;
             helpForm.Show();
         }
@@ -230,12 +252,13 @@ namespace VietOCR.NET
         {
             string releaseDate = System.Configuration.ConfigurationManager.AppSettings["ReleaseDate"];
             string version = System.Configuration.ConfigurationManager.AppSettings["Version"];
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUI));
 
             MessageBox.Show(this, strProgName + " " + version + " © 2008\n" +
                 ".NET GUI Frontend for Tesseract OCR\n" +
-                DateTime.Parse(releaseDate).ToString("dd MMMM yyyy") + "\n" +
+                DateTime.Parse(releaseDate).ToString("D", System.Threading.Thread.CurrentThread.CurrentUICulture).Normalize() + "\n" +
                 "http://vietocr.sourceforge.net",
-                "About " + strProgName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                resources.GetString("About_") + strProgName, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)

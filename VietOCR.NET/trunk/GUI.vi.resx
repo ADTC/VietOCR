@@ -373,4 +373,13 @@
   <data name="toolStripLabel1.Text" xml:space="preserve">
     <value>Ngôn ngữ OCR</value>
   </data>
+  <data name="About_" xml:space="preserve">
+    <value>Về </value>
+  </data>
+  <data name="_Help" xml:space="preserve">
+    <value> Trợ giúp</value>
+  </data>
+  <data name="readme" xml:space="preserve">
+    <value>readme_cs_vi.html</value>
+  </data>
 </root>
