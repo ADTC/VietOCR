@@ -1,7 +1,6 @@
-System requirements:
+﻿System requirements:
 
 - Java Runtime Environment 6.0 - http://java.sun.com/javase/downloads/index.jsp
-- JAI Image I/O 1.1 - https://jai-imageio.dev.java.net/binary-builds.html
 
 If you encounter out-of-memory exception, run ocr.bat instead of using the .jar.
 

@@ -19,26 +19,17 @@ engine</a>, cung cấp hỗ trợ nhận dạng ký tự cho các dạng ảnh T
 và ảnh chứa nhiều trang. Chương trình có phần hậu xử lý giúp sửa chữa các lỗi 
 thường gặp trong quy trình OCR, tăng độ chính xác trên kết quả.</p>
 <h3>ĐÒI HỎI KỸ THUẬT</h3>
-<ol>
-	<li>Java Runtime Environment 6.0 hoặc mới hơn - <a href="http://java.sun.com/">
-	http://java.sun.com/</a></li>
-	<li>JAI Image I/O 1.1 - <a href="https://jai-imageio.dev.java.net/">
-	https://jai-imageio.dev.java.net/</a></li>
-</ol>
+<p><a href="http://java.sun.com/javase/downloads/index.jsp">Java Runtime Environment 6.0</a> 
+hoặc mới hơn.</p>
 <h3>HƯỚNG DẪN</h3>
 <p>Các gói data ngôn ngữ (<a href="http://code.google.com/p/tesseract-ocr/downloads/list">language data 
 packs</a>) cho Tesseract nên được giải nén vào <tt>tesseract</tt> installation folder; các 
 data files, 
 có tên bắt đầu với mã ISO639-3, sẽ được đặt vào <tt>tessdata</tt> 
 subdirectory. Tesseract hiện tại chỉ có thể nhận dạng hình uncompressed TIFF; 
-tuy nhiên, jtTOCR cho khả năng nhận diện các loại ảnh khác.</p>
-<p>Để thực thi nhận dạng chữ OCR trên ảnh với Tesseract:</p>
+tuy nhiên, VietOCR cho khả năng nhận diện các loại ảnh khác.</p>
 
-<blockquote>
-	<p><tt>tesseract vietsample.tif output –l vie</tt></p>
-</blockquote>
-
-<p>Cho VietOCR:</p>
+<p>Để phóng chương trình:</p>
 <blockquote>
 	<p><tt>java -jar VietOCR.jar</tt></p>
 </blockquote>
@@ -56,7 +47,8 @@ Tesseract để tạo một bộ language data khác cụ thể cho những mặ
 kết quả nhận dạng. Hiện tại, mức chính xác có thể lên trên 97% cho Tiếng Việt, 
 và phiên bản tới của Tesseract có thể nâng cao độ nhận dạng hơn nữa. Dầu vậy, độ chính 
 xác thực thụ vẫn còn tùy thuộc rất lớn vào phẩm chất của ảnh quét. Thông số cho 
-quét ảnh tiêu biểu là 300 DPI và 1 bpp (bit per pixel) trắng đen hoặc 8 bpp grayscale dạng TIFF.</p>
+quét ảnh tiêu biểu là 300 DPI và 1 bpp (bit per pixel) trắng đen hoặc 8 bpp grayscale dạng 
+uncompressed TIFF.</p>
 <p>Thông tin sau đây liên quan đến quy trình OCR nhận diện Tiếng 
 Việt. Các lỗi nhận diện ký tự Việt có thể phân làm ba loại. Nhiều lỗi thường 
 bị bởi do lẫn lộn chữ hoa và chữ 
@@ -89,7 +81,7 @@ quả 2 loại lỗi đầu tiên, sử dụng chương trình
 	menu <i>Công cụ</i>.</li>
 </ol>
 
-<p>Qua các bước trên, mức chính xác có thể vượt hơn 99%. Những 
+<p>Qua các bước trên, hầu hết các lỗi thông thường sẽ được loại trừ. Những 
 lỗi ngữ nghĩa semantic còn lại ít, nhưng đòi hỏi người duyệt đọc dò 
 lại toàn bộ văn bản để được giống y như văn bản gốc quét, và toàn thiện nếu 
 muốn.</p>
