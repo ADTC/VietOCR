@@ -91,7 +91,6 @@ namespace VietOCR.NET
         void LoadLang()
         {
             XmlDocument doc = new XmlDocument();
-            //doc.Load("Data/ISO639-3.xml");
             String path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
             doc.Load(Path.Combine(path, "Data/ISO639-3.xml"));
             //doc.Load(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("VietOCR.NET.Data.ISO639-3.xml"));
@@ -126,7 +125,7 @@ namespace VietOCR.NET
         {
             if (this.pictureBox1.Image == null)
             {
-                MessageBox.Show(this, "Please load an image.", "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, resources.GetString("loadImage"), "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -157,7 +156,7 @@ namespace VietOCR.NET
         {
             if (this.pictureBox1.Image == null)
             {
-                MessageBox.Show(this, "Please load an image.", "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, resources.GetString("loadImage"), "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -170,7 +169,7 @@ namespace VietOCR.NET
             {
                 if (this.toolStripCbLang.SelectedIndex == -1)
                 {
-                    MessageBox.Show(this, "Please select a language.", "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, resources.GetString("selectlanguage"), "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 //if (this.pictureBox1.Image == null)
@@ -179,7 +178,7 @@ namespace VietOCR.NET
                 //    return;
                 //}
 
-                this.toolStripStatusLabel1.Text = "OCR running...";
+                this.toolStripStatusLabel1.Text = resources.GetString("OCRrunning");
                 this.Cursor = Cursors.WaitCursor;
                 this.pictureBox1.UseWaitCursor = true;
                 this.textBox1.Cursor = Cursors.WaitCursor;
@@ -267,7 +266,7 @@ namespace VietOCR.NET
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             //openFileDialog1.InitialDirectory = "c:\\";
-            openFileDialog1.Title = "Open Image File";
+            openFileDialog1.Title = resources.GetString("OpenImageFile");
             openFileDialog1.Filter = "Image files (*.tif)|*.tif|Image files (*.bmp)|*.bmp|Image files (*.jpg)|*.jpg|Image files (*.png)|*.png|All files (*.*)|*.*";
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
@@ -470,7 +469,7 @@ namespace VietOCR.NET
             catch (Exception ncde)
             {
                 Console.Write(ncde.Message);
-                MessageBox.Show("Cannot load image.");
+                MessageBox.Show(resources.GetString("Cannotloadimage"));
             }
         }
 
@@ -478,7 +477,7 @@ namespace VietOCR.NET
         {
             if (imageList != null)
             {
-                this.lblCurIndex.Text = "Page " + (imageIndex + 1) + " of " + imageTotal;
+                this.lblCurIndex.Text = resources.GetString("Page_") + (imageIndex + 1) + resources.GetString("_of_") + imageTotal;
                 currentImage = imageList[imageIndex];
                 this.pictureBox1.Image = currentImage;
                 this.pictureBox1.Size = this.pictureBox1.Image.Size;
@@ -504,7 +503,7 @@ namespace VietOCR.NET
             else
             {
                 // Finally, handle the case where the operation succeeded.
-                this.toolStripStatusLabel1.Text = "OCR completed.";
+                this.toolStripStatusLabel1.Text = resources.GetString("OCRcompleted");
                 this.textBox1.AppendText(e.Result.ToString());
             }
 
