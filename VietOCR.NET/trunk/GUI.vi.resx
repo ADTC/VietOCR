@@ -382,4 +382,34 @@
   <data name="readme" xml:space="preserve">
     <value>readme_cs_vi.html</value>
   </data>
+  <data name="Cannotloadimage" xml:space="preserve">
+    <value>Không thể nạp ảnh.</value>
+  </data>
+  <data name="loadImage" xml:space="preserve">
+    <value>Hãy nạp ảnh.</value>
+  </data>
+  <data name="OCRcompleted" xml:space="preserve">
+    <value>OCR hoàn tất.</value>
+  </data>
+  <data name="OCRrunning" xml:space="preserve">
+    <value>OCR đang chạy...</value>
+  </data>
+  <data name="OpenImageFile" xml:space="preserve">
+    <value>Mở tập tin ảnh</value>
+  </data>
+  <data name="selectLanguage" xml:space="preserve">
+    <value>Hãy chọn một ngôn ngữ.</value>
+  </data>
+  <data name="_of_" xml:space="preserve">
+    <value> của </value>
+  </data>
+  <data name="lblCurIndex.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
+  </data>
+  <data name="Page_" xml:space="preserve">
+    <value>Trang </value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
 </root>

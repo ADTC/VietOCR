@@ -265,7 +265,7 @@
     <value>2</value>
   </data>
   <data name="lblCurIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 13</value>
+    <value>76, 13</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -1103,5 +1103,29 @@
   </data>
   <data name="readme" xml:space="preserve">
     <value>readme_cs.html</value>
+  </data>
+  <data name="Cannotloadimage" xml:space="preserve">
+    <value>Cannot load image.</value>
+  </data>
+  <data name="loadImage" xml:space="preserve">
+    <value>Please load an image.</value>
+  </data>
+  <data name="OCRcompleted" xml:space="preserve">
+    <value>OCR completed.</value>
+  </data>
+  <data name="OCRrunning" xml:space="preserve">
+    <value>OCR running...</value>
+  </data>
+  <data name="OpenImageFile" xml:space="preserve">
+    <value>Open Image File</value>
+  </data>
+  <data name="selectLanguage" xml:space="preserve">
+    <value>Please select a language.</value>
+  </data>
+  <data name="_of_" xml:space="preserve">
+    <value> of </value>
+  </data>
+  <data name="Page_" xml:space="preserve">
+    <value>Page </value>
   </data>
 </root>
