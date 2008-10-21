@@ -26,6 +26,7 @@ public class SimpleFilter extends javax.swing.filechooser.FileFilter
         m_extension = "." + extension.toLowerCase();
     }
 
+    @Override
     public String getDescription() {
         return m_description;
     }
@@ -33,6 +34,8 @@ public class SimpleFilter extends javax.swing.filechooser.FileFilter
     public String getExtension()    {
         return m_extension;
     }
+    
+    @Override
     public boolean accept(File f) {
         if (f == null) return false;
         if (f.isDirectory()) return true;

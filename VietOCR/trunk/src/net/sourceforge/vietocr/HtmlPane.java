@@ -19,7 +19,6 @@
 
 package net.sourceforge.vietocr;
 
-import edu.stanford.ejalbert.BrowserLauncher;
 import java.awt.*;
 import java.io.*;
 import java.net.*;
@@ -61,6 +60,7 @@ class HtmlPane extends JScrollPane implements HyperlinkListener {
     /**
      * Notification of a change relative to a hyperlink.
      */
+    @Override
     public void hyperlinkUpdate(HyperlinkEvent e) {
         if (e.getEventType() == HyperlinkEvent.EventType.ENTERED) {
             statusBar.setText(e.getURL().toString());
@@ -88,7 +88,7 @@ class HtmlPane extends JScrollPane implements HyperlinkListener {
             if (url.toString().startsWith("jar:")) {
                 html.setPage(url);
             } else {
-                BrowserLauncher.openURL(url.toString());
+                Desktop.getDesktop().browse(url.toURI());
             }
         } catch (Exception e) {
             System.err.println("Error message: " + e.getMessage()); 
@@ -120,6 +120,7 @@ class HtmlPane extends JScrollPane implements HyperlinkListener {
             cursor = c;
         }
 
+        @Override
         public void run() {
             if (url == null) {
                 // restore the original cursor
