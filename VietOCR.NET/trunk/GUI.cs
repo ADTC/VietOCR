@@ -169,7 +169,7 @@ namespace VietOCR.NET
             {
                 if (this.toolStripCbLang.SelectedIndex == -1)
                 {
-                    MessageBox.Show(this, resources.GetString("selectlanguage"), "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, resources.GetString("selectLanguage"), "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 //if (this.pictureBox1.Image == null)
