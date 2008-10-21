@@ -178,7 +178,7 @@ public class Gui extends javax.swing.JFrame {
                 try {
                     m_undo.undo();
                 } catch (CannotUndoException ex) {
-                    System.err.println(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle").getString("Unable_to_undo:_") + ex);
+                    System.err.println(bundle.getString("Unable_to_undo:_") + ex);
                 }
                 updateUndoRedo();
             }
@@ -815,7 +815,7 @@ public class Gui extends javax.swing.JFrame {
             }
         } catch (UnsupportedOperationException uoe) {
             uoe.printStackTrace();
-            JOptionPane.showMessageDialog(null, String.format(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle").getString("Post-processing_not_supported_for_%1$s_language."), prop.getProperty(uoe.getMessage())), APP_NAME, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, String.format(bundle.getString("Post-processing_not_supported_for_%1$s_language."), prop.getProperty(uoe.getMessage())), APP_NAME, JOptionPane.ERROR_MESSAGE);
         } catch (RuntimeException re) {
             re.printStackTrace();
         } catch (Exception ex) {
@@ -1051,7 +1051,7 @@ public class Gui extends javax.swing.JFrame {
     
     private void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRActionPerformed
         if (imageFile == null) {
-            JOptionPane.showMessageDialog(this, java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle").getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         
@@ -1079,14 +1079,14 @@ public class Gui extends javax.swing.JFrame {
     void performOCR(final File imageFile, final int index) {
         try {
             if (this.jComboBoxLang.getSelectedIndex() == -1) {
-                JOptionPane.showMessageDialog(this, java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle").getString("Please_select_a_language."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, bundle.getString("Please_select_a_language."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
             if (this.jImageLabel.getIcon() == null) {
-                JOptionPane.showMessageDialog(this, java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle").getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
-            jLabelStatus.setText(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle").getString("OCR_running..."));
+            jLabelStatus.setText(bundle.getString("OCR_running..."));
             getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             getGlassPane().setVisible(true);
             
@@ -1099,7 +1099,7 @@ public class Gui extends javax.swing.JFrame {
                     try {
                         OCR ocrEngine = new OCR(tessPath);
                         jTextArea1.append(ocrEngine.recognizeText(imageFile, index, imageFormat, langCodes[jComboBoxLang.getSelectedIndex()]));
-                        jLabelStatus.setText(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle").getString("OCR_completed."));
+                        jLabelStatus.setText(bundle.getString("OCR_completed."));
                     } catch (OutOfMemoryError oome) {
                         oome.printStackTrace();
                         JOptionPane.showMessageDialog(null, APP_NAME
@@ -1107,10 +1107,10 @@ public class Gui extends javax.swing.JFrame {
                                 + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
                     } catch (FileNotFoundException fnfe) {
                         fnfe.printStackTrace();
-                        JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle").getString("An_exception_occurred_in_Tesseract_engine_while_recognizing_this_image."), APP_NAME, JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, bundle.getString("An_exception_occurred_in_Tesseract_engine_while_recognizing_this_image."), APP_NAME, JOptionPane.ERROR_MESSAGE);
                     } catch (IOException ioe) {
                         ioe.printStackTrace();
-                        JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle").getString("Cannot_find_Tesseract._Please_set_its_path."), APP_NAME, JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, bundle.getString("Cannot_find_Tesseract._Please_set_its_path."), APP_NAME, JOptionPane.ERROR_MESSAGE);
                     } catch (RuntimeException re) {
                         re.printStackTrace();
                         JOptionPane.showMessageDialog(null, re.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
@@ -1220,7 +1220,7 @@ public class Gui extends javax.swing.JFrame {
             imageIndex = 0;
         } catch (NoClassDefFoundError ncde) {
             System.err.println(ncde.getMessage());
-            JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle").getString("Required_JAI_Image_I/O_Library_is_not_found."), APP_NAME, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, bundle.getString("Required_JAI_Image_I/O_Library_is_not_found."), APP_NAME, JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -1247,7 +1247,7 @@ private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent 
     void changeUILang(String lang) {
         if (!selectedUILang.equals(lang)) {
             selectedUILang = lang;
-            JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle").getString("Please_restart_the_application_for_the_change_to_take_effect."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, bundle.getString("Please_restart_the_application_for_the_change_to_take_effect."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
         }
     }
     /**
