@@ -57,4 +57,7 @@ Version 0.9.3 (21 June 2008)
 - Improved Vietnamese postprocessing
 - Use Java 6.0
 - Use Tesseract 2.03 OCR engine
-- Use beta Vietnamese language data for Tesseract 2.03 (data for 2.01 crashes frequently with Tesseract 2.03)
+- Use Vietnamese language data for Tesseract 2.03 (data for 2.01 crashes frequently with Tesseract 2.03)
+
+Version 0.9.4 (21 October 2008)
+- Localized user inteface

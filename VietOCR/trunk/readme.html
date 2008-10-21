@@ -20,12 +20,8 @@ PNG, BMP image formats, and multi-page images. The program has postprocessing
 which helps correct errors regularly encountered in the OCR process, boosting 
 the accuracy rate on the result.</p>
 <h3>SYSTEM REQUIREMENTS</h3>
-<ol>
-	<li>Java Runtime Environment 6.0 or later - <a href="http://java.sun.com/">
-	http://java.sun.com/</a></li>
-	<li>JAI Image I/O 1.1 - <a href="https://jai-imageio.dev.java.net/">
-	https://jai-imageio.dev.java.net/</a></li>
-</ol>
+<p><a href="http://java.sun.com/javase/downloads/index.jsp">Java Runtime Environment 6.0</a> 
+or later.</p>
 <h3>
 INSTRUCTIONS</h3>
 <p>
@@ -35,13 +31,8 @@ installation folder; the data files, whose names start with ISO6639-3 codes,
 will be placed in the <tt>tessdata</tt> subdirectory. Tesseract currently can 
 only recognize uncompressed TIFF images; however, VietOCR enables recognition of 
 other image formats.</p>
-<p>To perform OCR on an image using Tesseract:</p>
 
-<blockquote>
-	<p><tt>tesseract vietsample.tif output –l vie</tt></p>
-</blockquote>
-
-<p>For VietOCR:</p>
+<p>To launch the program:</p>
 <blockquote>
 	<p><tt>java -jar VietOCR.jar</tt></p>
 </blockquote>
@@ -61,7 +52,7 @@ recognition accuracy, which currently can be higher than 97% for Vietnamese, and
 the next release of Tesseract may improve it even further. Even so, the actual 
 rates still depend greatly on the quality of the scanned image. The settings for 
 scanning are typically 300 DPI and 1 bpp (bit per pixel) black&amp;white or 8 bpp 
-grayscale TIFF format.</p>
+grayscale uncompressed TIFF format.</p>
 <p>The following information pertains to the OCR process of 
 Vietnamese text. The recognition errors involving Vietnamese characters can be classified into three 
 categories. Many of the errors are related to the letter cases — for example: 
@@ -94,7 +85,7 @@ can be summarized as follows:</p>
      under <i>Tool</i> menu.</li>
 </ol>
 
-<p>Through the above steps, the accurary can exceed 99%. The 
+<p>Through the above steps, most of common errors should be eliminated. The 
 remaining, sematic errors are few, but it requires a human editor to read though 
 and make necessary edits to make the document like the original scanned 
 document, and error-free if desired.</p>
