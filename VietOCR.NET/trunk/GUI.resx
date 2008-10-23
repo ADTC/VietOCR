@@ -153,7 +153,7 @@
     <value>splitContainer2</value>
   </data>
   <data name="toolStripBtnOCR.ToolTipText" xml:space="preserve">
-    <value>OCR</value>
+    <value>Perform OCR</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -292,7 +292,7 @@
     <value>toolStrip1</value>
   </data>
   <data name="toolStripBtnClear.ToolTipText" xml:space="preserve">
-    <value>Clear</value>
+    <value>Clear Textbox</value>
   </data>
   <data name="splitContainer2.IsSplitterFixed" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -541,7 +541,7 @@
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolStripBtnOpen.ToolTipText" xml:space="preserve">
-    <value>Open</value>
+    <value>Open Image File</value>
   </data>
   <data name="&gt;&gt;fontToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

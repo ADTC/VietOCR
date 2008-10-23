@@ -409,7 +409,19 @@
   <data name="Page_" xml:space="preserve">
     <value>Trang </value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
+  <data name="toolStripBtnClear.ToolTipText" xml:space="preserve">
+    <value>Xóa textbox</value>
+  </data>
+  <data name="toolStripBtnNext.ToolTipText" xml:space="preserve">
+    <value>Trang sau</value>
+  </data>
+  <data name="toolStripBtnOCR.ToolTipText" xml:space="preserve">
+    <value>Thực thi nhận dạng</value>
+  </data>
+  <data name="toolStripBtnOpen.ToolTipText" xml:space="preserve">
+    <value>Mở tập tin ảnh</value>
+  </data>
+  <data name="toolStripBtnPrev.ToolTipText" xml:space="preserve">
+    <value>Trang trước</value>
   </data>
 </root>
