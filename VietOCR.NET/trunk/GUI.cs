@@ -579,14 +579,12 @@ namespace VietOCR.NET
             // Rotating 270 degrees is equivalent to rotating -90 degrees.
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
             this.pictureBox1.Refresh();
-
         }
 
         private void toolStripBtnRR_Click(object sender, EventArgs e)
         {
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
             this.pictureBox1.Refresh();
-
         }
 
         private void toolStripBtnZoomIn_Click(object sender, EventArgs e)
@@ -594,8 +592,7 @@ namespace VietOCR.NET
             IsFitForZoomIn = true;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            // Zoom works best if you first fit the image according to its true aspect 
-            // ratio.
+            // Zoom works best if you first fit the image according to its true aspect ratio.
             Fit();
             // Make the PictureBox dimensions larger by 25% to effect the Zoom.
             this.pictureBox1.Width = Convert.ToInt32(this.pictureBox1.Width * 1.25);
@@ -605,8 +602,7 @@ namespace VietOCR.NET
 
         private void toolStripBtnZoomOut_Click(object sender, EventArgs e)
         {
-            // Zoom works best if you first fit the image according to its true aspect 
-            // ratio.
+            // Zoom works best if you first fit the image according to its true aspect ratio.
             Fit();
             // StretchImage SizeMode works best for zooming.
             this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -671,8 +667,7 @@ namespace VietOCR.NET
                          imageFile.Delete();
                      }
                      adapter.ScanImage(ImageFormat.Bmp, imageFile.FullName);
-                     loadImage(imageFile);
-                     displayImage();
+                     openFile(tempFileName);
                  }
                  catch (WiaOperationException ex)
                  {
