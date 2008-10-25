@@ -38,7 +38,7 @@ namespace VietOCR.NET
 {
     public partial class GUI : Form
     {
-         //private Bitmap image;
+        //private Bitmap image;
         protected const string strProgName = "VietOCR.NET";
 
         string curLangCode;
@@ -59,8 +59,8 @@ namespace VietOCR.NET
         protected string selectedUILanguage;
         protected const string strUILang = "UILanguage";
         protected string strRegKey = "Software\\VietUnicode\\";
-        double ratio;
         private bool IsFitForZoomIn = false;
+        private bool toggle = false;
 
         System.ComponentModel.ComponentResourceManager resources;
 
@@ -78,10 +78,10 @@ namespace VietOCR.NET
 
             selectedUILanguage = (string)regkey.GetValue(strUILang, "en-US");
             regkey.Close();
-            
+
             // Sets the UI culture to the selected language.
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(selectedUILanguage);
-            
+
             resources = new System.ComponentModel.ComponentResourceManager(typeof(GUI));
 
             InitializeComponent();
@@ -186,7 +186,7 @@ namespace VietOCR.NET
                 this.Cursor = Cursors.WaitCursor;
                 this.pictureBox1.UseWaitCursor = true;
                 this.textBox1.Cursor = Cursors.WaitCursor;
-                
+
                 OCRImageEntity entity = new OCRImageEntity(ImageIOHelper.GetImageList(imageFile), index, rect, curLangCode);
                 // Start the asynchronous operation.
                 backgroundWorker1.RunWorkerAsync(entity);
@@ -339,7 +339,7 @@ namespace VietOCR.NET
             Application.Exit();
         }
 
- 
+
         private void settingsToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
             this.wordWrapToolStripMenuItem.Checked = this.textBox1.WordWrap;
@@ -401,27 +401,22 @@ namespace VietOCR.NET
 
         private void toolStripBtnFitImage_Click(object sender, EventArgs e)
         {
-            this.pictureBox1.Dock = DockStyle.Fill;
-            this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.deselect();
-            scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
-            scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
-        }
-
-        private void toolStripBtnFitHeight_Click(object sender, EventArgs e)
-        {
-            this.pictureBox1.Dock = DockStyle.None;
-            this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-            this.pictureBox1.deselect();
-            scaleX = scaleY = 1f;
-        }
-
-        private void toolStripBtnFitWidth_Click(object sender, EventArgs e)
-        {
-            this.pictureBox1.Dock = DockStyle.None;
-            this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-            this.pictureBox1.deselect();
-            scaleX = scaleY = 1f;
+            if (toggle)
+            {
+                this.pictureBox1.Dock = DockStyle.None;
+                this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+                this.pictureBox1.deselect();
+                scaleX = scaleY = 1f;
+            }
+            else
+            {
+                this.pictureBox1.Dock = DockStyle.Fill;
+                this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                this.pictureBox1.deselect();
+                scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
+                scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
+            }
+            toggle ^= true;
         }
 
         /// <summary>
@@ -442,9 +437,7 @@ namespace VietOCR.NET
             this.toolStripStatusLabel1.Text = null;
             this.pictureBox1.deselect();
 
-            this.toolStripBtnFitHeight.Enabled = true;
             this.toolStripBtnFitImage.Enabled = true;
-            this.toolStripBtnFitWidth.Enabled = true;
             this.toolStripBtnZoomIn.Enabled = true;
             this.toolStripBtnZoomOut.Enabled = true;
             this.toolStripBtnRL.Enabled = true;
@@ -546,7 +539,7 @@ namespace VietOCR.NET
                 if (((e.AllowedEffect & DragDropEffects.Copy) != 0) &&
                     ((e.KeyState & 0x08) != 0))    // Ctrl key
                     e.Effect = DragDropEffects.Copy;
-            } 
+            }
             //else if (e.Data.GetDataPresent(DataFormats.Bitmap))
             //{
             //    e.Effect = DragDropEffects.Copy;
@@ -597,6 +590,8 @@ namespace VietOCR.NET
             // Make the PictureBox dimensions larger by 25% to effect the Zoom.
             this.pictureBox1.Width = Convert.ToInt32(this.pictureBox1.Width * 1.25);
             this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height * 1.25);
+            scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
+            scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
 
         }
 
@@ -609,7 +604,8 @@ namespace VietOCR.NET
             // Make the PictureBox dimensions smaller by 25% to effect the Zoom.
             this.pictureBox1.Width = Convert.ToInt32(this.pictureBox1.Width / 1.25);
             this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height / 1.25);
-
+            scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
+            scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
         }
         // This method makes the image fit properly in the PictureBox. You might think 
         // that the AutoSize SizeMode enum would make the image appear in the PictureBox 
@@ -630,7 +626,7 @@ namespace VietOCR.NET
                     this.pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
                 }
             }
-            ratio = CalculateAspectRatioAndSetDimensions();
+            CalculateAspectRatioAndSetDimensions();
         }
 
         // Calculates and returns the image's aspect ratio, and sets 
@@ -658,40 +654,22 @@ namespace VietOCR.NET
         {
             using (WiaScannerAdapter adapter = new WiaScannerAdapter())
             {
-                 try
-                 {
-                     string tempFileName = Path.GetTempFileName();
-                     imageFile = new FileInfo(tempFileName);
-                     if (imageFile.Exists)
-                     {
-                         imageFile.Delete();
-                     }
-                     adapter.ScanImage(ImageFormat.Bmp, imageFile.FullName);
-                     openFile(tempFileName);
-                 }
-                 catch (WiaOperationException ex)
-                 {
-                     MessageBox.Show(this, System.Text.RegularExpressions.Regex.Replace(ex.ErrorCode.ToString(), "(?=\\p{Lu}+)", " ").Trim() + ".", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                 }
+                try
+                {
+                    string tempFileName = Path.GetTempFileName();
+                    imageFile = new FileInfo(tempFileName);
+                    if (imageFile.Exists)
+                    {
+                        imageFile.Delete();
+                    }
+                    adapter.ScanImage(ImageFormat.Bmp, imageFile.FullName);
+                    openFile(tempFileName);
+                }
+                catch (WiaOperationException ex)
+                {
+                    MessageBox.Show(this, System.Text.RegularExpressions.Regex.Replace(ex.ErrorCode.ToString(), "(?=\\p{Lu}+)", " ").Trim() + ".", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
         }
-        //private void splitContainer2_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.Control && e.KeyCode == Keys.V)
-        //    {
-        //        if (Clipboard.GetDataObject().GetDataPresent(DataFormats.Bitmap))
-        //        {
-        //            this.pictureBox1.Image = (Bitmap)Clipboard.GetDataObject().GetData(DataFormats.Bitmap);
-        //            this.pictureBox1.Size = this.pictureBox1.Image.Size;
-        //            this.pictureBox1.Invalidate();
-        //        }
-        //    }
-        //}
-
-        //private void splitContainer2_Panel2_Click(object sender, EventArgs e)
-        //{
-        //    this.splitContainer2.Focus();
-        //}
-
     }
 }

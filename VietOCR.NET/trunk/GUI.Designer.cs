@@ -31,14 +31,13 @@ namespace VietOCR.NET
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUI));
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.lblCurIndex = new System.Windows.Forms.Label();
+            this.pictureBox1 = new VietOCR.NET.Controls.ScrollablePictureBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripBtnPrev = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnNext = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnFitImage = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtnFitHeight = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtnFitWidth = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnZoomIn = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnZoomOut = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnRL = new System.Windows.Forms.ToolStripButton();
@@ -74,10 +73,10 @@ namespace VietOCR.NET
             this.toolStripCbLang = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.pictureBox1 = new VietOCR.NET.Controls.ScrollablePictureBox();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -86,7 +85,6 @@ namespace VietOCR.NET
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer2
@@ -127,6 +125,17 @@ namespace VietOCR.NET
             resources.ApplyResources(this.lblCurIndex, "lblCurIndex");
             this.lblCurIndex.Font = null;
             this.lblCurIndex.Name = "lblCurIndex";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.AccessibleDescription = null;
+            this.pictureBox1.AccessibleName = null;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.BackgroundImage = null;
+            this.pictureBox1.Font = null;
+            this.pictureBox1.ImageLocation = null;
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
             // 
             // splitContainer1
             // 
@@ -177,8 +186,6 @@ namespace VietOCR.NET
             this.toolStripBtnPrev,
             this.toolStripBtnNext,
             this.toolStripBtnFitImage,
-            this.toolStripBtnFitHeight,
-            this.toolStripBtnFitWidth,
             this.toolStripBtnZoomIn,
             this.toolStripBtnZoomOut,
             this.toolStripBtnRL,
@@ -214,26 +221,6 @@ namespace VietOCR.NET
             this.toolStripBtnFitImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripBtnFitImage.Name = "toolStripBtnFitImage";
             this.toolStripBtnFitImage.Click += new System.EventHandler(this.toolStripBtnFitImage_Click);
-            // 
-            // toolStripBtnFitHeight
-            // 
-            this.toolStripBtnFitHeight.AccessibleDescription = null;
-            this.toolStripBtnFitHeight.AccessibleName = null;
-            resources.ApplyResources(this.toolStripBtnFitHeight, "toolStripBtnFitHeight");
-            this.toolStripBtnFitHeight.BackgroundImage = null;
-            this.toolStripBtnFitHeight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripBtnFitHeight.Name = "toolStripBtnFitHeight";
-            this.toolStripBtnFitHeight.Click += new System.EventHandler(this.toolStripBtnFitHeight_Click);
-            // 
-            // toolStripBtnFitWidth
-            // 
-            this.toolStripBtnFitWidth.AccessibleDescription = null;
-            this.toolStripBtnFitWidth.AccessibleName = null;
-            resources.ApplyResources(this.toolStripBtnFitWidth, "toolStripBtnFitWidth");
-            this.toolStripBtnFitWidth.BackgroundImage = null;
-            this.toolStripBtnFitWidth.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripBtnFitWidth.Name = "toolStripBtnFitWidth";
-            this.toolStripBtnFitWidth.Click += new System.EventHandler(this.toolStripBtnFitWidth_Click);
             // 
             // toolStripBtnZoomIn
             // 
@@ -594,17 +581,6 @@ namespace VietOCR.NET
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.AccessibleDescription = null;
-            this.pictureBox1.AccessibleName = null;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.BackgroundImage = null;
-            this.pictureBox1.Font = null;
-            this.pictureBox1.ImageLocation = null;
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            // 
             // GUI
             // 
             this.AccessibleDescription = null;
@@ -623,6 +599,7 @@ namespace VietOCR.NET
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -637,7 +614,6 @@ namespace VietOCR.NET
             this.statusStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -676,8 +652,6 @@ namespace VietOCR.NET
         private System.Windows.Forms.ToolStripButton toolStripBtnPrev;
         private System.Windows.Forms.ToolStripButton toolStripBtnNext;
         private System.Windows.Forms.ToolStripButton toolStripBtnFitImage;
-        private System.Windows.Forms.ToolStripButton toolStripBtnFitHeight;
-        private System.Windows.Forms.ToolStripButton toolStripBtnFitWidth;
         private System.Windows.Forms.ToolStripButton toolStripBtnZoomIn;
         private System.Windows.Forms.ToolStripButton toolStripBtnZoomOut;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
