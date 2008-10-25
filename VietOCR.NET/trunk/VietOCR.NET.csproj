@@ -127,6 +127,8 @@
     <Compile Include="Postprocessing\Processor.cs" />
     <Compile Include="Postprocessing\ProcessorFactory.cs" />
     <Compile Include="Postprocessing\ViePP.cs" />
+    <Compile Include="WIA\WiaOperationException.cs" />
+    <Compile Include="WIA\WiaScannerAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\ISO639-3.xml">
@@ -231,6 +233,16 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="versionchanges_cs.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WIA">
+      <Guid>{94A0E92D-43C0-494E-AC29-FD45948A5221}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

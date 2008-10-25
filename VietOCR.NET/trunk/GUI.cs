@@ -26,11 +26,13 @@ using System.Xml;
 using Microsoft.Win32;
 using System.Globalization;
 using System.Threading;
+using System.Drawing.Imaging;
 
 using net.sourceforge.vietocr.postprocessing;
 using Vietpad.NET.Controls;
 using VietOCR.NET.Controls;
 using Net.SourceForge.Vietpad.InputMethod;
+using VietOCR.NET.WIA;
 
 namespace VietOCR.NET
 {
@@ -57,6 +59,8 @@ namespace VietOCR.NET
         protected string selectedUILanguage;
         protected const string strUILang = "UILanguage";
         protected string strRegKey = "Software\\VietUnicode\\";
+        double ratio;
+        private bool IsFitForZoomIn = false;
 
         System.ComponentModel.ComponentResourceManager resources;
 
@@ -441,8 +445,10 @@ namespace VietOCR.NET
             this.toolStripBtnFitHeight.Enabled = true;
             this.toolStripBtnFitImage.Enabled = true;
             this.toolStripBtnFitWidth.Enabled = true;
-            //this.toolStripBtnZoomIn.Enabled = true;
-            //this.toolStripBtnZoomOut.Enabled = true;
+            this.toolStripBtnZoomIn.Enabled = true;
+            this.toolStripBtnZoomOut.Enabled = true;
+            this.toolStripBtnRL.Enabled = true;
+            this.toolStripBtnRR.Enabled = true;
 
             if (imageList.Count == 1)
             {
@@ -568,6 +574,112 @@ namespace VietOCR.NET
             }
         }
 
+        private void toolStripBtnRL_Click(object sender, EventArgs e)
+        {
+            // Rotating 270 degrees is equivalent to rotating -90 degrees.
+            this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            this.pictureBox1.Refresh();
+
+        }
+
+        private void toolStripBtnRR_Click(object sender, EventArgs e)
+        {
+            this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            this.pictureBox1.Refresh();
+
+        }
+
+        private void toolStripBtnZoomIn_Click(object sender, EventArgs e)
+        {
+            IsFitForZoomIn = true;
+            this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            // Zoom works best if you first fit the image according to its true aspect 
+            // ratio.
+            Fit();
+            // Make the PictureBox dimensions larger by 25% to effect the Zoom.
+            this.pictureBox1.Width = Convert.ToInt32(this.pictureBox1.Width * 1.25);
+            this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height * 1.25);
+
+        }
+
+        private void toolStripBtnZoomOut_Click(object sender, EventArgs e)
+        {
+            // Zoom works best if you first fit the image according to its true aspect 
+            // ratio.
+            Fit();
+            // StretchImage SizeMode works best for zooming.
+            this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            // Make the PictureBox dimensions smaller by 25% to effect the Zoom.
+            this.pictureBox1.Width = Convert.ToInt32(this.pictureBox1.Width / 1.25);
+            this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height / 1.25);
+
+        }
+        // This method makes the image fit properly in the PictureBox. You might think 
+        // that the AutoSize SizeMode enum would make the image appear in the PictureBox 
+        // according to its true aspect ratio within the fixed bounds of the PictureBox.
+        // However, it merely expands or shrinks the PictureBox.
+        private void Fit()
+        {
+            // if Fit was called by the Zoom In button, then center the image. This is
+            // only needed when working with images that are smaller than the PictureBox.
+            // Feel free to uncomment the line that sets the SizeMode and then see how
+            // it causes Zoom In for small images to show unexpected behavior.
+
+            if ((this.pictureBox1.Image.Width < this.pictureBox1.Width) &&
+                (this.pictureBox1.Image.Height < this.pictureBox1.Height))
+            {
+                if (!IsFitForZoomIn)
+                {
+                    this.pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+                }
+            }
+            ratio = CalculateAspectRatioAndSetDimensions();
+        }
+
+        // Calculates and returns the image's aspect ratio, and sets 
+        // its proper dimensions. This is used for Fit() and for saving thumbnails
+        // of images.
+        private double CalculateAspectRatioAndSetDimensions()
+        {
+            // Calculate the proper aspect ratio and set the image's dimensions.
+            double ratio;
+
+            if (this.pictureBox1.Image.Width > this.pictureBox1.Image.Height)
+            {
+                ratio = this.pictureBox1.Image.Width / this.pictureBox1.Image.Height;
+                this.pictureBox1.Height = Convert.ToInt32(Convert.ToDouble(this.pictureBox1.Width) / ratio);
+            }
+            else
+            {
+                ratio = this.pictureBox1.Image.Height / this.pictureBox1.Image.Width;
+                this.pictureBox1.Width = Convert.ToInt32(Convert.ToDouble(this.pictureBox1.Height) / ratio);
+            }
+            return ratio;
+        }
+
+        private void scanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (WiaScannerAdapter adapter = new WiaScannerAdapter())
+            {
+                 try
+                 {
+                     string tempFileName = Path.GetTempFileName();
+                     imageFile = new FileInfo(tempFileName);
+                     if (imageFile.Exists)
+                     {
+                         imageFile.Delete();
+                     }
+                     adapter.ScanImage(ImageFormat.Bmp, imageFile.FullName);
+                     loadImage(imageFile);
+                     displayImage();
+                 }
+                 catch (WiaOperationException ex)
+                 {
+                     MessageBox.Show(this, System.Text.RegularExpressions.Regex.Replace(ex.ErrorCode.ToString(), "(?=\\p{Lu}+)", " ").Trim() + ".", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                 }
+            }
+        }
         //private void splitContainer2_KeyDown(object sender, KeyEventArgs e)
         //{
         //    if (e.Control && e.KeyCode == Keys.V)

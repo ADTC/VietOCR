@@ -41,10 +41,13 @@ namespace VietOCR.NET
             this.toolStripBtnFitWidth = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnZoomIn = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnZoomOut = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnRL = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnRR = new System.Windows.Forms.ToolStripButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,6 +68,7 @@ namespace VietOCR.NET
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripBtnOpen = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnScan = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnOCR = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnClear = new System.Windows.Forms.ToolStripButton();
             this.toolStripCbLang = new System.Windows.Forms.ToolStripComboBox();
@@ -176,7 +180,9 @@ namespace VietOCR.NET
             this.toolStripBtnFitHeight,
             this.toolStripBtnFitWidth,
             this.toolStripBtnZoomIn,
-            this.toolStripBtnZoomOut});
+            this.toolStripBtnZoomOut,
+            this.toolStripBtnRL,
+            this.toolStripBtnRR});
             this.toolStrip2.Name = "toolStrip2";
             // 
             // toolStripBtnPrev
@@ -237,6 +243,7 @@ namespace VietOCR.NET
             this.toolStripBtnZoomIn.BackgroundImage = null;
             this.toolStripBtnZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripBtnZoomIn.Name = "toolStripBtnZoomIn";
+            this.toolStripBtnZoomIn.Click += new System.EventHandler(this.toolStripBtnZoomIn_Click);
             // 
             // toolStripBtnZoomOut
             // 
@@ -246,6 +253,27 @@ namespace VietOCR.NET
             this.toolStripBtnZoomOut.BackgroundImage = null;
             this.toolStripBtnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripBtnZoomOut.Name = "toolStripBtnZoomOut";
+            this.toolStripBtnZoomOut.Click += new System.EventHandler(this.toolStripBtnZoomOut_Click);
+            // 
+            // toolStripBtnRL
+            // 
+            this.toolStripBtnRL.AccessibleDescription = null;
+            this.toolStripBtnRL.AccessibleName = null;
+            resources.ApplyResources(this.toolStripBtnRL, "toolStripBtnRL");
+            this.toolStripBtnRL.BackgroundImage = null;
+            this.toolStripBtnRL.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripBtnRL.Name = "toolStripBtnRL";
+            this.toolStripBtnRL.Click += new System.EventHandler(this.toolStripBtnRL_Click);
+            // 
+            // toolStripBtnRR
+            // 
+            this.toolStripBtnRR.AccessibleDescription = null;
+            this.toolStripBtnRR.AccessibleName = null;
+            resources.ApplyResources(this.toolStripBtnRR, "toolStripBtnRR");
+            this.toolStripBtnRR.BackgroundImage = null;
+            this.toolStripBtnRR.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripBtnRR.Name = "toolStripBtnRR";
+            this.toolStripBtnRR.Click += new System.EventHandler(this.toolStripBtnRR_Click);
             // 
             // textBox1
             // 
@@ -278,6 +306,7 @@ namespace VietOCR.NET
             this.fileToolStripMenuItem.BackgroundImage = null;
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
+            this.scanToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.toolStripMenuItem1,
             this.quitToolStripMenuItem});
@@ -293,6 +322,16 @@ namespace VietOCR.NET
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeyDisplayString = null;
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // scanToolStripMenuItem
+            // 
+            this.scanToolStripMenuItem.AccessibleDescription = null;
+            this.scanToolStripMenuItem.AccessibleName = null;
+            resources.ApplyResources(this.scanToolStripMenuItem, "scanToolStripMenuItem");
+            this.scanToolStripMenuItem.BackgroundImage = null;
+            this.scanToolStripMenuItem.Name = "scanToolStripMenuItem";
+            this.scanToolStripMenuItem.ShortcutKeyDisplayString = null;
+            this.scanToolStripMenuItem.Click += new System.EventHandler(this.scanToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -481,6 +520,7 @@ namespace VietOCR.NET
             this.toolStrip1.Font = null;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripBtnOpen,
+            this.toolStripBtnScan,
             this.toolStripBtnOCR,
             this.toolStripBtnClear,
             this.toolStripCbLang,
@@ -497,6 +537,16 @@ namespace VietOCR.NET
             this.toolStripBtnOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripBtnOpen.Name = "toolStripBtnOpen";
             this.toolStripBtnOpen.Tag = this.openToolStripMenuItem;
+            // 
+            // toolStripBtnScan
+            // 
+            this.toolStripBtnScan.AccessibleDescription = null;
+            this.toolStripBtnScan.AccessibleName = null;
+            resources.ApplyResources(this.toolStripBtnScan, "toolStripBtnScan");
+            this.toolStripBtnScan.BackgroundImage = null;
+            this.toolStripBtnScan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripBtnScan.Name = "toolStripBtnScan";
+            this.toolStripBtnScan.Tag = this.scanToolStripMenuItem;
             // 
             // toolStripBtnOCR
             // 
@@ -637,5 +687,9 @@ namespace VietOCR.NET
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private VietOCR.NET.Controls.ScrollablePictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripButton toolStripBtnRL;
+        private System.Windows.Forms.ToolStripButton toolStripBtnRR;
+        private System.Windows.Forms.ToolStripMenuItem scanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripBtnScan;
     }
 }
