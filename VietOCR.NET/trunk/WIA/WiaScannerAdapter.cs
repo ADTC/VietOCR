@@ -58,7 +58,7 @@ namespace VietOCR.NET.WIA
 
                    imageObject =
                         WiaManager.ShowAcquireImage(WiaDeviceType.ScannerDeviceType,
-                             WiaImageIntent.ColorIntent, WiaImageBias.MinimizeSize, 
+                             WiaImageIntent.GrayscaleIntent, WiaImageBias.MaximizeQuality, 
                              outputFormat.Guid.ToString("B"), false, true, true);
 
                    imageObject.SaveFile(fileName);
