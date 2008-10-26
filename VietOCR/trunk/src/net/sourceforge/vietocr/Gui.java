@@ -1145,7 +1145,6 @@ public class Gui extends javax.swing.JFrame {
                     try {
                         OCR ocrEngine = new OCR(tessPath);
                         jTextArea1.append(ocrEngine.recognizeText(imageFile, index, imageFormat, langCodes[jComboBoxLang.getSelectedIndex()]));
-                        jLabelStatus.setText(bundle.getString("OCR_completed."));
                     } catch (OutOfMemoryError oome) {
                         oome.printStackTrace();
                         JOptionPane.showMessageDialog(null, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
@@ -1171,6 +1170,7 @@ public class Gui extends javax.swing.JFrame {
 
                 @Override
                 public void run() {
+                    jLabelStatus.setText(bundle.getString("OCR_completed."));
                     getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
                     getGlassPane().setVisible(false);
                 }
@@ -1292,26 +1292,50 @@ private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent 
 }//GEN-LAST:event_jRadioButtonMenuItemVietActionPerformed
 
 private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemScanActionPerformed
-    WiaScannerAdapter adapter = new WiaScannerAdapter();
     try {
-        File tempImageFile = File.createTempFile("tempfile", ".bmp");
+        jLabelStatus.setText(bundle.getString("Scanning..."));
+        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        getGlassPane().setVisible(true);
 
-        if (tempImageFile.exists()) {
-            tempImageFile.delete();
-        }
+        SwingUtilities.invokeLater(new Runnable() {
 
-        tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
-        openFile(tempImageFile);
-    } catch (IOException ioe) {
-        JOptionPane.showMessageDialog(this, ioe.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
-    } catch (WiaOperationException woe) {
-        JOptionPane.showMessageDialog(this, woe.getWIAMessage(), woe.getMessage(), JOptionPane.WARNING_MESSAGE);
-    } catch (Exception e) {
-        String msg = e.getMessage();
-        if (msg == null || msg.equals("")) {
-            msg = "Scanner Operation Error.";
-        }
-        JOptionPane.showMessageDialog(this, msg, "Scanner Operation Error", JOptionPane.ERROR_MESSAGE);
+            @Override
+            public void run() {
+                WiaScannerAdapter adapter = new WiaScannerAdapter();
+                try {
+                    File tempImageFile = File.createTempFile("tempfile", ".bmp");
+
+                    if (tempImageFile.exists()) {
+                        tempImageFile.delete();
+                    }
+
+                    tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
+                    openFile(tempImageFile);
+                } catch (IOException ioe) {
+                    JOptionPane.showMessageDialog(null, ioe.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
+                } catch (WiaOperationException woe) {
+                    JOptionPane.showMessageDialog(null, woe.getWIAMessage(), woe.getMessage(), JOptionPane.WARNING_MESSAGE);
+                } catch (Exception e) {
+                    String msg = e.getMessage();
+                    if (msg == null || msg.equals("")) {
+                        msg = "Scanner Operation Error.";
+                    }
+                    JOptionPane.showMessageDialog(null, msg, "Scanner Operation Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+    } catch (Exception exc) {
+        System.err.println(exc.getMessage());
+    } finally {
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                jLabelStatus.setText(bundle.getString("Scanning_completed"));
+                getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                getGlassPane().setVisible(false);
+            }
+        });
     }
 }//GEN-LAST:event_jMenuItemScanActionPerformed
 
