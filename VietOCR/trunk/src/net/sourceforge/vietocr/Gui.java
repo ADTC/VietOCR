@@ -3,7 +3,6 @@
  *
  * Created on December 9, 2007, 12:21 PM
  */
-
 package net.sourceforge.vietocr;
 
 import java.io.*;
@@ -22,6 +21,7 @@ import javax.swing.event.*;
 import net.sourceforge.vietocr.postprocessing.Processor;
 import net.sourceforge.vietpad.*;
 import net.sourceforge.vietpad.inputmethod.*;
+import net.sourceforge.vietocr.wia.*;
 
 /**
  *
@@ -29,11 +29,12 @@ import net.sourceforge.vietpad.inputmethod.*;
  *
  */
 public class Gui extends javax.swing.JFrame {
+
     private File imageFile;
     public static final String APP_NAME = "VietOCR";
     final static boolean MAC_OS_X = System.getProperty("os.name").startsWith("Mac");
     private final String UTF8 = "UTF-8";
-    protected ResourceBundle myResources, bundle;
+    protected ResourceBundle myResources,  bundle;
     protected final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
     private Font font;
     private final Rectangle screen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
@@ -52,9 +53,9 @@ public class Gui extends javax.swing.JFrame {
     private JFileChooser filechooser;
     private boolean wordWrapOn;
     private String selectedInputMethod;
-    private float originalProportion;
+    private float scale;
     private String selectedUILang;
-    
+
     /**
      * Creates new form Gui
      */
@@ -62,19 +63,19 @@ public class Gui extends javax.swing.JFrame {
         selectedUILang = prefs.get("UILanguage", "en");
         Locale.setDefault(new Locale(selectedUILang));
         tessPath = prefs.get("TesseractDirectory", new File("tesseract").getPath());
-        
+
         try {
             prop = new Properties();
             FileInputStream fis = new FileInputStream("ISO639-3.xml");
             prop.loadFromXML(fis);
-            
+
             langCodes = new File(tessPath, "tessdata").list(new FilenameFilter() {
                 @Override
                 public boolean accept(File dir, String name) {
                     return name.endsWith(".inttemp");
                 }
             });
-            
+
             if (langCodes == null) {
                 langs = new String[0];
             } else {
@@ -90,33 +91,33 @@ public class Gui extends javax.swing.JFrame {
         } catch (Exception exc) {
             exc.printStackTrace();
         }
-        
+
         selectedInputMethod = prefs.get("inputMethod", "Telex");
-        
+
         try {
             UIManager.setLookAndFeel(prefs.get("lookAndFeel", UIManager.getSystemLookAndFeelClassName()));
         } catch (Exception e) {
             e.printStackTrace();
-            // keep default LAF
+        // keep default LAF
         }
-        
+
         initComponents();
-        
+
         new DropTarget(this.jImageLabel, new ImageDropTargetListener(this));
-        
+
         addWindowListener(
                 new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                quit();
-            }
-            
-            @Override
-            public void windowOpened(WindowEvent e) {
-                setExtendedState(prefs.getInt("windowState", Frame.NORMAL));
-            }
-        });
-        
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        quit();
+                    }
+
+                    @Override
+                    public void windowOpened(WindowEvent e) {
+                        setExtendedState(prefs.getInt("windowState", Frame.NORMAL));
+                    }
+                });
+
         this.setTitle(APP_NAME);
         bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle"); // NOI18N
         currentDirectory = prefs.get("currentDirectory", System.getProperty("user.home"));
@@ -127,21 +128,21 @@ public class Gui extends javax.swing.JFrame {
         javax.swing.filechooser.FileFilter gifFilter = new SimpleFilter("gif", "GIF");
         javax.swing.filechooser.FileFilter pngFilter = new SimpleFilter("png", "PNG");
         javax.swing.filechooser.FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
-        
+
         filechooser.addChoosableFileFilter(tiffFilter);
         filechooser.addChoosableFileFilter(jpegFilter);
         filechooser.addChoosableFileFilter(gifFilter);
         filechooser.addChoosableFileFilter(pngFilter);
         filechooser.addChoosableFileFilter(bmpFilter);
-        
+
         filechooser.setFileFilter(filechooser.getChoosableFileFilters()[prefs.getInt("filterIndex", 0)]);
-        
+
         myResources = ResourceBundle.getBundle("net.sourceforge.vietpad.Resources");
-        
+
         wordWrapOn = prefs.getBoolean("wordWrap", false);
         jTextArea1.setLineWrap(wordWrapOn);
         jCheckBoxMenuWordWrap.setSelected(wordWrapOn);
-        
+
         font = new Font(
                 prefs.get("fontName", MAC_OS_X ? "Lucida Grande" : "Tahoma"),
                 prefs.getInt("fontStyle", Font.PLAIN),
@@ -157,20 +158,20 @@ public class Gui extends javax.swing.JFrame {
                 snap(
                 prefs.getInt("frameY", screen.y + (screen.height - getHeight()) / 3),
                 screen.y, screen.y + screen.height - getHeight()));
-        
+
         if (langCodes == null) {
             JOptionPane.showMessageDialog(this, bundle.getString("Tesseract_is_not_found._Please_specify_its_path_in_Settings_menu."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
         }
-        
+
         populatePopupMenu();
-        
+
         this.jTextArea1.getDocument().addUndoableEditListener(new RawListener());
         undoSupport.addUndoableEditListener(new SupportListener());
         m_undo.discardAllEdits();
         updateUndoRedo();
         updateCutCopyDelete(false);
     }
-    
+
     void populatePopupMenu() {
         m_undoAction = new AbstractAction(myResources.getString("Undo")) {
             @Override
@@ -183,10 +184,10 @@ public class Gui extends javax.swing.JFrame {
                 updateUndoRedo();
             }
         };
-        
-        
+
+
         popup.add(m_undoAction);
-        
+
         m_redoAction = new AbstractAction(myResources.getString("Redo")) {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -198,11 +199,11 @@ public class Gui extends javax.swing.JFrame {
                 updateUndoRedo();
             }
         };
-        
-        
+
+
         popup.add(m_redoAction);
         popup.addSeparator();
-        
+
         actionCut = new AbstractAction(myResources.getString("Cut")) {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -210,20 +211,20 @@ public class Gui extends javax.swing.JFrame {
                 updatePaste();
             }
         };
-        
+
         popup.add(actionCut);
-        
-        actionCopy =  new AbstractAction(myResources.getString("Copy")) {
+
+        actionCopy = new AbstractAction(myResources.getString("Copy")) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jTextArea1.copy();
                 updatePaste();
             }
         };
-        
-        
+
+
         popup.add(actionCopy);
-        
+
         actionPaste = new AbstractAction(myResources.getString("Paste")) {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -232,30 +233,29 @@ public class Gui extends javax.swing.JFrame {
                 undoSupport.endUpdate();
             }
         };
-        
+
         popup.add(actionPaste);
-        
+
         actionDelete = new AbstractAction(myResources.getString("Delete")) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jTextArea1.replaceSelection(null);
             }
         };
-        
+
         popup.add(actionDelete);
         popup.addSeparator();
-        
+
         actionSelectAll = new AbstractAction(myResources.getString("Select_All"), null) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jTextArea1.selectAll();
             }
         };
-        
+
         popup.add(actionSelectAll);
     }
-    
-    
+
     /**
      *  Updates the Undo and Redo actions
      */
@@ -263,8 +263,7 @@ public class Gui extends javax.swing.JFrame {
         m_undoAction.setEnabled(m_undo.canUndo());
         m_redoAction.setEnabled(m_undo.canRedo());
     }
-    
-    
+
     /**
      *  Updates the Cut, Copy, and Delete actions
      *
@@ -275,12 +274,13 @@ public class Gui extends javax.swing.JFrame {
         actionCopy.setEnabled(isTextSelected);
         actionDelete.setEnabled(isTextSelected);
     }
-    
+
     /**
      *  Listens to raw undoable edits
      *
      */
     private class RawListener implements UndoableEditListener {
+
         /**
          *  Description of the Method
          *
@@ -291,13 +291,13 @@ public class Gui extends javax.swing.JFrame {
             undoSupport.postEdit(e.getEdit());
         }
     }
-    
-    
+
     /**
      *  Listens to undoable edits filtered by undoSupport
      *
      */
     private class SupportListener implements UndoableEditListener {
+
         /**
          *  Description of the Method
          *
@@ -309,8 +309,7 @@ public class Gui extends javax.swing.JFrame {
             updateUndoRedo();
         }
     }
-    
-    
+
     /**
      *  Updates the Paste action
      */
@@ -322,12 +321,10 @@ public class Gui extends javax.swing.JFrame {
             }
         } catch (OutOfMemoryError e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, APP_NAME
-                    + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME
-                    + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -339,6 +336,7 @@ public class Gui extends javax.swing.JFrame {
         popup = new javax.swing.JPopupMenu();
         jToolBar2 = new javax.swing.JToolBar();
         jButtonOpen = new javax.swing.JButton();
+        jButtonScan = new javax.swing.JButton();
         jButtonOCR = new javax.swing.JButton();
         jButtonClear = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -390,6 +388,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemOpen = new javax.swing.JMenuItem();
+        jMenuItemScan = new javax.swing.JMenuItem();
         jMenuItemSave = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JSeparator();
         jMenuItemExit = new javax.swing.JMenuItem();
@@ -472,6 +471,17 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(jButtonOpen);
+
+        jButtonScan.setText(bundle.getString("Scan")); // NOI18N
+        jButtonScan.setFocusable(false);
+        jButtonScan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonScan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonScan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonScanActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButtonScan);
 
         jButtonOCR.setText("OCR");
         jButtonOCR.setToolTipText(bundle.getString("Perform_OCR")); // NOI18N
@@ -624,6 +634,14 @@ public class Gui extends javax.swing.JFrame {
         });
         jMenuFile.add(jMenuItemOpen);
 
+        jMenuItemScan.setText(bundle.getString("Scan") + "...");
+        jMenuItemScan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemScanActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuItemScan);
+
         jMenuItemSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemSave.setText(bundle.getString("Save...")); // NOI18N
         jMenuItemSave.addActionListener(new java.awt.event.ActionListener() {
@@ -765,7 +783,7 @@ public class Gui extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void jMenuItemHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHelpActionPerformed
         final String readme = myResources.getString("readme");
         if (MAC_OS_X && new File(readme).exists()) {
@@ -787,22 +805,23 @@ public class Gui extends javax.swing.JFrame {
             helptopicsFrame.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItemHelpActionPerformed
-    
+
     private void jComboBoxLangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxLangItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             curLangCode = langCodes[jComboBoxLang.getSelectedIndex()];
             VietKeyListener.setVietModeEnabled(curLangCode.equals("vie"));
         }
     }//GEN-LAST:event_jComboBoxLangItemStateChanged
-    
+
     private void jCheckBoxMenuWordWrapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuWordWrapActionPerformed
         this.jTextArea1.setLineWrap(wordWrapOn = jCheckBoxMenuWordWrap.isSelected());
     }//GEN-LAST:event_jCheckBoxMenuWordWrapActionPerformed
-    
-    
+
     private void jMenuItemPostProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPostProcessActionPerformed
-        if (curLangCode == null) return;
-        
+        if (curLangCode == null) {
+            return;
+        }
+
         try {
             String selectedText = this.jTextArea1.getSelectedText();
             if (selectedText != null) {
@@ -822,7 +841,7 @@ public class Gui extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_jMenuItemPostProcessActionPerformed
-    
+
     private void jButtonFitImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFitImageActionPerformed
         if ((float) imageIcon.getIconWidth() / jScrollPane2.getWidth() > (float) imageIcon.getIconHeight() / jScrollPane2.getHeight()) {
             jButtonFitWidthActionPerformed(evt);
@@ -830,9 +849,9 @@ public class Gui extends javax.swing.JFrame {
             jButtonFitHeightActionPerformed(evt);
         }
         reset = true;
-        ((JImageLabel)jImageLabel).deselect();
+        ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonFitImageActionPerformed
-    
+
     private void jMenuItemTessPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTessPathActionPerformed
         JFileChooser pathchooser = new JFileChooser(currentDirectory);
         pathchooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -848,35 +867,35 @@ public class Gui extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jMenuItemTessPathActionPerformed
-    
+
     private void jButtonFitWidthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFitWidthActionPerformed
         float factor = (float) imageIcon.getIconWidth() / jScrollPane2.getWidth();
         doChange(factor, false);
         reset = false;
-        ((JImageLabel)jImageLabel).deselect();
+        ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonFitWidthActionPerformed
-    
+
     private void jButtonFitHeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFitHeightActionPerformed
         float factor = (float) imageIcon.getIconHeight() / jScrollPane2.getHeight();
         doChange(factor, false);
         reset = false;
-        ((JImageLabel)jImageLabel).deselect();
+        ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonFitHeightActionPerformed
-    
+
     private void jButtonZoomOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomOutActionPerformed
-        float factor = 1.5f;
+        float factor = 1.25f;
         doChange(factor, false);
         reset = false;
-        ((JImageLabel)jImageLabel).deselect();
+        ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonZoomOutActionPerformed
-    
+
     private void jButtonZoomInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomInActionPerformed
-        float factor = 1.5f;
+        float factor = 1.25f;
         doChange(factor, true);
         reset = false;
-        ((JImageLabel)jImageLabel).deselect();
+        ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonZoomInActionPerformed
-    
+
     void doChange(final float factor, final boolean multiply) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -884,7 +903,7 @@ public class Gui extends javax.swing.JFrame {
                 for (ImageIconScalable image : imageList) {
                     int width = image.getIconWidth();
                     int height = image.getIconHeight();
-                    
+
                     if (multiply) {
                         image.setScaledSize((int) (width * factor), (int) (height * factor));
                     } else {
@@ -895,26 +914,26 @@ public class Gui extends javax.swing.JFrame {
                 jImageLabel.revalidate();
                 jScrollPane2.repaint();
                 if (multiply) {
-                    originalProportion *= factor;
+                    scale *= factor;
                 } else {
-                    originalProportion /= factor;
+                    scale /= factor;
                 }
-                
+
             }
         });
     }
     private void jButtonOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOpenActionPerformed
         jMenuItemOpenActionPerformed(evt);
     }//GEN-LAST:event_jButtonOpenActionPerformed
-    
+
     private void jButtonOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOCRActionPerformed
         jMenuItemOCRActionPerformed(evt);
     }//GEN-LAST:event_jButtonOCRActionPerformed
-    
+
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
         this.jTextArea1.setText(null);
     }//GEN-LAST:event_jButtonClearActionPerformed
-    
+
     private void jButtonPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevActionPerformed
         imageIndex--;
         if (imageIndex < 0) {
@@ -924,39 +943,38 @@ public class Gui extends javax.swing.JFrame {
             displayImage();
         }
         setButton();
-        ((JImageLabel)jImageLabel).deselect();
+        ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonPrevActionPerformed
-    
+
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
         imageIndex++;
-        if (imageIndex  > imageTotal - 1) {
+        if (imageIndex > imageTotal - 1) {
             imageIndex = imageTotal - 1;
         } else {
             this.jLabelStatus.setText(null);
             displayImage();
         }
         setButton();
-        ((JImageLabel)jImageLabel).deselect();
+        ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonNextActionPerformed
-    
+
     private void jMenuItemOCRAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRAllActionPerformed
         if (imageFile == null) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
+
         performOCR(imageFile, -1);
     }//GEN-LAST:event_jMenuItemOCRAllActionPerformed
-    
+
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
-        JOptionPane.showMessageDialog(this, APP_NAME + ", v0.9.4 \u00a9 2007\n" + 
-                "Java GUI Frontend for Tesseract OCR Engine\n" + 
-                DateFormat.getDateInstance(DateFormat.LONG)
-                        .format(new GregorianCalendar(2008, Calendar.OCTOBER, 21).getTime()) + 
+        JOptionPane.showMessageDialog(this, APP_NAME + ", v0.9.4 \u00a9 2007\n" +
+                "Java GUI Frontend for Tesseract OCR Engine\n" +
+                DateFormat.getDateInstance(DateFormat.LONG).format(new GregorianCalendar(2008, Calendar.OCTOBER, 26).getTime()) +
                 "\nhttp://vietocr.sourceforge.net", APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-        
+
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
-    
+
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
         quit();
     }//GEN-LAST:event_jMenuItemExitActionPerformed
@@ -974,16 +992,16 @@ public class Gui extends javax.swing.JFrame {
         if (this.jComboBoxLang.getSelectedIndex() != -1) {
             prefs.put("langCode", this.jComboBoxLang.getSelectedItem().toString());
         }
-        
+
         prefs.putBoolean("wordWrap", wordWrapOn);
-        
+
         if (getExtendedState() == NORMAL) {
             prefs.putInt("frameHeight", getHeight());
             prefs.putInt("frameWidth", getWidth());
             prefs.putInt("frameX", getX());
             prefs.putInt("frameY", getY());
         }
-        
+
         javax.swing.filechooser.FileFilter[] filters = filechooser.getChoosableFileFilters();
         for (int i = 0; i < filters.length; i++) {
             if (filters[i] == filechooser.getFileFilter()) {
@@ -991,7 +1009,7 @@ public class Gui extends javax.swing.JFrame {
                 break;
             }
         }
-        
+
         System.exit(0);
     }
     private void jMenuItemFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFontActionPerformed
@@ -1002,14 +1020,14 @@ public class Gui extends javax.swing.JFrame {
             jTextArea1.setFont(font = dlg.getFont());
             jTextArea1.validate();
         }
-        
+
     }//GEN-LAST:event_jMenuItemFontActionPerformed
-    
+
     private void jMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveActionPerformed
         JFileChooser chooser = new JFileChooser(currentDirectory);
         javax.swing.filechooser.FileFilter txtFilter = new SimpleFilter("txt", "Unicode UTF-8 Text");
         chooser.addChoosableFileFilter(txtFilter);
-        
+
         int returnVal = chooser.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File textFile = chooser.getSelectedFile();
@@ -1020,9 +1038,9 @@ public class Gui extends javax.swing.JFrame {
             }
             saveFile(textFile);
         }
-        
+
     }
-    
+
     void saveFile(File file) {
         try {
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), UTF8));
@@ -1030,9 +1048,7 @@ public class Gui extends javax.swing.JFrame {
             out.close();
         } catch (OutOfMemoryError oome) {
             oome.printStackTrace();
-            JOptionPane.showMessageDialog(this, APP_NAME
-                    + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME
-                    + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
         } catch (FileNotFoundException fnfe) {
             showError(fnfe, myResources.getString("Error_saving_file_") + file + myResources.getString(".\nFile_is_inaccessible."));
         } catch (Exception ex) {
@@ -1046,21 +1062,21 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
         }
-        
+
     }//GEN-LAST:event_jMenuItemSaveActionPerformed
-    
+
     private void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRActionPerformed
         if (imageFile == null) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
+
         Rectangle rect = ((JImageLabel) jImageLabel).getRect();
-        
+
         if (rect != null && jImageLabel.getIcon() != null) {
             try {
                 ImageIcon ii = (ImageIcon) this.jImageLabel.getIcon();
-                BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) (rect.x / originalProportion), (int) (rect.y / originalProportion), (int) (rect.width / originalProportion), (int) (rect.height / originalProportion));
+                BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) (rect.x / scale), (int) (rect.y / scale), (int) (rect.width / scale), (int) (rect.height / scale));
                 File tempFile = new File(imageFile.getParentFile(), "tempImageFile0.tif");
                 tempFile.deleteOnExit();
                 ImageIO.write(bi, "tiff", tempFile);
@@ -1073,9 +1089,9 @@ public class Gui extends javax.swing.JFrame {
         } else {
             performOCR(imageFile, imageIndex);
         }
-        
+
     }//GEN-LAST:event_jMenuItemOCRActionPerformed
-    
+
     void performOCR(final File imageFile, final int index) {
         try {
             if (this.jComboBoxLang.getSelectedIndex() == -1) {
@@ -1089,10 +1105,10 @@ public class Gui extends javax.swing.JFrame {
             jLabelStatus.setText(bundle.getString("OCR_running..."));
             getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             getGlassPane().setVisible(true);
-            
+
             String imageFileName = imageFile.getName();
             final String imageFormat = imageFileName.substring(imageFileName.lastIndexOf('.') + 1);
-            
+
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
@@ -1102,9 +1118,7 @@ public class Gui extends javax.swing.JFrame {
                         jLabelStatus.setText(bundle.getString("OCR_completed."));
                     } catch (OutOfMemoryError oome) {
                         oome.printStackTrace();
-                        JOptionPane.showMessageDialog(null, APP_NAME
-                                + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME
-                                + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
                     } catch (FileNotFoundException fnfe) {
                         fnfe.printStackTrace();
                         JOptionPane.showMessageDialog(null, bundle.getString("An_exception_occurred_in_Tesseract_engine_while_recognizing_this_image."), APP_NAME, JOptionPane.ERROR_MESSAGE);
@@ -1119,7 +1133,7 @@ public class Gui extends javax.swing.JFrame {
                     }
                 }
             });
-            
+
         } catch (Exception exc) {
             System.err.println(exc.getMessage());
         } finally {
@@ -1131,19 +1145,19 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
         }
-        
+
     }
-    
+
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
-        
+
         int returnVal = filechooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             currentDirectory = filechooser.getCurrentDirectory().getPath();
             openFile(filechooser.getSelectedFile());
-            originalProportion = 1f;
+            scale = 1f;
         }
     }//GEN-LAST:event_jMenuItemOpenActionPerformed
-    
+
     /**
      *  Updates UI component if changes in LAF
      *
@@ -1160,7 +1174,7 @@ public class Gui extends javax.swing.JFrame {
         SwingUtilities.updateComponentTreeUI(popup);
         SwingUtilities.updateComponentTreeUI(filechooser);
     }
-    
+
     /**
      * Opens image file.
      *
@@ -1171,14 +1185,14 @@ public class Gui extends javax.swing.JFrame {
         loadImage();
         displayImage();
         jLabelStatus.setText(null);
-        ((JImageLabel)jImageLabel).deselect();
-        
+        ((JImageLabel) jImageLabel).deselect();
+
         this.jButtonFitHeight.setEnabled(true);
         this.jButtonFitImage.setEnabled(true);
         this.jButtonFitWidth.setEnabled(true);
         this.jButtonZoomIn.setEnabled(true);
         this.jButtonZoomOut.setEnabled(true);
-        
+
         if (imageList.size() == 1) {
             this.jButtonNext.setEnabled(false);
             this.jButtonPrev.setEnabled(false);
@@ -1186,10 +1200,10 @@ public class Gui extends javax.swing.JFrame {
             this.jButtonNext.setEnabled(true);
             this.jButtonPrev.setEnabled(true);
         }
-        
+
         setButton();
     }
-    
+
     void displayImage() {
         if (imageList != null) {
             this.jLabelCurIndex.setText(bundle.getString("Page_") + (imageIndex + 1) + " " + bundle.getString("of_") + imageTotal);
@@ -1198,21 +1212,21 @@ public class Gui extends javax.swing.JFrame {
             jImageLabel.revalidate();
         }
     }
-    
+
     void setButton() {
         if (imageIndex == 0) {
             this.jButtonPrev.setEnabled(false);
         } else {
             this.jButtonPrev.setEnabled(true);
         }
-        
+
         if (imageIndex == imageList.size() - 1) {
             this.jButtonNext.setEnabled(false);
         } else {
             this.jButtonNext.setEnabled(true);
         }
     }
-    
+
     void loadImage() {
         try {
             imageList = ImageIOHelper.getImageList(imageFile);
@@ -1223,10 +1237,10 @@ public class Gui extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, bundle.getString("Required_JAI_Image_I/O_Library_is_not_found."), APP_NAME, JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         jSplitPane1.setDividerLocation(jSplitPane1.getWidth() / 2);
-        
+
         if (reset && imageFile != null) {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
@@ -1244,12 +1258,42 @@ private void jRadioButtonMenuItemEngActionPerformed(java.awt.event.ActionEvent e
 private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemVietActionPerformed
     changeUILang(evt.getActionCommand());
 }//GEN-LAST:event_jRadioButtonMenuItemVietActionPerformed
+
+private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemScanActionPerformed
+    WiaScannerAdapter adapter = new WiaScannerAdapter();
+    try {
+        File tempImageFile = File.createTempFile("tempfile", ".bmp");
+
+        if (tempImageFile.exists()) {
+            tempImageFile.delete();
+        }
+
+        tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getAbsolutePath());
+        openFile(tempImageFile);
+    } catch (IOException ioe) {
+    } catch (WiaOperationException ex) {
+        JOptionPane.showMessageDialog(this, getScannerError(ex), ex.getMessage(), JOptionPane.WARNING_MESSAGE);
+    } catch (Exception ioe) {
+    }
+}//GEN-LAST:event_jMenuItemScanActionPerformed
+    String getScannerError(WiaOperationException ex) {
+        String fullMessage = ex.getCause().getMessage();
+
+        String description = "Description: ";
+        int index = fullMessage.indexOf(description);
+        return fullMessage.substring(index + description.length());
+    }
+
+private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonScanActionPerformed
+    jMenuItemScanActionPerformed(evt);
+}//GEN-LAST:event_jButtonScanActionPerformed
     void changeUILang(String lang) {
         if (!selectedUILang.equals(lang)) {
             selectedUILang = lang;
             JOptionPane.showMessageDialog(null, bundle.getString("Please_restart_the_application_for_the_change_to_take_effect."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
         }
     }
+
     /**
      *  Shows a warning message
      *
@@ -1260,24 +1304,24 @@ private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent 
         e.printStackTrace();
         JOptionPane.showMessageDialog(this, message, APP_NAME, JOptionPane.WARNING_MESSAGE);
     }
-    
+
     private int snap(final int ideal, final int min, final int max) {
         final int TOLERANCE = 0;
         return ideal < min + TOLERANCE ? min : (ideal > max - TOLERANCE ? max : ideal);
     }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             @Override
             public void run() {
                 new Gui().setVisible(true);
             }
         });
     }
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClear;
     private javax.swing.JButton jButtonFitHeight;
@@ -1287,6 +1331,7 @@ private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent 
     private javax.swing.JButton jButtonOCR;
     private javax.swing.JButton jButtonOpen;
     private javax.swing.JButton jButtonPrev;
+    private javax.swing.JButton jButtonScan;
     private javax.swing.JButton jButtonZoomIn;
     private javax.swing.JButton jButtonZoomOut;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuWordWrap;
@@ -1309,6 +1354,7 @@ private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent 
     private javax.swing.JMenuItem jMenuItemOpen;
     private javax.swing.JMenuItem jMenuItemPostProcess;
     private javax.swing.JMenuItem jMenuItemSave;
+    private javax.swing.JMenuItem jMenuItemScan;
     private javax.swing.JMenuItem jMenuItemTessPath;
     private javax.swing.JMenu jMenuLookAndFeel;
     private javax.swing.JMenu jMenuSettings;
@@ -1334,7 +1380,7 @@ private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent 
     // End of variables declaration//GEN-END:variables
     private final UndoManager m_undo = new UndoManager();
     private final UndoableEditSupport undoSupport = new UndoableEditSupport();
-    private Action m_undoAction, m_redoAction, actionCut, actionCopy, actionPaste, actionDelete, actionSelectAll;
+    private Action m_undoAction,  m_redoAction,  actionCut,  actionCopy,  actionPaste,  actionDelete,  actionSelectAll;
     private final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
     private JFrame helptopicsFrame;
 }
