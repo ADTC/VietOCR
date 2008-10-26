@@ -33,4 +33,4 @@ Version 0.5 (10 October 2008):
 
 Version 0.6 (25 October 2008): 
 - Implemented Zoom In/Out and Rotate capabilities
-- Integrated WIA Scanning support
+- Integrated scanning support via WIA Automation
