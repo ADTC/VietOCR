@@ -497,7 +497,7 @@ namespace VietOCR.NET
                 // Next, handle the case where the user canceled the operation.
                 // Note that due to a race condition in the DoWork event handler, the Cancelled
                 // flag may not have been set, even though CancelAsync was called.
-                this.toolStripStatusLabel1.Text = "Canceled";
+                this.toolStripStatusLabel1.Text = resources.GetString("Canceled");
             }
             else
             {

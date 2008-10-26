@@ -472,4 +472,7 @@
   <data name="selectLanguage" xml:space="preserve">
     <value>Hãy chọn một ngôn ngữ.</value>
   </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>Bãi bỏ</value>
+  </data>
 </root>
