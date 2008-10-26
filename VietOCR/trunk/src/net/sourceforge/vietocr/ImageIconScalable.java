@@ -50,6 +50,7 @@ public class ImageIconScalable extends ImageIcon {
         super(location, description);
     }
     
+    @Override
     public int getIconHeight() {
         int returnValue;
         if (height == -1) {
@@ -60,6 +61,7 @@ public class ImageIconScalable extends ImageIcon {
         return returnValue;
     }
     
+    @Override
     public int getIconWidth() {
         int returnValue;
         if (width == -1) {
@@ -70,6 +72,7 @@ public class ImageIconScalable extends ImageIcon {
         return returnValue;
     }
     
+    @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
         if ((width == -1) && (height == -1)) {
             g.drawImage(getImage(), x, y, c);
