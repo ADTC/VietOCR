@@ -439,4 +439,13 @@
   <data name="toolStripLabel1.Text" xml:space="preserve">
     <value>Ngôn ngữ OCR</value>
   </data>
+  <data name="_Help" xml:space="preserve">
+    <value> Trợ giúp</value>
+  </data>
+  <data name="_of_" xml:space="preserve">
+    <value> của </value>
+  </data>
+  <data name="Page_" xml:space="preserve">
+    <value>Trang </value>
+  </data>
 </root>
