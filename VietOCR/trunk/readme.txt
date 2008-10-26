@@ -9,3 +9,6 @@ Nếu bạn gặp out-of-memory exception, hãy chạy ocr.bat thay vì sử d�
 Check http://vietunicode.sourceforge.net/howto/tesseract-ocr.html for more information.
 
 If there are problems setting Tesseract path on Linux, please consult this post: http://groups.google.com/group/tesseract-ocr/browse_thread/thread/58fcfab8ef3ae7c1#36d3c5e059332666
+
+To register the WIA Automation, copy wiaaut.dll to the C:\Windows\System32 folder and run from the command line:
+	regsvr32 C:\Windows\System32\wiaaut.dll

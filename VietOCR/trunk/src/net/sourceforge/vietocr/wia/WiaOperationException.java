@@ -61,6 +61,14 @@ public class WiaOperationException extends Exception {
         _errorCode = value;
     }
 
+    public String getWIAMessage() {
+        String fullMessage = this.getCause().getMessage();
+        String description = "Description: ";
+        int index = fullMessage.indexOf(description);
+        return index == -1 ? fullMessage : fullMessage.substring(index + description.length());
+    }
+
+
 //    void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) {
 //        super().GetObjectData(info, context);
 //        _errorCode = (WiaScannerError) info.GetUInt32("ErrorCode");
