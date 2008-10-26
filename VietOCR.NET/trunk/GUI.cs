@@ -216,7 +216,7 @@ namespace VietOCR.NET
             catch (Exception ex)
             {
                 Console.WriteLine(ex.StackTrace);
-                MessageBox.Show(this, string.Format("Post-processing not supported for {0} language.", "Error"), strProgName);
+                MessageBox.Show(this, string.Format("Post-processing not supported for {0} language.", ex.Message), strProgName);
             }
         }
 
