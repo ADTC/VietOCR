@@ -47,6 +47,7 @@ public class JImageLabel extends JLabel implements MouseMotionListener, MouseLis
         bs = bs1;
         
         ActionListener taskPerformer = new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 if (count % modulus == 0) {
                     bs = bs1;
@@ -75,6 +76,7 @@ public class JImageLabel extends JLabel implements MouseMotionListener, MouseLis
         rect = null;
     }
     
+    @Override
     public void paintComponent(Graphics g) {
         // automatically called when repaint
         super.paintComponent(g);
@@ -122,6 +124,7 @@ public class JImageLabel extends JLabel implements MouseMotionListener, MouseLis
         return ar.toArray(new Rectangle[ar.size()]);
     }
     
+    @Override
     public void mousePressed(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
             if (rect == null) {
@@ -225,6 +228,7 @@ public class JImageLabel extends JLabel implements MouseMotionListener, MouseLis
         }
     }
     
+    @Override
     public void mouseDragged(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
             if (rect == null) {
@@ -273,6 +277,7 @@ public class JImageLabel extends JLabel implements MouseMotionListener, MouseLis
         }
     }
     
+    @Override
     public void mouseClicked(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
             if (rect != null) {
@@ -335,6 +340,7 @@ public class JImageLabel extends JLabel implements MouseMotionListener, MouseLis
         }
     }
     
+    @Override
     public void mouseReleased(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
             if (rect != null) {
@@ -345,10 +351,12 @@ public class JImageLabel extends JLabel implements MouseMotionListener, MouseLis
         }
     }
     
+    @Override
     public void mouseEntered(MouseEvent e) {
         
     }
     
+    @Override
     public void mouseExited(MouseEvent e) {
         
     }
