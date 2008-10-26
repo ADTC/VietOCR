@@ -448,4 +448,28 @@
   <data name="Page_" xml:space="preserve">
     <value>Trang </value>
   </data>
+  <data name="About_" xml:space="preserve">
+    <value>Về </value>
+  </data>
+  <data name="Cannotloadimage" xml:space="preserve">
+    <value>Không nạp ảnh được.</value>
+  </data>
+  <data name="loadImage" xml:space="preserve">
+    <value>Hãy nạp ảnh.</value>
+  </data>
+  <data name="OCRcompleted" xml:space="preserve">
+    <value>OCR hoàn tất.</value>
+  </data>
+  <data name="OCRrunning" xml:space="preserve">
+    <value>OCR đang chạy...</value>
+  </data>
+  <data name="OpenImageFile" xml:space="preserve">
+    <value>Mở tập tin ảnh</value>
+  </data>
+  <data name="readme" xml:space="preserve">
+    <value>readme_cs_vi.html</value>
+  </data>
+  <data name="selectLanguage" xml:space="preserve">
+    <value>Hãy chọn một ngôn ngữ.</value>
+  </data>
 </root>
