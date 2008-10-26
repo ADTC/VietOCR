@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
+ */
 package net.sourceforge.vietocr;
 
 import java.io.*;
@@ -65,6 +65,7 @@ public class Gui extends javax.swing.JFrame {
     private String selectedInputMethod;
     private float scale;
     private String selectedUILang;
+    public static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
 
     /**
      * Creates new form Gui
@@ -80,6 +81,7 @@ public class Gui extends javax.swing.JFrame {
             prop.loadFromXML(fis);
 
             langCodes = new File(tessPath, "tessdata").list(new FilenameFilter() {
+
                 @Override
                 public boolean accept(File dir, String name) {
                     return name.endsWith(".inttemp");
@@ -113,10 +115,17 @@ public class Gui extends javax.swing.JFrame {
 
         initComponents();
 
+        // Hide Scan buttons for non-Windows OS because of WIA Automation
+        if (!WINDOWS) {
+            this.jButtonScan.setVisible(false);
+            this.jMenuItemScan.setVisible(false);
+        }
+
         new DropTarget(this.jImageLabel, new ImageDropTargetListener(this));
 
         addWindowListener(
                 new WindowAdapter() {
+
                     @Override
                     public void windowClosing(WindowEvent e) {
                         quit();
@@ -184,6 +193,7 @@ public class Gui extends javax.swing.JFrame {
 
     void populatePopupMenu() {
         m_undoAction = new AbstractAction(myResources.getString("Undo")) {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -199,6 +209,7 @@ public class Gui extends javax.swing.JFrame {
         popup.add(m_undoAction);
 
         m_redoAction = new AbstractAction(myResources.getString("Redo")) {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -215,6 +226,7 @@ public class Gui extends javax.swing.JFrame {
         popup.addSeparator();
 
         actionCut = new AbstractAction(myResources.getString("Cut")) {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 jTextArea1.cut();
@@ -225,6 +237,7 @@ public class Gui extends javax.swing.JFrame {
         popup.add(actionCut);
 
         actionCopy = new AbstractAction(myResources.getString("Copy")) {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 jTextArea1.copy();
@@ -236,6 +249,7 @@ public class Gui extends javax.swing.JFrame {
         popup.add(actionCopy);
 
         actionPaste = new AbstractAction(myResources.getString("Paste")) {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 undoSupport.beginUpdate();
@@ -247,6 +261,7 @@ public class Gui extends javax.swing.JFrame {
         popup.add(actionPaste);
 
         actionDelete = new AbstractAction(myResources.getString("Delete")) {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 jTextArea1.replaceSelection(null);
@@ -257,6 +272,7 @@ public class Gui extends javax.swing.JFrame {
         popup.addSeparator();
 
         actionSelectAll = new AbstractAction(myResources.getString("Select_All"), null) {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 jTextArea1.selectAll();
@@ -909,6 +925,7 @@ public class Gui extends javax.swing.JFrame {
 
     void doChange(final float factor, final boolean multiply) {
         SwingUtilities.invokeLater(new Runnable() {
+
             @Override
             public void run() {
                 for (ImageIconScalable image : imageList) {
@@ -1066,6 +1083,7 @@ public class Gui extends javax.swing.JFrame {
             showError(ex, myResources.getString("Error_saving_file_") + file);
         } finally {
             SwingUtilities.invokeLater(new Runnable() {
+
                 @Override
                 public void run() {
                     getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -1121,6 +1139,7 @@ public class Gui extends javax.swing.JFrame {
             final String imageFormat = imageFileName.substring(imageFileName.lastIndexOf('.') + 1);
 
             SwingUtilities.invokeLater(new Runnable() {
+
                 @Override
                 public void run() {
                     try {
@@ -1149,6 +1168,7 @@ public class Gui extends javax.swing.JFrame {
             System.err.println(exc.getMessage());
         } finally {
             SwingUtilities.invokeLater(new Runnable() {
+
                 @Override
                 public void run() {
                     getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -1254,6 +1274,7 @@ public class Gui extends javax.swing.JFrame {
 
         if (reset && imageFile != null) {
             SwingUtilities.invokeLater(new Runnable() {
+
                 @Override
                 public void run() {
                     jButtonFitImageActionPerformed(null);
@@ -1279,21 +1300,20 @@ private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             tempImageFile.delete();
         }
 
-        tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getAbsolutePath());
+        tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
         openFile(tempImageFile);
     } catch (IOException ioe) {
-    } catch (WiaOperationException ex) {
-        JOptionPane.showMessageDialog(this, getScannerError(ex), ex.getMessage(), JOptionPane.WARNING_MESSAGE);
-    } catch (Exception ioe) {
+        JOptionPane.showMessageDialog(this, ioe.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
+    } catch (WiaOperationException woe) {
+        JOptionPane.showMessageDialog(this, woe.getWIAMessage(), woe.getMessage(), JOptionPane.WARNING_MESSAGE);
+    } catch (Exception e) {
+        String msg = e.getMessage();
+        if (msg == null || msg.equals("")) {
+            msg = "Scanner Operation Error.";
+        }
+        JOptionPane.showMessageDialog(this, msg, "Scanner Operation Error", JOptionPane.ERROR_MESSAGE);
     }
 }//GEN-LAST:event_jMenuItemScanActionPerformed
-    String getScannerError(WiaOperationException ex) {
-        String fullMessage = ex.getCause().getMessage();
-
-        String description = "Description: ";
-        int index = fullMessage.indexOf(description);
-        return fullMessage.substring(index + description.length());
-    }
 
 private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonScanActionPerformed
     jMenuItemScanActionPerformed(evt);

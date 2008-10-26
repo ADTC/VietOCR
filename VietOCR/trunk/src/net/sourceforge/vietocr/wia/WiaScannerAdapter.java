@@ -27,20 +27,8 @@ import com.jacob.com.*;
 public final class WiaScannerAdapter {
 
     private ActiveXComponent _wiaManager; // CommonDialogClass
-    private boolean _disposed; // indicates if Dispose has been called
     private final Variant True = new Variant(true);
     private final Variant False = new Variant(false);
-
-    public WiaScannerAdapter() {
-    }
-
-    Dispatch getWiaManager() {
-        return _wiaManager;
-    }
-
-    void setWiaManager(ActiveXComponent value) {
-        _wiaManager = value;
-    }
 
     public File ScanImage(FormatID outputFormat, String fileName) throws Exception {
         if (outputFormat == null) {
@@ -55,41 +43,25 @@ public final class WiaScannerAdapter {
             }
 
             imageObject = Dispatch.callN(_wiaManager, "ShowAcquireImage", new Variant[] {
-                new Variant(WiaDeviceType.ScannerDeviceType), new Variant(WiaImageIntent.GrayscaleIntent),
-                new Variant(WiaImageBias.MaximizeQuality), new Variant(outputFormat.getValue()),
+                new Variant(WiaDeviceType.ScannerDeviceType.getValue()), new Variant(WiaImageIntent.GrayscaleIntent.getValue()),
+                new Variant(WiaImageBias.MaximizeQuality.getValue()), new Variant(outputFormat.getValue()),
                 False, True, True} ).getDispatch();
 
             Dispatch.call(imageObject, "SaveFile", fileName);
 
             return new File(fileName);
         } catch (Exception ex) {
-            String message = "Error scanning image";
+            String message = "Error Scanning Image";
             throw new WiaOperationException(message, ex);
         } finally {
             if (imageObject != null) {
-                imageObject = null;
                 imageObject.safeRelease();
-//                ComThread.Release();
             }
-        }
-    }
 
-    public void Dispose() {
-        Dispose(true);
-    }
-
-    private void Dispose(boolean disposing) {
-        if (!_disposed) {
-            if (disposing) {
-                // no managed resources to cleanup
-            }
             // cleanup unmanaged resources
             if (_wiaManager != null) {
-                _wiaManager = null;
                 _wiaManager.safeRelease();
             }
-
-            _disposed = true;
         }
     }
 }
