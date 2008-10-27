@@ -481,4 +481,10 @@
   <data name="Scanning" xml:space="preserve">
     <value>Đang quét văn bản...</value>
   </data>
+  <data name="OCROperation" xml:space="preserve">
+    <value>Tác vụ OCR</value>
+  </data>
+  <data name="ScanningOperation" xml:space="preserve">
+    <value>Tác vụ quét ảnh</value>
+  </data>
 </root>

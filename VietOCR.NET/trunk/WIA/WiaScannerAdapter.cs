@@ -40,6 +40,7 @@ namespace VietOCR.NET.WIA
               set { _wiaManager = value; }
          }
 
+         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
          [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
          public Image ScanImage(ImageFormat outputFormat, string fileName)
          {
