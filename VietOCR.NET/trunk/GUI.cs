@@ -494,7 +494,7 @@ namespace VietOCR.NET
             if (e.Error != null)
             {
                 this.toolStripStatusLabel1.Text = String.Empty;
-                MessageBox.Show(e.Error.Message);
+                MessageBox.Show(e.Error.Message, isOcrTask ? resources.GetString("OCROperation") : resources.GetString("ScanningOperation"));
             }
             else if (e.Cancelled)
             {
@@ -515,7 +515,6 @@ namespace VietOCR.NET
                 {
                     this.toolStripStatusLabel1.Text = resources.GetString("Scancompleted");
                 }
-
             }
 
             this.Cursor = Cursors.Default;
@@ -541,6 +540,50 @@ namespace VietOCR.NET
             e.Result = ocrEngine.RecognizeText(entity.Images, entity.Index, entity.Lang, entity.Rect, worker, e);
         }
 
+        private void scanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                this.toolStripStatusLabel1.Text = resources.GetString("Scanning");
+                this.Cursor = Cursors.WaitCursor;
+                this.pictureBox1.UseWaitCursor = true;
+                this.textBox1.Cursor = Cursors.WaitCursor;
+
+                isOcrTask = false;
+
+                // Start the asynchronous operation.
+                backgroundWorker2.RunWorkerAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //Console.WriteLine(ex.Message);
+            }
+        }
+
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            using (WiaScannerAdapter adapter = new WiaScannerAdapter())
+            {
+                try
+                {
+                    string tempFileName = Path.GetTempFileName();
+                    imageFile = new FileInfo(tempFileName);
+                    if (imageFile.Exists)
+                    {
+                        imageFile.Delete();
+                    }
+                    adapter.ScanImage(ImageFormat.Bmp, imageFile.FullName);
+                    openFile(tempFileName);
+                }
+                catch (WiaOperationException ex)
+                {
+                    throw new Exception(System.Text.RegularExpressions.Regex.Replace(ex.ErrorCode.ToString(), "(?=\\p{Lu}+)", " ").Trim() + ".");
+                }
+            }
+        }
         private void splitContainer2_Panel2_DragOver(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -660,42 +703,6 @@ namespace VietOCR.NET
                 this.pictureBox1.Width = Convert.ToInt32(Convert.ToDouble(this.pictureBox1.Height) / ratio);
             }
             return ratio;
-        }
-
-        private void scanToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.toolStripStatusLabel1.Text = resources.GetString("Scanrunning");
-            this.Cursor = Cursors.WaitCursor;
-            this.pictureBox1.UseWaitCursor = true;
-            this.textBox1.Cursor = Cursors.WaitCursor;
-
-            isOcrTask = false;
-
-            // Start the asynchronous operation.
-            backgroundWorker2.RunWorkerAsync();
-
-        }
-
-        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
-        {
-            using (WiaScannerAdapter adapter = new WiaScannerAdapter())
-            {
-                try
-                {
-                    string tempFileName = Path.GetTempFileName();
-                    imageFile = new FileInfo(tempFileName);
-                    if (imageFile.Exists)
-                    {
-                        imageFile.Delete();
-                    }
-                    adapter.ScanImage(ImageFormat.Bmp, imageFile.FullName);
-                    openFile(tempFileName);
-                }
-                catch (WiaOperationException ex)
-                {
-                    MessageBox.Show(this, System.Text.RegularExpressions.Regex.Replace(ex.ErrorCode.ToString(), "(?=\\p{Lu}+)", " ").Trim() + ".", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-            }
         }
     }
 }
