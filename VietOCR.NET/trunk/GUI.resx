@@ -1194,4 +1194,10 @@
   <data name="Scanning" xml:space="preserve">
     <value>Scanning...</value>
   </data>
+  <data name="OCROperation" xml:space="preserve">
+    <value>OCR Operation</value>
+  </data>  
+  <data name="ScanningOperation" xml:space="preserve">
+    <value>Scanning Operation</value>
+  </data>
 </root>

@@ -527,6 +527,7 @@ namespace VietOCR.NET
             this.toolStripProgressBar1.Value = e.ProgressPercentage;
         }
 
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             // Get the BackgroundWorker that raised this event.
