@@ -62,6 +62,8 @@ namespace VietOCR.NET
         private bool IsFitForZoomIn = false;
         private bool toggle = false;
 
+        private bool isOcrTask; // true : OCR; false : Scan
+
         System.ComponentModel.ComponentResourceManager resources;
 
         public GUI()
@@ -186,6 +188,8 @@ namespace VietOCR.NET
                 this.Cursor = Cursors.WaitCursor;
                 this.pictureBox1.UseWaitCursor = true;
                 this.textBox1.Cursor = Cursors.WaitCursor;
+
+                isOcrTask = true;
 
                 OCRImageEntity entity = new OCRImageEntity(ImageIOHelper.GetImageList(imageFile), index, rect, curLangCode);
                 // Start the asynchronous operation.
@@ -502,8 +506,16 @@ namespace VietOCR.NET
             else
             {
                 // Finally, handle the case where the operation succeeded.
-                this.toolStripStatusLabel1.Text = resources.GetString("OCRcompleted");
-                this.textBox1.AppendText(e.Result.ToString());
+                if (isOcrTask)
+                {
+                    this.toolStripStatusLabel1.Text = resources.GetString("OCRcompleted");
+                    this.textBox1.AppendText(e.Result.ToString());
+                }
+                else 
+                {
+                    this.toolStripStatusLabel1.Text = resources.GetString("Scancompleted");
+                }
+
             }
 
             this.Cursor = Cursors.Default;
@@ -651,6 +663,20 @@ namespace VietOCR.NET
         }
 
         private void scanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.toolStripStatusLabel1.Text = resources.GetString("Scanrunning");
+            this.Cursor = Cursors.WaitCursor;
+            this.pictureBox1.UseWaitCursor = true;
+            this.textBox1.Cursor = Cursors.WaitCursor;
+
+            isOcrTask = false;
+
+            // Start the asynchronous operation.
+            backgroundWorker2.RunWorkerAsync();
+
+        }
+
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
             using (WiaScannerAdapter adapter = new WiaScannerAdapter())
             {
