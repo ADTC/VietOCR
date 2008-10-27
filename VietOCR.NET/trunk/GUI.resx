@@ -1188,4 +1188,10 @@
   <data name="Canceled" xml:space="preserve">
     <value>Canceled</value>
   </data>
+  <data name="Scancompleted" xml:space="preserve">
+    <value>Scan completed.</value>
+  </data>
+  <data name="Scanning" xml:space="preserve">
+    <value>Scanning...</value>
+  </data>
 </root>
