@@ -475,4 +475,10 @@
   <data name="Canceled" xml:space="preserve">
     <value>Bãi bỏ</value>
   </data>
+  <data name="Scancompleted" xml:space="preserve">
+    <value>Quét xong văn bản.</value>
+  </data>
+  <data name="Scanning" xml:space="preserve">
+    <value>Đang quét văn bản...</value>
+  </data>
 </root>
