@@ -28,6 +28,7 @@ namespace VietOCR.NET
         ManualResetEvent m_event;
         BackgroundWorker worker;
 
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public string RecognizeText(IList<Image> images, int index, string lang, Rectangle selection, BackgroundWorker worker, DoWorkEventArgs e)
         {
             rect = selection;
@@ -40,6 +41,7 @@ namespace VietOCR.NET
         /// <param name="index">index of page (frame) of image; -1 for all</param>
         /// <param name="lang">the language OCR is going to be performed for</param>
         /// <returns>result text</returns>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public string RecognizeText(IList<Image> images, int index, string lang, BackgroundWorker worker, DoWorkEventArgs e)
         {
             // Abort the operation if the user has canceled.
