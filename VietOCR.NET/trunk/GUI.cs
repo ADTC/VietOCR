@@ -569,7 +569,7 @@ namespace VietOCR.NET
             {
                 try
                 {
-                    string tempFileName = Path.GetTempFileName();
+                    string tempFileName = Path.GetTempFileName().Replace(".tmp", ".bmp");
                     FileInfo imageFile = new FileInfo(tempFileName);
                     if (imageFile.Exists)
                     {
