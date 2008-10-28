@@ -514,6 +514,7 @@ namespace VietOCR.NET
                 else 
                 {
                     this.toolStripStatusLabel1.Text = resources.GetString("Scancompleted");
+                    openFile(e.Result.ToString());
                 }
             }
 
@@ -575,7 +576,7 @@ namespace VietOCR.NET
                         imageFile.Delete();
                     }
                     adapter.ScanImage(ImageFormat.Bmp, imageFile.FullName);
-                    openFile(tempFileName);
+                    e.Result = tempFileName;
                 }
                 catch (WiaOperationException ex)
                 {
