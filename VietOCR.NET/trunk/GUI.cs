@@ -62,8 +62,6 @@ namespace VietOCR.NET
         private bool IsFitForZoomIn = false;
         private bool toggle = false;
 
-        private bool isOcrTask; // true : OCR; false : Scan
-
         System.ComponentModel.ComponentResourceManager resources;
 
         public GUI()
@@ -188,8 +186,6 @@ namespace VietOCR.NET
                 this.Cursor = Cursors.WaitCursor;
                 this.pictureBox1.UseWaitCursor = true;
                 this.textBox1.Cursor = Cursors.WaitCursor;
-
-                isOcrTask = true;
 
                 OCRImageEntity entity = new OCRImageEntity(ImageIOHelper.GetImageList(imageFile), index, rect, curLangCode);
                 // Start the asynchronous operation.
@@ -494,7 +490,7 @@ namespace VietOCR.NET
             if (e.Error != null)
             {
                 this.toolStripStatusLabel1.Text = String.Empty;
-                MessageBox.Show(e.Error.Message, isOcrTask ? resources.GetString("OCROperation") : resources.GetString("ScanningOperation"));
+                MessageBox.Show(e.Error.Message, resources.GetString("OCROperation"));
             }
             else if (e.Cancelled)
             {
@@ -506,16 +502,35 @@ namespace VietOCR.NET
             else
             {
                 // Finally, handle the case where the operation succeeded.
-                if (isOcrTask)
-                {
-                    this.toolStripStatusLabel1.Text = resources.GetString("OCRcompleted");
-                    this.textBox1.AppendText(e.Result.ToString());
-                }
-                else 
-                {
-                    this.toolStripStatusLabel1.Text = resources.GetString("Scancompleted");
-                    openFile(e.Result.ToString());
-                }
+                this.toolStripStatusLabel1.Text = resources.GetString("OCRcompleted");
+                this.textBox1.AppendText(e.Result.ToString());
+            }
+
+            this.Cursor = Cursors.Default;
+            this.pictureBox1.UseWaitCursor = false;
+            this.textBox1.Cursor = Cursors.Default;
+        }
+
+        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // First, handle the case where an exception was thrown.
+            if (e.Error != null)
+            {
+                this.toolStripStatusLabel1.Text = String.Empty;
+                MessageBox.Show(e.Error.Message, resources.GetString("ScanningOperation"));
+            }
+            else if (e.Cancelled)
+            {
+                // Next, handle the case where the user canceled the operation.
+                // Note that due to a race condition in the DoWork event handler, the Cancelled
+                // flag may not have been set, even though CancelAsync was called.
+                this.toolStripStatusLabel1.Text = resources.GetString("Canceled");
+            }
+            else
+            {
+                // Finally, handle the case where the operation succeeded.
+                openFile(e.Result.ToString());
+                this.toolStripStatusLabel1.Text = resources.GetString("Scancompleted");
             }
 
             this.Cursor = Cursors.Default;
@@ -550,8 +565,6 @@ namespace VietOCR.NET
                 this.Cursor = Cursors.WaitCursor;
                 this.pictureBox1.UseWaitCursor = true;
                 this.textBox1.Cursor = Cursors.WaitCursor;
-
-                isOcrTask = false;
 
                 // Start the asynchronous operation.
                 backgroundWorker2.RunWorkerAsync();
