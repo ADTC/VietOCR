@@ -570,7 +570,7 @@ namespace VietOCR.NET
                 try
                 {
                     string tempFileName = Path.GetTempFileName();
-                    imageFile = new FileInfo(tempFileName);
+                    FileInfo imageFile = new FileInfo(tempFileName);
                     if (imageFile.Exists)
                     {
                         imageFile.Delete();
