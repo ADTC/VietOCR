@@ -131,7 +131,7 @@ namespace VietOCR.NET
         {
             if (this.pictureBox1.Image == null)
             {
-                MessageBox.Show(this, resources.GetString("loadImage"), "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, resources.GetString("loadImage"), strProgName);
                 return;
             }
 
@@ -162,7 +162,7 @@ namespace VietOCR.NET
         {
             if (this.pictureBox1.Image == null)
             {
-                MessageBox.Show(this, resources.GetString("loadImage"), "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, resources.GetString("loadImage"), strProgName);
                 return;
             }
 
@@ -175,12 +175,12 @@ namespace VietOCR.NET
             {
                 if (this.toolStripCbLang.SelectedIndex == -1)
                 {
-                    MessageBox.Show(this, resources.GetString("selectLanguage"), "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, resources.GetString("selectLanguage"), strProgName);
                     return;
                 }
                 //if (this.pictureBox1.Image == null)
                 //{
-                //    MessageBox.Show(this, "Please load an image.", "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    MessageBox.Show(this, "Please load an image.", strProgName);
                 //    return;
                 //}
 
@@ -195,9 +195,9 @@ namespace VietOCR.NET
                 // Start the asynchronous operation.
                 backgroundWorker1.RunWorkerAsync(entity);
             }
-            catch (Exception exc)
+            catch (Exception ex)
             {
-                Console.WriteLine(exc.Message);
+                Console.WriteLine(ex.Message);
             }
         }
         private void postprocessToolStripMenuItem_Click(object sender, EventArgs e)
@@ -545,7 +545,6 @@ namespace VietOCR.NET
         {
             try
             {
-
                 this.toolStripStatusLabel1.Text = resources.GetString("Scanning");
                 this.Cursor = Cursors.WaitCursor;
                 this.pictureBox1.UseWaitCursor = true;
@@ -558,8 +557,7 @@ namespace VietOCR.NET
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                //Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);
             }
         }
 
