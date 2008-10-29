@@ -73,11 +73,11 @@ public class Gui extends javax.swing.JFrame {
     public Gui() {
         selectedUILang = prefs.get("UILanguage", "en");
         Locale.setDefault(new Locale(selectedUILang));
-        tessPath = prefs.get("TesseractDirectory", new File("tesseract").getPath());
+        tessPath = prefs.get("TesseractDirectory", new File("./tesseract").getPath());
 
         try {
             prop = new Properties();
-            FileInputStream fis = new FileInputStream("ISO639-3.xml");
+            FileInputStream fis = new FileInputStream("./ISO639-3.xml");
             prop.loadFromXML(fis);
 
             langCodes = new File(tessPath, "tessdata").list(new FilenameFilter() {
@@ -888,8 +888,8 @@ public class Gui extends javax.swing.JFrame {
         pathchooser.setDialogTitle(bundle.getString("Locate_Tesseract_Directory"));
         int returnVal = pathchooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            if (!tessPath.equals(pathchooser.getSelectedFile().getAbsolutePath())) {
-                tessPath = pathchooser.getSelectedFile().getAbsolutePath();
+            if (!tessPath.equals(pathchooser.getSelectedFile().getPath())) {
+                tessPath = pathchooser.getSelectedFile().getPath();
                 JOptionPane.showMessageDialog(this, bundle.getString("Please_restart_the_application_for_the_change_to_take_effect."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             }
         }
