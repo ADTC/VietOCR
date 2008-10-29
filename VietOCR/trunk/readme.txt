@@ -10,5 +10,6 @@ Check http://vietunicode.sourceforge.net/howto/tesseract-ocr.html for more infor
 
 If there are problems setting Tesseract path on Linux, please consult this post: http://groups.google.com/group/tesseract-ocr/browse_thread/thread/58fcfab8ef3ae7c1#36d3c5e059332666
 
-To register the WIA Automation, copy wiaaut.dll to the C:\Windows\System32 folder and run from the command line:
-	regsvr32 C:\Windows\System32\wiaaut.dll
+The Windows Image Acquisition Library v2.0 require Windows XP Service Pack 1 (SP1) or later. To install the WIA Library, copy the wiaaut.dll file to your System32 directory (usually located at C:\Windows\System32) and run from the command line:
+
+regsvr32 C:\Windows\System32\wiaaut.dll
