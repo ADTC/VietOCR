@@ -75,11 +75,9 @@ public class Gui extends javax.swing.JFrame {
         Locale.setDefault(new Locale(selectedUILang));
         tessPath = prefs.get("TesseractDirectory", new File("./tesseract").getPath());
 
-        try {
-            prop = new Properties();
-            FileInputStream fis = new FileInputStream("./ISO639-3.xml");
-            prop.loadFromXML(fis);
+        String workingDir = new File(".").getAbsolutePath();
 
+        try {
             langCodes = new File(tessPath, "tessdata").list(new FilenameFilter() {
 
                 @Override
@@ -88,7 +86,20 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
 
-            if (langCodes == null) {
+            prop = new Properties();
+
+            File xmlFile = new File("./ISO639-3.xml");
+            workingDir = xmlFile.getParentFile().getCanonicalPath();
+
+            FileInputStream fis = new FileInputStream(xmlFile);
+            prop.loadFromXML(fis);
+        } catch (IOException ioe) {
+            JOptionPane.showMessageDialog(null, "Missing ISO639-3.xml file. Cannot find it in " + workingDir + " directory.", APP_NAME, JOptionPane.ERROR_MESSAGE);
+            ioe.printStackTrace();
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        } finally {
+             if (langCodes == null) {
                 langs = new String[0];
             } else {
                 langs = new String[langCodes.length];
@@ -97,11 +108,6 @@ public class Gui extends javax.swing.JFrame {
                 langCodes[i] = langCodes[i].replace(".inttemp", "");
                 langs[i] = prop.getProperty(langCodes[i], langCodes[i]);
             }
-        } catch (IOException ioe) {
-            JOptionPane.showMessageDialog(null, "Missing ISO639-3.xml file. Application aborts.", APP_NAME, JOptionPane.ERROR_MESSAGE);
-            ioe.printStackTrace();
-        } catch (Exception exc) {
-            exc.printStackTrace();
         }
 
         selectedInputMethod = prefs.get("inputMethod", "Telex");
@@ -998,7 +1004,7 @@ public class Gui extends javax.swing.JFrame {
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         JOptionPane.showMessageDialog(this, APP_NAME + ", v0.9.5 \u00a9 2007\n" +
                 "Java GUI Frontend for Tesseract OCR Engine\n" +
-                DateFormat.getDateInstance(DateFormat.LONG).format(new GregorianCalendar(2008, Calendar.OCTOBER, 28).getTime()) +
+                DateFormat.getDateInstance(DateFormat.LONG).format(new GregorianCalendar(2008, Calendar.OCTOBER, 29).getTime()) +
                 "\nhttp://vietocr.sourceforge.net", APP_NAME, JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
