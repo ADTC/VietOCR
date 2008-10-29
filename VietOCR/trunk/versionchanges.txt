@@ -62,5 +62,5 @@ Version 0.9.3 (21 June 2008)
 Version 0.9.4 (21 October 2008)
 - Localized user inteface
 
-Version 0.9.5 (28 October 2008)
+Version 0.9.5 (29 October 2008)
 - Integrated scanning support via WIA Automation Library v2.0 and JACOB Library
