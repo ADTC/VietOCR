@@ -32,6 +32,14 @@ Microsoft Visual C++ 2005 SP1 Redistributable Package</a>.</p>
 <h3>CÀI ĐẶT</h3>
 <p>Nếu bạn không có quyền cài đặt (install) dưới <tt>C:\Program Files</tt> folder, bạn 
 hãy chỉ định một folder khác trong Install Installation Folder dialog.</p>
+<p>Hỗ trợ quét văn bản được cung cấp qua Windows Image Acquisition Library 
+v2.0, thư viện này đòi hỏi Windows XP Service Pack 1 (SP1) hoặc mới hơn. Để cài 
+đặt 
+WIA Library, copy file <tt>wiaaut.dll</tt> vào <tt>System32</tt> directory 
+(thường đặt ở <tt>C:\Windows\System32</tt>) và chạy lệnh từ command line:</p>
+<blockquote>
+	<p><tt>regsvr32 C:\Windows\System32\wiaaut.dll</tt></p>
+</blockquote>
 <h3>HƯỚNG DẪN</h3>
 <p>Các gói data ngôn ngữ (<a href="http://code.google.com/p/tesseract-ocr/downloads/list">language data 
 packs</a>) cho Tesseract nên được giải nén vào <tt>tesseract</tt> installation folder; các 
