@@ -31,6 +31,6 @@ Version 0.4.3 (5 August 2008):
 Version 0.5 (10 October 2008): 
 - Localized user interface
 
-Version 0.6 (25 October 2008): 
+Version 0.6 (28 October 2008): 
 - Implemented Zoom In/Out and Rotate capabilities
 - Integrated scanning support via WIA Automation Library v2.0
