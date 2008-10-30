@@ -95,33 +95,53 @@ namespace VietOCR.NET
         void LoadLang()
         {
             XmlDocument doc = new XmlDocument();
-            String path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
-            doc.Load(Path.Combine(path, "Data/ISO639-3.xml"));
-            //doc.Load(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("VietOCR.NET.Data.ISO639-3.xml"));
-
-            XmlNodeList list = doc.GetElementsByTagName("entry");
+            String workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            String xmlFilePath = Path.Combine(workingDir, "Data/ISO639-3.xml");
             Dictionary<string, string> ht = new Dictionary<string, string>();
-            foreach (XmlNode node in list)
-            {
-                ht.Add(node.Attributes[0].Value, node.InnerText);
-            }
 
-            langCodes = Directory.GetFiles("tessdata", "*.inttemp");
+            try
+            {
+                langCodes = Directory.GetFiles("tessdata", "*.inttemp");
 
-            if (langCodes == null)
-            {
-                langs = new String[0];
-            }
-            else
-            {
-                langs = new String[langCodes.Length];
-            }
+                doc.Load(xmlFilePath);
+                //doc.Load(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("VietOCR.NET.Data.ISO639-3.xml"));
 
-            for (int i = 0; i < langs.Length; i++)
+                XmlNodeList list = doc.GetElementsByTagName("entry");
+                foreach (XmlNode node in list)
+                {
+                    ht.Add(node.Attributes[0].Value, node.InnerText);
+                }
+            }
+            catch (Exception ex)
             {
-                langCodes[i] = langCodes[i].Replace(".inttemp", "").Replace("tessdata\\", "");
-                // translate ISO codes to full English names for user-friendliness
-                langs[i] = ht[langCodes[i]];
+                MessageBox.Show(this, "Missing ISO639-3.xml file. Cannot find it in " + Path.GetDirectoryName(xmlFilePath) + " directory.", strProgName);
+                Console.WriteLine(ex.StackTrace);
+            }
+            finally
+            {
+                if (langCodes == null)
+                {
+                    langs = new String[0];
+                }
+                else
+                {
+                    langs = new String[langCodes.Length];
+                }
+
+                for (int i = 0; i < langs.Length; i++)
+                {
+                    langCodes[i] = langCodes[i].Replace(".inttemp", "").Replace("tessdata\\", "");
+                    // translate ISO codes to full English names for user-friendliness
+
+                    if (ht.ContainsKey(langCodes[i]))
+                    {
+                        langs[i] = ht[langCodes[i]];
+                    }
+                    else
+                    {
+                        langs[i] = langCodes[i];
+                    }       
+                }
             }
         }
 
@@ -145,9 +165,9 @@ namespace VietOCR.NET
                     rect = new Rectangle((int)(rect.X * scaleX), (int)(rect.Y * scaleY), (int)(rect.Width * scaleX), (int)(rect.Height * scaleY));
                     performOCR(imageList, imageIndex, rect);
                 }
-                catch (Exception exc)
+                catch (Exception ex)
                 {
-                    Console.WriteLine(exc.StackTrace);
+                    Console.WriteLine(ex.StackTrace);
                 }
             }
             else
