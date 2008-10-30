@@ -76,6 +76,7 @@ public class Gui extends javax.swing.JFrame {
         tessPath = prefs.get("TesseractDirectory", new File("./tesseract").getPath());
 
         String workingDir = new File(".").getAbsolutePath();
+        prop = new Properties();
 
         try {
             langCodes = new File(tessPath, "tessdata").list(new FilenameFilter() {
@@ -85,8 +86,6 @@ public class Gui extends javax.swing.JFrame {
                     return name.endsWith(".inttemp");
                 }
             });
-
-            prop = new Properties();
 
             File xmlFile = new File("./ISO639-3.xml");
             workingDir = xmlFile.getParentFile().getCanonicalPath();
