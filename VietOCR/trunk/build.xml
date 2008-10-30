@@ -61,7 +61,7 @@
             </zipfileset>
         </zip>
         <zip zipfile="${dist.dir}/${projectname}-${version}.zip">
-            <zipfileset dir="." includes="*,tesseract/**,lib/**" prefix="${projectname}" 
+            <zipfileset dir="." includes="*,tesseract/**,lib/**,data/**" prefix="${projectname}"
             		excludes="build.xml,src,build,dist,dict,res,doc,nbproject">
                 <include name="tesseract/.*" />
                 <include name="lib/.*" />

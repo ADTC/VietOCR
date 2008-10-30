@@ -87,7 +87,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
 
-            File xmlFile = new File("./ISO639-3.xml");
+            File xmlFile = new File("./data/ISO639-3.xml");
             workingDir = xmlFile.getParentFile().getCanonicalPath();
 
             FileInputStream fis = new FileInputStream(xmlFile);
