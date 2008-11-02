@@ -18,9 +18,23 @@ là một Java GUI frontend cho <a href="http://code.google.com/p/tesseract-ocr/
 engine</a>, cung cấp hỗ trợ nhận dạng ký tự cho các dạng ảnh TIFF, JPEG, GIF, PNG, BMP, 
 và ảnh chứa nhiều trang. Chương trình có phần hậu xử lý giúp sửa chữa các lỗi 
 thường gặp trong quy trình OCR, tăng độ chính xác trên kết quả.</p>
-<h3>ĐÒI HỎI KỸ THUẬT</h3>
+<h3>ĐÒI HỎI HỆ THỐNG</h3>
 <p><a href="http://java.sun.com/javase/downloads/index.jsp">Java Runtime Environment 6.0</a> 
 hoặc mới hơn.</p>
+<h3>CÀI ĐẶT</h3>
+<p>Các gói data ngôn ngữ (<a href="http://code.google.com/p/tesseract-ocr/downloads/list">language data 
+packs</a>) cho Tesseract nên được giải nén vào <tt>tesseract</tt> installation folder; các 
+data files, 
+có tên bắt đầu với mã ISO639-3, sẽ được đặt vào <tt>tessdata</tt> 
+subdirectory. Trên Linux, điều này có khác biệt vì make install Tesseract sẽ đặt 
+resultant executable binary và language data trong các directory khác nhau, 
+<tt>/usr/local/bin</tt> và <tt>/usr/local/share/tessdata</tt>, trong tuần tự đó. VietOCR đã giả 
+định rằng chúng trong cùng directory; do đó, để cho chương trình hoạt động đúng, 
+bạn sẽ cần tạo một soft link tới tessdata trong <tt>/usr/local/bin</tt>, cùng directory mà 
+tesseract executable nằm trong, như sau:</p>
+<blockquote>
+	<p><tt>ln -s /usr/local/share/tessdata /usr/local/bin/tessdata</tt></p>
+</blockquote>
 <p>Hỗ trợ quét văn bản được cung cấp qua Windows Image Acquisition Library 
 v2.0, thư viện này đòi hỏi Windows XP Service Pack 1 (SP1) hoặc mới hơn. Để cài 
 đặt 
@@ -30,11 +44,7 @@ WIA Library, copy file <tt>wiaaut.dll</tt> vào <tt>System32</tt> directory
 	<p><tt>regsvr32 C:\Windows\System32\wiaaut.dll</tt></p>
 </blockquote>
 <h3>HƯỚNG DẪN</h3>
-<p>Các gói data ngôn ngữ (<a href="http://code.google.com/p/tesseract-ocr/downloads/list">language data 
-packs</a>) cho Tesseract nên được giải nén vào <tt>tesseract</tt> installation folder; các 
-data files, 
-có tên bắt đầu với mã ISO639-3, sẽ được đặt vào <tt>tessdata</tt> 
-subdirectory. Tesseract hiện tại chỉ có thể nhận dạng hình uncompressed TIFF; 
+<p>Tesseract hiện tại chỉ có thể nhận dạng hình uncompressed TIFF; 
 tuy nhiên, VietOCR cho khả năng nhận diện các loại ảnh khác.</p>
 
 <p>Để phóng chương trình:</p>

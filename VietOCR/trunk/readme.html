@@ -22,6 +22,23 @@ the accuracy rate on the result.</p>
 <h3>SYSTEM REQUIREMENTS</h3>
 <p><a href="http://java.sun.com/javase/downloads/index.jsp">Java Runtime Environment 6.0</a> 
 or later.</p>
+<h3>
+INSTALLATION</h3>
+<p>
+<a href="http://code.google.com/p/tesseract-ocr/downloads/list">Language data 
+packs</a> for Tesseract should be decompressed into <tt>tesseract</tt> 
+installation folder; the data files, whose names start with ISO6639-3 codes, 
+will be placed in the <tt>tessdata</tt> subdirectory. On Linux, however, this 
+is different as make install Tesseract will place the resultant 
+executable binary and the language data in different directories, <tt>/usr/local/bin</tt> 
+and <tt>/usr/local/share/tessdata</tt>, respectively. VietOCR has assumed that 
+they were in the same directory; therefore, for it to work properly, you&#39;ll need 
+to make a soft link to tessdata in <tt>/usr/local/bin</tt>, the same directory as the tesseract 
+executable 
+is in, as follows:</p>
+<blockquote>
+	<p><tt>ln -s /usr/local/share/tessdata /usr/local/bin/tessdata</tt></p>
+</blockquote>
 <p>Scanning support is provided via the Windows Image Acquisition Library 
 v2.0, which requires Windows XP Service Pack 1 (SP1) or later. To install the 
 WIA Library, copy the <tt>wiaaut.dll</tt> file to your <tt>System32</tt> directory 
@@ -33,10 +50,7 @@ from the command line:</p>
 <h3>
 INSTRUCTIONS</h3>
 <p>
-<a href="http://code.google.com/p/tesseract-ocr/downloads/list">Language data 
-packs</a> for Tesseract should be decompressed into <tt>tesseract</tt> 
-installation folder; the data files, whose names start with ISO6639-3 codes, 
-will be placed in the <tt>tessdata</tt> subdirectory. Tesseract currently can 
+Tesseract currently can 
 only recognize uncompressed TIFF images; however, VietOCR enables recognition of 
 other image formats.</p>
 
