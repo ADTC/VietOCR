@@ -123,7 +123,7 @@ public class Gui extends javax.swing.JFrame {
         // Hide Scan buttons for non-Windows OS because of WIA Automation
         if (!WINDOWS) {
             this.jToolBar2.remove(this.jButtonScan);
-            this.jMenuItemScan.setVisible(false);
+            this.jMenuFile.remove(this.jMenuItemScan);
         }
 
         new DropTarget(this.jImageLabel, new ImageDropTargetListener(this));
