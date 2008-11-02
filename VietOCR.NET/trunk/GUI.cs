@@ -95,13 +95,14 @@ namespace VietOCR.NET
         void LoadLang()
         {
             XmlDocument doc = new XmlDocument();
-            String workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+
+            String workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             String xmlFilePath = Path.Combine(workingDir, "Data/ISO639-3.xml");
             Dictionary<string, string> ht = new Dictionary<string, string>();
 
             try
             {
-                langCodes = Directory.GetFiles("tessdata", "*.inttemp");
+                langCodes = Directory.GetFiles(Path.Combine(workingDir, "tessdata"), "*.inttemp");
 
                 doc.Load(xmlFilePath);
                 //doc.Load(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("VietOCR.NET.Data.ISO639-3.xml"));
@@ -115,6 +116,7 @@ namespace VietOCR.NET
             catch (Exception ex)
             {
                 MessageBox.Show(this, "Missing ISO639-3.xml file. Cannot find it in " + Path.GetDirectoryName(xmlFilePath) + " directory.", strProgName);
+                // this also applies to missing language data files in tessdata directory
                 Console.WriteLine(ex.StackTrace);
             }
             finally
@@ -130,7 +132,7 @@ namespace VietOCR.NET
 
                 for (int i = 0; i < langs.Length; i++)
                 {
-                    langCodes[i] = langCodes[i].Replace(".inttemp", "").Replace("tessdata\\", "");
+                    langCodes[i] = Path.GetFileNameWithoutExtension(langCodes[i]);
                     // translate ISO codes to full English names for user-friendliness
 
                     if (ht.ContainsKey(langCodes[i]))
