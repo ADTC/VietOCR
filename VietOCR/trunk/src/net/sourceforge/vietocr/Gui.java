@@ -122,7 +122,7 @@ public class Gui extends javax.swing.JFrame {
 
         // Hide Scan buttons for non-Windows OS because of WIA Automation
         if (!WINDOWS) {
-            this.jButtonScan.setVisible(false);
+            this.jToolBar2.remove(this.jButtonScan);
             this.jMenuItemScan.setVisible(false);
         }
 
@@ -1003,7 +1003,7 @@ public class Gui extends javax.swing.JFrame {
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         JOptionPane.showMessageDialog(this, APP_NAME + ", v0.9.5 \u00a9 2007\n" +
                 "Java GUI Frontend for Tesseract OCR Engine\n" +
-                DateFormat.getDateInstance(DateFormat.LONG).format(new GregorianCalendar(2008, Calendar.OCTOBER, 29).getTime()) +
+                DateFormat.getDateInstance(DateFormat.LONG).format(new GregorianCalendar(2008, Calendar.NOVEMBER, 2).getTime()) +
                 "\nhttp://vietocr.sourceforge.net", APP_NAME, JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
