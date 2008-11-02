@@ -1001,7 +1001,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemOCRAllActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
-        JOptionPane.showMessageDialog(this, APP_NAME + ", v0.9.5 \u00a9 2007\n" +
+        JOptionPane.showMessageDialog(this, APP_NAME + ", v0.9.6 \u00a9 2007\n" +
                 "Java GUI Frontend for Tesseract OCR Engine\n" +
                 DateFormat.getDateInstance(DateFormat.LONG).format(new GregorianCalendar(2008, Calendar.NOVEMBER, 2).getTime()) +
                 "\nhttp://vietocr.sourceforge.net", APP_NAME, JOptionPane.INFORMATION_MESSAGE);
