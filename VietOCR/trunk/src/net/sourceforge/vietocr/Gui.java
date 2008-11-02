@@ -32,6 +32,7 @@ import net.sourceforge.vietocr.postprocessing.Processor;
 import net.sourceforge.vietpad.*;
 import net.sourceforge.vietpad.inputmethod.*;
 import net.sourceforge.vietocr.wia.*;
+import java.net.*;
 
 /**
  *
@@ -73,9 +74,10 @@ public class Gui extends javax.swing.JFrame {
     public Gui() {
         selectedUILang = prefs.get("UILanguage", "en");
         Locale.setDefault(new Locale(selectedUILang));
-        tessPath = prefs.get("TesseractDirectory", new File("./tesseract").getPath());
 
-        String workingDir = new File(".").getAbsolutePath();
+        File baseDir = getBaseDir();
+        tessPath = prefs.get("TesseractDirectory", new File(baseDir, "tesseract").getPath());
+
         prop = new Properties();
 
         try {
@@ -87,13 +89,11 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
 
-            File xmlFile = new File("./data/ISO639-3.xml");
-            workingDir = xmlFile.getParentFile().getCanonicalPath();
-
+            File xmlFile = new File(baseDir, "data/ISO639-3.xml");
             FileInputStream fis = new FileInputStream(xmlFile);
             prop.loadFromXML(fis);
         } catch (IOException ioe) {
-            JOptionPane.showMessageDialog(null, "Missing ISO639-3.xml file. Cannot find it in " + workingDir + " directory.", APP_NAME, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Missing ISO639-3.xml file. Cannot find it in " + new File(baseDir, "data").getPath() + " directory.", APP_NAME, JOptionPane.ERROR_MESSAGE);
             ioe.printStackTrace();
         } catch (Exception exc) {
             exc.printStackTrace();
@@ -196,6 +196,30 @@ public class Gui extends javax.swing.JFrame {
         updateCutCopyDelete(false);
     }
 
+    /**
+     * 
+     * @return
+     */
+    File getBaseDir() {
+        URL dir = getClass().getResource("/" + getClass().getName().replaceAll("\\.", "/") + ".class");
+        File dbDir = new File(System.getProperty("user.dir"));
+
+        try {
+            if (dir.toString().startsWith("jar:")) {
+                dir = new URL(dir.toString().replaceFirst("^jar:", "").replaceFirst("/[^/]+.jar!.*$", ""));
+                dbDir = new File(dir.toURI());
+            }
+        } catch (MalformedURLException mue) {
+            mue.printStackTrace();
+        } catch (URISyntaxException use) {
+            use.printStackTrace();
+        }
+        return dbDir;
+    }
+
+    /**
+     * 
+     */
     void populatePopupMenu() {
         m_undoAction = new AbstractAction(myResources.getString("Undo")) {
 
