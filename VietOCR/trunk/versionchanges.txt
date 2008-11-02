@@ -64,3 +64,7 @@ Version 0.9.4 (21 October 2008)
 
 Version 0.9.5 (29 October 2008)
 - Integrated scanning support via WIA Automation Library v2.0 and JACOB Library
+
+Version 0.9.6 (2 November 2008)
+- Fixed an error with path in Linux
+- Additional instruction for configuring Tesseract on Linux
