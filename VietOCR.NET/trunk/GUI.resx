@@ -137,7 +137,7 @@
   <data name="&gt;&gt;oCRAllPagesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="toolStripBtnRR.ToolTipText" xml:space="preserve">
+  <data name="toolStripBtnRotateR.ToolTipText" xml:space="preserve">
     <value>Rotate Right</value>
   </data>
   <data name="&gt;&gt;toolStripBtnFitHeight.Name" xml:space="preserve">
@@ -225,7 +225,7 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="toolStripBtnRR.Text" xml:space="preserve">
+  <data name="toolStripBtnRotateR.Text" xml:space="preserve">
     <value>RR</value>
   </data>
   <data name="toolStripBtnZoomIn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -645,8 +645,8 @@
   <data name="splitContainer2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;toolStripBtnRR.Name" xml:space="preserve">
-    <value>toolStripBtnRR</value>
+  <data name="&gt;&gt;toolStripBtnRotateR.Name" xml:space="preserve">
+    <value>toolStripBtnRotateR</value>
   </data>
   <data name="toolStripBtnRR.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 27</value>
@@ -714,7 +714,7 @@
   <data name="toolStripBtnScan.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 28</value>
   </data>
-  <data name="&gt;&gt;toolStripBtnRR.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripBtnRotateR.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;scanToolStripMenuItem.Type" xml:space="preserve">
@@ -759,7 +759,7 @@
   <data name="toolStripBtnFitWidth.Text" xml:space="preserve">
     <value>↔</value>
   </data>
-  <data name="&gt;&gt;toolStripBtnRL.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripBtnRotateL.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStrip2.Parent" xml:space="preserve">
@@ -936,7 +936,7 @@
   <data name="&gt;&gt;wordWrapToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="toolStripBtnRL.Text" xml:space="preserve">
+  <data name="toolStripBtnRotateL.Text" xml:space="preserve">
     <value>RL</value>
   </data>
   <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -963,7 +963,7 @@
   <data name="toolStripBtnNext.Text" xml:space="preserve">
     <value>&gt;</value>
   </data>
-  <data name="toolStripBtnRL.ToolTipText" xml:space="preserve">
+  <data name="toolStripBtnRotateL.ToolTipText" xml:space="preserve">
     <value>Rotate Left</value>
   </data>
   <data name="fileToolStripMenuItem.Text" xml:space="preserve">
@@ -1038,8 +1038,8 @@
   <data name="Cannotloadimage" xml:space="preserve">
     <value>Cannot load image.</value>
   </data>
-  <data name="&gt;&gt;toolStripBtnRL.Name" xml:space="preserve">
-    <value>toolStripBtnRL</value>
+  <data name="&gt;&gt;toolStripBtnRotateL.Name" xml:space="preserve">
+    <value>toolStripBtnRotateL</value>
   </data>
   <data name="toolStripBtnScan.Text" xml:space="preserve">
     <value>Scan</value>
@@ -1196,7 +1196,7 @@
   </data>
   <data name="OCROperation" xml:space="preserve">
     <value>OCR Operation</value>
-  </data>  
+  </data>
   <data name="ScanningOperation" xml:space="preserve">
     <value>Scanning Operation</value>
   </data>
