@@ -220,7 +220,7 @@
   <data name="toolStripBtnRL.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripBtnRL.ToolTipText" xml:space="preserve">
+  <data name="toolStripBtnRotateL.ToolTipText" xml:space="preserve">
     <value>Xoay trái</value>
   </data>
   <data name="toolStripBtnRR.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -241,7 +241,7 @@
   <data name="toolStripBtnRR.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripBtnRR.ToolTipText" xml:space="preserve">
+  <data name="toolStripBtnRotateR.ToolTipText" xml:space="preserve">
     <value>Xoay phải</value>
   </data>
   <data name="openToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
