@@ -73,12 +73,12 @@ namespace VietOCR.NET.Controls
             this.Invalidate();
         }
 
-        public Rectangle getRect()
+        public Rectangle GetRect()
         {
             return rect;
         }
 
-        public void deselect()
+        public void Deselect()
         {
             startPoint = Point.Empty;
             rect = Rectangle.Empty;
@@ -316,7 +316,7 @@ namespace VietOCR.NET.Controls
                     Rectangle testRect = new Rectangle(rect.X - 1, rect.Y - 1, rect.Width + 2, rect.Height + 2);
                     if (!testRect.Contains(e.Location))
                     {
-                        deselect();
+                        Deselect();
                         this.Invalidate();
                     }
                 }

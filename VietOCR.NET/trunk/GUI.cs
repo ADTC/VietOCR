@@ -155,7 +155,7 @@ namespace VietOCR.NET
                 return;
             }
 
-            Rectangle rect = ((ScrollablePictureBox)this.pictureBox1).getRect();
+            Rectangle rect = ((ScrollablePictureBox)this.pictureBox1).GetRect();
 
             if (rect != Rectangle.Empty && this.pictureBox1.Image != null)
             {
@@ -209,7 +209,8 @@ namespace VietOCR.NET
                 this.pictureBox1.UseWaitCursor = true;
                 this.textBox1.Cursor = Cursors.WaitCursor;
 
-                OCRImageEntity entity = new OCRImageEntity(ImageIOHelper.GetImageList(imageFile), index, rect, curLangCode);
+                //OCRImageEntity entity = new OCRImageEntity(ImageIOHelper.GetImageList(imageFile), index, rect, curLangCode);
+                OCRImageEntity entity = new OCRImageEntity(imageList, index, rect, curLangCode);
                 // Start the asynchronous operation.
                 backgroundWorker1.RunWorkerAsync(entity);
             }
@@ -380,7 +381,7 @@ namespace VietOCR.NET
                 displayImage();
             }
             setButton();
-            this.pictureBox1.deselect();
+            this.pictureBox1.Deselect();
         }
 
         private void toolStripBtnNext_Click(object sender, EventArgs e)
@@ -396,7 +397,7 @@ namespace VietOCR.NET
                 displayImage();
             }
             setButton();
-            this.pictureBox1.deselect();
+            this.pictureBox1.Deselect();
         }
 
         void setButton()
@@ -423,18 +424,18 @@ namespace VietOCR.NET
 
         private void toolStripBtnFitImage_Click(object sender, EventArgs e)
         {
+            this.pictureBox1.Deselect();
+
             if (toggle)
             {
                 this.pictureBox1.Dock = DockStyle.None;
                 this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-                this.pictureBox1.deselect();
                 scaleX = scaleY = 1f;
             }
             else
             {
                 this.pictureBox1.Dock = DockStyle.Fill;
                 this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                this.pictureBox1.deselect();
                 scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
                 scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
             }
@@ -457,13 +458,13 @@ namespace VietOCR.NET
             }
 
             this.toolStripStatusLabel1.Text = null;
-            this.pictureBox1.deselect();
+            this.pictureBox1.Deselect();
 
             this.toolStripBtnFitImage.Enabled = true;
             this.toolStripBtnZoomIn.Enabled = true;
             this.toolStripBtnZoomOut.Enabled = true;
-            this.toolStripBtnRL.Enabled = true;
-            this.toolStripBtnRR.Enabled = true;
+            this.toolStripBtnRotateL.Enabled = true;
+            this.toolStripBtnRotateR.Enabled = true;
 
             if (imageList.Count == 1)
             {
@@ -657,16 +658,20 @@ namespace VietOCR.NET
             }
         }
 
-        private void toolStripBtnRL_Click(object sender, EventArgs e)
+        private void toolStripBtnRotateL_Click(object sender, EventArgs e)
         {
             // Rotating 270 degrees is equivalent to rotating -90 degrees.
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            imageList[imageIndex] = this.pictureBox1.Image;
+            this.pictureBox1.Deselect();
             this.pictureBox1.Refresh();
         }
 
-        private void toolStripBtnRR_Click(object sender, EventArgs e)
+        private void toolStripBtnRotateR_Click(object sender, EventArgs e)
         {
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            imageList[imageIndex] = this.pictureBox1.Image;
+            this.pictureBox1.Deselect();
             this.pictureBox1.Refresh();
         }
 
@@ -682,7 +687,7 @@ namespace VietOCR.NET
             this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height * 1.25);
             scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
             scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
-
+            this.pictureBox1.Deselect();
         }
 
         private void toolStripBtnZoomOut_Click(object sender, EventArgs e)
@@ -696,7 +701,9 @@ namespace VietOCR.NET
             this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height / 1.25);
             scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
             scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
+            this.pictureBox1.Deselect();
         }
+
         // This method makes the image fit properly in the PictureBox. You might think 
         // that the AutoSize SizeMode enum would make the image appear in the PictureBox 
         // according to its true aspect ratio within the fixed bounds of the PictureBox.
