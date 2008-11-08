@@ -333,7 +333,7 @@
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="toolStripBtnRL.Enabled" type="System.Boolean, mscorlib">
+  <data name="toolStripBtnRotateL.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="toolStripBtnFitImage.Font" type="System.Drawing.Font, System.Drawing">
@@ -510,7 +510,7 @@
         s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="toolStripBtnRL.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripBtnRotateL.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 27</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
@@ -648,7 +648,7 @@
   <data name="&gt;&gt;toolStripBtnRotateR.Name" xml:space="preserve">
     <value>toolStripBtnRotateR</value>
   </data>
-  <data name="toolStripBtnRR.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripBtnRotateR.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 27</value>
   </data>
   <data name="&gt;&gt;lblCurIndex.Parent" xml:space="preserve">
@@ -834,7 +834,7 @@
   <data name="toolStripBtnFitImage.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="toolStripBtnRR.Enabled" type="System.Boolean, mscorlib">
+  <data name="toolStripBtnRotateR.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="toolStripBtnFitHeight.ToolTipText" xml:space="preserve">
