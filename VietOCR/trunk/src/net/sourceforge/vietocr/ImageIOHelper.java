@@ -31,14 +31,13 @@ import javax.swing.*;
  * @author Quan Nguyen (nguyenq@users.sf.net)
  */
 public class ImageIOHelper {
-
+    final static String OUTPUT_FILE_NAME = "TessTempFile";
     final static String TIFF_EXT = ".tif";
 
     public static ArrayList<File> createImageFiles(File imageFile, int index, String imageFormat) throws Exception {
         ArrayList<File> tempImageFiles = new ArrayList<File>();
         
         try {
-            
             Iterator readers = ImageIO.getImageReadersByFormatName(imageFormat);
             ImageReader reader = (ImageReader) readers.next();
             
@@ -46,7 +45,7 @@ public class ImageIOHelper {
             reader.setInput(iis);
             //Read the stream metadata
             IIOMetadata streamMetadata = reader.getStreamMetadata();
-            
+
             //Set up the writeParam
             TIFFImageWriteParam tiffWriteParam = new TIFFImageWriteParam(Locale.US);
             tiffWriteParam.setCompressionMode(ImageWriteParam.MODE_DISABLED);
@@ -62,7 +61,7 @@ public class ImageIOHelper {
 //                BufferedImage bi = (BufferedImage) imageList.get(imageIndex).getImage();
                     BufferedImage bi = reader.read(i);
                     IIOImage image = new IIOImage(bi, null, reader.getImageMetadata(i));
-                    File tempFile = File.createTempFile("TessTempFile", TIFF_EXT);
+                    File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
                     ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
                     writer.setOutput(ios);
                     writer.write(streamMetadata, image, tiffWriteParam);
@@ -72,7 +71,7 @@ public class ImageIOHelper {
             } else {
                 BufferedImage bi = reader.read(index);
                 IIOImage image = new IIOImage(bi, null, reader.getImageMetadata(index));
-                File tempFile = File.createTempFile("TessTempFile", TIFF_EXT);
+                File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
                 ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
                 writer.setOutput(ios);
                 writer.write(streamMetadata, image, tiffWriteParam);
@@ -91,7 +90,6 @@ public class ImageIOHelper {
         ArrayList<File> tempImageFiles = new ArrayList<File>();
 
         try {
-
             //Set up the writeParam
             TIFFImageWriteParam tiffWriteParam = new TIFFImageWriteParam(Locale.US);
             tiffWriteParam.setCompressionMode(ImageWriteParam.MODE_DISABLED);
@@ -104,7 +102,7 @@ public class ImageIOHelper {
                 for (ImageIconScalable imageIcon : imageList) {
                     BufferedImage bi = (BufferedImage) imageIcon.getImage();
                     IIOImage image = new IIOImage(bi, null, null);
-                    File tempFile = File.createTempFile("TessTempFile", TIFF_EXT);
+                    File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
                     ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
                     writer.setOutput(ios);
                     writer.write(null, image, tiffWriteParam);
@@ -114,7 +112,7 @@ public class ImageIOHelper {
             } else {
                 BufferedImage bi = (BufferedImage) imageList.get(index).getImage();
                 IIOImage image = new IIOImage(bi, null, null);
-                File tempFile = File.createTempFile("TessTempFile", TIFF_EXT);
+                File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
                 ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
                 writer.setOutput(ios);
                 writer.write(null, image, tiffWriteParam);

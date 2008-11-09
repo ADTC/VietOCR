@@ -1211,6 +1211,7 @@ public class Gui extends javax.swing.JFrame {
                     try {
                         OCR ocrEngine = new OCR(tessPath);
                         String result = ocrEngine.recognizeText(imageFile, index, imageFormat, langCodes[jComboBoxLang.getSelectedIndex()]);
+//                        String result = ocrEngine.recognizeText(imageList, index, imageFormat, langCodes[jComboBoxLang.getSelectedIndex()]);
                         jTextArea1.append(result);
                     } catch (OutOfMemoryError oome) {
                         oome.printStackTrace();
