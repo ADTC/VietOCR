@@ -22,6 +22,7 @@ import javax.imageio.*;
 import javax.imageio.stream.*;
 import javax.imageio.metadata.*;
 import com.sun.media.imageio.plugins.tiff.*;
+import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;
 
@@ -30,15 +31,11 @@ import javax.swing.*;
  * @author Quan Nguyen (nguyenq@users.sf.net)
  */
 public class ImageIOHelper {
-    
-    /**
-     * Creates a new instance of ImageIOHelper
-     */
-    public ImageIOHelper() {
-    }
-    
-    public static ArrayList<File> createImages(File imageFile, int index, String imageFormat) {
-        ArrayList<File> tempFileNames = new ArrayList<File>();
+
+    final static String TIFF_EXT = ".tif";
+
+    public static ArrayList<File> createImageFiles(File imageFile, int index, String imageFormat) throws Exception {
+        ArrayList<File> tempImageFiles = new ArrayList<File>();
         
         try {
             
@@ -49,7 +46,6 @@ public class ImageIOHelper {
             reader.setInput(iis);
             //Read the stream metadata
             IIOMetadata streamMetadata = reader.getStreamMetadata();
-            
             
             //Set up the writeParam
             TIFFImageWriteParam tiffWriteParam = new TIFFImageWriteParam(Locale.US);
@@ -66,38 +62,78 @@ public class ImageIOHelper {
 //                BufferedImage bi = (BufferedImage) imageList.get(imageIndex).getImage();
                     BufferedImage bi = reader.read(i);
                     IIOImage image = new IIOImage(bi, null, reader.getImageMetadata(i));
-                    File tempFile = tempImageFile(imageFile, i);
+                    File tempFile = File.createTempFile("TessTempFile", TIFF_EXT);
                     ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
                     writer.setOutput(ios);
                     writer.write(streamMetadata, image, tiffWriteParam);
                     ios.close();
-                    tempFileNames.add(tempFile);
+                    tempImageFiles.add(tempFile);
                 }
             } else {
                 BufferedImage bi = reader.read(index);
                 IIOImage image = new IIOImage(bi, null, reader.getImageMetadata(index));
-                File tempFile = tempImageFile(imageFile, index);
+                File tempFile = File.createTempFile("TessTempFile", TIFF_EXT);
                 ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
                 writer.setOutput(ios);
                 writer.write(streamMetadata, image, tiffWriteParam);
                 ios.close();
-                tempFileNames.add(tempFile);
+                tempImageFiles.add(tempFile);
             }
             writer.dispose();
             reader.dispose();
         } catch (Exception exc) {
-            exc.printStackTrace();
+            throw exc;
         }
-        return tempFileNames;
+        return tempImageFiles;
+    }
+
+    public static ArrayList<File> createImageFiles(ArrayList<ImageIconScalable> imageList, int index, String imageFormat) throws Exception {
+        ArrayList<File> tempImageFiles = new ArrayList<File>();
+
+        try {
+
+            //Set up the writeParam
+            TIFFImageWriteParam tiffWriteParam = new TIFFImageWriteParam(Locale.US);
+            tiffWriteParam.setCompressionMode(ImageWriteParam.MODE_DISABLED);
+
+            //Get tif writer and set output to file
+            Iterator writers = ImageIO.getImageWritersByFormatName("tiff");
+            ImageWriter writer = (ImageWriter)writers.next();
+
+            if (index == -1) {
+                for (ImageIconScalable imageIcon : imageList) {
+                    BufferedImage bi = (BufferedImage) imageIcon.getImage();
+                    IIOImage image = new IIOImage(bi, null, null);
+                    File tempFile = File.createTempFile("TessTempFile", TIFF_EXT);
+                    ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
+                    writer.setOutput(ios);
+                    writer.write(null, image, tiffWriteParam);
+                    ios.close();
+                    tempImageFiles.add(tempFile);
+                }
+            } else {
+                BufferedImage bi = (BufferedImage) imageList.get(index).getImage();
+                IIOImage image = new IIOImage(bi, null, null);
+                File tempFile = File.createTempFile("TessTempFile", TIFF_EXT);
+                ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
+                writer.setOutput(ios);
+                writer.write(null, image, tiffWriteParam);
+                ios.close();
+                tempImageFiles.add(tempFile);
+            }
+            writer.dispose();
+        } catch (Exception exc) {
+            throw exc;
+        }
+        return tempImageFiles;
+    }
         
-    }
-    
-    public static File tempImageFile(File imageFile, int index) {
-        String path = imageFile.getPath();
-        StringBuffer strB = new StringBuffer(path);
-        strB.insert(path.lastIndexOf('.'), index);
-        return new File(strB.toString().replaceFirst("(?<=\\.)(\\w+)$", "tif"));
-    }
+//    public static File tempImageFile(File imageFile, int index) {
+//        String path = imageFile.getPath();
+//        StringBuffer strB = new StringBuffer(path);
+//        strB.insert(path.lastIndexOf('.'), index);
+//        return new File(strB.toString().replaceFirst("(?<=\\.)(\\w+)$", "tif"));
+//    }
         
     public static ArrayList<ImageIconScalable> getImageList(File imageFile) {
         ArrayList<ImageIconScalable> al = new ArrayList<ImageIconScalable>();
@@ -129,5 +165,25 @@ public class ImageIOHelper {
         
         return al;
     }
-    
+
+    public static BufferedImage rotateImage(BufferedImage image, double angle, Color background) {
+        double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
+        int w = image.getWidth(), h = image.getHeight();
+        int neww = (int)Math.floor(w*cos+h*sin), newh = (int)Math.floor(h*cos+w*sin);
+        GraphicsConfiguration gc = getDefaultConfiguration();
+        BufferedImage result = gc.createCompatibleImage(neww, newh);
+        Graphics2D g = result.createGraphics();
+        g.setColor(background);
+        g.fillRect(0,0,neww,newh);
+        g.translate((neww-w)/2, (newh-h)/2);
+        g.rotate(angle, w/2, h/2);
+        g.drawRenderedImage(image, null);
+        return result;
+    }
+
+    public static GraphicsConfiguration getDefaultConfiguration() {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+        return gd.getDefaultConfiguration();
+    }
 }

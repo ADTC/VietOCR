@@ -1,1 +1,1 @@
-java -Xmn32m -Xms128m -Xmx128m -jar VietOCR.jar
+java -Xms128m -Xmx512m -jar VietOCR.jar

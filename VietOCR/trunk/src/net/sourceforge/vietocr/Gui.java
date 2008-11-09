@@ -67,6 +67,7 @@ public class Gui extends javax.swing.JFrame {
     private float scale;
     private String selectedUILang;
     public static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
+    private boolean toggle = false;
 
     /**
      * Creates new form Gui
@@ -106,7 +107,7 @@ public class Gui extends javax.swing.JFrame {
         } catch (Exception exc) {
             exc.printStackTrace();
         } finally {
-             if (langCodes == null) {
+            if (langCodes == null) {
                 langs = new String[0];
             } else {
                 langs = new String[langCodes.length];
@@ -446,6 +447,8 @@ public class Gui extends javax.swing.JFrame {
         jButtonFitWidth = new javax.swing.JButton();
         jButtonZoomIn = new javax.swing.JButton();
         jButtonZoomOut = new javax.swing.JButton();
+        jButtonRotateL = new javax.swing.JButton();
+        jButtonRotateR = new javax.swing.JButton();
         jPanelStatus = new javax.swing.JPanel();
         jLabelStatus = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
@@ -674,6 +677,30 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButtonZoomOut);
+
+        jButtonRotateL.setText("RL");
+        jButtonRotateL.setEnabled(false);
+        jButtonRotateL.setFocusable(false);
+        jButtonRotateL.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonRotateL.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonRotateL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRotateLActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonRotateL);
+
+        jButtonRotateR.setText("RR");
+        jButtonRotateR.setEnabled(false);
+        jButtonRotateR.setFocusable(false);
+        jButtonRotateR.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonRotateR.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonRotateR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRotateRActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonRotateR);
 
         jPanel1.add(jToolBar1, java.awt.BorderLayout.WEST);
 
@@ -907,11 +934,13 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemPostProcessActionPerformed
 
     private void jButtonFitImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFitImageActionPerformed
-        if ((float) imageIcon.getIconWidth() / jScrollPane2.getWidth() > (float) imageIcon.getIconHeight() / jScrollPane2.getHeight()) {
+        if (toggle) {
+//        if ((float) imageIcon.getIconWidth() / jScrollPane2.getWidth() > (float) imageIcon.getIconHeight() / jScrollPane2.getHeight()) {
             jButtonFitWidthActionPerformed(evt);
         } else {
             jButtonFitHeightActionPerformed(evt);
         }
+        toggle ^= true;
         reset = true;
         ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonFitImageActionPerformed
@@ -1035,7 +1064,7 @@ public class Gui extends javax.swing.JFrame {
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         JOptionPane.showMessageDialog(this, APP_NAME + ", v0.9.6 \u00a9 2007\n" +
                 "Java GUI Frontend for Tesseract OCR Engine\n" +
-                DateFormat.getDateInstance(DateFormat.LONG).format(new GregorianCalendar(2008, Calendar.NOVEMBER, 2).getTime()) +
+                DateFormat.getDateInstance(DateFormat.LONG).format(new GregorianCalendar(2008, Calendar.NOVEMBER, 9).getTime()) +
                 "\nhttp://vietocr.sourceforge.net", APP_NAME, JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
@@ -1143,7 +1172,7 @@ public class Gui extends javax.swing.JFrame {
             try {
                 ImageIcon ii = (ImageIcon) this.jImageLabel.getIcon();
                 BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) (rect.x / scale), (int) (rect.y / scale), (int) (rect.width / scale), (int) (rect.height / scale));
-                File tempFile = new File(imageFile.getParentFile(), "tempImageFile0.tif");
+                File tempFile = File.createTempFile("TessTempFile", ".tif");
                 tempFile.deleteOnExit();
                 ImageIO.write(bi, "tiff", tempFile);
                 performOCR(tempFile, 0);
@@ -1181,7 +1210,8 @@ public class Gui extends javax.swing.JFrame {
                 public void run() {
                     try {
                         OCR ocrEngine = new OCR(tessPath);
-                        jTextArea1.append(ocrEngine.recognizeText(imageFile, index, imageFormat, langCodes[jComboBoxLang.getSelectedIndex()]));
+                        String result = ocrEngine.recognizeText(imageFile, index, imageFormat, langCodes[jComboBoxLang.getSelectedIndex()]);
+                        jTextArea1.append(result);
                     } catch (OutOfMemoryError oome) {
                         oome.printStackTrace();
                         JOptionPane.showMessageDialog(null, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
@@ -1268,6 +1298,9 @@ public class Gui extends javax.swing.JFrame {
             this.jButtonNext.setEnabled(true);
             this.jButtonPrev.setEnabled(true);
         }
+
+        this.jButtonRotateL.setEnabled(true);
+        this.jButtonRotateR.setEnabled(true);
 
         setButton();
     }
@@ -1379,6 +1412,21 @@ private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonScanActionPerformed
     jMenuItemScanActionPerformed(evt);
 }//GEN-LAST:event_jButtonScanActionPerformed
+
+private void jButtonRotateLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateLActionPerformed
+//                imageIcon = new ImageIconScalable(imageIcon.getRotatedImage(Math.toRadians(270)));
+    imageIcon = new ImageIconScalable(imageIcon.getRotatedImage2(Math.toRadians(270), jImageLabel.getBackground()));
+    jImageLabel.setIcon(imageIcon);
+    imageList.set(imageIndex, imageIcon);
+    ((JImageLabel) jImageLabel).deselect();
+}//GEN-LAST:event_jButtonRotateLActionPerformed
+
+private void jButtonRotateRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateRActionPerformed
+    imageIcon = new ImageIconScalable(imageIcon.getRotatedImage(Math.toRadians(90)));
+    jImageLabel.setIcon(imageIcon);
+    imageList.set(imageIndex, imageIcon);
+    ((JImageLabel) jImageLabel).deselect();
+}//GEN-LAST:event_jButtonRotateRActionPerformed
     void changeUILang(String lang) {
         if (!selectedUILang.equals(lang)) {
             selectedUILang = lang;
@@ -1423,6 +1471,8 @@ private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JButton jButtonOCR;
     private javax.swing.JButton jButtonOpen;
     private javax.swing.JButton jButtonPrev;
+    private javax.swing.JButton jButtonRotateL;
+    private javax.swing.JButton jButtonRotateR;
     private javax.swing.JButton jButtonScan;
     private javax.swing.JButton jButtonZoomIn;
     private javax.swing.JButton jButtonZoomOut;
