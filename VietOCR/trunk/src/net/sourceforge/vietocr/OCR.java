@@ -28,33 +28,45 @@ public class OCR {
     private final String EOL = System.getProperty("line.separator");
     
     private String tessPath;
+    private File outputPath;
+
+    final String OUTPUT_FILE_NAME = "output";
+    final String FILE_EXTENSION = ".txt";
     
     /** Creates a new instance of OCR */
     public OCR(String tessPath) {
         this.tessPath = tessPath;
     }
-    
+
+//    String recognizeText(ArrayList<ImageIconScalable> imageList, int index, String imageFormat, String lang) throws Exception {
+//        ArrayList<File> tempImageFiles = ImageIOHelper.createImageFiles(imageList, index, imageFormat);
+//        return recognizeText(tempImageFiles, index, imageFormat, lang);
+//    }
+
     String recognizeText(File imageFile, int index, String imageFormat, String lang) throws Exception {
-        ArrayList<File> tempImages = ImageIOHelper.createImages(imageFile, index, imageFormat);
-        
-        File outputFile = new File(imageFile.getParentFile(), "output");
+        ArrayList<File> tempImageFiles = ImageIOHelper.createImageFiles(imageFile, index, imageFormat);
+        return recognizeText(tempImageFiles, index, imageFormat, lang);
+    }
+
+    String recognizeText(ArrayList<File> tempImageFiles, int index, String imageFormat, String lang) throws Exception {
+        File tempTessOutputFile = File.createTempFile(OUTPUT_FILE_NAME, FILE_EXTENSION);
         StringBuffer strB = new StringBuffer();
         
         List<String> cmd = new ArrayList<String>();
         cmd.add(tessPath + "/tesseract");
         cmd.add(""); // placeholder for inputfile
-        cmd.add(outputFile.getName());
+        cmd.add(tempTessOutputFile.getPath().substring(0, tempTessOutputFile.getPath().length() - FILE_EXTENSION.length())); // chop the extension
         cmd.add(LANG_OPTION);
         cmd.add(lang);
             
         ProcessBuilder pb = new ProcessBuilder();
-        pb.directory(imageFile.getParentFile());
+        pb.directory(outputPath);
             
-        for (File tempImage : tempImages) {
+        for (File tempImageFile : tempImageFiles) {
             // actual output file will be "output.txt"
-//            ProcessBuilder pb = new ProcessBuilder(tessPath + "/tesseract", tempImage.getAbsolutePath(), outputFile.getAbsolutePath(), LANG_OPTION, lang);            
+//            ProcessBuilder pb = new ProcessBuilder(tessPath + "/tesseract", tempImage.getAbsolutePath(), tempTessOutputFile.getAbsolutePath(), LANG_OPTION, lang);
             
-            cmd.set(1, tempImage.getName());
+            cmd.set(1, tempImageFile.getPath());
             pb.command(cmd);
             pb.redirectErrorStream(true);
             Process process = pb.start();
@@ -64,10 +76,10 @@ public class OCR {
             System.out.println("Exit value = " + w);
             
             // delete temp working files
-            tempImage.delete();
+            tempImageFile.delete();
             
             if (w == 0) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(outputFile.getAbsolutePath() + ".txt"), "UTF-8"));
+                BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(tempTessOutputFile), "UTF-8"));
                 
                 String str;
                 
@@ -90,14 +102,14 @@ public class OCR {
                     default:
                         msg = "Errors occurred.";
                 }
-                for (File image : tempImages) {
+                for (File image : tempImageFiles) {
                     image.delete();
                 }
                 throw new RuntimeException(msg);
             }
             
         }
-        new File(outputFile.getAbsolutePath() + ".txt").delete();
+        tempTessOutputFile.delete();
         return strB.toString();
     }
 }
