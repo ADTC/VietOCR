@@ -18,6 +18,7 @@ package net.sourceforge.vietocr;
 
 import java.io.*;
 import java.util.*;
+import javax.imageio.IIOImage;
 
 /**
  *
@@ -37,17 +38,40 @@ public class OCR {
         this.tessPath = tessPath;
     }
 
-    String recognizeText(ArrayList<ImageIconScalable> imageList, int index, String imageFormat, String lang) throws Exception {
-        ArrayList<File> tempImageFiles = ImageIOHelper.createImageFiles(imageList, index, imageFormat);
-        return recognizeText(tempImageFiles.toArray(new File[tempImageFiles.size()]), index, imageFormat, lang);
+    /**
+     *
+     * @param imageList
+     * @param index
+     * @param lang
+     * @return
+     * @throws java.lang.Exception
+     */
+    String recognizeText(final ArrayList<IIOImage> imageList, final int index, final String lang) throws Exception {
+        ArrayList<File> tempImageFiles = ImageIOHelper.createImageFiles(imageList, index);
+        return recognizeText(tempImageFiles.toArray(new File[tempImageFiles.size()]), lang);
     }
 
-    String recognizeText(File imageFile, int index, String imageFormat, String lang) throws Exception {
-        ArrayList<File> tempImageFiles = ImageIOHelper.createImageFiles(imageFile, index, imageFormat);
-        return recognizeText(tempImageFiles.toArray(new File[tempImageFiles.size()]), index, imageFormat, lang);
+    /**
+     *
+     * @param imageFile
+     * @param index
+     * @param lang
+     * @return
+     * @throws java.lang.Exception
+     */
+    String recognizeText(final File imageFile, final int index, final String lang) throws Exception {
+        ArrayList<File> tempImageFiles = ImageIOHelper.createImageFiles(imageFile, index);
+        return recognizeText(tempImageFiles.toArray(new File[tempImageFiles.size()]), lang);
     }
 
-    String recognizeText(File[] tempImageFiles, int index, String imageFormat, String lang) throws Exception {
+    /**
+     * 
+     * @param tempImageFiles
+     * @param lang
+     * @return
+     * @throws java.lang.Exception
+     */
+    String recognizeText(final File[] tempImageFiles, final String lang) throws Exception {
         File tempTessOutputFile = File.createTempFile(OUTPUT_FILE_NAME, FILE_EXTENSION);
         StringBuffer strB = new StringBuffer();
         
