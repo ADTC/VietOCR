@@ -28,27 +28,26 @@ public class OCR {
     private final String EOL = System.getProperty("line.separator");
     
     private String tessPath;
-    private File outputPath;
 
-    final String OUTPUT_FILE_NAME = "output";
-    final String FILE_EXTENSION = ".txt";
+    final static String OUTPUT_FILE_NAME = "TessOutput";
+    final static String FILE_EXTENSION = ".txt";
     
     /** Creates a new instance of OCR */
     public OCR(String tessPath) {
         this.tessPath = tessPath;
     }
 
-//    String recognizeText(ArrayList<ImageIconScalable> imageList, int index, String imageFormat, String lang) throws Exception {
-//        ArrayList<File> tempImageFiles = ImageIOHelper.createImageFiles(imageList, index, imageFormat);
-//        return recognizeText(tempImageFiles, index, imageFormat, lang);
-//    }
+    String recognizeText(ArrayList<ImageIconScalable> imageList, int index, String imageFormat, String lang) throws Exception {
+        ArrayList<File> tempImageFiles = ImageIOHelper.createImageFiles(imageList, index, imageFormat);
+        return recognizeText(tempImageFiles.toArray(new File[tempImageFiles.size()]), index, imageFormat, lang);
+    }
 
     String recognizeText(File imageFile, int index, String imageFormat, String lang) throws Exception {
         ArrayList<File> tempImageFiles = ImageIOHelper.createImageFiles(imageFile, index, imageFormat);
-        return recognizeText(tempImageFiles, index, imageFormat, lang);
+        return recognizeText(tempImageFiles.toArray(new File[tempImageFiles.size()]), index, imageFormat, lang);
     }
 
-    String recognizeText(ArrayList<File> tempImageFiles, int index, String imageFormat, String lang) throws Exception {
+    String recognizeText(File[] tempImageFiles, int index, String imageFormat, String lang) throws Exception {
         File tempTessOutputFile = File.createTempFile(OUTPUT_FILE_NAME, FILE_EXTENSION);
         StringBuffer strB = new StringBuffer();
         
@@ -60,7 +59,7 @@ public class OCR {
         cmd.add(lang);
             
         ProcessBuilder pb = new ProcessBuilder();
-        pb.directory(outputPath);
+        pb.directory(new File(System.getProperty("user.dir")));
             
         for (File tempImageFile : tempImageFiles) {
             // actual output file will be "output.txt"
