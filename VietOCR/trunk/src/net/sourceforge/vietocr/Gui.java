@@ -52,6 +52,7 @@ public class Gui extends javax.swing.JFrame {
     private int imageIndex;
     private int imageTotal;
     private ArrayList<ImageIconScalable> imageList;
+    private ArrayList<IIOImage> iioImageList;
     public final String EOL = System.getProperty("line.separator");
     private String currentDirectory;
     private String tessPath;
@@ -1058,7 +1059,7 @@ public class Gui extends javax.swing.JFrame {
             return;
         }
 
-        performOCR(imageFile, -1);
+        performOCR(iioImageList, -1);
     }//GEN-LAST:event_jMenuItemOCRAllActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
@@ -1172,22 +1173,22 @@ public class Gui extends javax.swing.JFrame {
             try {
                 ImageIcon ii = (ImageIcon) this.jImageLabel.getIcon();
                 BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) (rect.x / scale), (int) (rect.y / scale), (int) (rect.width / scale), (int) (rect.height / scale));
-                File tempFile = File.createTempFile("TessTempFile", ".tif");
-                tempFile.deleteOnExit();
-                ImageIO.write(bi, "tiff", tempFile);
-                performOCR(tempFile, 0);
+                IIOImage iioImage = new IIOImage(bi, null, null);
+                ArrayList<IIOImage> tempList = new ArrayList<IIOImage>();
+                tempList.add(iioImage);
+                performOCR(tempList, 0);
             } catch (RasterFormatException rfe) {
                 rfe.printStackTrace();
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } else {
-            performOCR(imageFile, imageIndex);
+            performOCR(iioImageList, imageIndex);
         }
 
     }//GEN-LAST:event_jMenuItemOCRActionPerformed
 
-    void performOCR(final File imageFile, final int index) {
+    void performOCR(final ArrayList<IIOImage> list, final int index) {
         try {
             if (this.jComboBoxLang.getSelectedIndex() == -1) {
                 JOptionPane.showMessageDialog(this, bundle.getString("Please_select_a_language."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
@@ -1201,17 +1202,14 @@ public class Gui extends javax.swing.JFrame {
             getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             getGlassPane().setVisible(true);
 
-            String imageFileName = imageFile.getName();
-            final String imageFormat = imageFileName.substring(imageFileName.lastIndexOf('.') + 1);
-
             SwingUtilities.invokeLater(new Runnable() {
 
                 @Override
                 public void run() {
                     try {
                         OCR ocrEngine = new OCR(tessPath);
-                        String result = ocrEngine.recognizeText(imageFile, index, imageFormat, langCodes[jComboBoxLang.getSelectedIndex()]);
-//                        String result = ocrEngine.recognizeText(imageList, index, imageFormat, langCodes[jComboBoxLang.getSelectedIndex()]);
+//                        String result = ocrEngine.recognizeText(imageFile, index, langCodes[jComboBoxLang.getSelectedIndex()]);
+                        String result = ocrEngine.recognizeText(list, index, langCodes[jComboBoxLang.getSelectedIndex()]);
                         jTextArea1.append(result);
                     } catch (OutOfMemoryError oome) {
                         oome.printStackTrace();
@@ -1331,12 +1329,22 @@ public class Gui extends javax.swing.JFrame {
 
     void loadImage() {
         try {
-            imageList = ImageIOHelper.getImageList(imageFile);
+            iioImageList= ImageIOHelper.getIIOImageList(imageFile);
+            imageList = ImageIOHelper.getImageList(iioImageList);
+
             imageTotal = imageList.size();
             imageIndex = 0;
+        } catch (RuntimeException re) {
+            JOptionPane.showMessageDialog(null, re.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
         } catch (NoClassDefFoundError ncde) {
             System.err.println(ncde.getMessage());
             JOptionPane.showMessageDialog(null, bundle.getString("Required_JAI_Image_I/O_Library_is_not_found."), APP_NAME, JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ioe) {
+            JOptionPane.showMessageDialog(null, ioe.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
+            System.err.println(ioe.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
+            System.err.println(e.getMessage());
         }
     }
 
@@ -1419,6 +1427,7 @@ private void jButtonRotateLActionPerformed(java.awt.event.ActionEvent evt) {//GE
     imageIcon = new ImageIconScalable(imageIcon.getRotatedImage2(Math.toRadians(270), jImageLabel.getBackground()));
     jImageLabel.setIcon(imageIcon);
     imageList.set(imageIndex, imageIcon);
+    iioImageList.get(imageIndex).setRenderedImage((BufferedImage)imageIcon.getImage());
     ((JImageLabel) jImageLabel).deselect();
 }//GEN-LAST:event_jButtonRotateLActionPerformed
 
@@ -1426,6 +1435,7 @@ private void jButtonRotateRActionPerformed(java.awt.event.ActionEvent evt) {//GE
     imageIcon = new ImageIconScalable(imageIcon.getRotatedImage(Math.toRadians(90)));
     jImageLabel.setIcon(imageIcon);
     imageList.set(imageIndex, imageIcon);
+    iioImageList.get(imageIndex).setRenderedImage((BufferedImage)imageIcon.getImage());
     ((JImageLabel) jImageLabel).deselect();
 }//GEN-LAST:event_jButtonRotateRActionPerformed
     void changeUILang(String lang) {
