@@ -1329,7 +1329,7 @@ public class Gui extends javax.swing.JFrame {
 
     void loadImage() {
         try {
-            iioImageList= ImageIOHelper.getIIOImageList(imageFile);
+            iioImageList = ImageIOHelper.getIIOImageList(imageFile);
             imageList = ImageIOHelper.getImageList(iioImageList);
 
             imageTotal = imageList.size();
@@ -1423,21 +1423,21 @@ private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_jButtonScanActionPerformed
 
 private void jButtonRotateLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateLActionPerformed
-//                imageIcon = new ImageIconScalable(imageIcon.getRotatedImage(Math.toRadians(270)));
-    imageIcon = new ImageIconScalable(imageIcon.getRotatedImage2(Math.toRadians(270), jImageLabel.getBackground()));
-    jImageLabel.setIcon(imageIcon);
-    imageList.set(imageIndex, imageIcon);
-    iioImageList.get(imageIndex).setRenderedImage((BufferedImage)imageIcon.getImage());
-    ((JImageLabel) jImageLabel).deselect();
+    rotateImage(270);
 }//GEN-LAST:event_jButtonRotateLActionPerformed
 
 private void jButtonRotateRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateRActionPerformed
-    imageIcon = new ImageIconScalable(imageIcon.getRotatedImage(Math.toRadians(90)));
-    jImageLabel.setIcon(imageIcon);
-    imageList.set(imageIndex, imageIcon);
-    iioImageList.get(imageIndex).setRenderedImage((BufferedImage)imageIcon.getImage());
-    ((JImageLabel) jImageLabel).deselect();
+    rotateImage(90);
 }//GEN-LAST:event_jButtonRotateRActionPerformed
+
+    void rotateImage(int angle) {
+        imageIcon = imageIcon.getRotatedImageIcon(Math.toRadians(angle));
+        jImageLabel.setIcon(imageIcon);
+        imageList.set(imageIndex, imageIcon);
+        iioImageList.get(imageIndex).setRenderedImage((BufferedImage) imageIcon.getImage());
+        ((JImageLabel) jImageLabel).deselect();
+    }
+
     void changeUILang(String lang) {
         if (!selectedUILang.equals(lang)) {
             selectedUILang = lang;

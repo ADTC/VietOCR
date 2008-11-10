@@ -31,6 +31,7 @@ class ImageDropTargetListener extends DropTargetAdapter {
      *
      *@param  dtde  the DropTargetDragEvent
      */
+    @Override
     public void dragOver(DropTargetDragEvent dtde) {
         if (droppedFile == null) {
             DataFlavor[] flavors = dtde.getCurrentDataFlavors();
@@ -49,6 +50,7 @@ class ImageDropTargetListener extends DropTargetAdapter {
      *
      *@param  dtde  the DropTargetDropEvent
      */
+    @Override
     public void drop(DropTargetDropEvent dtde) {
         Transferable transferable = dtde.getTransferable();
         DataFlavor[] flavors = transferable.getTransferDataFlavors();
@@ -77,6 +79,7 @@ class ImageDropTargetListener extends DropTargetAdapter {
                     
                     // Processes one dropped file at a time in a separate thread
                     new Thread() {
+                        @Override
                         public void run() {
                             holder.openFile(droppedFile);
                             droppedFile = null;
