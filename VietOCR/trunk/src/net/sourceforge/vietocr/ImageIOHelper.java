@@ -21,7 +21,6 @@ import javax.imageio.*;
 import javax.imageio.stream.*;
 import javax.imageio.metadata.*;
 import com.sun.media.imageio.plugins.tiff.*;
-import java.awt.*;
 import java.awt.image.*;
 
 /**
@@ -185,26 +184,5 @@ public class ImageIOHelper {
         reader.dispose();
 
         return al;
-    }
-
-    public static BufferedImage rotateImage(BufferedImage image, double angle, Color background) {
-        double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
-        int w = image.getWidth(), h = image.getHeight();
-        int neww = (int) Math.floor(w * cos + h * sin), newh = (int) Math.floor(h * cos + w * sin);
-        GraphicsConfiguration gc = getDefaultConfiguration();
-        BufferedImage result = gc.createCompatibleImage(neww, newh);
-        Graphics2D g = result.createGraphics();
-        g.setColor(background);
-        g.fillRect(0, 0, neww, newh);
-        g.translate((neww - w) / 2, (newh - h) / 2);
-        g.rotate(angle, w / 2, h / 2);
-        g.drawRenderedImage(image, null);
-        return result;
-    }
-
-    public static GraphicsConfiguration getDefaultConfiguration() {
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice gd = ge.getDefaultScreenDevice();
-        return gd.getDefaultConfiguration();
     }
 }
