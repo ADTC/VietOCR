@@ -68,3 +68,8 @@ Version 0.9.5 (29 October 2008)
 Version 0.9.6 (2 November 2008)
 - Fixed an error with path in Linux
 - Additional instruction for configuring Tesseract on Linux
+
+Version 0.9.7 (10 November 2008)
+- Implemented rotate image functionality
+- Increased Maximum Heap Size to address OutOfMemory exceptions during image manipulations (fit, zoom, rotate)
+- Improved performance by passing IIOImage rather than File to OCR wrapper
