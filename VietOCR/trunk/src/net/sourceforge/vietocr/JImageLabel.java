@@ -19,8 +19,6 @@ package net.sourceforge.vietocr;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 import java.util.*;
 
 /**
@@ -104,7 +102,6 @@ public class JImageLabel extends JLabel implements MouseMotionListener, MouseLis
             g2d.setStroke(bs);
             //g2d.setPaint(gp);
             g2d.draw(rect);
-
         }
     }
 
@@ -135,82 +132,6 @@ public class JImageLabel extends JLabel implements MouseMotionListener, MouseLis
         ar.add(new Rectangle(x, y + h / 2, wh, wh));
 
         return ar.toArray(new Rectangle[ar.size()]);
-    }
-
-    public void rotate(int rotateAngle) {
-//        rotateImage(rotateAngle);
-        rotateImage2(rotateAngle);
-//        rotateEm(rotateAngle);
-//        this.rotateAngle = rotateAngle;
-//
-//        Rectangle bound = this.getBounds();
-//
-//        int m_imageWidth = this.getIcon().getIconWidth();
-//        int m_imageHeight = this.getIcon().getIconHeight();
-//
-//        m_affineTransform = new AffineTransform();
-//        //set the translation to the mid of the component
-//        m_affineTransform.setToTranslation((bound.width - m_imageWidth) / 2, (bound.height - m_imageHeight) / 2);
-//
-//        //rotate with the rotation point as the mid of the image
-//        m_affineTransform.rotate(Math.toRadians(rotateAngle), m_imageWidth / 2, m_imageHeight / 2);
-//        this.deselect();
-//
-//        repaint();
-    }
-
-    public void rotateImage(int angle) {
-        int w = this.getIcon().getIconWidth();
-        int h = this.getIcon().getIconHeight();
-
-        BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-        Graphics bg = bi.createGraphics();
-        Graphics2D g2d = (Graphics2D) bg;
-        g2d.rotate(Math.toRadians(angle), w / 2, h / 2);
-        // move the graphics center point to the center of the icon.
-//        g2d.translate(w / 2, h / 2);
-
-        g2d.drawImage(((ImageIcon) this.getIcon()).getImage(), 0, 0, w, h, 0, 0, w, h, null);
-        g2d.dispose(); //cleans up resources
-        this.setIcon(new ImageIcon(bi));
-        this.setPreferredSize(new Dimension(h, w));
-    }
-
-    public void rotateImage1(int angle) {
-        // Sets the Shape.
-        Rectangle r = this.getBounds();
-        int w = this.getIcon().getIconWidth();
-        int h = this.getIcon().getIconHeight();
-
-        AffineTransform at = new AffineTransform();
-        at.rotate(Math.toRadians(angle));
-
-        BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-        Graphics bg = bi.createGraphics();
-        Graphics2D g2d = (Graphics2D) bg;
-
-        // Sets the selected Shape to the center of the Canvas.
-        AffineTransform saveXform = g2d.getTransform();
-        AffineTransform toCenterAt = new AffineTransform();
-        toCenterAt.concatenate(at);
-        toCenterAt.translate(-(r.width / 2), -(r.height / 2));
-
-        g2d.transform(toCenterAt);
-        g2d.drawImage(((ImageIcon) this.getIcon()).getImage(), toCenterAt, null);
-
-        g2d.setTransform(saveXform);
-    }
-
-    public void rotateImage2(int angle) {
-        int h = this.getIcon().getIconHeight();
-        int w = this.getIcon().getIconWidth();
-
-        BufferedImage bim = new BufferedImage(h, w, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = (Graphics2D) (bim.createGraphics());
-        g2d.translate(h, 0);
-        g2d.rotate(Math.toRadians(angle)); //apprx 90 degree
-        g2d.drawImage(((ImageIcon) this.getIcon()).getImage(), 0, 0, w, h, this);
-        this.setIcon(new ImageIcon(bim));
     }
 
     @Override

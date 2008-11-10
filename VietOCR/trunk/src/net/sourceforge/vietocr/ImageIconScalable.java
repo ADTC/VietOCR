@@ -5,7 +5,6 @@
 package net.sourceforge.vietocr;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 import java.net.*;
@@ -86,25 +85,7 @@ public class ImageIconScalable extends ImageIcon {
         this.height = height;
     }
 
-    public BufferedImage getRotatedImage(double theta) {
-        double sin = Math.abs(Math.sin(theta));
-        double cos = Math.abs(Math.cos(theta));
-        int w = this.getIconWidth();
-        int h = this.getIconHeight();
-        int newW = (int) (w * cos + h * sin);
-        int newH = (int) (w * sin + h * cos);
-        BufferedImage result = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = result.createGraphics();
-        g2d.setPaint(UIManager.getColor("Panel.background"));
-        g2d.fillRect(0, 0, newW, newH);
-        AffineTransform at = AffineTransform.getRotateInstance(theta, newW / 2, newH / 2);
-        at.translate((newW - w) / 2, (newH - h) / 2);
-        g2d.drawRenderedImage((BufferedImage) this.getImage(), at);
-        g2d.dispose();
-        return result;
-    }
-
-    public BufferedImage getRotatedImage2(double angle, Color background) {
+    public ImageIconScalable getRotatedImageIcon(double angle) {
         double sin = Math.abs(Math.sin(angle));
         double cos = Math.abs(Math.cos(angle));
         int w = this.getIconWidth();
@@ -113,14 +94,23 @@ public class ImageIconScalable extends ImageIcon {
         int newH = (int) Math.floor(h * cos + w * sin);
         GraphicsConfiguration gc = getDefaultConfiguration();
         BufferedImage result = gc.createCompatibleImage(newW, newH);
+
         Graphics2D g2d = result.createGraphics();
-        g2d.setColor(background);
+        g2d.setColor(UIManager.getColor("Label.background"));
         g2d.fillRect(0, 0, newW, newH);
+
         g2d.translate((newW - w) / 2, (newH - h) / 2);
         g2d.rotate(angle, w / 2, h / 2);
         g2d.drawRenderedImage((BufferedImage) this.getImage(), null);
+
+        // Alternative for 3 lines above
+//        AffineTransform at = AffineTransform.getRotateInstance(angle, newW / 2, newH / 2);
+//        at.translate((newW - w) / 2, (newH - h) / 2);
+//        g2d.drawRenderedImage((BufferedImage) this.getImage(), at);
+        
         g2d.dispose();
-        return result;
+        
+        return new ImageIconScalable(result);
     }
 
     private GraphicsConfiguration getDefaultConfiguration() {
