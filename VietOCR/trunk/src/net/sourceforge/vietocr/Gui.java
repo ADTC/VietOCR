@@ -1431,17 +1431,21 @@ private void jButtonRotateRActionPerformed(java.awt.event.ActionEvent evt) {//GE
 }//GEN-LAST:event_jButtonRotateRActionPerformed
 
     void rotateImage(int angle) {
+        try {
         imageIcon = imageIcon.getRotatedImageIcon(Math.toRadians(angle));
         jImageLabel.setIcon(imageIcon);
         imageList.set(imageIndex, imageIcon);
         iioImageList.get(imageIndex).setRenderedImage((BufferedImage) imageIcon.getImage());
         ((JImageLabel) jImageLabel).deselect();
+        } catch (OutOfMemoryError oome) {
+            JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     void changeUILang(String lang) {
         if (!selectedUILang.equals(lang)) {
             selectedUILang = lang;
-            JOptionPane.showMessageDialog(null, bundle.getString("Please_restart_the_application_for_the_change_to_take_effect."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("Please_restart_the_application_for_the_change_to_take_effect."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
