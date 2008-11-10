@@ -667,6 +667,7 @@ namespace VietOCR.NET
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
             imageList[imageIndex] = this.pictureBox1.Image;
             this.pictureBox1.Deselect();
+            this.pictureBox1.Size = this.pictureBox1.Image.Size;
             this.pictureBox1.Refresh();
         }
 
@@ -675,6 +676,7 @@ namespace VietOCR.NET
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
             imageList[imageIndex] = this.pictureBox1.Image;
             this.pictureBox1.Deselect();
+            this.pictureBox1.Size = this.pictureBox1.Image.Size;
             this.pictureBox1.Refresh();
         }
 
