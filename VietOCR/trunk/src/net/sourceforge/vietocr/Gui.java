@@ -70,6 +70,8 @@ public class Gui extends javax.swing.JFrame {
     public static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
     private boolean toggle = false;
 
+    private int originalW, originalH;
+
     /**
      * Creates new form Gui
      */
@@ -135,6 +137,9 @@ public class Gui extends javax.swing.JFrame {
             this.jToolBar2.remove(this.jButtonScan);
             this.jMenuFile.remove(this.jMenuItemScan);
         }
+
+        this.jButtonFitHeight.setVisible(false); // no longer used
+        this.jButtonFitWidth.setVisible(false); // no longer used
 
         new DropTarget(this.jImageLabel, new ImageDropTargetListener(this));
 
@@ -937,16 +942,36 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemPostProcessActionPerformed
 
     private void jButtonFitImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFitImageActionPerformed
-        if (toggle) {
 //        if ((float) imageIcon.getIconWidth() / jScrollPane2.getWidth() > (float) imageIcon.getIconHeight() / jScrollPane2.getHeight()) {
-            jButtonFitWidthActionPerformed(evt);
+
+        if (toggle) {
+            this.jButtonFitImage.setToolTipText("Fit Image");
+            fitImageChange(originalW , originalH);
         } else {
-            jButtonFitHeightActionPerformed(evt);
+            originalW = imageIcon.getIconWidth();
+            originalH = imageIcon.getIconHeight();
+            this.jButtonFitImage.setToolTipText("Real Size");          
+            fitImageChange(this.jScrollPane2.getWidth() , this.jScrollPane2.getHeight());
         }
         toggle ^= true;
         reset = true;
         ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonFitImageActionPerformed
+
+    void fitImageChange(final int width, final int height) {
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                for (ImageIconScalable tempImageIcon : imageList) {
+                    tempImageIcon.setScaledSize(width, height);
+                }
+                imageIcon = imageList.get(imageIndex);
+                jImageLabel.revalidate();
+                jScrollPane2.repaint();
+            }
+        });
+    }
 
     private void jMenuItemTessPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTessPathActionPerformed
         JFileChooser pathchooser = new JFileChooser(currentDirectory);
@@ -997,14 +1022,14 @@ public class Gui extends javax.swing.JFrame {
 
             @Override
             public void run() {
-                for (ImageIconScalable image : imageList) {
-                    int width = image.getIconWidth();
-                    int height = image.getIconHeight();
+                for (ImageIconScalable tempImageIcon : imageList) {
+                    int width = tempImageIcon.getIconWidth();
+                    int height = tempImageIcon.getIconHeight();
 
                     if (multiply) {
-                        image.setScaledSize((int) (width * factor), (int) (height * factor));
+                        tempImageIcon.setScaledSize((int) (width * factor), (int) (height * factor));
                     } else {
-                        image.setScaledSize((int) (width / factor), (int) (height / factor));
+                        tempImageIcon.setScaledSize((int) (width / factor), (int) (height / factor));
                     }
                 }
                 imageIcon = imageList.get(imageIndex);
@@ -1015,7 +1040,6 @@ public class Gui extends javax.swing.JFrame {
                 } else {
                     scale /= factor;
                 }
-
             }
         });
     }
@@ -1281,6 +1305,7 @@ public class Gui extends javax.swing.JFrame {
     public void openFile(File selectedImage) {
         imageFile = selectedImage;
         this.setTitle(imageFile.getName() + " - " + APP_NAME);
+        toggle = false;
         loadImage();
         displayImage();
         jLabelStatus.setText(null);
@@ -1436,11 +1461,11 @@ private void jButtonRotateRActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
     void rotateImage(int angle) {
         try {
-        imageIcon = imageIcon.getRotatedImageIcon(Math.toRadians(angle));
-        jImageLabel.setIcon(imageIcon);
-        imageList.set(imageIndex, imageIcon);
-        iioImageList.get(imageIndex).setRenderedImage((BufferedImage) imageIcon.getImage());
-        ((JImageLabel) jImageLabel).deselect();
+            imageIcon = imageIcon.getRotatedImageIcon(Math.toRadians(angle));
+            jImageLabel.setIcon(imageIcon);
+            imageList.set(imageIndex, imageIcon);
+            iioImageList.get(imageIndex).setRenderedImage((BufferedImage) imageIcon.getImage());
+            ((JImageLabel) jImageLabel).deselect();
         } catch (OutOfMemoryError oome) {
             JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
         }
