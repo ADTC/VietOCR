@@ -69,7 +69,6 @@ public class Gui extends javax.swing.JFrame {
     private String selectedUILang;
     public static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
     private boolean toggle = false;
-
     private int originalW, originalH;
 
     /**
@@ -946,12 +945,12 @@ public class Gui extends javax.swing.JFrame {
 
         if (toggle) {
             this.jButtonFitImage.setToolTipText("Fit Image");
-            fitImageChange(originalW , originalH);
+            fitImageChange(originalW, originalH);
         } else {
             originalW = imageIcon.getIconWidth();
             originalH = imageIcon.getIconHeight();
-            this.jButtonFitImage.setToolTipText("Real Size");          
-            fitImageChange(this.jScrollPane2.getWidth() , this.jScrollPane2.getHeight());
+            this.jButtonFitImage.setToolTipText("Real Size");
+            fitImageChange(this.jScrollPane2.getWidth(), this.jScrollPane2.getHeight());
         }
         toggle ^= true;
         reset = true;
@@ -1089,11 +1088,20 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemOCRAllActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
-        JOptionPane.showMessageDialog(this, APP_NAME + ", v0.9.6 \u00a9 2007\n" +
-                "Java GUI Frontend for Tesseract OCR Engine\n" +
-                DateFormat.getDateInstance(DateFormat.LONG).format(new GregorianCalendar(2008, Calendar.NOVEMBER, 9).getTime()) +
-                "\nhttp://vietocr.sourceforge.net", APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+        try {
+            Properties config = new Properties();
+            config.loadFromXML(getClass().getResourceAsStream("config.xml"));
+            String version = config.getProperty("Version");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            Date releaseDate = sdf.parse(config.getProperty("ReleaseDate"));
 
+            JOptionPane.showMessageDialog(this, APP_NAME + ", " + version + " \u00a9 2007\n" +
+                    "Java GUI Frontend for Tesseract OCR Engine\n" +
+                    DateFormat.getDateInstance(DateFormat.LONG).format(releaseDate) +
+                    "\nhttp://vietocr.sourceforge.net", APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
