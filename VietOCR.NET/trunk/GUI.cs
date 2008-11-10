@@ -428,12 +428,14 @@ namespace VietOCR.NET
 
             if (toggle)
             {
+                this.toolStripBtnFitImage.ToolTipText = "Fit Image";
                 this.pictureBox1.Dock = DockStyle.None;
                 this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
                 scaleX = scaleY = 1f;
             }
             else
             {
+                this.toolStripBtnFitImage.ToolTipText = "Real Size";
                 this.pictureBox1.Dock = DockStyle.Fill;
                 this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
                 scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
@@ -450,6 +452,7 @@ namespace VietOCR.NET
         {
             imageFile = new FileInfo(selectedImageFile);
             this.Text = imageFile.Name + " - " + strProgName;
+            toggle = false;
             loadImage(imageFile);
             displayImage();
             if (imageList == null)
