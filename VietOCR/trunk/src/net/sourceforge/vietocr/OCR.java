@@ -73,21 +73,22 @@ public class OCR {
      */
     String recognizeText(final File[] tempImageFiles, final String lang) throws Exception {
         File tempTessOutputFile = File.createTempFile(OUTPUT_FILE_NAME, FILE_EXTENSION);
+        String output = tempTessOutputFile.getPath().substring(0, tempTessOutputFile.getPath().length() - FILE_EXTENSION.length()); // chop the .txt extension
         StringBuffer strB = new StringBuffer();
         
         List<String> cmd = new ArrayList<String>();
         cmd.add(tessPath + "/tesseract");
         cmd.add(""); // placeholder for inputfile
-        cmd.add(tempTessOutputFile.getPath().substring(0, tempTessOutputFile.getPath().length() - FILE_EXTENSION.length())); // chop the extension
+        cmd.add(output);
         cmd.add(LANG_OPTION);
         cmd.add(lang);
-            
+
         ProcessBuilder pb = new ProcessBuilder();
-        pb.directory(new File(System.getProperty("user.dir")));
+        pb.directory(new File(System.getProperty("user.home")));
             
         for (File tempImageFile : tempImageFiles) {
             // actual output file will be "output.txt"
-//            ProcessBuilder pb = new ProcessBuilder(tessPath + "/tesseract", tempImage.getAbsolutePath(), tempTessOutputFile.getAbsolutePath(), LANG_OPTION, lang);
+//            ProcessBuilder pb = new ProcessBuilder(tessPath + "/tesseract", tempImage.getPath(), output, LANG_OPTION, lang);
             
             cmd.set(1, tempImageFile.getPath());
             pb.command(cmd);

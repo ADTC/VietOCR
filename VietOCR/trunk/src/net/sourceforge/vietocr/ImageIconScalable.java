@@ -73,10 +73,14 @@ public class ImageIconScalable extends ImageIcon {
 
     @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
+        Image image = this.getImage();
+        if (image == null) {
+            return;
+        }
         if ((width == -1) && (height == -1)) {
-            g.drawImage(getImage(), x, y, c);
+            g.drawImage(image, x, y, c);
         } else {
-            g.drawImage(getImage(), x, y, width, height, c);
+            g.drawImage(image, x, y, width, height, c);
         }
     }
 
