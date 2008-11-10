@@ -159,30 +159,4 @@ public class ImageIOHelper {
 
          return al;
     }
-
-    public static ArrayList<ImageIconScalable> getImageList(File imageFile) throws Exception {
-        ArrayList<ImageIconScalable> al = new ArrayList<ImageIconScalable>();
-
-        String imageFileName = imageFile.getName();
-        String imageFormat = imageFileName.substring(imageFileName.lastIndexOf('.') + 1);
-        Iterator readers = ImageIO.getImageReadersByFormatName(imageFormat);
-        ImageReader reader = (ImageReader) readers.next();
-
-        if (reader == null) {
-            throw new RuntimeException("Need to install JAI Image I/O package.\nhttps://jai-imageio.dev.java.net");
-        }
-
-        ImageInputStream iis = ImageIO.createImageInputStream(imageFile);
-        reader.setInput(iis);
-        
-        int imageTotal = reader.getNumImages(true);
-
-        for (int i = 0; i < imageTotal; i++) {
-            al.add(new ImageIconScalable(reader.read(i)));
-        }
-
-        reader.dispose();
-
-        return al;
-    }
 }
