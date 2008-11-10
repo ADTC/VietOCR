@@ -232,6 +232,9 @@
     <Content Include="samples\vietsample2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="samples\vietsample2.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="versionchanges_cs.txt" />
   </ItemGroup>
   <ItemGroup>
