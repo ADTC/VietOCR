@@ -680,6 +680,7 @@ public class Gui extends javax.swing.JFrame {
         jToolBar1.add(jButtonZoomOut);
 
         jButtonRotateL.setText("RL");
+        jButtonRotateL.setToolTipText(bundle.getString("Rotate_Left")); // NOI18N
         jButtonRotateL.setEnabled(false);
         jButtonRotateL.setFocusable(false);
         jButtonRotateL.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -692,6 +693,7 @@ public class Gui extends javax.swing.JFrame {
         jToolBar1.add(jButtonRotateL);
 
         jButtonRotateR.setText("RR");
+        jButtonRotateR.setToolTipText(bundle.getString("Rotate_Right")); // NOI18N
         jButtonRotateR.setEnabled(false);
         jButtonRotateR.setFocusable(false);
         jButtonRotateR.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1335,10 +1337,12 @@ public class Gui extends javax.swing.JFrame {
             imageTotal = imageList.size();
             imageIndex = 0;
         } catch (RuntimeException re) {
-            JOptionPane.showMessageDialog(null, re.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, re.getMessage() + " " + bundle.getString("CorruptedImage"), APP_NAME, JOptionPane.ERROR_MESSAGE);
+            throw re;
         } catch (NoClassDefFoundError ncde) {
             System.err.println(ncde.getMessage());
             JOptionPane.showMessageDialog(null, bundle.getString("Required_JAI_Image_I/O_Library_is_not_found."), APP_NAME, JOptionPane.ERROR_MESSAGE);
+            throw ncde;
         } catch (IOException ioe) {
             JOptionPane.showMessageDialog(null, ioe.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
             System.err.println(ioe.getMessage());
