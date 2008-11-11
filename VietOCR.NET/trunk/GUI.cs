@@ -208,6 +208,9 @@ namespace VietOCR.NET
                 this.Cursor = Cursors.WaitCursor;
                 this.pictureBox1.UseWaitCursor = true;
                 this.textBox1.Cursor = Cursors.WaitCursor;
+                this.toolStripBtnOCR.Enabled = false;
+                this.oCRToolStripMenuItem.Enabled = false;
+                this.oCRAllPagesToolStripMenuItem.Enabled = false;
 
                 //OCRImageEntity entity = new OCRImageEntity(ImageIOHelper.GetImageList(imageFile), index, rect, curLangCode);
                 OCRImageEntity entity = new OCRImageEntity(imageList, index, rect, curLangCode);
@@ -535,6 +538,9 @@ namespace VietOCR.NET
             this.Cursor = Cursors.Default;
             this.pictureBox1.UseWaitCursor = false;
             this.textBox1.Cursor = Cursors.Default;
+            this.toolStripBtnOCR.Enabled = true;
+            this.oCRToolStripMenuItem.Enabled = true;
+            this.oCRAllPagesToolStripMenuItem.Enabled = true;
         }
 
         private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -562,6 +568,8 @@ namespace VietOCR.NET
             this.Cursor = Cursors.Default;
             this.pictureBox1.UseWaitCursor = false;
             this.textBox1.Cursor = Cursors.Default;
+            this.toolStripBtnScan.Enabled = true;
+            this.scanToolStripMenuItem.Enabled = true;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -591,6 +599,8 @@ namespace VietOCR.NET
                 this.Cursor = Cursors.WaitCursor;
                 this.pictureBox1.UseWaitCursor = true;
                 this.textBox1.Cursor = Cursors.WaitCursor;
+                this.toolStripBtnScan.Enabled = false;
+                this.scanToolStripMenuItem.Enabled = false;
 
                 // Start the asynchronous operation.
                 backgroundWorker2.RunWorkerAsync();
@@ -728,7 +738,7 @@ namespace VietOCR.NET
                     this.pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
                 }
             }
-            CalculateAspectRatioAndSetDimensions();
+            //CalculateAspectRatioAndSetDimensions();
         }
 
         // Calculates and returns the image's aspect ratio, and sets 
