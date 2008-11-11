@@ -65,11 +65,12 @@ public class Gui extends javax.swing.JFrame {
     private JFileChooser filechooser;
     private boolean wordWrapOn;
     private String selectedInputMethod;
-    private float scale;
+    private float scaleX, scaleY;
     private String selectedUILang;
     public static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
     private boolean toggle = false;
     private int originalW,  originalH;
+    private final float ZOOM_FACTOR = 1.25f;
 
     /**
      * Creates new form Gui
@@ -136,9 +137,6 @@ public class Gui extends javax.swing.JFrame {
             this.jToolBar2.remove(this.jButtonScan);
             this.jMenuFile.remove(this.jMenuItemScan);
         }
-
-        this.jButtonFitHeight.setVisible(false); // no longer used
-        this.jButtonFitWidth.setVisible(false); // no longer used
 
         new DropTarget(this.jImageLabel, new ImageDropTargetListener(this));
 
@@ -448,8 +446,6 @@ public class Gui extends javax.swing.JFrame {
         jButtonPrev = new javax.swing.JButton();
         jButtonNext = new javax.swing.JButton();
         jButtonFitImage = new javax.swing.JButton();
-        jButtonFitHeight = new javax.swing.JButton();
-        jButtonFitWidth = new javax.swing.JButton();
         jButtonZoomIn = new javax.swing.JButton();
         jButtonZoomOut = new javax.swing.JButton();
         jButtonRotateL = new javax.swing.JButton();
@@ -642,26 +638,6 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButtonFitImage);
-
-        jButtonFitHeight.setText("↕");
-        jButtonFitHeight.setToolTipText("Fit Height");
-        jButtonFitHeight.setEnabled(false);
-        jButtonFitHeight.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFitHeightActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButtonFitHeight);
-
-        jButtonFitWidth.setText("↔");
-        jButtonFitWidth.setToolTipText("Fit Width");
-        jButtonFitWidth.setEnabled(false);
-        jButtonFitWidth.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFitWidthActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButtonFitWidth);
 
         jButtonZoomIn.setText("(+)");
         jButtonZoomIn.setToolTipText("Zoom In");
@@ -946,11 +922,12 @@ public class Gui extends javax.swing.JFrame {
         if (toggle) {
             this.jButtonFitImage.setToolTipText("Fit Image");
             fitImageChange(originalW, originalH);
+            scaleX = scaleY = 1f;
         } else {
-            originalW = imageIcon.getIconWidth();
-            originalH = imageIcon.getIconHeight();
             this.jButtonFitImage.setToolTipText("Real Size");
             fitImageChange(this.jScrollPane2.getWidth(), this.jScrollPane2.getHeight());
+            scaleX = (float)imageIcon.getIconWidth() / (float)this.jScrollPane2.getWidth();
+            scaleY = (float)imageIcon.getIconHeight() / (float)this.jScrollPane2.getHeight();
         }
         toggle ^= true;
         reset = true;
@@ -988,35 +965,19 @@ public class Gui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemTessPathActionPerformed
 
-    private void jButtonFitWidthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFitWidthActionPerformed
-        float factor = (float) imageIcon.getIconWidth() / jScrollPane2.getWidth();
-        doChange(factor, false);
-        reset = false;
-        ((JImageLabel) jImageLabel).deselect();
-    }//GEN-LAST:event_jButtonFitWidthActionPerformed
-
-    private void jButtonFitHeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFitHeightActionPerformed
-        float factor = (float) imageIcon.getIconHeight() / jScrollPane2.getHeight();
-        doChange(factor, false);
-        reset = false;
-        ((JImageLabel) jImageLabel).deselect();
-    }//GEN-LAST:event_jButtonFitHeightActionPerformed
-
     private void jButtonZoomOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomOutActionPerformed
-        float factor = 1.25f;
-        doChange(factor, false);
+        doChange(false);
         reset = false;
         ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonZoomOutActionPerformed
 
     private void jButtonZoomInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomInActionPerformed
-        float factor = 1.25f;
-        doChange(factor, true);
+        doChange(true);
         reset = false;
         ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonZoomInActionPerformed
 
-    void doChange(final float factor, final boolean multiply) {
+    void doChange(final boolean multiply) {
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override
@@ -1026,18 +987,20 @@ public class Gui extends javax.swing.JFrame {
                     int height = tempImageIcon.getIconHeight();
 
                     if (multiply) {
-                        tempImageIcon.setScaledSize((int) (width * factor), (int) (height * factor));
+                        tempImageIcon.setScaledSize((int) (width * ZOOM_FACTOR), (int) (height * ZOOM_FACTOR));
                     } else {
-                        tempImageIcon.setScaledSize((int) (width / factor), (int) (height / factor));
+                        tempImageIcon.setScaledSize((int) (width / ZOOM_FACTOR), (int) (height / ZOOM_FACTOR));
                     }
                 }
                 imageIcon = imageList.get(imageIndex);
                 jImageLabel.revalidate();
                 jScrollPane2.repaint();
                 if (multiply) {
-                    scale *= factor;
+                    scaleX *= ZOOM_FACTOR;
+                    scaleY *= ZOOM_FACTOR;
                 } else {
-                    scale /= factor;
+                    scaleX /= ZOOM_FACTOR;
+                    scaleY /= ZOOM_FACTOR;
                 }
             }
         });
@@ -1206,7 +1169,7 @@ public class Gui extends javax.swing.JFrame {
         if (rect != null && jImageLabel.getIcon() != null) {
             try {
                 ImageIcon ii = (ImageIcon) this.jImageLabel.getIcon();
-                BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) (rect.x / scale), (int) (rect.y / scale), (int) (rect.width / scale), (int) (rect.height / scale));
+                BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) (rect.x / scaleX), (int) (rect.y / scaleY), (int) (rect.width / scaleX), (int) (rect.height / scaleY));
                 IIOImage iioImage = new IIOImage(bi, null, null);
                 ArrayList<IIOImage> tempList = new ArrayList<IIOImage>();
                 tempList.add(iioImage);
@@ -1279,7 +1242,7 @@ public class Gui extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             currentDirectory = filechooser.getCurrentDirectory().getPath();
             openFile(filechooser.getSelectedFile());
-            scale = 1f;
+            scaleX = scaleY = 1f;
         }
     }//GEN-LAST:event_jMenuItemOpenActionPerformed
 
@@ -1309,13 +1272,14 @@ public class Gui extends javax.swing.JFrame {
         this.setTitle(imageFile.getName() + " - " + APP_NAME);
         toggle = false;
         loadImage();
+        if (imageList == null) {
+            return;
+        }
         displayImage();
         jLabelStatus.setText(null);
         ((JImageLabel) jImageLabel).deselect();
 
-        this.jButtonFitHeight.setEnabled(true);
         this.jButtonFitImage.setEnabled(true);
-        this.jButtonFitWidth.setEnabled(true);
         this.jButtonZoomIn.setEnabled(true);
         this.jButtonZoomOut.setEnabled(true);
 
@@ -1334,12 +1298,13 @@ public class Gui extends javax.swing.JFrame {
     }
 
     void displayImage() {
-        if (imageList != null) {
-            this.jLabelCurIndex.setText(bundle.getString("Page_") + (imageIndex + 1) + " " + bundle.getString("of_") + imageTotal);
-            imageIcon = imageList.get(imageIndex);
-            jImageLabel.setIcon(imageIcon);
-            jImageLabel.revalidate();
-        }
+        this.jLabelCurIndex.setText(bundle.getString("Page_") + (imageIndex + 1) + " " + bundle.getString("of_") + imageTotal);
+        imageIcon = imageList.get(imageIndex);
+        originalW = imageIcon.getIconWidth();
+        originalH = imageIcon.getIconHeight();
+
+        jImageLabel.setIcon(imageIcon);
+        jImageLabel.revalidate();
     }
 
     void setButton() {
@@ -1360,7 +1325,6 @@ public class Gui extends javax.swing.JFrame {
         try {
             iioImageList = ImageIOHelper.getIIOImageList(imageFile);
             imageList = ImageIOHelper.getImageList(iioImageList);
-
             imageTotal = imageList.size();
             imageIndex = 0;
         } catch (RuntimeException re) {
@@ -1504,9 +1468,7 @@ private void jButtonRotateRActionPerformed(java.awt.event.ActionEvent evt) {//GE
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClear;
-    private javax.swing.JButton jButtonFitHeight;
     private javax.swing.JButton jButtonFitImage;
-    private javax.swing.JButton jButtonFitWidth;
     private javax.swing.JButton jButtonNext;
     private javax.swing.JButton jButtonOCR;
     private javax.swing.JButton jButtonOpen;
