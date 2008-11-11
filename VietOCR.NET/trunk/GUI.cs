@@ -61,7 +61,7 @@ namespace VietOCR.NET
         protected string strRegKey = "Software\\VietUnicode\\";
         private bool IsFitForZoomIn = false;
         private bool toggle = false;
-        private const float ZOOM_FACTOR = 1.25;
+        private const float ZOOM_FACTOR = 1.25f;
 
         System.ComponentModel.ComponentResourceManager resources;
 
