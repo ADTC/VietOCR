@@ -521,26 +521,6 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFitImageActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButtonFitHeight">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="&#x2195;"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Fit Height"/>
-                    <Property name="enabled" type="boolean" value="false"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFitHeightActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="jButtonFitWidth">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="&#x2194;"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Fit Width"/>
-                    <Property name="enabled" type="boolean" value="false"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFitWidthActionPerformed"/>
-                  </Events>
-                </Component>
                 <Component class="javax.swing.JButton" name="jButtonZoomIn">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="(+)"/>
