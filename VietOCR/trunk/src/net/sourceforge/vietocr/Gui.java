@@ -924,10 +924,10 @@ public class Gui extends javax.swing.JFrame {
             fitImageChange(originalW, originalH);
             scaleX = scaleY = 1f;
         } else {
-            this.jButtonFitImage.setToolTipText("Real Size");
-            fitImageChange(this.jScrollPane2.getWidth(), this.jScrollPane2.getHeight());
             scaleX = (float)imageIcon.getIconWidth() / (float)this.jScrollPane2.getWidth();
             scaleY = (float)imageIcon.getIconHeight() / (float)this.jScrollPane2.getHeight();
+            this.jButtonFitImage.setToolTipText("Real Size");
+            fitImageChange(this.jScrollPane2.getWidth(), this.jScrollPane2.getHeight());
         }
         toggle ^= true;
         reset = true;
@@ -977,7 +977,7 @@ public class Gui extends javax.swing.JFrame {
         ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonZoomInActionPerformed
 
-    void doChange(final boolean multiply) {
+    void doChange(final boolean isZoomIn) {
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override
@@ -986,7 +986,7 @@ public class Gui extends javax.swing.JFrame {
                     int width = tempImageIcon.getIconWidth();
                     int height = tempImageIcon.getIconHeight();
 
-                    if (multiply) {
+                    if (isZoomIn) {
                         tempImageIcon.setScaledSize((int) (width * ZOOM_FACTOR), (int) (height * ZOOM_FACTOR));
                     } else {
                         tempImageIcon.setScaledSize((int) (width / ZOOM_FACTOR), (int) (height / ZOOM_FACTOR));
@@ -995,12 +995,13 @@ public class Gui extends javax.swing.JFrame {
                 imageIcon = imageList.get(imageIndex);
                 jImageLabel.revalidate();
                 jScrollPane2.repaint();
-                if (multiply) {
-                    scaleX *= ZOOM_FACTOR;
-                    scaleY *= ZOOM_FACTOR;
-                } else {
+                
+                if (isZoomIn) {
                     scaleX /= ZOOM_FACTOR;
                     scaleY /= ZOOM_FACTOR;
+                } else {
+                    scaleX *= ZOOM_FACTOR;
+                    scaleY *= ZOOM_FACTOR;
                 }
             }
         });
@@ -1169,7 +1170,7 @@ public class Gui extends javax.swing.JFrame {
         if (rect != null && jImageLabel.getIcon() != null) {
             try {
                 ImageIcon ii = (ImageIcon) this.jImageLabel.getIcon();
-                BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) (rect.x / scaleX), (int) (rect.y / scaleY), (int) (rect.width / scaleX), (int) (rect.height / scaleY));
+                BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) (rect.x * scaleX), (int) (rect.y * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
                 IIOImage iioImage = new IIOImage(bi, null, null);
                 ArrayList<IIOImage> tempList = new ArrayList<IIOImage>();
                 tempList.add(iioImage);
