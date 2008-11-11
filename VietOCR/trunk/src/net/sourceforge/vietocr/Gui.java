@@ -69,7 +69,7 @@ public class Gui extends javax.swing.JFrame {
     private String selectedUILang;
     public static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
     private boolean toggle = false;
-    private int originalW, originalH;
+    private int originalW,  originalH;
 
     /**
      * Creates new form Gui
@@ -1223,60 +1223,54 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemOCRActionPerformed
 
     void performOCR(final ArrayList<IIOImage> list, final int index) {
-        try {
-            if (this.jComboBoxLang.getSelectedIndex() == -1) {
-                JOptionPane.showMessageDialog(this, bundle.getString("Please_select_a_language."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-            if (this.jImageLabel.getIcon() == null) {
-                JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-            jLabelStatus.setText(bundle.getString("OCR_running..."));
-            getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            getGlassPane().setVisible(true);
+        if (this.jComboBoxLang.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(this, bundle.getString("Please_select_a_language."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        if (this.jImageLabel.getIcon() == null) {
+            JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        jLabelStatus.setText(bundle.getString("OCR_running..."));
+        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        getGlassPane().setVisible(true);
+        this.jButtonOCR.setEnabled(false);
+        this.jMenuItemOCR.setEnabled(false);
+        this.jMenuItemOCRAll.setEnabled(false);
 
-            SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
 
-                @Override
-                public void run() {
-                    try {
-                        OCR ocrEngine = new OCR(tessPath);
+            @Override
+            public void run() {
+                try {
+                    OCR ocrEngine = new OCR(tessPath);
 //                        String result = ocrEngine.recognizeText(imageFile, index, langCodes[jComboBoxLang.getSelectedIndex()]);
-                        String result = ocrEngine.recognizeText(list, index, langCodes[jComboBoxLang.getSelectedIndex()]);
-                        jTextArea1.append(result);
-                    } catch (OutOfMemoryError oome) {
-                        oome.printStackTrace();
-                        JOptionPane.showMessageDialog(null, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
-                    } catch (FileNotFoundException fnfe) {
-                        fnfe.printStackTrace();
-                        JOptionPane.showMessageDialog(null, bundle.getString("An_exception_occurred_in_Tesseract_engine_while_recognizing_this_image."), APP_NAME, JOptionPane.ERROR_MESSAGE);
-                    } catch (IOException ioe) {
-                        ioe.printStackTrace();
-                        JOptionPane.showMessageDialog(null, bundle.getString("Cannot_find_Tesseract._Please_set_its_path."), APP_NAME, JOptionPane.ERROR_MESSAGE);
-                    } catch (RuntimeException re) {
-                        re.printStackTrace();
-                        JOptionPane.showMessageDialog(null, re.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
-                    } catch (Exception exc) {
-                        exc.printStackTrace();
-                    }
-                }
-            });
-
-        } catch (Exception exc) {
-            System.err.println(exc.getMessage());
-        } finally {
-            SwingUtilities.invokeLater(new Runnable() {
-
-                @Override
-                public void run() {
+                    String result = ocrEngine.recognizeText(list, index, langCodes[jComboBoxLang.getSelectedIndex()]);
+                    jTextArea1.append(result);
+                } catch (OutOfMemoryError oome) {
+                    oome.printStackTrace();
+                    JOptionPane.showMessageDialog(null, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
+                } catch (FileNotFoundException fnfe) {
+                    fnfe.printStackTrace();
+                    JOptionPane.showMessageDialog(null, bundle.getString("An_exception_occurred_in_Tesseract_engine_while_recognizing_this_image."), APP_NAME, JOptionPane.ERROR_MESSAGE);
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                    JOptionPane.showMessageDialog(null, bundle.getString("Cannot_find_Tesseract._Please_set_its_path."), APP_NAME, JOptionPane.ERROR_MESSAGE);
+                } catch (RuntimeException re) {
+                    re.printStackTrace();
+                    JOptionPane.showMessageDialog(null, re.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                } finally {
                     jLabelStatus.setText(bundle.getString("OCR_completed."));
                     getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
                     getGlassPane().setVisible(false);
+                    jButtonOCR.setEnabled(true);
+                    jMenuItemOCR.setEnabled(true);
+                    jMenuItemOCRAll.setEnabled(true);
                 }
-            });
-        }
-
+            }
+        });
     }
 
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
@@ -1408,51 +1402,45 @@ private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent 
 }//GEN-LAST:event_jRadioButtonMenuItemVietActionPerformed
 
 private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemScanActionPerformed
-    try {
-        jLabelStatus.setText(bundle.getString("Scanning..."));
-        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        getGlassPane().setVisible(true);
+    jLabelStatus.setText(bundle.getString("Scanning..."));
+    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+    getGlassPane().setVisible(true);
+    jMenuItemScan.setEnabled(false);
+    jButtonScan.setEnabled(false);
 
-        SwingUtilities.invokeLater(new Runnable() {
+    SwingUtilities.invokeLater(new Runnable() {
 
-            @Override
-            public void run() {
+        @Override
+        public void run() {
+            try {
                 WiaScannerAdapter adapter = new WiaScannerAdapter();
-                try {
-                    File tempImageFile = File.createTempFile("tempfile", ".bmp");
+                File tempImageFile = File.createTempFile("tempfile", ".bmp");
 
-                    if (tempImageFile.exists()) {
-                        tempImageFile.delete();
-                    }
-
-                    tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
-                    openFile(tempImageFile);
-                } catch (IOException ioe) {
-                    JOptionPane.showMessageDialog(null, ioe.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
-                } catch (WiaOperationException woe) {
-                    JOptionPane.showMessageDialog(null, woe.getWIAMessage(), woe.getMessage(), JOptionPane.WARNING_MESSAGE);
-                } catch (Exception e) {
-                    String msg = e.getMessage();
-                    if (msg == null || msg.equals("")) {
-                        msg = "Scanner Operation Error.";
-                    }
-                    JOptionPane.showMessageDialog(null, msg, "Scanner Operation Error", JOptionPane.ERROR_MESSAGE);
+                if (tempImageFile.exists()) {
+                    tempImageFile.delete();
                 }
-            }
-        });
-    } catch (Exception exc) {
-        System.err.println(exc.getMessage());
-    } finally {
-        SwingUtilities.invokeLater(new Runnable() {
 
-            @Override
-            public void run() {
+                tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
+                openFile(tempImageFile);
+            } catch (IOException ioe) {
+                JOptionPane.showMessageDialog(null, ioe.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
+            } catch (WiaOperationException woe) {
+                JOptionPane.showMessageDialog(null, woe.getWIAMessage(), woe.getMessage(), JOptionPane.WARNING_MESSAGE);
+            } catch (Exception e) {
+                String msg = e.getMessage();
+                if (msg == null || msg.equals("")) {
+                    msg = "Scanner Operation Error.";
+                }
+                JOptionPane.showMessageDialog(null, msg, "Scanner Operation Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
                 jLabelStatus.setText(bundle.getString("Scanning_completed"));
                 getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
                 getGlassPane().setVisible(false);
+                jMenuItemScan.setEnabled(true);
+                jButtonScan.setEnabled(true);
             }
-        });
-    }
+        }
+    });
 }//GEN-LAST:event_jMenuItemScanActionPerformed
 
 private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonScanActionPerformed
