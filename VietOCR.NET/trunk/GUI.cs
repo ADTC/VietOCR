@@ -61,6 +61,7 @@ namespace VietOCR.NET
         protected string strRegKey = "Software\\VietUnicode\\";
         private bool IsFitForZoomIn = false;
         private bool toggle = false;
+        private const float ZOOM_FACTOR = 1.25;
 
         System.ComponentModel.ComponentResourceManager resources;
 
@@ -142,7 +143,7 @@ namespace VietOCR.NET
                     else
                     {
                         langs[i] = langCodes[i];
-                    }       
+                    }
                 }
             }
         }
@@ -304,8 +305,7 @@ namespace VietOCR.NET
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 openFile(openFileDialog1.FileName);
-                scaleX = 1f;
-                scaleY = 1f;
+                scaleX = scaleY = 1f;
             }
 
         }
@@ -457,11 +457,11 @@ namespace VietOCR.NET
             this.Text = imageFile.Name + " - " + strProgName;
             toggle = false;
             loadImage(imageFile);
-            displayImage();
             if (imageList == null)
             {
                 return;
             }
+            displayImage();
 
             this.toolStripStatusLabel1.Text = null;
             this.pictureBox1.Deselect();
@@ -503,14 +503,11 @@ namespace VietOCR.NET
 
         void displayImage()
         {
-            if (imageList != null)
-            {
-                this.lblCurIndex.Text = resources.GetString("Page_") + (imageIndex + 1) + resources.GetString("_of_") + imageTotal;
-                currentImage = imageList[imageIndex];
-                this.pictureBox1.Image = currentImage;
-                this.pictureBox1.Size = this.pictureBox1.Image.Size;
-                this.pictureBox1.Invalidate();
-            }
+            this.lblCurIndex.Text = resources.GetString("Page_") + (imageIndex + 1) + resources.GetString("_of_") + imageTotal;
+            currentImage = imageList[imageIndex];
+            this.pictureBox1.Image = currentImage;
+            this.pictureBox1.Size = this.pictureBox1.Image.Size;
+            this.pictureBox1.Invalidate();
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -698,8 +695,8 @@ namespace VietOCR.NET
             // Zoom works best if you first fit the image according to its true aspect ratio.
             Fit();
             // Make the PictureBox dimensions larger by 25% to effect the Zoom.
-            this.pictureBox1.Width = Convert.ToInt32(this.pictureBox1.Width * 1.25);
-            this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height * 1.25);
+            this.pictureBox1.Width = Convert.ToInt32(this.pictureBox1.Width * ZOOM_FACTOR);
+            this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height * ZOOM_FACTOR);
             scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
             scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
             this.pictureBox1.Deselect();
@@ -712,8 +709,8 @@ namespace VietOCR.NET
             // StretchImage SizeMode works best for zooming.
             this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             // Make the PictureBox dimensions smaller by 25% to effect the Zoom.
-            this.pictureBox1.Width = Convert.ToInt32(this.pictureBox1.Width / 1.25);
-            this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height / 1.25);
+            this.pictureBox1.Width = Convert.ToInt32(this.pictureBox1.Width / ZOOM_FACTOR);
+            this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height / ZOOM_FACTOR);
             scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
             scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
             this.pictureBox1.Deselect();
