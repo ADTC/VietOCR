@@ -38,6 +38,7 @@ namespace VietOCR.NET
             this.toolStripBtnPrev = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnNext = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnFitImage = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnRealSize = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnZoomIn = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnZoomOut = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnRotateL = new System.Windows.Forms.ToolStripButton();
@@ -144,6 +145,7 @@ namespace VietOCR.NET
             this.toolStripBtnPrev,
             this.toolStripBtnNext,
             this.toolStripBtnFitImage,
+            this.toolStripBtnRealSize,
             this.toolStripBtnZoomIn,
             this.toolStripBtnZoomOut,
             this.toolStripBtnRotateL,
@@ -152,49 +154,56 @@ namespace VietOCR.NET
             // 
             // toolStripBtnPrev
             // 
-            this.toolStripBtnPrev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripBtnPrev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripBtnPrev, "toolStripBtnPrev");
             this.toolStripBtnPrev.Name = "toolStripBtnPrev";
             this.toolStripBtnPrev.Click += new System.EventHandler(this.toolStripBtnPrev_Click);
             // 
             // toolStripBtnNext
             // 
-            this.toolStripBtnNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripBtnNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripBtnNext, "toolStripBtnNext");
             this.toolStripBtnNext.Name = "toolStripBtnNext";
             this.toolStripBtnNext.Click += new System.EventHandler(this.toolStripBtnNext_Click);
             // 
             // toolStripBtnFitImage
             // 
-            this.toolStripBtnFitImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripBtnFitImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripBtnFitImage, "toolStripBtnFitImage");
             this.toolStripBtnFitImage.Name = "toolStripBtnFitImage";
             this.toolStripBtnFitImage.Click += new System.EventHandler(this.toolStripBtnFitImage_Click);
             // 
+            // toolStripBtnRealSize
+            // 
+            this.toolStripBtnRealSize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.toolStripBtnRealSize, "toolStripBtnRealSize");
+            this.toolStripBtnRealSize.Name = "toolStripBtnRealSize";
+            this.toolStripBtnRealSize.Click += new System.EventHandler(this.toolStripBtnRealSize_Click);
+            // 
             // toolStripBtnZoomIn
             // 
-            this.toolStripBtnZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripBtnZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripBtnZoomIn, "toolStripBtnZoomIn");
             this.toolStripBtnZoomIn.Name = "toolStripBtnZoomIn";
             this.toolStripBtnZoomIn.Click += new System.EventHandler(this.toolStripBtnZoomIn_Click);
             // 
             // toolStripBtnZoomOut
             // 
-            this.toolStripBtnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripBtnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripBtnZoomOut, "toolStripBtnZoomOut");
             this.toolStripBtnZoomOut.Name = "toolStripBtnZoomOut";
             this.toolStripBtnZoomOut.Click += new System.EventHandler(this.toolStripBtnZoomOut_Click);
             // 
             // toolStripBtnRotateL
             // 
-            this.toolStripBtnRotateL.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripBtnRotateL.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripBtnRotateL, "toolStripBtnRotateL");
             this.toolStripBtnRotateL.Name = "toolStripBtnRotateL";
             this.toolStripBtnRotateL.Click += new System.EventHandler(this.toolStripBtnRotateL_Click);
             // 
             // toolStripBtnRotateR
             // 
-            this.toolStripBtnRotateR.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripBtnRotateR.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripBtnRotateR, "toolStripBtnRotateR");
             this.toolStripBtnRotateR.Name = "toolStripBtnRotateR";
             this.toolStripBtnRotateR.Click += new System.EventHandler(this.toolStripBtnRotateR_Click);
@@ -489,6 +498,7 @@ namespace VietOCR.NET
         private System.Windows.Forms.ToolStripButton toolStripBtnPrev;
         private System.Windows.Forms.ToolStripButton toolStripBtnNext;
         private System.Windows.Forms.ToolStripButton toolStripBtnFitImage;
+        private System.Windows.Forms.ToolStripButton toolStripBtnRealSize;
         private System.Windows.Forms.ToolStripButton toolStripBtnZoomIn;
         private System.Windows.Forms.ToolStripButton toolStripBtnZoomOut;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
