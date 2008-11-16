@@ -489,7 +489,9 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="jButtonPrev">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="&lt;"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/net/sourceforge/vietocr/icons/prevpage.gif"/>
+                    </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="net/sourceforge/vietocr/Bundle.properties" key="Previous_Page" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
@@ -501,7 +503,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonNext">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="&gt;"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/net/sourceforge/vietocr/icons/nextpage.gif"/>
+                    </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="net/sourceforge/vietocr/Bundle.properties" key="Next_Page" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
@@ -513,7 +517,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonFitImage">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="&#x253c;"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/net/sourceforge/vietocr/icons/fitimage.gif"/>
+                    </Property>
                     <Property name="toolTipText" type="java.lang.String" value="Fit Image"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
@@ -521,9 +527,23 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFitImageActionPerformed"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JButton" name="jButtonRealImage">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/net/sourceforge/vietocr/icons/realsize.gif"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Real Size"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRealImageActionPerformed"/>
+                  </Events>
+                </Component>
                 <Component class="javax.swing.JButton" name="jButtonZoomIn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="(+)"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/net/sourceforge/vietocr/icons/zoomin.gif"/>
+                    </Property>
                     <Property name="toolTipText" type="java.lang.String" value="Zoom In"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
@@ -533,7 +553,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonZoomOut">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="(-)"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/net/sourceforge/vietocr/icons/zoomout.gif"/>
+                    </Property>
                     <Property name="toolTipText" type="java.lang.String" value="Zoom Out"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
@@ -543,7 +565,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonRotateL">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="RL"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/net/sourceforge/vietocr/icons/rotateleft.gif"/>
+                    </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="net/sourceforge/vietocr/Bundle.properties" key="Rotate_Left" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
@@ -558,7 +582,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonRotateR">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="RR"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/net/sourceforge/vietocr/icons/rotateright.gif"/>
+                    </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="net/sourceforge/vietocr/Bundle.properties" key="Rotate_Right" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
