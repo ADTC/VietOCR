@@ -60,7 +60,6 @@ namespace VietOCR.NET
         protected const string strUILang = "UILanguage";
         protected string strRegKey = "Software\\VietUnicode\\";
         private bool IsFitForZoomIn = false;
-        private bool toggle = false;
         private const float ZOOM_FACTOR = 1.25f;
 
         System.ComponentModel.ComponentResourceManager resources;
@@ -427,26 +426,28 @@ namespace VietOCR.NET
 
         private void toolStripBtnFitImage_Click(object sender, EventArgs e)
         {
+            this.toolStripBtnFitImage.Enabled = false;
+            this.toolStripBtnRealSize.Enabled = true;
+
             this.pictureBox1.Deselect();
 
-            if (toggle)
-            {
-                this.toolStripBtnFitImage.ToolTipText = "Fit Image";
-                this.pictureBox1.Dock = DockStyle.None;
-                this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-                scaleX = scaleY = 1f;
-            }
-            else
-            {
-                this.toolStripBtnFitImage.ToolTipText = "Real Size";
-                this.pictureBox1.Dock = DockStyle.Fill;
-                this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
-                scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
-            }
-            toggle ^= true;
+            this.pictureBox1.Dock = DockStyle.Fill;
+            this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
+            scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
         }
 
+        private void toolStripBtnRealSize_Click(object sender, EventArgs e)
+        {
+            this.toolStripBtnFitImage.Enabled = true;
+            this.toolStripBtnRealSize.Enabled = false;
+
+            this.pictureBox1.Deselect();
+
+            this.pictureBox1.Dock = DockStyle.None;
+            this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            scaleX = scaleY = 1f;
+        }
         /// <summary>
         /// Opens image file.
         /// </summary>
@@ -455,7 +456,6 @@ namespace VietOCR.NET
         {
             imageFile = new FileInfo(selectedImageFile);
             this.Text = imageFile.Name + " - " + strProgName;
-            toggle = false;
             loadImage(imageFile);
             if (imageList == null)
             {
