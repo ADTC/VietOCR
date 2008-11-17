@@ -444,10 +444,13 @@ public class Gui extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jButtonPrev = new javax.swing.JButton();
         jButtonNext = new javax.swing.JButton();
+        jSeparator7 = new javax.swing.JToolBar.Separator();
         jButtonFitImage = new javax.swing.JButton();
         jButtonRealImage = new javax.swing.JButton();
+        jSeparator8 = new javax.swing.JToolBar.Separator();
         jButtonZoomIn = new javax.swing.JButton();
         jButtonZoomOut = new javax.swing.JButton();
+        jSeparator9 = new javax.swing.JToolBar.Separator();
         jButtonRotateL = new javax.swing.JButton();
         jButtonRotateR = new javax.swing.JButton();
         jPanelStatus = new javax.swing.JPanel();
@@ -628,6 +631,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButtonNext);
+        jToolBar1.add(jSeparator7);
 
         jButtonFitImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/fitimage.gif"))); // NOI18N
         jButtonFitImage.setToolTipText("Fit Image");
@@ -648,6 +652,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButtonRealImage);
+        jToolBar1.add(jSeparator8);
 
         jButtonZoomIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/zoomin.gif"))); // NOI18N
         jButtonZoomIn.setToolTipText("Zoom In");
@@ -668,6 +673,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButtonZoomOut);
+        jToolBar1.add(jSeparator9);
 
         jButtonRotateL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/rotateleft.gif"))); // NOI18N
         jButtonRotateL.setToolTipText(bundle.getString("Rotate_Left")); // NOI18N
@@ -1441,6 +1447,7 @@ private void jButtonRealImageActionPerformed(java.awt.event.ActionEvent evt) {//
             iioImageList.get(imageIndex).setRenderedImage((BufferedImage) imageIcon.getImage());
             ((JImageLabel) jImageLabel).deselect();
         } catch (OutOfMemoryError oome) {
+            oome.printStackTrace();
             JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -1531,6 +1538,9 @@ private void jButtonRealImageActionPerformed(java.awt.event.ActionEvent evt) {//
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JToolBar.Separator jSeparator7;
+    private javax.swing.JToolBar.Separator jSeparator8;
+    private javax.swing.JToolBar.Separator jSeparator9;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JToolBar jToolBar1;
