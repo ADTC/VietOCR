@@ -40,25 +40,26 @@ namespace VietOCR.NET.Controls
         protected bool resizeLeft, resizeTop, resizeRight, resizeBottom, move;
         int selX, selY, selW, selH;
         int offset;
-        private static Mutex mut = new Mutex();
         Point currentScrollPos;
 
         public ScrollablePictureBox()
         {
             InitializeComponent();
 
-            System.Timers.Timer timer = new System.Timers.Timer();
-            //timer.SynchronizingObject = this;
-            timer.Interval = 500;
-            timer.Elapsed += new System.Timers.ElapsedEventHandler(TimerOnTick);
-            timer.Start();
+            rect = Rectangle.Empty;
 
-            //System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
-            //myTimer.Tick += new EventHandler(TimerOnTick);
+            //System.Timers.Timer timer = new System.Timers.Timer();
+            ////timer.SynchronizingObject = this;
+            //timer.Interval = 500;
+            //timer.Elapsed += new System.Timers.ElapsedEventHandler(TimerOnTick);
+            //timer.Start();
 
-            //// Sets the timer interval to 5 seconds.
-            //myTimer.Interval = 500;
-            //myTimer.Start();
+            System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
+            myTimer.Tick += new EventHandler(TimerOnTick);
+
+            // Sets the timer interval to .5 seconds.
+            myTimer.Interval = 500;
+            myTimer.Start();
 
         }
         // This is the method to run when the timer is raised.
@@ -70,7 +71,12 @@ namespace VietOCR.NET.Controls
             {
                 offset = 0;
             }
-            this.Invalidate();
+    
+            if (rect != Rectangle.Empty)
+            {
+                // redraw only the region
+                this.Invalidate(new Rectangle(rect.X, rect.Y, rect.Width + 1, rect.Height + 1));
+            }
         }
 
         public Rectangle GetRect()
@@ -86,20 +92,17 @@ namespace VietOCR.NET.Controls
 
         protected override void OnPaint(PaintEventArgs pe)
         {
+            // Calling the base class OnPaint
+            base.OnPaint(pe);
+
             // TODO: Add custom paint code here
             if (this.Image == null) return;
 
-            // Wait until it is safe to enter.
-            mut.WaitOne();
-
-            // Calling the base class OnPaint
-            base.OnPaint(pe);
             //Graphics g = (Graphics)pe.Graphics;
             //g.DrawImage(this.Image, this.ClientRectangle);
 
             if (rect != Rectangle.Empty)
             {
-
                 Graphics g = (Graphics)pe.Graphics;
 
                 // Create pen
@@ -120,11 +123,8 @@ namespace VietOCR.NET.Controls
                 g.DrawRectangle(blackPen, rect);
 
                 blackPen.Dispose();
-
             }
 
-            // Release the Mutex.
-            mut.ReleaseMutex();
         }
 
         /// <summary>
