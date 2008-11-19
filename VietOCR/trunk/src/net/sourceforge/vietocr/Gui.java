@@ -44,6 +44,7 @@ public class Gui extends javax.swing.JFrame {
     private File imageFile;
     public static final String APP_NAME = "VietOCR";
     final static boolean MAC_OS_X = System.getProperty("os.name").startsWith("Mac");
+    final static boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
     private final String UTF8 = "UTF-8";
     protected ResourceBundle myResources,  bundle;
     protected final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
@@ -67,7 +68,6 @@ public class Gui extends javax.swing.JFrame {
     private String selectedInputMethod;
     private float scaleX,  scaleY;
     private String selectedUILang;
-    public static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
     private int originalW,  originalH;
     private final float ZOOM_FACTOR = 1.25f;
 
@@ -87,7 +87,7 @@ public class Gui extends javax.swing.JFrame {
             File tessdataDir = new File(tessPath, "tessdata");
             if (!tessdataDir.exists()) {
                 String TESSDATA_PREFIX = System.getenv("TESSDATA_PREFIX");
-                if (TESSDATA_PREFIX == null) {
+                if (TESSDATA_PREFIX == null && !WINDOWS) {
                     TESSDATA_PREFIX = "/usr/local/share/tessdata"; // default path of tessdata on Linux
                 }
                 tessdataDir = new File(TESSDATA_PREFIX);
