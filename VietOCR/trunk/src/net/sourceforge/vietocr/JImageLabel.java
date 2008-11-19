@@ -72,7 +72,9 @@ public class JImageLabel extends JLabel implements MouseMotionListener, MouseLis
                 }
                 count++;
 
-                repaint();
+                if (rect != null) {
+                    repaint(rect.x, rect.y, rect.width + 1, rect.height + 1);
+                }
             }
         };
         new javax.swing.Timer(delay, taskPerformer).start();
