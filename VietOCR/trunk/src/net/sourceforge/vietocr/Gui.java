@@ -442,17 +442,17 @@ public class Gui extends javax.swing.JFrame {
         jImageLabel = new JImageLabel();
         jLabelCurIndex = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
-        jButtonPrev = new javax.swing.JButton();
-        jButtonNext = new javax.swing.JButton();
+        jButtonPrevPage = new javax.swing.JButton();
+        jButtonNextPage = new javax.swing.JButton();
         jSeparator7 = new javax.swing.JToolBar.Separator();
         jButtonFitImage = new javax.swing.JButton();
-        jButtonRealImage = new javax.swing.JButton();
+        jButtonActualSize = new javax.swing.JButton();
         jSeparator8 = new javax.swing.JToolBar.Separator();
         jButtonZoomIn = new javax.swing.JButton();
         jButtonZoomOut = new javax.swing.JButton();
         jSeparator9 = new javax.swing.JToolBar.Separator();
-        jButtonRotateL = new javax.swing.JButton();
-        jButtonRotateR = new javax.swing.JButton();
+        jButtonRotateCCW = new javax.swing.JButton();
+        jButtonRotateCW = new javax.swing.JButton();
         jPanelStatus = new javax.swing.JPanel();
         jLabelStatus = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
@@ -612,28 +612,28 @@ public class Gui extends javax.swing.JFrame {
 
         jToolBar1.setOrientation(1);
 
-        jButtonPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/prevpage.gif"))); // NOI18N
-        jButtonPrev.setToolTipText(bundle.getString("Previous_Page")); // NOI18N
-        jButtonPrev.setEnabled(false);
-        jButtonPrev.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPrevPage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/PrevPage.gif"))); // NOI18N
+        jButtonPrevPage.setToolTipText(bundle.getString("Previous_Page")); // NOI18N
+        jButtonPrevPage.setEnabled(false);
+        jButtonPrevPage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPrevActionPerformed(evt);
+                jButtonPrevPageActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButtonPrev);
+        jToolBar1.add(jButtonPrevPage);
 
-        jButtonNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/nextpage.gif"))); // NOI18N
-        jButtonNext.setToolTipText(bundle.getString("Next_Page")); // NOI18N
-        jButtonNext.setEnabled(false);
-        jButtonNext.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNextPage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/NextPage.gif"))); // NOI18N
+        jButtonNextPage.setToolTipText(bundle.getString("Next_Page")); // NOI18N
+        jButtonNextPage.setEnabled(false);
+        jButtonNextPage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNextActionPerformed(evt);
+                jButtonNextPageActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButtonNext);
+        jToolBar1.add(jButtonNextPage);
         jToolBar1.add(jSeparator7);
 
-        jButtonFitImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/fitimage.gif"))); // NOI18N
+        jButtonFitImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/FitImage.gif"))); // NOI18N
         jButtonFitImage.setToolTipText("Fit Image");
         jButtonFitImage.setEnabled(false);
         jButtonFitImage.addActionListener(new java.awt.event.ActionListener() {
@@ -643,18 +643,18 @@ public class Gui extends javax.swing.JFrame {
         });
         jToolBar1.add(jButtonFitImage);
 
-        jButtonRealImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/realsize.gif"))); // NOI18N
-        jButtonRealImage.setToolTipText("Real Size");
-        jButtonRealImage.setEnabled(false);
-        jButtonRealImage.addActionListener(new java.awt.event.ActionListener() {
+        jButtonActualSize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/ActualSize.gif"))); // NOI18N
+        jButtonActualSize.setToolTipText("Actual Size");
+        jButtonActualSize.setEnabled(false);
+        jButtonActualSize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRealImageActionPerformed(evt);
+                jButtonActualSizeActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButtonRealImage);
+        jToolBar1.add(jButtonActualSize);
         jToolBar1.add(jSeparator8);
 
-        jButtonZoomIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/zoomin.gif"))); // NOI18N
+        jButtonZoomIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/ZoomIn.gif"))); // NOI18N
         jButtonZoomIn.setToolTipText("Zoom In");
         jButtonZoomIn.setEnabled(false);
         jButtonZoomIn.addActionListener(new java.awt.event.ActionListener() {
@@ -664,7 +664,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jToolBar1.add(jButtonZoomIn);
 
-        jButtonZoomOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/zoomout.gif"))); // NOI18N
+        jButtonZoomOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/ZoomOut.gif"))); // NOI18N
         jButtonZoomOut.setToolTipText("Zoom Out");
         jButtonZoomOut.setEnabled(false);
         jButtonZoomOut.addActionListener(new java.awt.event.ActionListener() {
@@ -675,31 +675,31 @@ public class Gui extends javax.swing.JFrame {
         jToolBar1.add(jButtonZoomOut);
         jToolBar1.add(jSeparator9);
 
-        jButtonRotateL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/rotateleft.gif"))); // NOI18N
-        jButtonRotateL.setToolTipText(bundle.getString("Rotate_Left")); // NOI18N
-        jButtonRotateL.setEnabled(false);
-        jButtonRotateL.setFocusable(false);
-        jButtonRotateL.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonRotateL.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonRotateL.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRotateCCW.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/RotateCCW.gif"))); // NOI18N
+        jButtonRotateCCW.setToolTipText(bundle.getString("Rotate_Left")); // NOI18N
+        jButtonRotateCCW.setEnabled(false);
+        jButtonRotateCCW.setFocusable(false);
+        jButtonRotateCCW.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonRotateCCW.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonRotateCCW.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRotateLActionPerformed(evt);
+                jButtonRotateCCWActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButtonRotateL);
+        jToolBar1.add(jButtonRotateCCW);
 
-        jButtonRotateR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/rotateright.gif"))); // NOI18N
-        jButtonRotateR.setToolTipText(bundle.getString("Rotate_Right")); // NOI18N
-        jButtonRotateR.setEnabled(false);
-        jButtonRotateR.setFocusable(false);
-        jButtonRotateR.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonRotateR.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonRotateR.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRotateCW.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/RotateCW.gif"))); // NOI18N
+        jButtonRotateCW.setToolTipText(bundle.getString("Rotate_Right")); // NOI18N
+        jButtonRotateCW.setEnabled(false);
+        jButtonRotateCW.setFocusable(false);
+        jButtonRotateCW.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonRotateCW.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonRotateCW.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRotateRActionPerformed(evt);
+                jButtonRotateCWActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButtonRotateR);
+        jToolBar1.add(jButtonRotateCW);
 
         jPanel1.add(jToolBar1, java.awt.BorderLayout.WEST);
 
@@ -934,7 +934,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void jButtonFitImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFitImageActionPerformed
         this.jButtonFitImage.setEnabled(false);
-        this.jButtonRealImage.setEnabled(true);
+        this.jButtonActualSize.setEnabled(true);
         
         scaleX = (float) imageIcon.getIconWidth() / (float) this.jScrollPane2.getWidth();
         scaleY = (float) imageIcon.getIconHeight() / (float) this.jScrollPane2.getHeight();
@@ -1027,7 +1027,7 @@ public class Gui extends javax.swing.JFrame {
         this.jTextArea1.setText(null);
     }//GEN-LAST:event_jButtonClearActionPerformed
 
-    private void jButtonPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevActionPerformed
+    private void jButtonPrevPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevPageActionPerformed
         imageIndex--;
         if (imageIndex < 0) {
             imageIndex = 0;
@@ -1037,9 +1037,9 @@ public class Gui extends javax.swing.JFrame {
         }
         setButton();
         ((JImageLabel) jImageLabel).deselect();
-    }//GEN-LAST:event_jButtonPrevActionPerformed
+}//GEN-LAST:event_jButtonPrevPageActionPerformed
 
-    private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
+    private void jButtonNextPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextPageActionPerformed
         imageIndex++;
         if (imageIndex > imageTotal - 1) {
             imageIndex = imageTotal - 1;
@@ -1049,7 +1049,7 @@ public class Gui extends javax.swing.JFrame {
         }
         setButton();
         ((JImageLabel) jImageLabel).deselect();
-    }//GEN-LAST:event_jButtonNextActionPerformed
+}//GEN-LAST:event_jButtonNextPageActionPerformed
 
     private void jMenuItemOCRAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRAllActionPerformed
         if (imageFile == null) {
@@ -1293,15 +1293,15 @@ public class Gui extends javax.swing.JFrame {
         this.jButtonZoomOut.setEnabled(true);
 
         if (imageList.size() == 1) {
-            this.jButtonNext.setEnabled(false);
-            this.jButtonPrev.setEnabled(false);
+            this.jButtonNextPage.setEnabled(false);
+            this.jButtonPrevPage.setEnabled(false);
         } else {
-            this.jButtonNext.setEnabled(true);
-            this.jButtonPrev.setEnabled(true);
+            this.jButtonNextPage.setEnabled(true);
+            this.jButtonPrevPage.setEnabled(true);
         }
 
-        this.jButtonRotateL.setEnabled(true);
-        this.jButtonRotateR.setEnabled(true);
+        this.jButtonRotateCCW.setEnabled(true);
+        this.jButtonRotateCW.setEnabled(true);
 
         setButton();
     }
@@ -1318,15 +1318,15 @@ public class Gui extends javax.swing.JFrame {
 
     void setButton() {
         if (imageIndex == 0) {
-            this.jButtonPrev.setEnabled(false);
+            this.jButtonPrevPage.setEnabled(false);
         } else {
-            this.jButtonPrev.setEnabled(true);
+            this.jButtonPrevPage.setEnabled(true);
         }
 
         if (imageIndex == imageList.size() - 1) {
-            this.jButtonNext.setEnabled(false);
+            this.jButtonNextPage.setEnabled(false);
         } else {
-            this.jButtonNext.setEnabled(true);
+            this.jButtonNextPage.setEnabled(true);
         }
     }
 
@@ -1420,24 +1420,24 @@ private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     jMenuItemScanActionPerformed(evt);
 }//GEN-LAST:event_jButtonScanActionPerformed
 
-private void jButtonRotateLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateLActionPerformed
+private void jButtonRotateCCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateCCWActionPerformed
     rotateImage(270);
-}//GEN-LAST:event_jButtonRotateLActionPerformed
+}//GEN-LAST:event_jButtonRotateCCWActionPerformed
 
-private void jButtonRotateRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateRActionPerformed
+private void jButtonRotateCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateCWActionPerformed
     rotateImage(90);
-}//GEN-LAST:event_jButtonRotateRActionPerformed
+}//GEN-LAST:event_jButtonRotateCWActionPerformed
 
-private void jButtonRealImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRealImageActionPerformed
+private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualSizeActionPerformed
     this.jButtonFitImage.setEnabled(true);
-    this.jButtonRealImage.setEnabled(false);
+    this.jButtonActualSize.setEnabled(false);
 
     fitImageChange(originalW, originalH);
     scaleX = scaleY = 1f;
 
     reset = true;
     ((JImageLabel) jImageLabel).deselect();
-}//GEN-LAST:event_jButtonRealImageActionPerformed
+}//GEN-LAST:event_jButtonActualSizeActionPerformed
 
     void rotateImage(int angle) {
         try {
@@ -1488,15 +1488,15 @@ private void jButtonRealImageActionPerformed(java.awt.event.ActionEvent evt) {//
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonActualSize;
     private javax.swing.JButton jButtonClear;
     private javax.swing.JButton jButtonFitImage;
-    private javax.swing.JButton jButtonNext;
+    private javax.swing.JButton jButtonNextPage;
     private javax.swing.JButton jButtonOCR;
     private javax.swing.JButton jButtonOpen;
-    private javax.swing.JButton jButtonPrev;
-    private javax.swing.JButton jButtonRealImage;
-    private javax.swing.JButton jButtonRotateL;
-    private javax.swing.JButton jButtonRotateR;
+    private javax.swing.JButton jButtonPrevPage;
+    private javax.swing.JButton jButtonRotateCCW;
+    private javax.swing.JButton jButtonRotateCW;
     private javax.swing.JButton jButtonScan;
     private javax.swing.JButton jButtonZoomIn;
     private javax.swing.JButton jButtonZoomOut;
