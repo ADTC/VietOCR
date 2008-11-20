@@ -39,13 +39,13 @@ namespace VietOCR.NET
             this.toolStripBtnNext = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripBtnFitImage = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtnRealSize = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnActualSize = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripBtnZoomIn = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnZoomOut = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripBtnRotateL = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtnRotateR = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnRotateCCW = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnRotateCW = new System.Windows.Forms.ToolStripButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -149,13 +149,13 @@ namespace VietOCR.NET
             this.toolStripBtnNext,
             this.toolStripSeparator1,
             this.toolStripBtnFitImage,
-            this.toolStripBtnRealSize,
+            this.toolStripBtnActualSize,
             this.toolStripSeparator2,
             this.toolStripBtnZoomIn,
             this.toolStripBtnZoomOut,
             this.toolStripSeparator3,
-            this.toolStripBtnRotateL,
-            this.toolStripBtnRotateR});
+            this.toolStripBtnRotateCCW,
+            this.toolStripBtnRotateCW});
             this.toolStrip2.Name = "toolStrip2";
             // 
             // toolStripBtnPrev
@@ -184,12 +184,12 @@ namespace VietOCR.NET
             this.toolStripBtnFitImage.Name = "toolStripBtnFitImage";
             this.toolStripBtnFitImage.Click += new System.EventHandler(this.toolStripBtnFitImage_Click);
             // 
-            // toolStripBtnRealSize
+            // toolStripBtnActualSize
             // 
-            this.toolStripBtnRealSize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.toolStripBtnRealSize, "toolStripBtnRealSize");
-            this.toolStripBtnRealSize.Name = "toolStripBtnRealSize";
-            this.toolStripBtnRealSize.Click += new System.EventHandler(this.toolStripBtnRealSize_Click);
+            this.toolStripBtnActualSize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.toolStripBtnActualSize, "toolStripBtnActualSize");
+            this.toolStripBtnActualSize.Name = "toolStripBtnActualSize";
+            this.toolStripBtnActualSize.Click += new System.EventHandler(this.toolStripBtnActualSize_Click);
             // 
             // toolStripSeparator2
             // 
@@ -215,19 +215,19 @@ namespace VietOCR.NET
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
             // 
-            // toolStripBtnRotateL
+            // toolStripBtnRotateCCW
             // 
-            this.toolStripBtnRotateL.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.toolStripBtnRotateL, "toolStripBtnRotateL");
-            this.toolStripBtnRotateL.Name = "toolStripBtnRotateL";
-            this.toolStripBtnRotateL.Click += new System.EventHandler(this.toolStripBtnRotateL_Click);
+            this.toolStripBtnRotateCCW.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.toolStripBtnRotateCCW, "toolStripBtnRotateCCW");
+            this.toolStripBtnRotateCCW.Name = "toolStripBtnRotateCCW";
+            this.toolStripBtnRotateCCW.Click += new System.EventHandler(this.toolStripBtnRotateCCW_Click);
             // 
-            // toolStripBtnRotateR
+            // toolStripBtnRotateCW
             // 
-            this.toolStripBtnRotateR.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.toolStripBtnRotateR, "toolStripBtnRotateR");
-            this.toolStripBtnRotateR.Name = "toolStripBtnRotateR";
-            this.toolStripBtnRotateR.Click += new System.EventHandler(this.toolStripBtnRotateR_Click);
+            this.toolStripBtnRotateCW.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.toolStripBtnRotateCW, "toolStripBtnRotateCW");
+            this.toolStripBtnRotateCW.Name = "toolStripBtnRotateCW";
+            this.toolStripBtnRotateCW.Click += new System.EventHandler(this.toolStripBtnRotateCW_Click);
             // 
             // textBox1
             // 
@@ -518,7 +518,7 @@ namespace VietOCR.NET
         private System.Windows.Forms.ToolStripButton toolStripBtnPrev;
         private System.Windows.Forms.ToolStripButton toolStripBtnNext;
         private System.Windows.Forms.ToolStripButton toolStripBtnFitImage;
-        private System.Windows.Forms.ToolStripButton toolStripBtnRealSize;
+        private System.Windows.Forms.ToolStripButton toolStripBtnActualSize;
         private System.Windows.Forms.ToolStripButton toolStripBtnZoomIn;
         private System.Windows.Forms.ToolStripButton toolStripBtnZoomOut;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
@@ -528,8 +528,8 @@ namespace VietOCR.NET
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private VietOCR.NET.Controls.ScrollablePictureBox pictureBox1;
-        private System.Windows.Forms.ToolStripButton toolStripBtnRotateL;
-        private System.Windows.Forms.ToolStripButton toolStripBtnRotateR;
+        private System.Windows.Forms.ToolStripButton toolStripBtnRotateCCW;
+        private System.Windows.Forms.ToolStripButton toolStripBtnRotateCW;
         private System.Windows.Forms.ToolStripMenuItem scanToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripBtnScan;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
