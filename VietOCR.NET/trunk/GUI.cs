@@ -427,7 +427,7 @@ namespace VietOCR.NET
         private void toolStripBtnFitImage_Click(object sender, EventArgs e)
         {
             this.toolStripBtnFitImage.Enabled = false;
-            this.toolStripBtnRealSize.Enabled = true;
+            this.toolStripBtnActualSize.Enabled = true;
 
             this.pictureBox1.Deselect();
 
@@ -437,10 +437,10 @@ namespace VietOCR.NET
             scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
         }
 
-        private void toolStripBtnRealSize_Click(object sender, EventArgs e)
+        private void toolStripBtnActualSize_Click(object sender, EventArgs e)
         {
             this.toolStripBtnFitImage.Enabled = true;
-            this.toolStripBtnRealSize.Enabled = false;
+            this.toolStripBtnActualSize.Enabled = false;
 
             this.pictureBox1.Deselect();
 
@@ -469,8 +469,8 @@ namespace VietOCR.NET
             this.toolStripBtnFitImage.Enabled = true;
             this.toolStripBtnZoomIn.Enabled = true;
             this.toolStripBtnZoomOut.Enabled = true;
-            this.toolStripBtnRotateL.Enabled = true;
-            this.toolStripBtnRotateR.Enabled = true;
+            this.toolStripBtnRotateCCW.Enabled = true;
+            this.toolStripBtnRotateCW.Enabled = true;
 
             if (imageList.Count == 1)
             {
@@ -668,7 +668,7 @@ namespace VietOCR.NET
             }
         }
 
-        private void toolStripBtnRotateL_Click(object sender, EventArgs e)
+        private void toolStripBtnRotateCCW_Click(object sender, EventArgs e)
         {
             // Rotating 270 degrees is equivalent to rotating -90 degrees.
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
@@ -678,7 +678,7 @@ namespace VietOCR.NET
             this.pictureBox1.Refresh();
         }
 
-        private void toolStripBtnRotateR_Click(object sender, EventArgs e)
+        private void toolStripBtnRotateCW_Click(object sender, EventArgs e)
         {
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
             imageList[imageIndex] = this.pictureBox1.Image;
