@@ -271,7 +271,7 @@
     <value>0</value>
   </data>
   <metadata name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>308, 17</value>
+    <value>0, 0</value>
   </metadata>
   <data name="toolStrip2.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -296,9 +296,6 @@
   </data>
   <data name="toolStripBtnPrev.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
-  </data>
-  <data name="toolStripBtnPrev.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
   </data>
   <data name="toolStripBtnPrev.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 24</value>
@@ -328,9 +325,6 @@
   <data name="toolStripBtnNext.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
   </data>
-  <data name="toolStripBtnNext.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
   <data name="toolStripBtnNext.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 24</value>
   </data>
@@ -346,24 +340,18 @@
   <data name="toolStripBtnFitImage.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="toolStripBtnFitImage.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8.25pt</value>
-  </data>
   <data name="toolStripBtnFitImage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAN1JREFUOE9jfPfp
-        938GagKQgdTEDNQ0DOxbmhrIaDLzPxiH7CQYDCA1MPXIjkJxIUiBvPdSgobBDNCLWAM2FLeBUJcZRq35
-        X1aHH4PUgAxC9w3WMAQZVnXqP14MUoMt/HEauPXR//+zL975v+Hej/8gNjom2cB771//V2uV/m87yez/
-        q28//n/4+R8Fk2xgzGr3/45zNcEYxP766zOYrt2T8//Xn5/gMCbJy4k7bf/jwqm7nUg3sPFK4H98mCgX
-        wpIA1ZKNgMMCkhI2KBPgT9jUznrUKChoW9oMShcCAEDIOoJcm2+PAAAAAElFTkSuQmCC
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAALtJREFUOE9jYBgF
+        VA0BLrnG/yDMaLn8PyGDQWpg6nGqBSlQsJlE0DCYAXpec8CG4jQQ5jKQoZHJ0/FimMXE+IYBZFjG/v94
+        MUgNoWCBy4MUr7j653/zkYv/Z177A2ajY5INvPvo7X/2fLb/ahUy/19+/oOBSTbQcZou2DAQBrHff34P
+        ppNWBfz/9+8fOHxJ8rLLGtX/+DDJBiadMPmPDxNlINWTDav+FJISNigt4k3YVM96RMfaqELkEAAAEij5
+        OMZXibwAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="toolStripBtnFitImage.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
-  </data>
-  <data name="toolStripBtnFitImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
   </data>
   <data name="toolStripBtnFitImage.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 24</value>
@@ -374,25 +362,25 @@
   <data name="toolStripBtnFitImage.ToolTipText" xml:space="preserve">
     <value>Fit Image</value>
   </data>
-  <data name="toolStripBtnRealSize.Enabled" type="System.Boolean, mscorlib">
+  <data name="toolStripBtnActualSize.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="toolStripBtnRealSize.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="toolStripBtnActualSize.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        R0lGODlhFAAUAPQAAHZ+rO7y+wE0mRBAoB9LpZWr16S33cLP6tHb8HrK//D5/7Xi/7De+JvR3Or2+N7v
-        6z2SNiaFG0GdKVyrR328bPX682G5PWW7Qvr8+YHUUQAAAAAAAAAAAAAAAAAAAAAAACwAAAAAFAAUAAAF
-        X2AgjmRpnmiqrmxqCDDSjodwzECu7yqQ/MAfAHUDLBqMhVI5vJVsgEcE4lBYFYDDwCQgACYSyaQyoWAA
-        BAH3ALC435ZLdlsqZu74exO16w9ZBQNOMy8CAzIziYqLjCchADs=
+        R0lGODlhFAAUAPQAAK6z0AoegVljlyA8kp2ozQUvlMrU6t3i7enz/KjV/Gi//5nW/IPE0e/z7wdvBiZ4
+        HEGWLWKqUESsJWLINP7+/v///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABUALAAA
+        AAAUABQAAAVdYCWOZGmeaKqubAoE8NGORmDMQq7vqqD8wJ8AdRMkGIuEUjm8lWyCg+OBqFYFhoIpMBBA
+        Hg9IAxKhCAaBrUEgabvbWG2pOKnb603Ubj9kEQpOMy8BBTIzh4iJiichADs=
 </value>
   </data>
-  <data name="toolStripBtnRealSize.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+  <data name="toolStripBtnActualSize.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
   </data>
-  <data name="toolStripBtnRealSize.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripBtnActualSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 24</value>
   </data>
-  <data name="toolStripBtnRealSize.ToolTipText" xml:space="preserve">
-    <value>Real Size</value>
+  <data name="toolStripBtnActualSize.ToolTipText" xml:space="preserve">
+    <value>Actual Size</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 6</value>
@@ -403,23 +391,17 @@
   <data name="toolStripBtnZoomIn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAfRJREFUOE+tlG9P
-        UmEYxvUD9THaetHWx6i3rXrV1uxF63VbWwsViVDnH2Dl5E/kETfQ1cCJCsGBc0QDEVA8h8gJJb+ecxoN
-        RoOj49muF2d79jvXdd/3c4/X6r8YG+UxgKPU2ChhZlorwOz3nyz7FWxLMpNuBbtHxh04IKXqfemGAuOp
-        c+xumdB2hWi5iaS1CRSbvI9UmXLniCVrPdCBQMOZbSmDWrnAOF+qEDgB7xFIOizLLWyLGYx7naQDgZ8i
-        JeY3ChSvIF2DV4kGtx5H2WpCuA6bl+AIHeEJqtaArpUDgoULJOHMgHWAC0qD9VqLbeFaKjXN2lpyOO1R
-        WdfbeA5h/H7MdNctWQATV22zUZaAc6t5Pu7pBE9hMl7HvqObwHiuYqokgJGTBjPerDWg9LWMTfx98wf4
-        RDP8x3UTKEpHW0iUFqc/QyBaHA7UahqZZIqpxV3erhYIayKeAKSF8kKiR+wopzg/5IZ32YD9jj7icuEe
-        b147eOdNC6dpZtbyrClnSNkz5nxZXAKWkLXBc9iBtWZvs/HkLq6Jl+xnzgnHqsyuKEx7VeZ9efO7e/7+
-        25Q+2LMXhAKpay2Pf4M9CljPcshnk2jOO39j3sBZX+T9byoTDx/gePqcz77da8Xs3lg9b/m4rLOXPLwx
-        zPI+tLIzO3f+ALn4cYST9IhjAAAAAElFTkSuQmCC
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAVlJREFUOE/tk81K
+        w0AUhfM2PoLP0IUbBd+g4NKtK1cqUnDTIq1QUFBsNyJYKurGhWT8wY00bRJxI0jaiiAI/tB0jpwLU2wQ
+        Mm1dGhgShrlfzv1mxnH+n6SBp/Y7Ti8jbO41sLJ1J2OteAPOj2zLC54FRED5ooN61EPFi7G+H8rcdaNr
+        D2UCwk7ceylqxUA16qPUjOVdvNKjJTVtdt5iaK1RD/QASOjZl5ak5cqtXUqmY5ssNAB+/xxMSqdWLrmQ
+        QBZld3w4M+dDgwoItwaahATSY3IQyE2yBtIhF7OILbt9DUKMU3qtqra9Q+4yj0auFg28EWigBPOHD48v
+        6Q4/g0N81OaQzxcEurzty/ljSiZmMsLYReqGEIbdaYSLUyjMZ6DcUPwRbG4Kj4rVTUnCNpZKdoW/xfxT
+        2KvXHGpzomRyT1s+VhdmxdnEMNO+UgpHB8fjO0vd7jEXfAMvl8cnRS0ANgAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="toolStripBtnZoomIn.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
-  </data>
-  <data name="toolStripBtnZoomIn.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
   </data>
   <data name="toolStripBtnZoomIn.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 24</value>
@@ -436,23 +418,18 @@
   <data name="toolStripBtnZoomOut.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAdhJREFUOE+tlNtO
-        GlEUhvXJ+g72BUzapkkv9QXsbe/au2qlGE1GUikICIj25AHFgpUUYjMjzggWSW0o0kCDWL6uPRdEpdMB
-        607+yRyyv1nr32ut4Wq9zdBtLgW8TQ25wYxSgzepCrOhAlP+ApOvdCZ9edT7v+39JzCr19CWDvEG9gl9
-        PuVDvUPcauKJl/C8Nkjnqz1QR6CKYD5q8i79FbWsXxA7gbA8vj2D+VyDFxLt9Ugdge/Tp2iJI378huYF
-        bJRhtQrBIiweQ7IJ04ljfBH9SpSOQC1mEdr9zk5DAIUWmQ49Wj1p2Z5e9tIROB04JPSlTkTSfBwuM/ww
-        fUUFsSFz0bEPqi+gFrUI7lZZkTTXsqUeVQSYqg0QofLQGzbZlAOIiH+fBGCK6iKxlXNRNPutfw/V6c0E
-        dGaTNbbEx1QbdIEIG/mHpHnOy4BB/qDmnnJDT3AWvc+ctsSUL8dziXSl2GKv3bHTjEtNKtjaTtm9DhWM
-        2AilJ3fwjj9iO2OyvFnG4ze6nRKUcuqrUy7DFsYeMPcsiFn8OVCvd8umB/bUPzDMnlzqUrEMiN+107Qj
-        uyGsC8ztywCYGMU/du+/YF2gullPfmQ5tn6jNPvqFLc56fTddcAOCv4DtJV4MWCd8csAAAAASUVORK5C
-        YII=
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAW9JREFUOE/tkj1L
+        w1AUhvtnXB38HTqIODg5iDj4A1wEQVApBT8W0ULBQbFZtGAR1EEFraJUJDRN68dSkDRqqVBU1CSvvqfc
+        EqSY1IKTgcPlcm+ePOc9iUT+n+8J3JVfkEhmMRXXG8X9bamCltM6y91jZukc2kkZ29YHNMtF0nAQS1sC
+        53loKM0IUyYKuJx3BMyV57wXCrqTucZC6gamA2RKHsaO39HRu4m9N0+AXKPrVxJHKODiWk7a48uEKaAy
+        zLh1MFsPBeRF1Vqk50Ds/CXmX9DQQBomjmyBTh8+ShG4r5elCGSuoYG7p/VJqmFohi1Az/MaFVu9ALMO
+        bNl1KyjqWZnixEpBLNkei2Z2zRFLAgOnTNhrug/Pc50Yn5wXKIsTpSWLIEZiFB9+tvPDUgNdmB0alZfY
+        PgGMgCv3LZkp2MbWZXA+zQJsZvZrGD/wZOQls7bNlK1pFjDc343o4AjaMvO3X61VQXDgP/XXFz4BHZ+/
+        GN/ia1wAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="toolStripBtnZoomOut.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
-  </data>
-  <data name="toolStripBtnZoomOut.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
   </data>
   <data name="toolStripBtnZoomOut.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 24</value>
@@ -466,51 +443,51 @@
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 6</value>
   </data>
-  <data name="toolStripBtnRotateL.Enabled" type="System.Boolean, mscorlib">
+  <data name="toolStripBtnRotateCCW.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="toolStripBtnRotateL.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="toolStripBtnRotateCCW.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        R0lGODlhFAAUAPQAAO7y+z1kskxwuVt8vrPD4x9Ysi5itQFEqQFKrwFXvAFTuAFdwgFav+Dq7NHi3ZW+
-        noa2jnitftXr1z2KQAFnARBvER94ILvlsZrbf2fMNG/OQYDUWQAAAAAAAAAAAAAAACwAAAAAFAAUAAAF
-        TSAgjmRpnmiqrmzrlsE7iUYyEOxDAQKDLAqcyrIDIBCAwkEFoewuAIZokGpUnICMBiNZRZy7jDizgZ4c
-        V+x4vO2SwOr12v2q2+/4/CsEADs=
+        R0lGODlhFAAUAPQAAOfn6VVopy5KnGF2swUvlEBgrgE5p7nG2wFMASFiIkB4QH+lf5m3me/z79nu1Uu9
+        HlbBLI/Wc7vmqnDLS////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABQALAAA
+        AAAUABQAAAVMICWOZGmeaKqubOu+avEqomAMB8sgVGAQBkNOleBRCASKIJna8SQUg2iQaiCulAck4lgt
+        rryH+DGBngDg8Fi87ZLS6vXYDavb73hVCAA7
 </value>
   </data>
-  <data name="toolStripBtnRotateL.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+  <data name="toolStripBtnRotateCCW.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
   </data>
-  <data name="toolStripBtnRotateL.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripBtnRotateCCW.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 24</value>
   </data>
-  <data name="toolStripBtnRotateL.Text" xml:space="preserve">
-    <value>RL</value>
+  <data name="toolStripBtnRotateCCW.Text" xml:space="preserve">
+    <value>RCCW</value>
   </data>
-  <data name="toolStripBtnRotateL.ToolTipText" xml:space="preserve">
-    <value>Rotate Left</value>
+  <data name="toolStripBtnRotateCCW.ToolTipText" xml:space="preserve">
+    <value>Rotate Counterclockwise</value>
   </data>
-  <data name="toolStripBtnRotateR.Enabled" type="System.Boolean, mscorlib">
+  <data name="toolStripBtnRotateCW.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="toolStripBtnRotateR.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="toolStripBtnRotateCW.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        R0lGODlhFAAUAPQAAODn9u7y+z1kskxwuVt8vrPD4x9Ysi5itQFEqQFKrwFXvAFTuAFdwgFav+Dq7KTH
-        rZW+nnitftXr11ubXwFnARBvER94ILvlsZrbf2fMNG/OQYDUWQAAAAAAAAAAAAAAACwAAAAAFAAUAAAF
-        T2AgjmRpnmiqrmzrksIrFoRyiBFbLEzSDAHKY4UwBBKJAIBiWRFEjcAlSIGwJBhNhlpxpC6bjHhLKedK
-        WO1YTKV0SZK1vE2ZyO74vH6/CgEAOw==
+        R0lGODlhFAAUAPQAAFVopy5KnGF2swUvlEBgrgE5p7nG2+nz/AFMASFiImCPYH+lf5m3ma/Gr+/z79nu
+        1Uu9HlbBLI/Wc7vmqnDLS////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABUALAAA
+        AAAUABQAAAVMYCWOZGmeaKqubOuSxCsaQhGIC2sUxVAAFURjNbgNBpUDIrESiAqVSRDBYD0kEcgU4UhN
+        KJCwFkHOla5ZcXjLJT3UcLZCRq/b7/hVCAA7
 </value>
   </data>
-  <data name="toolStripBtnRotateR.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+  <data name="toolStripBtnRotateCW.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
   </data>
-  <data name="toolStripBtnRotateR.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripBtnRotateCW.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 24</value>
   </data>
-  <data name="toolStripBtnRotateR.Text" xml:space="preserve">
-    <value>RR</value>
+  <data name="toolStripBtnRotateCW.Text" xml:space="preserve">
+    <value>RCW</value>
   </data>
-  <data name="toolStripBtnRotateR.ToolTipText" xml:space="preserve">
-    <value>Rotate Right</value>
+  <data name="toolStripBtnRotateCW.ToolTipText" xml:space="preserve">
+    <value>Rotate Clockwise</value>
   </data>
   <data name="toolStrip2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -615,8 +592,38 @@
     <value>0</value>
   </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>188, 17</value>
+    <value>0, 0</value>
   </metadata>
+  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>792, 31</value>
+  </data>
+  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 27</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
   <data name="openToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+O</value>
   </data>
@@ -650,11 +657,11 @@
   <data name="quitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 27</value>
+  <data name="commandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 27</value>
   </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>File</value>
+  <data name="commandToolStripMenuItem.Text" xml:space="preserve">
+    <value>Command</value>
   </data>
   <data name="oCRToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 28</value>
@@ -677,11 +684,11 @@
   <data name="postprocessToolStripMenuItem.Text" xml:space="preserve">
     <value>Post-process</value>
   </data>
-  <data name="commandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 27</value>
+  <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 27</value>
   </data>
-  <data name="commandToolStripMenuItem.Text" xml:space="preserve">
-    <value>Command</value>
+  <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="wordWrapToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>195, 28</value>
@@ -695,11 +702,11 @@
   <data name="fontToolStripMenuItem.Text" xml:space="preserve">
     <value>Font...</value>
   </data>
-  <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 27</value>
+  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 27</value>
   </data>
-  <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Settings</value>
+  <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
+    <value>Help</value>
   </data>
   <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>262, 28</value>
@@ -716,48 +723,9 @@
   <data name="aboutToolStripMenuItem2.Text" xml:space="preserve">
     <value>About VietOCR.NET</value>
   </data>
-  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 27</value>
-  </data>
-  <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
-    <value>Help</value>
-  </data>
-  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>792, 31</value>
-  </data>
-  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>695, 17</value>
+    <value>0, 544</value>
   </metadata>
-  <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 17</value>
-  </data>
-  <data name="toolStripProgressBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 16</value>
-  </data>
-  <data name="toolStripProgressBar1.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 544</value>
   </data>
@@ -782,9 +750,42 @@
   <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 17</value>
+  </data>
+  <data name="toolStripProgressBar1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 16</value>
+  </data>
+  <data name="toolStripProgressBar1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>587, 17</value>
+    <value>0, 31</value>
   </metadata>
+  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 31</value>
+  </data>
+  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>792, 31</value>
+  </data>
+  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="toolStrip1.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="toolStripBtnOpen.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -884,30 +885,6 @@
   <data name="toolStripLabel1.Text" xml:space="preserve">
     <value>OCR Language</value>
   </data>
-  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 31</value>
-  </data>
-  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>792, 31</value>
-  </data>
-  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="toolStrip1.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>416, 17</value>
   </metadata>
@@ -950,10 +927,10 @@
   <data name="&gt;&gt;toolStripBtnFitImage.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripBtnRealSize.Name" xml:space="preserve">
-    <value>toolStripBtnRealSize</value>
+  <data name="&gt;&gt;toolStripBtnActualSize.Name" xml:space="preserve">
+    <value>toolStripBtnActualSize</value>
   </data>
-  <data name="&gt;&gt;toolStripBtnRealSize.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripBtnActualSize.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
@@ -980,16 +957,16 @@
   <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripBtnRotateL.Name" xml:space="preserve">
-    <value>toolStripBtnRotateL</value>
+  <data name="&gt;&gt;toolStripBtnRotateCCW.Name" xml:space="preserve">
+    <value>toolStripBtnRotateCCW</value>
   </data>
-  <data name="&gt;&gt;toolStripBtnRotateL.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripBtnRotateCCW.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripBtnRotateR.Name" xml:space="preserve">
-    <value>toolStripBtnRotateR</value>
+  <data name="&gt;&gt;toolStripBtnRotateCW.Name" xml:space="preserve">
+    <value>toolStripBtnRotateCW</value>
   </data>
-  <data name="&gt;&gt;toolStripBtnRotateR.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripBtnRotateCW.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
