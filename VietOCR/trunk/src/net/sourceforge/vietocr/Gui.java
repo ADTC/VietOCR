@@ -676,7 +676,7 @@ public class Gui extends javax.swing.JFrame {
         jToolBar1.add(jSeparator9);
 
         jButtonRotateCCW.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/RotateCCW.gif"))); // NOI18N
-        jButtonRotateCCW.setToolTipText(bundle.getString("Rotate_Left")); // NOI18N
+        jButtonRotateCCW.setToolTipText(bundle.getString("Rotate_CCW")); // NOI18N
         jButtonRotateCCW.setEnabled(false);
         jButtonRotateCCW.setFocusable(false);
         jButtonRotateCCW.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -689,7 +689,7 @@ public class Gui extends javax.swing.JFrame {
         jToolBar1.add(jButtonRotateCCW);
 
         jButtonRotateCW.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/RotateCW.gif"))); // NOI18N
-        jButtonRotateCW.setToolTipText(bundle.getString("Rotate_Right")); // NOI18N
+        jButtonRotateCW.setToolTipText(bundle.getString("Rotate_CW")); // NOI18N
         jButtonRotateCW.setEnabled(false);
         jButtonRotateCW.setFocusable(false);
         jButtonRotateCW.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
