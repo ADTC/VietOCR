@@ -60,19 +60,21 @@ public class JImageLabel extends JLabel implements MouseMotionListener, MouseLis
 
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if (count % modulus == 0) {
-                    bs = bs1;
-                } else if (count % modulus == 1) {
-                    bs = bs2;
-                } else if (count % modulus == 2) {
-                    bs = bs3;
-                } else if (count % modulus == 3) {
-                    bs = bs4;
-                    count = 0;
-                }
-                count++;
-
                 if (rect != null) {
+                    int mod = count % modulus;
+
+                    if (mod == 0) {
+                        bs = bs1;
+                    } else if (mod == 1) {
+                        bs = bs2;
+                    } else if (mod == 2) {
+                        bs = bs3;
+                    } else if (mod == 3) {
+                        bs = bs4;
+                        count = 0;
+                    }
+                    count++;
+
                     repaint(rect.x, rect.y, rect.width + 1, rect.height + 1);
                 }
             }
