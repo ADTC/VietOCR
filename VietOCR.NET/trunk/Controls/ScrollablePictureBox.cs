@@ -65,15 +65,15 @@ namespace VietOCR.NET.Controls
         // This is the method to run when the timer is raised.
         private void TimerOnTick(Object myObject, EventArgs myEventArgs)
         {
-            offset += 3;
-
-            if (offset > 9)
-            {
-                offset = 0;
-            }
-    
             if (rect != Rectangle.Empty)
             {
+                offset += 3;
+
+                if (offset > 9)
+                {
+                    offset = 0;
+                }
+
                 // redraw only the region
                 this.Invalidate(new Rectangle(rect.X, rect.Y, rect.Width + 1, rect.Height + 1));
             }
