@@ -30,11 +30,13 @@ subdirectory. Trên Linux, điều này có khác biệt vì make install Tesser
 executable binary được tạo và language data trong các directory khác nhau, 
 <tt>/usr/local/bin</tt> và <tt>/usr/local/share/tessdata</tt>, trong tuần tự đó. VietOCR giả 
 định rằng chúng trong cùng directory; do đó, để cho chương trình hoạt động đúng, 
-bạn sẽ cần tạo một soft link tới <tt>tessdata</tt> trong cùng directory mà 
+bạn có thể cần tạo một soft link tới <tt>tessdata</tt> trong cùng directory mà 
 tesseract executable nằm trong, như sau:</p>
 <blockquote>
 	<p><tt>ln -s /usr/local/share/tessdata /usr/local/bin/tessdata</tt></p>
 </blockquote>
+<p>Ngoài cách trên, bạn cũng có thể cho VietOCR biết địa điểm của <tt>tessdata</tt> 
+qua environment variable TESSDATA_PREFIX.</p>
 <p>Hỗ trợ quét văn bản được cung cấp qua Windows Image Acquisition Library 
 v2.0, thư viện này đòi hỏi Windows XP Service Pack 1 (SP1) hoặc mới hơn. Để cài 
 đặt 
