@@ -1285,6 +1285,9 @@ public class Gui extends javax.swing.JFrame {
             return;
         }
         displayImage();
+        originalW = imageIcon.getIconWidth();
+        originalH = imageIcon.getIconHeight();
+
         jLabelStatus.setText(null);
         ((JImageLabel) jImageLabel).deselect();
 
@@ -1309,8 +1312,6 @@ public class Gui extends javax.swing.JFrame {
     void displayImage() {
         this.jLabelCurIndex.setText(bundle.getString("Page_") + (imageIndex + 1) + " " + bundle.getString("of_") + imageTotal);
         imageIcon = imageList.get(imageIndex);
-        originalW = imageIcon.getIconWidth();
-        originalH = imageIcon.getIconHeight();
 
         jImageLabel.setIcon(imageIcon);
         jImageLabel.revalidate();
