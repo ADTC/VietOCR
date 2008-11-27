@@ -1400,10 +1400,11 @@ private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     jMenuItemScan.setEnabled(false);
     jButtonScan.setEnabled(false);
 
-    SwingWorker worker = new SwingWorker<File, Void>() {
+    SwingUtilities.invokeLater(new Runnable() {
 
-            @Override
-            protected File doInBackground() throws Exception {
+        @Override
+        public void run() {
+            try {
                 WiaScannerAdapter adapter = new WiaScannerAdapter();
                 File tempImageFile = File.createTempFile("tempfile", ".bmp");
 
@@ -1412,90 +1413,26 @@ private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 }
 
                 tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
-//                openFile(tempImageFile);
-                return tempImageFile;
-            }
-
-            @Override
-            protected void done() {
-                try {
-                    File tempImageFile = get();
-                     openFile(tempImageFile);
-                } catch (OutOfMemoryError oome) {
-                    oome.printStackTrace();
-                    JOptionPane.showMessageDialog(null, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
-                } catch (InterruptedException ignore) {
-                    ignore.printStackTrace();
-                } catch (java.util.concurrent.ExecutionException e) {
-                    String why = null;
-                    String title = APP_NAME;
-                    Throwable cause = e.getCause();
-                    if (cause != null) {
-                        if (cause instanceof WiaOperationException) {
-                            why = ((WiaOperationException)cause).getWIAMessage();
-                            title = ((WiaOperationException)cause).getMessage();
-                        } else if (cause instanceof FileNotFoundException) {
-                            why = bundle.getString("An_exception_occurred_in_Tesseract_engine_while_recognizing_this_image.");
-                        } else {
-                            why = cause.getMessage();
-                        }
-                    } else {
-                        why = e.getMessage();
-                    }
-                    e.printStackTrace();
-                    System.err.println(why);
-                    JOptionPane.showMessageDialog(null, why, title, JOptionPane.ERROR_MESSAGE);
-                } catch (RuntimeException re) {
-                    re.printStackTrace();
-                    JOptionPane.showMessageDialog(null, re.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
-                } catch (Exception exc) {
-                    exc.printStackTrace();
-                } finally {
+                openFile(tempImageFile);
+            } catch (IOException ioe) {
+                JOptionPane.showMessageDialog(null, ioe.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
+            } catch (WiaOperationException woe) {
+                JOptionPane.showMessageDialog(null, woe.getWIAMessage(), woe.getMessage(), JOptionPane.WARNING_MESSAGE);
+            } catch (Exception e) {
+                String msg = e.getMessage();
+                if (msg == null || msg.equals("")) {
+                    msg = "Scanner Operation Error.";
+                }
+                JOptionPane.showMessageDialog(null, msg, "Scanner Operation Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
                 jLabelStatus.setText(bundle.getString("Scanning_completed"));
                 getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
                 getGlassPane().setVisible(false);
                 jMenuItemScan.setEnabled(true);
                 jButtonScan.setEnabled(true);
-                }
             }
-        };
-
-        worker.execute();
-
-
-//    SwingUtilities.invokeLater(new Runnable() {
-//
-//        @Override
-//        public void run() {
-//            try {
-//                WiaScannerAdapter adapter = new WiaScannerAdapter();
-//                File tempImageFile = File.createTempFile("tempfile", ".bmp");
-//
-//                if (tempImageFile.exists()) {
-//                    tempImageFile.delete();
-//                }
-//
-//                tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
-//                openFile(tempImageFile);
-//            } catch (IOException ioe) {
-//                JOptionPane.showMessageDialog(null, ioe.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
-//            } catch (WiaOperationException woe) {
-//                JOptionPane.showMessageDialog(null, woe.getWIAMessage(), woe.getMessage(), JOptionPane.WARNING_MESSAGE);
-//            } catch (Exception e) {
-//                String msg = e.getMessage();
-//                if (msg == null || msg.equals("")) {
-//                    msg = "Scanner Operation Error.";
-//                }
-//                JOptionPane.showMessageDialog(null, msg, "Scanner Operation Error", JOptionPane.ERROR_MESSAGE);
-//            } finally {
-//                jLabelStatus.setText(bundle.getString("Scanning_completed"));
-//                getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-//                getGlassPane().setVisible(false);
-//                jMenuItemScan.setEnabled(true);
-//                jButtonScan.setEnabled(true);
-//            }
-//        }
-//    });
+        }
+    });
 }//GEN-LAST:event_jMenuItemScanActionPerformed
 
 private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonScanActionPerformed
