@@ -935,7 +935,7 @@ public class Gui extends javax.swing.JFrame {
     private void jButtonFitImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFitImageActionPerformed
         this.jButtonFitImage.setEnabled(false);
         this.jButtonActualSize.setEnabled(true);
-        
+
         scaleX = (float) imageIcon.getIconWidth() / (float) this.jScrollPane2.getWidth();
         scaleY = (float) imageIcon.getIconHeight() / (float) this.jScrollPane2.getHeight();
         fitImageChange(this.jScrollPane2.getWidth(), this.jScrollPane2.getHeight());
@@ -1211,24 +1211,41 @@ public class Gui extends javax.swing.JFrame {
         this.jMenuItemOCR.setEnabled(false);
         this.jMenuItemOCRAll.setEnabled(false);
 
-        SwingUtilities.invokeLater(new Runnable() {
+        SwingWorker worker = new SwingWorker<String, Void>() {
 
             @Override
-            public void run() {
+            protected String doInBackground() throws Exception {
+                OCR ocrEngine = new OCR(tessPath);
+                return ocrEngine.recognizeText(list, index, langCodes[jComboBoxLang.getSelectedIndex()]);
+            }
+
+            @Override
+            protected void done() {
                 try {
-                    OCR ocrEngine = new OCR(tessPath);
-//                        String result = ocrEngine.recognizeText(imageFile, index, langCodes[jComboBoxLang.getSelectedIndex()]);
-                    String result = ocrEngine.recognizeText(list, index, langCodes[jComboBoxLang.getSelectedIndex()]);
+                    String result = get();
                     jTextArea1.append(result);
                 } catch (OutOfMemoryError oome) {
                     oome.printStackTrace();
                     JOptionPane.showMessageDialog(null, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
-                } catch (FileNotFoundException fnfe) {
-                    fnfe.printStackTrace();
-                    JOptionPane.showMessageDialog(null, bundle.getString("An_exception_occurred_in_Tesseract_engine_while_recognizing_this_image."), APP_NAME, JOptionPane.ERROR_MESSAGE);
-                } catch (IOException ioe) {
-                    ioe.printStackTrace();
-                    JOptionPane.showMessageDialog(null, bundle.getString("Cannot_find_Tesseract._Please_set_its_path."), APP_NAME, JOptionPane.ERROR_MESSAGE);
+                } catch (InterruptedException ignore) {
+                    ignore.printStackTrace();
+                } catch (java.util.concurrent.ExecutionException e) {
+                    String why = null;
+                    Throwable cause = e.getCause();
+                    if (cause != null) {
+                        if (cause instanceof IOException) {
+                            why = bundle.getString("Cannot_find_Tesseract._Please_set_its_path.");
+                        } if (cause instanceof FileNotFoundException) {
+                            why = bundle.getString("An_exception_occurred_in_Tesseract_engine_while_recognizing_this_image.");
+                        } else {
+                            why = cause.getMessage();
+                        }
+                    } else {
+                        why = e.getMessage();
+                    }
+                    e.printStackTrace();
+                    System.err.println(why);
+                    JOptionPane.showMessageDialog(null, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
                 } catch (RuntimeException re) {
                     re.printStackTrace();
                     JOptionPane.showMessageDialog(null, re.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
@@ -1243,7 +1260,9 @@ public class Gui extends javax.swing.JFrame {
                     jMenuItemOCRAll.setEnabled(true);
                 }
             }
-        });
+        };
+
+        worker.execute();
     }
 
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
@@ -1285,9 +1304,6 @@ public class Gui extends javax.swing.JFrame {
             return;
         }
         displayImage();
-        originalW = imageIcon.getIconWidth();
-        originalH = imageIcon.getIconHeight();
-
         jLabelStatus.setText(null);
         ((JImageLabel) jImageLabel).deselect();
 
@@ -1312,6 +1328,8 @@ public class Gui extends javax.swing.JFrame {
     void displayImage() {
         this.jLabelCurIndex.setText(bundle.getString("Page_") + (imageIndex + 1) + " " + bundle.getString("of_") + imageTotal);
         imageIcon = imageList.get(imageIndex);
+        originalW = imageIcon.getIconWidth();
+        originalH = imageIcon.getIconHeight();
 
         jImageLabel.setIcon(imageIcon);
         jImageLabel.revalidate();
