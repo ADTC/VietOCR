@@ -56,6 +56,7 @@ public class Gui extends javax.swing.JFrame {
     private ArrayList<IIOImage> iioImageList;
     public final String EOL = System.getProperty("line.separator");
     private String currentDirectory;
+    private String outputDirectory;
     private String tessPath;
     private Properties prop;
     private String curLangCode;
@@ -155,7 +156,7 @@ public class Gui extends javax.swing.JFrame {
 
         this.setTitle(APP_NAME);
         bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle"); // NOI18N
-        currentDirectory = prefs.get("currentDirectory", System.getProperty("user.home"));
+        currentDirectory = prefs.get("currentDirectory", null);
         filechooser = new JFileChooser(currentDirectory);
         filechooser.setDialogTitle(bundle.getString("Open_Image_File"));
         javax.swing.filechooser.FileFilter tiffFilter = new SimpleFilter("tif", "TIFF");
@@ -164,6 +165,7 @@ public class Gui extends javax.swing.JFrame {
         javax.swing.filechooser.FileFilter pngFilter = new SimpleFilter("png", "PNG");
         javax.swing.filechooser.FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
 
+        filechooser.setAcceptAllFileFilterUsed(true);
         filechooser.addChoosableFileFilter(tiffFilter);
         filechooser.addChoosableFileFilter(jpegFilter);
         filechooser.addChoosableFileFilter(gifFilter);
@@ -959,9 +961,8 @@ public class Gui extends javax.swing.JFrame {
     }
 
     private void jMenuItemTessPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTessPathActionPerformed
-        JFileChooser pathchooser = new JFileChooser(currentDirectory);
+        JFileChooser pathchooser = new JFileChooser(tessPath);
         pathchooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        pathchooser.setCurrentDirectory(new File(tessPath));
         pathchooser.setAcceptAllFileFilterUsed(false);
         pathchooser.setApproveButtonText(bundle.getString("Set"));
         pathchooser.setDialogTitle(bundle.getString("Locate_Tesseract_Directory"));
@@ -1082,7 +1083,14 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemExitActionPerformed
     void quit() {
         prefs.put("UILanguage", selectedUILang);
-        prefs.put("currentDirectory", currentDirectory);
+        
+        if (currentDirectory != null) {
+            prefs.put("currentDirectory", currentDirectory);           
+        }
+        if (outputDirectory != null) {
+                prefs.put("outputDirectory", outputDirectory);
+        }
+
         prefs.put("TesseractDirectory", tessPath);
         prefs.put("inputMethod", selectedInputMethod);
         prefs.put("lookAndFeel", UIManager.getLookAndFeel().getClass().getName());
@@ -1126,12 +1134,14 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemFontActionPerformed
 
     private void jMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveActionPerformed
-        JFileChooser chooser = new JFileChooser(currentDirectory);
+        outputDirectory = prefs.get("outputDirectory", null);
+        JFileChooser chooser = new JFileChooser(outputDirectory);
         javax.swing.filechooser.FileFilter txtFilter = new SimpleFilter("txt", "Unicode UTF-8 Text");
         chooser.addChoosableFileFilter(txtFilter);
 
         int returnVal = chooser.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
+            outputDirectory = chooser.getCurrentDirectory().getPath();
             File textFile = chooser.getSelectedFile();
             if (chooser.getFileFilter() == txtFilter) {
                 if (!textFile.getName().endsWith(".txt")) {
