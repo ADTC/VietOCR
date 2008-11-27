@@ -1224,9 +1224,6 @@ public class Gui extends javax.swing.JFrame {
                 try {
                     String result = get();
                     jTextArea1.append(result);
-                } catch (OutOfMemoryError oome) {
-                    oome.printStackTrace();
-                    JOptionPane.showMessageDialog(null, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
                 } catch (InterruptedException ignore) {
                     ignore.printStackTrace();
                 } catch (java.util.concurrent.ExecutionException e) {
@@ -1237,6 +1234,8 @@ public class Gui extends javax.swing.JFrame {
                             why = bundle.getString("Cannot_find_Tesseract._Please_set_its_path.");
                         } else if (cause instanceof FileNotFoundException) {
                             why = bundle.getString("An_exception_occurred_in_Tesseract_engine_while_recognizing_this_image.");
+                        } else if (cause instanceof OutOfMemoryError) {
+                            why = bundle.getString("_has_run_out_of_memory.\nPlease_restart_");
                         } else {
                             why = cause.getMessage();
                         }
@@ -1244,13 +1243,8 @@ public class Gui extends javax.swing.JFrame {
                         why = e.getMessage();
                     }
                     e.printStackTrace();
-                    System.err.println(why);
+//                    System.err.println(why);
                     JOptionPane.showMessageDialog(null, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
-                } catch (RuntimeException re) {
-                    re.printStackTrace();
-                    JOptionPane.showMessageDialog(null, re.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
-                } catch (Exception exc) {
-                    exc.printStackTrace();
                 } finally {
                     jLabelStatus.setText(bundle.getString("OCR_completed."));
                     getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
