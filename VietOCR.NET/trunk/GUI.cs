@@ -455,14 +455,15 @@ namespace VietOCR.NET
         public void openFile(string selectedImageFile)
         {
             imageFile = new FileInfo(selectedImageFile);
-            this.Text = imageFile.Name + " - " + strProgName;
             loadImage(imageFile);
+
             if (imageList == null)
             {
                 return;
             }
             displayImage();
 
+            this.Text = imageFile.Name + " - " + strProgName;
             this.toolStripStatusLabel1.Text = null;
             this.pictureBox1.Deselect();
 
@@ -589,6 +590,11 @@ namespace VietOCR.NET
         }
 
         private void scanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            performScan();
+        }
+
+        void performScan()
         {
             try
             {
