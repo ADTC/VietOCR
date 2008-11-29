@@ -1300,14 +1300,16 @@ public class Gui extends javax.swing.JFrame {
      * Opens image file.
      *
      */
-    public void openFile(File selectedImage) {
-        imageFile = selectedImage;
-        this.setTitle(imageFile.getName() + " - " + APP_NAME);
-        loadImage();
+    public void openFile(File selectedFile) {
+        imageFile = selectedFile;
+        loadImage(imageFile);
+
         if (imageList == null) {
             return;
         }
         displayImage();
+        
+        this.setTitle(imageFile.getName() + " - " + APP_NAME);
         jLabelStatus.setText(null);
         ((JImageLabel) jImageLabel).deselect();
 
@@ -1353,7 +1355,7 @@ public class Gui extends javax.swing.JFrame {
         }
     }
 
-    void loadImage() {
+    void loadImage(final File imageFile) {
         try {
             iioImageList = ImageIOHelper.getIIOImageList(imageFile);
             imageList = ImageIOHelper.getImageList(iioImageList);
@@ -1398,6 +1400,10 @@ private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent 
 }//GEN-LAST:event_jRadioButtonMenuItemVietActionPerformed
 
 private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemScanActionPerformed
+    performScan();
+}
+
+void performScan() {
     jLabelStatus.setText(bundle.getString("Scanning..."));
     getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
     getGlassPane().setVisible(true);
