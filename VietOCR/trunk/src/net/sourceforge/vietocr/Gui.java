@@ -938,6 +938,9 @@ public class Gui extends javax.swing.JFrame {
         this.jButtonFitImage.setEnabled(false);
         this.jButtonActualSize.setEnabled(true);
 
+        originalW = imageIcon.getIconWidth();
+        originalH = imageIcon.getIconHeight();
+
         scaleX = (float) imageIcon.getIconWidth() / (float) this.jScrollPane2.getWidth();
         scaleY = (float) imageIcon.getIconHeight() / (float) this.jScrollPane2.getHeight();
         fitImageChange(this.jScrollPane2.getWidth(), this.jScrollPane2.getHeight());
@@ -1315,8 +1318,8 @@ public class Gui extends javax.swing.JFrame {
         }
         displayImage();
 
-        originalW = imageIcon.getIconWidth();
-        originalH = imageIcon.getIconHeight();
+//        originalW = imageIcon.getIconWidth();
+//        originalH = imageIcon.getIconHeight();
 
         this.setTitle(imageFile.getName() + " - " + APP_NAME);
         jLabelStatus.setText(null);
