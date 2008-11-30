@@ -75,4 +75,4 @@ Version 0.9.7 (10 November 2008)
 - Improved performance by passing IIOImage rather than File to OCR wrapper
 
 Version 0.9.8 (30 November 2008)
-- Various improvements
+- Minor fixes and various improvements
