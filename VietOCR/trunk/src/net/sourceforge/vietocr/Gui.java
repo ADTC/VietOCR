@@ -1083,12 +1083,12 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemExitActionPerformed
     void quit() {
         prefs.put("UILanguage", selectedUILang);
-        
+
         if (currentDirectory != null) {
-            prefs.put("currentDirectory", currentDirectory);           
+            prefs.put("currentDirectory", currentDirectory);
         }
         if (outputDirectory != null) {
-                prefs.put("outputDirectory", outputDirectory);
+            prefs.put("outputDirectory", outputDirectory);
         }
 
         prefs.put("TesseractDirectory", tessPath);
@@ -1205,6 +1205,12 @@ public class Gui extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItemOCRActionPerformed
 
+    /**
+     * Perform OCR on images represented by IIOImage.
+     * 
+     * @param list List of IIOImage
+     * @param index Index of page to be OCRed: -1 for all pages
+     */
     void performOCR(final ArrayList<IIOImage> list, final int index) {
         if (this.jComboBoxLang.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_select_a_language."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
@@ -1308,7 +1314,10 @@ public class Gui extends javax.swing.JFrame {
             return;
         }
         displayImage();
-        
+
+        originalW = imageIcon.getIconWidth();
+        originalH = imageIcon.getIconHeight();
+
         this.setTitle(imageFile.getName() + " - " + APP_NAME);
         jLabelStatus.setText(null);
         ((JImageLabel) jImageLabel).deselect();
@@ -1334,8 +1343,6 @@ public class Gui extends javax.swing.JFrame {
     void displayImage() {
         this.jLabelCurIndex.setText(bundle.getString("Page_") + (imageIndex + 1) + " " + bundle.getString("of_") + imageTotal);
         imageIcon = imageList.get(imageIndex);
-        originalW = imageIcon.getIconWidth();
-        originalH = imageIcon.getIconHeight();
 
         jImageLabel.setIcon(imageIcon);
         jImageLabel.revalidate();
@@ -1400,50 +1407,54 @@ private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent 
 }//GEN-LAST:event_jRadioButtonMenuItemVietActionPerformed
 
 private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemScanActionPerformed
-    performScan();
-}
-
-void performScan() {
-    jLabelStatus.setText(bundle.getString("Scanning..."));
-    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-    getGlassPane().setVisible(true);
-    jMenuItemScan.setEnabled(false);
-    jButtonScan.setEnabled(false);
-
-    SwingUtilities.invokeLater(new Runnable() {
-
-        @Override
-        public void run() {
-            try {
-                WiaScannerAdapter adapter = new WiaScannerAdapter();
-                File tempImageFile = File.createTempFile("tempfile", ".bmp");
-
-                if (tempImageFile.exists()) {
-                    tempImageFile.delete();
-                }
-
-                tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
-                openFile(tempImageFile);
-            } catch (IOException ioe) {
-                JOptionPane.showMessageDialog(null, ioe.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
-            } catch (WiaOperationException woe) {
-                JOptionPane.showMessageDialog(null, woe.getWIAMessage(), woe.getMessage(), JOptionPane.WARNING_MESSAGE);
-            } catch (Exception e) {
-                String msg = e.getMessage();
-                if (msg == null || msg.equals("")) {
-                    msg = "Scanner Operation Error.";
-                }
-                JOptionPane.showMessageDialog(null, msg, "Scanner Operation Error", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                jLabelStatus.setText(bundle.getString("Scanning_completed"));
-                getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-                getGlassPane().setVisible(false);
-                jMenuItemScan.setEnabled(true);
-                jButtonScan.setEnabled(true);
-            }
-        }
-    });
+        performScan();
 }//GEN-LAST:event_jMenuItemScanActionPerformed
+
+    /**
+     * Access scanner and scan documents via WIA.
+     *
+     */
+    void performScan() {
+        jLabelStatus.setText(bundle.getString("Scanning..."));
+        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        getGlassPane().setVisible(true);
+        jMenuItemScan.setEnabled(false);
+        jButtonScan.setEnabled(false);
+
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    WiaScannerAdapter adapter = new WiaScannerAdapter();
+                    File tempImageFile = File.createTempFile("tempfile", ".bmp");
+
+                    if (tempImageFile.exists()) {
+                        tempImageFile.delete();
+                    }
+
+                    tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
+                    openFile(tempImageFile);
+                } catch (IOException ioe) {
+                    JOptionPane.showMessageDialog(null, ioe.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
+                } catch (WiaOperationException woe) {
+                    JOptionPane.showMessageDialog(null, woe.getWIAMessage(), woe.getMessage(), JOptionPane.WARNING_MESSAGE);
+                } catch (Exception e) {
+                    String msg = e.getMessage();
+                    if (msg == null || msg.equals("")) {
+                        msg = "Scanner Operation Error.";
+                    }
+                    JOptionPane.showMessageDialog(null, msg, "Scanner Operation Error", JOptionPane.ERROR_MESSAGE);
+                } finally {
+                    jLabelStatus.setText(bundle.getString("Scanning_completed"));
+                    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                    getGlassPane().setVisible(false);
+                    jMenuItemScan.setEnabled(true);
+                    jButtonScan.setEnabled(true);
+                }
+            }
+        });
+    }
 
 private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonScanActionPerformed
     jMenuItemScanActionPerformed(evt);
