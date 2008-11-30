@@ -39,4 +39,4 @@ Version 0.7 (10 November 2008):
 - Implemented rotate image functionality
 
 Version 0.8 (30 November 2008)
-- Various improvements
+- Minor fixes and various improvements

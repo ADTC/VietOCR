@@ -189,6 +189,12 @@ namespace VietOCR.NET
             performOCR(imageList, -1, Rectangle.Empty);
         }
 
+        /// <summary>
+        /// Perform OCR on pages of image.
+        /// </summary>
+        /// <param name="imageList"></param>
+        /// <param name="index">-1 for all pages</param>
+        /// <param name="rect">selection rectangle</param>
         void performOCR(IList<Image> imageList, int index, Rectangle rect)
         {
             try
@@ -594,6 +600,9 @@ namespace VietOCR.NET
             performScan();
         }
 
+        /// <summary>
+        /// Access scanner and scan documents via WIA.
+        /// </summary>
         void performScan()
         {
             try
