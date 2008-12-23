@@ -44,9 +44,8 @@
     <target name="run" depends="jar"
                 description="run the program">
         <java fork="true" jar="${projectname}.jar">
-            <jvmarg value="-Xmn32m" />
             <jvmarg value="-Xms128m" />
-            <jvmarg value="-Xmx128m" />
+            <jvmarg value="-Xmx512m" />
         </java>
     </target>
     <target name="dist" depends="clean,jar"

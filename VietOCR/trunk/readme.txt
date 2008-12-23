@@ -14,6 +14,10 @@ On Linux, make install Tesseract will place the resultant executable binary and 
 
 ln -s /usr/local/share/tessdata /usr/local/bin/tessdata
 
+In addition, you can also let VietOCR know the location of tessdata via the environment variable TESSDATA_PREFIX.
+
+export TESSDATA_PREFIX=/usr/local/share/tessdata
+
 The Windows Image Acquisition Library v2.0 require Windows XP Service Pack 1 (SP1) or later. To install the WIA Library, copy the wiaaut.dll file to your System32 directory (usually located at C:\Windows\System32) and run from the command line:
 
 regsvr32 C:\Windows\System32\wiaaut.dll
