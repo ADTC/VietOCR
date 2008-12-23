@@ -102,7 +102,19 @@ namespace VietOCR.NET
 
             try
             {
-                langCodes = Directory.GetFiles(Path.Combine(workingDir, "tessdata"), "*.inttemp");
+                string tessdataDir = Path.Combine(workingDir, "tessdata");
+
+                if (!Directory.Exists(tessdataDir))
+                {
+                    string TESSDATA_PREFIX = Environment.GetEnvironmentVariable("TESSDATA_PREFIX");
+                    if (String.IsNullOrEmpty(TESSDATA_PREFIX))
+                    {
+                        TESSDATA_PREFIX = "/usr/local/share/tessdata"; // default path of tessdata on Linux (for Mono)
+                    }
+                    tessdataDir = TESSDATA_PREFIX;
+                }
+
+                langCodes = Directory.GetFiles(tessdataDir, "*.inttemp");
 
                 doc.Load(xmlFilePath);
                 //doc.Load(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("VietOCR.NET.Data.ISO639-3.xml"));
