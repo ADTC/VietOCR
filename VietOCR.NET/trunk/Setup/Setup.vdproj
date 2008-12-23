@@ -81,6 +81,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_4E6E1A9C9212DE0E1B1438F6DCF0DA0A"
+        "OwnerKey" = "8:_9E057C2EB4AD457E8400FF49592A0AFD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_58F1FECDCDE64A2FAD0E398AD402BB5D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -124,7 +130,7 @@
         "Entry"
         {
         "MsmKey" = "8:_8F735BC804077654D82F5F56211712FD"
-        "OwnerKey" = "8:_C3EDDD34B6DE903B1544C63767D700BA"
+        "OwnerKey" = "8:_4E6E1A9C9212DE0E1B1438F6DCF0DA0A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -167,12 +173,6 @@
         {
         "MsmKey" = "8:_C23BBB850591486193135D36FDC8C1FF"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C3EDDD34B6DE903B1544C63767D700BA"
-        "OwnerKey" = "8:_9E057C2EB4AD457E8400FF49592A0AFD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -250,7 +250,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C3EDDD34B6DE903B1544C63767D700BA"
+        "OwnerKey" = "8:_4E6E1A9C9212DE0E1B1438F6DCF0DA0A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -586,6 +586,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4E6E1A9C9212DE0E1B1438F6DCF0DA0A"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Interop.WIA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_4E6E1A9C9212DE0E1B1438F6DCF0DA0A"
+                    {
+                    "Name" = "8:Interop.WIA.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Interop.WIA.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_58F1FECDCDE64A2FAD0E398AD402BB5D"
             {
             "SourcePath" = "8:..\\tessdata\\vie.normproto"
@@ -728,7 +759,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F735BC804077654D82F5F56211712FD"
             {
-            "SourcePath" = "8:WIAAut.dll"
+            "SourcePath" = "8:wiaaut.dll"
             "TargetName" = "8:WIAAut.dll"
             "Tag" = "8:"
             "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
@@ -864,37 +895,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C3EDDD34B6DE903B1544C63767D700BA"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Interop.WIA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_C3EDDD34B6DE903B1544C63767D700BA"
-                    {
-                    "Name" = "8:Interop.WIA.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Interop.WIA.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C97D0F3EFC37428D8CD8E6BA61942B72"
@@ -1253,7 +1253,7 @@
         "Subject" = "8:Installer for VietOCR.NET"
         "ARPCONTACT" = "8:Quan Nguyen"
         "Keywords" = "8:Vietnamese OCR"
-        "ARPCOMMENTS" = "8:http://vietuniode.sf.net"
+        "ARPCOMMENTS" = "8:http://vietocr.sf.net"
         "ARPURLINFOABOUT" = "8:http://vietunicode.sf.net"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
@@ -1815,7 +1815,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9E057C2EB4AD457E8400FF49592A0AFD"
             {
-            "SourcePath" = "8:..\\obj\\Release\\VietOCR.NET.exe"
+            "SourcePath" = "8:..\\obj\\Debug\\VietOCR.NET.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
