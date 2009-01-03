@@ -724,7 +724,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jMenuFile.add(jMenuItemOpen);
 
-        jMenuItemScan.setText(bundle.getString("jMenuItemScan.Text") + "...");
+        jMenuItemScan.setText(bundle.getString("jMenuItemScan.Text")); // NOI18N
         jMenuItemScan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemScanActionPerformed(evt);
