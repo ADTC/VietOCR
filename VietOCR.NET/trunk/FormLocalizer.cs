@@ -26,7 +26,7 @@ namespace VietOCR.NET
 
         /// <summary>
         /// Update UI elements.
-        /// Code from http://secure.codeproject.com/KB/locale/ChangeUICulture.aspx
+        /// Original code from http://secure.codeproject.com/KB/locale/ChangeUICulture.aspx
         /// </summary>
         /// <param name="culture"></param>
         public void ApplyCulture(CultureInfo culture)
@@ -45,63 +45,54 @@ namespace VietOCR.NET
             // localized text doesn't change layout immediately.
 
             form.SuspendLayout();
-            for (int index = 0; index < fieldInfos.Length; index++)
-            {
-                if (fieldInfos[index].FieldType.IsSubclassOf(typeof(Control)))
-                {
-                    fieldInfos[index].FieldType.InvokeMember("SuspendLayout",
-                        BindingFlags.InvokeMethod, null,
-                        fieldInfos[index].GetValue(form), null);
-                }
-            }
-
             // If available, assign localized text to Form and fields with Text property.
 
             String text = resources.GetString("$this.Text");
             if (text != null)
                 form.Text = text;
 
-            for (int index = 0; index < fieldInfos.Length; index++)
+            foreach (FieldInfo fieldInfo in fieldInfos)
             {
-                if (!fieldInfos[index].FieldType.IsSubclassOf(typeof(System.Windows.Forms.Control)))
+                if (fieldInfo.FieldType.IsSubclassOf(typeof(Control)) || fieldInfo.FieldType.IsSubclassOf(typeof(ToolStripItem)))
                 {
-                    continue;
-                }
-
-                if (fieldInfos[index].FieldType.GetProperty("Text", typeof(String)) != null)
-                {
-                    text = resources.GetString(fieldInfos[index].Name + ".Text");
-                    if (text != null)
+                    if (fieldInfo.FieldType.IsSubclassOf(typeof(Control)))
                     {
-                        fieldInfos[index].FieldType.InvokeMember("Text",
-                            BindingFlags.SetProperty, null,
-                            fieldInfos[index].GetValue(form), new object[] { text });
-                    }
-                }
-                if (fieldInfos[index].FieldType.GetProperty("ToolTipText", typeof(String)) != null)
-                {
-                    text = resources.GetString(fieldInfos[index].Name + ".ToolTipText");
-                    if (text != null)
-                    {
-                        fieldInfos[index].FieldType.InvokeMember("ToolTipText",
-                            BindingFlags.SetProperty, null,
-                            fieldInfos[index].GetValue(form), new object[] { text });
-                    }
-                }
-            }
-
-            // Call ResumeLayout for Form and all fields
-            // derived from Control to resume layout logic.
-            // Call PerformLayout, so layout changes due
-            // to assignment of localized text are performed.
-
-            for (int index = 0; index < fieldInfos.Length; index++)
-            {
-                if (fieldInfos[index].FieldType.IsSubclassOf(typeof(Control)))
-                {
-                    fieldInfos[index].FieldType.InvokeMember("ResumeLayout",
+                        fieldInfo.FieldType.InvokeMember("SuspendLayout",
                             BindingFlags.InvokeMethod, null,
-                            fieldInfos[index].GetValue(form), new object[] { false });
+                            fieldInfo.GetValue(form), null);
+                    }
+                    if (fieldInfo.FieldType.GetProperty("Text", typeof(String)) != null)
+                    {
+                        text = resources.GetString(fieldInfo.Name + ".Text");
+                        if (text != null)
+                        {
+                            fieldInfo.FieldType.InvokeMember("Text",
+                                BindingFlags.SetProperty, null,
+                                fieldInfo.GetValue(form), new object[] { text });
+                        }
+                    }
+
+                    if (fieldInfo.FieldType.GetProperty("ToolTipText", typeof(String)) != null)
+                    {
+                        text = resources.GetString(fieldInfo.Name + ".ToolTipText");
+                        if (text != null)
+                        {
+                            fieldInfo.FieldType.InvokeMember("ToolTipText",
+                                BindingFlags.SetProperty, null,
+                                fieldInfo.GetValue(form), new object[] { text });
+                        }
+                    }
+
+                    // Call ResumeLayout for Form and all fields
+                    // derived from Control to resume layout logic.
+                    // Call PerformLayout, so layout changes due
+                    // to assignment of localized text are performed.
+                    if (fieldInfo.FieldType.IsSubclassOf(typeof(Control)))
+                    {
+                        fieldInfo.FieldType.InvokeMember("ResumeLayout",
+                                BindingFlags.InvokeMethod, null,
+                                fieldInfo.GetValue(form), new object[] { false });
+                    }
                 }
             }
 
