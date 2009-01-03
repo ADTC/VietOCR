@@ -53,31 +53,33 @@ namespace VietOCR.NET
 
             foreach (FieldInfo fieldInfo in fieldInfos)
             {
-                if (fieldInfo.FieldType.IsSubclassOf(typeof(Control)) || fieldInfo.FieldType.IsSubclassOf(typeof(ToolStripItem)))
+                Type fieldType = fieldInfo.FieldType;
+                if (fieldType.IsSubclassOf(typeof(Control)) || fieldType.IsSubclassOf(typeof(ToolStripItem)))
                 {
-                    if (fieldInfo.FieldType.IsSubclassOf(typeof(Control)))
+                    if (fieldType.IsSubclassOf(typeof(Control)))
                     {
-                        fieldInfo.FieldType.InvokeMember("SuspendLayout",
+                        fieldType.InvokeMember("SuspendLayout",
                             BindingFlags.InvokeMethod, null,
                             fieldInfo.GetValue(form), null);
                     }
-                    if (fieldInfo.FieldType.GetProperty("Text", typeof(String)) != null)
+
+                    if (fieldType.GetProperty("Text", typeof(String)) != null)
                     {
                         text = resources.GetString(fieldInfo.Name + ".Text");
                         if (text != null)
                         {
-                            fieldInfo.FieldType.InvokeMember("Text",
+                            fieldType.InvokeMember("Text",
                                 BindingFlags.SetProperty, null,
                                 fieldInfo.GetValue(form), new object[] { text });
                         }
                     }
 
-                    if (fieldInfo.FieldType.GetProperty("ToolTipText", typeof(String)) != null)
+                    if (fieldType.GetProperty("ToolTipText", typeof(String)) != null)
                     {
                         text = resources.GetString(fieldInfo.Name + ".ToolTipText");
                         if (text != null)
                         {
-                            fieldInfo.FieldType.InvokeMember("ToolTipText",
+                            fieldType.InvokeMember("ToolTipText",
                                 BindingFlags.SetProperty, null,
                                 fieldInfo.GetValue(form), new object[] { text });
                         }
@@ -87,9 +89,9 @@ namespace VietOCR.NET
                     // derived from Control to resume layout logic.
                     // Call PerformLayout, so layout changes due
                     // to assignment of localized text are performed.
-                    if (fieldInfo.FieldType.IsSubclassOf(typeof(Control)))
+                    if (fieldType.IsSubclassOf(typeof(Control)))
                     {
-                        fieldInfo.FieldType.InvokeMember("ResumeLayout",
+                        fieldType.InvokeMember("ResumeLayout",
                                 BindingFlags.InvokeMethod, null,
                                 fieldInfo.GetValue(form), new object[] { false });
                     }
