@@ -63,12 +63,27 @@ namespace VietOCR.NET
 
             for (int index = 0; index < fieldInfos.Length; index++)
             {
+                if (!fieldInfos[index].FieldType.IsSubclassOf(typeof(System.Windows.Forms.Control)))
+                {
+                    continue;
+                }
+
                 if (fieldInfos[index].FieldType.GetProperty("Text", typeof(String)) != null)
                 {
                     text = resources.GetString(fieldInfos[index].Name + ".Text");
                     if (text != null)
                     {
                         fieldInfos[index].FieldType.InvokeMember("Text",
+                            BindingFlags.SetProperty, null,
+                            fieldInfos[index].GetValue(form), new object[] { text });
+                    }
+                }
+                if (fieldInfos[index].FieldType.GetProperty("ToolTipText", typeof(String)) != null)
+                {
+                    text = resources.GetString(fieldInfos[index].Name + ".ToolTipText");
+                    if (text != null)
+                    {
+                        fieldInfos[index].FieldType.InvokeMember("ToolTipText",
                             BindingFlags.SetProperty, null,
                             fieldInfos[index].GetValue(form), new object[] { text });
                     }
@@ -89,6 +104,7 @@ namespace VietOCR.NET
                             fieldInfos[index].GetValue(form), new object[] { false });
                 }
             }
+
             form.ResumeLayout(false);
             form.PerformLayout();
         }
