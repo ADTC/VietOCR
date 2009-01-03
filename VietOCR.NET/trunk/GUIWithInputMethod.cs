@@ -137,9 +137,32 @@ namespace VietOCR.NET
             {
                 selectedUILanguage = miuilChecked.Tag.ToString();
                 System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUIWithInputMethod));
-                MessageBox.Show(this, resources.GetString("Restart_me"), "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                UpdateUI(selectedUILanguage);
+                //MessageBox.Show(this, resources.GetString("Restart_me"), "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        /// <summary>
+        /// Changes localized text and messages
+        /// </summary>
+        /// <param name="locale"></param>
+        /// <param name="firstTime"></param>
+        protected override void UpdateUI(string locale)
+        {
+            base.UpdateUI(locale);
+            FormLocalizer localizer = new FormLocalizer(this, typeof(GUIWithInputMethod));
+            localizer.ApplyCulture(new CultureInfo(locale));
+
+            //this.overviewToolStripMenuItem.Text = strProgName + " " + Properties.Resources.Help;
+            //this.aboutToolStripMenuItem.Text = Properties.Resources.About + " " + strProgName;
+
+            //if (!String.IsNullOrEmpty(sourceEncoding))
+            //{
+            //    this.comboBox1.Text = sourceEncoding;
+            //}
+            //this.comboBox1.SelectedItem = sourceEncoding;
+        }
+
         protected override void LoadRegistryInfo(RegistryKey regkey)
         {
             base.LoadRegistryInfo(regkey);
