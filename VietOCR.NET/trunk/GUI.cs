@@ -785,5 +785,16 @@ namespace VietOCR.NET
             }
             return ratio;
         }
+
+        /// <summary>
+        /// Changes localized text and messages
+        /// </summary>
+        /// <param name="locale"></param>
+        /// <param name="firstTime"></param>
+        protected virtual void UpdateUI(string locale)
+        {
+            FormLocalizer localizer = new FormLocalizer(this, typeof(GUI));
+            localizer.ApplyCulture(new CultureInfo(locale));
+        }
     }
 }
