@@ -534,7 +534,7 @@ public class Gui extends javax.swing.JFrame {
         });
 
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle"); // NOI18N
-        jButtonOpen.setText(bundle.getString("jButtonOpen")); // NOI18N
+        jButtonOpen.setText(bundle.getString("jButtonOpen.Text")); // NOI18N
         jButtonOpen.setToolTipText(bundle.getString("jButtonOpen.ToolTipText")); // NOI18N
         jButtonOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -543,7 +543,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jToolBar2.add(jButtonOpen);
 
-        jButtonScan.setText(bundle.getString("jButtonScan")); // NOI18N
+        jButtonScan.setText(bundle.getString("jButtonScan.Text")); // NOI18N
         jButtonScan.setToolTipText(bundle.getString("jButtonScan.ToolTipText")); // NOI18N
         jButtonScan.setFocusable(false);
         jButtonScan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -564,7 +564,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jToolBar2.add(jButtonOCR);
 
-        jButtonClear.setText(bundle.getString("jButtonClear")); // NOI18N
+        jButtonClear.setText(bundle.getString("jButtonClear.Text")); // NOI18N
         jButtonClear.setToolTipText(bundle.getString("jButtonClear.ToolTipText")); // NOI18N
         jButtonClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -576,7 +576,7 @@ public class Gui extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(100, 10));
         jToolBar2.add(jPanel2);
 
-        jLabelLanguage.setText(bundle.getString("jLabelLanguage")); // NOI18N
+        jLabelLanguage.setText(bundle.getString("jLabelLanguage.Text")); // NOI18N
         jToolBar2.add(jLabelLanguage);
 
         jComboBoxLang.setMaximumSize(new java.awt.Dimension(100, 32767));
@@ -713,10 +713,10 @@ public class Gui extends javax.swing.JFrame {
         getContentPane().add(jPanelStatus, java.awt.BorderLayout.SOUTH);
 
         jMenuFile.setMnemonic('f');
-        jMenuFile.setText(bundle.getString("jMenuFile")); // NOI18N
+        jMenuFile.setText(bundle.getString("jMenuFile.Text")); // NOI18N
 
         jMenuItemOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItemOpen.setText(bundle.getString("jMenuItemOpen")); // NOI18N
+        jMenuItemOpen.setText(bundle.getString("jMenuItemOpen.Text")); // NOI18N
         jMenuItemOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemOpenActionPerformed(evt);
@@ -724,7 +724,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jMenuFile.add(jMenuItemOpen);
 
-        jMenuItemScan.setText(bundle.getString("jMenuItemScan") + "...");
+        jMenuItemScan.setText(bundle.getString("jMenuItemScan.Text") + "...");
         jMenuItemScan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemScanActionPerformed(evt);
@@ -733,7 +733,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuFile.add(jMenuItemScan);
 
         jMenuItemSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItemSave.setText(bundle.getString("jMenuItemSave")); // NOI18N
+        jMenuItemSave.setText(bundle.getString("jMenuItemSave.Text")); // NOI18N
         jMenuItemSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemSaveActionPerformed(evt);
@@ -742,7 +742,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuFile.add(jMenuItemSave);
         jMenuFile.add(jSeparator2);
 
-        jMenuItemExit.setText(bundle.getString("jMenuItemExit")); // NOI18N
+        jMenuItemExit.setText(bundle.getString("jMenuItemExit.Text")); // NOI18N
         jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemExitActionPerformed(evt);
@@ -753,9 +753,9 @@ public class Gui extends javax.swing.JFrame {
         jMenuBar2.add(jMenuFile);
 
         jMenuCommand.setMnemonic('c');
-        jMenuCommand.setText(bundle.getString("jMenuCommand")); // NOI18N
+        jMenuCommand.setText(bundle.getString("jMenuCommand.Text")); // NOI18N
 
-        jMenuItemOCR.setText(bundle.getString("jMenuItemOCR")); // NOI18N
+        jMenuItemOCR.setText(bundle.getString("jMenuItemOCR.Text")); // NOI18N
         jMenuItemOCR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemOCRActionPerformed(evt);
@@ -763,7 +763,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jMenuCommand.add(jMenuItemOCR);
 
-        jMenuItemOCRAll.setText(bundle.getString("jMenuItemOCRAll")); // NOI18N
+        jMenuItemOCRAll.setText(bundle.getString("jMenuItemOCRAll.Text")); // NOI18N
         jMenuItemOCRAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemOCRAllActionPerformed(evt);
@@ -772,7 +772,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuCommand.add(jMenuItemOCRAll);
         jMenuCommand.add(jSeparator1);
 
-        jMenuItemPostProcess.setText(bundle.getString("jMenuItemPostProcess")); // NOI18N
+        jMenuItemPostProcess.setText(bundle.getString("jMenuItemPostProcess.Text")); // NOI18N
         jMenuItemPostProcess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemPostProcessActionPerformed(evt);
@@ -783,9 +783,9 @@ public class Gui extends javax.swing.JFrame {
         jMenuBar2.add(jMenuCommand);
 
         jMenuSettings.setMnemonic('s');
-        jMenuSettings.setText(bundle.getString("jMenuSettings")); // NOI18N
+        jMenuSettings.setText(bundle.getString("jMenuSettings.Text")); // NOI18N
 
-        jCheckBoxMenuWordWrap.setText(bundle.getString("jCheckBoxMenuWordWrap")); // NOI18N
+        jCheckBoxMenuWordWrap.setText(bundle.getString("jCheckBoxMenuWordWrap.Text")); // NOI18N
         jCheckBoxMenuWordWrap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBoxMenuWordWrapActionPerformed(evt);
@@ -793,7 +793,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jMenuSettings.add(jCheckBoxMenuWordWrap);
 
-        jMenuItemFont.setText(bundle.getString("jMenuItemFont")); // NOI18N
+        jMenuItemFont.setText(bundle.getString("jMenuItemFont.Text")); // NOI18N
         jMenuItemFont.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemFontActionPerformed(evt);
@@ -802,15 +802,15 @@ public class Gui extends javax.swing.JFrame {
         jMenuSettings.add(jMenuItemFont);
         jMenuSettings.add(jSeparator3);
 
-        jMenuInputMethod.setText(bundle.getString("jMenuInputMethod")); // NOI18N
+        jMenuInputMethod.setText(bundle.getString("jMenuInputMethod.Text")); // NOI18N
         jMenuSettings.add(jMenuInputMethod);
         jMenuSettings.add(jSeparator6);
 
-        jMenuUILang.setText(bundle.getString("jMenuUILang")); // NOI18N
+        jMenuUILang.setText(bundle.getString("jMenuUILang.Text")); // NOI18N
 
         group.add(jRadioButtonMenuItemEng);
         jRadioButtonMenuItemEng.setSelected(selectedUILang.equals("en"));
-        jRadioButtonMenuItemEng.setText(bundle.getString("jRadioButtonMenuItemEng")); // NOI18N
+        jRadioButtonMenuItemEng.setText(bundle.getString("jRadioButtonMenuItemEng.Text")); // NOI18N
         jRadioButtonMenuItemEng.setActionCommand("en");
         jRadioButtonMenuItemEng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -821,7 +821,7 @@ public class Gui extends javax.swing.JFrame {
 
         group.add(jRadioButtonMenuItemViet);
         jRadioButtonMenuItemViet.setSelected(selectedUILang.equals("vi"));
-        jRadioButtonMenuItemViet.setText(bundle.getString("jRadioButtonMenuItemViet")); // NOI18N
+        jRadioButtonMenuItemViet.setText(bundle.getString("jRadioButtonMenuItemViet.Text")); // NOI18N
         jRadioButtonMenuItemViet.setActionCommand("vi");
         jRadioButtonMenuItemViet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -832,11 +832,11 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuSettings.add(jMenuUILang);
 
-        jMenuLookAndFeel.setText(bundle.getString("jMenuLookAndFeel")); // NOI18N
+        jMenuLookAndFeel.setText(bundle.getString("jMenuLookAndFeel.Text")); // NOI18N
         jMenuSettings.add(jMenuLookAndFeel);
         jMenuSettings.add(jSeparator4);
 
-        jMenuItemTessPath.setText(bundle.getString("jMenuItemTessPath")); // NOI18N
+        jMenuItemTessPath.setText(bundle.getString("jMenuItemTessPath.Text")); // NOI18N
         jMenuItemTessPath.setActionCommand(bundle.getString("Tesseract_Path")); // NOI18N
         jMenuItemTessPath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -848,9 +848,9 @@ public class Gui extends javax.swing.JFrame {
         jMenuBar2.add(jMenuSettings);
 
         jMenuHelp.setMnemonic('a');
-        jMenuHelp.setText(bundle.getString("jMenuHelp")); // NOI18N
+        jMenuHelp.setText(bundle.getString("jMenuHelp.Text")); // NOI18N
 
-        jMenuItemHelp.setText(APP_NAME + " " + bundle.getString("jMenuItemHelp"));
+        jMenuItemHelp.setText(APP_NAME + " " + bundle.getString("jMenuItemHelp.Text"));
         jMenuItemHelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemHelpActionPerformed(evt);
@@ -859,7 +859,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuHelp.add(jMenuItemHelp);
         jMenuHelp.add(jSeparator5);
 
-        jMenuItemAbout.setText(bundle.getString("jMenuItemAbout") + " " + APP_NAME);
+        jMenuItemAbout.setText(bundle.getString("jMenuItemAbout.Text") + " " + APP_NAME);
         jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemAboutActionPerformed(evt);
@@ -1509,8 +1509,8 @@ private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {/
             public void run() {
                 FormLocalizer localizer = new FormLocalizer(Gui.this, Gui.class);
                 localizer.ApplyCulture(bundle);
-                jMenuItemHelp.setText(APP_NAME + " " + bundle.getString("jMenuItemHelp"));
-                jMenuItemAbout.setText(bundle.getString("jMenuItemAbout") + " " + APP_NAME);
+                jMenuItemHelp.setText(APP_NAME + " " + bundle.getString("jMenuItemHelp.Text"));
+                jMenuItemAbout.setText(bundle.getString("jMenuItemAbout.Text") + " " + APP_NAME);
                 if (helptopicsFrame != null) {
                     helptopicsFrame.setTitle(jMenuItemHelp.getText());
                 }
