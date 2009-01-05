@@ -374,7 +374,7 @@ namespace VietOCR.NET
 
         private void toolStripBtnClear_Click(object sender, EventArgs e)
         {
-            this.textBox1.Text = null;
+            this.textBox1.Clear();
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
