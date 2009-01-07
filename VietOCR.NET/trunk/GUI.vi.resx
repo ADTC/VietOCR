@@ -218,7 +218,7 @@
     <value>284, 28</value>
   </data>
   <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>VietOCR.NET Trợ giúp</value>
+    <value>Trợ giúp</value>
   </data>
   <data name="aboutToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>281, 6</value>
@@ -226,14 +226,14 @@
   <data name="aboutToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 28</value>
   </data>
-  <data name="aboutToolStripMenuItem2.Text" xml:space="preserve">
-    <value>Về VietOCR.NET</value>
+  <data name="helpToolStripMenuItem1.Text" xml:space="preserve">
+    <value>VietOCR.NET Trợ giúp</value>
   </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 27</value>
   </data>
   <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
-    <value>Trợ giúp</value>
+    <value>Về VietOCR.NET</value>
   </data>
   <data name="toolStripBtnOpen.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 28</value>
