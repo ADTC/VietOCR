@@ -173,9 +173,6 @@ namespace VietOCR.NET
             {
                 try
                 {
-                    //Image croppedImage = ImageIOHelper.Crop(this.pictureBox1.Image, rect);
-                    //IList<Image> list = new List<Image>();
-                    //list.Add(croppedImage);
                     rect = new Rectangle((int)(rect.X * scaleX), (int)(rect.Y * scaleY), (int)(rect.Width * scaleX), (int)(rect.Height * scaleY));
                     performOCR(imageList, imageIndex, rect);
                 }
@@ -230,7 +227,6 @@ namespace VietOCR.NET
                 this.oCRToolStripMenuItem.Enabled = false;
                 this.oCRAllPagesToolStripMenuItem.Enabled = false;
 
-                //OCRImageEntity entity = new OCRImageEntity(ImageIOHelper.GetImageList(imageFile), index, rect, curLangCode);
                 OCRImageEntity entity = new OCRImageEntity(imageList, index, rect, curLangCode);
                 // Start the asynchronous operation.
                 backgroundWorker1.RunWorkerAsync(entity);
