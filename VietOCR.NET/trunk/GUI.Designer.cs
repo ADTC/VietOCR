@@ -64,7 +64,7 @@ namespace VietOCR.NET
             this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -343,7 +343,7 @@ namespace VietOCR.NET
             // 
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpToolStripMenuItem,
-            this.aboutToolStripMenuItem1,
+            this.toolStripMenuItem3,
             this.aboutToolStripMenuItem2});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
@@ -354,10 +354,10 @@ namespace VietOCR.NET
             resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
-            // aboutToolStripMenuItem1
+            // toolStripMenuItem3
             // 
-            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            resources.ApplyResources(this.aboutToolStripMenuItem1, "aboutToolStripMenuItem1");
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            resources.ApplyResources(this.toolStripMenuItem3, "toolStripMenuItem3");
             // 
             // aboutToolStripMenuItem2
             // 
@@ -510,7 +510,7 @@ namespace VietOCR.NET
         private System.Windows.Forms.ToolStripMenuItem fontToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator aboutToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         protected System.Windows.Forms.ToolStripComboBox toolStripCbLang;
