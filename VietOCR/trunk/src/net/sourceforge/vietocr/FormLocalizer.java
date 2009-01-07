@@ -17,7 +17,7 @@ package net.sourceforge.vietocr;
 
 import java.lang.reflect.*;
 import java.util.ResourceBundle;
-import javax.swing.JFrame;
+import java.awt.Window;
 
 /**
  *
@@ -25,17 +25,17 @@ import javax.swing.JFrame;
  */
 public class FormLocalizer {
 
-    private JFrame jFrame;
-    private Class jFrameType;
+    private Window window;
+    private Class windowType;
 
     /**
      * Constructor.
-     * @param jFrame
-     * @param jFrameType
+     * @param window
+     * @param windowType
      */
-    public FormLocalizer(JFrame jFrame, Class jFrameType) {
-        this.jFrame = jFrame;
-        this.jFrameType = jFrameType;
+    public FormLocalizer(Window window, Class windowType) {
+        this.window = window;
+        this.windowType = windowType;
     }
 
     /**
@@ -46,10 +46,10 @@ public class FormLocalizer {
         // Determine its fields via reflection.
         // If bundle resource available, assign localized text to JFrame and fields with Text property.
 
-        for (Field fieldInfo : jFrameType.getDeclaredFields()) {
+        for (Field fieldInfo : windowType.getDeclaredFields()) {
             Class fieldType = fieldInfo.getType();
             try {
-                // apply only to Swing components
+                // apply only to non-text Swing components
                 if (!FormLocalizer.isSubclass(fieldType, Class.forName("javax.swing.JComponent")) || FormLocalizer.isSubclass(fieldType, Class.forName("javax.swing.text.JTextComponent"))) {
                     continue;
                 }
@@ -64,7 +64,7 @@ public class FormLocalizer {
                         String text = resources.getString(fieldInfo.getName() + ".Text");
                         if (text != null) {
                             fieldInfo.setAccessible(true);
-                            method.invoke(fieldInfo.get(jFrame), new Object[]{text});
+                            method.invoke(fieldInfo.get(window), new Object[]{text});
                         }
                     }
                 } catch (Exception e) {
@@ -77,7 +77,7 @@ public class FormLocalizer {
                         String text = resources.getString(fieldInfo.getName() + ".ToolTipText");
                         if (text != null) {
                             fieldInfo.setAccessible(true);
-                            method.invoke(fieldInfo.get(jFrame), new Object[]{text});
+                            method.invoke(fieldInfo.get(window), new Object[]{text});
                         }
                     }
                 } catch (Exception e) {

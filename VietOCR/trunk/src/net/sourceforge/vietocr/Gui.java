@@ -1509,8 +1509,9 @@ private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {/
             public void run() {
                 FormLocalizer localizer = new FormLocalizer(Gui.this, Gui.class);
                 localizer.ApplyCulture(bundle);
-                jMenuItemHelp.setText(APP_NAME + " " + bundle.getString("jMenuItemHelp.Text"));
-                jMenuItemAbout.setText(bundle.getString("jMenuItemAbout.Text") + " " + APP_NAME);
+                jLabelCurIndex.setText(bundle.getString("Page_") + (imageIndex + 1) + " " + bundle.getString("of_") + imageTotal);
+                jMenuItemHelp.setText(APP_NAME + " " + jMenuItemHelp.getText());
+                jMenuItemAbout.setText(jMenuItemAbout.getText() + " " + APP_NAME);
                 if (helptopicsFrame != null) {
                     helptopicsFrame.setTitle(jMenuItemHelp.getText());
                 }
