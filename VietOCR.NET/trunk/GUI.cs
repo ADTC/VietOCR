@@ -791,6 +791,7 @@ namespace VietOCR.NET
         {
             FormLocalizer localizer = new FormLocalizer(this, typeof(GUI));
             localizer.ApplyCulture(new CultureInfo(locale));
+            this.lblCurIndex.Text = resources.GetString("Page_") + (imageIndex + 1) + resources.GetString("_of_") + imageTotal;
         }
     }
 }
