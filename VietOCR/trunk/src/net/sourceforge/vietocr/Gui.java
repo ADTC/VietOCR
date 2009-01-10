@@ -480,10 +480,9 @@ public class Gui extends javax.swing.JFrame {
         };
 
         ButtonGroup groupInputMethod = new ButtonGroup();
-        String supportedInputMethods[] = InputMethods.getNames();
 
-        for (int i = 0; i < supportedInputMethods.length; i++) {
-            String inputMethod = supportedInputMethods[i];
+        for (InputMethods im : InputMethods.values()) {
+            String inputMethod = im.name();
             JRadioButtonMenuItem radioItem = new JRadioButtonMenuItem(inputMethod, selectedInputMethod.equals(inputMethod));
             radioItem.addActionListener(imlst);
             jMenuInputMethod.add(radioItem);
