@@ -223,7 +223,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>GUIWithInputMethod.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUIWithInputMethod.vi.resx">
+    <EmbeddedResource Include="GUIWithInputMethod.vi-VN.resx">
       <SubType>Designer</SubType>
       <DependentUpon>GUIWithInputMethod.cs</DependentUpon>
     </EmbeddedResource>
