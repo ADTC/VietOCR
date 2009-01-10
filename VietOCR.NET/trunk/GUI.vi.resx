@@ -155,7 +155,7 @@
     <value>212, 28</value>
   </data>
   <data name="saveToolStripMenuItem.Text" xml:space="preserve">
-    <value>Lưu...</value>
+    <value>Lưu vào...</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 6</value>
@@ -273,53 +273,5 @@
   </data>
   <data name="toolStripLabel1.Text" xml:space="preserve">
     <value>Ngôn ngữ OCR</value>
-  </data>
-  <data name="_Help" xml:space="preserve">
-    <value> Trợ giúp</value>
-  </data>
-  <data name="_of_" xml:space="preserve">
-    <value> của </value>
-  </data>
-  <data name="Page_" xml:space="preserve">
-    <value>Trang </value>
-  </data>
-  <data name="About_" xml:space="preserve">
-    <value>Về </value>
-  </data>
-  <data name="Cannotloadimage" xml:space="preserve">
-    <value>Không nạp ảnh được.</value>
-  </data>
-  <data name="loadImage" xml:space="preserve">
-    <value>Hãy nạp ảnh.</value>
-  </data>
-  <data name="OCRcompleted" xml:space="preserve">
-    <value>OCR hoàn tất.</value>
-  </data>
-  <data name="OCRrunning" xml:space="preserve">
-    <value>OCR đang chạy...</value>
-  </data>
-  <data name="OpenImageFile" xml:space="preserve">
-    <value>Mở tập tin ảnh</value>
-  </data>
-  <data name="readme" xml:space="preserve">
-    <value>readme_cs_vi.html</value>
-  </data>
-  <data name="selectLanguage" xml:space="preserve">
-    <value>Hãy chọn một ngôn ngữ.</value>
-  </data>
-  <data name="Canceled" xml:space="preserve">
-    <value>Bãi bỏ</value>
-  </data>
-  <data name="Scancompleted" xml:space="preserve">
-    <value>Quét xong văn bản.</value>
-  </data>
-  <data name="Scanning" xml:space="preserve">
-    <value>Đang quét văn bản...</value>
-  </data>
-  <data name="OCROperation" xml:space="preserve">
-    <value>Tác vụ OCR</value>
-  </data>
-  <data name="ScanningOperation" xml:space="preserve">
-    <value>Tác vụ quét ảnh</value>
   </data>
 </root>

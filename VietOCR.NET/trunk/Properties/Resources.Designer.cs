@@ -169,6 +169,15 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save As.
+        /// </summary>
+        internal static string Save_As {
+            get {
+                return ResourceManager.GetString("Save_As", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scan completed..
         /// </summary>
         internal static string Scancompleted {

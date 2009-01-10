@@ -165,4 +165,7 @@
   <data name="_of_" xml:space="preserve">
     <value> of </value>
   </data>
+  <data name="Save_As" xml:space="preserve">
+    <value>Save As</value>
+  </data>
 </root>
