@@ -216,8 +216,7 @@
     <None Include="tessdata\vie.word-dawg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <EmbeddedResource Include="GUI.vi.resx">
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="GUI.vi-VN.resx">
       <DependentUpon>GUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIWithInputMethod.resx">
