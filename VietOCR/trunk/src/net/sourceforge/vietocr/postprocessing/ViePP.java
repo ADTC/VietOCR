@@ -16,7 +16,6 @@
 
 package net.sourceforge.vietocr.postprocessing;
 
-import java.util.regex.*;
 import java.text.Normalizer; // available in Java 6.0
 
 /**
@@ -35,14 +34,11 @@ public class ViePP implements IPostProcessor {
             return text;
         }
 
-        // substitute letters frequently misrecognized by Tesseract 2.03
-        text = text.replaceAll("\\b1(?=\\p{L}+\\b)", "l") // 1 to l
-                .replaceAll("\\b11(?=\\p{L}+\\b)", "n") // 11 to n
-                .replaceAll("\\bI(?=\\p{Ll}+\\b)", "l") // I to l
-                .replaceAll("(?<=\\b\\p{L}*)0(?=\\p{L}*\\b)", "o") // 0 to o
-                //                    .replaceAll("(?<!\\.) S(?=\\p{L}*\\b)", " s") // S to s
-                //                    .replaceAll("(?<![cn])h\\b", "n")                    
-                .replace("êĩ-", "ết")
+        // correct common errors caused by OCR
+        text = TextUtilities.correctOCRErrors(text);
+
+        // substitute Vietnamese letters frequently misrecognized by Tesseract 2.03
+        text = text.replace("êĩ-", "ết")
                 .replace("ug", "ng")
                 .replace("uh", "nh")
                 .replace("rn", "m")
@@ -50,29 +46,14 @@ public class ViePP implements IPostProcessor {
                 .replace("ll", "u")
                 .replace("II", "u");
 
-        StringBuffer strB = new StringBuffer();
-
-        // lower uppercase letters ended by lowercase letters except the first letter
-        Matcher matcher = Pattern.compile("(?<=\\p{L}+)(\\p{Lu}+)(?=\\p{Ll}+)").matcher(text);
-        while (matcher.find()) {
-            matcher.appendReplacement(strB, matcher.group().toLowerCase());
-        }
-        matcher.appendTail(strB);
-
-        // lower uppercase letters begun by lowercase letters
-        matcher = Pattern.compile("(?<=\\p{Ll}+)(\\p{Lu}+)").matcher(strB.toString());
-        strB.setLength(0);
-        while (matcher.find()) {
-            matcher.appendReplacement(strB, matcher.group().toLowerCase());
-        }
-        matcher.appendTail(strB);
+        // correct letter cases
+        text = TextUtilities.correctLetterCases(text);
 
         // add hook marks
-        text = strB.toString();
-//                    .replaceAll("(?<![qQ])(u)(?=[ơờởỡớợ]\\p{L})", "ư")
-//                    .replaceAll("(?<![qQ])(U)(?=[ƠỜỞỠỚỢ]\\p{L})", "Ư")
-//                    .replace("ưon", "ươn")
-//                    .replace("ưoi", "ươi");
+//        text = text.replaceAll("(?<![qQ])(u)(?=[ơờởỡớợ]\\p{L})", "ư")
+//                .replaceAll("(?<![qQ])(U)(?=[ƠỜỞỠỚỢ]\\p{L})", "Ư")
+//                .replace("ưon", "ươn")
+//                .replace("ưoi", "ươi");
 
         String nfdText = Normalizer.normalize(text, Normalizer.Form.NFD)
                 .replaceAll("(?i)(?<![qQ])(u)(?=o\u031B" + TONE + "\\p{L})", "$1\u031B") // uo+n to u+o+n 
