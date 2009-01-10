@@ -230,6 +230,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="readme_cs.html" />
     <EmbeddedResource Include="readme_cs_vi.html" />
+    <EmbeddedResource Include="Properties\Resources.vi-VN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Content Include="samples\vietsample.tif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

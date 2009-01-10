@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -114,4 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About_" xml:space="preserve">
+    <value>About </value>
+  </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+  <data name="Cannotloadimage" xml:space="preserve">
+    <value>Cannot load image.</value>
+  </data>
+  <data name="loadImage" xml:space="preserve">
+    <value>Please load an image.</value>
+  </data>
+  <data name="OCRcompleted" xml:space="preserve">
+    <value>OCR completed.</value>
+  </data>
+  <data name="OCROperation" xml:space="preserve">
+    <value>OCR Operation</value>
+  </data>
+  <data name="OCRrunning" xml:space="preserve">
+    <value>OCR running...</value>
+  </data>
+  <data name="OpenImageFile" xml:space="preserve">
+    <value>Open Image File</value>
+  </data>
+  <data name="Page_" xml:space="preserve">
+    <value>Page </value>
+  </data>
+  <data name="readme" xml:space="preserve">
+    <value>readme_cs.html</value>
+  </data>
+  <data name="Scancompleted" xml:space="preserve">
+    <value>Scan completed.</value>
+  </data>
+  <data name="Scanning" xml:space="preserve">
+    <value>Scanning...</value>
+  </data>
+  <data name="ScanningOperation" xml:space="preserve">
+    <value>Scanning Operation</value>
+  </data>
+  <data name="selectLanguage" xml:space="preserve">
+    <value>Please select a language.</value>
+  </data>
+  <data name="_Help" xml:space="preserve">
+    <value> Help</value>
+  </data>
+  <data name="_of_" xml:space="preserve">
+    <value> of </value>
+  </data>
 </root>
