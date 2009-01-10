@@ -165,7 +165,7 @@ namespace VietOCR.NET
 
             Rectangle rect = ((ScrollablePictureBox)this.pictureBox1).GetRect();
 
-            if (rect != Rectangle.Empty && this.pictureBox1.Image != null)
+            if (rect != Rectangle.Empty)
             {
                 try
                 {
