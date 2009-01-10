@@ -17,9 +17,9 @@ public class ProcessorFactory {
         IPostProcessor processor;
         
         switch (code) {
-//            case eng:
-//                processor = new EngPP();
-//                break;
+            case eng:
+                processor = new EngPP();
+                break;
             case vie:
                 processor = new ViePP();
                 break;
