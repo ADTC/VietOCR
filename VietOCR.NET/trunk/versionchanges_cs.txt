@@ -40,3 +40,6 @@ Version 0.7 (10 November 2008):
 
 Version 0.8 (30 November 2008)
 - Minor fixes and various improvements
+
+Version 0.9 (10 January 2009)
+- Revamped localization codes
