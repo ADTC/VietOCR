@@ -1176,14 +1176,14 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemSaveActionPerformed
 
     private void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRActionPerformed
-        if (imageFile == null) {
+        if (jImageLabel.getIcon() == null) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
         Rectangle rect = ((JImageLabel) jImageLabel).getRect();
 
-        if (rect != null && jImageLabel.getIcon() != null) {
+        if (rect != null) {
             try {
                 ImageIcon ii = (ImageIcon) this.jImageLabel.getIcon();
                 BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) (rect.x * scaleX), (int) (rect.y * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
