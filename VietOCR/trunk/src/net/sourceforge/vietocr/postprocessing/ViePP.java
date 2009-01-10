@@ -44,7 +44,8 @@ public class ViePP implements IPostProcessor {
                 .replace("rn", "m")
                 .replace("iii", "m")
                 .replace("ll", "u")
-                .replace("II", "u");
+                .replace("II", "u")
+                .replace("ôh", "ốn");
 
         // correct letter cases
         text = TextUtilities.correctLetterCases(text);
