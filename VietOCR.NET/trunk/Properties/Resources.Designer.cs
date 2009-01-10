@@ -59,5 +59,149 @@ namespace VietOCR.NET.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Help.
+        /// </summary>
+        internal static string _Help {
+            get {
+                return ResourceManager.GetString("_Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  of .
+        /// </summary>
+        internal static string _of_ {
+            get {
+                return ResourceManager.GetString("_of_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About .
+        /// </summary>
+        internal static string About_ {
+            get {
+                return ResourceManager.GetString("About_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Canceled.
+        /// </summary>
+        internal static string Canceled {
+            get {
+                return ResourceManager.GetString("Canceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot load image..
+        /// </summary>
+        internal static string Cannotloadimage {
+            get {
+                return ResourceManager.GetString("Cannotloadimage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please load an image..
+        /// </summary>
+        internal static string loadImage {
+            get {
+                return ResourceManager.GetString("loadImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OCR completed..
+        /// </summary>
+        internal static string OCRcompleted {
+            get {
+                return ResourceManager.GetString("OCRcompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OCR Operation.
+        /// </summary>
+        internal static string OCROperation {
+            get {
+                return ResourceManager.GetString("OCROperation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OCR running....
+        /// </summary>
+        internal static string OCRrunning {
+            get {
+                return ResourceManager.GetString("OCRrunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Image File.
+        /// </summary>
+        internal static string OpenImageFile {
+            get {
+                return ResourceManager.GetString("OpenImageFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page .
+        /// </summary>
+        internal static string Page_ {
+            get {
+                return ResourceManager.GetString("Page_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to readme_cs.html.
+        /// </summary>
+        internal static string readme {
+            get {
+                return ResourceManager.GetString("readme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan completed..
+        /// </summary>
+        internal static string Scancompleted {
+            get {
+                return ResourceManager.GetString("Scancompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scanning....
+        /// </summary>
+        internal static string Scanning {
+            get {
+                return ResourceManager.GetString("Scanning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scanning Operation.
+        /// </summary>
+        internal static string ScanningOperation {
+            get {
+                return ResourceManager.GetString("ScanningOperation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select a language..
+        /// </summary>
+        internal static string selectLanguage {
+            get {
+                return ResourceManager.GetString("selectLanguage", resourceCulture);
+            }
+        }
     }
 }
