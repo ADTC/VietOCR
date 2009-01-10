@@ -794,6 +794,15 @@ namespace VietOCR.NET
             }
 
             this.toolStripStatusLabel1.Text = null;
+
+            foreach (Form form in this.OwnedForms)
+            {
+                HtmlHelpForm helpForm = form as HtmlHelpForm;
+                if (helpForm != null)
+                {
+                    helpForm.Text = strProgName + Properties.Resources._Help;
+                }
+            }
         }
     }
 }
