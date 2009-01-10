@@ -62,8 +62,6 @@ namespace VietOCR.NET
         private bool IsFitForZoomIn = false;
         private const float ZOOM_FACTOR = 1.25f;
 
-        System.ComponentModel.ComponentResourceManager resources;
-
         public GUI()
         {
             // Access registry to determine which UI Language to be loaded.
@@ -81,8 +79,6 @@ namespace VietOCR.NET
 
             // Sets the UI culture to the selected language.
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(selectedUILanguage);
-
-            resources = new System.ComponentModel.ComponentResourceManager(typeof(GUI));
 
             InitializeComponent();
 
@@ -163,7 +159,7 @@ namespace VietOCR.NET
         {
             if (this.pictureBox1.Image == null)
             {
-                MessageBox.Show(this, resources.GetString("loadImage"), strProgName);
+                MessageBox.Show(this, Properties.Resources.loadImage, strProgName);
                 return;
             }
 
@@ -191,7 +187,7 @@ namespace VietOCR.NET
         {
             if (this.pictureBox1.Image == null)
             {
-                MessageBox.Show(this, resources.GetString("loadImage"), strProgName);
+                MessageBox.Show(this, Properties.Resources.loadImage, strProgName);
                 return;
             }
 
@@ -210,7 +206,7 @@ namespace VietOCR.NET
             {
                 if (this.toolStripCbLang.SelectedIndex == -1)
                 {
-                    MessageBox.Show(this, resources.GetString("selectLanguage"), strProgName);
+                    MessageBox.Show(this, Properties.Resources.selectLanguage, strProgName);
                     return;
                 }
                 //if (this.pictureBox1.Image == null)
@@ -219,7 +215,7 @@ namespace VietOCR.NET
                 //    return;
                 //}
 
-                this.toolStripStatusLabel1.Text = resources.GetString("OCRrunning");
+                this.toolStripStatusLabel1.Text = Properties.Resources.OCRrunning;
                 this.Cursor = Cursors.WaitCursor;
                 this.pictureBox1.UseWaitCursor = true;
                 this.textBox1.Cursor = Cursors.WaitCursor;
@@ -288,7 +284,7 @@ namespace VietOCR.NET
             if (OwnedForms.Length > 0)
                 return;
 
-            HtmlHelpForm helpForm = new HtmlHelpForm(resources.GetString("readme"), strProgName + resources.GetString("_Help"));
+            HtmlHelpForm helpForm = new HtmlHelpForm(Properties.Resources.readme, strProgName + Properties.Resources._Help);
             helpForm.Owner = this;
             helpForm.Show();
         }
@@ -302,7 +298,7 @@ namespace VietOCR.NET
                 ".NET GUI Frontend for Tesseract OCR\n" +
                 DateTime.Parse(releaseDate).ToString("D", System.Threading.Thread.CurrentThread.CurrentUICulture).Normalize() + "\n" +
                 "http://vietocr.sourceforge.net",
-                resources.GetString("About_") + strProgName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Properties.Resources.About_ + strProgName, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -310,7 +306,7 @@ namespace VietOCR.NET
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             //openFileDialog1.InitialDirectory = "c:\\";
-            openFileDialog1.Title = resources.GetString("OpenImageFile");
+            openFileDialog1.Title = Properties.Resources.OpenImageFile;
             openFileDialog1.Filter = "Image files (*.tif)|*.tif|Image files (*.bmp)|*.bmp|Image files (*.jpg)|*.jpg|Image files (*.png)|*.png|All files (*.*)|*.*";
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
@@ -512,13 +508,13 @@ namespace VietOCR.NET
             catch (Exception ncde)
             {
                 Console.Write(ncde.Message);
-                MessageBox.Show(resources.GetString("Cannotloadimage"));
+                MessageBox.Show(Properties.Resources.Cannotloadimage);
             }
         }
 
         void displayImage()
         {
-            this.lblCurIndex.Text = resources.GetString("Page_") + (imageIndex + 1) + resources.GetString("_of_") + imageTotal;
+            this.lblCurIndex.Text = Properties.Resources.Page_ + (imageIndex + 1) + Properties.Resources._of_ + imageTotal;
             currentImage = imageList[imageIndex];
             this.pictureBox1.Image = currentImage;
             this.pictureBox1.Size = this.pictureBox1.Image.Size;
@@ -531,19 +527,19 @@ namespace VietOCR.NET
             if (e.Error != null)
             {
                 this.toolStripStatusLabel1.Text = String.Empty;
-                MessageBox.Show(e.Error.Message, resources.GetString("OCROperation"));
+                MessageBox.Show(e.Error.Message, Properties.Resources.OCROperation);
             }
             else if (e.Cancelled)
             {
                 // Next, handle the case where the user canceled the operation.
                 // Note that due to a race condition in the DoWork event handler, the Cancelled
                 // flag may not have been set, even though CancelAsync was called.
-                this.toolStripStatusLabel1.Text = resources.GetString("Canceled");
+                this.toolStripStatusLabel1.Text = Properties.Resources.Canceled;
             }
             else
             {
                 // Finally, handle the case where the operation succeeded.
-                this.toolStripStatusLabel1.Text = resources.GetString("OCRcompleted");
+                this.toolStripStatusLabel1.Text = Properties.Resources.OCRcompleted;
                 this.textBox1.AppendText(e.Result.ToString());
             }
 
@@ -561,20 +557,20 @@ namespace VietOCR.NET
             if (e.Error != null)
             {
                 this.toolStripStatusLabel1.Text = String.Empty;
-                MessageBox.Show(e.Error.Message, resources.GetString("ScanningOperation"));
+                MessageBox.Show(e.Error.Message, Properties.Resources.ScanningOperation);
             }
             else if (e.Cancelled)
             {
                 // Next, handle the case where the user canceled the operation.
                 // Note that due to a race condition in the DoWork event handler, the Cancelled
                 // flag may not have been set, even though CancelAsync was called.
-                this.toolStripStatusLabel1.Text = resources.GetString("Canceled");
+                this.toolStripStatusLabel1.Text = Properties.Resources.Canceled;
             }
             else
             {
                 // Finally, handle the case where the operation succeeded.
                 openFile(e.Result.ToString());
-                this.toolStripStatusLabel1.Text = resources.GetString("Scancompleted");
+                this.toolStripStatusLabel1.Text = Properties.Resources.Scancompleted;
             }
 
             this.Cursor = Cursors.Default;
@@ -615,7 +611,7 @@ namespace VietOCR.NET
         {
             try
             {
-                this.toolStripStatusLabel1.Text = resources.GetString("Scanning");
+                this.toolStripStatusLabel1.Text = Properties.Resources.Scanning;
                 this.Cursor = Cursors.WaitCursor;
                 this.pictureBox1.UseWaitCursor = true;
                 this.textBox1.Cursor = Cursors.WaitCursor;
@@ -794,7 +790,7 @@ namespace VietOCR.NET
 
             if (imageTotal > 0)
             {
-                this.lblCurIndex.Text = resources.GetString("Page_") + (imageIndex + 1) + resources.GetString("_of_") + imageTotal;
+                this.lblCurIndex.Text = Properties.Resources.Page_ + (imageIndex + 1) + Properties.Resources._of_ + imageTotal;
             }
         }
     }
