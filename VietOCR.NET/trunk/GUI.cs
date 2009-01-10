@@ -792,6 +792,8 @@ namespace VietOCR.NET
             {
                 this.lblCurIndex.Text = Properties.Resources.Page_ + (imageIndex + 1) + Properties.Resources._of_ + imageTotal;
             }
+
+            this.toolStripStatusLabel1.Text = null;
         }
     }
 }
