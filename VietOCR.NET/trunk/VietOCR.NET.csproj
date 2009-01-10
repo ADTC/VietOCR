@@ -130,9 +130,11 @@
     <Compile Include="ImageIOHelper.cs" />
     <Compile Include="OCR.cs" />
     <Compile Include="OCRImageEntity.cs" />
+    <Compile Include="Postprocessing\EngPP.cs" />
     <Compile Include="Postprocessing\IPostProcessor.cs" />
     <Compile Include="Postprocessing\Processor.cs" />
     <Compile Include="Postprocessing\ProcessorFactory.cs" />
+    <Compile Include="Postprocessing\TextUtilities.cs" />
     <Compile Include="Postprocessing\ViePP.cs" />
     <Compile Include="WIA\WiaOperationException.cs" />
     <Compile Include="WIA\WiaScannerAdapter.cs" />

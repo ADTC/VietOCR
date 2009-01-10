@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright @ 2008 Quan Nguyen
  * 
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -13,21 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
+using System;
+using System.Collections.Generic;
+using System.Text;
+
 namespace VietOCR.NET.Postprocessing
 {
-    using System;
-
-    /**
-     *
-     * @author Quan Nguyen (nguyenq@users.sf.net)
-     */
-    public class Processor
+    class EngPP : IPostProcessor
     {
-        
-        public static string PostProcess(string text, string langCode)
+        public string PostProcess(string text)
         {
-            IPostProcessor processor = ProcessorFactory.createProcessor((ISO639) Enum.Parse(typeof(ISO639), langCode));
-            return processor.PostProcess(text);
+            if (text.Trim().Length == 0)
+            {
+                return text;
+            }
+
+            // correct common errors caused by OCR
+            text = TextUtilities.CorrectOCRErrors(text);
+
+            // correct letter cases
+            text = TextUtilities.CorrectLetterCases(text);
+
+            return text;
         }
     }
 }

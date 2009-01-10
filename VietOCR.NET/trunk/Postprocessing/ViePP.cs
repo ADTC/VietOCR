@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-namespace net.sourceforge.vietocr.postprocessing
+namespace VietOCR.NET.Postprocessing
 {
     using System;
     using System.Text;
@@ -37,22 +37,11 @@ namespace net.sourceforge.vietocr.postprocessing
                 return text;
             }
 
-            // substitute letters frequently misrecognized by Tesseract 2.03
-            text = Regex.Replace(
-                    Regex.Replace(
-                    Regex.Replace(
-                    Regex.Replace(text,
-                        "\\b1(?=\\p{L}+\\b)", "l"), // 1 to l
-                        "\\b11(?=\\p{L}+\\b)", "n"), // 11 to n
-                        "\\bI(?=\\p{Ll}+\\b)", "l"), // I to l
-                        "(?<=\\b\\p{L}*)0(?=\\p{L}*\\b)", "o") // 0 to o
+            // correct common errors caused by OCR
+            text = TextUtilities.CorrectOCRErrors(text);
 
-                //                    .ReplaceAll("(?<!\\.) S(?=\\p{L}*\\b)", " s") // S to s
-                //                    .ReplaceAll("(?<![cn])h\\b", "n")
-            ;
-
+            // substitute Vietnamese letters frequently misrecognized by Tesseract 2.03
             StringBuilder strB = new StringBuilder(text);
-
             strB.Replace("êĩ-", "ết")
                 .Replace("ug", "ng")
                 .Replace("uh", "nh")
@@ -62,13 +51,8 @@ namespace net.sourceforge.vietocr.postprocessing
                 .Replace("II", "u")
                 .Replace("ôh", "ốn");
 
-            // lower uppercase letters ended by lowercase letters except the first letter
-            Regex regex = new Regex("(?<=\\p{L}+)(\\p{Lu}+)(?=\\p{Ll}+)");
-            text = regex.Replace(strB.ToString(), new MatchEvaluator(LowerCaseText));
-
-            //// lower uppercase letters begun by lowercase letters
-            regex = new Regex("(?<=\\p{Ll}+)(\\p{Lu}+)");
-            text = regex.Replace(text, new MatchEvaluator(LowerCaseText));
+            // correct letter cases
+            text = TextUtilities.CorrectLetterCases(strB.ToString());
 
             // add hook marks
             //                    .ReplaceAll("(?<![qQ])(u)(?=[ơờởỡớợ]\\p{L})", "ư")
@@ -89,12 +73,5 @@ namespace net.sourceforge.vietocr.postprocessing
 
             return nfdText.Normalize();
         }
-
-        string LowerCaseText(Match m)
-        {
-            // Lowercase the matched string.
-            return m.Value.ToLower();
-        }
-
     }
 }

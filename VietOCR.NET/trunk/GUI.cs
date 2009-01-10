@@ -28,7 +28,7 @@ using System.Globalization;
 using System.Threading;
 using System.Drawing.Imaging;
 
-using net.sourceforge.vietocr.postprocessing;
+using VietOCR.NET.Postprocessing;
 using Vietpad.NET.Controls;
 using VietOCR.NET.Controls;
 using Net.SourceForge.Vietpad.InputMethod;
