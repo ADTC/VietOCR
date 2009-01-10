@@ -1502,11 +1502,14 @@ private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {/
         bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle");
 
         SwingUtilities.invokeLater(new Runnable() {
+
             @Override
             public void run() {
                 FormLocalizer localizer = new FormLocalizer(Gui.this, Gui.class);
                 localizer.ApplyCulture(bundle);
-                jLabelCurIndex.setText(bundle.getString("Page_") + (imageIndex + 1) + " " + bundle.getString("of_") + imageTotal);
+                if (imageTotal > 0) {
+                    jLabelCurIndex.setText(bundle.getString("Page_") + (imageIndex + 1) + " " + bundle.getString("of_") + imageTotal);
+                }
                 jMenuItemHelp.setText(APP_NAME + " " + jMenuItemHelp.getText());
                 jMenuItemAbout.setText(jMenuItemAbout.getText() + " " + APP_NAME);
                 if (helptopicsFrame != null) {
@@ -1542,6 +1545,7 @@ private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {/
         Locale.setDefault(selectedUILang.equals("vi") ? VIETNAM : Locale.US);
 
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             @Override
             public void run() {
                 new Gui().setVisible(true);
