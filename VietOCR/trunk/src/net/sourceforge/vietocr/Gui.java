@@ -43,12 +43,12 @@ public class Gui extends javax.swing.JFrame {
 
     private File imageFile;
     public static final String APP_NAME = "VietOCR";
-    final static boolean MAC_OS_X = System.getProperty("os.name").startsWith("Mac");
-    final static boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
-    final static Locale VIETNAM = new Locale("vi", "VN");
+    static final boolean MAC_OS_X = System.getProperty("os.name").startsWith("Mac");
+    static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
+    static final Locale VIETNAM = new Locale("vi", "VN");
     private final String UTF8 = "UTF-8";
     protected ResourceBundle myResources,  bundle;
-    protected final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
+    protected static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
     private Font font;
     private final Rectangle screen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
     private int imageIndex;
@@ -69,7 +69,7 @@ public class Gui extends javax.swing.JFrame {
     private boolean wordWrapOn;
     private String selectedInputMethod;
     private float scaleX,  scaleY;
-    private String selectedUILang;
+    protected static String selectedUILang;
     private int originalW,  originalH;
     private final float ZOOM_FACTOR = 1.25f;
 
@@ -77,9 +77,6 @@ public class Gui extends javax.swing.JFrame {
      * Creates new form Gui
      */
     public Gui() {
-        selectedUILang = prefs.get("UILanguage", "en");
-        Locale.setDefault(selectedUILang.equals("vi") ? VIETNAM : Locale.US);
-
         File baseDir = getBaseDir();
         tessPath = prefs.get("TesseractDirectory", new File(baseDir, "tesseract").getPath());
 
@@ -1541,8 +1538,10 @@ private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {/
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        selectedUILang = prefs.get("UILanguage", "en");
+        Locale.setDefault(selectedUILang.equals("vi") ? VIETNAM : Locale.US);
 
+        java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new Gui().setVisible(true);
