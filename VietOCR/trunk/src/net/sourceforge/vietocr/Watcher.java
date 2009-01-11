@@ -10,14 +10,14 @@ import java.util.Queue;
 /**
  * http://forums.sun.com/thread.jspa?forumID=31&threadID=5316582
  */
-public class Sniffer implements Runnable {
+public class Watcher implements Runnable {
 
     private long lastTime = 0;
     private List<File> lastFiles = new ArrayList<File>();
     private File watchFolder;
     Queue<File> queue;
 
-    Sniffer(Queue<File> q, File folder) {
+    Watcher(Queue<File> q, File folder) {
         queue = q;
         watchFolder = folder;
     }
@@ -61,7 +61,7 @@ public class Sniffer implements Runnable {
     public static void main(String[] args) {
         Queue<File> queue = new LinkedList<File>();
         File watchFolder = new File(System.getProperty("user.home"));
-        Thread t = new Thread(new Sniffer(queue, watchFolder));
+        Thread t = new Thread(new Watcher(queue, watchFolder));
         t.start();
     }
 }
