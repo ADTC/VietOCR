@@ -34,10 +34,12 @@ namespace VietOCR.NET
         /// <returns>list of images</returns>
         public static IList<Image> GetImageList(FileInfo imageFile)
         {
+            Image image = null;
+
             try
             {
                 // read in the image
-                Image image = Image.FromFile(imageFile.FullName);
+                image = Image.FromFile(imageFile.FullName);
 
                 IList<Image> images = new List<Image>();
 
@@ -45,12 +47,14 @@ namespace VietOCR.NET
                 for (int i = 0; i < count; i++)
                 {
                     // save each frame to a bytestream
-                    image.SelectActiveFrame(FrameDimension.Page, i);
-                    MemoryStream byteStream = new MemoryStream();
-                    image.Save(byteStream, ImageFormat.Bmp);
+                    using (MemoryStream byteStream = new MemoryStream())
+                    {
+                        image.SelectActiveFrame(FrameDimension.Page, i);
+                        image.Save(byteStream, ImageFormat.Bmp);
 
-                    // and then create a new Image from it
-                    images.Add(Image.FromStream(byteStream));
+                        // and then create a new Image from it
+                        images.Add(Image.FromStream(byteStream));
+                    }
                 }
 
                 return images;
@@ -58,6 +62,13 @@ namespace VietOCR.NET
             catch
             {
                 return null;
+            }
+            finally
+            {
+                if (image != null)
+                {
+                    image.Dispose();
+                }
             }
         }
 
