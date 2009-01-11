@@ -33,6 +33,7 @@ using Vietpad.NET.Controls;
 using VietOCR.NET.Controls;
 using Net.SourceForge.Vietpad.InputMethod;
 using VietOCR.NET.WIA;
+using System.Timers;
 
 namespace VietOCR.NET
 {
@@ -62,6 +63,8 @@ namespace VietOCR.NET
         private bool IsFitForZoomIn = false;
         private const float ZOOM_FACTOR = 1.25f;
 
+        private Queue<String> queue;
+
         public GUI()
         {
             // Access registry to determine which UI Language to be loaded.
@@ -86,6 +89,45 @@ namespace VietOCR.NET
 
             LoadLang();
             this.toolStripCbLang.Items.AddRange(langs);
+
+            string watchFolder = System.Configuration.ConfigurationManager.AppSettings["WatchFolder"];
+            string outputFolder = System.Configuration.ConfigurationManager.AppSettings["OutputFolder"];
+
+            queue = new Queue<String>();
+            Watcher watcher = new Watcher(queue, watchFolder);
+
+            System.Timers.Timer aTimer = new System.Timers.Timer(5000);
+            // Hook up the Elapsed event for the timer.
+            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            aTimer.Enabled = true;
+
+        }
+
+        // Specify what you want to happen when the Elapsed event is 
+        // raised.
+        private void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            if (queue.Count > 0)
+            {
+                Thread t = new Thread(new ThreadStart(ThreadProc));
+                t.Start();
+            }
+        }
+        public void ThreadProc()
+        {
+
+            // perform OCR
+            //Console.WriteLine("File: " + queue.Dequeue());
+            imageFile = new FileInfo(queue.Dequeue());
+            loadImage(imageFile);
+
+            OCRImageEntity entity = new OCRImageEntity(imageList, -1, Rectangle.Empty, curLangCode);
+            OCR ocrEngine = new OCR();
+
+            string result = ocrEngine.RecognizeText(entity.Images, entity.Index, entity.Lang);
+            StreamWriter sw = new StreamWriter(imageFile.FullName + ".txt", false, new System.Text.UTF8Encoding());
+            sw.Write(result);
+            sw.Close();
         }
 
         void LoadLang()
