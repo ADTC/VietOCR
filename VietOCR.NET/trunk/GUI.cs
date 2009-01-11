@@ -64,9 +64,9 @@ namespace VietOCR.NET
         private const float ZOOM_FACTOR = 1.25f;
 
         private Queue<String> queue;
-        private string watchFolder = @"C:\Projects\VietOCR\samples";
-        private string outputFolder = @"C:\Temp";
-        private bool watchEnabled = false;
+        protected string watchFolder = System.Configuration.ConfigurationManager.AppSettings["WatchFolder"];
+        protected string outputFolder = System.Configuration.ConfigurationManager.AppSettings["OutputFolder"];
+        protected bool watchEnabled = false;
 
         public GUI()
         {
@@ -92,9 +92,11 @@ namespace VietOCR.NET
 
             LoadLang();
             this.toolStripCbLang.Items.AddRange(langs);
+        }
 
-            string watchFolder = System.Configuration.ConfigurationManager.AppSettings["WatchFolder"];
-            outputFolder = System.Configuration.ConfigurationManager.AppSettings["OutputFolder"];
+        protected override void OnLoad(EventArgs ea)
+        {
+            base.OnLoad(ea);
 
             queue = new Queue<String>();
             Watcher watcher = new Watcher(queue, watchFolder);
