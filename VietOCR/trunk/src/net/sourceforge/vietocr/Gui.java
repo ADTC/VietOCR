@@ -33,6 +33,7 @@ import net.sourceforge.vietpad.*;
 import net.sourceforge.vietpad.inputmethod.*;
 import net.sourceforge.vietocr.wia.*;
 import java.net.*;
+import javax.swing.Timer;
 
 /**
  *
@@ -59,7 +60,7 @@ public class Gui extends javax.swing.JFrame {
     private String currentDirectory;
     private String outputDirectory;
     private String tessPath;
-    private Properties prop;
+    private Properties prop, config;
     private String curLangCode;
     private String[] langCodes;
     private String[] langs;
@@ -72,6 +73,7 @@ public class Gui extends javax.swing.JFrame {
     protected static String selectedUILang;
     private int originalW,  originalH;
     private final float ZOOM_FACTOR = 1.25f;
+    private Queue<File> queue;
 
     /**
      * Creates new form Gui
@@ -100,8 +102,7 @@ public class Gui extends javax.swing.JFrame {
             });
 
             File xmlFile = new File(baseDir, "data/ISO639-3.xml");
-            FileInputStream fis = new FileInputStream(xmlFile);
-            prop.loadFromXML(fis);
+            prop.loadFromXML(new FileInputStream(xmlFile));
         } catch (IOException ioe) {
             JOptionPane.showMessageDialog(null, "Missing ISO639-3.xml file. Cannot find it in " + new File(baseDir, "data").getPath() + " directory.", APP_NAME, JOptionPane.ERROR_MESSAGE);
             ioe.printStackTrace();
@@ -120,9 +121,11 @@ public class Gui extends javax.swing.JFrame {
         }
 
         selectedInputMethod = prefs.get("inputMethod", "Telex");
-
+        config = new Properties();
+        
         try {
             UIManager.setLookAndFeel(prefs.get("lookAndFeel", UIManager.getSystemLookAndFeelClassName()));
+            config.loadFromXML(getClass().getResourceAsStream("config.xml"));
         } catch (Exception e) {
             e.printStackTrace();
         // keep default LAF
@@ -205,6 +208,40 @@ public class Gui extends javax.swing.JFrame {
         m_undo.discardAllEdits();
         updateUndoRedo();
         updateCutCopyDelete(false);
+
+        queue = new LinkedList<File>();
+        final File watchFolder = new File(config.getProperty("WatchFolder"));
+        final File outputFolder = new File(config.getProperty("OutputFolder"));
+        Thread t = new Thread(new Sniffer(queue, watchFolder));
+        t.start();
+
+        Action autoOcrAction = new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                final File file = queue.poll();
+                if (file != null) {
+                    loadImage(file);
+
+                    SwingUtilities.invokeLater(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            try {
+                                OCR ocrEngine = new OCR(tessPath);
+                                String result = ocrEngine.recognizeText(iioImageList, -1, langCodes[jComboBoxLang.getSelectedIndex()]);
+                                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(outputFolder, file.getName() + ".txt")), UTF8));
+                                out.write(result);
+                                out.close();
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+                }
+            }
+        };
+
+        new Timer(5000, autoOcrAction).start();
     }
 
     /**
@@ -1060,8 +1097,6 @@ public class Gui extends javax.swing.JFrame {
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         try {
-            Properties config = new Properties();
-            config.loadFromXML(getClass().getResourceAsStream("config.xml"));
             String version = config.getProperty("Version");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date releaseDate = sdf.parse(config.getProperty("ReleaseDate"));
