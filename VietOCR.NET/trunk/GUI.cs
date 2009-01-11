@@ -101,34 +101,31 @@ namespace VietOCR.NET
             // Hook up the Elapsed event for the timer.
             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             aTimer.Enabled = true;
-
         }
 
-        // Specify what you want to happen when the Elapsed event is 
-        // raised.
+        // Specify what you want to happen when the Elapsed event is raised.
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
             if (queue.Count > 0)
             {
-                Thread t = new Thread(new ThreadStart(ThreadProc));
+                Thread t = new Thread(new ThreadStart(AutoOCR));
                 t.Start();
             }
         }
-        public void ThreadProc()
-        {
 
-            // perform OCR
-            //Console.WriteLine("File: " + queue.Dequeue());
+        public void AutoOCR()
+        {
             imageFile = new FileInfo(queue.Dequeue());
             loadImage(imageFile);
 
             OCRImageEntity entity = new OCRImageEntity(imageList, -1, Rectangle.Empty, curLangCode);
             OCR ocrEngine = new OCR();
-
             string result = ocrEngine.RecognizeText(entity.Images, entity.Index, entity.Lang);
-            StreamWriter sw = new StreamWriter(Path.Combine(outputFolder, imageFile.Name + ".txt"), false, new System.Text.UTF8Encoding());
-            sw.Write(result);
-            sw.Close();
+
+            using (StreamWriter sw = new StreamWriter(Path.Combine(outputFolder, imageFile.Name + ".txt"), false, new System.Text.UTF8Encoding()))
+            {
+                sw.Write(result);
+            }
         }
 
         void LoadLang()
