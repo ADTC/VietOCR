@@ -152,7 +152,7 @@ namespace VietOCR.NET
             this.textBox1.BackColor = Color.FromArgb(
                 (int)regkey.GetValue(strBackColor, Color.FromKnownColor(KnownColor.White).ToArgb()));
 
-            watchEnabled = Convert.ToBoolean((int)regkey.GetValue(strWatchFolder, Convert.ToInt32(false)));
+            watchEnabled = Convert.ToBoolean((int)regkey.GetValue(strWatchEnable, Convert.ToInt32(false)));
             watchFolder = (string) regkey.GetValue(strWatchFolder);
             outputFolder = (string) regkey.GetValue(strOutputFolder);
         }
