@@ -22,8 +22,9 @@ namespace VietOCR.NET
                the renaming of files or directories. */
             watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
                | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+
             // Only watch tif files.
-            watcher.Filter = "*.tif";
+            //watcher.Filter = "*.tif"; // commented out since multiple filters not possible with Filter property
 
             // Add event handlers.
             //watcher.Changed += new FileSystemEventHandler(OnChanged);
@@ -42,7 +43,10 @@ namespace VietOCR.NET
             Console.WriteLine("File: " + e.FullPath + " " + e.ChangeType);
             if (e.ChangeType == WatcherChangeTypes.Created)
             {
-                queue.Enqueue(e.FullPath);
+                if (e.Name.ToLower().EndsWith(".tif"))
+                {
+                    queue.Enqueue(e.FullPath);
+                }
             }
         }
 
