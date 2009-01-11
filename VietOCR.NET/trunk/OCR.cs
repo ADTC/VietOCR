@@ -29,38 +29,21 @@ namespace VietOCR.NET
         BackgroundWorker worker;
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public string RecognizeText(IList<Image> images, int index, string lang, Rectangle selection, BackgroundWorker worker, DoWorkEventArgs e)
+        public string RecognizeText(IList<Image> images, int index, string lang, Rectangle selection)
         {
             rect = selection;
-            return RecognizeText(images, index, lang, worker, e);
+            return RecognizeText(images, index, lang);
         }
         /// <summary>
-        /// 
+        /// Recognize text
         /// </summary>
-        /// <param name="images">list of images</param>
-        /// <param name="index">index of page (frame) of image; -1 for all</param>
-        /// <param name="lang">the language OCR is going to be performed for</param>
-        /// <returns>result text</returns>
+        /// <param name="images"></param>
+        /// <param name="index"></param>
+        /// <param name="lang"></param>
+        /// <returns></returns>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public string RecognizeText(IList<Image> images, int index, string lang, BackgroundWorker worker, DoWorkEventArgs e)
+        public string RecognizeText(IList<Image> images, int index, string lang)
         {
-            // Abort the operation if the user has canceled.
-            // Note that a call to CancelAsync may have set 
-            // CancellationPending to true just after the
-            // last invocation of this method exits, so this 
-            // code will not have the opportunity to set the 
-            // DoWorkEventArgs.Cancel flag to true. This means
-            // that RunWorkerCompletedEventArgs.Cancelled will
-            // not be set to true in your RunWorkerCompleted
-            // event handler. This is a race condition.
-            this.worker = worker;
-
-            if (worker.CancellationPending)
-            {
-                e.Cancel = true;
-                return String.Empty;
-            }
-
             using (tessnet2.Tesseract ocr = new tessnet2.Tesseract())
             {
                 ocr.Init(lang, false);
@@ -114,6 +97,43 @@ namespace VietOCR.NET
                 }
                 return strB.ToString();
             }
+        }
+
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public string RecognizeText(IList<Image> images, int index, string lang, Rectangle selection, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            rect = selection;
+            return RecognizeText(images, index, lang, worker, e);
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="images">list of images</param>
+        /// <param name="index">index of page (frame) of image; -1 for all</param>
+        /// <param name="lang">the language OCR is going to be performed for</param>
+        /// <returns>result text</returns>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public string RecognizeText(IList<Image> images, int index, string lang, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            // Abort the operation if the user has canceled.
+            // Note that a call to CancelAsync may have set 
+            // CancellationPending to true just after the
+            // last invocation of this method exits, so this 
+            // code will not have the opportunity to set the 
+            // DoWorkEventArgs.Cancel flag to true. This means
+            // that RunWorkerCompletedEventArgs.Cancelled will
+            // not be set to true in your RunWorkerCompleted
+            // event handler. This is a race condition.
+            this.worker = worker;
+
+            if (worker.CancellationPending)
+            {
+                e.Cancel = true;
+                return String.Empty;
+            }
+
+            return RecognizeText(images, index, lang);
         }
         public void Finished(List<tessnet2.Word> result)
         {
