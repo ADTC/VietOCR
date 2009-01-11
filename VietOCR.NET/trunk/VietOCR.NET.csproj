@@ -137,6 +137,12 @@
     <Compile Include="Postprocessing\TextUtilities.cs" />
     <Compile Include="Postprocessing\ViePP.cs" />
     <Compile Include="Watcher.cs" />
+    <Compile Include="WatchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WatchForm.Designer.cs">
+      <DependentUpon>WatchForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="WIA\WiaOperationException.cs" />
     <Compile Include="WIA\WiaScannerAdapter.cs" />
   </ItemGroup>
@@ -234,6 +240,9 @@
     <EmbeddedResource Include="readme_cs_vi.html" />
     <EmbeddedResource Include="Properties\Resources.vi-VN.resx">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WatchForm.resx">
+      <DependentUpon>WatchForm.cs</DependentUpon>
     </EmbeddedResource>
     <Content Include="samples\vietsample.tif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
