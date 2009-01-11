@@ -213,8 +213,9 @@ public class Gui extends javax.swing.JFrame {
         final File watchFolder = new File(config.getProperty("WatchFolder"));
         final File outputFolder = new File(config.getProperty("OutputFolder"));
         Thread t = new Thread(new Watcher(queue, watchFolder));
-        t.start();
+        t.start(); // watch for new image files
 
+        // autoOCR if there are files in the queue
         Action autoOcrAction = new AbstractAction() {
 
             @Override
