@@ -64,7 +64,9 @@ namespace VietOCR.NET
         private const float ZOOM_FACTOR = 1.25f;
 
         private Queue<String> queue;
-        private string outputFolder;
+        private string watchFolder = @"C:\Projects\VietOCR\samples";
+        private string outputFolder = @"C:\Temp";
+        private bool watchEnabled = false;
 
         public GUI()
         {
@@ -849,6 +851,21 @@ namespace VietOCR.NET
                 {
                     helpForm.Text = strProgName + Properties.Resources._Help;
                 }
+            }
+        }
+
+        private void watchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WatchForm form = new WatchForm();
+            form.WatchFolder = watchFolder;
+            form.OutputFolder = outputFolder;
+            form.WatchEnabled = watchEnabled;
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                watchFolder = form.WatchFolder;
+                outputFolder = form.OutputFolder;
+                watchEnabled = form.WatchEnabled;
             }
         }
     }
