@@ -64,6 +64,7 @@ namespace VietOCR.NET
         private const float ZOOM_FACTOR = 1.25f;
 
         private Queue<String> queue;
+        private string outputFolder;
 
         public GUI()
         {
@@ -91,7 +92,7 @@ namespace VietOCR.NET
             this.toolStripCbLang.Items.AddRange(langs);
 
             string watchFolder = System.Configuration.ConfigurationManager.AppSettings["WatchFolder"];
-            string outputFolder = System.Configuration.ConfigurationManager.AppSettings["OutputFolder"];
+            outputFolder = System.Configuration.ConfigurationManager.AppSettings["OutputFolder"];
 
             queue = new Queue<String>();
             Watcher watcher = new Watcher(queue, watchFolder);
@@ -125,7 +126,7 @@ namespace VietOCR.NET
             OCR ocrEngine = new OCR();
 
             string result = ocrEngine.RecognizeText(entity.Images, entity.Index, entity.Lang);
-            StreamWriter sw = new StreamWriter(imageFile.FullName + ".txt", false, new System.Text.UTF8Encoding());
+            StreamWriter sw = new StreamWriter(Path.Combine(outputFolder, imageFile.Name + ".txt"), false, new System.Text.UTF8Encoding());
             sw.Write(result);
             sw.Close();
         }
