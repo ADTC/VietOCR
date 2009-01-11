@@ -212,7 +212,7 @@ public class Gui extends javax.swing.JFrame {
         queue = new LinkedList<File>();
         final File watchFolder = new File(config.getProperty("WatchFolder"));
         final File outputFolder = new File(config.getProperty("OutputFolder"));
-        Thread t = new Thread(new Sniffer(queue, watchFolder));
+        Thread t = new Thread(new Watcher(queue, watchFolder));
         t.start();
 
         Action autoOcrAction = new AbstractAction() {
