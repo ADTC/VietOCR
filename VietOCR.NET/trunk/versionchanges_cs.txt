@@ -44,3 +44,6 @@ Version 0.8 (30 November 2008)
 Version 0.9 (10 January 2009)
 - Revamped localization codes
 - Added rudimentary support for English postprocessing
+
+Version 0.9.1 (11 January 2009)
+- Added watch folder functionality
