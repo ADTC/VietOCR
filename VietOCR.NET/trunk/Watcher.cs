@@ -10,6 +10,13 @@ namespace VietOCR.NET
     {
         private Queue<String> queue;
         private Regex filters;
+        private FileSystemWatcher watcher;
+
+        public bool Enabled
+        {
+            get { return watcher.EnableRaisingEvents; }
+            set { watcher.EnableRaisingEvents = value; }
+        }
 
         //[PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         public Watcher(Queue<String> q, string watchFolder)
@@ -18,7 +25,7 @@ namespace VietOCR.NET
             filters = new Regex(@".*\.(tif|tiff|jpg|jpeg|png|bmp)$", RegexOptions.IgnoreCase);
 
             // Create a new FileSystemWatcher and set its properties.
-            FileSystemWatcher watcher = new FileSystemWatcher();
+            watcher = new FileSystemWatcher();
             watcher.Path = watchFolder;
             /* Watch for changes in LastWrite times, and 
                the renaming of files or directories. */
