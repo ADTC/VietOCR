@@ -118,13 +118,20 @@ namespace VietOCR.NET
             imageFile = new FileInfo(queue.Dequeue());
             loadImage(imageFile);
 
-            OCRImageEntity entity = new OCRImageEntity(imageList, -1, Rectangle.Empty, curLangCode);
-            OCR ocrEngine = new OCR();
-            string result = ocrEngine.RecognizeText(entity.Images, entity.Index, entity.Lang);
-
-            using (StreamWriter sw = new StreamWriter(Path.Combine(outputFolder, imageFile.Name + ".txt"), false, new System.Text.UTF8Encoding()))
+            try
             {
-                sw.Write(result);
+                OCRImageEntity entity = new OCRImageEntity(imageList, -1, Rectangle.Empty, curLangCode);
+                OCR ocrEngine = new OCR();
+                string result = ocrEngine.RecognizeText(entity.Images, entity.Index, entity.Lang);
+
+                using (StreamWriter sw = new StreamWriter(Path.Combine(outputFolder, imageFile.Name + ".txt"), false, new System.Text.UTF8Encoding()))
+                {
+                    sw.Write(result);
+                }
+            }
+            catch
+            {
+                //ignore
             }
         }
 

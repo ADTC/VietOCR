@@ -1,27 +1,28 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace VietOCR.NET
 {
     public class Watcher
     {
-        private FileInfo watchFolder;
         private Queue<String> queue;
+        private Regex filters;
 
         //[PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
-        public Watcher(Queue<String> q, string folder)
+        public Watcher(Queue<String> q, string watchFolder)
         {
             queue = q;
+            filters = new Regex(@".*\.(tif|tiff|jpg|jpeg|png|bmp)$", RegexOptions.IgnoreCase);
 
             // Create a new FileSystemWatcher and set its properties.
             FileSystemWatcher watcher = new FileSystemWatcher();
-            watcher.Path = folder;
-            /* Watch for changes in LastAccess and LastWrite times, and 
+            watcher.Path = watchFolder;
+            /* Watch for changes in LastWrite times, and 
                the renaming of files or directories. */
-            watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
-               | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+            watcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
 
             // Only watch tif files.
             //watcher.Filter = "*.tif"; // commented out since multiple filters not possible with Filter property
@@ -40,11 +41,11 @@ namespace VietOCR.NET
         private void OnChanged(object source, FileSystemEventArgs e)
         {
             // Specify what is done when a file is changed, created, or deleted.
-            Console.WriteLine("File: " + e.FullPath + " " + e.ChangeType);
             if (e.ChangeType == WatcherChangeTypes.Created)
             {
-                if (e.Name.ToLower().EndsWith(".tif"))
+                if (filters.IsMatch(e.Name))
                 {
+                    Console.WriteLine("New file: " + e.FullPath);
                     queue.Enqueue(e.FullPath);
                 }
             }
