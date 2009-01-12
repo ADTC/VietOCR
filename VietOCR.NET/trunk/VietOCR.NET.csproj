@@ -121,6 +121,12 @@
     <Compile Include="GUIWithRegistry.Designer.cs">
       <DependentUpon>GUIWithRegistry.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUIWithWatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIWithWatch.Designer.cs">
+      <DependentUpon>GUIWithWatch.cs</DependentUpon>
+    </Compile>
     <Compile Include="HtmlHelpForm.cs">
       <SubType>Form</SubType>
     </Compile>

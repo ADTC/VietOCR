@@ -33,7 +33,6 @@ using Vietpad.NET.Controls;
 using VietOCR.NET.Controls;
 using Net.SourceForge.Vietpad.InputMethod;
 using VietOCR.NET.WIA;
-using System.Timers;
 
 namespace VietOCR.NET
 {
@@ -42,15 +41,15 @@ namespace VietOCR.NET
         //private Bitmap image;
         protected const string strProgName = "VietOCR.NET";
 
-        string curLangCode;
+        protected string curLangCode;
         string[] langCodes;
         string[] langs;
 
         private int imageIndex;
         private int imageTotal;
-        private IList<Image> imageList;
+        protected IList<Image> imageList;
         private Image currentImage;
-        private FileInfo imageFile;
+        protected FileInfo imageFile;
 
         private Rectangle rect = Rectangle.Empty;
         private Rectangle box = Rectangle.Empty;
@@ -62,11 +61,6 @@ namespace VietOCR.NET
         protected string strRegKey = "Software\\VietUnicode\\";
         private bool IsFitForZoomIn = false;
         private const float ZOOM_FACTOR = 1.25f;
-
-        private Queue<String> queue;
-        protected string watchFolder = System.Configuration.ConfigurationManager.AppSettings["WatchFolder"];
-        protected string outputFolder = System.Configuration.ConfigurationManager.AppSettings["OutputFolder"];
-        protected bool watchEnabled = false;
 
         public GUI()
         {
@@ -92,51 +86,6 @@ namespace VietOCR.NET
 
             LoadLang();
             this.toolStripCbLang.Items.AddRange(langs);
-        }
-
-        protected override void OnLoad(EventArgs ea)
-        {
-            base.OnLoad(ea);
-
-            queue = new Queue<String>();
-            Watcher watcher = new Watcher(queue, watchFolder);
-
-            System.Timers.Timer aTimer = new System.Timers.Timer(5000);
-            // Hook up the Elapsed event for the timer.
-            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            aTimer.Enabled = true;
-        }
-
-        // Specify what you want to happen when the Elapsed event is raised.
-        private void OnTimedEvent(object source, ElapsedEventArgs e)
-        {
-            if (queue.Count > 0)
-            {
-                Thread t = new Thread(new ThreadStart(AutoOCR));
-                t.Start();
-            }
-        }
-
-        public void AutoOCR()
-        {
-            imageFile = new FileInfo(queue.Dequeue());
-            loadImage(imageFile);
-
-            try
-            {
-                OCRImageEntity entity = new OCRImageEntity(imageList, -1, Rectangle.Empty, curLangCode);
-                OCR ocrEngine = new OCR();
-                string result = ocrEngine.RecognizeText(entity.Images, entity.Index, entity.Lang);
-
-                using (StreamWriter sw = new StreamWriter(Path.Combine(outputFolder, imageFile.Name + ".txt"), false, new System.Text.UTF8Encoding()))
-                {
-                    sw.Write(result);
-                }
-            }
-            catch
-            {
-                //ignore
-            }
         }
 
         void LoadLang()
@@ -548,7 +497,7 @@ namespace VietOCR.NET
             setButton();
         }
 
-        void loadImage(FileInfo imageFile)
+        protected void loadImage(FileInfo imageFile)
         {
             try
             {
@@ -856,19 +805,9 @@ namespace VietOCR.NET
             }
         }
 
-        private void watchToolStripMenuItem_Click(object sender, EventArgs e)
+        protected virtual void watchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WatchForm form = new WatchForm();
-            form.WatchFolder = watchFolder;
-            form.OutputFolder = outputFolder;
-            form.WatchEnabled = watchEnabled;
-
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                watchFolder = form.WatchFolder;
-                outputFolder = form.OutputFolder;
-                watchEnabled = form.WatchEnabled;
-            }
+            MessageBox.Show("To be implemented", strProgName);
         }
     }
 }
