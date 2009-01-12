@@ -95,9 +95,9 @@ namespace VietOCR.NET
                     sw.Write(result);
                 }
             }
-            catch
+            catch (Exception e)
             {
-                //ignore
+                Console.WriteLine(e.StackTrace);
             }
         }
 

@@ -45,7 +45,8 @@ namespace VietOCR.NET.Postprocessing
                     processor = new ViePP();
                     break;
                 default:
-                    throw new Exception(code.ToString());
+                    processor = new EngPP();
+                    //throw new Exception(code.ToString());
             }
 
             return processor;
