@@ -48,7 +48,6 @@ namespace VietOCR.NET
         private int imageIndex;
         private int imageTotal;
         protected IList<Image> imageList;
-        private Image currentImage;
         protected FileInfo imageFile;
 
         private Rectangle rect = Rectangle.Empty;
@@ -505,8 +504,7 @@ namespace VietOCR.NET
         void displayImage()
         {
             this.lblCurIndex.Text = Properties.Resources.Page_ + (imageIndex + 1) + Properties.Resources._of_ + imageTotal;
-            currentImage = imageList[imageIndex];
-            this.pictureBox1.Image = currentImage;
+            this.pictureBox1.Image = imageList[imageIndex];
             this.pictureBox1.Size = this.pictureBox1.Image.Size;
             this.pictureBox1.Invalidate();
         }
