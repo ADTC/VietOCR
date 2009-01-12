@@ -25,6 +25,7 @@ using System.Timers;
 using System.Threading;
 using System.IO;
 using Microsoft.Win32;
+using VietOCR.NET.Postprocessing;
 
 namespace VietOCR.NET
 {
@@ -74,13 +75,20 @@ namespace VietOCR.NET
         private void AutoOCR()
         {
             imageFile = new FileInfo(queue.Dequeue());
-            loadImage(imageFile);
+            imageList = ImageIOHelper.GetImageList(imageFile);
+
+            if (imageList == null)
+            {
+                return;
+            }
 
             try
             {
-                OCRImageEntity entity = new OCRImageEntity(imageList, -1, Rectangle.Empty, curLangCode);
                 OCR ocrEngine = new OCR();
-                string result = ocrEngine.RecognizeText(entity.Images, entity.Index, entity.Lang);
+                string result = ocrEngine.RecognizeText(imageList, -1, curLangCode);
+                
+                // postprocess to correct common OCR errors
+                result = Processor.PostProcess(result, curLangCode);
 
                 using (StreamWriter sw = new StreamWriter(Path.Combine(outputFolder, imageFile.Name + ".txt"), false, new System.Text.UTF8Encoding()))
                 {

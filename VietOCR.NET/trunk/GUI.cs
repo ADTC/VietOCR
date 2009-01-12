@@ -465,12 +465,17 @@ namespace VietOCR.NET
         public void openFile(string selectedImageFile)
         {
             imageFile = new FileInfo(selectedImageFile);
-            loadImage(imageFile);
+            imageList = ImageIOHelper.GetImageList(imageFile);
 
             if (imageList == null)
             {
+                MessageBox.Show(Properties.Resources.Cannotloadimage);
                 return;
             }
+
+            imageTotal = imageList.Count;
+            imageIndex = 0;
+
             displayImage();
 
             this.Text = imageFile.Name + " - " + strProgName;
@@ -495,21 +500,6 @@ namespace VietOCR.NET
             }
 
             setButton();
-        }
-
-        protected void loadImage(FileInfo imageFile)
-        {
-            try
-            {
-                imageList = ImageIOHelper.GetImageList(imageFile);
-                imageTotal = imageList.Count;
-                imageIndex = 0;
-            }
-            catch (Exception ncde)
-            {
-                Console.Write(ncde.Message);
-                MessageBox.Show(Properties.Resources.Cannotloadimage);
-            }
         }
 
         void displayImage()
