@@ -222,7 +222,7 @@ public class Gui extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 final File file = queue.poll();
                 if (file != null) {
-                    loadImage(file);
+                    iioImageList = ImageIOHelper.getIIOImageList(file);
 
                     SwingUtilities.invokeLater(new Runnable() {
 
@@ -1099,7 +1099,7 @@ public class Gui extends javax.swing.JFrame {
 }//GEN-LAST:event_jButtonNextPageActionPerformed
 
     private void jMenuItemOCRAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRAllActionPerformed
-        if (imageFile == null) {
+        if (this.jImageLabel.getIcon() == null) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -1246,7 +1246,6 @@ public class Gui extends javax.swing.JFrame {
         } else {
             performOCR(iioImageList, imageIndex);
         }
-
     }//GEN-LAST:event_jMenuItemOCRActionPerformed
 
     /**
@@ -1260,10 +1259,7 @@ public class Gui extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_select_a_language."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        if (this.jImageLabel.getIcon() == null) {
-            JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
+
         jLabelStatus.setText(bundle.getString("OCR_running..."));
         getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         getGlassPane().setVisible(true);
@@ -1352,11 +1348,17 @@ public class Gui extends javax.swing.JFrame {
      */
     public void openFile(File selectedFile) {
         imageFile = selectedFile;
-        loadImage(imageFile);
+        iioImageList = ImageIOHelper.getIIOImageList(imageFile);
+        imageList = ImageIOHelper.getImageList(iioImageList);
 
         if (imageList == null) {
+            JOptionPane.showMessageDialog(null, bundle.getString("Cannotloadimage"), APP_NAME, JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        imageTotal = imageList.size();
+        imageIndex = 0;
+
         displayImage();
 
 //        originalW = imageIcon.getIconWidth();
@@ -1403,28 +1405,6 @@ public class Gui extends javax.swing.JFrame {
             this.jButtonNextPage.setEnabled(false);
         } else {
             this.jButtonNextPage.setEnabled(true);
-        }
-    }
-
-    void loadImage(final File imageFile) {
-        try {
-            iioImageList = ImageIOHelper.getIIOImageList(imageFile);
-            imageList = ImageIOHelper.getImageList(iioImageList);
-            imageTotal = imageList.size();
-            imageIndex = 0;
-        } catch (RuntimeException re) {
-            JOptionPane.showMessageDialog(null, re.getMessage() + " " + bundle.getString("CorruptedImage"), APP_NAME, JOptionPane.ERROR_MESSAGE);
-            throw re;
-        } catch (NoClassDefFoundError ncde) {
-            System.err.println(ncde.getMessage());
-            JOptionPane.showMessageDialog(null, bundle.getString("Required_JAI_Image_I/O_Library_is_not_found."), APP_NAME, JOptionPane.ERROR_MESSAGE);
-            throw ncde;
-        } catch (IOException ioe) {
-            JOptionPane.showMessageDialog(null, ioe.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
-            System.err.println(ioe.getMessage());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
-            System.err.println(e.getMessage());
         }
     }
 

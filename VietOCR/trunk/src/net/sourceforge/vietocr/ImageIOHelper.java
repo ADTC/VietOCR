@@ -54,7 +54,7 @@ public class ImageIOHelper {
         //Get tif writer and set output to file
         Iterator writers = ImageIO.getImageWritersByFormatName(TIFF_FORMAT);
         ImageWriter writer = (ImageWriter) writers.next();
-        
+
         //Read the stream metadata
         IIOMetadata streamMetadata = writer.getDefaultStreamMetadata(tiffWriteParam);
 
@@ -124,39 +124,47 @@ public class ImageIOHelper {
         return tempImageFiles;
     }
 
-    public static ArrayList<IIOImage> getIIOImageList(File imageFile) throws Exception {
-        ArrayList<IIOImage> iioImageList = new ArrayList<IIOImage>();
+    public static ArrayList<IIOImage> getIIOImageList(File imageFile) {
+        try {
+            ArrayList<IIOImage> iioImageList = new ArrayList<IIOImage>();
 
-        String imageFileName = imageFile.getName();
-        String imageFormat = imageFileName.substring(imageFileName.lastIndexOf('.') + 1);
-        Iterator readers = ImageIO.getImageReadersByFormatName(imageFormat);
-        ImageReader reader = (ImageReader) readers.next();
+            String imageFileName = imageFile.getName();
+            String imageFormat = imageFileName.substring(imageFileName.lastIndexOf('.') + 1);
+            Iterator readers = ImageIO.getImageReadersByFormatName(imageFormat);
+            ImageReader reader = (ImageReader) readers.next();
 
-        if (reader == null) {
-            throw new RuntimeException("Need to install JAI Image I/O package.\nhttps://jai-imageio.dev.java.net");
+            if (reader == null) {
+                throw new RuntimeException("Need to install JAI Image I/O package.\nhttps://jai-imageio.dev.java.net");
+            }
+
+            ImageInputStream iis = ImageIO.createImageInputStream(imageFile);
+            reader.setInput(iis);
+
+            int imageTotal = reader.getNumImages(true);
+
+            for (int i = 0; i < imageTotal; i++) {
+                IIOImage image = new IIOImage(reader.read(i), null, reader.getImageMetadata(i));
+                iioImageList.add(image);
+            }
+
+            reader.dispose();
+
+            return iioImageList;
+        } catch (Exception e) {
+            return null;
         }
-
-        ImageInputStream iis = ImageIO.createImageInputStream(imageFile);
-        reader.setInput(iis);
-
-        int imageTotal = reader.getNumImages(true);
-
-        for (int i = 0; i < imageTotal; i++) {
-            IIOImage image = new IIOImage(reader.read(i), null, reader.getImageMetadata(i));
-            iioImageList.add(image);
-        }
-
-        reader.dispose();
-
-        return iioImageList;
     }
 
     public static ArrayList<ImageIconScalable> getImageList(ArrayList<IIOImage> iioImageList) {
-         ArrayList<ImageIconScalable> al = new ArrayList<ImageIconScalable>();
-         for (IIOImage iioImage : iioImageList) {
-             al.add(new ImageIconScalable((BufferedImage)iioImage.getRenderedImage()));
-         }
+        try {
+            ArrayList<ImageIconScalable> al = new ArrayList<ImageIconScalable>();
+            for (IIOImage iioImage : iioImageList) {
+                al.add(new ImageIconScalable((BufferedImage) iioImage.getRenderedImage()));
+            }
 
-         return al;
+            return al;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
