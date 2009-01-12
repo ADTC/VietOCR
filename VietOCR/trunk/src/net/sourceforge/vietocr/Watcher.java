@@ -27,7 +27,7 @@ public class Watcher implements Runnable {
         while (true) {
             sniff();
             try {
-                Thread.sleep(500);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 // not important
                 e.printStackTrace();
