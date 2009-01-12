@@ -69,7 +69,7 @@ public class Gui extends javax.swing.JFrame {
     private boolean wordWrapOn;
     private String selectedInputMethod;
     private float scaleX,  scaleY;
-    protected static String selectedUILang;
+    protected static String selectedUILang = "en";
     private int originalW,  originalH;
     private final float ZOOM_FACTOR = 1.25f;
 
