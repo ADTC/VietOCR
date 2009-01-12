@@ -147,8 +147,9 @@ public class ImageIOHelper {
                 iioImageList.add(image);
             }
 
+            iis.close();
             reader.dispose();
-
+            
             return iioImageList;
         } catch (Exception e) {
             return null;

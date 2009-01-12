@@ -33,7 +33,6 @@ import net.sourceforge.vietpad.*;
 import net.sourceforge.vietpad.inputmethod.*;
 import net.sourceforge.vietocr.wia.*;
 import java.net.*;
-import javax.swing.Timer;
 
 /**
  *
@@ -47,7 +46,7 @@ public class Gui extends javax.swing.JFrame {
     static final boolean MAC_OS_X = System.getProperty("os.name").startsWith("Mac");
     static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
     static final Locale VIETNAM = new Locale("vi", "VN");
-    private final String UTF8 = "UTF-8";
+    protected final String UTF8 = "UTF-8";
     protected ResourceBundle myResources,  bundle;
     protected static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
     private Font font;
@@ -59,10 +58,10 @@ public class Gui extends javax.swing.JFrame {
     public final String EOL = System.getProperty("line.separator");
     private String currentDirectory;
     private String outputDirectory;
-    private String tessPath;
+    protected String tessPath;
     private Properties prop, config;
-    private String curLangCode;
-    private String[] langCodes;
+    protected String curLangCode;
+    protected String[] langCodes;
     private String[] langs;
     private ImageIconScalable imageIcon;
     private boolean reset;
@@ -73,7 +72,6 @@ public class Gui extends javax.swing.JFrame {
     protected static String selectedUILang;
     private int originalW,  originalH;
     private final float ZOOM_FACTOR = 1.25f;
-    private Queue<File> queue;
 
     /**
      * Creates new form Gui
@@ -208,41 +206,6 @@ public class Gui extends javax.swing.JFrame {
         m_undo.discardAllEdits();
         updateUndoRedo();
         updateCutCopyDelete(false);
-
-        queue = new LinkedList<File>();
-        final File watchFolder = new File(System.getProperty("user.dir"));
-        final File outputFolder = new File(System.getProperty("user.dir"));
-        Thread t = new Thread(new Watcher(queue, watchFolder));
-        t.start(); // watch for new image files
-
-        // autoOCR if there are files in the queue
-        Action autoOcrAction = new AbstractAction() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                final File file = queue.poll();
-                if (file != null) {
-                    iioImageList = ImageIOHelper.getIIOImageList(file);
-
-                    SwingUtilities.invokeLater(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            try {
-                                OCR ocrEngine = new OCR(tessPath);
-                                String result = ocrEngine.recognizeText(iioImageList, -1, langCodes[jComboBoxLang.getSelectedIndex()]);
-                                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(outputFolder, file.getName() + ".txt")), UTF8));
-                                out.write(result);
-                                out.close();
-                            } catch (Exception e) {
-                            }
-                        }
-                    });
-                }
-            }
-        };
-
-        new Timer(5000, autoOcrAction).start();
     }
 
     /**
@@ -838,7 +801,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuSettings.add(jMenuItemFont);
         jMenuSettings.add(jSeparator10);
 
-        jMenuItemWatch.setText("Watch...");
+        jMenuItemWatch.setText(bundle.getString("jMenuItemWatch.Text")); // NOI18N
         jMenuItemWatch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemWatchActionPerformed(evt);
@@ -1272,7 +1235,7 @@ public class Gui extends javax.swing.JFrame {
             @Override
             protected String doInBackground() throws Exception {
                 OCR ocrEngine = new OCR(tessPath);
-                return ocrEngine.recognizeText(list, index, langCodes[jComboBoxLang.getSelectedIndex()]);
+                return ocrEngine.recognizeText(list, index, curLangCode);
             }
 
             @Override
