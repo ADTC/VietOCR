@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.SuspendLayout();
             // 
             // textBoxWatch
@@ -61,7 +62,7 @@
             this.btnWatch.TabIndex = 2;
             this.btnWatch.Text = "...";
             this.btnWatch.UseVisualStyleBackColor = true;
-            this.btnWatch.Click += new System.EventHandler(this.button1_Click);
+            this.btnWatch.Click += new System.EventHandler(this.btnWatch_Click);
             // 
             // btnOutput
             // 
@@ -71,7 +72,7 @@
             this.btnOutput.TabIndex = 3;
             this.btnOutput.Text = "...";
             this.btnOutput.UseVisualStyleBackColor = true;
-            this.btnOutput.Click += new System.EventHandler(this.button2_Click);
+            this.btnOutput.Click += new System.EventHandler(this.btnOutput_Click);
             // 
             // checkBoxWatchEnabled
             // 
@@ -155,5 +156,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
