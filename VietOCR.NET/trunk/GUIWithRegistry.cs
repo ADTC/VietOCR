@@ -40,10 +40,6 @@ namespace VietOCR.NET
         const string strForeColor = "ForeColor";
         const string strBackColor = "BackColor";
 
-        const string strWatchEnable = "WatchEnable";
-        const string strWatchFolder = "WatchFolder";
-        const string strOutputFolder = "OutputFolder";
-
         Rectangle rectNormal;
 
         public GUIWithRegistry()
@@ -111,10 +107,6 @@ namespace VietOCR.NET
             regkey.SetValue(strFontStyle, (int)this.textBox1.Font.Style);
             regkey.SetValue(strForeColor, this.textBox1.ForeColor.ToArgb());
             regkey.SetValue(strBackColor, this.textBox1.BackColor.ToArgb());
-
-            regkey.SetValue(strWatchEnable, Convert.ToInt32(watchEnabled));
-            regkey.SetValue(strWatchFolder, watchFolder);
-            regkey.SetValue(strOutputFolder, outputFolder);
         }
 
         protected virtual void LoadRegistryInfo(RegistryKey regkey)
@@ -151,10 +143,6 @@ namespace VietOCR.NET
                 (int)regkey.GetValue(strForeColor, Color.FromKnownColor(KnownColor.Black).ToArgb()));
             this.textBox1.BackColor = Color.FromArgb(
                 (int)regkey.GetValue(strBackColor, Color.FromKnownColor(KnownColor.White).ToArgb()));
-
-            watchEnabled = Convert.ToBoolean((int)regkey.GetValue(strWatchEnable, Convert.ToInt32(false)));
-            //watchFolder = (string) regkey.GetValue(strWatchFolder);
-            //outputFolder = (string) regkey.GetValue(strOutputFolder);
         }
     }
 }
