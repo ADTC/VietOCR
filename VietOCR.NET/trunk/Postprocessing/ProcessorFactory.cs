@@ -46,6 +46,7 @@ namespace VietOCR.NET.Postprocessing
                     break;
                 default:
                     processor = new EngPP();
+                    break;
                     //throw new Exception(code.ToString());
             }
 
