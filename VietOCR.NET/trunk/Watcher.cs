@@ -9,8 +9,15 @@ namespace VietOCR.NET
     public class Watcher
     {
         private Queue<String> queue;
-        private Regex filters;
+        private Regex filters = new Regex(@".*\.(tif|tiff|jpg|jpeg|png|bmp)$", RegexOptions.IgnoreCase);
+
         private FileSystemWatcher watcher;
+
+        public string Path
+        {
+            get { return watcher.Path; }
+            set { watcher.Path = value; }
+        }
 
         public bool Enabled
         {
@@ -22,7 +29,6 @@ namespace VietOCR.NET
         public Watcher(Queue<String> q, string watchFolder)
         {
             queue = q;
-            filters = new Regex(@".*\.(tif|tiff|jpg|jpeg|png|bmp)$", RegexOptions.IgnoreCase);
 
             // Create a new FileSystemWatcher and set its properties.
             watcher = new FileSystemWatcher();

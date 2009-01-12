@@ -64,6 +64,7 @@ namespace VietOCR.NET
             if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 watchFolder = this.folderBrowserDialog1.SelectedPath;
+                this.textBoxWatch.Text = watchFolder;
             }
         }
 
@@ -75,6 +76,7 @@ namespace VietOCR.NET
             if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 outputFolder = this.folderBrowserDialog1.SelectedPath;
+                this.textBoxOutput.Text = outputFolder;
             }
         }
     }
