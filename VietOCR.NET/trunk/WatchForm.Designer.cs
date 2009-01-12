@@ -41,21 +41,21 @@
             // 
             // textBoxWatch
             // 
-            this.textBoxWatch.Location = new System.Drawing.Point(103, 18);
+            this.textBoxWatch.Location = new System.Drawing.Point(95, 18);
             this.textBoxWatch.Name = "textBoxWatch";
-            this.textBoxWatch.Size = new System.Drawing.Size(150, 20);
+            this.textBoxWatch.Size = new System.Drawing.Size(158, 20);
             this.textBoxWatch.TabIndex = 0;
             // 
             // textBoxOutput
             // 
-            this.textBoxOutput.Location = new System.Drawing.Point(103, 52);
+            this.textBoxOutput.Location = new System.Drawing.Point(95, 52);
             this.textBoxOutput.Name = "textBoxOutput";
-            this.textBoxOutput.Size = new System.Drawing.Size(150, 20);
+            this.textBoxOutput.Size = new System.Drawing.Size(158, 20);
             this.textBoxOutput.TabIndex = 1;
             // 
             // btnWatch
             // 
-            this.btnWatch.Location = new System.Drawing.Point(259, 18);
+            this.btnWatch.Location = new System.Drawing.Point(259, 16);
             this.btnWatch.Name = "btnWatch";
             this.btnWatch.Size = new System.Drawing.Size(30, 23);
             this.btnWatch.TabIndex = 2;
@@ -65,7 +65,7 @@
             // 
             // btnOutput
             // 
-            this.btnOutput.Location = new System.Drawing.Point(259, 52);
+            this.btnOutput.Location = new System.Drawing.Point(259, 50);
             this.btnOutput.Name = "btnOutput";
             this.btnOutput.Size = new System.Drawing.Size(30, 23);
             this.btnOutput.TabIndex = 3;
