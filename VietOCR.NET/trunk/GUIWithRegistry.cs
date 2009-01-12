@@ -153,8 +153,8 @@ namespace VietOCR.NET
                 (int)regkey.GetValue(strBackColor, Color.FromKnownColor(KnownColor.White).ToArgb()));
 
             watchEnabled = Convert.ToBoolean((int)regkey.GetValue(strWatchEnable, Convert.ToInt32(false)));
-            watchFolder = (string) regkey.GetValue(strWatchFolder);
-            outputFolder = (string) regkey.GetValue(strOutputFolder);
+            //watchFolder = (string) regkey.GetValue(strWatchFolder);
+            //outputFolder = (string) regkey.GetValue(strOutputFolder);
         }
     }
 }

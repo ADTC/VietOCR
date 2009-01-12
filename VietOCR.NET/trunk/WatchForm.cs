@@ -38,30 +38,6 @@ namespace VietOCR.NET
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Title = "Set Watch Folder";
-            openFileDialog1.InitialDirectory = watchFolder;
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Title = "Set Output Folder";
-            openFileDialog1.InitialDirectory = outputFolder;
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-
-            }
-        }
-
         protected override void OnLoad(EventArgs ea)
         {
             base.OnLoad(ea);
@@ -78,6 +54,28 @@ namespace VietOCR.NET
             watchFolder =this.textBoxWatch.Text;
             outputFolder = this.textBoxOutput.Text;
             watchEnabled = this.checkBoxWatchEnabled.Checked;
+        }
+
+        private void btnWatch_Click(object sender, EventArgs e)
+        {
+            this.folderBrowserDialog1.Description = "Set Watch Folder.";
+            this.folderBrowserDialog1.SelectedPath = watchFolder;
+
+            if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                watchFolder = this.folderBrowserDialog1.SelectedPath;
+            }
+        }
+
+        private void btnOutput_Click(object sender, EventArgs e)
+        {
+            this.folderBrowserDialog1.Description = "Set Output Folder.";
+            this.folderBrowserDialog1.SelectedPath = outputFolder;
+
+            if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                outputFolder = this.folderBrowserDialog1.SelectedPath;
+            }
         }
     }
 }
