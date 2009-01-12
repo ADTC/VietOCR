@@ -4,6 +4,4 @@
     <comment>Configuration File</comment>
     <entry key="ReleaseDate">2009/1/11</entry>
     <entry key="Version">v0.9.9.1</entry>
-    <entry key="WatchFolder">C:\Projects\VietOCR\samples</entry>
-    <entry key="OutputFolder">C:\Temp</entry>
 </properties>

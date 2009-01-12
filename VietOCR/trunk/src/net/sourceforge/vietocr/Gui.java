@@ -210,8 +210,8 @@ public class Gui extends javax.swing.JFrame {
         updateCutCopyDelete(false);
 
         queue = new LinkedList<File>();
-        final File watchFolder = new File(config.getProperty("WatchFolder"));
-        final File outputFolder = new File(config.getProperty("OutputFolder"));
+        final File watchFolder = new File(System.getProperty("user.dir"));
+        final File outputFolder = new File(System.getProperty("user.dir"));
         Thread t = new Thread(new Watcher(queue, watchFolder));
         t.start(); // watch for new image files
 
@@ -508,6 +508,8 @@ public class Gui extends javax.swing.JFrame {
         jMenuSettings = new javax.swing.JMenu();
         jCheckBoxMenuWordWrap = new javax.swing.JCheckBoxMenuItem();
         jMenuItemFont = new javax.swing.JMenuItem();
+        jSeparator10 = new javax.swing.JSeparator();
+        jMenuItemWatch = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JSeparator();
         jMenuInputMethod = new javax.swing.JMenu();
         ActionListener imlst = new ActionListener() {
@@ -834,6 +836,15 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jMenuSettings.add(jMenuItemFont);
+        jMenuSettings.add(jSeparator10);
+
+        jMenuItemWatch.setText("Watch...");
+        jMenuItemWatch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemWatchActionPerformed(evt);
+            }
+        });
+        jMenuSettings.add(jMenuItemWatch);
         jMenuSettings.add(jSeparator3);
 
         jMenuInputMethod.setText(bundle.getString("jMenuInputMethod.Text")); // NOI18N
@@ -1516,6 +1527,12 @@ private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {/
     ((JImageLabel) jImageLabel).deselect();
 }//GEN-LAST:event_jButtonActualSizeActionPerformed
 
+private void jMenuItemWatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWatchActionPerformed
+    JDialog dialog = new WatchDialog(this, true);
+    dialog.setVisible(true);
+
+}//GEN-LAST:event_jMenuItemWatchActionPerformed
+
     void rotateImage(int angle) {
         try {
             imageIcon = imageIcon.getRotatedImageIcon(Math.toRadians(angle));
@@ -1622,6 +1639,7 @@ private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {/
     private javax.swing.JMenuItem jMenuItemSave;
     private javax.swing.JMenuItem jMenuItemScan;
     private javax.swing.JMenuItem jMenuItemTessPath;
+    private javax.swing.JMenuItem jMenuItemWatch;
     private javax.swing.JMenu jMenuLookAndFeel;
     private javax.swing.JMenu jMenuSettings;
     private javax.swing.JMenu jMenuUILang;
@@ -1633,6 +1651,7 @@ private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {/
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
