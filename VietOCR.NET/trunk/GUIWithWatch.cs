@@ -40,6 +40,7 @@ namespace VietOCR.NET
         private bool watchEnabled;
 
         WatchForm form;
+        Watcher watcher;
 
         public GUIWithWatch()
         {
@@ -51,7 +52,8 @@ namespace VietOCR.NET
             base.OnLoad(ea);
 
             queue = new Queue<String>();
-            Watcher watcher = new Watcher(queue, watchFolder);
+            watcher = new Watcher(queue, watchFolder);
+            watcher.Enabled = watchEnabled;
 
             System.Timers.Timer aTimer = new System.Timers.Timer(5000);
             // Hook up the Elapsed event for the timer.
@@ -107,6 +109,8 @@ namespace VietOCR.NET
                 watchFolder = form.WatchFolder;
                 outputFolder = form.OutputFolder;
                 watchEnabled = form.WatchEnabled;
+                watcher.Path = watchFolder;
+                watcher.Enabled = watchEnabled;
             }
         }
 
@@ -114,8 +118,8 @@ namespace VietOCR.NET
         {
             base.LoadRegistryInfo(regkey);
             watchEnabled = Convert.ToBoolean((int)regkey.GetValue(strWatchEnable, Convert.ToInt32(false)));
-            watchFolder = (string)regkey.GetValue(strWatchFolder, System.Configuration.ConfigurationManager.AppSettings["WatchFolder"]);
-            outputFolder = (string)regkey.GetValue(strOutputFolder, System.Configuration.ConfigurationManager.AppSettings["OutputFolder"]);
+            watchFolder = (string)regkey.GetValue(strWatchFolder, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+            outputFolder = (string)regkey.GetValue(strOutputFolder, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
         }
 
         protected override void SaveRegistryInfo(RegistryKey regkey)
