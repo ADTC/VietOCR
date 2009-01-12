@@ -208,11 +208,6 @@ namespace VietOCR.NET
                     MessageBox.Show(this, Properties.Resources.selectLanguage, strProgName);
                     return;
                 }
-                //if (this.pictureBox1.Image == null)
-                //{
-                //    MessageBox.Show(this, "Please load an image.", strProgName);
-                //    return;
-                //}
 
                 this.toolStripStatusLabel1.Text = Properties.Resources.OCRrunning;
                 this.Cursor = Cursors.WaitCursor;

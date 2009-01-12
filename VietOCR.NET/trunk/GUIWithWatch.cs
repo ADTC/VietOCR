@@ -74,8 +74,8 @@ namespace VietOCR.NET
 
         private void AutoOCR()
         {
-            imageFile = new FileInfo(queue.Dequeue());
-            imageList = ImageIOHelper.GetImageList(imageFile);
+            FileInfo imageFile = new FileInfo(queue.Dequeue());
+            IList<Image> imageList = ImageIOHelper.GetImageList(imageFile);
 
             if (imageList == null)
             {
