@@ -21,7 +21,6 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using System.Timers;
 using System.Threading;
 using System.IO;
 using Microsoft.Win32;
@@ -40,12 +39,17 @@ namespace VietOCR.NET
         private string outputFolder;
         private bool watchEnabled;
 
-        WatchForm form;
-        Watcher watcher;
+        private WatchForm form;
+        private Watcher watcher;
+
+        private StatusForm statusPanel;
+
+        delegate void UpdateStatusEvent(string fileName); 
 
         public GUIWithWatch()
         {
             InitializeComponent();
+            statusPanel = new StatusForm();
         }
 
         protected override void OnLoad(EventArgs ea)
@@ -56,17 +60,21 @@ namespace VietOCR.NET
             watcher = new Watcher(queue, watchFolder);
             watcher.Enabled = watchEnabled;
 
-            System.Timers.Timer aTimer = new System.Timers.Timer(5000);
-            // Hook up the Elapsed event for the timer.
-            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            aTimer.Enabled = true;
+            System.Windows.Forms.Timer aTimer = new System.Windows.Forms.Timer();
+            aTimer.Interval = 20000;
+            aTimer.Tick += new EventHandler(OnTimedEvent);
+            aTimer.Start();
         }
 
-        // Specify what you want to happen when the Elapsed event is raised.
-        private void OnTimedEvent(object source, ElapsedEventArgs e)
+        private void OnTimedEvent(Object sender, EventArgs e)
         {
             if (queue.Count > 0)
             {
+                if (!this.statusPanel.Visible)
+                {
+                    this.statusPanel.Show();
+                }
+
                 Thread t = new Thread(new ThreadStart(AutoOCR));
                 t.Start();
             }
@@ -84,9 +92,11 @@ namespace VietOCR.NET
 
             try
             {
+                this.statusPanel.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { imageFile.FullName });
+
                 OCR ocrEngine = new OCR();
                 string result = ocrEngine.RecognizeText(imageList, -1, curLangCode);
-                
+
                 // postprocess to correct common OCR errors
                 result = Processor.PostProcess(result, curLangCode);
 
@@ -99,6 +109,11 @@ namespace VietOCR.NET
             {
                 Console.WriteLine(e.StackTrace);
             }
+        }
+
+        void WorkerUpdate(string fileName)
+        {
+            this.statusPanel.TextBox.AppendText(fileName + Environment.NewLine);
         }
 
         protected override void watchToolStripMenuItem_Click(object sender, EventArgs e)
