@@ -61,7 +61,7 @@ namespace VietOCR.NET
             watcher.Enabled = watchEnabled;
 
             System.Windows.Forms.Timer aTimer = new System.Windows.Forms.Timer();
-            aTimer.Interval = 20000;
+            aTimer.Interval = 15000;
             aTimer.Tick += new EventHandler(OnTimedEvent);
             aTimer.Start();
         }
