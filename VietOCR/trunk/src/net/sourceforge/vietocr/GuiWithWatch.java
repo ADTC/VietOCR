@@ -12,8 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
-
+ */
 package net.sourceforge.vietocr;
 
 import java.awt.event.*;
@@ -24,19 +23,25 @@ import javax.swing.*;
 import javax.swing.Timer;
 import net.sourceforge.vietocr.postprocessing.Processor;
 
-
 /**
  *
  * @author Quan Nguyen
  */
 public class GuiWithWatch extends Gui {
+    private String watchFolder = System.getProperty("user.home");
+    private String outputFolder = System.getProperty("user.home");
+    private boolean watchEnabled;
+
+    private StatusFrame statusPanel;
+    private WatchDialog dialog;
 
     public GuiWithWatch() {
+        statusPanel = new StatusFrame();
+
+        // watch for new image files
         final Queue<File> queue = new LinkedList<File>();
-        final File watchFolder = new File(System.getProperty("user.home"));
-        final File outputFolder = new File(System.getProperty("user.home"));
-        Thread t = new Thread(new Watcher(queue, watchFolder));
-        t.start(); // watch for new image files
+        Thread t = new Thread(new Watcher(queue, new File(watchFolder)));
+        t.start();
 
         // autoOCR if there are files in the queue
         Action autoOcrAction = new AbstractAction() {
@@ -46,6 +51,10 @@ public class GuiWithWatch extends Gui {
                 final File imageFile = queue.poll();
                 if (imageFile != null) {
                     final ArrayList<IIOImage> iioImageList = ImageIOHelper.getIIOImageList(imageFile);
+                    if (!statusPanel.isVisible()) {
+                        statusPanel.setVisible(true);
+                    }
+                    statusPanel.getTextArea().append(imageFile.getPath() + "\n");
 
                     SwingUtilities.invokeLater(new Runnable() {
 
@@ -71,6 +80,26 @@ public class GuiWithWatch extends Gui {
         };
 
         new Timer(5000, autoOcrAction).start();
+    }
+
+    @Override
+    protected void openWatchDialog() {
+        if (dialog == null) {
+            dialog = new WatchDialog(this, true);
+        }
+
+        dialog.setWatchFolder(watchFolder);
+        dialog.setOutputFolder(outputFolder);
+        dialog.setWatchEnabled(watchEnabled);
+
+        dialog.setVisible(true);
+
+//            if (dialog.ShowDialog() == DialogResult.OK)
+//            {
+//                watchFolder = dialog.getWatchFolder();
+//                outputFolder = dialog.getOutputFolder();
+//                watchEnabled = dialog.isWatchEnabled();
+//            }
     }
 
     /**
