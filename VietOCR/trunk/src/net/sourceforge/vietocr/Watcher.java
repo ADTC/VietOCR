@@ -15,7 +15,8 @@ public class Watcher implements Runnable {
     private long lastTime = 0;
     private List<File> lastFiles = new ArrayList<File>();
     private File watchFolder;
-    Queue<File> queue;
+    private Queue<File> queue;
+    private boolean firstTimeEntered = true;
 
     Watcher(Queue<File> q, File folder) {
         queue = q;
@@ -27,7 +28,7 @@ public class Watcher implements Runnable {
         while (true) {
             sniff();
             try {
-                Thread.sleep(5000);
+                Thread.sleep(10000);
             } catch (InterruptedException e) {
                 // not important
                 e.printStackTrace();
@@ -37,7 +38,7 @@ public class Watcher implements Runnable {
 
     private void sniff() {
         final long newTime = watchFolder.lastModified();
-        if (lastTime != newTime) {
+        if (lastTime < newTime) {
             // find modified files
             File[] files = watchFolder.listFiles(new FilenameFilter() {
 
@@ -47,12 +48,17 @@ public class Watcher implements Runnable {
                 }
             });
 
-            for (File file : files) {
-                if (!lastFiles.contains(file)) {
-                    System.out.println("New file: " + file);
-                    queue.offer(file);
-                }
+            if (firstTimeEntered) {
+                firstTimeEntered = false;
+            } else {
+                for (File file : files) {
+                    if (!lastFiles.contains(file)) {
+                        System.out.println("New file: " + file);
+                        queue.offer(file);
+                    }
+                }                
             }
+            
             lastTime = newTime;
             lastFiles = Arrays.asList(files);
         }
