@@ -1471,10 +1471,12 @@ private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {/
 }//GEN-LAST:event_jButtonActualSizeActionPerformed
 
 private void jMenuItemWatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWatchActionPerformed
-    JDialog dialog = new WatchDialog(this, true);
-    dialog.setVisible(true);
-
+    openWatchDialog();
 }//GEN-LAST:event_jMenuItemWatchActionPerformed
+
+    protected void openWatchDialog() {
+        // to be implemented in subclass
+    }
 
     void rotateImage(int angle) {
         try {
