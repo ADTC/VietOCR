@@ -10,15 +10,15 @@ import javax.swing.*;
  * @author Quan Nguyen
  */
 public class WatchDialog extends javax.swing.JDialog {
-
+    private int actionSelected = -1;
     private String watchFolder;
     private String outputFolder;
     private boolean watchEnabled;
     private JFileChooser filechooser;
 
-    /** Creates new form NewJDialog */
-    public WatchDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    /** Creates new form WatchDialog */
+    public WatchDialog(java.awt.Frame parent, String title) {
+        super(parent, title, true);
 
         initComponents();
         
@@ -186,10 +186,12 @@ public class WatchDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
+        actionSelected = JOptionPane.OK_OPTION;
         this.setVisible(false);
     }//GEN-LAST:event_jButtonOKActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        actionSelected = JOptionPane.CANCEL_OPTION;
         this.setVisible(false);
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
@@ -212,6 +214,11 @@ public class WatchDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonWatchActionPerformed
 
+    public int showDialog() {
+        setVisible(true);
+        return actionSelected;
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -219,7 +226,7 @@ public class WatchDialog extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                WatchDialog dialog = new WatchDialog(new javax.swing.JFrame(), true);
+                WatchDialog dialog = new WatchDialog(new javax.swing.JFrame(), "Custom Dialog");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
