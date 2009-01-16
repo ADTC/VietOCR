@@ -2,10 +2,8 @@ package net.sourceforge.vietocr;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
-import javax.swing.KeyStroke;
+import java.io.File;
+import javax.swing.*;
 
 /**
  *
@@ -16,11 +14,16 @@ public class WatchDialog extends javax.swing.JDialog {
     private String watchFolder;
     private String outputFolder;
     private boolean watchEnabled;
+    private JFileChooser filechooser;
 
     /** Creates new form NewJDialog */
     public WatchDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+
         initComponents();
+        
+        filechooser = new JFileChooser();
+        filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
         this.setLocationRelativeTo(parent);
         getRootPane().setDefaultButton(jButtonOK);
@@ -88,6 +91,11 @@ public class WatchDialog extends javax.swing.JDialog {
 
         jButtonOutput.setText("...");
         jButtonOutput.setPreferredSize(new java.awt.Dimension(30, 23));
+        jButtonOutput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOutputActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
@@ -123,6 +131,11 @@ public class WatchDialog extends javax.swing.JDialog {
 
         jButtonWatch.setText("...");
         jButtonWatch.setPreferredSize(new java.awt.Dimension(30, 23));
+        jButtonWatch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonWatchActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
@@ -179,6 +192,25 @@ public class WatchDialog extends javax.swing.JDialog {
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void jButtonOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOutputActionPerformed
+        filechooser.setCurrentDirectory(new File(outputFolder));
+        filechooser.setDialogTitle("Set Output Folder");
+        if (filechooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            outputFolder = filechooser.getSelectedFile().getPath();
+            this.jTextFieldOutput.setText(outputFolder);
+        }
+    }//GEN-LAST:event_jButtonOutputActionPerformed
+
+    private void jButtonWatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWatchActionPerformed
+        filechooser.setCurrentDirectory(new File(watchFolder));
+        filechooser.setDialogTitle("Set Watch Folder");
+        filechooser.showOpenDialog(this);
+        if (filechooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            watchFolder = filechooser.getSelectedFile().getPath();
+            this.jTextFieldWatch.setText(watchFolder);
+        }
+    }//GEN-LAST:event_jButtonWatchActionPerformed
 
     /**
     * @param args the command line arguments
@@ -243,6 +275,7 @@ public class WatchDialog extends javax.swing.JDialog {
      * @return the watchEnabled
      */
     public boolean isWatchEnabled() {
+        watchEnabled = jCheckBoxEnable.isSelected();
         return watchEnabled;
     }
 
