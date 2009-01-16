@@ -85,21 +85,18 @@ public class GuiWithWatch extends Gui {
     @Override
     protected void openWatchDialog() {
         if (dialog == null) {
-            dialog = new WatchDialog(this, true);
+            dialog = new WatchDialog(this, "Set Watch");
         }
 
         dialog.setWatchFolder(watchFolder);
         dialog.setOutputFolder(outputFolder);
         dialog.setWatchEnabled(watchEnabled);
 
-        dialog.setVisible(true);
-
-//            if (dialog.ShowDialog() == DialogResult.OK)
-//            {
-//                watchFolder = dialog.getWatchFolder();
-//                outputFolder = dialog.getOutputFolder();
-//                watchEnabled = dialog.isWatchEnabled();
-//            }
+        if (dialog.showDialog() == JOptionPane.OK_OPTION) {
+            watchFolder = dialog.getWatchFolder();
+            outputFolder = dialog.getOutputFolder();
+            watchEnabled = dialog.isWatchEnabled();
+        }
     }
 
 
