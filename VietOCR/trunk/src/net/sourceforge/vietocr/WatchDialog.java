@@ -87,11 +87,12 @@ public class WatchDialog extends javax.swing.JDialog {
         getContentPane().add(jTextFieldWatch, gridBagConstraints);
 
         jButtonOutput.setText("...");
+        jButtonOutput.setPreferredSize(new java.awt.Dimension(30, 23));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 15);
+        gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 15);
         getContentPane().add(jButtonOutput, gridBagConstraints);
 
         jTextFieldOutput.setPreferredSize(new java.awt.Dimension(170, 20));
@@ -121,11 +122,12 @@ public class WatchDialog extends javax.swing.JDialog {
         getContentPane().add(jLabelWatch, gridBagConstraints);
 
         jButtonWatch.setText("...");
+        jButtonWatch.setPreferredSize(new java.awt.Dimension(30, 23));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 5, 0, 15);
+        gridBagConstraints.insets = new java.awt.Insets(20, 3, 0, 15);
         getContentPane().add(jButtonWatch, gridBagConstraints);
 
         jButtonCancel.setText("Cancel");
@@ -152,7 +154,7 @@ public class WatchDialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 20, 27);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 20, 44);
         getContentPane().add(jButtonOK, gridBagConstraints);
 
         pack();
