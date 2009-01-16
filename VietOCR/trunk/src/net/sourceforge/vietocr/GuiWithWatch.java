@@ -102,6 +102,22 @@ public class GuiWithWatch extends Gui {
 //            }
     }
 
+
+    /**
+     *  Updates UI component if changes in LAF
+     *
+     *@param  laf  the look and feel class name
+     */
+    @Override
+    protected void updateLaF(String laf) {
+        super.updateLaF(laf);
+
+        SwingUtilities.updateComponentTreeUI(this.statusPanel);
+        if (dialog != null) {
+            SwingUtilities.updateComponentTreeUI(this.dialog);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */

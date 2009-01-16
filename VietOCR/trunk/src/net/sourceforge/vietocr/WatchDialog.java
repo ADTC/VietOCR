@@ -1,22 +1,40 @@
-
-/*
- * WatchJDialog.java
- *
- * Created on Jan 11, 2009, 6:25:30 PM
- */
-
 package net.sourceforge.vietocr;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 
 /**
  *
- * @author Quan
+ * @author Quan Nguyen
  */
 public class WatchDialog extends javax.swing.JDialog {
 
-    /** Creates new form WatchJDialog */
+    private String watchFolder;
+    private String outputFolder;
+    private boolean watchEnabled;
+
+    /** Creates new form NewJDialog */
     public WatchDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        this.setLocationRelativeTo(parent);
+        getRootPane().setDefaultButton(jButtonOK);
+
+        //  Handle escape key to hide the dialog
+        KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
+        Action escapeAction = new AbstractAction() {
+            @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                }
+            };
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escapeKeyStroke, "ESCAPE");
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);
     }
 
     /** This method is called from within the constructor to
@@ -27,94 +45,149 @@ public class WatchDialog extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jCheckBoxEnable = new javax.swing.JCheckBox();
+        jTextFieldWatch = new javax.swing.JTextField();
+        jButtonOutput = new javax.swing.JButton();
+        jTextFieldOutput = new javax.swing.JTextField();
+        jLabelOutput = new javax.swing.JLabel();
+        jLabelWatch = new javax.swing.JLabel();
+        jButtonWatch = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
+        jButtonOK = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Set Watch");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("Watch Folder");
+        jCheckBoxEnable.setText("Enable");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 20, 0);
+        getContentPane().add(jCheckBoxEnable, gridBagConstraints);
 
-        jLabel2.setText("Output Folder");
+        jTextFieldWatch.setMinimumSize(new java.awt.Dimension(50, 20));
+        jTextFieldWatch.setPreferredSize(new java.awt.Dimension(170, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        getContentPane().add(jTextFieldWatch, gridBagConstraints);
 
-        jButton1.setText("...");
+        jButtonOutput.setText("...");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 15);
+        getContentPane().add(jButtonOutput, gridBagConstraints);
 
-        jButton2.setText("...");
+        jTextFieldOutput.setPreferredSize(new java.awt.Dimension(170, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        getContentPane().add(jTextFieldOutput, gridBagConstraints);
 
-        jCheckBox1.setText("Enable Watch");
+        jLabelOutput.setText("Output Folder:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 15, 0, 5);
+        getContentPane().add(jLabelOutput, gridBagConstraints);
 
-        jButton3.setText("OK");
+        jLabelWatch.setText("Watch Folder:");
+        jLabelWatch.setPreferredSize(new java.awt.Dimension(71, 14));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 15, 0, 5);
+        getContentPane().add(jLabelWatch, gridBagConstraints);
 
-        jButton4.setText("Cancel");
+        jButtonWatch.setText("...");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 5, 0, 15);
+        getContentPane().add(jButtonWatch, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)
-                        .addGap(27, 27, 27))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1))))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
+        jButtonCancel.setText("Cancel");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 20, 15);
+        getContentPane().add(jButtonCancel, gridBagConstraints);
+
+        jButtonOK.setText("OK");
+        jButtonOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOKActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 20, 27);
+        getContentPane().add(jButtonOK, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.jTextFieldWatch.setText(watchFolder);
+        this.jTextFieldOutput.setText(outputFolder);
+        this.jCheckBoxEnable.setSelected(watchEnabled);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        watchFolder = this.jTextFieldWatch.getText();
+        outputFolder = this.jTextFieldOutput.getText();
+        watchEnabled = this.jCheckBoxEnable.isSelected();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonOKActionPerformed
+
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
     * @param args the command line arguments
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 WatchDialog dialog = new WatchDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
@@ -125,15 +198,56 @@ public class WatchDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonOK;
+    private javax.swing.JButton jButtonOutput;
+    private javax.swing.JButton jButtonWatch;
+    private javax.swing.JCheckBox jCheckBoxEnable;
+    private javax.swing.JLabel jLabelOutput;
+    private javax.swing.JLabel jLabelWatch;
+    private javax.swing.JTextField jTextFieldOutput;
+    private javax.swing.JTextField jTextFieldWatch;
     // End of variables declaration//GEN-END:variables
 
+      /**
+     * @return the watchFolder
+     */
+    public String getWatchFolder() {
+        return watchFolder;
+    }
+
+    /**
+     * @param watchFolder the watchFolder to set
+     */
+    public void setWatchFolder(String watchFolder) {
+        this.watchFolder = watchFolder;
+    }
+
+    /**
+     * @return the outputFolder
+     */
+    public String getOutputFolder() {
+        return outputFolder;
+    }
+
+    /**
+     * @param outputFolder the outputFolder to set
+     */
+    public void setOutputFolder(String outputFolder) {
+        this.outputFolder = outputFolder;
+    }
+
+    /**
+     * @return the watchEnabled
+     */
+    public boolean isWatchEnabled() {
+        return watchEnabled;
+    }
+
+    /**
+     * @param watchEnabled the watchEnabled to set
+     */
+    public void setWatchEnabled(boolean watchEnabled) {
+        this.watchEnabled = watchEnabled;
+    }
 }
