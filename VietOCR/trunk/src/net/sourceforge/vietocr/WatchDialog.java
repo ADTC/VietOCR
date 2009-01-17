@@ -3,6 +3,8 @@ package net.sourceforge.vietocr;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.*;
 
 /**
@@ -15,17 +17,20 @@ public class WatchDialog extends javax.swing.JDialog {
     private String outputFolder;
     private boolean watchEnabled;
     private JFileChooser filechooser;
+    protected ResourceBundle bundle;
 
     /** Creates new form WatchDialog */
-    public WatchDialog(java.awt.Frame parent, String title) {
-        super(parent, title, true);
+    public WatchDialog(java.awt.Frame parent) {
+        super(parent, true);
 
         initComponents();
-        
+
+        bundle = ResourceBundle.getBundle("net/sourceforge/vietocr/WatchDialog");
+
         filechooser = new JFileChooser();
         filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         filechooser.setAcceptAllFileFilterUsed(false);
-        filechooser.setApproveButtonText(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/WatchDialog").getString("Set"));
+        filechooser.setApproveButtonText(bundle.getString("Set"));
 
         this.setLocationRelativeTo(parent);
         getRootPane().setDefaultButton(jButtonOK);
@@ -76,7 +81,7 @@ public class WatchDialog extends javax.swing.JDialog {
         });
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jCheckBoxEnable.setText(bundle.getString("Enable")); // NOI18N
+        jCheckBoxEnable.setText(bundle.getString("jCheckBoxEnable.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -92,7 +97,7 @@ public class WatchDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
         getContentPane().add(jTextFieldWatch, gridBagConstraints);
 
-        jButtonOutput.setText("...");
+        jButtonOutput.setText(bundle.getString("jButtonOutput.Text")); // NOI18N
         jButtonOutput.setPreferredSize(new java.awt.Dimension(30, 23));
         jButtonOutput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +118,7 @@ public class WatchDialog extends javax.swing.JDialog {
         gridBagConstraints.gridwidth = 2;
         getContentPane().add(jTextFieldOutput, gridBagConstraints);
 
-        jLabelOutput.setText(bundle.getString("Output_Folder:")); // NOI18N
+        jLabelOutput.setText(bundle.getString("jLabelOutput.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -122,7 +127,7 @@ public class WatchDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 15, 0, 5);
         getContentPane().add(jLabelOutput, gridBagConstraints);
 
-        jLabelWatch.setText(bundle.getString("Watch_Folder:")); // NOI18N
+        jLabelWatch.setText(bundle.getString("jLabelWatch.Text")); // NOI18N
         jLabelWatch.setPreferredSize(new java.awt.Dimension(71, 14));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -132,7 +137,7 @@ public class WatchDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(20, 15, 0, 5);
         getContentPane().add(jLabelWatch, gridBagConstraints);
 
-        jButtonWatch.setText("...");
+        jButtonWatch.setText(bundle.getString("jButtonWatch.Text")); // NOI18N
         jButtonWatch.setPreferredSize(new java.awt.Dimension(30, 23));
         jButtonWatch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +151,7 @@ public class WatchDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(20, 3, 0, 15);
         getContentPane().add(jButtonWatch, gridBagConstraints);
 
-        jButtonCancel.setText(bundle.getString("Cancel")); // NOI18N
+        jButtonCancel.setText(bundle.getString("jButtonCancel.Text")); // NOI18N
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelActionPerformed(evt);
@@ -160,7 +165,7 @@ public class WatchDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 20, 15);
         getContentPane().add(jButtonCancel, gridBagConstraints);
 
-        jButtonOK.setText(bundle.getString("OK")); // NOI18N
+        jButtonOK.setText(bundle.getString("jButtonOK.Text")); // NOI18N
         jButtonOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonOKActionPerformed(evt);
@@ -170,7 +175,7 @@ public class WatchDialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 20, 44);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 20, 42);
         getContentPane().add(jButtonOK, gridBagConstraints);
 
         pack();
@@ -188,7 +193,7 @@ public class WatchDialog extends javax.swing.JDialog {
 
     private void jButtonOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOutputActionPerformed
         filechooser.setCurrentDirectory(new File(outputFolder));
-        filechooser.setDialogTitle(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/WatchDialog").getString("Set_Output_Folder"));
+        filechooser.setDialogTitle(bundle.getString("Set_Output_Folder"));
         if (filechooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             outputFolder = filechooser.getSelectedFile().getPath();
             this.jTextFieldOutput.setText(outputFolder);
@@ -197,7 +202,7 @@ public class WatchDialog extends javax.swing.JDialog {
 
     private void jButtonWatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWatchActionPerformed
         filechooser.setCurrentDirectory(new File(watchFolder));
-        filechooser.setDialogTitle(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/WatchDialog").getString("Set_Watch_Folder"));
+        filechooser.setDialogTitle(bundle.getString("Set_Watch_Folder"));
         filechooser.showOpenDialog(this);
         if (filechooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             watchFolder = filechooser.getSelectedFile().getPath();
@@ -221,7 +226,23 @@ public class WatchDialog extends javax.swing.JDialog {
         setVisible(true);
         return actionSelected;
     }
-    
+
+    void changeUILanguage(final Locale locale) {
+        Locale.setDefault(locale);
+        bundle = ResourceBundle.getBundle("net/sourceforge/vietocr/WatchDialog");
+
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                FormLocalizer localizer = new FormLocalizer(WatchDialog.this, WatchDialog.class);
+                localizer.ApplyCulture(bundle);
+
+                WatchDialog.this.setTitle(bundle.getString("Set_Watch"));
+            }
+        });
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -229,7 +250,7 @@ public class WatchDialog extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                WatchDialog dialog = new WatchDialog(new javax.swing.JFrame(), "Custom Dialog");
+                WatchDialog dialog = new WatchDialog(new javax.swing.JFrame());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
