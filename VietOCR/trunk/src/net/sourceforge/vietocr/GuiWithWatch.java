@@ -33,7 +33,7 @@ public class GuiWithWatch extends Gui {
     private boolean watchEnabled;
 
     private StatusFrame statusPanel;
-    private WatchDialog dialog;
+    private WatchDialog watchDialog;
 
     public GuiWithWatch() {
         watchFolder = prefs.get("WatchFolder", System.getProperty("user.home"));
@@ -88,18 +88,18 @@ public class GuiWithWatch extends Gui {
 
     @Override
     protected void openWatchDialog() {
-        if (dialog == null) {
-            dialog = new WatchDialog(this, "Set Watch");
+        if (watchDialog == null) {
+            watchDialog = new WatchDialog(this);
         }
 
-        dialog.setWatchFolder(watchFolder);
-        dialog.setOutputFolder(outputFolder);
-        dialog.setWatchEnabled(watchEnabled);
+        watchDialog.setWatchFolder(watchFolder);
+        watchDialog.setOutputFolder(outputFolder);
+        watchDialog.setWatchEnabled(watchEnabled);
 
-        if (dialog.showDialog() == JOptionPane.OK_OPTION) {
-            watchFolder = dialog.getWatchFolder();
-            outputFolder = dialog.getOutputFolder();
-            watchEnabled = dialog.isWatchEnabled();
+        if (watchDialog.showDialog() == JOptionPane.OK_OPTION) {
+            watchFolder = watchDialog.getWatchFolder();
+            outputFolder = watchDialog.getOutputFolder();
+            watchEnabled = watchDialog.isWatchEnabled();
         }
     }
 
@@ -114,8 +114,8 @@ public class GuiWithWatch extends Gui {
         super.updateLaF(laf);
 
         SwingUtilities.updateComponentTreeUI(this.statusPanel);
-        if (dialog != null) {
-            SwingUtilities.updateComponentTreeUI(this.dialog);
+        if (watchDialog != null) {
+            SwingUtilities.updateComponentTreeUI(this.watchDialog);
         }
     }
     
@@ -128,6 +128,21 @@ public class GuiWithWatch extends Gui {
         prefs.putBoolean("WatchEnabled", watchEnabled);
 
         System.exit(0);
+    }
+
+    @Override
+    void changeUILanguage(final Locale locale) {
+        super.changeUILanguage(locale);
+        
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                if (watchDialog != null) {
+                    watchDialog.changeUILanguage(locale);
+                }
+            }
+        });
     }
 
     /**

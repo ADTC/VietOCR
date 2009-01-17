@@ -1390,7 +1390,6 @@ private void jRadioButtonMenuItemEngActionPerformed(java.awt.event.ActionEvent e
         selectedUILang = evt.getActionCommand();
         changeUILanguage(selectedUILang.equals("vi") ? VIETNAM : Locale.US);
     }
-
 }//GEN-LAST:event_jRadioButtonMenuItemEngActionPerformed
 
 private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemVietActionPerformed
@@ -1515,7 +1514,6 @@ private void jMenuItemWatchActionPerformed(java.awt.event.ActionEvent evt) {//GE
                 filechooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
             }
         });
-
     }
 
     /**
