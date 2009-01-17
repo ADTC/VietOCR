@@ -32,7 +32,7 @@ public class GuiWithWatch extends Gui {
     private String outputFolder;
     private boolean watchEnabled;
 
-    private StatusFrame statusPanel;
+    private StatusFrame statusFrame;
     private WatchDialog watchDialog;
 
     public GuiWithWatch() {
@@ -40,7 +40,8 @@ public class GuiWithWatch extends Gui {
         outputFolder = prefs.get("OutputFolder", System.getProperty("user.home"));
         watchEnabled = prefs.getBoolean("WatchEnabled", false);
 
-        statusPanel = new StatusFrame();
+        statusFrame = new StatusFrame();
+        statusFrame.setTitle(bundle.getString("statusFrame.Title"));
 
         // watch for new image files
         final Queue<File> queue = new LinkedList<File>();
@@ -55,10 +56,10 @@ public class GuiWithWatch extends Gui {
                 final File imageFile = queue.poll();
                 if (imageFile != null) {
                     final ArrayList<IIOImage> iioImageList = ImageIOHelper.getIIOImageList(imageFile);
-                    if (!statusPanel.isVisible()) {
-                        statusPanel.setVisible(true);
+                    if (!statusFrame.isVisible()) {
+                        statusFrame.setVisible(true);
                     }
-                    statusPanel.getTextArea().append(imageFile.getPath() + "\n");
+                    statusFrame.getTextArea().append(imageFile.getPath() + "\n");
 
                     SwingUtilities.invokeLater(new Runnable() {
 
@@ -75,6 +76,7 @@ public class GuiWithWatch extends Gui {
                                 out.write(result);
                                 out.close();
                             } catch (Exception e) {
+                                statusFrame.getTextArea().append("\t" + bundle.getString("Cannotprocess") + " " + imageFile.getName() + ".\n");
                                 e.printStackTrace();
                             }
                         }
@@ -113,7 +115,7 @@ public class GuiWithWatch extends Gui {
     protected void updateLaF(String laf) {
         super.updateLaF(laf);
 
-        SwingUtilities.updateComponentTreeUI(this.statusPanel);
+        SwingUtilities.updateComponentTreeUI(this.statusFrame);
         if (watchDialog != null) {
             SwingUtilities.updateComponentTreeUI(this.watchDialog);
         }
@@ -141,6 +143,8 @@ public class GuiWithWatch extends Gui {
                 if (watchDialog != null) {
                     watchDialog.changeUILanguage(locale);
                 }
+
+                statusFrame.setTitle(bundle.getString("statusFrame.Title"));
             }
         });
     }
