@@ -1127,7 +1127,7 @@ public class Gui extends javax.swing.JFrame {
             }
         }
 
-        System.exit(0);
+//        System.exit(0);
     }
     private void jMenuItemFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFontActionPerformed
         FontDialog dlg = new FontDialog(this);
