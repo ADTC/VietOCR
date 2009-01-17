@@ -24,6 +24,8 @@ public class WatchDialog extends javax.swing.JDialog {
         
         filechooser = new JFileChooser();
         filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        filechooser.setAcceptAllFileFilterUsed(false);
+        filechooser.setApproveButtonText("Set");
 
         this.setLocationRelativeTo(parent);
         getRootPane().setDefaultButton(jButtonOK);
