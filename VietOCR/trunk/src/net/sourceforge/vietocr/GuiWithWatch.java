@@ -28,14 +28,18 @@ import net.sourceforge.vietocr.postprocessing.Processor;
  * @author Quan Nguyen
  */
 public class GuiWithWatch extends Gui {
-    private String watchFolder = System.getProperty("user.home");
-    private String outputFolder = System.getProperty("user.home");
+    private String watchFolder;
+    private String outputFolder;
     private boolean watchEnabled;
 
     private StatusFrame statusPanel;
     private WatchDialog dialog;
 
     public GuiWithWatch() {
+        watchFolder = prefs.get("WatchFolder", System.getProperty("user.home"));
+        outputFolder = prefs.get("OutputFolder", System.getProperty("user.home"));
+        watchEnabled = prefs.getBoolean("WatchEnabled", false);
+
         statusPanel = new StatusFrame();
 
         // watch for new image files
@@ -115,6 +119,17 @@ public class GuiWithWatch extends Gui {
         }
     }
     
+    @Override
+    void quit() {
+        super.quit();
+
+        prefs.put("WatchFolder", watchFolder);
+        prefs.put("OutputFolder", outputFolder);
+        prefs.putBoolean("WatchEnabled", watchEnabled);
+
+        System.exit(0);
+    }
+
     /**
      * @param args the command line arguments
      */
