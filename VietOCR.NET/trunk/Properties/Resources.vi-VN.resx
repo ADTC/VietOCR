@@ -168,4 +168,7 @@
   <data name="Save_As" xml:space="preserve">
     <value>Lưu vào</value>
   </data>
+  <data name="Cannotprocess" xml:space="preserve">
+    <value>Không thể xử lý </value>
+  </data>
 </root>

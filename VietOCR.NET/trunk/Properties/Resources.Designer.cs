@@ -106,6 +106,15 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot process .
+        /// </summary>
+        internal static string Cannotprocess {
+            get {
+                return ResourceManager.GetString("Cannotprocess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please load an image..
         /// </summary>
         internal static string loadImage {

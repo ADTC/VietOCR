@@ -39,17 +39,17 @@ namespace VietOCR.NET
         private string outputFolder;
         private bool watchEnabled;
 
-        private WatchForm form;
+        private WatchForm watchForm;
         private Watcher watcher;
 
-        private StatusForm statusPanel;
+        private StatusForm statusForm;
 
         delegate void UpdateStatusEvent(string fileName); 
 
         public GUIWithWatch()
         {
             InitializeComponent();
-            statusPanel = new StatusForm();
+            statusForm = new StatusForm();
         }
 
         protected override void OnLoad(EventArgs ea)
@@ -70,9 +70,9 @@ namespace VietOCR.NET
         {
             if (queue.Count > 0)
             {
-                if (!this.statusPanel.Visible)
+                if (!this.statusForm.Visible)
                 {
-                    this.statusPanel.Show();
+                    this.statusForm.Show();
                 }
 
                 Thread t = new Thread(new ThreadStart(AutoOCR));
@@ -92,7 +92,7 @@ namespace VietOCR.NET
 
             try
             {
-                this.statusPanel.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { imageFile.FullName });
+                this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { imageFile.FullName });
 
                 OCR ocrEngine = new OCR();
                 string result = ocrEngine.RecognizeText(imageList, -1, curLangCode);
@@ -107,31 +107,32 @@ namespace VietOCR.NET
             }
             catch (Exception e)
             {
+                this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { "    **  " + Properties.Resources.Cannotprocess + imageFile.Name + "  **"});
                 Console.WriteLine(e.StackTrace);
             }
         }
 
         void WorkerUpdate(string fileName)
         {
-            this.statusPanel.TextBox.AppendText(fileName + Environment.NewLine);
+            this.statusForm.TextBox.AppendText(fileName + Environment.NewLine);
         }
 
         protected override void watchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (form == null)
+            if (watchForm == null)
             {
-                form = new WatchForm();
+                watchForm = new WatchForm();
             }
 
-            form.WatchFolder = watchFolder;
-            form.OutputFolder = outputFolder;
-            form.WatchEnabled = watchEnabled;
+            watchForm.WatchFolder = watchFolder;
+            watchForm.OutputFolder = outputFolder;
+            watchForm.WatchEnabled = watchEnabled;
 
-            if (form.ShowDialog() == DialogResult.OK)
+            if (watchForm.ShowDialog() == DialogResult.OK)
             {
-                watchFolder = form.WatchFolder;
-                outputFolder = form.OutputFolder;
-                watchEnabled = form.WatchEnabled;
+                watchFolder = watchForm.WatchFolder;
+                outputFolder = watchForm.OutputFolder;
+                watchEnabled = watchForm.WatchEnabled;
                 watcher.Path = watchFolder;
                 watcher.Enabled = watchEnabled;
             }
