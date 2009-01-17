@@ -76,7 +76,7 @@ public class GuiWithWatch extends Gui {
                                 out.write(result);
                                 out.close();
                             } catch (Exception e) {
-                                statusFrame.getTextArea().append("\t" + bundle.getString("Cannotprocess") + " " + imageFile.getName() + ".\n");
+                                statusFrame.getTextArea().append("    **  " + bundle.getString("Cannotprocess") + " " + imageFile.getName() + "  **\n");
                                 e.printStackTrace();
                             }
                         }
