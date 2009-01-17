@@ -203,7 +203,6 @@ public class WatchDialog extends javax.swing.JDialog {
     private void jButtonWatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWatchActionPerformed
         filechooser.setCurrentDirectory(new File(watchFolder));
         filechooser.setDialogTitle(bundle.getString("Set_Watch_Folder"));
-        filechooser.showOpenDialog(this);
         if (filechooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             watchFolder = filechooser.getSelectedFile().getPath();
             this.jTextFieldWatch.setText(watchFolder);
