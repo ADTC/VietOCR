@@ -64,11 +64,11 @@ public class WatchDialog extends javax.swing.JDialog {
         setTitle("Set Watch");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
+            public void windowDeactivated(java.awt.event.WindowEvent evt) {
+                formWindowDeactivated(evt);
             }
         });
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -173,18 +173,6 @@ public class WatchDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.jTextFieldWatch.setText(watchFolder);
-        this.jTextFieldOutput.setText(outputFolder);
-        this.jCheckBoxEnable.setSelected(watchEnabled);
-    }//GEN-LAST:event_formWindowOpened
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        watchFolder = this.jTextFieldWatch.getText();
-        outputFolder = this.jTextFieldOutput.getText();
-        watchEnabled = this.jCheckBoxEnable.isSelected();
-    }//GEN-LAST:event_formWindowClosed
-
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
         actionSelected = JOptionPane.OK_OPTION;
         this.setVisible(false);
@@ -213,6 +201,18 @@ public class WatchDialog extends javax.swing.JDialog {
             this.jTextFieldWatch.setText(watchFolder);
         }
     }//GEN-LAST:event_jButtonWatchActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        this.jTextFieldWatch.setText(watchFolder);
+        this.jTextFieldOutput.setText(outputFolder);
+        this.jCheckBoxEnable.setSelected(watchEnabled);
+    }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated
+        watchFolder = this.jTextFieldWatch.getText();
+        outputFolder = this.jTextFieldOutput.getText();
+        watchEnabled = this.jCheckBoxEnable.isSelected();
+    }//GEN-LAST:event_formWindowDeactivated
 
     public int showDialog() {
         setVisible(true);
