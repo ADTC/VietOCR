@@ -125,19 +125,22 @@ public class ImageIOHelper {
     }
 
     public static ArrayList<IIOImage> getIIOImageList(File imageFile) {
+        ImageReader reader = null;
+        ImageInputStream iis = null;
+
         try {
             ArrayList<IIOImage> iioImageList = new ArrayList<IIOImage>();
 
             String imageFileName = imageFile.getName();
             String imageFormat = imageFileName.substring(imageFileName.lastIndexOf('.') + 1);
             Iterator readers = ImageIO.getImageReadersByFormatName(imageFormat);
-            ImageReader reader = (ImageReader) readers.next();
+            reader = (ImageReader) readers.next();
 
             if (reader == null) {
                 throw new RuntimeException("Need to install JAI Image I/O package.\nhttps://jai-imageio.dev.java.net");
             }
 
-            ImageInputStream iis = ImageIO.createImageInputStream(imageFile);
+            iis = ImageIO.createImageInputStream(imageFile);
             reader.setInput(iis);
 
             int imageTotal = reader.getNumImages(true);
@@ -146,13 +149,21 @@ public class ImageIOHelper {
                 IIOImage image = new IIOImage(reader.read(i), null, reader.getImageMetadata(i));
                 iioImageList.add(image);
             }
-
-            iis.close();
-            reader.dispose();
-            
+           
             return iioImageList;
         } catch (Exception e) {
             return null;
+        } finally {
+            try {
+                if (iis != null) {
+                    iis.close();
+                }
+                if (reader != null) {
+                    reader.dispose();
+                }
+            } catch (Exception e) {
+                // ignore
+            }
         }
     }
 
