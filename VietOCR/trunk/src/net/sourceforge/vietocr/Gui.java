@@ -154,7 +154,7 @@ public class Gui extends javax.swing.JFrame {
                 });
 
         this.setTitle(APP_NAME);
-        bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle"); // NOI18N
+        bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui"); // NOI18N
         currentDirectory = prefs.get("currentDirectory", null);
         filechooser = new JFileChooser(currentDirectory);
         filechooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
@@ -532,7 +532,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui"); // NOI18N
         jButtonOpen.setText(bundle.getString("jButtonOpen.Text")); // NOI18N
         jButtonOpen.setToolTipText(bundle.getString("jButtonOpen.ToolTipText")); // NOI18N
         jButtonOpen.addActionListener(new java.awt.event.ActionListener() {
@@ -1496,7 +1496,7 @@ private void jMenuItemWatchActionPerformed(java.awt.event.ActionEvent evt) {//GE
             return; // no change in locale
         }
         Locale.setDefault(locale);
-        bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Bundle");
+        bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui");
 
         SwingUtilities.invokeLater(new Runnable() {
 
