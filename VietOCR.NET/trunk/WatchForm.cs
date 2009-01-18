@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace VietOCR.NET
 {
@@ -78,6 +79,17 @@ namespace VietOCR.NET
                 outputFolder = this.folderBrowserDialog1.SelectedPath;
                 this.textBoxOutput.Text = outputFolder;
             }
+        }
+
+        /// <summary>
+        /// Changes localized text and messages
+        /// </summary>
+        /// <param name="locale"></param>
+        /// <param name="firstTime"></param>
+        protected virtual void ChangeUILanguage(string locale)
+        {
+            FormLocalizer localizer = new FormLocalizer(this, typeof(WatchForm));
+            localizer.ApplyCulture(new CultureInfo(locale));
         }
     }
 }

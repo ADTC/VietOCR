@@ -152,10 +152,14 @@ namespace VietOCR.NET
         /// </summary>
         /// <param name="locale"></param>
         /// <param name="firstTime"></param>
-        protected override void UpdateUI(string locale)
+        protected override void ChangeUILanguage(string locale)
         {
-            base.UpdateUI(locale);
+            base.ChangeUILanguage(locale);
 
+            if (watchForm != null)
+            { 
+                
+            }
             statusForm.Text = Properties.Resources.BatchProcessStatus;
         }
 
