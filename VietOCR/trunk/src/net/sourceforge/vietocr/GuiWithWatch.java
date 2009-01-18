@@ -34,6 +34,7 @@ public class GuiWithWatch extends Gui {
 
     private StatusFrame statusFrame;
     private WatchDialog watchDialog;
+    private Watcher watcher;
 
     public GuiWithWatch() {
         watchFolder = prefs.get("WatchFolder", System.getProperty("user.home"));
@@ -45,7 +46,10 @@ public class GuiWithWatch extends Gui {
 
         // watch for new image files
         final Queue<File> queue = new LinkedList<File>();
-        Thread t = new Thread(new Watcher(queue, new File(watchFolder)));
+        watcher = new Watcher(queue, new File(watchFolder));
+        watcher.setEnabled(watchEnabled);
+
+        Thread t = new Thread(watcher);
         t.start();
 
         // autoOCR if there are files in the queue
@@ -102,6 +106,8 @@ public class GuiWithWatch extends Gui {
             watchFolder = watchDialog.getWatchFolder();
             outputFolder = watchDialog.getOutputFolder();
             watchEnabled = watchDialog.isWatchEnabled();
+            watcher.setPath(new File(watchFolder));
+            watcher.setEnabled(watchEnabled);
         }
     }
 

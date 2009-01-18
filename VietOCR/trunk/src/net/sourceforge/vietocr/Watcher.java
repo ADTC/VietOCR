@@ -17,6 +17,7 @@ public class Watcher implements Runnable {
     private File watchFolder;
     private Queue<File> queue;
     private boolean firstTimeEntered = true;
+    private volatile boolean watchEnabled;
 
     Watcher(Queue<File> q, File folder) {
         queue = q;
@@ -26,9 +27,11 @@ public class Watcher implements Runnable {
     @Override
     public void run() {
         while (true) {
-            sniff();
+            if (watchEnabled) {
+                sniff();
+            }
             try {
-                Thread.sleep(10000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 // not important
                 e.printStackTrace();
@@ -62,6 +65,14 @@ public class Watcher implements Runnable {
             lastTime = newTime;
             lastFiles = Arrays.asList(files);
         }
+    }
+
+    public void setEnabled(boolean enabled) {
+        watchEnabled = enabled;
+    }
+    
+    public void setPath(File path) {
+        watchFolder = path;
     }
 
     public static void main(String[] args) {
