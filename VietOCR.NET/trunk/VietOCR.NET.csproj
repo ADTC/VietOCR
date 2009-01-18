@@ -259,6 +259,9 @@
     <EmbeddedResource Include="WatchForm.resx">
       <DependentUpon>WatchForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WatchForm.vi-VN.resx">
+      <DependentUpon>WatchForm.cs</DependentUpon>
+    </EmbeddedResource>
     <Content Include="samples\vietsample.tif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
