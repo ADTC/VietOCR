@@ -33,6 +33,7 @@ public class StatusFrame extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
 
         setTitle("Batch Process Status");
+        setLocationByPlatform(true);
         setName("statusFrame"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
