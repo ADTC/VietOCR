@@ -171,4 +171,7 @@
   <data name="Cannotprocess" xml:space="preserve">
     <value>Không thể xử lý </value>
   </data>
+  <data name="BatchProcessStatus" xml:space="preserve">
+    <value>Tình trạng Batch Process</value>
+  </data>
 </root>

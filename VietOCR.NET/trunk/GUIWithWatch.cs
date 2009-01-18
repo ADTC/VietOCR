@@ -25,6 +25,7 @@ using System.Threading;
 using System.IO;
 using Microsoft.Win32;
 using VietOCR.NET.Postprocessing;
+using System.Globalization;
 
 namespace VietOCR.NET
 {
@@ -50,6 +51,7 @@ namespace VietOCR.NET
         {
             InitializeComponent();
             statusForm = new StatusForm();
+            statusForm.Text = Properties.Resources.BatchProcessStatus;
         }
 
         protected override void OnLoad(EventArgs ea)
@@ -70,6 +72,10 @@ namespace VietOCR.NET
         {
             if (queue.Count > 0)
             {
+                if (this.statusForm.IsDisposed)
+                {
+                    this.statusForm = new StatusForm();
+                }
                 if (!this.statusForm.Visible)
                 {
                     this.statusForm.Show();
@@ -107,6 +113,9 @@ namespace VietOCR.NET
             }
             catch (Exception e)
             {
+                // Sets the UI culture to the selected language.
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(selectedUILanguage);
+
                 this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { "    **  " + Properties.Resources.Cannotprocess + imageFile.Name + "  **"});
                 Console.WriteLine(e.StackTrace);
             }
@@ -136,6 +145,18 @@ namespace VietOCR.NET
                 watcher.Path = watchFolder;
                 watcher.Enabled = watchEnabled;
             }
+        }
+
+        /// <summary>
+        /// Changes localized text and messages
+        /// </summary>
+        /// <param name="locale"></param>
+        /// <param name="firstTime"></param>
+        protected override void UpdateUI(string locale)
+        {
+            base.UpdateUI(locale);
+
+            statusForm.Text = Properties.Resources.BatchProcessStatus;
         }
 
         protected override void LoadRegistryInfo(RegistryKey regkey)
