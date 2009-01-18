@@ -88,6 +88,15 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Batch Process Status.
+        /// </summary>
+        internal static string BatchProcessStatus {
+            get {
+                return ResourceManager.GetString("BatchProcessStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Canceled.
         /// </summary>
         internal static string Canceled {
