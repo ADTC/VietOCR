@@ -88,6 +88,8 @@ public class WatchDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(10, 5, 20, 0);
         getContentPane().add(jCheckBoxEnable, gridBagConstraints);
 
+        jTextFieldWatch.setBackground(new java.awt.Color(255, 255, 255));
+        jTextFieldWatch.setEditable(false);
         jTextFieldWatch.setMinimumSize(new java.awt.Dimension(50, 20));
         jTextFieldWatch.setPreferredSize(new java.awt.Dimension(170, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -111,6 +113,8 @@ public class WatchDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 15);
         getContentPane().add(jButtonOutput, gridBagConstraints);
 
+        jTextFieldOutput.setBackground(new java.awt.Color(255, 255, 255));
+        jTextFieldOutput.setEditable(false);
         jTextFieldOutput.setPreferredSize(new java.awt.Dimension(170, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
