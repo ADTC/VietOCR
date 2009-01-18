@@ -79,9 +79,9 @@
             this.checkBoxWatchEnabled.AutoSize = true;
             this.checkBoxWatchEnabled.Location = new System.Drawing.Point(24, 95);
             this.checkBoxWatchEnabled.Name = "checkBoxWatchEnabled";
-            this.checkBoxWatchEnabled.Size = new System.Drawing.Size(94, 17);
+            this.checkBoxWatchEnabled.Size = new System.Drawing.Size(59, 17);
             this.checkBoxWatchEnabled.TabIndex = 4;
-            this.checkBoxWatchEnabled.Text = "Enable Watch";
+            this.checkBoxWatchEnabled.Text = "Enable";
             this.checkBoxWatchEnabled.UseVisualStyleBackColor = true;
             // 
             // btnClose
@@ -136,7 +136,9 @@
             this.Controls.Add(this.btnWatch);
             this.Controls.Add(this.textBoxOutput);
             this.Controls.Add(this.textBoxWatch);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "WatchForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Set Watch";
