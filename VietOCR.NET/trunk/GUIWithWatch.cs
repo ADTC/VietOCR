@@ -157,8 +157,8 @@ namespace VietOCR.NET
             base.ChangeUILanguage(locale);
 
             if (watchForm != null)
-            { 
-                
+            {
+                watchForm.ChangeUILanguage(locale);
             }
             statusForm.Text = Properties.Resources.BatchProcessStatus;
         }
