@@ -12,12 +12,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
+ */
 package net.sourceforge.vietocr;
 
 import java.lang.reflect.*;
 import java.util.ResourceBundle;
 import java.awt.Window;
+import javax.swing.*;
 
 /**
  *
@@ -43,6 +44,19 @@ public class FormLocalizer {
      * @param resources
      */
     public void ApplyCulture(ResourceBundle resources) {
+        String text;
+
+        // set window's title
+        String propertyName = "this.Title";
+        if (resources.containsKey(propertyName)) {
+            text = resources.getString(propertyName);
+            if (window instanceof JFrame) {
+                ((JFrame) window).setTitle(text);
+            } else if (window instanceof JDialog) {
+                ((JDialog) window).setTitle(text);
+            }
+        }
+
         // Determine its fields via reflection.
         // If bundle resource available, assign localized text to JFrame and fields with Text property.
 
@@ -61,8 +75,9 @@ public class FormLocalizer {
                 // setText
                 try {
                     if (method.getName().equals("setText") && method.getReturnType() == void.class) {
-                        String text = resources.getString(fieldInfo.getName() + ".Text");
-                        if (text != null) {
+                        propertyName = fieldInfo.getName() + ".Text";
+                        if (resources.containsKey(propertyName)) {
+                            text = resources.getString(propertyName);
                             fieldInfo.setAccessible(true);
                             method.invoke(fieldInfo.get(window), new Object[]{text});
                         }
@@ -74,8 +89,9 @@ public class FormLocalizer {
                 // setToolTipText for JButton
                 try {
                     if (FormLocalizer.isSubclass(fieldType, Class.forName("javax.swing.JButton")) && method.getName().equals("setToolTipText") && method.getReturnType() == void.class) {
-                        String text = resources.getString(fieldInfo.getName() + ".ToolTipText");
-                        if (text != null) {
+                        propertyName = fieldInfo.getName() + ".ToolTipText";
+                        if (resources.containsKey(propertyName)) {
+                            text = resources.getString(propertyName);
                             fieldInfo.setAccessible(true);
                             method.invoke(fieldInfo.get(window), new Object[]{text});
                         }
