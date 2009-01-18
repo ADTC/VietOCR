@@ -75,6 +75,7 @@ namespace VietOCR.NET
                 if (this.statusForm.IsDisposed)
                 {
                     this.statusForm = new StatusForm();
+                    statusForm.Text = Properties.Resources.BatchProcessStatus;
                 }
                 if (!this.statusForm.Visible)
                 {
