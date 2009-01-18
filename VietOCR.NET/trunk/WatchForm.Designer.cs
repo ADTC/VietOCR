@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WatchForm));
             this.textBoxWatch = new System.Windows.Forms.TextBox();
             this.textBoxOutput = new System.Windows.Forms.TextBox();
             this.btnWatch = new System.Windows.Forms.Button();
@@ -42,91 +43,103 @@
             // 
             // textBoxWatch
             // 
-            this.textBoxWatch.Location = new System.Drawing.Point(95, 18);
+            this.textBoxWatch.AccessibleDescription = null;
+            this.textBoxWatch.AccessibleName = null;
+            resources.ApplyResources(this.textBoxWatch, "textBoxWatch");
+            this.textBoxWatch.BackgroundImage = null;
+            this.textBoxWatch.Font = null;
             this.textBoxWatch.Name = "textBoxWatch";
-            this.textBoxWatch.Size = new System.Drawing.Size(158, 20);
-            this.textBoxWatch.TabIndex = 0;
             // 
             // textBoxOutput
             // 
-            this.textBoxOutput.Location = new System.Drawing.Point(95, 52);
+            this.textBoxOutput.AccessibleDescription = null;
+            this.textBoxOutput.AccessibleName = null;
+            resources.ApplyResources(this.textBoxOutput, "textBoxOutput");
+            this.textBoxOutput.BackgroundImage = null;
+            this.textBoxOutput.Font = null;
             this.textBoxOutput.Name = "textBoxOutput";
-            this.textBoxOutput.Size = new System.Drawing.Size(158, 20);
-            this.textBoxOutput.TabIndex = 1;
             // 
             // btnWatch
             // 
-            this.btnWatch.Location = new System.Drawing.Point(259, 16);
+            this.btnWatch.AccessibleDescription = null;
+            this.btnWatch.AccessibleName = null;
+            resources.ApplyResources(this.btnWatch, "btnWatch");
+            this.btnWatch.BackgroundImage = null;
+            this.btnWatch.Font = null;
             this.btnWatch.Name = "btnWatch";
-            this.btnWatch.Size = new System.Drawing.Size(30, 23);
-            this.btnWatch.TabIndex = 2;
-            this.btnWatch.Text = "...";
             this.btnWatch.UseVisualStyleBackColor = true;
             this.btnWatch.Click += new System.EventHandler(this.btnWatch_Click);
             // 
             // btnOutput
             // 
-            this.btnOutput.Location = new System.Drawing.Point(259, 50);
+            this.btnOutput.AccessibleDescription = null;
+            this.btnOutput.AccessibleName = null;
+            resources.ApplyResources(this.btnOutput, "btnOutput");
+            this.btnOutput.BackgroundImage = null;
+            this.btnOutput.Font = null;
             this.btnOutput.Name = "btnOutput";
-            this.btnOutput.Size = new System.Drawing.Size(30, 23);
-            this.btnOutput.TabIndex = 3;
-            this.btnOutput.Text = "...";
             this.btnOutput.UseVisualStyleBackColor = true;
             this.btnOutput.Click += new System.EventHandler(this.btnOutput_Click);
             // 
             // checkBoxWatchEnabled
             // 
-            this.checkBoxWatchEnabled.AutoSize = true;
-            this.checkBoxWatchEnabled.Location = new System.Drawing.Point(24, 95);
+            this.checkBoxWatchEnabled.AccessibleDescription = null;
+            this.checkBoxWatchEnabled.AccessibleName = null;
+            resources.ApplyResources(this.checkBoxWatchEnabled, "checkBoxWatchEnabled");
+            this.checkBoxWatchEnabled.BackgroundImage = null;
+            this.checkBoxWatchEnabled.Font = null;
             this.checkBoxWatchEnabled.Name = "checkBoxWatchEnabled";
-            this.checkBoxWatchEnabled.Size = new System.Drawing.Size(59, 17);
-            this.checkBoxWatchEnabled.TabIndex = 4;
-            this.checkBoxWatchEnabled.Text = "Enable";
             this.checkBoxWatchEnabled.UseVisualStyleBackColor = true;
             // 
             // btnClose
             // 
+            this.btnClose.AccessibleDescription = null;
+            this.btnClose.AccessibleName = null;
+            resources.ApplyResources(this.btnClose, "btnClose");
+            this.btnClose.BackgroundImage = null;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(214, 95);
+            this.btnClose.Font = null;
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 5;
-            this.btnClose.Text = "Cancel";
             this.btnClose.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 21);
+            this.label1.AccessibleDescription = null;
+            this.label1.AccessibleName = null;
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Font = null;
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Watch Folder:";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 55);
+            this.label2.AccessibleDescription = null;
+            this.label2.AccessibleName = null;
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Font = null;
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Output Folder:";
             // 
             // btnOK
             // 
+            this.btnOK.AccessibleDescription = null;
+            this.btnOK.AccessibleName = null;
+            resources.ApplyResources(this.btnOK, "btnOK");
+            this.btnOK.BackgroundImage = null;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(133, 95);
+            this.btnOK.Font = null;
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 8;
-            this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
+            // 
+            // folderBrowserDialog1
+            // 
+            resources.ApplyResources(this.folderBrowserDialog1, "folderBrowserDialog1");
             // 
             // WatchForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AccessibleDescription = null;
+            this.AccessibleName = null;
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 137);
+            this.BackgroundImage = null;
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -136,12 +149,12 @@
             this.Controls.Add(this.btnWatch);
             this.Controls.Add(this.textBoxOutput);
             this.Controls.Add(this.textBoxWatch);
+            this.Font = null;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = null;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "WatchForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Set Watch";
             this.ResumeLayout(false);
             this.PerformLayout();
 
