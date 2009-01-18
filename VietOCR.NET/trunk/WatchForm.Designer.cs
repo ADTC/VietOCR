@@ -46,18 +46,22 @@
             this.textBoxWatch.AccessibleDescription = null;
             this.textBoxWatch.AccessibleName = null;
             resources.ApplyResources(this.textBoxWatch, "textBoxWatch");
+            this.textBoxWatch.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.textBoxWatch.BackgroundImage = null;
             this.textBoxWatch.Font = null;
             this.textBoxWatch.Name = "textBoxWatch";
+            this.textBoxWatch.ReadOnly = true;
             // 
             // textBoxOutput
             // 
             this.textBoxOutput.AccessibleDescription = null;
             this.textBoxOutput.AccessibleName = null;
             resources.ApplyResources(this.textBoxOutput, "textBoxOutput");
+            this.textBoxOutput.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.textBoxOutput.BackgroundImage = null;
             this.textBoxOutput.Font = null;
             this.textBoxOutput.Name = "textBoxOutput";
+            this.textBoxOutput.ReadOnly = true;
             // 
             // btnWatch
             // 
