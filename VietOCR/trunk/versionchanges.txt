@@ -81,5 +81,5 @@ Version 0.9.9 (10 January 2009)
 - Revamped localization codes
 - Added rudimentary support for English postprocessing
 
-Version 0.9.9.1 (18 January 2009)
+Version 0.9.10 (18 January 2009)
 - Added watch folder functionality for Batch Processing
