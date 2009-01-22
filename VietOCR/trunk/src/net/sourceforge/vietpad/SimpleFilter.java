@@ -40,6 +40,13 @@ public class SimpleFilter extends javax.swing.filechooser.FileFilter
         if (f == null) return false;
         if (f.isDirectory()) return true;
         if (m_extension.equals(".*")) return true;
-        return f.getName().toLowerCase().endsWith(m_extension);
+
+        String lowerCaseName = f.getName().toLowerCase();
+        if (m_extension.equals(".tif")) {
+            return  lowerCaseName.endsWith(m_extension) ||  lowerCaseName.endsWith(".tiff");
+        } else if (m_extension.equals(".jpg")) {
+            return  lowerCaseName.endsWith(m_extension) ||  lowerCaseName.endsWith(".jpeg");
+        }
+        return lowerCaseName.endsWith(m_extension);
     }
 }
