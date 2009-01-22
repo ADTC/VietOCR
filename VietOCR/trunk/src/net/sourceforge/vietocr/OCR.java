@@ -115,7 +115,7 @@ public class OCR {
                 String msg;
                 switch (w) {
                     case 1:
-                        msg = "Errors accessing files. There may be spaces in your image's filename.";
+                        msg = "Errors accessing files.";
                         break;
                     case 29:
                         msg = "Cannot recognize the image or its selected region.";
