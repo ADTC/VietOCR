@@ -49,6 +49,8 @@ public class Gui extends javax.swing.JFrame {
     protected final String UTF8 = "UTF-8";
     protected ResourceBundle myResources,  bundle;
     protected static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
+    private int filterIndex;
+    private javax.swing.filechooser.FileFilter[] fileFilters;
     private Font font;
     private final Rectangle screen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
     private int imageIndex;
@@ -171,7 +173,9 @@ public class Gui extends javax.swing.JFrame {
         filechooser.addChoosableFileFilter(pngFilter);
         filechooser.addChoosableFileFilter(bmpFilter);
 
-        filechooser.setFileFilter(filechooser.getChoosableFileFilters()[prefs.getInt("filterIndex", 0)]);
+        filterIndex = prefs.getInt("filterIndex", 0);
+        fileFilters = filechooser.getChoosableFileFilters();
+        filechooser.setFileFilter(fileFilters[filterIndex]);
 
         myResources = ResourceBundle.getBundle("net.sourceforge.vietpad.Resources");
 
@@ -1119,13 +1123,7 @@ public class Gui extends javax.swing.JFrame {
             prefs.putInt("frameY", getY());
         }
 
-        javax.swing.filechooser.FileFilter[] filters = filechooser.getChoosableFileFilters();
-        for (int i = 0; i < filters.length; i++) {
-            if (filters[i] == filechooser.getFileFilter()) {
-                prefs.putInt("filterIndex", i);
-                break;
-            }
-        }
+        prefs.putInt("filterIndex", filterIndex);
 
 //        System.exit(0);
     }
@@ -1285,6 +1283,13 @@ public class Gui extends javax.swing.JFrame {
             currentDirectory = filechooser.getCurrentDirectory().getPath();
             openFile(filechooser.getSelectedFile());
             scaleX = scaleY = 1f;
+
+            for (int i = 0; i < fileFilters.length; i++) {
+                if (fileFilters[i] == filechooser.getFileFilter()) {
+                    filterIndex = i;
+                    break;
+                }
+            }
         }
     }//GEN-LAST:event_jMenuItemOpenActionPerformed
 
