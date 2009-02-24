@@ -3,8 +3,8 @@ VietOCR.NET Change Summary
 Version 0.1 (7 June 2008): 
 - Proof-of-concept design
 - Added post-processing for Vietnamese to improve accuracy
-- Integrated Tessnet2 .NET wrapper for Tesseract 2.03 OCR engine
-- Use beta Vietnamese language data for Tesseract 2.03 (data for 2.01 crashes frequently with Tesseract 2.03)
+- Integrated Tessnet2 .NET wrapper for Tesseract 2.03 OCR engine (http://www.pixel-technology.com/freeware/tessnet2/)
+- Use Vietnamese language data for Tesseract 2.03 (data for 2.01 crashes frequently with Tesseract 2.03)
 - Integrated VietKeyInput class library
 
 Version 0.2 (10 June 2008): 
