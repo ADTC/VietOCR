@@ -368,12 +368,6 @@ namespace VietOCR.NET
             Application.Exit();
         }
 
-
-        private void settingsToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
-        {
-            this.wordWrapToolStripMenuItem.Checked = this.textBox1.WordWrap;
-        }
-
         private void toolStripBtnPrev_Click(object sender, EventArgs e)
         {
             imageIndex--;
@@ -791,6 +785,11 @@ namespace VietOCR.NET
         protected virtual void watchToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("To be implemented", strProgName);
+        }
+
+        private void formatToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            this.wordWrapToolStripMenuItem.Checked = this.textBox1.WordWrap;
         }
     }
 }
