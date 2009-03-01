@@ -277,4 +277,13 @@
   <data name="watchToolStripMenuItem.Text" xml:space="preserve">
     <value>Canh gác...</value>
   </data>
+  <data name="changeCaseToolStripMenuItem.Text" xml:space="preserve">
+    <value>Đổi ngữ cách...</value>
+  </data>
+  <data name="formatToolStripMenuItem.Text" xml:space="preserve">
+    <value>Định dạng</value>
+  </data>
+  <data name="removeLineBreaksToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nối dòng</value>
+  </data>
 </root>
