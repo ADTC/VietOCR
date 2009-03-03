@@ -13,33 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package net.sourceforge.vietocr;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import net.sourceforge.vietpad.ChangeCaseDialog;
+import java.util.regex.*;
+import net.sourceforge.vietpad.*;
 
 public class GuiWithFormat extends Gui {
     private ChangeCaseDialog changeCaseDlg;
 
-    private void jCheckBoxMenuWordWrapActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    void setLineWrap() {
         this.jTextArea1.setLineWrap(wordWrapOn = jCheckBoxMenuWordWrap.isSelected());
     }
-private void jMenuItemChangeCaseActionPerformed(java.awt.event.ActionEvent evt) {
-    if (changeCaseDlg == null) {
-        changeCaseDlg = new ChangeCaseDialog(GuiWithFormat.this, false);
-        // non-modal
-        changeCaseDlg.setSelectedCase(prefs.get("selectedCase", "Upper Case"));
-        changeCaseDlg.setLocation(
-                prefs.getInt("changeCaseX", changeCaseDlg.getX()),
-                prefs.getInt("changeCaseY", changeCaseDlg.getY()));
+
+    @Override
+    void openFontDialog() {
+        FontDialog dlg = new FontDialog(this);
+        dlg.setAttributes(font);
+        dlg.setVisible(true);
+        if (dlg.succeeded()) {
+            jTextArea1.setFont(font = dlg.getFont());
+            jTextArea1.validate();
+        }
     }
-    if (jTextArea1.getSelectedText() == null) {
-        jTextArea1.selectAll();
+
+    @Override
+    void openChangeCaseDialog() {
+        if (changeCaseDlg == null) {
+            changeCaseDlg = new ChangeCaseDialog(GuiWithFormat.this, false);
+            // non-modal
+            changeCaseDlg.setSelectedCase(prefs.get("selectedCase", "Upper Case"));
+            changeCaseDlg.setLocation(
+                    prefs.getInt("changeCaseX", changeCaseDlg.getX()),
+                    prefs.getInt("changeCaseY", changeCaseDlg.getY()));
+        }
+        if (jTextArea1.getSelectedText() == null) {
+            jTextArea1.selectAll();
+        }
+        changeCaseDlg.setVisible(true);
     }
-    changeCaseDlg.setVisible(true);
-}
+
     /**
      *  Changes case
      *
@@ -98,21 +111,23 @@ private void jMenuItemChangeCaseActionPerformed(java.awt.event.ActionEvent evt) 
         jTextArea1.setSelectionEnd(start + result.length());
         undoSupport.endUpdate();
     }
-private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent evt) {
-    if (jTextArea1.getSelectedText() == null) {
-        jTextArea1.selectAll();
 
+    @Override
+    void removeLineBreaks() {
         if (jTextArea1.getSelectedText() == null) {
-            return;
-        }
-    }
-    String result = jTextArea1.getSelectedText().replaceAll("(?<=\n|^)[\t ]+|[\t ]+(?=$|\n)", "").replaceAll("(?<=.)\n(?=.)", " ");
+            jTextArea1.selectAll();
 
-    undoSupport.beginUpdate();
-    int start = jTextArea1.getSelectionStart();
-    jTextArea1.replaceSelection(result);
-    jTextArea1.setSelectionStart(start);
-    jTextArea1.setSelectionEnd(start + result.length());
-    undoSupport.endUpdate();
-}
+            if (jTextArea1.getSelectedText() == null) {
+                return;
+            }
+        }
+        String result = jTextArea1.getSelectedText().replaceAll("(?<=\n|^)[\t ]+|[\t ]+(?=$|\n)", "").replaceAll("(?<=.)\n(?=.)", " ");
+
+        undoSupport.beginUpdate();
+        int start = jTextArea1.getSelectionStart();
+        jTextArea1.replaceSelection(result);
+        jTextArea1.setSelectionStart(start);
+        jTextArea1.setSelectionEnd(start + result.length());
+        undoSupport.endUpdate();
+    }
 }

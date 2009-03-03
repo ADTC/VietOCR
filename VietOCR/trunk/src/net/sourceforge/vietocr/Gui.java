@@ -51,7 +51,7 @@ public class Gui extends javax.swing.JFrame {
     protected static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
     private int filterIndex;
     private javax.swing.filechooser.FileFilter[] fileFilters;
-    private Font font;
+    protected Font font;
     private final Rectangle screen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
     private int imageIndex;
     private int imageTotal;
@@ -74,7 +74,6 @@ public class Gui extends javax.swing.JFrame {
     protected static String selectedUILang = "en";
     private int originalW,  originalH;
     private final float ZOOM_FACTOR = 1.25f;
-
 
     /**
      * Creates new form Gui
@@ -938,9 +937,12 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxLangItemStateChanged
 
     private void jCheckBoxMenuWordWrapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuWordWrapActionPerformed
-        this.jTextArea1.setLineWrap(wordWrapOn = jCheckBoxMenuWordWrap.isSelected());
+        setLineWrap();
     }//GEN-LAST:event_jCheckBoxMenuWordWrapActionPerformed
 
+    void setLineWrap() {
+        // to be implemented in subclass
+    }
     private void jMenuItemPostProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPostProcessActionPerformed
         if (curLangCode == null) {
             return;
@@ -1150,15 +1152,12 @@ public class Gui extends javax.swing.JFrame {
 //        System.exit(0);
     }
     private void jMenuItemFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFontActionPerformed
-        FontDialog dlg = new FontDialog(this);
-        dlg.setAttributes(font);
-        dlg.setVisible(true);
-        if (dlg.succeeded()) {
-            jTextArea1.setFont(font = dlg.getFont());
-            jTextArea1.validate();
-        }
-
+        openFontDialog();
     }//GEN-LAST:event_jMenuItemFontActionPerformed
+
+    void openFontDialog() {
+        // to be implemented in subclass
+    }
 
     private void jMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveActionPerformed
         outputDirectory = prefs.get("outputDirectory", null);
@@ -1500,15 +1499,22 @@ private void jMenuItemWatchActionPerformed(java.awt.event.ActionEvent evt) {//GE
     openWatchDialog();
 }//GEN-LAST:event_jMenuItemWatchActionPerformed
 
+    void openWatchDialog() {
+        // to be implemented in subclass
+    }
+
 private void jMenuItemChangeCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChangeCaseActionPerformed
-    // to be implemented in subclass
+    openChangeCaseDialog();
 }//GEN-LAST:event_jMenuItemChangeCaseActionPerformed
 
+    void openChangeCaseDialog() {
+        // to be implemented in subclass
+    }
 private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRemoveLineBreaksActionPerformed
-    // to be implemented in subclass
+    removeLineBreaks();
 }//GEN-LAST:event_jMenuItemRemoveLineBreaksActionPerformed
 
-    protected void openWatchDialog() {
+    void removeLineBreaks() {
         // to be implemented in subclass
     }
 
