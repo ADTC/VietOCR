@@ -13,7 +13,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.util.*;
-import net.sourceforge.vietocr.Gui;
+import net.sourceforge.vietocr.*;
 
 public class ChangeCaseDialog extends JDialog {
     
@@ -92,7 +92,7 @@ public class ChangeCaseDialog extends JDialog {
         jButtonChangeCase.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                final Gui frame = (Gui) getOwner();
+                final GuiWithFormat frame = (GuiWithFormat) getOwner();
 
                 getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 getGlassPane().setVisible(true);
