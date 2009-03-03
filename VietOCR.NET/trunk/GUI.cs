@@ -250,27 +250,14 @@ namespace VietOCR.NET
             }
         }
 
-        private void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
+        protected virtual void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem mi = (ToolStripMenuItem)sender;
-            mi.Checked ^= true;
-            this.textBox1.WordWrap = mi.Checked;
+            MessageBox.Show("To be implemented", strProgName);
         }
 
-        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+        protected virtual void fontToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FontDialog fontdlg = new FontDialog();
-
-            fontdlg.ShowColor = true;
-            fontdlg.Font = this.textBox1.Font;
-            fontdlg.Color = this.textBox1.ForeColor;
-
-            if (fontdlg.ShowDialog() == DialogResult.OK)
-            {
-                this.textBox1.Font = fontdlg.Font;
-                this.textBox1.ForeColor = fontdlg.Color;
-            }
-
+            MessageBox.Show("To be implemented", strProgName);
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -782,14 +769,24 @@ namespace VietOCR.NET
             }
         }
 
+        private void formatToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            this.wordWrapToolStripMenuItem.Checked = this.textBox1.WordWrap;
+        }
+       
         protected virtual void watchToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("To be implemented", strProgName);
         }
-
-        private void formatToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        
+        protected virtual void changeCaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.wordWrapToolStripMenuItem.Checked = this.textBox1.WordWrap;
+            MessageBox.Show("To be implemented", strProgName);
+        }
+
+        protected virtual void removeLineBreaksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("To be implemented", strProgName);
         }
     }
 }
