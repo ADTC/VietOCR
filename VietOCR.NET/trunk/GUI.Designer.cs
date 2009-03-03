@@ -357,11 +357,13 @@ namespace VietOCR.NET
             // 
             this.changeCaseToolStripMenuItem.Name = "changeCaseToolStripMenuItem";
             resources.ApplyResources(this.changeCaseToolStripMenuItem, "changeCaseToolStripMenuItem");
+            this.changeCaseToolStripMenuItem.Click += new System.EventHandler(this.changeCaseToolStripMenuItem_Click);
             // 
             // removeLineBreaksToolStripMenuItem
             // 
             this.removeLineBreaksToolStripMenuItem.Name = "removeLineBreaksToolStripMenuItem";
             resources.ApplyResources(this.removeLineBreaksToolStripMenuItem, "removeLineBreaksToolStripMenuItem");
+            this.removeLineBreaksToolStripMenuItem.Click += new System.EventHandler(this.removeLineBreaksToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 

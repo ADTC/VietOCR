@@ -96,6 +96,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeCaseDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeCaseDialog1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeCaseDialog1.Designer.cs">
+      <DependentUpon>ChangeCaseDialog1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ClonableToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -109,6 +118,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FormLocalizer.cs" />
+    <Compile Include="GUIWithFormat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIWithFormat.Designer.cs">
+      <DependentUpon>GUIWithFormat.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUIWithInputMethod.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -237,6 +252,15 @@
     <None Include="tessdata\vie.word-dawg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <EmbeddedResource Include="ChangeCaseDialog.resx">
+      <DependentUpon>ChangeCaseDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeCaseDialog1.resx">
+      <DependentUpon>ChangeCaseDialog1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeCaseDialog1.vi-VN.resx">
+      <DependentUpon>ChangeCaseDialog1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI.vi-VN.resx">
       <DependentUpon>GUI.cs</DependentUpon>
     </EmbeddedResource>

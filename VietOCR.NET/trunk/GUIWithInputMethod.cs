@@ -31,7 +31,7 @@ using VietOCR.NET.Controls;
 
 namespace VietOCR.NET
 {
-    public partial class GUIWithInputMethod : VietOCR.NET.GUIWithRegistry
+    public partial class GUIWithInputMethod : VietOCR.NET.GUIWithFormat
     {
         string selectedInputMethod;
         ToolStripMenuItem miimChecked;
