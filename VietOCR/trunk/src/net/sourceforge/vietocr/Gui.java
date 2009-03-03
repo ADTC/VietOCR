@@ -61,19 +61,20 @@ public class Gui extends javax.swing.JFrame {
     private String currentDirectory;
     private String outputDirectory;
     protected String tessPath;
-    private Properties prop, config;
+    private Properties prop,  config;
     protected String curLangCode;
     protected String[] langCodes;
     private String[] langs;
     private ImageIconScalable imageIcon;
     private boolean reset;
     private JFileChooser filechooser;
-    private boolean wordWrapOn;
+    protected boolean wordWrapOn;
     private String selectedInputMethod;
     private float scaleX,  scaleY;
     protected static String selectedUILang = "en";
     private int originalW,  originalH;
     private final float ZOOM_FACTOR = 1.25f;
+
 
     /**
      * Creates new form Gui
@@ -122,7 +123,7 @@ public class Gui extends javax.swing.JFrame {
 
         selectedInputMethod = prefs.get("inputMethod", "Telex");
         config = new Properties();
-        
+
         try {
             UIManager.setLookAndFeel(prefs.get("lookAndFeel", UIManager.getSystemLookAndFeelClassName()));
             config.loadFromXML(getClass().getResourceAsStream("config.xml"));
@@ -472,11 +473,15 @@ public class Gui extends javax.swing.JFrame {
         jMenuItemOCRAll = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JSeparator();
         jMenuItemPostProcess = new javax.swing.JMenuItem();
-        jMenuSettings = new javax.swing.JMenu();
+        jMenuFormat = new javax.swing.JMenu();
         jCheckBoxMenuWordWrap = new javax.swing.JCheckBoxMenuItem();
         jMenuItemFont = new javax.swing.JMenuItem();
         jSeparator10 = new javax.swing.JSeparator();
+        jMenuItemChangeCase = new javax.swing.JMenuItem();
+        jMenuItemRemoveLineBreaks = new javax.swing.JMenuItem();
+        jMenuSettings = new javax.swing.JMenu();
         jMenuItemWatch = new javax.swing.JMenuItem();
+        jMenuItemTessPath = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JSeparator();
         jMenuInputMethod = new javax.swing.JMenu();
         ActionListener imlst = new ActionListener() {
@@ -520,8 +525,6 @@ public class Gui extends javax.swing.JFrame {
             groupLookAndFeel.add(lafButton);
             jMenuLookAndFeel.add(lafButton);
         }
-        jSeparator4 = new javax.swing.JSeparator();
-        jMenuItemTessPath = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemHelp = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JSeparator();
@@ -785,8 +788,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuCommand);
 
-        jMenuSettings.setMnemonic('s');
-        jMenuSettings.setText(bundle.getString("jMenuSettings.Text")); // NOI18N
+        jMenuFormat.setText("Format");
 
         jCheckBoxMenuWordWrap.setText(bundle.getString("jCheckBoxMenuWordWrap.Text")); // NOI18N
         jCheckBoxMenuWordWrap.addActionListener(new java.awt.event.ActionListener() {
@@ -794,7 +796,7 @@ public class Gui extends javax.swing.JFrame {
                 jCheckBoxMenuWordWrapActionPerformed(evt);
             }
         });
-        jMenuSettings.add(jCheckBoxMenuWordWrap);
+        jMenuFormat.add(jCheckBoxMenuWordWrap);
 
         jMenuItemFont.setText(bundle.getString("jMenuItemFont.Text")); // NOI18N
         jMenuItemFont.addActionListener(new java.awt.event.ActionListener() {
@@ -802,8 +804,29 @@ public class Gui extends javax.swing.JFrame {
                 jMenuItemFontActionPerformed(evt);
             }
         });
-        jMenuSettings.add(jMenuItemFont);
-        jMenuSettings.add(jSeparator10);
+        jMenuFormat.add(jMenuItemFont);
+        jMenuFormat.add(jSeparator10);
+
+        jMenuItemChangeCase.setText("Change Case...");
+        jMenuItemChangeCase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemChangeCaseActionPerformed(evt);
+            }
+        });
+        jMenuFormat.add(jMenuItemChangeCase);
+
+        jMenuItemRemoveLineBreaks.setText("Remove Line Breaks");
+        jMenuItemRemoveLineBreaks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRemoveLineBreaksActionPerformed(evt);
+            }
+        });
+        jMenuFormat.add(jMenuItemRemoveLineBreaks);
+
+        jMenuBar2.add(jMenuFormat);
+
+        jMenuSettings.setMnemonic('s');
+        jMenuSettings.setText(bundle.getString("jMenuSettings.Text")); // NOI18N
 
         jMenuItemWatch.setText(bundle.getString("jMenuItemWatch.Text")); // NOI18N
         jMenuItemWatch.addActionListener(new java.awt.event.ActionListener() {
@@ -812,6 +835,15 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jMenuSettings.add(jMenuItemWatch);
+
+        jMenuItemTessPath.setText(bundle.getString("jMenuItemTessPath.Text")); // NOI18N
+        jMenuItemTessPath.setActionCommand(bundle.getString("Tesseract_Path")); // NOI18N
+        jMenuItemTessPath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemTessPathActionPerformed(evt);
+            }
+        });
+        jMenuSettings.add(jMenuItemTessPath);
         jMenuSettings.add(jSeparator3);
 
         jMenuInputMethod.setText(bundle.getString("jMenuInputMethod.Text")); // NOI18N
@@ -846,16 +878,6 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuLookAndFeel.setText(bundle.getString("jMenuLookAndFeel.Text")); // NOI18N
         jMenuSettings.add(jMenuLookAndFeel);
-        jMenuSettings.add(jSeparator4);
-
-        jMenuItemTessPath.setText(bundle.getString("jMenuItemTessPath.Text")); // NOI18N
-        jMenuItemTessPath.setActionCommand(bundle.getString("Tesseract_Path")); // NOI18N
-        jMenuItemTessPath.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemTessPathActionPerformed(evt);
-            }
-        });
-        jMenuSettings.add(jMenuItemTessPath);
 
         jMenuBar2.add(jMenuSettings);
 
@@ -1478,6 +1500,14 @@ private void jMenuItemWatchActionPerformed(java.awt.event.ActionEvent evt) {//GE
     openWatchDialog();
 }//GEN-LAST:event_jMenuItemWatchActionPerformed
 
+private void jMenuItemChangeCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChangeCaseActionPerformed
+    // to be implemented in subclass
+}//GEN-LAST:event_jMenuItemChangeCaseActionPerformed
+
+private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRemoveLineBreaksActionPerformed
+    // to be implemented in subclass
+}//GEN-LAST:event_jMenuItemRemoveLineBreaksActionPerformed
+
     protected void openWatchDialog() {
         // to be implemented in subclass
     }
@@ -1565,7 +1595,7 @@ private void jMenuItemWatchActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JButton jButtonScan;
     private javax.swing.JButton jButtonZoomIn;
     private javax.swing.JButton jButtonZoomOut;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuWordWrap;
+    protected javax.swing.JCheckBoxMenuItem jCheckBoxMenuWordWrap;
     private javax.swing.JComboBox jComboBoxLang;
     private javax.swing.JLabel jImageLabel;
     private javax.swing.JLabel jLabelCurIndex;
@@ -1574,9 +1604,11 @@ private void jMenuItemWatchActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu jMenuCommand;
     private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenu jMenuFormat;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenu jMenuInputMethod;
     private javax.swing.JMenuItem jMenuItemAbout;
+    private javax.swing.JMenuItem jMenuItemChangeCase;
     private javax.swing.JMenuItem jMenuItemExit;
     private javax.swing.JMenuItem jMenuItemFont;
     private javax.swing.JMenuItem jMenuItemHelp;
@@ -1584,6 +1616,7 @@ private void jMenuItemWatchActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JMenuItem jMenuItemOCRAll;
     private javax.swing.JMenuItem jMenuItemOpen;
     private javax.swing.JMenuItem jMenuItemPostProcess;
+    private javax.swing.JMenuItem jMenuItemRemoveLineBreaks;
     private javax.swing.JMenuItem jMenuItemSave;
     private javax.swing.JMenuItem jMenuItemScan;
     private javax.swing.JMenuItem jMenuItemTessPath;
@@ -1602,20 +1635,19 @@ private void jMenuItemWatchActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JToolBar.Separator jSeparator9;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTextArea jTextArea1;
+    protected javax.swing.JTextArea jTextArea1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JPopupMenu popup;
     // End of variables declaration//GEN-END:variables
     private final UndoManager m_undo = new UndoManager();
-    private final UndoableEditSupport undoSupport = new UndoableEditSupport();
+    protected final UndoableEditSupport undoSupport = new UndoableEditSupport();
     private Action m_undoAction,  m_redoAction,  actionCut,  actionCopy,  actionPaste,  actionDelete,  actionSelectAll;
     private final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
     private JFrame helptopicsFrame;
