@@ -787,7 +787,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuCommand);
 
-        jMenuFormat.setText("Format");
+        jMenuFormat.setText(bundle.getString("jMenuFormat.Text")); // NOI18N
 
         jCheckBoxMenuWordWrap.setText(bundle.getString("jCheckBoxMenuWordWrap.Text")); // NOI18N
         jCheckBoxMenuWordWrap.addActionListener(new java.awt.event.ActionListener() {
@@ -806,7 +806,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuFormat.add(jMenuItemFont);
         jMenuFormat.add(jSeparator10);
 
-        jMenuItemChangeCase.setText("Change Case...");
+        jMenuItemChangeCase.setText(bundle.getString("jMenuItemChangeCase.Text")); // NOI18N
         jMenuItemChangeCase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemChangeCaseActionPerformed(evt);
@@ -814,7 +814,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jMenuFormat.add(jMenuItemChangeCase);
 
-        jMenuItemRemoveLineBreaks.setText("Remove Line Breaks");
+        jMenuItemRemoveLineBreaks.setText(bundle.getString("jMenuItemRemoveLineBreaks.Text")); // NOI18N
         jMenuItemRemoveLineBreaks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemRemoveLineBreaksActionPerformed(evt);
