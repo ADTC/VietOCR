@@ -27,7 +27,7 @@ import net.sourceforge.vietocr.postprocessing.Processor;
  *
  * @author Quan Nguyen
  */
-public class GuiWithWatch extends Gui {
+public class GuiWithWatch extends GuiWithFormat {
     private String watchFolder;
     private String outputFolder;
     private boolean watchEnabled;
