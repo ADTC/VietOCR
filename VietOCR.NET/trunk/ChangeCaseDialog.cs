@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace VietOCR.NET
 {
-    public partial class ChangeCaseDialog1 : Form
+    public partial class ChangeCaseDialog : Form
     {
         private string selectedCase;
 
@@ -21,7 +21,7 @@ namespace VietOCR.NET
             get { return selectedCase; }
         }
 
-        public ChangeCaseDialog1()
+        public ChangeCaseDialog()
         {
             InitializeComponent();
         }
@@ -46,7 +46,7 @@ namespace VietOCR.NET
             {
                 if (rb.Checked)
                 {
-                    selectedCase = (string) rb.Tag;
+                    selectedCase = rb.Tag.ToString();
                     break;
                 }
             }
