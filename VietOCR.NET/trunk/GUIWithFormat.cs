@@ -22,6 +22,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using Microsoft.Win32;
+using System.Globalization;
 
 namespace VietOCR.NET
 {
@@ -35,7 +36,25 @@ namespace VietOCR.NET
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// Changes localized text and messages
+        /// </summary>
+        /// <param name="locale"></param>
+        /// <param name="firstTime"></param>
+        protected override void ChangeUILanguage(string locale)
+        {
+            base.ChangeUILanguage(locale);
 
+            foreach (Form form in this.OwnedForms)
+            {
+                ChangeCaseDialog changeCaseDlg = form as ChangeCaseDialog;
+                if (changeCaseDlg != null)
+                {
+                    FormLocalizer localizer = new FormLocalizer(changeCaseDlg, typeof(ChangeCaseDialog));
+                    localizer.ApplyCulture(new CultureInfo(locale));
+                }
+            }
+        }
         protected override void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem mi = (ToolStripMenuItem)sender;
@@ -65,7 +84,7 @@ namespace VietOCR.NET
 
             textBox1.HideSelection = false;
 
-            ChangeCaseDialog1 changeCaseDlg = new ChangeCaseDialog1();
+            ChangeCaseDialog changeCaseDlg = new ChangeCaseDialog();
             changeCaseDlg.Owner = this;
             changeCaseDlg.SelectedCase = selectedCase;
             changeCaseDlg.ChangeCase += new EventHandler(ChangeCaseDialogChangeCase);
@@ -86,7 +105,7 @@ namespace VietOCR.NET
                 return;
             }
 
-            ChangeCaseDialog1 dlg = (ChangeCaseDialog1)obj;
+            ChangeCaseDialog dlg = (ChangeCaseDialog)obj;
             selectedCase = dlg.SelectedCase;
             changeCase(selectedCase);
         }
