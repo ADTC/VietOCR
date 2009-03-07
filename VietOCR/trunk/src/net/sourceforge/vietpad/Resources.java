@@ -61,7 +61,7 @@ public class Resources extends ListResourceBundle
         {"Language", "Language"},
         {"Line_Separators", "Line Separators"},
         {"Look_&_Feel", "Look and Feel"},
-        {"lowercase", "lowercase"},
+        {"lowercase", "lower case"},
         {"Match_Case", "Match Case"},
         {"Match_Diacritics", "Match Diacritics"},
         {"Match_Whole_Word", "Match Whole Word"},
@@ -124,7 +124,7 @@ public class Resources extends ListResourceBundle
         {"Tools", "Tools"},
         {"Undo", "Undo"},
         {"Untitled", "Untitled"},
-        {"UPPERCASE", "UPPERCASE"},
+        {"UPPERCASE", "UPPER CASE"},
         {"User_Interface", "User Interface"},
         {"Value:", "Value:"},
         {"Viet_Mode", "Viet Mode"},
@@ -134,6 +134,7 @@ public class Resources extends ListResourceBundle
 
     };
 
+    @Override
     public Object [][] getContents() {
         return contents;
     }
