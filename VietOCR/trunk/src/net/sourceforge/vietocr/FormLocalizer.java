@@ -101,6 +101,8 @@ public class FormLocalizer {
                 }
             }
         }
+
+        window.pack();
     }
 
     /**
