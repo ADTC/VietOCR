@@ -89,6 +89,7 @@ class OpenList extends JPanel implements ListSelectionListener, ActionListener {
     }
 
 
+    @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting()) {
             return;
@@ -100,6 +101,7 @@ class OpenList extends JPanel implements ListSelectionListener, ActionListener {
     }
 
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         ListModel model = m_list.getModel();
         String key = m_text.getText().toLowerCase();
