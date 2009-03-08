@@ -17,6 +17,7 @@ class LimitedLengthDocument extends PlainDocument {
         this.max = max;
     }
 
+    @Override
     public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
         if (getLength() + str.length() <= max) {
             super.insertString(offs, str, a);

@@ -133,6 +133,7 @@ public class Resources_vi extends ListResourceBundle
 
     };
     
+    @Override
     public Object [][] getContents() {
         return contents;
     }
