@@ -15,11 +15,30 @@
  */
 package net.sourceforge.vietocr;
 
+import java.util.Locale;
 import java.util.regex.*;
+import java.awt.Window;
+import javax.swing.SwingUtilities;
 import net.sourceforge.vietpad.*;
 
 public class GuiWithFormat extends Gui {
+
     private ChangeCaseDialog changeCaseDlg;
+
+    @Override
+    void changeUILanguage(final Locale locale) {
+        super.changeUILanguage(locale);
+
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                if (changeCaseDlg != null) {
+                    changeCaseDlg.changeUILanguage(locale);
+                }
+            }
+        });
+    }
 
     @Override
     void setLineWrap() {
@@ -42,7 +61,7 @@ public class GuiWithFormat extends Gui {
         if (changeCaseDlg == null) {
             changeCaseDlg = new ChangeCaseDialog(GuiWithFormat.this, false);
             // non-modal
-            changeCaseDlg.setSelectedCase(prefs.get("selectedCase", "Upper Case"));
+            changeCaseDlg.setSelectedCase(prefs.get("selectedCase", "UPPER CASE"));
             changeCaseDlg.setLocation(
                     prefs.getInt("changeCaseX", changeCaseDlg.getX()),
                     prefs.getInt("changeCaseY", changeCaseDlg.getY()));
@@ -51,6 +70,15 @@ public class GuiWithFormat extends Gui {
             jTextArea1.selectAll();
         }
         changeCaseDlg.setVisible(true);
+    }
+
+    @Override
+    void quit() {
+        super.quit();
+
+        if (changeCaseDlg != null) {
+            prefs.put("selectedCase", changeCaseDlg.getSelectedCase());
+        }
     }
 
     /**
@@ -69,11 +97,11 @@ public class GuiWithFormat extends Gui {
 
         String result = jTextArea1.getSelectedText();
 
-        if (typeOfCase.equals("UPPERCASE")) {
+        if (typeOfCase.equals("UPPER CASE")) {
             result = result.toUpperCase();
-        } else if (typeOfCase.equals("lowercase")) {
+        } else if (typeOfCase.equals("lower case")) {
             result = result.toLowerCase();
-        } else if (typeOfCase.equals("Title_Case")) {
+        } else if (typeOfCase.equals("Title Case")) {
             StringBuffer strB = new StringBuffer(result.toLowerCase());
             Pattern pattern = Pattern.compile("(?<!\\p{InCombiningDiacriticalMarks}|\\p{L})\\p{L}");
             // word boundary
@@ -83,7 +111,7 @@ public class GuiWithFormat extends Gui {
                 strB.setCharAt(index, Character.toTitleCase(strB.charAt(index)));
             }
             result = strB.toString();
-        } else if (typeOfCase.equals("Sentence_case")) {
+        } else if (typeOfCase.equals("Sentence case")) {
             StringBuffer strB = new StringBuffer(result.toUpperCase().equals(result) ? result.toLowerCase() : result);
             Matcher matcher = Pattern.compile("\\p{L}(\\p{L}+)").matcher(result);
             while (matcher.find()) {

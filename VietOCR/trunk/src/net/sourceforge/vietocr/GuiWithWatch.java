@@ -110,22 +110,6 @@ public class GuiWithWatch extends GuiWithFormat {
             watcher.setEnabled(watchEnabled);
         }
     }
-
-
-    /**
-     *  Updates UI component if changes in LAF
-     *
-     *@param  laf  the look and feel class name
-     */
-    @Override
-    protected void updateLaF(String laf) {
-        super.updateLaF(laf);
-
-        SwingUtilities.updateComponentTreeUI(this.statusFrame);
-        if (watchDialog != null) {
-            SwingUtilities.updateComponentTreeUI(this.watchDialog);
-        }
-    }
     
     @Override
     void quit() {
