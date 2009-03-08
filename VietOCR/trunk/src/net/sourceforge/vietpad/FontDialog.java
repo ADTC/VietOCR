@@ -106,10 +106,12 @@ public class FontDialog extends JDialog
         ListSelectionListener lsel =
             new ListSelectionListener()
             {
+            @Override
                 public void valueChanged(ListSelectionEvent e) {
                     SwingUtilities.invokeLater(
                         new Runnable()
                         {
+                    @Override
                             public void run() {
                                 updatePreview();
                             }
@@ -123,10 +125,12 @@ public class FontDialog extends JDialog
         m_lstFontSize.addActionListener(
             new ActionListener()
             {
+            @Override
                 public void actionPerformed(ActionEvent e) {
                     SwingUtilities.invokeLater(
                         new Runnable()
                         {
+                    @Override
                             public void run() {
                                 updatePreview();
                             }
@@ -156,6 +160,7 @@ public class FontDialog extends JDialog
         btOK.addActionListener(
             new ActionListener()
             {
+            @Override
                 public void actionPerformed(ActionEvent e) {
                     m_succeeded = true;
                     dispose();
@@ -166,6 +171,7 @@ public class FontDialog extends JDialog
         btCancel.addActionListener(
             new ActionListener()
             {
+            @Override
                 public void actionPerformed(ActionEvent e) {
                     dispose();
                 }
@@ -193,6 +199,7 @@ public class FontDialog extends JDialog
         Action escapeAction =
             new AbstractAction()
             {
+            @Override
                 public void actionPerformed(ActionEvent e) {
                     dispose();
                 }
@@ -246,6 +253,7 @@ public class FontDialog extends JDialog
      *
      *@return    The font value
      */
+    @Override
     public Font getFont() {
         return curFont;
     }
