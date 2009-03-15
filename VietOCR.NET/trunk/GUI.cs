@@ -263,8 +263,18 @@ namespace VietOCR.NET
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (OwnedForms.Length > 0)
-                return;
-
+            {
+                foreach (Form form in this.OwnedForms)
+                {
+                    HtmlHelpForm helpForm1 = form as HtmlHelpForm;
+                    if (helpForm1 != null)
+                    {
+                        helpForm1.Show();
+                        helpForm1.WindowState = FormWindowState.Normal;
+                        return;
+                    }
+                }
+            }
             HtmlHelpForm helpForm = new HtmlHelpForm(Properties.Resources.readme, strProgName + Properties.Resources._Help);
             helpForm.Owner = this;
             helpForm.Show();
@@ -647,6 +657,7 @@ namespace VietOCR.NET
         {
             if (!this.textBox1.Focused)
             {
+                textBox1.HideSelection = false;
                 this.textBox1.Focus();
             }
         }
