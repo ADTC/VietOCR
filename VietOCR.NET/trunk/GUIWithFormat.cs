@@ -52,6 +52,7 @@ namespace VietOCR.NET
                 {
                     FormLocalizer localizer = new FormLocalizer(changeCaseDlg, typeof(ChangeCaseDialog));
                     localizer.ApplyCulture(new CultureInfo(locale));
+                    break;
                 }
             }
         }
@@ -80,7 +81,17 @@ namespace VietOCR.NET
         protected override void changeCaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (OwnedForms.Length > 0)
-                return;
+            {
+                foreach (Form form in this.OwnedForms)
+                {
+                    ChangeCaseDialog changeCaseDlg1 = form as ChangeCaseDialog;
+                    if (changeCaseDlg1 != null)
+                    {
+                        changeCaseDlg1.Show();
+                        return;
+                    }
+                }
+            }
 
             textBox1.HideSelection = false;
 
@@ -112,7 +123,7 @@ namespace VietOCR.NET
         
         void ChangeCaseDialogCloseDlg(object obj, EventArgs ea)
         {
-            textBox1.HideSelection = true;
+            //textBox1.HideSelection = true;
             this.Focus();
         }
 
