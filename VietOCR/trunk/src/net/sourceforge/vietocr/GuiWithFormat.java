@@ -17,12 +17,10 @@ package net.sourceforge.vietocr;
 
 import java.util.Locale;
 import java.util.regex.*;
-import java.awt.Window;
 import javax.swing.SwingUtilities;
 import net.sourceforge.vietpad.*;
 
 public class GuiWithFormat extends Gui {
-
     private ChangeCaseDialog changeCaseDlg;
 
     @Override
