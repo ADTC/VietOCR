@@ -23,11 +23,11 @@ import java.util.ResourceBundle;
 import javax.swing.*;
 
 public class WatchDialog extends javax.swing.JDialog {
+
     private int actionSelected = -1;
     private String watchFolder;
     private String outputFolder;
     private boolean watchEnabled;
-    private JFileChooser filechooser;
     protected ResourceBundle bundle;
 
     /** Creates new form WatchDialog */
@@ -38,22 +38,18 @@ public class WatchDialog extends javax.swing.JDialog {
 
         bundle = ResourceBundle.getBundle("net/sourceforge/vietocr/WatchDialog");
 
-        filechooser = new JFileChooser();
-        filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        filechooser.setAcceptAllFileFilterUsed(false);
-        filechooser.setApproveButtonText(bundle.getString("Set"));
-
         this.setLocationRelativeTo(parent);
         getRootPane().setDefaultButton(jButtonOK);
 
         //  Handle escape key to hide the dialog
         KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         Action escapeAction = new AbstractAction() {
+
             @Override
-                public void actionPerformed(ActionEvent e) {
-                    setVisible(false);
-                }
-            };
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+            }
+        };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escapeKeyStroke, "ESCAPE");
         getRootPane().getActionMap().put("ESCAPE", escapeAction);
     }
@@ -207,6 +203,10 @@ public class WatchDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOutputActionPerformed
+        JFileChooser filechooser = new JFileChooser();
+        filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        filechooser.setAcceptAllFileFilterUsed(false);
+        filechooser.setApproveButtonText(bundle.getString("Set"));
         filechooser.setCurrentDirectory(new File(outputFolder));
         filechooser.setDialogTitle(bundle.getString("Set_Output_Folder"));
         if (filechooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -216,6 +216,10 @@ public class WatchDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonOutputActionPerformed
 
     private void jButtonWatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWatchActionPerformed
+        JFileChooser filechooser = new JFileChooser();
+        filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        filechooser.setAcceptAllFileFilterUsed(false);
+        filechooser.setApproveButtonText(bundle.getString("Set"));
         filechooser.setCurrentDirectory(new File(watchFolder));
         filechooser.setDialogTitle(bundle.getString("Set_Watch_Folder"));
         if (filechooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -256,14 +260,16 @@ public class WatchDialog extends javax.swing.JDialog {
     }
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             @Override
             public void run() {
                 WatchDialog dialog = new WatchDialog(new javax.swing.JFrame());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
@@ -286,7 +292,7 @@ public class WatchDialog extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldWatch;
     // End of variables declaration//GEN-END:variables
 
-      /**
+    /**
      * @return the watchFolder
      */
     public String getWatchFolder() {

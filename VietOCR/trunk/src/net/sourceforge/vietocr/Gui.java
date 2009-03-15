@@ -1331,6 +1331,7 @@ public class Gui extends javax.swing.JFrame {
 
         for (Window win : Window.getWindows()) {
             SwingUtilities.updateComponentTreeUI(win);
+            win.pack();
         }
 
         SwingUtilities.updateComponentTreeUI(popup);
