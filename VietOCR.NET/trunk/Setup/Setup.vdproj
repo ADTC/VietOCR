@@ -419,7 +419,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:VietKeyInput, Version=2.0.3073.22842, Culture=neutral, PublicKeyToken=7c2367f2fb8ce189, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:VietKeyInput, Version=2.0.3276.24700, Culture=neutral, PublicKeyToken=7c2367f2fb8ce189, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_1B642B25FC7D23D5624FAC8B0E7C8FC0"
@@ -593,11 +593,6 @@
             "AssemblyAsmDisplayName" = "8:Interop.WIA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_4E6E1A9C9212DE0E1B1438F6DCF0DA0A"
-                    {
-                    "Name" = "8:Interop.WIA.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Interop.WIA.dll"
             "TargetName" = "8:"
@@ -1233,19 +1228,20 @@
         "MsiBootstrapper"
         {
         "LangId" = "3:1033"
+        "RequiresElevation" = "11:FALSE"
         }
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:VietOCR.NET"
-        "ProductCode" = "8:{2F0E1FD5-6AAD-4B3A-B65B-5551A9EAF3AC}"
-        "PackageCode" = "8:{471961D1-EE3C-4460-A048-7F718DCAEA59}"
+        "ProductCode" = "8:{54F0B851-261F-4686-AC67-4B930054053A}"
+        "PackageCode" = "8:{B051F79E-24F6-4F2F-AD40-FEE7CAEC9751}"
         "UpgradeCode" = "8:{2EF42973-7837-44E2-9085-FA4B5B40483E}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.2"
+        "ProductVersion" = "8:0.9.2"
         "Manufacturer" = "8:VietUnicode"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://vietunicode.sf.net/forum"
@@ -1815,7 +1811,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9E057C2EB4AD457E8400FF49592A0AFD"
             {
-            "SourcePath" = "8:..\\obj\\Debug\\VietOCR.NET.exe"
+            "SourcePath" = "8:..\\obj\\Release\\VietOCR.NET.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
