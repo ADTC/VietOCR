@@ -24,21 +24,15 @@ using Microsoft.Win32;
 
 namespace VietOCR.NET
 {
-    public partial class GUIWithRegistry : VietOCR.NET.GUI
+    public partial class GUIWithRegistry : Form
     {
         const string strWinState = "WindowState";
         const string strLocationX = "LocationX";
         const string strLocationY = "LocationY";
         const string strWidth = "Width";
         const string strHeight = "Height";
-        const string strOcrLanguage = "OcrLanguage";
 
-        const string strWordWrap = "WordWrap";
-        const string strFontFace = "FontFace";
-        const string strFontSize = "FontSize";
-        const string strFontStyle = "FontStyle";
-        const string strForeColor = "ForeColor";
-        const string strBackColor = "BackColor";
+        protected string strRegKey = "Software\\VietUnicode\\";
 
         Rectangle rectNormal;
 
@@ -99,14 +93,6 @@ namespace VietOCR.NET
             regkey.SetValue(strLocationY, rectNormal.Y);
             regkey.SetValue(strWidth, rectNormal.Width);
             regkey.SetValue(strHeight, rectNormal.Height);
-            regkey.SetValue(strOcrLanguage, this.toolStripCbLang.SelectedIndex);
-
-            regkey.SetValue(strWordWrap, Convert.ToInt32(this.textBox1.WordWrap));
-            regkey.SetValue(strFontFace, this.textBox1.Font.Name);
-            regkey.SetValue(strFontSize, this.textBox1.Font.SizeInPoints.ToString());
-            regkey.SetValue(strFontStyle, (int)this.textBox1.Font.Style);
-            regkey.SetValue(strForeColor, this.textBox1.ForeColor.ToArgb());
-            regkey.SetValue(strBackColor, this.textBox1.BackColor.ToArgb());
         }
 
         protected virtual void LoadRegistryInfo(RegistryKey regkey)
@@ -115,8 +101,6 @@ namespace VietOCR.NET
             int y = (int)regkey.GetValue(strLocationY, 100);
             int cx = (int)regkey.GetValue(strWidth, 324);
             int cy = (int)regkey.GetValue(strHeight, 300);
-
-            this.toolStripCbLang.SelectedIndex = (int)regkey.GetValue(strOcrLanguage, -1);
 
             rectNormal = new Rectangle(x, y, cx, cy);
 
@@ -133,16 +117,6 @@ namespace VietOCR.NET
 
             DesktopBounds = rectNormal;
             WindowState = (FormWindowState)regkey.GetValue(strWinState, 0);
-
-            this.textBox1.WordWrap = Convert.ToBoolean(
-                (int)regkey.GetValue(strWordWrap, Convert.ToInt32(true)));
-            this.textBox1.Font = new Font((string)regkey.GetValue(strFontFace, "Microsoft Sans Serif"),
-                float.Parse((string)regkey.GetValue(strFontSize, "10")),
-                (FontStyle)regkey.GetValue(strFontStyle, FontStyle.Regular));
-            this.textBox1.ForeColor = Color.FromArgb(
-                (int)regkey.GetValue(strForeColor, Color.FromKnownColor(KnownColor.Black).ToArgb()));
-            this.textBox1.BackColor = Color.FromArgb(
-                (int)regkey.GetValue(strBackColor, Color.FromKnownColor(KnownColor.White).ToArgb()));
         }
     }
 }

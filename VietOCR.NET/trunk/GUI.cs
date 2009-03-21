@@ -36,7 +36,7 @@ using VietOCR.NET.WIA;
 
 namespace VietOCR.NET
 {
-    public partial class GUI : Form
+    public partial class GUI : GUIWithRegistry
     {
         //private Bitmap image;
         protected const string strProgName = "VietOCR.NET";
@@ -57,9 +57,19 @@ namespace VietOCR.NET
 
         protected string selectedUILanguage;
         protected const string strUILang = "UILanguage";
-        protected string strRegKey = "Software\\VietUnicode\\";
+        const string strOcrLanguage = "OcrLanguage";
+        const string strWordWrap = "WordWrap";
+        const string strFontFace = "FontFace";
+        const string strFontSize = "FontSize";
+        const string strFontStyle = "FontStyle";
+        const string strForeColor = "ForeColor";
+        const string strBackColor = "BackColor";
+        const string strFilterIndex = "FilterIndex";
+
         private bool IsFitForZoomIn = false;
         private const float ZOOM_FACTOR = 1.25f;
+
+        private int filterIndex;
 
         public GUI()
         {
@@ -299,13 +309,14 @@ namespace VietOCR.NET
             //openFileDialog1.InitialDirectory = "c:\\";
             openFileDialog1.Title = Properties.Resources.OpenImageFile;
             openFileDialog1.Filter = "Image files (*.tif;*.tiff)|*.tif;*.tiff|Image files (*.bmp)|*.bmp|Image files (*.jpg;*.jpeg)|*.jpg;*.jpeg|Image files (*.png)|*.png|All files (*.*)|*.*";
-            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.FilterIndex = filterIndex;
             openFileDialog1.RestoreDirectory = true;
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 openFile(openFileDialog1.FileName);
                 scaleX = scaleY = 1f;
+                filterIndex = openFileDialog1.FilterIndex;
             }
 
         }
@@ -778,6 +789,37 @@ namespace VietOCR.NET
                     helpForm.Text = strProgName + Properties.Resources._Help;
                 }
             }
+        }
+
+        protected override void LoadRegistryInfo(RegistryKey regkey)
+        {
+            base.LoadRegistryInfo(regkey);
+
+            this.toolStripCbLang.SelectedIndex = (int)regkey.GetValue(strOcrLanguage, -1);
+            this.textBox1.WordWrap = Convert.ToBoolean(
+                (int)regkey.GetValue(strWordWrap, Convert.ToInt32(true)));
+            this.textBox1.Font = new Font((string)regkey.GetValue(strFontFace, "Microsoft Sans Serif"),
+                float.Parse((string)regkey.GetValue(strFontSize, "10")),
+                (FontStyle)regkey.GetValue(strFontStyle, FontStyle.Regular));
+            this.textBox1.ForeColor = Color.FromArgb(
+                (int)regkey.GetValue(strForeColor, Color.FromKnownColor(KnownColor.Black).ToArgb()));
+            this.textBox1.BackColor = Color.FromArgb(
+                (int)regkey.GetValue(strBackColor, Color.FromKnownColor(KnownColor.White).ToArgb()));
+            filterIndex = (int)regkey.GetValue(strFilterIndex, 1);
+        }
+
+        protected override void SaveRegistryInfo(RegistryKey regkey)
+        {
+            base.SaveRegistryInfo(regkey);
+
+            regkey.SetValue(strOcrLanguage, this.toolStripCbLang.SelectedIndex);
+            regkey.SetValue(strWordWrap, Convert.ToInt32(this.textBox1.WordWrap));
+            regkey.SetValue(strFontFace, this.textBox1.Font.Name);
+            regkey.SetValue(strFontSize, this.textBox1.Font.SizeInPoints.ToString());
+            regkey.SetValue(strFontStyle, (int)this.textBox1.Font.Style);
+            regkey.SetValue(strForeColor, this.textBox1.ForeColor.ToArgb());
+            regkey.SetValue(strBackColor, this.textBox1.BackColor.ToArgb());
+            regkey.SetValue(strFilterIndex, filterIndex);
         }
 
         private void formatToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
