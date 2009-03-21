@@ -550,7 +550,7 @@ namespace VietOCR.NET
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        protected System.Windows.Forms.ToolStripComboBox toolStripCbLang;
+        private System.Windows.Forms.ToolStripComboBox toolStripCbLang;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripBtnPrev;
         private System.Windows.Forms.ToolStripButton toolStripBtnNext;
