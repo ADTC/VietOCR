@@ -56,7 +56,9 @@ namespace VietOCR.NET
         private float scaleX, scaleY;
 
         protected string selectedUILanguage;
-        protected const string strUILang = "UILanguage";
+        private int filterIndex;
+
+        const string strUILang = "UILanguage";
         const string strOcrLanguage = "OcrLanguage";
         const string strWordWrap = "WordWrap";
         const string strFontFace = "FontFace";
@@ -69,7 +71,6 @@ namespace VietOCR.NET
         private bool IsFitForZoomIn = false;
         private const float ZOOM_FACTOR = 1.25f;
 
-        private int filterIndex;
 
         public GUI()
         {
@@ -806,6 +807,7 @@ namespace VietOCR.NET
             this.textBox1.BackColor = Color.FromArgb(
                 (int)regkey.GetValue(strBackColor, Color.FromKnownColor(KnownColor.White).ToArgb()));
             filterIndex = (int)regkey.GetValue(strFilterIndex, 1);
+            selectedUILanguage = (string)regkey.GetValue(strUILang, "en-US");
         }
 
         protected override void SaveRegistryInfo(RegistryKey regkey)
@@ -820,6 +822,7 @@ namespace VietOCR.NET
             regkey.SetValue(strForeColor, this.textBox1.ForeColor.ToArgb());
             regkey.SetValue(strBackColor, this.textBox1.BackColor.ToArgb());
             regkey.SetValue(strFilterIndex, filterIndex);
+            regkey.SetValue(strUILang, selectedUILanguage);
         }
 
         private void formatToolStripMenuItem_DropDownOpening(object sender, EventArgs e)

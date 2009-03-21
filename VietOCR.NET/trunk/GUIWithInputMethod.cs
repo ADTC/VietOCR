@@ -33,21 +33,18 @@ namespace VietOCR.NET
 {
     public partial class GUIWithInputMethod : VietOCR.NET.GUIWithFormat
     {
-        string selectedInputMethod;
         ToolStripMenuItem miimChecked;
         ToolStripMenuItem miuilChecked;
 
+        private string selectedInputMethod;
         const string strInputMethod = "InputMethod";
 
         public GUIWithInputMethod()
         {
-            // Sets the UI culture to the selected language.
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(selectedUILanguage);
-
             InitializeComponent();
 
             //
-            // Keyboard InputMethod submenu
+            // Settings InputMethod submenu
             //
             EventHandler eh = new EventHandler(MenuKeyboardInputMethodOnClick);
 
@@ -67,7 +64,7 @@ namespace VietOCR.NET
 
 
             //
-            // Keyboard UI Language submenu
+            // Settings UI Language submenu
             //
             EventHandler eh1 = new EventHandler(MenuKeyboardUILangOnClick);
 
@@ -136,9 +133,7 @@ namespace VietOCR.NET
             if (selectedUILanguage != miuilChecked.Tag.ToString())
             {
                 selectedUILanguage = miuilChecked.Tag.ToString();
-                System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUIWithInputMethod));
                 ChangeUILanguage(selectedUILanguage);
-                //MessageBox.Show(this, resources.GetString("Restart_me"), "VietOCR.NET", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -152,29 +147,18 @@ namespace VietOCR.NET
             base.ChangeUILanguage(locale);
             FormLocalizer localizer = new FormLocalizer(this, typeof(GUIWithInputMethod));
             localizer.ApplyCulture(new CultureInfo(locale));
-
-            //this.overviewToolStripMenuItem.Text = strProgName + " " + Properties.Resources.Help;
-            //this.aboutToolStripMenuItem.Text = Properties.Resources.About + " " + strProgName;
-
-            //if (!String.IsNullOrEmpty(sourceEncoding))
-            //{
-            //    this.comboBox1.Text = sourceEncoding;
-            //}
-            //this.comboBox1.SelectedItem = sourceEncoding;
         }
 
         protected override void LoadRegistryInfo(RegistryKey regkey)
         {
             base.LoadRegistryInfo(regkey);
             selectedInputMethod = (string)regkey.GetValue(strInputMethod, Enum.GetName(typeof(InputMethods), InputMethods.Telex));
-            selectedUILanguage = (string)regkey.GetValue(strUILang, "en-US");
         }
 
         protected override void SaveRegistryInfo(RegistryKey regkey)
         {
             base.SaveRegistryInfo(regkey);
             regkey.SetValue(strInputMethod, selectedInputMethod);
-            regkey.SetValue(strUILang, selectedUILanguage);
         }
         
     }
