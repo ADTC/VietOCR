@@ -90,17 +90,23 @@ namespace VietOCR.NET
         private void AutoOCR()
         {
             FileInfo imageFile = new FileInfo(queue.Dequeue());
+            this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { imageFile.FullName });
+            
             IList<Image> imageList = ImageIOHelper.GetImageList(imageFile);
-
             if (imageList == null)
             {
+                this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { "    **  " + Properties.Resources.Cannotprocess + imageFile.Name + "  **" });
                 return;
             }
-
+            if (curLangCode == null)
+            {
+                this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { "    **  " + Properties.Resources.selectLanguage + "  **" });
+                //queue.Clear();
+                return;
+            }
+            
             try
             {
-                this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { imageFile.FullName });
-
                 OCR ocrEngine = new OCR();
                 string result = ocrEngine.RecognizeText(imageList, -1, curLangCode);
 
