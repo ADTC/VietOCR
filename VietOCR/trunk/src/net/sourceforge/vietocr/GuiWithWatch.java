@@ -23,10 +23,6 @@ import javax.swing.*;
 import javax.swing.Timer;
 import net.sourceforge.vietocr.postprocessing.Processor;
 
-/**
- *
- * @author Quan Nguyen
- */
 public class GuiWithWatch extends GuiWithFormat {
     private String watchFolder;
     private String outputFolder;
@@ -59,17 +55,27 @@ public class GuiWithWatch extends GuiWithFormat {
             public void actionPerformed(ActionEvent e) {
                 final File imageFile = queue.poll();
                 if (imageFile != null) {
-                    final ArrayList<IIOImage> iioImageList = ImageIOHelper.getIIOImageList(imageFile);
                     if (!statusFrame.isVisible()) {
                         statusFrame.setVisible(true);
                     }
                     statusFrame.getTextArea().append(imageFile.getPath() + "\n");
 
+                    final ArrayList<IIOImage> iioImageList = ImageIOHelper.getIIOImageList(imageFile);
+                    if (iioImageList == null) {
+                        statusFrame.getTextArea().append("    **  " + bundle.getString("Cannotprocess") + " " + imageFile.getName() + "  **\n");
+                        return;
+                    }
+                    if (curLangCode == null) {
+                        statusFrame.getTextArea().append("    **  " + bundle.getString("Please_select_a_language.") + "  **\n");
+//                        queue.clear();
+                        return;
+                    }
+
                     SwingUtilities.invokeLater(new Runnable() {
 
                         @Override
                         public void run() {
-                            try {
+                            try {          
                                 OCR ocrEngine = new OCR(tessPath);
                                 String result = ocrEngine.recognizeText(iioImageList, -1, curLangCode);
 
