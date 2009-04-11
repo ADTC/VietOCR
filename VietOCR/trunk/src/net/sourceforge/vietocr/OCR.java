@@ -26,7 +26,8 @@ import javax.imageio.IIOImage;
  */
 public class OCR {
     private final String LANG_OPTION = "-l";
-    
+    private final String EOL = System.getProperty("line.separator");
+
     private String tessPath;
 
     final static String OUTPUT_FILE_NAME = "TessOutput";
@@ -107,7 +108,7 @@ public class OCR {
                 String str;
                 
                 while ((str = in.readLine()) != null) {
-                    strB.append(str).append("\n");
+                    strB.append(str).append(EOL);
                 }
                 in.close();
             } else {

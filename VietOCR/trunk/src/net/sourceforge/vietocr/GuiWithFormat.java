@@ -147,7 +147,7 @@ public class GuiWithFormat extends Gui {
                 return;
             }
         }
-        String result = jTextArea1.getSelectedText().replaceAll("(?<=\n|^)[\t ]+|[\t ]+(?=$|\n)", "").replaceAll("(?<=.)\n(?=.)", " ");
+        String result = jTextArea1.getSelectedText().replace("\r\n", "\n").replaceAll("(?<=\n|^)[\t ]+|[\t ]+(?=$|\n)", "").replaceAll("(?<=.)\n(?=.)", " ");
 
         undoSupport.beginUpdate();
         int start = jTextArea1.getSelectionStart();
