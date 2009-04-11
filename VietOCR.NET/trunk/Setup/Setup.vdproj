@@ -593,6 +593,11 @@
             "AssemblyAsmDisplayName" = "8:Interop.WIA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_4E6E1A9C9212DE0E1B1438F6DCF0DA0A"
+                    {
+                    "Name" = "8:Interop.WIA.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Interop.WIA.dll"
             "TargetName" = "8:"
@@ -1234,14 +1239,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:VietOCR.NET"
-        "ProductCode" = "8:{54F0B851-261F-4686-AC67-4B930054053A}"
-        "PackageCode" = "8:{B051F79E-24F6-4F2F-AD40-FEE7CAEC9751}"
+        "ProductCode" = "8:{1586EA06-CF1E-4CBC-88A7-C1DF03013B1F}"
+        "PackageCode" = "8:{1DBC1705-5E3E-4FA0-9F7E-9DDD51301D27}"
         "UpgradeCode" = "8:{2EF42973-7837-44E2-9085-FA4B5B40483E}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:0.9.2"
+        "ProductVersion" = "8:0.9.4"
         "Manufacturer" = "8:VietUnicode"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://vietunicode.sf.net/forum"
