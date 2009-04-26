@@ -51,6 +51,6 @@ Version 0.9.1 (18 January 2009)
 Version 0.9.2 (15 March 2009)
 - Added text formatting functionality
 
-Version 0.9.3 (25 March 2009)
+Version 0.9.3 (25 April 2009)
 - Refactored
 - Display appropriate error message during batch process
