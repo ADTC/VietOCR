@@ -129,6 +129,7 @@ public class OCR {
                 for (File image : tempImageFiles) {
                     image.delete();
                 }
+                tempTessOutputFile.delete();
                 throw new RuntimeException(msg);
             }
             
