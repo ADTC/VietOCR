@@ -89,9 +89,9 @@ public class Gui extends javax.swing.JFrame {
             if (!tessdataDir.exists()) {
                 String TESSDATA_PREFIX = System.getenv("TESSDATA_PREFIX");
                 if (TESSDATA_PREFIX == null && !WINDOWS) {
-                    TESSDATA_PREFIX = "/usr/local/share/tessdata"; // default path of tessdata on Linux
+                    TESSDATA_PREFIX = "/usr/local/share/"; // default path of tessdata on Linux
                 }
-                tessdataDir = new File(TESSDATA_PREFIX);
+                tessdataDir = new File(TESSDATA_PREFIX, "tessdata");
             }
             langCodes = tessdataDir.list(new FilenameFilter() {
 

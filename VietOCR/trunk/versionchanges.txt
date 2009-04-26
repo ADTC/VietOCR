@@ -86,3 +86,8 @@ Version 0.9.10 (18 January 2009)
 
 Version 0.9.11 (15 March 2009)
 - Added text formatting functionality
+
+Version 0.9.12 (25 April 2009)
+- Fixed the way TESSDATA_PREFIX environment variable handled in Linux
+- Clean up temporary files if errors occur during OCR operations
+- Fixed a regression EOL bug with output files in Windows
