@@ -88,11 +88,18 @@ public class Gui extends javax.swing.JFrame {
             File tessdataDir = new File(tessPath, "tessdata");
             if (!tessdataDir.exists()) {
                 String TESSDATA_PREFIX = System.getenv("TESSDATA_PREFIX");
-                if (TESSDATA_PREFIX == null && !WINDOWS) {
-                    TESSDATA_PREFIX = "/usr/local/share/"; // default path of tessdata on Linux
+                if (TESSDATA_PREFIX == null && !WINDOWS) { // if TESSDATA_PREFIX env var not set
+                    TESSDATA_PREFIX = "/usr/local/share/"; // default path of tessdata on Linux after make install
+                    tessdataDir = new File(TESSDATA_PREFIX, "tessdata");
+                    if (!tessdataDir.exists()) {
+                        TESSDATA_PREFIX = "/usr/share/tesseract-ocr/"; // other possible path of tessdata
+                        tessdataDir = new File(TESSDATA_PREFIX, "tessdata");
+                    }
+                } else {
+                    tessdataDir = new File(TESSDATA_PREFIX, "tessdata");
                 }
-                tessdataDir = new File(TESSDATA_PREFIX, "tessdata");
             }
+            
             langCodes = tessdataDir.list(new FilenameFilter() {
 
                 @Override
