@@ -275,7 +275,7 @@
     <value>Ngôn ngữ OCR</value>
   </data>
   <data name="watchToolStripMenuItem.Text" xml:space="preserve">
-    <value>Canh gác...</value>
+    <value>Watch Folder...</value>
   </data>
   <data name="changeCaseToolStripMenuItem.Text" xml:space="preserve">
     <value>Đổi ngữ cách...</value>
