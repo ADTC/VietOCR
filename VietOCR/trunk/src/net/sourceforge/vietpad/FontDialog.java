@@ -22,7 +22,7 @@ import javax.swing.event.ListSelectionListener;
  *  Font Dialog
  *
  *@author     Quan Nguyen
- *@version    1.0.7, April 14, 2004
+ *@version    1.1, June 14, 2009
  *@see        http://vietpad.sourceforge.net
  */
 public class FontDialog extends JDialog
@@ -55,35 +55,12 @@ public class FontDialog extends JDialog
         p.setBorder(new TitledBorder(new EtchedBorder(), myResources.getString("Font")));
 
         final Font[] allFonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
-        final Collection<String> vietFamilies = new TreeSet<String>();
+        final Collection<String> fontFamilies = new TreeSet<String>();
         for (int i = 0; i < allFonts.length; i++) {
-            if (allFonts[i].canDisplay('\u1EED')
-                    || allFonts[i].getFamily().matches(".+ 1\\.1|(?:VNI|VPS|VI |\\.Vn).+")) {
-                vietFamilies.add(allFonts[i].getFamily());
-            }
+            fontFamilies.add(allFonts[i].getFamily());
         }
-        if (MAC_OS_X) {
-            // Mac OS X hides font names starting with a dot
-            // this is slow but the only way to detect the ABC/TCVN fonts
-            final String[] abcFamilies = new String[]{
-//              "3D", "Arabia", "Arial Narrow", "Aristote", "Avant", "BahamasB",
-//              "Black", "Bodoni", "Book Antiqua", "Century Schoolbook", "Clarendon",
-//              "Commercial Script", "Cooper", "Courier", "Exotic", "Free",
-//              "Gothic", "HelvetIns", "Koala", "Lincoln", "Linus", "Lucida sans",
-//              "Memorandum", "Monotype corsiva", "Mystical", "Park", "Present", "Revue",
-//              "Southern", "Stamp", "Teknical", "Tifani Heavy", "Universe", "Vogue",
-                "Time", "Arial", "Courier New"
-            };
-            for (int i = 0; i < abcFamilies.length; i++) {
-                if (new Font(".Vn" + abcFamilies[i], Font.PLAIN, 1).getPSName().startsWith("Vn")) {
-                    vietFamilies.add(".Vn" + abcFamilies[i]);
-                    if (new Font(".Vn" + abcFamilies[i] + "H", Font.PLAIN, 1).getPSName().startsWith("Vn")) {
-                        vietFamilies.add(".Vn" + abcFamilies[i] + "H");
-                    }
-                }
-            }
-        }
-        m_lstFontName = new OpenList(vietFamilies.toArray(), myResources.getString("Name:"));
+
+        m_lstFontName = new OpenList(fontFamilies.toArray(), myResources.getString("Name:"));
         p.add(m_lstFontName);
 
         m_lstFontStyle = new OpenList(
