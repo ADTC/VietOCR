@@ -139,6 +139,7 @@ public class Gui extends javax.swing.JFrame {
         }
 
         initComponents();
+        jLabelStatus.setVisible(false); // use jProgressBar instead for (more animation) task status
 
         // Hide Scan buttons for non-Windows OS because of WIA Automation
         if (!WINDOWS) {
