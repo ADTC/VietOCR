@@ -44,9 +44,14 @@ public class GuiWithFormat extends Gui {
     }
 
     @Override
-    void openFontDialog() {
+    void openFontDialog(String langCode) {
         FontDialog dlg = new FontDialog(this);
         dlg.setAttributes(font);
+
+        if ("vie".equals(langCode)) {
+            dlg.setPreviewText("T\u00f4i y\u00eau ti\u1ebfng n\u01b0\u1edbc t\u00f4i t\u1eeb khi m\u1edbi ra \u0111\u1eddi.");
+        }
+        
         dlg.setVisible(true);
         if (dlg.succeeded()) {
             jTextArea1.setFont(font = dlg.getFont());

@@ -1171,10 +1171,10 @@ public class Gui extends javax.swing.JFrame {
 //        System.exit(0);
     }
     private void jMenuItemFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFontActionPerformed
-        openFontDialog();
+        openFontDialog(curLangCode);
     }//GEN-LAST:event_jMenuItemFontActionPerformed
 
-    void openFontDialog() {
+    void openFontDialog(String langCode) {
         // to be implemented in subclass
     }
 
