@@ -91,3 +91,8 @@ Version 0.9.12 (25 April 2009)
 - Fixed the way TESSDATA_PREFIX environment variable handled in Linux
 - Clean up temporary files if errors occur during OCR operations
 - Fixed a regression EOL bug with output files in Windows
+
+Version 0.9.13 (20 June 2009)
+- Bundle Tesseract 2.04RC engine
+- Added indeterminate progressbar for (more animated) task status
+- Removed Vietnamese-glyph font filter to now show all system fonts
