@@ -467,6 +467,8 @@ public class Gui extends javax.swing.JFrame {
         jButtonRotateCW = new javax.swing.JButton();
         jPanelStatus = new javax.swing.JPanel();
         jLabelStatus = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        this.jProgressBar1.setVisible(false);
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemOpen = new javax.swing.JMenuItem();
@@ -721,6 +723,9 @@ public class Gui extends javax.swing.JFrame {
 
         jPanelStatus.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
         jPanelStatus.add(jLabelStatus);
+
+        jProgressBar1.setStringPainted(true);
+        jPanelStatus.add(jProgressBar1);
 
         getContentPane().add(jPanelStatus, java.awt.BorderLayout.SOUTH);
 
@@ -1080,6 +1085,8 @@ public class Gui extends javax.swing.JFrame {
             imageIndex = 0;
         } else {
             this.jLabelStatus.setText(null);
+            jProgressBar1.setString(null);
+            jProgressBar1.setVisible(false);
             displayImage();
         }
         setButton();
@@ -1092,6 +1099,8 @@ public class Gui extends javax.swing.JFrame {
             imageIndex = imageTotal - 1;
         } else {
             this.jLabelStatus.setText(null);
+            jProgressBar1.setString(null);
+            jProgressBar1.setVisible(false);
             displayImage();
         }
         setButton();
@@ -1252,6 +1261,9 @@ public class Gui extends javax.swing.JFrame {
         }
 
         jLabelStatus.setText(bundle.getString("OCR_running..."));
+        jProgressBar1.setIndeterminate(true);
+        jProgressBar1.setString(bundle.getString("OCR_running..."));
+        jProgressBar1.setVisible(true);
         getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         getGlassPane().setVisible(true);
         this.jButtonOCR.setEnabled(false);
@@ -1294,6 +1306,8 @@ public class Gui extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
                 } finally {
                     jLabelStatus.setText(bundle.getString("OCR_completed."));
+                    jProgressBar1.setIndeterminate(false);
+                    jProgressBar1.setString(bundle.getString("OCR_completed."));
                     getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
                     getGlassPane().setVisible(false);
                     jButtonOCR.setEnabled(true);
@@ -1369,6 +1383,8 @@ public class Gui extends javax.swing.JFrame {
 
         this.setTitle(imageFile.getName() + " - " + APP_NAME);
         jLabelStatus.setText(null);
+        jProgressBar1.setString(null);
+        jProgressBar1.setVisible(false);
         ((JImageLabel) jImageLabel).deselect();
 
         this.jButtonFitImage.setEnabled(true);
@@ -1446,6 +1462,9 @@ private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN
      */
     void performScan() {
         jLabelStatus.setText(bundle.getString("Scanning..."));
+        jProgressBar1.setIndeterminate(true);
+        jProgressBar1.setString(bundle.getString("Scanning..."));
+        jProgressBar1.setVisible(true);
         getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         getGlassPane().setVisible(true);
         jMenuItemScan.setEnabled(false);
@@ -1477,6 +1496,8 @@ private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                     JOptionPane.showMessageDialog(null, msg, "Scanner Operation Error", JOptionPane.ERROR_MESSAGE);
                 } finally {
                     jLabelStatus.setText(bundle.getString("Scanning_completed"));
+                    jProgressBar1.setIndeterminate(false);
+                    jProgressBar1.setString(bundle.getString("Scanning_completed"));
                     getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
                     getGlassPane().setVisible(false);
                     jMenuItemScan.setEnabled(true);
@@ -1647,6 +1668,7 @@ private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelStatus;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemEng;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemViet;
     private javax.swing.JScrollPane jScrollPane1;
