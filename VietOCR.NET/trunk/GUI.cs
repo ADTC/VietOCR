@@ -227,6 +227,9 @@ namespace VietOCR.NET
                 this.toolStripBtnOCR.Enabled = false;
                 this.oCRToolStripMenuItem.Enabled = false;
                 this.oCRAllPagesToolStripMenuItem.Enabled = false;
+                this.toolStripProgressBar1.Enabled = true;
+                this.toolStripProgressBar1.Visible = true;
+                this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
 
                 OCRImageEntity entity = new OCRImageEntity(imageList, index, rect, curLangCode);
                 // Start the asynchronous operation.
@@ -513,6 +516,8 @@ namespace VietOCR.NET
             if (e.Error != null)
             {
                 this.toolStripStatusLabel1.Text = String.Empty;
+                this.toolStripProgressBar1.Enabled = false;
+                this.toolStripProgressBar1.Visible = false;
                 MessageBox.Show(e.Error.Message, Properties.Resources.OCROperation);
             }
             else if (e.Cancelled)
@@ -535,6 +540,8 @@ namespace VietOCR.NET
             this.toolStripBtnOCR.Enabled = true;
             this.oCRToolStripMenuItem.Enabled = true;
             this.oCRAllPagesToolStripMenuItem.Enabled = true;
+            this.toolStripProgressBar1.Enabled = false;
+            this.toolStripProgressBar1.Visible = false;
         }
 
         private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -543,6 +550,8 @@ namespace VietOCR.NET
             if (e.Error != null)
             {
                 this.toolStripStatusLabel1.Text = String.Empty;
+                this.toolStripProgressBar1.Enabled = false;
+                this.toolStripProgressBar1.Visible = false;
                 MessageBox.Show(e.Error.Message, Properties.Resources.ScanningOperation);
             }
             else if (e.Cancelled)
@@ -564,11 +573,14 @@ namespace VietOCR.NET
             this.textBox1.Cursor = Cursors.Default;
             this.toolStripBtnScan.Enabled = true;
             this.scanToolStripMenuItem.Enabled = true;
+            this.toolStripProgressBar1.Enabled = false;
+            this.toolStripProgressBar1.Visible = false;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             this.toolStripProgressBar1.Value = e.ProgressPercentage;
+            //this.toolStripStatusLabel1.Text = e.UserState as String;
         }
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -576,6 +588,7 @@ namespace VietOCR.NET
         {
             // Get the BackgroundWorker that raised this event.
             BackgroundWorker worker = sender as BackgroundWorker;
+            worker.ReportProgress(0, "OCR running...");
 
             OCRImageEntity entity = (OCRImageEntity)e.Argument;
             OCR ocrEngine = new OCR();
@@ -603,7 +616,10 @@ namespace VietOCR.NET
                 this.textBox1.Cursor = Cursors.WaitCursor;
                 this.toolStripBtnScan.Enabled = false;
                 this.scanToolStripMenuItem.Enabled = false;
-
+                this.toolStripProgressBar1.Enabled = true;
+                this.toolStripProgressBar1.Visible = true;
+				this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
+				
                 // Start the asynchronous operation.
                 backgroundWorker2.RunWorkerAsync();
             }
