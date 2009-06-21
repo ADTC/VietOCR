@@ -92,8 +92,10 @@ Version 0.9.12 (25 April 2009)
 - Clean up temporary files if errors occur during OCR operations
 - Fixed a regression EOL bug with output files in Windows
 
-Version 0.9.13 (20 June 2009)
+Version 0.9.13 (21 June 2009)
 - Bundle Tesseract 2.04RC engine
 - Added indeterminate progressbar for (more animated) task status
 - Removed Vietnamese-glyph font filter to now show all system fonts
 - Changed FontDialog's default PreviewText to the standard English pangram to make it more universal
+- Modified SimpleFilter to accept multiple file extensions
+- Added All Image Files filter
