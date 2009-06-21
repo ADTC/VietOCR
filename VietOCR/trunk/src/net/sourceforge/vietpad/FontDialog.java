@@ -22,7 +22,7 @@ import javax.swing.event.ListSelectionListener;
  *  Font Dialog
  *
  *@author     Quan Nguyen
- *@version    1.1, June 14, 2009
+ *@version    1.2, June 20, 2009
  *@see        http://vietpad.sourceforge.net
  */
 public class FontDialog extends JDialog
@@ -118,7 +118,8 @@ public class FontDialog extends JDialog
         p = new JPanel(new BorderLayout());
         p.setBorder(new TitledBorder(new EtchedBorder(), myResources.getString("Preview")));
         m_preview = new JLabel(
-                "T\u00f4i y\u00eau ti\u1ebfng n\u01b0\u1edbc t\u00f4i t\u1eeb khi m\u1edbi ra \u0111\u1eddi.",
+                "The quick brown fox jumps over the lazy dog.",
+//                "T\u00f4i y\u00eau ti\u1ebfng n\u01b0\u1edbc t\u00f4i t\u1eeb khi m\u1edbi ra \u0111\u1eddi.",
                 JLabel.CENTER);
         m_preview.setBackground(Color.white);
         m_preview.setForeground(Color.black);
