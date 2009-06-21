@@ -46,7 +46,7 @@ namespace VietOCR.NET
         {
             using (tessnet2.Tesseract ocr = new tessnet2.Tesseract())
             {
-                ocr.Init(lang, false);
+                ocr.Init(null, lang, false);
 
                 IList<Image> workingImages;
 
