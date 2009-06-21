@@ -168,13 +168,15 @@ public class Gui extends javax.swing.JFrame {
         currentDirectory = prefs.get("currentDirectory", null);
         filechooser = new JFileChooser(currentDirectory);
         filechooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
-        javax.swing.filechooser.FileFilter tiffFilter = new SimpleFilter("tif", "TIFF");
-        javax.swing.filechooser.FileFilter jpegFilter = new SimpleFilter("jpg", "JPEG");
+        javax.swing.filechooser.FileFilter tiffFilter = new SimpleFilter("tif;tiff", "TIFF");
+        javax.swing.filechooser.FileFilter jpegFilter = new SimpleFilter("jpg;jpeg", "JPEG");
         javax.swing.filechooser.FileFilter gifFilter = new SimpleFilter("gif", "GIF");
         javax.swing.filechooser.FileFilter pngFilter = new SimpleFilter("png", "PNG");
         javax.swing.filechooser.FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
+        javax.swing.filechooser.FileFilter allImageFilter = new SimpleFilter("tif;tiff;jpg;jpeg;gif;png;bmp", "All Image Files");
 
         filechooser.setAcceptAllFileFilterUsed(true);
+        filechooser.addChoosableFileFilter(allImageFilter);
         filechooser.addChoosableFileFilter(tiffFilter);
         filechooser.addChoosableFileFilter(jpegFilter);
         filechooser.addChoosableFileFilter(gifFilter);
