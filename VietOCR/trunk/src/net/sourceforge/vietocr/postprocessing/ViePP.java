@@ -37,7 +37,7 @@ public class ViePP implements IPostProcessor {
         // correct common errors caused by OCR
         text = TextUtilities.correctOCRErrors(text);
 
-        // substitute Vietnamese letters frequently misrecognized by Tesseract 2.03
+        // substitute Vietnamese letters frequently misrecognized by Tesseract
         text = text.replace("êĩ-", "ết")
                 .replace("ug", "ng")
                 .replace("uh", "nh")
@@ -45,7 +45,11 @@ public class ViePP implements IPostProcessor {
                 .replace("iii", "m")
                 .replace("ll", "u")
                 .replace("II", "u")
-                .replace("ôh", "ốn");
+                .replace("ôh", "ốn")
+                .replace("âỳ", "ấy")
+                .replace("u1I", "ưn")
+                .replace("q1I", "qu")
+                ;
 
         // correct letter cases
         text = TextUtilities.correctLetterCases(text);
