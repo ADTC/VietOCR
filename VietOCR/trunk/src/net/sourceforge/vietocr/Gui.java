@@ -79,7 +79,7 @@ public class Gui extends javax.swing.JFrame {
      * Creates new form Gui
      */
     public Gui() {
-        File baseDir = getBaseDir();
+        File baseDir = Utilities.getBaseDir(this);
         tessPath = prefs.get("TesseractDirectory", new File(baseDir, "tesseract").getPath());
 
         prop = new Properties();
@@ -220,27 +220,6 @@ public class Gui extends javax.swing.JFrame {
         m_undo.discardAllEdits();
         updateUndoRedo();
         updateCutCopyDelete(false);
-    }
-
-    /**
-     * 
-     * @return
-     */
-    File getBaseDir() {
-        URL dir = getClass().getResource("/" + getClass().getName().replaceAll("\\.", "/") + ".class");
-        File dbDir = new File(System.getProperty("user.dir"));
-
-        try {
-            if (dir.toString().startsWith("jar:")) {
-                dir = new URL(dir.toString().replaceFirst("^jar:", "").replaceFirst("/[^/]+.jar!.*$", ""));
-                dbDir = new File(dir.toURI());
-            }
-        } catch (MalformedURLException mue) {
-            mue.printStackTrace();
-        } catch (URISyntaxException use) {
-            use.printStackTrace();
-        }
-        return dbDir;
     }
 
     /**
