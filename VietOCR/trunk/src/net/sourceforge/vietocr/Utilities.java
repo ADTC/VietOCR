@@ -21,16 +21,12 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-/**
- *
- * @author Quan
- */
 public class Utilities {
     /**
      * 
      * @return the directory of the running jar
      */
-    static File getBaseDir(Object aType) {
+    public static File getBaseDir(Object aType) {
         URL dir = aType.getClass().getResource("/" + aType.getClass().getName().replaceAll("\\.", "/") + ".class");
         File dbDir = new File(System.getProperty("user.dir"));
 
