@@ -49,7 +49,7 @@ public class ViePP implements IPostProcessor {
                 .replace("âỳ", "ấy")
                 .replace("u1I", "ưn")
                 .replace("q1I", "qu")
-                .replace("chtmg", "chúng")
+                .replace("htmg", "húng")
                 .replace("tm", "trư")
                 .replace("Tm", "Trư")
                 ;
