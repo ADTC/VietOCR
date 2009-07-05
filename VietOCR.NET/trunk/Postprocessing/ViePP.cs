@@ -49,7 +49,14 @@ namespace VietOCR.NET.Postprocessing
                 .Replace("iii", "m")
                 .Replace("ll", "u")
                 .Replace("II", "u")
-                .Replace("ôh", "ốn");
+                .Replace("ôh", "ốn")
+                .Replace("âỳ", "ấy")
+                .Replace("u1I", "ưn")
+                .Replace("q1I", "qu")
+                .Replace("htmg", "húng")
+                .Replace("tm", "trư")
+                .Replace("Tm", "Trư")
+                ;
 
             // correct letter cases
             text = TextUtilities.CorrectLetterCases(strB.ToString());
