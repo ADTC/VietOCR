@@ -41,6 +41,10 @@ public class FormLocalizer {
 
     /**
      * Update UI elements.
+     *
+     * For this to work, it requires the resource bundle to follow certain naming convention for keys,
+     * which are to be composed of the Swing component's name appended with ".Text" or ".ToolTipText".
+     * 
      * @param resources
      */
     public void ApplyCulture(ResourceBundle resources) {
