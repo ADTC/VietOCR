@@ -53,7 +53,7 @@ namespace VietOCR.NET.Postprocessing
                 .Replace("âỳ", "ấy")
                 .Replace("u1I", "ưn")
                 .Replace("q1I", "qu")
-                .Replace("htmg", "húng")
+                .Replace("tmg", "úng")
                 .Replace("tm", "trư")
                 .Replace("Tm", "Trư")
                 ;
