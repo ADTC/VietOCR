@@ -956,12 +956,12 @@ public class Gui extends javax.swing.JFrame {
         try {
             String selectedText = this.jTextArea1.getSelectedText();
             if (selectedText != null) {
-                selectedText = Processor.postProcess(selectedText, curLangCode, new File(dangAmbigsPath));
+                selectedText = Processor.postProcess(selectedText, curLangCode, dangAmbigsPath);
                 int start = this.jTextArea1.getSelectionStart();
                 this.jTextArea1.replaceSelection(selectedText);
                 this.jTextArea1.select(start, start + selectedText.length());
             } else {
-                this.jTextArea1.setText(Processor.postProcess(jTextArea1.getText(), curLangCode, new File(dangAmbigsPath)));
+                this.jTextArea1.setText(Processor.postProcess(jTextArea1.getText(), curLangCode, dangAmbigsPath));
             }
         } catch (UnsupportedOperationException uoe) {
             uoe.printStackTrace();
