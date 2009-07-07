@@ -30,14 +30,14 @@ public class Processor {
         return processor.postProcess(text);
     }
 
-    public static String postProcess(String text, String langCode, File dangAmbigsPath) {
+    public static String postProcess(String text, String langCode, String dangAmbigsPath) {
         // postprocessor
         StringBuffer strB = new StringBuffer(postProcess(text, langCode));
 
         // replace text based on entries read from a DangAmbigs.txt file
-        Map<String, String> replaceRules = TextUtilities.loadMap(new File(dangAmbigsPath, langCode + ".DangAmbigs.txt"));
-        Set<String> set = replaceRules.keySet();
-        Iterator<String> iter = set.iterator();
+        Map<String, String> replaceRules = TextUtilities.loadMap(new File(dangAmbigsPath, langCode + ".DangAmbigs.txt").getPath());
+        Iterator<String> iter = replaceRules.keySet().iterator();
+        
         while (iter.hasNext()) {
             String key = iter.next();
             String value = replaceRules.get(key);

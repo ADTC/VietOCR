@@ -69,7 +69,7 @@ public class TextUtilities {
                 ;
     }
 
-    public static Map<String, String> loadMap(File dangAmbigsFile) {
+    public static Map<String, String> loadMap(String dangAmbigsFile) {
         Map<String, String> map = new LinkedHashMap<String, String>();
 
         try {
