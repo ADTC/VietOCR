@@ -280,6 +280,12 @@
     <EmbeddedResource Include="WatchForm.vi-VN.resx">
       <DependentUpon>WatchForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Data\eng.DangAmbigs.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\vie.DangAmbigs.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="samples\vietsample.tif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

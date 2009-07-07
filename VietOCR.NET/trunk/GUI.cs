@@ -67,10 +67,11 @@ namespace VietOCR.NET
         const string strForeColor = "ForeColor";
         const string strBackColor = "BackColor";
         const string strFilterIndex = "FilterIndex";
+        const string strDangAmbigsPath = "DangAmbigsPath";
 
         private bool IsFitForZoomIn = false;
         private const float ZOOM_FACTOR = 1.25f;
-
+        private string dangAmbigsPath;
 
         public GUI()
         {
@@ -249,12 +250,12 @@ namespace VietOCR.NET
                 string selectedText = this.textBox1.SelectedText;
                 if (!String.IsNullOrEmpty(selectedText))
                 {
-                    selectedText = Processor.PostProcess(selectedText, curLangCode);
+                    selectedText = Processor.PostProcess(selectedText, curLangCode, dangAmbigsPath);
                     this.textBox1.SelectedText = selectedText;
                 }
                 else
                 {
-                    this.textBox1.Text = Processor.PostProcess(this.textBox1.Text, curLangCode);
+                    this.textBox1.Text = Processor.PostProcess(this.textBox1.Text, curLangCode, dangAmbigsPath);
                 }
             }
             catch (Exception ex)
@@ -824,6 +825,9 @@ namespace VietOCR.NET
                 (int)regkey.GetValue(strBackColor, Color.FromKnownColor(KnownColor.White).ToArgb()));
             filterIndex = (int)regkey.GetValue(strFilterIndex, 1);
             selectedUILanguage = (string)regkey.GetValue(strUILang, "en-US");
+
+            String workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            dangAmbigsPath = (string)regkey.GetValue(strDangAmbigsPath, Path.Combine(workingDir, "Data"));
         }
 
         protected override void SaveRegistryInfo(RegistryKey regkey)
@@ -842,6 +846,7 @@ namespace VietOCR.NET
             regkey.SetValue(strBackColor, this.textBox1.BackColor.ToArgb());
             regkey.SetValue(strFilterIndex, filterIndex);
             regkey.SetValue(strUILang, selectedUILanguage);
+            regkey.SetValue(strDangAmbigsPath, dangAmbigsPath);
         }
 
         private void formatToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
@@ -862,6 +867,19 @@ namespace VietOCR.NET
         protected virtual void removeLineBreaksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("To be implemented", strProgName);
+        }
+
+        private void dangAmbigsPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+
+            folderBrowserDialog1.Description = "Path to " + curLangCode + ".DangAmbigs.txt.";
+            folderBrowserDialog1.SelectedPath = dangAmbigsPath;
+
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                dangAmbigsPath = folderBrowserDialog1.SelectedPath;
+            }
         }
     }
 }
