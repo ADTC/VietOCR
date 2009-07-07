@@ -286,4 +286,7 @@
   <data name="removeLineBreaksToolStripMenuItem.Text" xml:space="preserve">
     <value>Nối dòng</value>
   </data>
+  <data name="dangAmbigsPathToolStripMenuItem.Text" xml:space="preserve">
+    <value>Đường dẫn DangAmbigs...</value>
+  </data>
 </root>
