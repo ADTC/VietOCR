@@ -32,7 +32,6 @@ import net.sourceforge.vietocr.postprocessing.Processor;
 import net.sourceforge.vietpad.*;
 import net.sourceforge.vietpad.inputmethod.*;
 import net.sourceforge.vietocr.wia.*;
-import java.net.*;
 
 /**
  *
@@ -60,7 +59,7 @@ public class Gui extends javax.swing.JFrame {
     public final String EOL = System.getProperty("line.separator");
     private String currentDirectory;
     private String outputDirectory;
-    protected String tessPath;
+    protected String tessPath, dangAmbigsPath;
     private Properties prop,  config;
     protected String curLangCode;
     protected String[] langCodes;
@@ -81,6 +80,7 @@ public class Gui extends javax.swing.JFrame {
     public Gui() {
         File baseDir = Utilities.getBaseDir(this);
         tessPath = prefs.get("TesseractDirectory", new File(baseDir, "tesseract").getPath());
+        dangAmbigsPath = prefs.get("DangAmbigsPath", new File(baseDir, "data").getPath());
 
         prop = new Properties();
 
@@ -472,6 +472,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuSettings = new javax.swing.JMenu();
         jMenuItemWatch = new javax.swing.JMenuItem();
         jMenuItemTessPath = new javax.swing.JMenuItem();
+        jMenuItemDangAmbigsPath = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JSeparator();
         jMenuInputMethod = new javax.swing.JMenu();
         ActionListener imlst = new ActionListener() {
@@ -839,6 +840,14 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jMenuSettings.add(jMenuItemTessPath);
+
+        jMenuItemDangAmbigsPath.setText(bundle.getString("jMenuItemDangAmbigsPath.Text")); // NOI18N
+        jMenuItemDangAmbigsPath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDangAmbigsPathActionPerformed(evt);
+            }
+        });
+        jMenuSettings.add(jMenuItemDangAmbigsPath);
         jMenuSettings.add(jSeparator3);
 
         jMenuInputMethod.setText(bundle.getString("jMenuInputMethod.Text")); // NOI18N
@@ -947,12 +956,12 @@ public class Gui extends javax.swing.JFrame {
         try {
             String selectedText = this.jTextArea1.getSelectedText();
             if (selectedText != null) {
-                selectedText = Processor.postProcess(selectedText, curLangCode);
+                selectedText = Processor.postProcess(selectedText, curLangCode, new File(dangAmbigsPath));
                 int start = this.jTextArea1.getSelectionStart();
                 this.jTextArea1.replaceSelection(selectedText);
                 this.jTextArea1.select(start, start + selectedText.length());
             } else {
-                this.jTextArea1.setText(Processor.postProcess(jTextArea1.getText(), curLangCode));
+                this.jTextArea1.setText(Processor.postProcess(jTextArea1.getText(), curLangCode, new File(dangAmbigsPath)));
             }
         } catch (UnsupportedOperationException uoe) {
             uoe.printStackTrace();
@@ -1127,6 +1136,7 @@ public class Gui extends javax.swing.JFrame {
         }
 
         prefs.put("TesseractDirectory", tessPath);
+        prefs.put("DangAmbigsPath", dangAmbigsPath);
         prefs.put("inputMethod", selectedInputMethod);
         prefs.put("lookAndFeel", UIManager.getLookAndFeel().getClass().getName());
         prefs.put("fontName", font.getName());
@@ -1531,6 +1541,20 @@ private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent
     removeLineBreaks();
 }//GEN-LAST:event_jMenuItemRemoveLineBreaksActionPerformed
 
+private void jMenuItemDangAmbigsPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDangAmbigsPathActionPerformed
+        JFileChooser pathchooser = new JFileChooser(dangAmbigsPath);
+        pathchooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        pathchooser.setAcceptAllFileFilterUsed(false);
+        pathchooser.setApproveButtonText(bundle.getString("Set"));
+        pathchooser.setDialogTitle(bundle.getString("Path_to") + " " + curLangCode + ".DangAmbigs.txt");
+        int returnVal = pathchooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            if (!dangAmbigsPath.equals(pathchooser.getSelectedFile().getPath())) {
+                dangAmbigsPath = pathchooser.getSelectedFile().getPath();
+            }
+        }
+}//GEN-LAST:event_jMenuItemDangAmbigsPathActionPerformed
+
     void removeLineBreaks() {
         // to be implemented in subclass
     }
@@ -1632,6 +1656,7 @@ private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JMenu jMenuInputMethod;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemChangeCase;
+    private javax.swing.JMenuItem jMenuItemDangAmbigsPath;
     private javax.swing.JMenuItem jMenuItemExit;
     private javax.swing.JMenuItem jMenuItemFont;
     private javax.swing.JMenuItem jMenuItemHelp;
