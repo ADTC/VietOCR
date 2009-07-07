@@ -12,10 +12,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
-
+ */
 package net.sourceforge.vietocr.postprocessing;
 
+import java.io.*;
+import java.util.*;
 import java.util.regex.*;
 
 /**
@@ -23,6 +24,7 @@ import java.util.regex.*;
  * @author Quan Nguyen (nguyenq@users.sf.net)
  */
 public class TextUtilities {
+
     /**
      * Corrects letter cases.
      *
@@ -56,14 +58,38 @@ public class TextUtilities {
      * @param input
      * @return
      */
-     public static String correctOCRErrors(String input) {
+    public static String correctOCRErrors(String input) {
         // substitute letters frequently misrecognized by Tesseract 2.03
         return input.replaceAll("\\b1(?=\\p{L}+\\b)", "l") // 1 to l
                 .replaceAll("\\b11(?=\\p{L}+\\b)", "n") // 11 to n
                 .replaceAll("\\bI(?=\\p{Ll}+\\b)", "l") // I to l
                 .replaceAll("(?<=\\b\\p{L}*)0(?=\\p{L}*\\b)", "o") // 0 to o
-//                .replaceAll("(?<!\\.) S(?=\\p{L}*\\b)", " s") // S to s
-//                .replaceAll("(?<![cn])h\\b", "n")
+                //                .replaceAll("(?<!\\.) S(?=\\p{L}*\\b)", " s") // S to s
+                //                .replaceAll("(?<![cn])h\\b", "n")
                 ;
-     }
+    }
+
+    public static Map<String, String> loadMap(File dangAmbigsFile) {
+        Map<String, String> map = new LinkedHashMap<String, String>();
+
+        try {
+            InputStreamReader stream = new InputStreamReader(new FileInputStream(dangAmbigsFile), "UTF8");
+            BufferedReader bs = new BufferedReader(stream);
+            String str;
+            while ((str = bs.readLine()) != null) {
+                int index = str.indexOf('=');
+                if (index == -1) {
+                    continue;
+                }
+
+                String key = str.substring(0, index);
+                String value = str.substring(index + 1);
+                map.put(key, value);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return map;
+    }
 }
