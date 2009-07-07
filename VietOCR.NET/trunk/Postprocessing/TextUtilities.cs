@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace VietOCR.NET.Postprocessing
 {
@@ -50,6 +51,37 @@ namespace VietOCR.NET.Postprocessing
                 //Regex.Replace("(?<!\\.) S(?=\\p{L}*\\b)", " s") // S to s
                 //Regex.Replace("(?<![cn])h\\b", "n")
             ;
+        }
+
+        public static Dictionary<string, string> LoadMap(string dangAmbigsFile)
+        {
+            Dictionary<string, string> map = new Dictionary<string, string>();
+
+            try
+            {
+                StreamReader sr = new StreamReader(dangAmbigsFile, Encoding.UTF8);
+                string str;
+
+                while ((str = sr.ReadLine()) != null)
+                {
+                    int index = str.IndexOf('=');
+                    if (index == -1)
+                    {
+                        continue;
+                    }
+
+                    string key = str.Substring(0, index);
+                    string value = str.Substring(index + 1);
+                    map[key] = value;
+                }
+                sr.Close();   
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
+
+            return map;
         }
     }
 }
