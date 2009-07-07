@@ -83,6 +83,7 @@ namespace VietOCR.NET
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.dangAmbigsPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -368,7 +369,8 @@ namespace VietOCR.NET
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.watchToolStripMenuItem});
+            this.watchToolStripMenuItem,
+            this.dangAmbigsPathToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
             // 
@@ -492,6 +494,12 @@ namespace VietOCR.NET
             this.backgroundWorker2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker2_RunWorkerCompleted);
             this.backgroundWorker2.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             // 
+            // dangAmbigsPathToolStripMenuItem
+            // 
+            this.dangAmbigsPathToolStripMenuItem.Name = "dangAmbigsPathToolStripMenuItem";
+            resources.ApplyResources(this.dangAmbigsPathToolStripMenuItem, "dangAmbigsPathToolStripMenuItem");
+            this.dangAmbigsPathToolStripMenuItem.Click += new System.EventHandler(this.dangAmbigsPathToolStripMenuItem_Click);
+            // 
             // GUI
             // 
             resources.ApplyResources(this, "$this");
@@ -580,5 +588,6 @@ namespace VietOCR.NET
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem changeCaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeLineBreaksToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dangAmbigsPathToolStripMenuItem;
     }
 }
