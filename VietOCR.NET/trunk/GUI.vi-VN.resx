@@ -274,8 +274,8 @@
   <data name="toolStripLabel1.Text" xml:space="preserve">
     <value>Ngôn ngữ OCR</value>
   </data>
-  <data name="watchToolStripMenuItem.Text" xml:space="preserve">
-    <value>Watch Folder...</value>
+  <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Tùy chọn...</value>
   </data>
   <data name="changeCaseToolStripMenuItem.Text" xml:space="preserve">
     <value>Đổi ngữ cách...</value>
