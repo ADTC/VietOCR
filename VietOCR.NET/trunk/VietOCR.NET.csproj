@@ -133,11 +133,11 @@
     <Compile Include="GUIWithRegistry.Designer.cs">
       <DependentUpon>GUIWithRegistry.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUIWithWatch.cs">
+    <Compile Include="GUIWithSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUIWithWatch.Designer.cs">
-      <DependentUpon>GUIWithWatch.cs</DependentUpon>
+    <Compile Include="GUIWithSettings.Designer.cs">
+      <DependentUpon>GUIWithSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="HtmlHelpForm.cs">
       <SubType>Form</SubType>
@@ -148,6 +148,12 @@
     <Compile Include="ImageIOHelper.cs" />
     <Compile Include="OCR.cs" />
     <Compile Include="OCRImageEntity.cs" />
+    <Compile Include="OptionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsDialog.Designer.cs">
+      <DependentUpon>OptionsDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Postprocessing\EngPP.cs" />
     <Compile Include="Postprocessing\IPostProcessor.cs" />
     <Compile Include="Postprocessing\Processor.cs" />
@@ -265,6 +271,9 @@
     <EmbeddedResource Include="GUIWithInputMethod.vi-VN.resx">
       <SubType>Designer</SubType>
       <DependentUpon>GUIWithInputMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsDialog.resx">
+      <DependentUpon>OptionsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="readme_cs.html" />
     <EmbeddedResource Include="readme_cs_vi.html" />
