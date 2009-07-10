@@ -470,9 +470,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuItemChangeCase = new javax.swing.JMenuItem();
         jMenuItemRemoveLineBreaks = new javax.swing.JMenuItem();
         jMenuSettings = new javax.swing.JMenu();
-        jMenuItemWatch = new javax.swing.JMenuItem();
-        jMenuItemTessPath = new javax.swing.JMenuItem();
-        jMenuItemDangAmbigsPath = new javax.swing.JMenuItem();
+        jMenuItemOptions = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JSeparator();
         jMenuInputMethod = new javax.swing.JMenu();
         ActionListener imlst = new ActionListener() {
@@ -824,30 +822,13 @@ public class Gui extends javax.swing.JFrame {
         jMenuSettings.setMnemonic('s');
         jMenuSettings.setText(bundle.getString("jMenuSettings.Text")); // NOI18N
 
-        jMenuItemWatch.setText(bundle.getString("jMenuItemWatch.Text")); // NOI18N
-        jMenuItemWatch.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemOptions.setText(bundle.getString("jMenuItemOptions.Text")); // NOI18N
+        jMenuItemOptions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemWatchActionPerformed(evt);
+                jMenuItemOptionsActionPerformed(evt);
             }
         });
-        jMenuSettings.add(jMenuItemWatch);
-
-        jMenuItemTessPath.setText(bundle.getString("jMenuItemTessPath.Text")); // NOI18N
-        jMenuItemTessPath.setActionCommand(bundle.getString("Tesseract_Path")); // NOI18N
-        jMenuItemTessPath.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemTessPathActionPerformed(evt);
-            }
-        });
-        jMenuSettings.add(jMenuItemTessPath);
-
-        jMenuItemDangAmbigsPath.setText(bundle.getString("jMenuItemDangAmbigsPath.Text")); // NOI18N
-        jMenuItemDangAmbigsPath.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemDangAmbigsPathActionPerformed(evt);
-            }
-        });
-        jMenuSettings.add(jMenuItemDangAmbigsPath);
+        jMenuSettings.add(jMenuItemOptions);
         jMenuSettings.add(jSeparator3);
 
         jMenuInputMethod.setText(bundle.getString("jMenuInputMethod.Text")); // NOI18N
@@ -1001,21 +982,6 @@ public class Gui extends javax.swing.JFrame {
             }
         });
     }
-
-    private void jMenuItemTessPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTessPathActionPerformed
-        JFileChooser pathchooser = new JFileChooser(tessPath);
-        pathchooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        pathchooser.setAcceptAllFileFilterUsed(false);
-        pathchooser.setApproveButtonText(bundle.getString("Set"));
-        pathchooser.setDialogTitle(bundle.getString("Locate_Tesseract_Directory"));
-        int returnVal = pathchooser.showOpenDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            if (!tessPath.equals(pathchooser.getSelectedFile().getPath())) {
-                tessPath = pathchooser.getSelectedFile().getPath();
-                JOptionPane.showMessageDialog(this, bundle.getString("Please_restart_the_application_for_the_change_to_take_effect."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
-    }//GEN-LAST:event_jMenuItemTessPathActionPerformed
 
     private void jButtonZoomOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomOutActionPerformed
         doChange(false);
@@ -1522,11 +1488,11 @@ private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {/
     ((JImageLabel) jImageLabel).deselect();
 }//GEN-LAST:event_jButtonActualSizeActionPerformed
 
-private void jMenuItemWatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWatchActionPerformed
-    openWatchDialog();
-}//GEN-LAST:event_jMenuItemWatchActionPerformed
+private void jMenuItemOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOptionsActionPerformed
+    openOptionsDialog();
+}//GEN-LAST:event_jMenuItemOptionsActionPerformed
 
-    void openWatchDialog() {
+    void openOptionsDialog() {
         // to be implemented in subclass
     }
 
@@ -1540,20 +1506,6 @@ private void jMenuItemChangeCaseActionPerformed(java.awt.event.ActionEvent evt) 
 private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRemoveLineBreaksActionPerformed
     removeLineBreaks();
 }//GEN-LAST:event_jMenuItemRemoveLineBreaksActionPerformed
-
-private void jMenuItemDangAmbigsPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDangAmbigsPathActionPerformed
-        JFileChooser pathchooser = new JFileChooser(dangAmbigsPath);
-        pathchooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        pathchooser.setAcceptAllFileFilterUsed(false);
-        pathchooser.setApproveButtonText(bundle.getString("Set"));
-        pathchooser.setDialogTitle(bundle.getString("Path_to") + " " + curLangCode + ".DangAmbigs.txt");
-        int returnVal = pathchooser.showOpenDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            if (!dangAmbigsPath.equals(pathchooser.getSelectedFile().getPath())) {
-                dangAmbigsPath = pathchooser.getSelectedFile().getPath();
-            }
-        }
-}//GEN-LAST:event_jMenuItemDangAmbigsPathActionPerformed
 
     void removeLineBreaks() {
         // to be implemented in subclass
@@ -1656,19 +1608,17 @@ private void jMenuItemDangAmbigsPathActionPerformed(java.awt.event.ActionEvent e
     private javax.swing.JMenu jMenuInputMethod;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemChangeCase;
-    private javax.swing.JMenuItem jMenuItemDangAmbigsPath;
     private javax.swing.JMenuItem jMenuItemExit;
     private javax.swing.JMenuItem jMenuItemFont;
     private javax.swing.JMenuItem jMenuItemHelp;
     private javax.swing.JMenuItem jMenuItemOCR;
     private javax.swing.JMenuItem jMenuItemOCRAll;
     private javax.swing.JMenuItem jMenuItemOpen;
+    private javax.swing.JMenuItem jMenuItemOptions;
     private javax.swing.JMenuItem jMenuItemPostProcess;
     private javax.swing.JMenuItem jMenuItemRemoveLineBreaks;
     private javax.swing.JMenuItem jMenuItemSave;
     private javax.swing.JMenuItem jMenuItemScan;
-    private javax.swing.JMenuItem jMenuItemTessPath;
-    private javax.swing.JMenuItem jMenuItemWatch;
     private javax.swing.JMenu jMenuLookAndFeel;
     private javax.swing.JMenu jMenuSettings;
     private javax.swing.JMenu jMenuUILang;

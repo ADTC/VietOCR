@@ -29,7 +29,7 @@ public class GuiWithWatch extends GuiWithFormat {
     private boolean watchEnabled;
 
     private StatusFrame statusFrame;
-    private WatchDialog watchDialog;
+    private OptionsDialog optionsDialog;
     private Watcher watcher;
 
     public GuiWithWatch() {
@@ -99,19 +99,26 @@ public class GuiWithWatch extends GuiWithFormat {
     }
 
     @Override
-    protected void openWatchDialog() {
-        if (watchDialog == null) {
-            watchDialog = new WatchDialog(this);
+    protected void openOptionsDialog() {
+        if (optionsDialog == null) {
+            optionsDialog = new OptionsDialog(this, true);
         }
 
-        watchDialog.setWatchFolder(watchFolder);
-        watchDialog.setOutputFolder(outputFolder);
-        watchDialog.setWatchEnabled(watchEnabled);
+        optionsDialog.setWatchFolder(watchFolder);
+        optionsDialog.setOutputFolder(outputFolder);
+        optionsDialog.setWatchEnabled(watchEnabled);
+        optionsDialog.setTessPath(tessPath);
+        optionsDialog.setDangAmbigsPath(dangAmbigsPath);
 
-        if (watchDialog.showDialog() == JOptionPane.OK_OPTION) {
-            watchFolder = watchDialog.getWatchFolder();
-            outputFolder = watchDialog.getOutputFolder();
-            watchEnabled = watchDialog.isWatchEnabled();
+        optionsDialog.setCurLangCode(curLangCode);
+
+        if (optionsDialog.showDialog() == JOptionPane.OK_OPTION) {
+            watchFolder = optionsDialog.getWatchFolder();
+            outputFolder = optionsDialog.getOutputFolder();
+            watchEnabled = optionsDialog.isWatchEnabled();
+            tessPath = optionsDialog.getTessPath();
+            dangAmbigsPath = optionsDialog.getDangAmbigsPath();
+            
             watcher.setPath(new File(watchFolder));
             watcher.setEnabled(watchEnabled);
         }
@@ -136,8 +143,8 @@ public class GuiWithWatch extends GuiWithFormat {
 
             @Override
             public void run() {
-                if (watchDialog != null) {
-                    watchDialog.changeUILanguage(locale);
+                if (optionsDialog != null) {
+                    optionsDialog.changeUILanguage(locale);
                 }
 
                 statusFrame.setTitle(bundle.getString("statusFrame.Title"));
