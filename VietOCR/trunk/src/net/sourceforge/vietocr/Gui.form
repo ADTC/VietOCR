@@ -178,18 +178,6 @@
             </Property>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemOptions">
-              <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuItemOptions.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemOptionsActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JSeparator" name="jSeparator3">
-            </MenuItem>
             <Menu class="javax.swing.JMenu" name="jMenuInputMethod">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
@@ -259,6 +247,18 @@
                 <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="ActionListener lafLst = new ActionListener() {&#xa;                public void actionPerformed(ActionEvent ae) {&#xa;                    updateLaF(ae.getActionCommand());&#xa;                }&#xa;            };&#xa;&#xa;        ButtonGroup groupLookAndFeel = new ButtonGroup();&#xa;        UIManager.LookAndFeelInfo[] lafs = UIManager.getInstalledLookAndFeels();&#xa;        for (int i = 0; i &lt; lafs.length; i++) {&#xa;            JRadioButtonMenuItem lafButton = new JRadioButtonMenuItem(lafs[i].getName());&#xa;            lafButton.setActionCommand(lafs[i].getClassName());&#xa;            if (UIManager.getLookAndFeel().getClass().getName().equals(lafButton.getActionCommand())) {&#xa;                lafButton.setSelected(true);&#xa;            }&#xa;            lafButton.addActionListener(lafLst);&#xa;            groupLookAndFeel.add(lafButton);&#xa;            jMenuLookAndFeel.add(lafButton);&#xa;        }&#xa;"/>
               </AuxValues>
             </Menu>
+            <MenuItem class="javax.swing.JSeparator" name="jSeparator3">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemOptions">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuItemOptions.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemOptionsActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuHelp">
