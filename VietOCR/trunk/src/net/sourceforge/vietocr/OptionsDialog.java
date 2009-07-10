@@ -169,6 +169,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         jPanelWatchFolder.add(jCheckBoxWatch, gridBagConstraints);
 
         jButtonWatch.setText("...");
+        jButtonWatch.setToolTipText("Browse");
         jButtonWatch.setPreferredSize(new java.awt.Dimension(30, 23));
         jButtonWatch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +179,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         jPanelWatchFolder.add(jButtonWatch, new java.awt.GridBagConstraints());
 
         jButtonOutput.setText("...");
+        jButtonOutput.setToolTipText("Browse");
         jButtonOutput.setPreferredSize(new java.awt.Dimension(30, 23));
         jButtonOutput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,6 +201,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         jPanelTessPath.add(jTextFieldTess);
 
         jButtonTess.setText("...");
+        jButtonTess.setToolTipText("Browse");
         jButtonTess.setPreferredSize(new java.awt.Dimension(30, 23));
         jButtonTess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,6 +218,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         jPanelDangAmbigsPath.add(jLabelDangAmbigs, new java.awt.GridBagConstraints());
 
         jButtonDangAmbigs.setText("...");
+        jButtonDangAmbigs.setToolTipText("Browse");
         jButtonDangAmbigs.setPreferredSize(new java.awt.Dimension(30, 23));
         jButtonDangAmbigs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
