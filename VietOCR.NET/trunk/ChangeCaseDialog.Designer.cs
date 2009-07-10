@@ -73,6 +73,7 @@
             // 
             // buttonChange
             // 
+            this.buttonChange.DialogResult = System.Windows.Forms.DialogResult.OK;
             resources.ApplyResources(this.buttonChange, "buttonChange");
             this.buttonChange.Name = "buttonChange";
             this.buttonChange.UseVisualStyleBackColor = true;
@@ -80,6 +81,7 @@
             // 
             // buttonClose
             // 
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.buttonClose, "buttonClose");
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -95,7 +97,7 @@
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
-            // ChangeCaseDialog1
+            // ChangeCaseDialog
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -105,7 +107,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ChangeCaseDialog1";
+            this.Name = "ChangeCaseDialog";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

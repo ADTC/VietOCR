@@ -143,6 +143,9 @@ namespace VietOCR.NET
             optionsDialog.WatchFolder = watchFolder;
             optionsDialog.OutputFolder = outputFolder;
             optionsDialog.WatchEnabled = watchEnabled;
+            optionsDialog.DangAmbigsPath = dangAmbigsPath;
+            optionsDialog.DangAmbigsEnabled = dangAmbigsOn;
+            optionsDialog.CurLangCode = curLangCode;
 
             if (optionsDialog.ShowDialog() == DialogResult.OK)
             {
@@ -151,6 +154,9 @@ namespace VietOCR.NET
                 watchEnabled = optionsDialog.WatchEnabled;
                 watcher.Path = watchFolder;
                 watcher.Enabled = watchEnabled;
+                dangAmbigsPath = optionsDialog.DangAmbigsPath;
+                dangAmbigsOn = optionsDialog.DangAmbigsEnabled;
+                curLangCode = optionsDialog.CurLangCode;
             }
         }
 
