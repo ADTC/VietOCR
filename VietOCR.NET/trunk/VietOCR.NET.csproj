@@ -167,12 +167,6 @@
       <DependentUpon>StatusForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Watcher.cs" />
-    <Compile Include="WatchForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WatchForm.Designer.cs">
-      <DependentUpon>WatchForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="WIA\WiaOperationException.cs" />
     <Compile Include="WIA\WiaScannerAdapter.cs" />
   </ItemGroup>
@@ -275,6 +269,9 @@
     <EmbeddedResource Include="OptionsDialog.resx">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OptionsDialog.vi-VN.resx">
+      <DependentUpon>OptionsDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="readme_cs.html" />
     <EmbeddedResource Include="readme_cs_vi.html" />
     <EmbeddedResource Include="Properties\Resources.vi-VN.resx">
@@ -282,12 +279,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StatusForm.resx">
       <DependentUpon>StatusForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WatchForm.resx">
-      <DependentUpon>WatchForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WatchForm.vi-VN.resx">
-      <DependentUpon>WatchForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Data\eng.DangAmbigs.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

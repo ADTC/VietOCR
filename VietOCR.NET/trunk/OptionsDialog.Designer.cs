@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsDialog));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.checkBoxWatch = new System.Windows.Forms.CheckBox();
@@ -52,17 +53,22 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.AccessibleDescription = null;
+            this.tabControl1.AccessibleName = null;
+            resources.ApplyResources(this.tabControl1, "tabControl1");
+            this.tabControl1.BackgroundImage = null;
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Font = null;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(292, 144);
-            this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.AccessibleDescription = null;
+            this.tabPage1.AccessibleName = null;
+            resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.BackgroundImage = null;
             this.tabPage1.Controls.Add(this.checkBoxWatch);
             this.tabPage1.Controls.Add(this.labelOutput);
             this.tabPage1.Controls.Add(this.labelWatch);
@@ -70,176 +76,177 @@
             this.tabPage1.Controls.Add(this.btnWatch);
             this.tabPage1.Controls.Add(this.textBoxOutput);
             this.tabPage1.Controls.Add(this.textBoxWatch);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Font = null;
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(284, 118);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Watch";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // checkBoxWatch
             // 
-            this.checkBoxWatch.AutoSize = true;
-            this.checkBoxWatch.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.checkBoxWatch.Location = new System.Drawing.Point(82, 88);
+            this.checkBoxWatch.AccessibleDescription = null;
+            this.checkBoxWatch.AccessibleName = null;
+            resources.ApplyResources(this.checkBoxWatch, "checkBoxWatch");
+            this.checkBoxWatch.BackgroundImage = null;
+            this.checkBoxWatch.Font = null;
             this.checkBoxWatch.Name = "checkBoxWatch";
-            this.checkBoxWatch.Size = new System.Drawing.Size(59, 17);
-            this.checkBoxWatch.TabIndex = 14;
-            this.checkBoxWatch.Text = "Enable";
             this.checkBoxWatch.UseVisualStyleBackColor = true;
             // 
             // labelOutput
             // 
-            this.labelOutput.AutoSize = true;
-            this.labelOutput.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelOutput.Location = new System.Drawing.Point(8, 55);
+            this.labelOutput.AccessibleDescription = null;
+            this.labelOutput.AccessibleName = null;
+            resources.ApplyResources(this.labelOutput, "labelOutput");
+            this.labelOutput.Font = null;
             this.labelOutput.Name = "labelOutput";
-            this.labelOutput.Size = new System.Drawing.Size(74, 13);
-            this.labelOutput.TabIndex = 13;
-            this.labelOutput.Text = "Output Folder:";
             // 
             // labelWatch
             // 
-            this.labelWatch.AutoSize = true;
-            this.labelWatch.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelWatch.Location = new System.Drawing.Point(8, 21);
+            this.labelWatch.AccessibleDescription = null;
+            this.labelWatch.AccessibleName = null;
+            resources.ApplyResources(this.labelWatch, "labelWatch");
+            this.labelWatch.Font = null;
             this.labelWatch.Name = "labelWatch";
-            this.labelWatch.Size = new System.Drawing.Size(74, 13);
-            this.labelWatch.TabIndex = 12;
-            this.labelWatch.Text = "Watch Folder:";
             // 
             // btnOutput
             // 
-            this.btnOutput.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOutput.Location = new System.Drawing.Point(246, 50);
+            this.btnOutput.AccessibleDescription = null;
+            this.btnOutput.AccessibleName = null;
+            resources.ApplyResources(this.btnOutput, "btnOutput");
+            this.btnOutput.BackgroundImage = null;
+            this.btnOutput.Font = null;
             this.btnOutput.Name = "btnOutput";
-            this.btnOutput.Size = new System.Drawing.Size(30, 23);
-            this.btnOutput.TabIndex = 11;
-            this.btnOutput.Text = "...";
             this.btnOutput.UseVisualStyleBackColor = true;
             this.btnOutput.Click += new System.EventHandler(this.btnOutput_Click);
             // 
             // btnWatch
             // 
-            this.btnWatch.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnWatch.Location = new System.Drawing.Point(246, 16);
+            this.btnWatch.AccessibleDescription = null;
+            this.btnWatch.AccessibleName = null;
+            resources.ApplyResources(this.btnWatch, "btnWatch");
+            this.btnWatch.BackgroundImage = null;
+            this.btnWatch.Font = null;
             this.btnWatch.Name = "btnWatch";
-            this.btnWatch.Size = new System.Drawing.Size(30, 23);
-            this.btnWatch.TabIndex = 10;
-            this.btnWatch.Text = "...";
             this.btnWatch.UseVisualStyleBackColor = true;
             this.btnWatch.Click += new System.EventHandler(this.btnWatch_Click);
             // 
             // textBoxOutput
             // 
+            this.textBoxOutput.AccessibleDescription = null;
+            this.textBoxOutput.AccessibleName = null;
+            resources.ApplyResources(this.textBoxOutput, "textBoxOutput");
             this.textBoxOutput.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBoxOutput.Location = new System.Drawing.Point(82, 52);
+            this.textBoxOutput.BackgroundImage = null;
+            this.textBoxOutput.Font = null;
             this.textBoxOutput.Name = "textBoxOutput";
             this.textBoxOutput.ReadOnly = true;
-            this.textBoxOutput.Size = new System.Drawing.Size(158, 20);
-            this.textBoxOutput.TabIndex = 9;
             // 
             // textBoxWatch
             // 
+            this.textBoxWatch.AccessibleDescription = null;
+            this.textBoxWatch.AccessibleName = null;
+            resources.ApplyResources(this.textBoxWatch, "textBoxWatch");
             this.textBoxWatch.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBoxWatch.Location = new System.Drawing.Point(82, 18);
+            this.textBoxWatch.BackgroundImage = null;
+            this.textBoxWatch.Font = null;
             this.textBoxWatch.Name = "textBoxWatch";
             this.textBoxWatch.ReadOnly = true;
-            this.textBoxWatch.Size = new System.Drawing.Size(158, 20);
-            this.textBoxWatch.TabIndex = 8;
             // 
             // tabPage2
             // 
+            this.tabPage2.AccessibleDescription = null;
+            this.tabPage2.AccessibleName = null;
+            resources.ApplyResources(this.tabPage2, "tabPage2");
+            this.tabPage2.BackgroundImage = null;
             this.tabPage2.Controls.Add(this.checkBoxDangAmbigs);
             this.tabPage2.Controls.Add(this.labelPath);
             this.tabPage2.Controls.Add(this.btnDangAmbigs);
             this.tabPage2.Controls.Add(this.textBoxDangAmbigs);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Font = null;
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(284, 118);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "DangAmbigs.txt";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // checkBoxDangAmbigs
             // 
-            this.checkBoxDangAmbigs.AutoSize = true;
-            this.checkBoxDangAmbigs.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.checkBoxDangAmbigs.Location = new System.Drawing.Point(55, 52);
+            this.checkBoxDangAmbigs.AccessibleDescription = null;
+            this.checkBoxDangAmbigs.AccessibleName = null;
+            resources.ApplyResources(this.checkBoxDangAmbigs, "checkBoxDangAmbigs");
+            this.checkBoxDangAmbigs.BackgroundImage = null;
+            this.checkBoxDangAmbigs.Font = null;
             this.checkBoxDangAmbigs.Name = "checkBoxDangAmbigs";
-            this.checkBoxDangAmbigs.Size = new System.Drawing.Size(59, 17);
-            this.checkBoxDangAmbigs.TabIndex = 18;
-            this.checkBoxDangAmbigs.Text = "Enable";
             this.checkBoxDangAmbigs.UseVisualStyleBackColor = true;
             // 
             // labelPath
             // 
-            this.labelPath.AutoSize = true;
-            this.labelPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelPath.Location = new System.Drawing.Point(17, 20);
+            this.labelPath.AccessibleDescription = null;
+            this.labelPath.AccessibleName = null;
+            resources.ApplyResources(this.labelPath, "labelPath");
+            this.labelPath.Font = null;
             this.labelPath.Name = "labelPath";
-            this.labelPath.Size = new System.Drawing.Size(32, 13);
-            this.labelPath.TabIndex = 17;
-            this.labelPath.Text = "Path:";
             // 
             // btnDangAmbigs
             // 
-            this.btnDangAmbigs.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnDangAmbigs.Location = new System.Drawing.Point(228, 15);
+            this.btnDangAmbigs.AccessibleDescription = null;
+            this.btnDangAmbigs.AccessibleName = null;
+            resources.ApplyResources(this.btnDangAmbigs, "btnDangAmbigs");
+            this.btnDangAmbigs.BackgroundImage = null;
+            this.btnDangAmbigs.Font = null;
             this.btnDangAmbigs.Name = "btnDangAmbigs";
-            this.btnDangAmbigs.Size = new System.Drawing.Size(30, 23);
-            this.btnDangAmbigs.TabIndex = 16;
-            this.btnDangAmbigs.Text = "...";
             this.btnDangAmbigs.UseVisualStyleBackColor = true;
             this.btnDangAmbigs.Click += new System.EventHandler(this.btnDangAmbigs_Click);
             // 
             // textBoxDangAmbigs
             // 
+            this.textBoxDangAmbigs.AccessibleDescription = null;
+            this.textBoxDangAmbigs.AccessibleName = null;
+            resources.ApplyResources(this.textBoxDangAmbigs, "textBoxDangAmbigs");
             this.textBoxDangAmbigs.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBoxDangAmbigs.Location = new System.Drawing.Point(55, 17);
+            this.textBoxDangAmbigs.BackgroundImage = null;
+            this.textBoxDangAmbigs.Font = null;
             this.textBoxDangAmbigs.Name = "textBoxDangAmbigs";
             this.textBoxDangAmbigs.ReadOnly = true;
-            this.textBoxDangAmbigs.Size = new System.Drawing.Size(167, 20);
-            this.textBoxDangAmbigs.TabIndex = 15;
             // 
             // buttonOK
             // 
+            this.buttonOK.AccessibleDescription = null;
+            this.buttonOK.AccessibleName = null;
+            resources.ApplyResources(this.buttonOK, "buttonOK");
+            this.buttonOK.BackgroundImage = null;
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Location = new System.Drawing.Point(124, 158);
+            this.buttonOK.Font = null;
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 1;
-            this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             // 
             // buttonCancel
             // 
+            this.buttonCancel.AccessibleDescription = null;
+            this.buttonCancel.AccessibleName = null;
+            resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.BackgroundImage = null;
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(205, 158);
+            this.buttonCancel.Font = null;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 2;
-            this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
-          
+            // 
+            // folderBrowserDialog1
+            // 
+            resources.ApplyResources(this.folderBrowserDialog1, "folderBrowserDialog1");
             // 
             // OptionsDialog
             // 
             this.AcceptButton = this.buttonOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AccessibleDescription = null;
+            this.AccessibleName = null;
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 197);
+            this.BackgroundImage = null;
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.tabControl1);
+            this.Font = null;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = null;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OptionsDialog";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Options";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
