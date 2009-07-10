@@ -854,7 +854,7 @@ namespace VietOCR.NET
             this.wordWrapToolStripMenuItem.Checked = this.textBox1.WordWrap;
         }
        
-        protected virtual void watchToolStripMenuItem_Click(object sender, EventArgs e)
+        protected virtual void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("To be implemented", strProgName);
         }

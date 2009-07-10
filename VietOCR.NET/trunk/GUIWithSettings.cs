@@ -133,7 +133,7 @@ namespace VietOCR.NET
             this.statusForm.TextBox.AppendText(fileName + Environment.NewLine);
         }
 
-        protected override void watchToolStripMenuItem_Click(object sender, EventArgs e)
+        protected override void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (optionsDialog == null)
             {
