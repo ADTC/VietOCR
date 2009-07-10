@@ -33,6 +33,30 @@ namespace VietOCR.NET
             set { watchEnabled = value; }
         }
 
+        private string dangAmbigsPath;
+
+        public string DangAmbigsPath
+        {
+            get { return dangAmbigsPath; }
+            set { dangAmbigsPath = value; }
+        }
+
+        private string curLangCode;
+
+        public string CurLangCode
+        {
+            get { return curLangCode; }
+            set { curLangCode = value; }
+        }
+
+        private bool dangAmbigsEnabled;
+
+        public bool DangAmbigsEnabled
+        {
+            get { return dangAmbigsEnabled; }
+            set { dangAmbigsEnabled = value; }
+        }
+
         public OptionsDialog()
         {
             InitializeComponent();
@@ -45,6 +69,8 @@ namespace VietOCR.NET
             this.textBoxWatch.Text = watchFolder;
             this.textBoxOutput.Text = outputFolder;
             this.checkBoxWatch.Checked = watchEnabled;
+            this.textBoxDangAmbigs.Text = dangAmbigsPath;
+            this.checkBoxDangAmbigs.Checked = dangAmbigsEnabled;
         }
 
         protected override void OnClosed(EventArgs ea)
@@ -54,6 +80,8 @@ namespace VietOCR.NET
             watchFolder = this.textBoxWatch.Text;
             outputFolder = this.textBoxOutput.Text;
             watchEnabled = this.checkBoxWatch.Checked;
+            dangAmbigsPath = this.textBoxDangAmbigs.Text;
+            dangAmbigsEnabled = this.checkBoxDangAmbigs.Checked;
         }
 
         private void btnWatch_Click(object sender, EventArgs e)
@@ -82,13 +110,13 @@ namespace VietOCR.NET
 
         private void btnDangAmbigs_Click(object sender, EventArgs e)
         {
-            this.folderBrowserDialog1.Description = "Set Path to DangAmbigs.txt.";
-            this.folderBrowserDialog1.SelectedPath = outputFolder;
+            this.folderBrowserDialog1.Description = String.Format("Set Path to {0}.DangAmbigs.txt.", curLangCode);
+            this.folderBrowserDialog1.SelectedPath = dangAmbigsPath;
 
             if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                outputFolder = this.folderBrowserDialog1.SelectedPath;
-                this.textBoxOutput.Text = outputFolder;
+                dangAmbigsPath = this.folderBrowserDialog1.SelectedPath;
+                this.textBoxDangAmbigs.Text = dangAmbigsPath;
             }
 
         }

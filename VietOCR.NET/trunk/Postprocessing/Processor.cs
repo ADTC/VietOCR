@@ -26,17 +26,29 @@ namespace VietOCR.NET.Postprocessing
      */
     public class Processor
     {
-        
+
         public static string PostProcess(string text, string langCode)
         {
-            IPostProcessor processor = ProcessorFactory.createProcessor((ISO639) Enum.Parse(typeof(ISO639), langCode));
-            return processor.PostProcess(text);
+            try
+            {
+                IPostProcessor processor = ProcessorFactory.createProcessor((ISO639)Enum.Parse(typeof(ISO639), langCode));
+                return processor.PostProcess(text);
+            }
+            catch
+            {
+                return text;
+            }
         }
 
-        public static string PostProcess(string text, string langCode, string dangAmbigsPath)
+        public static string PostProcess(string text, string langCode, string dangAmbigsPath, bool dangAmbigsOn)
         {
             // postprocessor
-            StringBuilder strB = new StringBuilder(text);//PostProcess(text, langCode));
+            StringBuilder strB = new StringBuilder(PostProcess(text, langCode));
+
+            if (!dangAmbigsOn)
+            {
+                return strB.ToString();
+            }
 
             // replace text based on entries read from a DangAmbigs.txt file
             Dictionary<string, string> replaceRules = TextUtilities.LoadMap(Path.Combine(dangAmbigsPath, langCode + ".DangAmbigs.txt"));
