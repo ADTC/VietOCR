@@ -67,7 +67,7 @@ public class Gui extends javax.swing.JFrame {
     private ImageIconScalable imageIcon;
     private boolean reset;
     private JFileChooser filechooser;
-    protected boolean wordWrapOn;
+    protected boolean wordWrapOn, dangAmbigsOn;
     private String selectedInputMethod;
     private float scaleX,  scaleY;
     protected static String selectedUILang = "en";
@@ -80,7 +80,6 @@ public class Gui extends javax.swing.JFrame {
     public Gui() {
         File baseDir = Utilities.getBaseDir(this);
         tessPath = prefs.get("TesseractDirectory", new File(baseDir, "tesseract").getPath());
-        dangAmbigsPath = prefs.get("DangAmbigsPath", new File(baseDir, "data").getPath());
 
         prop = new Properties();
 
@@ -190,6 +189,10 @@ public class Gui extends javax.swing.JFrame {
         myResources = ResourceBundle.getBundle("net.sourceforge.vietpad.Resources");
 
         wordWrapOn = prefs.getBoolean("wordWrap", false);
+        
+        dangAmbigsPath = prefs.get("DangAmbigsPath", new File(baseDir, "data").getPath());
+        dangAmbigsOn = prefs.getBoolean("dangAmbigs", false);
+
         jTextArea1.setLineWrap(wordWrapOn);
         jCheckBoxMenuWordWrap.setSelected(wordWrapOn);
 
@@ -470,8 +473,6 @@ public class Gui extends javax.swing.JFrame {
         jMenuItemChangeCase = new javax.swing.JMenuItem();
         jMenuItemRemoveLineBreaks = new javax.swing.JMenuItem();
         jMenuSettings = new javax.swing.JMenu();
-        jMenuItemOptions = new javax.swing.JMenuItem();
-        jSeparator3 = new javax.swing.JSeparator();
         jMenuInputMethod = new javax.swing.JMenu();
         ActionListener imlst = new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
@@ -514,6 +515,8 @@ public class Gui extends javax.swing.JFrame {
             groupLookAndFeel.add(lafButton);
             jMenuLookAndFeel.add(lafButton);
         }
+        jSeparator3 = new javax.swing.JSeparator();
+        jMenuItemOptions = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemHelp = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JSeparator();
@@ -822,15 +825,6 @@ public class Gui extends javax.swing.JFrame {
         jMenuSettings.setMnemonic('s');
         jMenuSettings.setText(bundle.getString("jMenuSettings.Text")); // NOI18N
 
-        jMenuItemOptions.setText(bundle.getString("jMenuItemOptions.Text")); // NOI18N
-        jMenuItemOptions.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemOptionsActionPerformed(evt);
-            }
-        });
-        jMenuSettings.add(jMenuItemOptions);
-        jMenuSettings.add(jSeparator3);
-
         jMenuInputMethod.setText(bundle.getString("jMenuInputMethod.Text")); // NOI18N
         jMenuSettings.add(jMenuInputMethod);
         jMenuSettings.add(jSeparator6);
@@ -863,6 +857,15 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuLookAndFeel.setText(bundle.getString("jMenuLookAndFeel.Text")); // NOI18N
         jMenuSettings.add(jMenuLookAndFeel);
+        jMenuSettings.add(jSeparator3);
+
+        jMenuItemOptions.setText(bundle.getString("jMenuItemOptions.Text")); // NOI18N
+        jMenuItemOptions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemOptionsActionPerformed(evt);
+            }
+        });
+        jMenuSettings.add(jMenuItemOptions);
 
         jMenuBar2.add(jMenuSettings);
 
@@ -937,12 +940,12 @@ public class Gui extends javax.swing.JFrame {
         try {
             String selectedText = this.jTextArea1.getSelectedText();
             if (selectedText != null) {
-                selectedText = Processor.postProcess(selectedText, curLangCode, dangAmbigsPath);
+                selectedText = Processor.postProcess(selectedText, curLangCode, dangAmbigsPath, dangAmbigsOn);
                 int start = this.jTextArea1.getSelectionStart();
                 this.jTextArea1.replaceSelection(selectedText);
                 this.jTextArea1.select(start, start + selectedText.length());
             } else {
-                this.jTextArea1.setText(Processor.postProcess(jTextArea1.getText(), curLangCode, dangAmbigsPath));
+                this.jTextArea1.setText(Processor.postProcess(jTextArea1.getText(), curLangCode, dangAmbigsPath, dangAmbigsOn));
             }
         } catch (UnsupportedOperationException uoe) {
             uoe.printStackTrace();
@@ -1115,6 +1118,7 @@ public class Gui extends javax.swing.JFrame {
         }
 
         prefs.putBoolean("wordWrap", wordWrapOn);
+        prefs.putBoolean("dangAmbigs", dangAmbigsOn);
 
         if (getExtendedState() == NORMAL) {
             prefs.putInt("frameHeight", getHeight());

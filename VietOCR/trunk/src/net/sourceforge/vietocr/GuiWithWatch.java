@@ -109,7 +109,7 @@ public class GuiWithWatch extends GuiWithFormat {
         optionsDialog.setWatchEnabled(watchEnabled);
         optionsDialog.setTessPath(tessPath);
         optionsDialog.setDangAmbigsPath(dangAmbigsPath);
-
+        optionsDialog.setDangAmbigsEnabled(dangAmbigsOn);
         optionsDialog.setCurLangCode(curLangCode);
 
         if (optionsDialog.showDialog() == JOptionPane.OK_OPTION) {
@@ -118,6 +118,7 @@ public class GuiWithWatch extends GuiWithFormat {
             watchEnabled = optionsDialog.isWatchEnabled();
             tessPath = optionsDialog.getTessPath();
             dangAmbigsPath = optionsDialog.getDangAmbigsPath();
+            dangAmbigsOn  = optionsDialog.isDangAmbigsEnabled();
             
             watcher.setPath(new File(watchFolder));
             watcher.setEnabled(watchEnabled);

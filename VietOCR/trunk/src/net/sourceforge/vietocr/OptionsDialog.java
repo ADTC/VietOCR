@@ -36,6 +36,8 @@ public class OptionsDialog extends javax.swing.JDialog {
     private String dangAmbigsPath;
     private String curLangCode;
     private boolean watchEnabled;
+    private boolean dangAmbigsOn;
+    
     protected ResourceBundle bundle;
 
     /** Creates new form OptionsDialog */
@@ -322,6 +324,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         this.jCheckBoxWatch.setSelected(watchEnabled);
         this.jTextFieldTess.setText(tessPath);
         this.jTextFieldDangAmbigs.setText(dangAmbigsPath);
+        this.jCheckBoxDangAmbigs.setSelected(dangAmbigsOn);
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated
@@ -331,6 +334,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         watchEnabled = this.jCheckBoxWatch.isSelected();
         tessPath = this.jTextFieldTess.getText();
         dangAmbigsPath = this.jTextFieldDangAmbigs.getText();
+        dangAmbigsOn = this.jCheckBoxDangAmbigs.isSelected();
     }//GEN-LAST:event_formWindowDeactivated
 
     public int showDialog() {
@@ -472,5 +476,20 @@ public class OptionsDialog extends javax.swing.JDialog {
      */
     public void setCurLangCode(String curLangCode) {
         this.curLangCode = curLangCode;
+    }
+
+    /**
+     * @return the dangAmbigsOn
+     */
+    public boolean isDangAmbigsEnabled() {
+        dangAmbigsOn = this.jCheckBoxDangAmbigs.isSelected();
+        return dangAmbigsOn;
+    }
+
+    /**
+     * @param dangAmbigsOn the dangAmbigsOn to set
+     */
+    public void setDangAmbigsEnabled(boolean dangAmbigsOn) {
+        this.dangAmbigsOn = dangAmbigsOn;
     }
 }
