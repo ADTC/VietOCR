@@ -78,25 +78,26 @@ public class OptionsDialog extends javax.swing.JDialog {
         jButtonCancel = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelWatchFolder = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelWatch = new javax.swing.JLabel();
         jTextFieldWatch = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelOutput = new javax.swing.JLabel();
         jTextFieldOutput = new javax.swing.JTextField();
         jCheckBoxWatch = new javax.swing.JCheckBox();
         jButtonWatch = new javax.swing.JButton();
         jButtonOutput = new javax.swing.JButton();
         jPanelTessPath = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelTess = new javax.swing.JLabel();
         jTextFieldTess = new javax.swing.JTextField();
         jButtonTess = new javax.swing.JButton();
         jPanelDangAmbigsPath = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelDangAmbigs = new javax.swing.JLabel();
         jButtonDangAmbigs = new javax.swing.JButton();
         jTextFieldDangAmbigs = new javax.swing.JTextField();
         jCheckBoxDangAmbigs = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Options");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/OptionsDialog"); // NOI18N
+        setTitle(bundle.getString("this.Title")); // NOI18N
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -109,7 +110,8 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        jButtonOK.setText("OK");
+        jButtonOK.setText(bundle.getString("jButtonOK.Text")); // NOI18N
+        jButtonOK.setToolTipText(bundle.getString("jButtonOK.ToolTipText")); // NOI18N
         jButtonOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonOKActionPerformed(evt);
@@ -117,7 +119,8 @@ public class OptionsDialog extends javax.swing.JDialog {
         });
         jPanel1.add(jButtonOK);
 
-        jButtonCancel.setText("Cancel");
+        jButtonCancel.setText(bundle.getString("jButtonCancel.Text")); // NOI18N
+        jButtonCancel.setToolTipText(bundle.getString("jButtonCancel.ToolTipText")); // NOI18N
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelActionPerformed(evt);
@@ -129,8 +132,8 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jPanelWatchFolder.setLayout(new java.awt.GridBagLayout());
 
-        jLabel2.setText("Watch Folder:");
-        jPanelWatchFolder.add(jLabel2, new java.awt.GridBagConstraints());
+        jLabelWatch.setText(bundle.getString("jLabelWatch.Text")); // NOI18N
+        jPanelWatchFolder.add(jLabelWatch, new java.awt.GridBagConstraints());
 
         jTextFieldWatch.setEditable(false);
         jTextFieldWatch.setPreferredSize(new java.awt.Dimension(200, 20));
@@ -142,11 +145,11 @@ public class OptionsDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
         jPanelWatchFolder.add(jTextFieldWatch, gridBagConstraints);
 
-        jLabel1.setText("Output Folder:");
+        jLabelOutput.setText(bundle.getString("jLabelOutput.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        jPanelWatchFolder.add(jLabel1, gridBagConstraints);
+        jPanelWatchFolder.add(jLabelOutput, gridBagConstraints);
 
         jTextFieldOutput.setEditable(false);
         jTextFieldOutput.setPreferredSize(new java.awt.Dimension(200, 20));
@@ -158,7 +161,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
         jPanelWatchFolder.add(jTextFieldOutput, gridBagConstraints);
 
-        jCheckBoxWatch.setText("Enable");
+        jCheckBoxWatch.setText(bundle.getString("jCheckBoxWatch.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -188,8 +191,8 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Watch", jPanelWatchFolder);
 
-        jLabel3.setText("Path:");
-        jPanelTessPath.add(jLabel3);
+        jLabelTess.setText(bundle.getString("jLabelTess.Text")); // NOI18N
+        jPanelTessPath.add(jLabelTess);
 
         jTextFieldTess.setEditable(false);
         jTextFieldTess.setPreferredSize(new java.awt.Dimension(200, 20));
@@ -208,11 +211,10 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jPanelDangAmbigsPath.setLayout(new java.awt.GridBagLayout());
 
-        jLabel4.setText("Path:");
-        jPanelDangAmbigsPath.add(jLabel4, new java.awt.GridBagConstraints());
+        jLabelDangAmbigs.setText(bundle.getString("jLabelDangAmbigs.Text")); // NOI18N
+        jPanelDangAmbigsPath.add(jLabelDangAmbigs, new java.awt.GridBagConstraints());
 
         jButtonDangAmbigs.setText("...");
-        jButtonDangAmbigs.setMinimumSize(new java.awt.Dimension(45, 23));
         jButtonDangAmbigs.setPreferredSize(new java.awt.Dimension(30, 23));
         jButtonDangAmbigs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,7 +235,8 @@ public class OptionsDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
         jPanelDangAmbigsPath.add(jTextFieldDangAmbigs, gridBagConstraints);
 
-        jCheckBoxDangAmbigs.setText("Enable");
+        jCheckBoxDangAmbigs.setSelected(true);
+        jCheckBoxDangAmbigs.setText(bundle.getString("jCheckBoxDangAmbigs.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -287,7 +290,6 @@ public class OptionsDialog extends javax.swing.JDialog {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             if (!tessPath.equals(pathchooser.getSelectedFile().getPath())) {
                 setTessPath(pathchooser.getSelectedFile().getPath());
-                JOptionPane.showMessageDialog(this, bundle.getString("Please_restart_the_application_for_the_change_to_take_effect."), Gui.APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButtonTessActionPerformed
@@ -385,10 +387,10 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButtonWatch;
     private javax.swing.JCheckBox jCheckBoxDangAmbigs;
     private javax.swing.JCheckBox jCheckBoxWatch;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelDangAmbigs;
+    private javax.swing.JLabel jLabelOutput;
+    private javax.swing.JLabel jLabelTess;
+    private javax.swing.JLabel jLabelWatch;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelDangAmbigsPath;
     private javax.swing.JPanel jPanelTessPath;
