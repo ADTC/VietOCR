@@ -14,7 +14,7 @@ namespace VietOCR.NET
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GUIWithWatch());
+            Application.Run(new GUIWithSettings());
         }
     }
 }
