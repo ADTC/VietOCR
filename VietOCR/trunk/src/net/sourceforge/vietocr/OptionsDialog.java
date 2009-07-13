@@ -45,6 +45,10 @@ public class OptionsDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
+        if (Gui.WINDOWS) {
+            jTabbedPane1.remove(jPanelTessPath);
+        }
+        
         bundle = ResourceBundle.getBundle("net/sourceforge/vietocr/OptionsDialog");
 
         this.setLocationRelativeTo(parent);
