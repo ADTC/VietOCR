@@ -79,7 +79,12 @@ public class Gui extends javax.swing.JFrame {
      */
     public Gui() {
         File baseDir = Utilities.getBaseDir(this);
-        tessPath = prefs.get("TesseractDirectory", new File(baseDir, "tesseract").getPath());
+        if (WINDOWS) {
+            tessPath = new File(baseDir, "tesseract").getPath();
+        } else {
+            tessPath = prefs.get("TesseractDirectory", new File(baseDir, "tesseract").getPath());
+        }
+
 
         prop = new Properties();
 
@@ -1104,7 +1109,10 @@ public class Gui extends javax.swing.JFrame {
             prefs.put("outputDirectory", outputDirectory);
         }
 
-        prefs.put("TesseractDirectory", tessPath);
+        if (!WINDOWS) {
+            prefs.put("TesseractDirectory", tessPath);
+        }
+        
         prefs.put("DangAmbigsPath", dangAmbigsPath);
         prefs.put("inputMethod", selectedInputMethod);
         prefs.put("lookAndFeel", UIManager.getLookAndFeel().getClass().getName());
