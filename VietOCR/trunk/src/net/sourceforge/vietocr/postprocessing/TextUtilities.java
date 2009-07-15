@@ -86,6 +86,8 @@ public class TextUtilities {
                 String value = str.substring(index + 1);
                 map.put(key, value);
             }
+            bs.close();
+            stream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
