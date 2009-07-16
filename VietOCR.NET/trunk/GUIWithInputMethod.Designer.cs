@@ -37,12 +37,17 @@ namespace VietOCR.NET
             // 
             // settingsToolStripMenuItem
             // 
+            System.Windows.Forms.ToolStripMenuItem[] items = new System.Windows.Forms.ToolStripMenuItem[this.settingsToolStripMenuItem.DropDownItems.Count];
+            this.settingsToolStripMenuItem.DropDownItems.CopyTo(items, 0); // copy Options item
+
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem3,
             this.vietInputMethodToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.uILanguageToolStripMenuItem
+            this.uILanguageToolStripMenuItem,
+            this.toolStripMenuItem3
             });
+
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(items); // move Options item to the bottom
 
             // 
             // toolStripMenuItem3
