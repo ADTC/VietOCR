@@ -112,6 +112,7 @@ public class OptionsDialog extends javax.swing.JDialog {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 1, 4, 1));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         jButtonOK.setText(bundle.getString("jButtonOK.Text")); // NOI18N
@@ -170,6 +171,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
         jPanelWatchFolder.add(jCheckBoxWatch, gridBagConstraints);
 
         jButtonWatch.setText("...");
@@ -249,6 +251,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
         jPanelDangAmbigsPath.add(jCheckBoxDangAmbigs, gridBagConstraints);
 
         jTabbedPane1.addTab("DangAmbigs.txt", jPanelDangAmbigsPath);
