@@ -46,7 +46,7 @@ public class Gui extends javax.swing.JFrame {
     static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
     static final Locale VIETNAM = new Locale("vi", "VN");
     protected final String UTF8 = "UTF-8";
-    protected ResourceBundle myResources,  bundle;
+    protected ResourceBundle myResources, bundle;
     protected static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
     private int filterIndex;
     private javax.swing.filechooser.FileFilter[] fileFilters;
@@ -60,7 +60,7 @@ public class Gui extends javax.swing.JFrame {
     private String currentDirectory;
     private String outputDirectory;
     protected String tessPath, dangAmbigsPath;
-    private Properties prop,  config;
+    private Properties prop, config;
     protected String curLangCode;
     protected String[] langCodes;
     private String[] langs;
@@ -69,9 +69,9 @@ public class Gui extends javax.swing.JFrame {
     private JFileChooser filechooser;
     protected boolean wordWrapOn, dangAmbigsOn;
     private String selectedInputMethod;
-    private float scaleX,  scaleY;
+    private float scaleX, scaleY;
     protected static String selectedUILang = "en";
-    private int originalW,  originalH;
+    private int originalW, originalH;
     private final float ZOOM_FACTOR = 1.25f;
 
     /**
@@ -168,7 +168,7 @@ public class Gui extends javax.swing.JFrame {
                 });
 
         this.setTitle(APP_NAME);
-        bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui"); // NOI18N
+        bundle = java.util.ResourceBundle.getBundle("net.sourceforge.vietocr.Gui"); // NOI18N
         currentDirectory = prefs.get("currentDirectory", null);
         filechooser = new JFileChooser(currentDirectory);
         filechooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
@@ -234,6 +234,8 @@ public class Gui extends javax.swing.JFrame {
      * 
      */
     void populatePopupMenu() {
+        popup.removeAll();
+        
         m_undoAction = new AbstractAction(myResources.getString("Undo")) {
 
             @Override
@@ -1541,7 +1543,8 @@ private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent
             return; // no change in locale
         }
         Locale.setDefault(locale);
-        bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui");
+        bundle = java.util.ResourceBundle.getBundle("net.sourceforge.vietocr.Gui");
+        myResources = ResourceBundle.getBundle("net.sourceforge.vietpad.Resources");
 
         SwingUtilities.invokeLater(new Runnable() {
 
@@ -1558,6 +1561,7 @@ private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent
                     helptopicsFrame.setTitle(jMenuItemHelp.getText());
                 }
                 filechooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
+                populatePopupMenu();
             }
         });
     }
