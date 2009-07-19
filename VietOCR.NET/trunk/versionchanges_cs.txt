@@ -60,6 +60,6 @@ Version 0.9.4 (21 June 2009)
 - Added progressbar for (more animated) task status
 - Added All Image Files filter
 
-Version 1.0 (5 July 2009)
+Version 1.0RC (5 July 2009)
 - Updated to Tessnet2 .NET wrapper for Tesseract 2.04 OCR engine
 - Added more language codes to ISO639-3.xml file
