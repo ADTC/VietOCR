@@ -18,7 +18,6 @@ package net.sourceforge.vietocr;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
-import javax.imageio.IIOImage;
 import javax.swing.*;
 import javax.swing.Timer;
 import net.sourceforge.vietocr.postprocessing.Processor;
@@ -58,26 +57,33 @@ public class GuiWithSettings extends GuiWithFormat {
                     if (!statusFrame.isVisible()) {
                         statusFrame.setVisible(true);
                     }
-                    statusFrame.getTextArea().append(imageFile.getPath() + "\n");
 
-                    final ArrayList<IIOImage> iioImageList = ImageIOHelper.getIIOImageList(imageFile);
-                    if (iioImageList == null) {
-                        statusFrame.getTextArea().append("    **  " + bundle.getString("Cannotprocess") + " " + imageFile.getName() + "  **\n");
-                        return;
-                    }
                     if (curLangCode == null) {
                         statusFrame.getTextArea().append("    **  " + bundle.getString("Please_select_a_language.") + "  **\n");
 //                        queue.clear();
                         return;
                     }
 
+                    statusFrame.getTextArea().append(imageFile.getPath() + "\n");
+                    
+                    OCRImageEntity entity = new OCRImageEntity(imageFile, -1);
+                    final List<File> tempImageFiles;
+                    
+                    try {
+                        tempImageFiles = entity.getClonedImageFiles();
+                    } catch (Exception exc) {
+                        statusFrame.getTextArea().append("    **  " + bundle.getString("Cannotprocess") + " " + imageFile.getName() + "  **\n");
+                        return;
+                    }
+                    
                     SwingUtilities.invokeLater(new Runnable() {
 
                         @Override
                         public void run() {
                             try {
+                                
                                 OCR ocrEngine = new OCR(tessPath);
-                                String result = ocrEngine.recognizeText(iioImageList, -1, curLangCode);
+                                String result = ocrEngine.recognizeText(tempImageFiles, curLangCode);
 
                                 // postprocess to correct common OCR errors
                                 result = Processor.postProcess(result, curLangCode);

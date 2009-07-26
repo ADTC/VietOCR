@@ -54,8 +54,8 @@ public class Gui extends javax.swing.JFrame {
     private final Rectangle screen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
     private int imageIndex;
     private int imageTotal;
-    private ArrayList<ImageIconScalable> imageList;
-    private ArrayList<IIOImage> iioImageList;
+    private java.util.List<ImageIconScalable> imageList;
+    private java.util.List<IIOImage> iioImageList;
     public final String EOL = System.getProperty("line.separator");
     private String currentDirectory;
     private String outputDirectory;
@@ -1226,7 +1226,7 @@ public class Gui extends javax.swing.JFrame {
      * @param list List of IIOImage
      * @param index Index of page to be OCRed: -1 for all pages
      */
-    void performOCR(final ArrayList<IIOImage> list, final int index) {
+    void performOCR(final java.util.List<IIOImage> iioImageList, final int index) {
         if (this.jComboBoxLang.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_select_a_language."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -1246,8 +1246,9 @@ public class Gui extends javax.swing.JFrame {
 
             @Override
             protected String doInBackground() throws Exception {
+                OCRImageEntity entity = new OCRImageEntity(iioImageList, index);
                 OCR ocrEngine = new OCR(tessPath);
-                return ocrEngine.recognizeText(list, index, curLangCode);
+                return ocrEngine.recognizeText(entity.getClonedImageFiles(), curLangCode);
             }
 
             @Override

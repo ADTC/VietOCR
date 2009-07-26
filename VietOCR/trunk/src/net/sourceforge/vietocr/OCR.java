@@ -18,7 +18,7 @@ package net.sourceforge.vietocr;
 
 import java.io.*;
 import java.util.*;
-import javax.imageio.IIOImage;
+//import javax.imageio.IIOImage;
 
 /**
  *
@@ -46,10 +46,10 @@ public class OCR {
      * @return
      * @throws java.lang.Exception
      */
-    String recognizeText(final ArrayList<IIOImage> imageList, final int index, final String lang) throws Exception {
-        ArrayList<File> tempImageFiles = ImageIOHelper.createImageFiles(imageList, index);
-        return recognizeText(tempImageFiles.toArray(new File[tempImageFiles.size()]), lang);
-    }
+//    String recognizeText(final List<IIOImage> imageList, final int index, final String lang) throws Exception {
+//        List<File> tempImageFiles = ImageIOHelper.createImageFiles(imageList, index);
+//        return recognizeText(tempImageFiles, lang);
+//    }
 
     /**
      *
@@ -59,10 +59,10 @@ public class OCR {
      * @return
      * @throws java.lang.Exception
      */
-    String recognizeText(final File imageFile, final int index, final String lang) throws Exception {
-        ArrayList<File> tempImageFiles = ImageIOHelper.createImageFiles(imageFile, index);
-        return recognizeText(tempImageFiles.toArray(new File[tempImageFiles.size()]), lang);
-    }
+//    String recognizeText(final File imageFile, final int index, final String lang) throws Exception {
+//        List<File> tempImageFiles = ImageIOHelper.createImageFiles(imageFile, index);
+//        return recognizeText(tempImageFiles, lang);
+//    }
 
     /**
      * 
@@ -71,7 +71,7 @@ public class OCR {
      * @return
      * @throws java.lang.Exception
      */
-    String recognizeText(final File[] tempImageFiles, final String lang) throws Exception {
+    String recognizeText(final List<File> tempImageFiles, final String lang) throws Exception {
         File tempTessOutputFile = File.createTempFile(OUTPUT_FILE_NAME, FILE_EXTENSION);
         String output = tempTessOutputFile.getPath().substring(0, tempTessOutputFile.getPath().length() - FILE_EXTENSION.length()); // chop the .txt extension
         StringBuffer strB = new StringBuffer();

@@ -33,14 +33,18 @@ public class ImageIOHelper {
     final static String TIFF_EXT = ".tif";
     final static String TIFF_FORMAT = "tiff";
 
-    public static ArrayList<File> createImageFiles(File imageFile, int index) throws Exception {
-        ArrayList<File> tempImageFiles = new ArrayList<File>();
+    public static List<File> createImageFiles(File imageFile, int index) throws Exception {
+        List<File> tempImageFiles = new ArrayList<File>();
 
         String imageFileName = imageFile.getName();
         String imageFormat = imageFileName.substring(imageFileName.lastIndexOf('.') + 1);
 
         Iterator readers = ImageIO.getImageReadersByFormatName(imageFormat);
         ImageReader reader = (ImageReader) readers.next();
+
+        if (reader == null) {
+            throw new RuntimeException("Need to install JAI Image I/O package.\nhttps://jai-imageio.dev.java.net");
+        }
 
         ImageInputStream iis = ImageIO.createImageInputStream(imageFile);
         reader.setInput(iis);
@@ -87,8 +91,8 @@ public class ImageIOHelper {
         return tempImageFiles;
     }
 
-    public static ArrayList<File> createImageFiles(ArrayList<IIOImage> imageList, int index) throws Exception {
-        ArrayList<File> tempImageFiles = new ArrayList<File>();
+    public static List<File> createImageFiles(List<IIOImage> imageList, int index) throws Exception {
+        List<File> tempImageFiles = new ArrayList<File>();
 
         //Set up the writeParam
         TIFFImageWriteParam tiffWriteParam = new TIFFImageWriteParam(Locale.US);
@@ -124,12 +128,12 @@ public class ImageIOHelper {
         return tempImageFiles;
     }
 
-    public static ArrayList<IIOImage> getIIOImageList(File imageFile) {
+    public static List<IIOImage> getIIOImageList(File imageFile) {
         ImageReader reader = null;
         ImageInputStream iis = null;
 
         try {
-            ArrayList<IIOImage> iioImageList = new ArrayList<IIOImage>();
+            List<IIOImage> iioImageList = new ArrayList<IIOImage>();
 
             String imageFileName = imageFile.getName();
             String imageFormat = imageFileName.substring(imageFileName.lastIndexOf('.') + 1);
@@ -167,9 +171,9 @@ public class ImageIOHelper {
         }
     }
 
-    public static ArrayList<ImageIconScalable> getImageList(ArrayList<IIOImage> iioImageList) {
+    public static List<ImageIconScalable> getImageList(List<IIOImage> iioImageList) {
         try {
-            ArrayList<ImageIconScalable> al = new ArrayList<ImageIconScalable>();
+            List<ImageIconScalable> al = new ArrayList<ImageIconScalable>();
             for (IIOImage iioImage : iioImageList) {
                 al.add(new ImageIconScalable((BufferedImage) iioImage.getRenderedImage()));
             }
