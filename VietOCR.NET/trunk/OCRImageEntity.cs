@@ -61,8 +61,8 @@ namespace VietOCR.NET
 
         public OCRImageEntity(IList<Image> originalImages, int index, Rectangle rect, String lang)
         {
-            this.index = index;
             this.originalImages = originalImages;
+            this.index = index;
             this.rect = rect;
             this.lang = lang;
         }
