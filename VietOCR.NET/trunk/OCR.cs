@@ -29,10 +29,10 @@ namespace VietOCR.NET
         BackgroundWorker worker;
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public string RecognizeText(IList<Image> images, int index, string lang, Rectangle selection)
+        public string RecognizeText(IList<Image> images, string lang, Rectangle selection)
         {
             rect = selection;
-            return RecognizeText(images, index, lang);
+            return RecognizeText(images, lang);
         }
         /// <summary>
         /// Recognize text
@@ -42,27 +42,15 @@ namespace VietOCR.NET
         /// <param name="lang"></param>
         /// <returns></returns>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public string RecognizeText(IList<Image> images, int index, string lang)
+        public string RecognizeText(IList<Image> images, string lang)
         {
             using (tessnet2.Tesseract ocr = new tessnet2.Tesseract())
             {
                 ocr.Init(null, lang, false);
 
-                IList<Image> workingImages;
-
-                if (index == -1)
-                {
-                    workingImages = images; // all images
-                }
-                else
-                {
-                    workingImages = new List<Image>();
-                    workingImages.Add(images[index]); // specific image
-                }
-
                 StringBuilder strB = new StringBuilder();
 
-                foreach (Bitmap image in workingImages)
+                foreach (Bitmap image in images)
                 {
                     // If the OcrDone delegate is not null then this'll be the multithreaded version
                     //ocr.OcrDone = new tessnet2.Tesseract.OcrDoneHandler(Finished);
@@ -100,10 +88,10 @@ namespace VietOCR.NET
         }
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public string RecognizeText(IList<Image> images, int index, string lang, Rectangle selection, BackgroundWorker worker, DoWorkEventArgs e)
+        public string RecognizeText(IList<Image> images, string lang, Rectangle selection, BackgroundWorker worker, DoWorkEventArgs e)
         {
             rect = selection;
-            return RecognizeText(images, index, lang, worker, e);
+            return RecognizeText(images, lang, worker, e);
         }
         
         /// <summary>
@@ -114,7 +102,7 @@ namespace VietOCR.NET
         /// <param name="lang">the language OCR is going to be performed for</param>
         /// <returns>result text</returns>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public string RecognizeText(IList<Image> images, int index, string lang, BackgroundWorker worker, DoWorkEventArgs e)
+        public string RecognizeText(IList<Image> images, string lang, BackgroundWorker worker, DoWorkEventArgs e)
         {
             // Abort the operation if the user has canceled.
             // Note that a call to CancelAsync may have set 
@@ -133,7 +121,7 @@ namespace VietOCR.NET
                 return String.Empty;
             }
 
-            return RecognizeText(images, index, lang);
+            return RecognizeText(images, lang);
         }
         public void Finished(List<tessnet2.Word> result)
         {

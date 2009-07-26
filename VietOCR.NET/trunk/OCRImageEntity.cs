@@ -22,12 +22,17 @@ namespace VietOCR.NET
 {
     class OCRImageEntity
     {
-        IList<Image> images;
-
-        public IList<Image> Images
+        IList<Image> originalImages;
+        
+        public IList<Image> OriginalImages
         {
-            get { return images; }
-            set { images = value; }
+            get { return originalImages; }
+            set { originalImages = value; }
+        }
+
+        public IList<Image> ClonedImages
+        {
+            get { return Clone(originalImages); }
         }
 
         int index;
@@ -54,12 +59,36 @@ namespace VietOCR.NET
             set { lang = value; }
         }
 
-        public OCRImageEntity(IList<Image> images, int index, Rectangle rect, String lang)
+        public OCRImageEntity(IList<Image> originalImages, int index, Rectangle rect, String lang)
         {
-            this.images = images;
             this.index = index;
+            this.originalImages = originalImages;
             this.rect = rect;
             this.lang = lang;
+        }
+
+        /// <summary>
+        /// Clone a list of images.
+        /// </summary>
+        /// <param name="originalImages">List of original images.</param>
+        /// <returns>All or one cloned image.</returns>
+        private IList<Image> Clone(IList<Image> originalImages)
+        {
+            IList<Image> images = new List<Image>();
+
+            if (index == -1)
+            {
+                foreach (Image image in originalImages)
+                {
+                    images.Add(new Bitmap(image));
+                }
+            }
+            else
+            {
+                images.Add(new Bitmap(originalImages[index]));
+            }
+
+            return images;
         }
     }
 }
