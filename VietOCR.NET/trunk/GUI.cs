@@ -598,7 +598,7 @@ namespace VietOCR.NET
 
             // Assign the result of the computation to the Result property of the DoWorkEventArgs
             // object. This is will be available to the RunWorkerCompleted eventhandler.
-            e.Result = ocrEngine.RecognizeText(entity.Images, entity.Index, entity.Lang, entity.Rect, worker, e);
+            e.Result = ocrEngine.RecognizeText(entity.ClonedImages, entity.Lang, entity.Rect, worker, e);
         }
 
         private void scanToolStripMenuItem_Click(object sender, EventArgs e)
