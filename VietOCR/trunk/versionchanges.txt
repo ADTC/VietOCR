@@ -108,5 +108,5 @@ Version 1.0 (18 July 2009)
 - Removed the option of Locating Tesseract on Windows. Current Tesseract is the executable bundled inside the program.
 - Added support for custom text replacement in postprocessing
 
-Version 1.0.1 (29 July 2009)
-- Refactored
+Version 1.0.1 (1 August 2009)
+- Refactored for improvements
