@@ -40,7 +40,6 @@ import net.sourceforge.vietocr.wia.*;
  */
 public class Gui extends javax.swing.JFrame {
 
-    private File imageFile;
     public static final String APP_NAME = "VietOCR";
     static final boolean MAC_OS_X = System.getProperty("os.name").startsWith("Mac");
     static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
@@ -1337,8 +1336,7 @@ public class Gui extends javax.swing.JFrame {
      *
      */
     public void openFile(File selectedFile) {
-        imageFile = selectedFile;
-        iioImageList = ImageIOHelper.getIIOImageList(imageFile);
+        iioImageList = ImageIOHelper.getIIOImageList(selectedFile);
         imageList = ImageIOHelper.getImageList(iioImageList);
 
         if (imageList == null) {
@@ -1354,7 +1352,7 @@ public class Gui extends javax.swing.JFrame {
 //        originalW = imageIcon.getIconWidth();
 //        originalH = imageIcon.getIconHeight();
 
-        this.setTitle(imageFile.getName() + " - " + APP_NAME);
+        this.setTitle(selectedFile.getName() + " - " + APP_NAME);
         jLabelStatus.setText(null);
         jProgressBar1.setString(null);
         jProgressBar1.setVisible(false);
@@ -1403,7 +1401,7 @@ public class Gui extends javax.swing.JFrame {
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         jSplitPane1.setDividerLocation(jSplitPane1.getWidth() / 2);
 
-        if (reset && imageFile != null) {
+        if (reset && imageIcon != null) {
             SwingUtilities.invokeLater(new Runnable() {
 
                 @Override
