@@ -63,7 +63,7 @@ namespace VietOCR.NET
             watcher.Enabled = watchEnabled;
 
             System.Windows.Forms.Timer aTimer = new System.Windows.Forms.Timer();
-            aTimer.Interval = 15000;
+            aTimer.Interval = 10000;
             aTimer.Tick += new EventHandler(OnTimedEvent);
             aTimer.Start();
         }
@@ -89,19 +89,29 @@ namespace VietOCR.NET
 
         private void AutoOCR()
         {
-            FileInfo imageFile = new FileInfo(queue.Dequeue());
-            this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { imageFile.FullName });
-            
-            IList<Image> imageList = ImageIOHelper.GetImageList(imageFile);
-            if (imageList == null)
+            FileInfo imageFile;
+            try
             {
-                this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { "    **  " + Properties.Resources.Cannotprocess + imageFile.Name + "  **" });
+                imageFile = new FileInfo(queue.Dequeue());
+            }
+            catch
+            {
                 return;
             }
+            
+            this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { imageFile.FullName });
+
             if (curLangCode == null)
             {
                 this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { "    **  " + Properties.Resources.selectLanguage + "  **" });
                 //queue.Clear();
+                return;
+            }
+
+            IList<Image> imageList = ImageIOHelper.GetImageList(imageFile);
+            if (imageList == null)
+            {
+                this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { "    **  " + Properties.Resources.Cannotprocess + imageFile.Name + "  **" });
                 return;
             }
             

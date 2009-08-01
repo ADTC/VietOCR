@@ -47,8 +47,7 @@ namespace VietOCR.NET
 
         private int imageIndex;
         private int imageTotal;
-        protected IList<Image> imageList;
-        protected FileInfo imageFile;
+        private IList<Image> imageList;
 
         private Rectangle rect = Rectangle.Empty;
         private Rectangle box = Rectangle.Empty;
@@ -467,7 +466,7 @@ namespace VietOCR.NET
         /// <param name="selectedImageFile"></param>
         public void openFile(string selectedImageFile)
         {
-            imageFile = new FileInfo(selectedImageFile);
+            FileInfo imageFile = new FileInfo(selectedImageFile);
             imageList = ImageIOHelper.GetImageList(imageFile);
 
             if (imageList == null)
