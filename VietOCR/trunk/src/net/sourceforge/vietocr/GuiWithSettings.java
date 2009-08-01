@@ -58,14 +58,14 @@ public class GuiWithSettings extends GuiWithFormat {
                         statusFrame.setVisible(true);
                     }
 
+                    statusFrame.getTextArea().append(imageFile.getPath() + "\n");
+
                     if (curLangCode == null) {
                         statusFrame.getTextArea().append("    **  " + bundle.getString("Please_select_a_language.") + "  **\n");
 //                        queue.clear();
                         return;
                     }
-
-                    statusFrame.getTextArea().append(imageFile.getPath() + "\n");
-                    
+                   
                     OCRImageEntity entity = new OCRImageEntity(imageFile, -1);
                     final List<File> tempImageFiles;
                     
