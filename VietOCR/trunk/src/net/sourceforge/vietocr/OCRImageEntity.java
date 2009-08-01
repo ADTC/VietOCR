@@ -12,8 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
-
+ */
 package net.sourceforge.vietocr;
 
 import java.io.File;
@@ -51,13 +50,14 @@ public class OCRImageEntity {
     }
 
     /**
-     * @return the ClonedImages
+     * @return the ClonedImageFiles
      */
     public List<File> getClonedImageFiles() throws Exception {
-        if (originalImages != null)
+        if (originalImages != null) {
             return ImageIOHelper.createImageFiles(originalImages, index);
-        else
+        } else {
             return ImageIOHelper.createImageFiles(originalImageFile, index);
+        }
     }
 
     /**
