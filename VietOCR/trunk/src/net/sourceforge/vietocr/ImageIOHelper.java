@@ -66,8 +66,9 @@ public class ImageIOHelper {
             int imageTotal = reader.getNumImages(true);
 
             for (int i = 0; i < imageTotal; i++) {
-                BufferedImage bi = reader.read(i);
-                IIOImage image = new IIOImage(bi, null, reader.getImageMetadata(i));
+//                BufferedImage bi = reader.read(i);
+//                IIOImage image = new IIOImage(bi, null, reader.getImageMetadata(i));
+                IIOImage image = reader.readAll(i, reader.getDefaultReadParam());
                 File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
                 ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
                 writer.setOutput(ios);
@@ -76,8 +77,9 @@ public class ImageIOHelper {
                 tempImageFiles.add(tempFile);
             }
         } else {
-            BufferedImage bi = reader.read(index);
-            IIOImage image = new IIOImage(bi, null, reader.getImageMetadata(index));
+//            BufferedImage bi = reader.read(index);
+//            IIOImage image = new IIOImage(bi, null, reader.getImageMetadata(index));
+            IIOImage image = reader.readAll(index, reader.getDefaultReadParam());
             File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
             ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
             writer.setOutput(ios);
@@ -102,6 +104,10 @@ public class ImageIOHelper {
         Iterator writers = ImageIO.getImageWritersByFormatName(TIFF_FORMAT);
         ImageWriter writer = (ImageWriter) writers.next();
 
+        if (writer == null) {
+            throw new RuntimeException("Need to install JAI Image I/O package.\nhttps://jai-imageio.dev.java.net");
+        }
+        
         //Get the stream metadata
         IIOMetadata streamMetadata = writer.getDefaultStreamMetadata(tiffWriteParam);
 
@@ -150,10 +156,11 @@ public class ImageIOHelper {
             int imageTotal = reader.getNumImages(true);
 
             for (int i = 0; i < imageTotal; i++) {
-                IIOImage image = new IIOImage(reader.read(i), null, reader.getImageMetadata(i));
+//                IIOImage image = new IIOImage(reader.read(i), null, reader.getImageMetadata(i));
+                IIOImage image = reader.readAll(i, reader.getDefaultReadParam());
                 iioImageList.add(image);
             }
-           
+
             return iioImageList;
         } catch (Exception e) {
             return null;
@@ -182,5 +189,50 @@ public class ImageIOHelper {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public static void mergeTiff(String[] inputTiffs, String outputTiff) throws IOException {
+        Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName(TIFF_FORMAT);
+        ImageReader reader = readers.next();
+
+        if (reader == null) {
+            throw new RuntimeException("Need to install JAI Image I/O package.\nhttps://jai-imageio.dev.java.net");
+        }
+
+        List<IIOImage> imageList = new ArrayList<IIOImage>();
+        ImageInputStream iis = null;
+
+        for (int i = 0; i < inputTiffs.length; i++) {
+            iis = ImageIO.createImageInputStream(new File(inputTiffs[i]));
+            reader.setInput(iis);
+            IIOImage image = reader.readAll(i, reader.getDefaultReadParam());
+            imageList.add(image);
+        }
+        iis.close();
+
+        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(TIFF_FORMAT);
+        ImageWriter writer = writers.next();
+
+        //Set up the writeParam
+        TIFFImageWriteParam tiffWriteParam = new TIFFImageWriteParam(Locale.US);
+        tiffWriteParam.setCompressionMode(ImageWriteParam.MODE_DISABLED);
+
+        //Get the stream metadata
+        IIOMetadata streamMetadata = writer.getDefaultStreamMetadata(tiffWriteParam);
+
+        ImageOutputStream ios = ImageIO.createImageOutputStream(new File(outputTiff));
+        writer.setOutput(ios);
+
+        IIOImage firstIioImage = imageList.remove(0);
+        writer.write(streamMetadata, firstIioImage, tiffWriteParam);
+
+        int i = 1;
+        for (IIOImage iioImage : imageList) {
+            writer.writeInsert(i++, iioImage, tiffWriteParam);
+        }
+        ios.close();
+
+        writer.dispose();
+        reader.dispose();
     }
 }
