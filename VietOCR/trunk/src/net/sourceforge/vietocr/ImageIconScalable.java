@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 import java.net.*;
+import javax.imageio.IIOImage;
 
 public class ImageIconScalable extends ImageIcon {
     private int width = -1;
@@ -121,5 +122,18 @@ public class ImageIconScalable extends ImageIcon {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice gd = ge.getDefaultScreenDevice();
         return gd.getDefaultConfiguration();
+    }
+
+    public static java.util.List<ImageIconScalable> getImageList(java.util.List<IIOImage> iioImageList) {
+        try {
+            java.util.List<ImageIconScalable> al = new java.util.ArrayList<ImageIconScalable>();
+            for (IIOImage iioImage : iioImageList) {
+                al.add(new ImageIconScalable((BufferedImage) iioImage.getRenderedImage()));
+            }
+
+            return al;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
