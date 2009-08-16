@@ -1337,7 +1337,7 @@ public class Gui extends javax.swing.JFrame {
      */
     public void openFile(File selectedFile) {
         iioImageList = ImageIOHelper.getIIOImageList(selectedFile);
-        imageList = ImageIOHelper.getImageList(iioImageList);
+        imageList = ImageIconScalable.getImageList(iioImageList);
 
         if (imageList == null) {
             JOptionPane.showMessageDialog(null, bundle.getString("Cannotloadimage"), APP_NAME, JOptionPane.ERROR_MESSAGE);
