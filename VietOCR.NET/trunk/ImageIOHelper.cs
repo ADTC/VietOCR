@@ -15,7 +15,6 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -102,5 +101,53 @@ namespace VietOCR.NET
             return bitmap.Clone(cropArea, bitmap.PixelFormat);
         }
 
+        public static void MergeTiff(string[] inputTiffs, string outputTiff)
+        {
+            //get the codec for tiff files
+            ImageCodecInfo info = null;
+
+            foreach (ImageCodecInfo ice in ImageCodecInfo.GetImageEncoders())
+            {
+                if (ice.MimeType == "image/tiff")
+                {
+                    info = ice;
+                }
+            }
+
+            //use the save encoder
+            System.Drawing.Imaging.Encoder enc = System.Drawing.Imaging.Encoder.SaveFlag;
+            EncoderParameters ep = new EncoderParameters(2);
+            ep.Param[0] = new EncoderParameter(enc, (long)EncoderValue.MultiFrame);
+            Encoder enc1 = Encoder.Compression;
+            ep.Param[1] = new EncoderParameter(enc1, (long)EncoderValue.CompressionNone);
+            Bitmap pages = null;
+
+            int frame = 0;
+
+            foreach (string inputTiff in inputTiffs)
+            {
+                if (frame == 0)
+                {
+                    pages = (Bitmap)Image.FromFile(inputTiff);
+                    //save the first frame
+                    pages.Save(outputTiff, info, ep);
+                }
+                else
+                {
+                    //save the intermediate frames
+                    ep.Param[0] = new EncoderParameter(enc, (long)EncoderValue.FrameDimensionPage);
+                    Bitmap bm = (Bitmap)Image.FromFile(inputTiff);
+                    pages.SaveAdd(bm, ep);
+                }
+
+                if (frame == inputTiffs.Length - 1)
+                {
+                    //flush and close
+                    ep.Param[0] = new EncoderParameter(enc, (long)EncoderValue.Flush);
+                    pages.SaveAdd(ep);
+                }
+                frame++;
+            }
+        }
     }
 }
