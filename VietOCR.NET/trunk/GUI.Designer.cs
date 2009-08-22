@@ -83,6 +83,8 @@ namespace VietOCR.NET
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mergeTiffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -247,6 +249,7 @@ namespace VietOCR.NET
             this.commandToolStripMenuItem,
             this.formatToolStripMenuItem,
             this.settingsToolStripMenuItem,
+            this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
@@ -492,6 +495,19 @@ namespace VietOCR.NET
             this.backgroundWorker2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker2_RunWorkerCompleted);
             this.backgroundWorker2.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mergeTiffToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            resources.ApplyResources(this.toolsToolStripMenuItem, "toolsToolStripMenuItem");
+            // 
+            // mergeTiffToolStripMenuItem
+            // 
+            this.mergeTiffToolStripMenuItem.Name = "mergeTiffToolStripMenuItem";
+            resources.ApplyResources(this.mergeTiffToolStripMenuItem, "mergeTiffToolStripMenuItem");
+            this.mergeTiffToolStripMenuItem.Click += new System.EventHandler(this.mergeTiffToolStripMenuItem_Click);
+            // 
             // GUI
             // 
             resources.ApplyResources(this, "$this");
@@ -580,5 +596,7 @@ namespace VietOCR.NET
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem changeCaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeLineBreaksToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mergeTiffToolStripMenuItem;
     }
 }
