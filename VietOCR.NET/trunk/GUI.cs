@@ -872,5 +872,10 @@ namespace VietOCR.NET
         {
             MessageBox.Show("To be implemented", strProgName);
         }
+
+        protected virtual void mergeTiffToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("To be implemented", strProgName);
+        }
     }
 }
