@@ -143,7 +143,7 @@ public class GuiWithSettings extends GuiWithFormat {
         prefs.put("OutputFolder", outputFolder);
         prefs.putBoolean("WatchEnabled", watchEnabled);
 
-        System.exit(0);
+//        System.exit(0);
     }
 
     @Override

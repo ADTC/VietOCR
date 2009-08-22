@@ -523,6 +523,8 @@ public class Gui extends javax.swing.JFrame {
         }
         jSeparator3 = new javax.swing.JSeparator();
         jMenuItemOptions = new javax.swing.JMenuItem();
+        jMenuTools = new javax.swing.JMenu();
+        jMenuItemMergeTiff = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemHelp = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JSeparator();
@@ -874,6 +876,18 @@ public class Gui extends javax.swing.JFrame {
         jMenuSettings.add(jMenuItemOptions);
 
         jMenuBar2.add(jMenuSettings);
+
+        jMenuTools.setText("Tools");
+
+        jMenuItemMergeTiff.setText("Merge TIFFs");
+        jMenuItemMergeTiff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMergeTiffActionPerformed(evt);
+            }
+        });
+        jMenuTools.add(jMenuItemMergeTiff);
+
+        jMenuBar2.add(jMenuTools);
 
         jMenuHelp.setMnemonic('a');
         jMenuHelp.setText(bundle.getString("jMenuHelp.Text")); // NOI18N
@@ -1524,6 +1538,14 @@ private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent
         // to be implemented in subclass
     }
 
+private void jMenuItemMergeTiffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMergeTiffActionPerformed
+    mergeTiffs();
+}//GEN-LAST:event_jMenuItemMergeTiffActionPerformed
+
+    void mergeTiffs() {
+        // to be implemented in subclass
+    }
+    
     void rotateImage(int angle) {
         try {
             imageIcon = imageIcon.getRotatedImageIcon(Math.toRadians(angle));
@@ -1626,6 +1648,7 @@ private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JMenuItem jMenuItemExit;
     private javax.swing.JMenuItem jMenuItemFont;
     private javax.swing.JMenuItem jMenuItemHelp;
+    private javax.swing.JMenuItem jMenuItemMergeTiff;
     private javax.swing.JMenuItem jMenuItemOCR;
     private javax.swing.JMenuItem jMenuItemOCRAll;
     private javax.swing.JMenuItem jMenuItemOpen;
@@ -1636,6 +1659,7 @@ private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JMenuItem jMenuItemScan;
     private javax.swing.JMenu jMenuLookAndFeel;
     private javax.swing.JMenu jMenuSettings;
+    private javax.swing.JMenu jMenuTools;
     private javax.swing.JMenu jMenuUILang;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
