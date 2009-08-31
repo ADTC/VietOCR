@@ -289,4 +289,10 @@
   <data name="dangAmbigsPathToolStripMenuItem.Text" xml:space="preserve">
     <value>Đường dẫn DangAmbigs...</value>
   </data>
+  <data name="mergeTiffToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nhập TIFFs</value>
+  </data>
+  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Công cụ</value>
+  </data>
 </root>
