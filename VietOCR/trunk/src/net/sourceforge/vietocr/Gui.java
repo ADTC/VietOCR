@@ -877,9 +877,9 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuSettings);
 
-        jMenuTools.setText("Tools");
+        jMenuTools.setText(bundle.getString("jMenuTools.Text")); // NOI18N
 
-        jMenuItemMergeTiff.setText("Merge TIFFs");
+        jMenuItemMergeTiff.setText(bundle.getString("jMenuItemMergeTiff.Text")); // NOI18N
         jMenuItemMergeTiff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemMergeTiffActionPerformed(evt);
