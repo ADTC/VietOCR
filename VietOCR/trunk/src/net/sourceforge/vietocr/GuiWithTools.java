@@ -34,8 +34,8 @@ public class GuiWithTools extends GuiWithSettings {
     void mergeTiffs() {
         JFileChooser jf = new JFileChooser();
         jf.setDialogTitle("Select Input TIFF Images");
-        jf.setMultiSelectionEnabled(true);
         jf.setCurrentDirectory(imageFolder);
+        jf.setMultiSelectionEnabled(true);
         javax.swing.filechooser.FileFilter tiffFilter = new SimpleFilter("tif;tiff", "TIFF");
         jf.setFileFilter(tiffFilter);
         jf.setAcceptAllFileFilterUsed(false);
@@ -45,6 +45,7 @@ public class GuiWithTools extends GuiWithSettings {
 
             jf = new JFileChooser();
             jf.setDialogTitle("Save Output TIFF Image");
+            jf.setCurrentDirectory(imageFolder);
             jf.setFileFilter(tiffFilter);
             jf.setAcceptAllFileFilterUsed(false);
             if (jf.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
