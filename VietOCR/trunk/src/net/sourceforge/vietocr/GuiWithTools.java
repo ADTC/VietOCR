@@ -19,12 +19,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.JOptionPane;
 import net.sourceforge.vietpad.SimpleFilter;
 
 public class GuiWithTools extends GuiWithSettings {
 
     File imageFolder;
+    FileFilter selectedFilter;
 
     public GuiWithTools() {
         imageFolder = new File(prefs.get("ImageFolder", System.getProperty("user.home")));
@@ -33,29 +35,50 @@ public class GuiWithTools extends GuiWithSettings {
     @Override
     void mergeTiffs() {
         JFileChooser jf = new JFileChooser();
-        jf.setDialogTitle("Select Input TIFF Images");
+        jf.setDialogTitle(bundle.getString("Select") + " Input Images");
         jf.setCurrentDirectory(imageFolder);
         jf.setMultiSelectionEnabled(true);
-        javax.swing.filechooser.FileFilter tiffFilter = new SimpleFilter("tif;tiff", "TIFF");
-        jf.setFileFilter(tiffFilter);
+        FileFilter tiffFilter = new SimpleFilter("tif;tiff", "TIFF");
+        FileFilter jpegFilter = new SimpleFilter("jpg;jpeg", "JPEG");
+        FileFilter gifFilter = new SimpleFilter("gif", "GIF");
+        FileFilter pngFilter = new SimpleFilter("png", "PNG");
+        FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
+        FileFilter allImageFilter = new SimpleFilter("tif;tiff;jpg;jpeg;gif;png;bmp", "All Image Files");
+
+        jf.addChoosableFileFilter(tiffFilter);
+        jf.addChoosableFileFilter(jpegFilter);
+        jf.addChoosableFileFilter(gifFilter);
+        jf.addChoosableFileFilter(pngFilter);
+        jf.addChoosableFileFilter(bmpFilter);
+        jf.addChoosableFileFilter(allImageFilter);
+
+        if (selectedFilter != null) {
+            jf.setFileFilter(selectedFilter);
+        }
+
         jf.setAcceptAllFileFilterUsed(false);
         if (jf.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            selectedFilter = jf.getFileFilter();
             File[] inputs = jf.getSelectedFiles();
             imageFolder = jf.getCurrentDirectory();
 
             jf = new JFileChooser();
-            jf.setDialogTitle("Save Output TIFF Image");
+            jf.setDialogTitle(bundle.getString("Save") + " Multi-page TIFF Image");
             jf.setCurrentDirectory(imageFolder);
             jf.setFileFilter(tiffFilter);
             jf.setAcceptAllFileFilterUsed(false);
             if (jf.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-                File output = jf.getSelectedFile();
-                if (!(output.getName().endsWith(".tif") || output.getName().endsWith(".tiff"))) {
-                    output = new File(output.getParent(), output.getName() + ".tif");
+                File outputTiff = jf.getSelectedFile();
+                if (!(outputTiff.getName().endsWith(".tif") || outputTiff.getName().endsWith(".tiff"))) {
+                    outputTiff = new File(outputTiff.getParent(), outputTiff.getName() + ".tif");
                 }
 
+                if (outputTiff.exists()) {
+                    outputTiff.delete();
+                }
+                
                 try {
-                    ImageIOHelper.mergeTiff(inputs, output);
+                    ImageIOHelper.mergeTiff(inputs, outputTiff);
                     JOptionPane.showMessageDialog(this, "Merge completed.", APP_NAME, JOptionPane.INFORMATION_MESSAGE);
                 } catch (IOException ioe) {
                     System.err.println(ioe.getMessage());
