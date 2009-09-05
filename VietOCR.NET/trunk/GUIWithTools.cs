@@ -27,7 +27,7 @@ namespace VietOCR.NET
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             openFileDialog1.InitialDirectory = imageFolder;
-            openFileDialog1.Title = "Select Input Images"; //Properties.Resources.OpenImageFile;
+            openFileDialog1.Title = Properties.Resources.Select + " Input Images";
             openFileDialog1.Filter = "Image Files (*.tif;*.tiff)|*.tif;*.tiff|Image Files (*.bmp)|*.bmp|Image Files (*.jpg;*.jpeg)|*.jpg;*.jpeg|Image Files (*.png)|*.png|All Image Files|*.tif;*.tiff;*.bmp;*.jpg;*.jpeg;*.png";
             openFileDialog1.FilterIndex = filterIndex;
             openFileDialog1.RestoreDirectory = true;
@@ -38,7 +38,7 @@ namespace VietOCR.NET
                 filterIndex = openFileDialog1.FilterIndex;
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.InitialDirectory = imageFolder;
-                saveFileDialog1.Title = "Save Multi-page TIFF Image"; //Properties.Resources.Save_As;
+                saveFileDialog1.Title = Properties.Resources.Save + " Multi-page TIFF Image";
                 saveFileDialog1.Filter = "Image Files (*.tif;*.tiff)|*.tif;*.tiff";
                 saveFileDialog1.RestoreDirectory = true;
 
