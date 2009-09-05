@@ -56,6 +56,11 @@ namespace VietOCR.NET.Postprocessing
                 .Replace("tmg", "úng")
                 .Replace("tm", "trư")
                 .Replace("Tm", "Trư")
+                .Replace("êf", "ết")
+                .Replace("rg", "ng")
+                .Replace("êh", "ến")
+                .Replace("‘â", "ầ")
+                .Replace("fâ", "rầ")
                 ;
 
             // correct letter cases
