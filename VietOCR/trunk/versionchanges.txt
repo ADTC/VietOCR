@@ -110,3 +110,7 @@ Version 1.0 (18 July 2009)
 
 Version 1.0.1 (1 August 2009)
 - Refactored for improvements
+
+Version 1.1 (5 September 2009)
+- Added Merge TIFF functionality
+- Updated Vietnamese language data to include support for more Unicode fonts, specifically, Tahoma and Palatino Linotype
