@@ -101,7 +101,7 @@ namespace VietOCR.NET
             return bitmap.Clone(cropArea, bitmap.PixelFormat);
         }
 
-        public static void MergeTiff(string[] inputTiffs, string outputTiff)
+        public static void MergeTiff(string[] inputImages, string outputTiff)
         {
             //get the codec for tiff files
             ImageCodecInfo info = null;
@@ -124,11 +124,11 @@ namespace VietOCR.NET
 
             int frame = 0;
 
-            foreach (string inputTiff in inputTiffs)
+            foreach (string inputImage in inputImages)
             {
                 if (frame == 0)
                 {
-                    pages = (Bitmap)Image.FromFile(inputTiff);
+                    pages = (Bitmap)Image.FromFile(inputImage);
                     //save the first frame
                     pages.Save(outputTiff, info, ep);
                 }
@@ -136,11 +136,11 @@ namespace VietOCR.NET
                 {
                     //save the intermediate frames
                     ep.Param[0] = new EncoderParameter(enc, (long)EncoderValue.FrameDimensionPage);
-                    Bitmap bm = (Bitmap)Image.FromFile(inputTiff);
+                    Bitmap bm = (Bitmap)Image.FromFile(inputImage);
                     pages.SaveAdd(bm, ep);
                 }
 
-                if (frame == inputTiffs.Length - 1)
+                if (frame == inputImages.Length - 1)
                 {
                     //flush and close
                     ep.Param[0] = new EncoderParameter(enc, (long)EncoderValue.Flush);
