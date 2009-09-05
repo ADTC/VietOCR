@@ -177,11 +177,11 @@ public class ImageIOHelper {
         }
     }
 
-    public static void mergeTiff(File[] inputTiffs, File outputTiff) throws IOException {
+    public static void mergeTiff(File[] inputImages, File outputTiff) throws IOException {
         List<IIOImage> imageList = new ArrayList<IIOImage>();
 
-        for (int i = 0; i < inputTiffs.length; i++) {
-            imageList.addAll(getIIOImageList(inputTiffs[i]));
+        for (int i = 0; i < inputImages.length; i++) {
+            imageList.addAll(getIIOImageList(inputImages[i]));
         }
 
         Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(TIFF_FORMAT);
@@ -193,10 +193,6 @@ public class ImageIOHelper {
 
         //Get the stream metadata
         IIOMetadata streamMetadata = writer.getDefaultStreamMetadata(tiffWriteParam);
-
-        if (outputTiff.exists()) {
-            outputTiff.delete();
-        }
 
         ImageOutputStream ios = ImageIO.createImageOutputStream(outputTiff);
         writer.setOutput(ios);
