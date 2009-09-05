@@ -65,3 +65,7 @@ Version 1.0 (1 August 2009)
 - Added more language codes to ISO639-3.xml file
 - Fixed a long-standing issue with accessing original image from a different thread; it would throw an InvalidOperationException with message "Object is currently in use elsewhere"
 - Added support for custom text replacement in postprocessing
+
+Version 1.1 (5 September 2009)
+- Added Merge TIFF functionality
+- Updated Vietnamese language data to include support for more Unicode fonts, specifically, Tahoma and Palatino Linotype
