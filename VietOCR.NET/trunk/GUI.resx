@@ -270,9 +270,9 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
-  </metadata>
+  </data>
   <data name="toolStrip2.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -588,9 +588,9 @@
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
-  </metadata>
+  </data>
   <data name="openToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+O</value>
   </data>
@@ -712,7 +712,7 @@
     <value>161, 22</value>
   </data>
   <data name="mergeTiffToolStripMenuItem.Text" xml:space="preserve">
-    <value>Merge TIFFs</value>
+    <value>Merge TIFF</value>
   </data>
   <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 20</value>
@@ -765,9 +765,9 @@
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>0, 544</value>
-  </metadata>
+  </data>
   <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 17</value>
   </data>
@@ -801,9 +801,9 @@
   <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>0, 31</value>
-  </metadata>
+  </data>
   <data name="toolStripBtnOpen.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -927,15 +927,15 @@
   <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>416, 17</value>
-  </metadata>
-  <metadata name="backgroundWorker2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  </data>
+  <data name="backgroundWorker2.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
