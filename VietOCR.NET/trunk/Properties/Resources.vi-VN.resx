@@ -174,4 +174,10 @@
   <data name="BatchProcessStatus" xml:space="preserve">
     <value>Tình trạng Batch Process</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Chọn</value>
+  </data>
 </root>
