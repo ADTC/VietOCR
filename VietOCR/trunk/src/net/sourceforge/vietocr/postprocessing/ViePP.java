@@ -52,6 +52,11 @@ public class ViePP implements IPostProcessor {
                 .replace("tmg", "úng")
                 .replace("tm", "trư")
                 .replace("Tm", "Trư")
+                .replace("êf", "ết")
+                .replace("rg", "ng")
+                .replace("êh", "ến")
+                .replace("‘â", "ầ")
+                .replace("fâ", "rầ")
                 ;
 
         // correct letter cases
