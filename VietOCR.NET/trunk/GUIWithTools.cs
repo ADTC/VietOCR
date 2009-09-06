@@ -48,7 +48,7 @@ namespace VietOCR.NET
                     File.Delete(saveFileDialog1.FileName);
 
                     ImageIOHelper.MergeTiff(openFileDialog1.FileNames, saveFileDialog1.FileName);
-                    MessageBox.Show("Merge completed.", strProgName);
+                    MessageBox.Show(Properties.Resources.Mergecompleted + Path.GetFileName(saveFileDialog1.FileName) + Properties.Resources.created);
                 }
             }
         }
