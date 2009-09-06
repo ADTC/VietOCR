@@ -36,6 +36,7 @@ namespace VietOCR.NET
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 filterIndex = openFileDialog1.FilterIndex;
+                imageFolder = Path.GetDirectoryName(openFileDialog1.FileName); 
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.InitialDirectory = imageFolder;
                 saveFileDialog1.Title = Properties.Resources.Save + " Multi-page TIFF Image";
