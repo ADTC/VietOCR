@@ -124,11 +124,29 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  has been created..
+        /// </summary>
+        internal static string created {
+            get {
+                return ResourceManager.GetString("created", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please load an image..
         /// </summary>
         internal static string loadImage {
             get {
                 return ResourceManager.GetString("loadImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Merge completed. .
+        /// </summary>
+        internal static string Mergecompleted {
+            get {
+                return ResourceManager.GetString("Mergecompleted", resourceCulture);
             }
         }
         
