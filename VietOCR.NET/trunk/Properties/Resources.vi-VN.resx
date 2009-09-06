@@ -180,4 +180,10 @@
   <data name="Select" xml:space="preserve">
     <value>Chọn</value>
   </data>
+  <data name="created" xml:space="preserve">
+    <value> đã được tạo.</value>
+  </data>
+  <data name="Mergecompleted" xml:space="preserve">
+    <value>Nhập hoàn tất. </value>
+  </data>
 </root>
