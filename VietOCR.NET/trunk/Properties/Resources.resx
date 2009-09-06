@@ -180,4 +180,10 @@
   <data name="Select" xml:space="preserve">
     <value>Select</value>
   </data>
+  <data name="created" xml:space="preserve">
+    <value> has been created.</value>
+  </data>
+  <data name="Mergecompleted" xml:space="preserve">
+    <value>Merge completed. </value>
+  </data>
 </root>
