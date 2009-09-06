@@ -79,7 +79,7 @@ public class GuiWithTools extends GuiWithSettings {
                 
                 try {
                     ImageIOHelper.mergeTiff(inputs, outputTiff);
-                    JOptionPane.showMessageDialog(this, "Merge completed.", APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, bundle.getString("Mergecompleted") + outputTiff.getName() + bundle.getString("created"), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
                 } catch (IOException ioe) {
                     System.err.println(ioe.getMessage());
                 }
