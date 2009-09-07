@@ -184,6 +184,11 @@ public class ImageIOHelper {
             imageList.addAll(getIIOImageList(inputImages[i]));
         }
 
+        if (imageList.size() == 0) {
+            // if no image
+            return;
+        }
+        
         Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(TIFF_FORMAT);
         ImageWriter writer = writers.next();
 
