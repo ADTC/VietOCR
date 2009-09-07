@@ -28,6 +28,7 @@ import java.awt.event.*;
 import javax.swing.undo.*;
 import java.awt.dnd.DropTarget;
 import javax.swing.event.*;
+import javax.swing.filechooser.FileFilter;
 import net.sourceforge.vietocr.postprocessing.Processor;
 import net.sourceforge.vietpad.*;
 import net.sourceforge.vietpad.inputmethod.*;
@@ -48,7 +49,7 @@ public class Gui extends javax.swing.JFrame {
     protected ResourceBundle myResources, bundle;
     protected static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
     private int filterIndex;
-    private javax.swing.filechooser.FileFilter[] fileFilters;
+    private FileFilter[] fileFilters;
     protected Font font;
     private final Rectangle screen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
     private int imageIndex;
@@ -102,7 +103,7 @@ public class Gui extends javax.swing.JFrame {
                     tessdataDir = new File(TESSDATA_PREFIX, "tessdata");
                 }
             }
-            
+
             langCodes = tessdataDir.list(new FilenameFilter() {
 
                 @Override
@@ -138,7 +139,7 @@ public class Gui extends javax.swing.JFrame {
             config.loadFromXML(getClass().getResourceAsStream("config.xml"));
         } catch (Exception e) {
             e.printStackTrace();
-        // keep default LAF
+            // keep default LAF
         }
 
         initComponents();
@@ -171,15 +172,17 @@ public class Gui extends javax.swing.JFrame {
         currentDirectory = prefs.get("currentDirectory", null);
         filechooser = new JFileChooser(currentDirectory);
         filechooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
-        javax.swing.filechooser.FileFilter tiffFilter = new SimpleFilter("tif;tiff", "TIFF");
-        javax.swing.filechooser.FileFilter jpegFilter = new SimpleFilter("jpg;jpeg", "JPEG");
-        javax.swing.filechooser.FileFilter gifFilter = new SimpleFilter("gif", "GIF");
-        javax.swing.filechooser.FileFilter pngFilter = new SimpleFilter("png", "PNG");
-        javax.swing.filechooser.FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
-        javax.swing.filechooser.FileFilter allImageFilter = new SimpleFilter("tif;tiff;jpg;jpeg;gif;png;bmp", "All Image Files");
+        FileFilter pdfFilter = new SimpleFilter("pdf", "PDF");
+        FileFilter tiffFilter = new SimpleFilter("tif;tiff", "TIFF");
+        FileFilter jpegFilter = new SimpleFilter("jpg;jpeg", "JPEG");
+        FileFilter gifFilter = new SimpleFilter("gif", "GIF");
+        FileFilter pngFilter = new SimpleFilter("png", "PNG");
+        FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
+        FileFilter allImageFilter = new SimpleFilter("tif;tiff;jpg;jpeg;gif;png;bmp", "All Image Files");
 
         filechooser.setAcceptAllFileFilterUsed(true);
         filechooser.addChoosableFileFilter(allImageFilter);
+        filechooser.addChoosableFileFilter(pdfFilter);
         filechooser.addChoosableFileFilter(tiffFilter);
         filechooser.addChoosableFileFilter(jpegFilter);
         filechooser.addChoosableFileFilter(gifFilter);
@@ -193,7 +196,7 @@ public class Gui extends javax.swing.JFrame {
         myResources = ResourceBundle.getBundle("net.sourceforge.vietpad.Resources");
 
         wordWrapOn = prefs.getBoolean("wordWrap", false);
-        
+
         dangAmbigsPath = prefs.get("DangAmbigsPath", new File(baseDir, "data").getPath());
         dangAmbigsOn = prefs.getBoolean("dangAmbigs", false);
 
@@ -234,7 +237,7 @@ public class Gui extends javax.swing.JFrame {
      */
     void populatePopupMenu() {
         popup.removeAll();
-        
+
         m_undoAction = new AbstractAction(myResources.getString("Undo")) {
 
             @Override
@@ -1127,7 +1130,7 @@ public class Gui extends javax.swing.JFrame {
         if (!WINDOWS) {
             prefs.put("TesseractDirectory", tessPath);
         }
-        
+
         prefs.put("DangAmbigsPath", dangAmbigsPath);
         prefs.put("inputMethod", selectedInputMethod);
         prefs.put("lookAndFeel", UIManager.getLookAndFeel().getClass().getName());
@@ -1165,7 +1168,7 @@ public class Gui extends javax.swing.JFrame {
     private void jMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveActionPerformed
         outputDirectory = prefs.get("outputDirectory", null);
         JFileChooser chooser = new JFileChooser(outputDirectory);
-        javax.swing.filechooser.FileFilter txtFilter = new SimpleFilter("txt", "Unicode UTF-8 Text");
+        FileFilter txtFilter = new SimpleFilter("txt", "Unicode UTF-8 Text");
         chooser.addChoosableFileFilter(txtFilter);
 
         int returnVal = chooser.showSaveDialog(this);
@@ -1350,7 +1353,14 @@ public class Gui extends javax.swing.JFrame {
      *
      */
     public void openFile(File selectedFile) {
-        iioImageList = ImageIOHelper.getIIOImageList(selectedFile);
+        if (selectedFile.getName().toLowerCase().endsWith(".pdf")) {
+            File workingTiffFile = Utilities.convertPdf2Tiff(selectedFile);
+            iioImageList = ImageIOHelper.getIIOImageList(workingTiffFile);
+            workingTiffFile.delete();
+        } else {
+            iioImageList = ImageIOHelper.getIIOImageList(selectedFile);
+        }
+
         imageList = ImageIconScalable.getImageList(iioImageList);
 
         if (imageList == null) {
@@ -1545,7 +1555,7 @@ private void jMenuItemMergeTiffActionPerformed(java.awt.event.ActionEvent evt) {
     void mergeTiffs() {
         // to be implemented in subclass
     }
-    
+
     void rotateImage(int angle) {
         try {
             imageIcon = imageIcon.getRotatedImageIcon(Math.toRadians(angle));
@@ -1686,7 +1696,7 @@ private void jMenuItemMergeTiffActionPerformed(java.awt.event.ActionEvent evt) {
     // End of variables declaration//GEN-END:variables
     private final UndoManager m_undo = new UndoManager();
     protected final UndoableEditSupport undoSupport = new UndoableEditSupport();
-    private Action m_undoAction,  m_redoAction,  actionCut,  actionCopy,  actionPaste,  actionDelete,  actionSelectAll;
+    private Action m_undoAction, m_redoAction, actionCut, actionCopy, actionPaste, actionDelete, actionSelectAll;
     private final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
     private JFrame helptopicsFrame;
 }
