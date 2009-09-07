@@ -1359,7 +1359,7 @@ public class Gui extends javax.swing.JFrame {
                 iioImageList = ImageIOHelper.getIIOImageList(workingTiffFile);
                 workingTiffFile.delete();
             } catch (Error e) {
-                JOptionPane.showMessageDialog(this, e.getMessage() + "Please install Ghostscript library.", APP_NAME, JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, e.getMessage() + "\nPlease install Ghostscript and/or set system path to the library object.", APP_NAME, JOptionPane.ERROR_MESSAGE);
                 return;
             }
         } else {
