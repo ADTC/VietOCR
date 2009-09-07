@@ -160,6 +160,7 @@
     <Compile Include="OptionsDialog.Designer.cs">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="PDFConvert.cs" />
     <Compile Include="Postprocessing\EngPP.cs" />
     <Compile Include="Postprocessing\IPostProcessor.cs" />
     <Compile Include="Postprocessing\Processor.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="StatusForm.Designer.cs">
       <DependentUpon>StatusForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities.cs" />
     <Compile Include="Watcher.cs" />
     <Compile Include="WIA\WiaOperationException.cs" />
     <Compile Include="WIA\WiaScannerAdapter.cs" />
