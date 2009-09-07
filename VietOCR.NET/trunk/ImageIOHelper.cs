@@ -138,6 +138,7 @@ namespace VietOCR.NET
                     ep.Param[0] = new EncoderParameter(enc, (long)EncoderValue.FrameDimensionPage);
                     Bitmap bm = (Bitmap)Image.FromFile(inputImage);
                     pages.SaveAdd(bm, ep);
+                    bm.Dispose();
                 }
 
                 if (frame == inputImages.Length - 1)
@@ -147,6 +148,11 @@ namespace VietOCR.NET
                     pages.SaveAdd(ep);
                 }
                 frame++;
+            }
+
+            if (pages != null)
+            {
+                pages.Dispose();
             }
         }
     }
