@@ -1354,9 +1354,14 @@ public class Gui extends javax.swing.JFrame {
      */
     public void openFile(File selectedFile) {
         if (selectedFile.getName().toLowerCase().endsWith(".pdf")) {
-            File workingTiffFile = Utilities.convertPdf2Tiff(selectedFile);
-            iioImageList = ImageIOHelper.getIIOImageList(workingTiffFile);
-            workingTiffFile.delete();
+            try {
+                File workingTiffFile = Utilities.convertPdf2Tiff(selectedFile);
+                iioImageList = ImageIOHelper.getIIOImageList(workingTiffFile);
+                workingTiffFile.delete();
+            } catch (Error e) {
+                JOptionPane.showMessageDialog(this, e.getMessage() + "Please install Ghostscript library.", APP_NAME, JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         } else {
             iioImageList = ImageIOHelper.getIIOImageList(selectedFile);
         }
@@ -1364,7 +1369,7 @@ public class Gui extends javax.swing.JFrame {
         imageList = ImageIconScalable.getImageList(iioImageList);
 
         if (imageList == null) {
-            JOptionPane.showMessageDialog(null, bundle.getString("Cannotloadimage"), APP_NAME, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("Cannotloadimage"), APP_NAME, JOptionPane.ERROR_MESSAGE);
             return;
         }
 
