@@ -182,6 +182,9 @@
     <None Include="Data\ISO639-3.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="samples\vietsample.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="tessdata\configs\api_config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

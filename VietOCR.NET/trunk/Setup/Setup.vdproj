@@ -177,6 +177,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_B0A2CAA541C048A783CF54024F5C0F09"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_B18FE5F11C474AB3AE059853F4C170F0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -909,6 +915,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B0A2CAA541C048A783CF54024F5C0F09"
+            {
+            "SourcePath" = "8:..\\samples\\vietsample.pdf"
+            "TargetName" = "8:vietsample.pdf"
+            "Tag" = "8:"
+            "Folder" = "8:_01DB017D98454EC9B137623356AF645E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B18FE5F11C474AB3AE059853F4C170F0"
             {
             "SourcePath" = "8:..\\Data\\eng.DangAmbigs.txt"
@@ -1291,14 +1317,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:VietOCR.NET"
-        "ProductCode" = "8:{8BCE4FCF-FBDA-465E-9AA9-A20EE5DCD5D5}"
-        "PackageCode" = "8:{03A1F5BF-FABF-4C15-868D-34F970EF343C}"
+        "ProductCode" = "8:{860A163F-7810-4A2A-93E5-28A28E030573}"
+        "PackageCode" = "8:{C2085E40-D04F-4BD7-957D-A9CB83F426B1}"
         "UpgradeCode" = "8:{2EF42973-7837-44E2-9085-FA4B5B40483E}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1"
+        "ProductVersion" = "8:1.2"
         "Manufacturer" = "8:VietUnicode"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://vietunicode.sf.net/forum"
