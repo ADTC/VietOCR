@@ -114,5 +114,5 @@ Version 1.0.1 (1 August 2009)
 Version 1.1 (6 September 2009)
 - Added Merge TIFF functionality
 
-Version 1.2 Beta (6 September 2009)
-- Added support for PDF-to-image conversion using Ghost4J, JNA, and Ghostscript (http://mirror.switch.ch/ftp/mirror/ghost/GPL/gs870/)
+Version 1.2 Beta (7 September 2009)
+- Added support for PDF-to-image conversion using Ghost4J, JNA, and GPL Ghostscript (http://sourceforge.net/projects/ghostscript/)
