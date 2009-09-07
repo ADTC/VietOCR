@@ -314,7 +314,7 @@ namespace VietOCR.NET
 
             //openFileDialog1.InitialDirectory = "c:\\";
             openFileDialog1.Title = Properties.Resources.OpenImageFile;
-            openFileDialog1.Filter = "Image Files (*.tif;*.tiff)|*.tif;*.tiff|Image Files (*.bmp)|*.bmp|Image Files (*.jpg;*.jpeg)|*.jpg;*.jpeg|Image Files (*.png)|*.png|All Image Files|*.tif;*.tiff;*.bmp;*.jpg;*.jpeg;*.png|All Files (*.*)|*.*";
+            openFileDialog1.Filter = "PDF Files (*.pdf)|*.pdf;|Image Files (*.tif;*.tiff)|*.tif;*.tiff|Image Files (*.bmp)|*.bmp|Image Files (*.jpg;*.jpeg)|*.jpg;*.jpeg|Image Files (*.png)|*.png|All Image Files|*.tif;*.tiff;*.bmp;*.jpg;*.jpeg;*.png|All Files (*.*)|*.*";
             openFileDialog1.FilterIndex = filterIndex;
             openFileDialog1.RestoreDirectory = true;
 
@@ -467,7 +467,26 @@ namespace VietOCR.NET
         public void openFile(string selectedImageFile)
         {
             FileInfo imageFile = new FileInfo(selectedImageFile);
-            imageList = ImageIOHelper.GetImageList(imageFile);
+
+            if (selectedImageFile.ToLower().EndsWith(".pdf"))
+            {
+                try
+                {
+                    string workingTiffFileName = Utilities.ConvertPdf2Tiff(selectedImageFile);
+                    FileInfo workingTiffFile = new FileInfo(workingTiffFileName);
+                    imageList = ImageIOHelper.GetImageList(workingTiffFile);
+                    workingTiffFile.Delete();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(this, e.Message + "\nPlease install Ghostscript and/or set system path to the library object.", strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else
+            {
+                imageList = ImageIOHelper.GetImageList(imageFile);
+            }
 
             if (imageList == null)
             {
