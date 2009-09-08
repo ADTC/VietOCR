@@ -15,12 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_026DE9EAB3B44C639E1769128BA0086C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_040434E4A81740C895686B7305AE79C9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -29,12 +23,6 @@
         {
         "MsmKey" = "8:_08D18714F4A1DC3745E8B5E7307BAF1E"
         "OwnerKey" = "8:_9E057C2EB4AD457E8400FF49592A0AFD"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_0B37B42CD82C4377B0AED49FCBA38F76"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -57,12 +45,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_243122CCAA9B4D54A68183038D4FB24C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_2653234D2BC946F88660234B289F1A66"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -76,12 +58,6 @@
         "Entry"
         {
         "MsmKey" = "8:_3880F5B07A5341F0A8D6744475DCC443"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3B78663A60624739974E0C3BADD6C5F7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -159,12 +135,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A03D7DE51D874CA5865F2C7FF77DA65A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_AAE30512D66D42AD83133CD193CAD2C2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -201,19 +171,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C97D0F3EFC37428D8CD8E6BA61942B72"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_CB534E76A5FB447DA3761CDC90D7690E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D058965BF67042AE9D6AFB1AEC95BBAF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -226,12 +184,6 @@
         "Entry"
         {
         "MsmKey" = "8:_D1782A6647F545CDBA36D5A773BA8B90"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D83805C719604EC2AA974D93095804AB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -373,26 +325,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_026DE9EAB3B44C639E1769128BA0086C"
-            {
-            "SourcePath" = "8:..\\tessdata\\configs\\kannada"
-            "TargetName" = "8:kannada"
-            "Tag" = "8:"
-            "Folder" = "8:_4FD1E45339A145ABBF39D2731FFDC5A2"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_040434E4A81740C895686B7305AE79C9"
             {
             "SourcePath" = "8:..\\tessdata\\eng.word-dawg"
@@ -442,26 +374,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0B37B42CD82C4377B0AED49FCBA38F76"
-            {
-            "SourcePath" = "8:..\\tessdata\\configs\\inter"
-            "TargetName" = "8:inter"
-            "Tag" = "8:"
-            "Folder" = "8:_4FD1E45339A145ABBF39D2731FFDC5A2"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0F66AF3E160E7686A71F1C6813FFAE75"
@@ -535,26 +447,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_243122CCAA9B4D54A68183038D4FB24C"
-            {
-            "SourcePath" = "8:..\\tessdata\\configs\\box.train"
-            "TargetName" = "8:box.train"
-            "Tag" = "8:"
-            "Folder" = "8:_4FD1E45339A145ABBF39D2731FFDC5A2"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2653234D2BC946F88660234B289F1A66"
             {
             "SourcePath" = "8:..\\tessdata\\eng.inttemp"
@@ -601,26 +493,6 @@
             "TargetName" = "8:vie.pffmtable"
             "Tag" = "8:"
             "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3B78663A60624739974E0C3BADD6C5F7"
-            {
-            "SourcePath" = "8:..\\tessdata\\configs\\Makefile.in"
-            "TargetName" = "8:Makefile.in"
-            "Tag" = "8:"
-            "Folder" = "8:_4FD1E45339A145ABBF39D2731FFDC5A2"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -855,26 +727,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A03D7DE51D874CA5865F2C7FF77DA65A"
-            {
-            "SourcePath" = "8:..\\tessdata\\configs\\makebox"
-            "TargetName" = "8:makebox"
-            "Tag" = "8:"
-            "Folder" = "8:_4FD1E45339A145ABBF39D2731FFDC5A2"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AAE30512D66D42AD83133CD193CAD2C2"
             {
             "SourcePath" = "8:..\\tessdata\\eng.freq-dawg"
@@ -982,11 +834,6 @@
             "AssemblyAsmDisplayName" = "8:Interop.WIA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C3EDDD34B6DE903B1544C63767D700BA"
-                    {
-                    "Name" = "8:Interop.WIA.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Interop.WIA.dll"
             "TargetName" = "8:"
@@ -1006,52 +853,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C97D0F3EFC37428D8CD8E6BA61942B72"
-            {
-            "SourcePath" = "8:..\\tessdata\\configs\\api_config"
-            "TargetName" = "8:api_config"
-            "Tag" = "8:"
-            "Folder" = "8:_4FD1E45339A145ABBF39D2731FFDC5A2"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CB534E76A5FB447DA3761CDC90D7690E"
             {
             "SourcePath" = "8:..\\samples\\vietsample.tif"
             "TargetName" = "8:vietsample.tif"
             "Tag" = "8:"
             "Folder" = "8:_01DB017D98454EC9B137623356AF645E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D058965BF67042AE9D6AFB1AEC95BBAF"
-            {
-            "SourcePath" = "8:..\\tessdata\\configs\\Makefile.am"
-            "TargetName" = "8:Makefile.am"
-            "Tag" = "8:"
-            "Folder" = "8:_4FD1E45339A145ABBF39D2731FFDC5A2"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1092,26 +899,6 @@
             "TargetName" = "8:vie.unicharset"
             "Tag" = "8:"
             "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D83805C719604EC2AA974D93095804AB"
-            {
-            "SourcePath" = "8:..\\tessdata\\configs\\unlv"
-            "TargetName" = "8:unlv"
-            "Tag" = "8:"
-            "Folder" = "8:_4FD1E45339A145ABBF39D2731FFDC5A2"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1264,17 +1051,6 @@
                     "Property" = "8:_DF5299D2EC2247A092465F68A177B3D5"
                         "Folders"
                         {
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_4FD1E45339A145ABBF39D2731FFDC5A2"
-                            {
-                            "Name" = "8:configs"
-                            "AlwaysCreate" = "11:FALSE"
-                            "Condition" = "8:"
-                            "Transitive" = "11:FALSE"
-                            "Property" = "8:_8225C7EEB65F4B659E370AB705762696"
-                                "Folders"
-                                {
-                                }
-                            }
                         }
                     }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_69B414EFD2C243ABA1307C6342D57521"
