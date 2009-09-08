@@ -476,6 +476,7 @@ namespace VietOCR.NET
                     FileInfo workingTiffFile = new FileInfo(workingTiffFileName);
                     imageList = ImageIOHelper.GetImageList(workingTiffFile);
                     workingTiffFile.Delete();
+                    if (imageList == null) return;
                 }
                 catch (Exception e)
                 {
