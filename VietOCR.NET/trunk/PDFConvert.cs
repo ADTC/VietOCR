@@ -412,15 +412,15 @@ namespace ConvertPDF
             {//in this case the dll we r using isn't the dll we expect
                 ClearParameters(ref aGCHandle, ref gchandleArgs);
                 if (throwException)
-                    throw new ApplicationException("The gsdll32.dll wasn't found in default dlls search path"+
-                        "or is not in correct version (doesn't expose the required methods). Please download "+
-                        "the version 8.64 from the original website");
+                    throw new ApplicationException("The gsdll32.dll wasn't found in default dlls search path " +
+                        "or is not in correct version (doesn't expose the required methods).\nPlease download, install " +
+                        "GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set system path to the library object.");
                 else
                 {
                     //Barbara post write much better then me, thanks her for the nice words :P
-                    System.Windows.Forms.MessageBox.Show("The gsdll32.dll wasn't found in default dlls search path" +
-                        "or is not in correct version (doesn't expose the required methods). Please download " +
-                        "the version 8.64 from the original website");
+                    System.Windows.Forms.MessageBox.Show("The gsdll32.dll wasn't found in default dlls search path " +
+                        "or is not in correct version (doesn't expose the required methods).\nPlease download, install " +
+                        "GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set system path to the library object.");
                     return false;
                 }
             }
