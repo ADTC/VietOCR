@@ -263,7 +263,6 @@ public class OptionsDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonWatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWatchActionPerformed
-        // TODO add your handling code here:
         JFileChooser filechooser = new JFileChooser();
         filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         filechooser.setAcceptAllFileFilterUsed(false);
@@ -277,7 +276,6 @@ public class OptionsDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonWatchActionPerformed
 
     private void jButtonOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOutputActionPerformed
-        // TODO add your handling code here:
         JFileChooser filechooser = new JFileChooser();
         filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         filechooser.setAcceptAllFileFilterUsed(false);
@@ -291,16 +289,14 @@ public class OptionsDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonOutputActionPerformed
 
     private void jButtonTessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTessActionPerformed
-        // TODO add your handling code here:
         JFileChooser pathchooser = new JFileChooser(tessPath);
-        pathchooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         pathchooser.setAcceptAllFileFilterUsed(false);
         pathchooser.setApproveButtonText(bundle.getString("Set"));
-        pathchooser.setDialogTitle(bundle.getString("Locate_Tesseract_Directory"));
+        pathchooser.setDialogTitle(bundle.getString("Locate_Tesseract"));
         int returnVal = pathchooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            if (!tessPath.equals(pathchooser.getSelectedFile().getPath())) {
-                setTessPath(pathchooser.getSelectedFile().getPath());
+            if (!tessPath.equals(pathchooser.getCurrentDirectory().getPath())) {
+                setTessPath(pathchooser.getCurrentDirectory().getPath());
             }
         }
     }//GEN-LAST:event_jButtonTessActionPerformed
