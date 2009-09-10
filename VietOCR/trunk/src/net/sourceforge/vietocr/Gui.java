@@ -1359,7 +1359,7 @@ public class Gui extends javax.swing.JFrame {
                 iioImageList = ImageIOHelper.getIIOImageList(workingTiffFile);
                 workingTiffFile.delete();
             } catch (Error e) {
-                JOptionPane.showMessageDialog(this, e.getMessage() + "\nPlease download, install GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set system path to the library object.", APP_NAME, JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, e.getMessage() + "\nPlease download, install GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.", APP_NAME, JOptionPane.ERROR_MESSAGE);
                 return;
             }
         } else {
