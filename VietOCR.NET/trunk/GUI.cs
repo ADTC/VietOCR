@@ -476,7 +476,6 @@ namespace VietOCR.NET
                     FileInfo workingTiffFile = new FileInfo(workingTiffFileName);
                     imageList = ImageIOHelper.GetImageList(workingTiffFile);
                     workingTiffFile.Delete();
-                    if (imageList == null) return;
                 }
                 catch (Exception e)
                 {
@@ -491,7 +490,7 @@ namespace VietOCR.NET
 
             if (imageList == null)
             {
-                MessageBox.Show(Properties.Resources.Cannotloadimage);
+                MessageBox.Show(this, Properties.Resources.Cannotloadimage, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
