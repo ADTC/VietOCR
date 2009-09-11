@@ -527,7 +527,7 @@ namespace VietOCR.NET
         void displayImage()
         {
             this.lblCurIndex.Text = Properties.Resources.Page_ + (imageIndex + 1) + Properties.Resources._of_ + imageTotal;
-            this.pictureBox1.Image = imageList[imageIndex];
+            this.pictureBox1.Image = new Bitmap(imageList[imageIndex]);
             this.pictureBox1.Size = this.pictureBox1.Image.Size;
             this.pictureBox1.Invalidate();
         }
