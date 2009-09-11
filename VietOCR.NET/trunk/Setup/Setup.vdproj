@@ -147,12 +147,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B0A2CAA541C048A783CF54024F5C0F09"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_B18FE5F11C474AB3AE059853F4C170F0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -190,6 +184,12 @@
         "Entry"
         {
         "MsmKey" = "8:_DB73DA28A957488780072015E8A7C3FF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DF0571E234C74A99BFF1F1B37D4A2296"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -349,7 +349,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:tessnet2_32, Version=2.0.4.0, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:tessnet2_32, Version=2.0.4.0, Culture=neutral, PublicKeyToken=1550524b5ba07e29, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_08D18714F4A1DC3745E8B5E7307BAF1E"
@@ -767,26 +767,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B0A2CAA541C048A783CF54024F5C0F09"
-            {
-            "SourcePath" = "8:..\\samples\\vietsample.pdf"
-            "TargetName" = "8:vietsample.pdf"
-            "Tag" = "8:"
-            "Folder" = "8:_01DB017D98454EC9B137623356AF645E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B18FE5F11C474AB3AE059853F4C170F0"
             {
             "SourcePath" = "8:..\\Data\\eng.DangAmbigs.txt"
@@ -834,6 +814,11 @@
             "AssemblyAsmDisplayName" = "8:Interop.WIA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_C3EDDD34B6DE903B1544C63767D700BA"
+                    {
+                    "Name" = "8:Interop.WIA.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Interop.WIA.dll"
             "TargetName" = "8:"
@@ -919,6 +904,26 @@
             "TargetName" = "8:ISO639-3.xml"
             "Tag" = "8:"
             "Folder" = "8:_69B414EFD2C243ABA1307C6342D57521"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DF0571E234C74A99BFF1F1B37D4A2296"
+            {
+            "SourcePath" = "8:..\\samples\\vietsample1.pdf"
+            "TargetName" = "8:vietsample1.pdf"
+            "Tag" = "8:"
+            "Folder" = "8:_01DB017D98454EC9B137623356AF645E"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1094,7 +1099,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:VietOCR.NET"
         "ProductCode" = "8:{860A163F-7810-4A2A-93E5-28A28E030573}"
-        "PackageCode" = "8:{C2085E40-D04F-4BD7-957D-A9CB83F426B1}"
+        "PackageCode" = "8:{2955E61D-4B99-4913-AF7C-8FA9ACCF6869}"
         "UpgradeCode" = "8:{2EF42973-7837-44E2-9085-FA4B5B40483E}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"

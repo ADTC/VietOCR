@@ -182,7 +182,7 @@
     <None Include="Data\ISO639-3.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="samples\vietsample.pdf">
+    <Content Include="samples\vietsample1.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="tessdata\eng.DangAmbigs">
