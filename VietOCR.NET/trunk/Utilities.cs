@@ -52,11 +52,18 @@ namespace VietOCR.NET
             converter.OutputFormat = "pnggray"; // -sDEVICE
 
             string sOutputFile = string.Format("{0}\\workingimage%03d.png", Path.GetDirectoryName(inputPdfFile));
-            converter.Convert(inputPdfFile, sOutputFile);
+            bool success = converter.Convert(inputPdfFile, sOutputFile);
 
-            // find working files
-            string[] workingFiles = Directory.GetFiles(Path.GetDirectoryName(inputPdfFile), "workingimage???.png");
-            return workingFiles;
+            if (success)
+            {
+                // find working files
+                string[] workingFiles = Directory.GetFiles(Path.GetDirectoryName(inputPdfFile), "workingimage???.png");
+                return workingFiles;
+            }
+            else
+            {
+                return new string[0];
+            }
         }
     }
 }
