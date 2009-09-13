@@ -391,8 +391,8 @@ public class Gui extends javax.swing.JFrame {
             if (clipData != null) {
                 actionPaste.setEnabled(clipData.isDataFlavorSupported(DataFlavor.stringFlavor));
             }
-        } catch (OutOfMemoryError e) {
-            e.printStackTrace();
+        } catch (OutOfMemoryError oome) {
+            oome.printStackTrace();
             JOptionPane.showMessageDialog(this, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -1354,13 +1354,28 @@ public class Gui extends javax.swing.JFrame {
      */
     public void openFile(File selectedFile) {
         if (selectedFile.getName().toLowerCase().endsWith(".pdf")) {
+            File workingTiffFile = null;
+
             try {
-                File workingTiffFile = Utilities.convertPdf2Tiff(selectedFile);
+                workingTiffFile = Utilities.convertPdf2Tiff(selectedFile);
                 iioImageList = ImageIOHelper.getIIOImageList(workingTiffFile);
-                workingTiffFile.delete();
+            } catch (OutOfMemoryError oome) {
+                JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
+                return;
+//            } catch (UnsatisfiedLinkError ule) {
+//               JOptionPane.showMessageDialog(this, ule.getMessage() + "\nPlease download, install GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.", APP_NAME, JOptionPane.ERROR_MESSAGE);
+//            } catch (NoClassDefFoundError ncdfe) {
+//               JOptionPane.showMessageDialog(this, ncdfe.getMessage() + "\nPlease download, install GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.", APP_NAME, JOptionPane.ERROR_MESSAGE);
             } catch (Error e) {
                 JOptionPane.showMessageDialog(this, e.getMessage() + "\nPlease download, install GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.", APP_NAME, JOptionPane.ERROR_MESSAGE);
                 return;
+            } finally {
+                if (workingTiffFile != null && workingTiffFile.exists()) {
+                    workingTiffFile.delete();
+                }
             }
         } else {
             iioImageList = ImageIOHelper.getIIOImageList(selectedFile);
