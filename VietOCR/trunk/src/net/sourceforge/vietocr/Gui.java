@@ -1371,7 +1371,12 @@ public class Gui extends javax.swing.JFrame {
                 }
             }
         } else {
-            iioImageList = ImageIOHelper.getIIOImageList(selectedFile);
+            try {
+                iioImageList = ImageIOHelper.getIIOImageList(selectedFile);
+            } catch (OutOfMemoryError oome) {
+                JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
 
         imageList = ImageIconScalable.getImageList(iioImageList);
