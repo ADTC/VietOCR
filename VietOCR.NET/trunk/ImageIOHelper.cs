@@ -144,6 +144,10 @@ namespace VietOCR.NET
                             bm = (Bitmap)Image.FromFile(inputImage);
                             pages.SaveAdd(bm, ep);
                         }
+                        catch (System.Runtime.InteropServices.ExternalException e)
+                        {
+                            throw new ApplicationException(e.Message + "\nIt might have run out of memory due to handling too many input images.");
+                        }
                         finally 
                         {
                             if (bm != null)
