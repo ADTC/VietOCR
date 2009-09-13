@@ -76,14 +76,15 @@ public class GuiWithTools extends GuiWithSettings {
                 if (outputTiff.exists()) {
                     outputTiff.delete();
                 }
-                
+
                 try {
                     ImageIOHelper.mergeTiff(inputs, outputTiff);
                     JOptionPane.showMessageDialog(this, bundle.getString("Mergecompleted") + outputTiff.getName() + bundle.getString("created"), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-                } catch (IOException ioe) {
-                    System.err.println(ioe.getMessage());
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
+                } catch (OutOfMemoryError oome) {
+                    JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
                 }
-
             }
         }
     }
