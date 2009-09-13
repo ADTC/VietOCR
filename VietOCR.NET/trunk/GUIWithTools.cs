@@ -46,9 +46,16 @@ namespace VietOCR.NET
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     File.Delete(saveFileDialog1.FileName);
-
-                    ImageIOHelper.MergeTiff(openFileDialog1.FileNames, saveFileDialog1.FileName);
-                    MessageBox.Show(this, Properties.Resources.Mergecompleted + Path.GetFileName(saveFileDialog1.FileName) + Properties.Resources.created, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    try
+                    {
+                        ImageIOHelper.MergeTiff(openFileDialog1.FileNames, saveFileDialog1.FileName);
+                        MessageBox.Show(this, Properties.Resources.Mergecompleted + Path.GetFileName(saveFileDialog1.FileName) + Properties.Resources.created, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (ApplicationException ae)
+                    {
+                        Console.WriteLine("ERROR: " + ae.Message);
+                        MessageBox.Show(this, ae.Message, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
