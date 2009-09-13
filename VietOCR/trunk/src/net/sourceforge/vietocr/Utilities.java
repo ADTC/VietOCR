@@ -58,12 +58,10 @@ public class Utilities {
             // put PNG images into a single multi-page TIFF image for return
             ImageIOHelper.mergeTiff(pngFiles, tiffFile);
             return tiffFile;
-        } catch (OutOfMemoryError oome) {
-            System.err.println("ERROR: " + oome.getMessage());
-            throw oome;
-        } catch (IOException ioe) {
-            System.err.println("ERROR: " + ioe.getMessage());
-            throw ioe;
+        } catch (UnsatisfiedLinkError ule) {
+            throw new RuntimeException(ule.getMessage() + "\nPlease download, install GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.");
+        } catch (NoClassDefFoundError ncdfe) {
+            throw new RuntimeException(ncdfe.getMessage() + "\nPlease download, install GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.");
         } finally {
             if (pngFiles != null) {
                 // delete temporary PNG images
