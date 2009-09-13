@@ -48,22 +48,30 @@ public class Utilities {
      * @param inputPdfFile
      * @return a multi-page TIFF image
      */
-    public static File convertPdf2Tiff(File inputPdfFile) {
+    public static File convertPdf2Tiff(File inputPdfFile) throws Exception {
+        File[] pngFiles = null;
+
         try {
-            File[] pngFiles = convertPdf2Png(inputPdfFile);
+            pngFiles = convertPdf2Png(inputPdfFile);
             File tiffFile = File.createTempFile("multipage", ".tif");
-            
+
             // put PNG images into a single multi-page TIFF image for return
             ImageIOHelper.mergeTiff(pngFiles, tiffFile);
-            for (File tempFile : pngFiles) {
-                tempFile.delete();
-            }
             return tiffFile;
+        } catch (OutOfMemoryError oome) {
+            System.err.println("ERROR: " + oome.getMessage());
+            throw oome;
         } catch (IOException ioe) {
             System.err.println("ERROR: " + ioe.getMessage());
-            return null;
+            throw ioe;
+        } finally {
+            if (pngFiles != null) {
+                // delete temporary PNG images
+                for (File tempFile : pngFiles) {
+                    tempFile.delete();
+                }
+            }
         }
-
     }
 
     /**
