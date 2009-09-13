@@ -122,37 +122,52 @@ namespace VietOCR.NET
             ep.Param[1] = new EncoderParameter(enc1, (long)EncoderValue.CompressionNone);
             Bitmap pages = null;
 
-            int frame = 0;
-
-            foreach (string inputImage in inputImages)
+            try
             {
-                if (frame == 0)
-                {
-                    pages = (Bitmap)Image.FromFile(inputImage);
-                    //save the first frame
-                    pages.Save(outputTiff, info, ep);
-                }
-                else
-                {
-                    //save the intermediate frames
-                    ep.Param[0] = new EncoderParameter(enc, (long)EncoderValue.FrameDimensionPage);
-                    Bitmap bm = (Bitmap)Image.FromFile(inputImage);
-                    pages.SaveAdd(bm, ep);
-                    bm.Dispose();
-                }
+                int frame = 0;
 
-                if (frame == inputImages.Length - 1)
+                foreach (string inputImage in inputImages)
                 {
-                    //flush and close
-                    ep.Param[0] = new EncoderParameter(enc, (long)EncoderValue.Flush);
-                    pages.SaveAdd(ep);
+                    if (frame == 0)
+                    {
+                        pages = (Bitmap)Image.FromFile(inputImage);
+                        //save the first frame
+                        pages.Save(outputTiff, info, ep);
+                    }
+                    else
+                    {
+                        //save the intermediate frames
+                        ep.Param[0] = new EncoderParameter(enc, (long)EncoderValue.FrameDimensionPage);
+                        Bitmap bm = null;
+                        try
+                        {
+                            bm = (Bitmap)Image.FromFile(inputImage);
+                            pages.SaveAdd(bm, ep);
+                        }
+                        finally 
+                        {
+                            if (bm != null)
+                            {
+                                bm.Dispose();
+                            }
+                        }
+                    }
+
+                    if (frame == inputImages.Length - 1)
+                    {
+                        //flush and close
+                        ep.Param[0] = new EncoderParameter(enc, (long)EncoderValue.Flush);
+                        pages.SaveAdd(ep);
+                    }
+                    frame++;
                 }
-                frame++;
             }
-
-            if (pages != null)
+            finally
             {
-                pages.Dispose();
+                if (pages != null)
+                {
+                    pages.Dispose();
+                }
             }
         }
     }
