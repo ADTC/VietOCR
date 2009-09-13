@@ -470,17 +470,29 @@ namespace VietOCR.NET
 
             if (selectedImageFile.ToLower().EndsWith(".pdf"))
             {
+                string workingTiffFileName = null;
+
                 try
                 {
-                    string workingTiffFileName = Utilities.ConvertPdf2Tiff(selectedImageFile);
-                    FileInfo workingTiffFile = new FileInfo(workingTiffFileName);
-                    imageList = ImageIOHelper.GetImageList(workingTiffFile);
-                    workingTiffFile.Delete();
+                    workingTiffFileName = Utilities.ConvertPdf2Tiff(selectedImageFile);
+                    imageList = ImageIOHelper.GetImageList(new FileInfo(workingTiffFileName));
+                }
+                catch (System.Runtime.InteropServices.ExternalException ee)
+                {
+                    MessageBox.Show(this, ee.Message, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(this, e.Message + "\nPlease install Ghostscript and/or set system path to the library object.", strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, e.Message, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
+                }
+                finally
+                {
+                    if (workingTiffFileName != null && File.Exists(workingTiffFileName))
+                    {
+                        File.Delete(workingTiffFileName);
+                    }
                 }
             }
             else
