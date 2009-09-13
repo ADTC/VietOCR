@@ -1365,13 +1365,6 @@ public class Gui extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
                 return;
-//            } catch (UnsatisfiedLinkError ule) {
-//               JOptionPane.showMessageDialog(this, ule.getMessage() + "\nPlease download, install GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.", APP_NAME, JOptionPane.ERROR_MESSAGE);
-//            } catch (NoClassDefFoundError ncdfe) {
-//               JOptionPane.showMessageDialog(this, ncdfe.getMessage() + "\nPlease download, install GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.", APP_NAME, JOptionPane.ERROR_MESSAGE);
-            } catch (Error e) {
-                JOptionPane.showMessageDialog(this, e.getMessage() + "\nPlease download, install GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.", APP_NAME, JOptionPane.ERROR_MESSAGE);
-                return;
             } finally {
                 if (workingTiffFile != null && workingTiffFile.exists()) {
                     workingTiffFile.delete();
