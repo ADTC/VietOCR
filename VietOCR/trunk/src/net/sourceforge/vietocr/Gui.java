@@ -528,6 +528,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuItemOptions = new javax.swing.JMenuItem();
         jMenuTools = new javax.swing.JMenu();
         jMenuItemMergeTiff = new javax.swing.JMenuItem();
+        jMenuItemSplitPdf = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemHelp = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JSeparator();
@@ -889,6 +890,14 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jMenuTools.add(jMenuItemMergeTiff);
+
+        jMenuItemSplitPdf.setText(bundle.getString("jMenuItemSplitPdf.Text")); // NOI18N
+        jMenuItemSplitPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSplitPdfActionPerformed(evt);
+            }
+        });
+        jMenuTools.add(jMenuItemSplitPdf);
 
         jMenuBar2.add(jMenuTools);
 
@@ -1574,6 +1583,14 @@ private void jMenuItemMergeTiffActionPerformed(java.awt.event.ActionEvent evt) {
         // to be implemented in subclass
     }
 
+private void jMenuItemSplitPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSplitPdfActionPerformed
+    splitPdf();
+}//GEN-LAST:event_jMenuItemSplitPdfActionPerformed
+
+    void splitPdf() {
+        // to be implemented in subclass
+    }
+
     void rotateImage(int angle) {
         try {
             imageIcon = imageIcon.getRotatedImageIcon(Math.toRadians(angle));
@@ -1685,6 +1702,7 @@ private void jMenuItemMergeTiffActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JMenuItem jMenuItemRemoveLineBreaks;
     private javax.swing.JMenuItem jMenuItemSave;
     private javax.swing.JMenuItem jMenuItemScan;
+    private javax.swing.JMenuItem jMenuItemSplitPdf;
     private javax.swing.JMenu jMenuLookAndFeel;
     private javax.swing.JMenu jMenuSettings;
     private javax.swing.JMenu jMenuTools;
