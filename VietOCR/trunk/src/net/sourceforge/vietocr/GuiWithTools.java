@@ -16,7 +16,6 @@
 package net.sourceforge.vietocr;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Locale;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
@@ -87,6 +86,12 @@ public class GuiWithTools extends GuiWithSettings {
                 }
             }
         }
+    }
+
+    @Override
+    void splitPdf() {
+        SplitPdfDialog dialog = new SplitPdfDialog(this, true);
+        dialog.setVisible(true);
     }
 
     @Override
