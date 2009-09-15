@@ -17,6 +17,7 @@ package net.sourceforge.vietocr;
 
 import java.io.*;
 import java.net.*;
+import java.util.*;
 import net.sf.ghost4j.*;
 
 public class Utilities {
@@ -116,5 +117,46 @@ public class Utilities {
         });
 
         return workingFiles;
+    }
+
+    /**
+     * Split PDF.
+     *
+     * @param inputPdfFile
+     * @return an array of PNG images
+     */
+    public static void splitPdf(String inputPdfFile, String outputPdfFile, String firstPage, String lastPage) {
+        //get Ghostscript instance
+        Ghostscript gs = Ghostscript.getInstance();
+
+        //prepare Ghostscript interpreter parameters
+        //refer to Ghostscript documentation for parameter usage
+        //gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -dFirstPage=m -dLastPage=n -sOutputFile=out.pdf in.pdf
+        List<String> gsArgs = new ArrayList<String>();
+        gsArgs.add("-gs");
+        gsArgs.add("-dNOPAUSE");
+        gsArgs.add("-dQUIET");
+        gsArgs.add("-dBATCH");
+        gsArgs.add("-sDEVICE=pdfwrite");
+
+        if (!firstPage.trim().isEmpty()) {
+            gsArgs.add("-dFirstPage=" + firstPage);
+        }
+
+        if (!lastPage.trim().isEmpty()) {
+            gsArgs.add("-dLastPage=" + lastPage);
+        }
+
+        gsArgs.add("-sOutputFile=" + outputPdfFile);
+        gsArgs.add(inputPdfFile);
+
+        //execute and exit interpreter
+        try {
+            gs.initialize(gsArgs.toArray(new String[0]));
+            gs.exit();
+        } catch (GhostscriptException e) {
+            System.err.println("ERROR: " + e.getMessage());
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }
