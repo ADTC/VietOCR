@@ -22,6 +22,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileFilter;
+import net.sourceforge.vietpad.SimpleFilter;
 
 /**
  *
@@ -37,7 +39,6 @@ public class OptionsDialog extends javax.swing.JDialog {
     private String curLangCode;
     private boolean watchEnabled;
     private boolean dangAmbigsOn;
-    
     protected ResourceBundle bundle;
 
     /** Creates new form OptionsDialog */
@@ -48,7 +49,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         if (Gui.WINDOWS) {
             jTabbedPane1.remove(jPanelTessPath);
         }
-        
+
         bundle = ResourceBundle.getBundle("net/sourceforge/vietocr/OptionsDialog");
 
         this.setLocationRelativeTo(parent);
@@ -302,16 +303,16 @@ public class OptionsDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonTessActionPerformed
 
     private void jButtonDangAmbigsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDangAmbigsActionPerformed
-        // TODO add your handling code here:
         JFileChooser pathchooser = new JFileChooser(dangAmbigsPath);
-        pathchooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        FileFilter txtFilter = new SimpleFilter("txt", "Text");
+        pathchooser.addChoosableFileFilter(txtFilter);
         pathchooser.setAcceptAllFileFilterUsed(false);
         pathchooser.setApproveButtonText(bundle.getString("Set"));
         pathchooser.setDialogTitle(bundle.getString("Path_to") + " " + curLangCode + ".DangAmbigs.txt");
         int returnVal = pathchooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            if (!dangAmbigsPath.equals(pathchooser.getSelectedFile().getPath())) {
-                setDangAmbigsPath(pathchooser.getSelectedFile().getPath());
+            if (!dangAmbigsPath.equals(pathchooser.getCurrentDirectory().getPath())) {
+                setDangAmbigsPath(pathchooser.getCurrentDirectory().getPath());
             }
         }
     }//GEN-LAST:event_jButtonDangAmbigsActionPerformed
