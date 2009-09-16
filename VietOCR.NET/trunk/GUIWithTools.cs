@@ -60,6 +60,14 @@ namespace VietOCR.NET
             }
         }
 
+        protected override void splitPdfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SplitPdfDialog dialog = new SplitPdfDialog();
+            dialog.Owner = this;
+            
+            dialog.ShowDialog();
+        }
+
         protected override void LoadRegistryInfo(RegistryKey regkey)
         {
             base.LoadRegistryInfo(regkey);
