@@ -15,14 +15,8 @@
  */
 package net.sourceforge.vietocr;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
+import java.awt.event.*;
+import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import net.sourceforge.vietpad.SimpleFilter;
 
@@ -260,21 +254,28 @@ public class SplitPdfDialog extends javax.swing.JDialog {
 
     private void jButtonSplitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSplitActionPerformed
         try {
+            String inputFilename = this.jTextFieldInputFile.getText();
+            String outputFilename = this.jTextFieldOutputFile.getText();
+
             if (this.jRadioButtonPages.isSelected()) {
-             Utilities.splitPdf(this.jTextFieldInputFile.getText(), this.jTextFieldOutputFile.getText(), this.jTextFieldFrom.getText(), this.jTextFieldTo.getText());
+                Utilities.splitPdf(inputFilename, outputFilename, this.jTextFieldFrom.getText(), this.jTextFieldTo.getText());
             } else {
-                int i = 1;
-                String outputFilename = this.jTextFieldOutputFile.getText();
                 if (outputFilename.endsWith(".pdf")) {
                     outputFilename = outputFilename.substring(0, outputFilename.lastIndexOf(".pdf"));
                 }
-                while (true) {
-                    int end = i + Integer.parseInt(this.jTextFieldNumOfPages.getText()) - 1;
-                    Utilities.splitPdf(this.jTextFieldInputFile.getText(), outputFilename + String.valueOf(i) + ".pdf", String.valueOf(i), String.valueOf(end));
-                    i = end + 1;
+
+                int pageCount = Utilities.countPagePdf(this.jTextFieldInputFile.getText());
+                int pageRange = Integer.parseInt(this.jTextFieldNumOfPages.getText());
+                int startPage = 1;
+
+                while (startPage < pageCount) {
+                    int endPage = startPage + pageRange - 1;
+                    String outputFileName = outputFilename + startPage + ".pdf";
+                    Utilities.splitPdf(inputFilename, outputFileName, String.valueOf(startPage), String.valueOf(endPage));
+                    startPage = endPage + 1;
                 }
             }
-              JOptionPane.showMessageDialog(this, "Successful.");
+            JOptionPane.showMessageDialog(this, "Split PDF successful.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
