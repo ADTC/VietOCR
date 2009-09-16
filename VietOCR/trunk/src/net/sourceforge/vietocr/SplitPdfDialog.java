@@ -26,6 +26,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
     public SplitPdfDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        disableBoxes(!this.jRadioButtonPages.isSelected());
 
         setLocationRelativeTo(getOwner());
 
@@ -138,6 +139,11 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         jRadioButtonPages.setSelected(true);
         jRadioButtonPages.setText("Pages");
         jRadioButtonPages.setToolTipText("Extract pages to a file");
+        jRadioButtonPages.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonPagesActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -178,6 +184,11 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         buttonGroup1.add(jRadioButtonFiles);
         jRadioButtonFiles.setText("Files");
         jRadioButtonFiles.setToolTipText("Split into multiple files");
+        jRadioButtonFiles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonFilesActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -216,8 +227,8 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         });
         jPanel2.add(jButtonSplit);
 
-        jButtonCancel.setText("Cancel");
-        jButtonCancel.setToolTipText("Cancel");
+        jButtonCancel.setText("Close");
+        jButtonCancel.setToolTipText("Close");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelActionPerformed(evt);
@@ -284,6 +295,19 @@ public class SplitPdfDialog extends javax.swing.JDialog {
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void jRadioButtonPagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPagesActionPerformed
+        disableBoxes(false);
+    }//GEN-LAST:event_jRadioButtonPagesActionPerformed
+
+    private void jRadioButtonFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFilesActionPerformed
+        disableBoxes(true);
+    }//GEN-LAST:event_jRadioButtonFilesActionPerformed
+    void disableBoxes(boolean enabled) {
+        this.jTextFieldNumOfPages.setEnabled(enabled);
+        this.jTextFieldFrom.setEnabled(!enabled);
+        this.jTextFieldTo.setEnabled(!enabled);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonCancel;
