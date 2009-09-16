@@ -159,4 +159,45 @@ public class Utilities {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+  /**
+     * Count pages of PDF.
+     *
+     * @param inputPdfFile
+     * @return number of pages
+     */
+    public static int countPagePdf(String inputPdfFile) {
+        //get Ghostscript instance
+        Ghostscript gs = Ghostscript.getInstance();
+
+        //prepare Ghostscript interpreter parameters
+        //refer to Ghostscript documentation for parameter usage
+        //gs -q -sPDFname=test.pdf pdfpagecount.ps
+        List<String> gsArgs = new ArrayList<String>();
+        gsArgs.add("-gs");
+        gsArgs.add("-dNOPAUSE");
+        gsArgs.add("-dQUIET");
+        gsArgs.add("-dBATCH");
+        gsArgs.add("-sPDFname=" + inputPdfFile);
+        gsArgs.add("pdfpagecount.ps");
+
+        ByteArrayOutputStream os = null;
+        int pageCount = 0;
+
+        //execute and exit interpreter
+        try {
+            //output
+            os = new ByteArrayOutputStream();
+            gs.setStdOut(os);
+            gs.initialize(gsArgs.toArray(new String[0]));
+            gs.getStdOut();
+            pageCount = Integer.parseInt(os.toString().substring("%%Pages: ".length()));
+            os.close();
+        } catch (GhostscriptException e) {
+            System.err.println("ERROR: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("ERROR: " + e.getMessage());
+        }
+        return pageCount;
+    }
 }
