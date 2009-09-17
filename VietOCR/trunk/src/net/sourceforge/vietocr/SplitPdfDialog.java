@@ -260,6 +260,10 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         int returnVal = filechooser.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             this.jTextFieldOutputFile.setText(filechooser.getSelectedFile().getPath());
+
+            if (!this.jTextFieldOutputFile.getText().endsWith(".pdf")) {
+                this.jTextFieldOutputFile.setText(this.jTextFieldOutputFile.getText() + ".pdf");
+            }
         }
     }//GEN-LAST:event_jButtonOutputActionPerformed
 
