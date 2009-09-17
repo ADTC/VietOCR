@@ -38,9 +38,9 @@ namespace VietOCR.NET
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "PDF (*.pdf)|*.pdf";
 
-            if (dialog.ShowDialog() == DialogResult.Yes)
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                string filename = dialog.FileName;
+                this.textBoxInput.Text = dialog.FileName;
             }
         }
 
@@ -49,9 +49,14 @@ namespace VietOCR.NET
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "PDF (*.pdf)|*.pdf";
 
-            if (dialog.ShowDialog() == DialogResult.Yes)
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                string filename = dialog.FileName;
+                this.textBoxOutput.Text = dialog.FileName;
+
+                if (!this.textBoxOutput.Text.EndsWith(".pdf") )
+                {
+                    this.textBoxOutput.Text += "pdf"; // seems not needed
+                }
             }
         }
 
@@ -73,7 +78,7 @@ namespace VietOCR.NET
                         outputFilename = outputFilename.Substring(0, outputFilename.LastIndexOf(".pdf"));
                     }
 
-                    int pageCount = Utilities.CountPagePdf(this.jTextFieldInputFile.getText());
+                    int pageCount = Utilities.CountPagePdf(inputFilename);
                     int pageRange = Int32.Parse(this.textBoxNumOfPages.Text);
                     int startPage = 1;
 
