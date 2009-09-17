@@ -54,5 +54,43 @@ namespace VietOCR.NET
                 string filename = dialog.FileName;
             }
         }
+
+        private void buttonSplit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                String inputFilename = this.textBoxInput.Text;
+                String outputFilename = this.textBoxOutput.Text;
+
+                if (this.radioButtonPages.Checked)
+                {
+                    Utilities.SplitPdf(inputFilename, outputFilename, this.textBoxFrom.Text, this.textBoxTo.Text);
+                }
+                else
+                {
+                    if (outputFilename.EndsWith(".pdf"))
+                    {
+                        outputFilename = outputFilename.Substring(0, outputFilename.LastIndexOf(".pdf"));
+                    }
+
+                    int pageCount = Utilities.CountPagePdf(this.jTextFieldInputFile.getText());
+                    int pageRange = Int32.Parse(this.textBoxNumOfPages.Text);
+                    int startPage = 1;
+
+                    while (startPage < pageCount)
+                    {
+                        int endPage = startPage + pageRange - 1;
+                        String outputFileName = outputFilename + startPage + ".pdf";
+                        Utilities.SplitPdf(inputFilename, outputFileName, startPage.ToString(), endPage.ToString());
+                        startPage = endPage + 1;
+                    }
+                }
+                MessageBox.Show(this, "Split PDF successful.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message);
+            }
+        }
     }
 }

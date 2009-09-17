@@ -73,5 +73,42 @@ namespace VietOCR.NET
                 return new string[0];
             }
         }
+
+        /// <summary>
+        /// Convert PDF to PNG format.
+        /// </summary>
+        /// <param name="inputPdfFile"></param>
+        /// <returns>an array of PNG images</returns>
+        public static void SplitPdf(string inputPdfFile, string outputPdfFile, string firstPage, string lastPage)
+        {
+            PDFConvert converter = new PDFConvert();
+            converter.OutputFormat = "pdfwrite"; // -sDEVICE
+            converter.ThrowOnlyException = true; // rethrow exceptions
+
+ 
+
+            //gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -dFirstPage=m -dLastPage=n -sOutputFile=out.pdf in.pdf
+            if (firstPage.Trim().Length != 0)
+            {
+                converter.FirstPageToConvert = Int32.Parse(firstPage);
+            }
+
+            if (lastPage.Trim().Length != 0)
+            {
+                converter.LastPageToConvert = Int32.Parse(lastPage);
+            }
+
+            bool success = converter.Convert(inputPdfFile, outputPdfFile);
+
+        }
+
+        public static int CountPagePdf(string inputFile)
+        {
+            PDFConvert converter = new PDFConvert();
+            converter.OutputFormat = "pdfwrite"; // -sDEVICE
+            converter.Convert(inputFile, null, null); 
+                
+            return 1;
+        }
     }
 }

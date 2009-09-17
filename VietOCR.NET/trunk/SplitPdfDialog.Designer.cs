@@ -54,6 +54,7 @@
             this.buttonSplit.TabIndex = 0;
             this.buttonSplit.Text = "Split";
             this.buttonSplit.UseVisualStyleBackColor = true;
+            this.buttonSplit.Click += new System.EventHandler(this.buttonSplit_Click);
             // 
             // buttonCancel
             // 
