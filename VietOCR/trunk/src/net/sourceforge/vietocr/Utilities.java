@@ -87,21 +87,21 @@ public class Utilities {
 
         //prepare Ghostscript interpreter parameters
         //refer to Ghostscript documentation for parameter usage
-        String[] gsArgs = new String[10];
-        gsArgs[0] = "-gs";
-        gsArgs[1] = "-dNOPAUSE";
-        gsArgs[2] = "-dBATCH";
-        gsArgs[3] = "-dSAFER";
-        gsArgs[4] = "-sDEVICE=pnggray";
-        gsArgs[5] = "-r300";
-        gsArgs[6] = "-dGraphicsAlphaBits=4";
-        gsArgs[7] = "-dTextAlphaBits=4";
-        gsArgs[8] = "-sOutputFile=" + imageDir.getPath() + "/workingimage%03d.png";
-        gsArgs[9] = inputPdfFile.getPath();
+        List<String> gsArgs = new ArrayList<String>();
+        gsArgs.add("-gs");
+        gsArgs.add("-dNOPAUSE");
+        gsArgs.add("-dBATCH");
+        gsArgs.add("-dSAFER");
+        gsArgs.add("-sDEVICE=pnggray");
+        gsArgs.add("-r300");
+        gsArgs.add("-dGraphicsAlphaBits=4");
+        gsArgs.add("-dTextAlphaBits=4");
+        gsArgs.add("-sOutputFile=" + imageDir.getPath() + "/workingimage%03d.png");
+        gsArgs.add(inputPdfFile.getPath());
 
         //execute and exit interpreter
         try {
-            gs.initialize(gsArgs);
+            gs.initialize(gsArgs.toArray(new String[0]));
             gs.exit();
         } catch (GhostscriptException e) {
             System.err.println("ERROR: " + e.getMessage());
@@ -121,9 +121,10 @@ public class Utilities {
 
     /**
      * Split PDF.
-     *
      * @param inputPdfFile
-     * @return an array of PNG images
+     * @param outputPdfFile
+     * @param firstPage
+     * @param lastPage
      */
     public static void splitPdf(String inputPdfFile, String outputPdfFile, String firstPage, String lastPage) {
         //get Ghostscript instance
@@ -160,7 +161,7 @@ public class Utilities {
         }
     }
 
-  /**
+    /**
      * Count pages of PDF.
      *
      * @param inputPdfFile
@@ -198,6 +199,7 @@ public class Utilities {
         } catch (Exception e) {
             System.err.println("ERROR: " + e.getMessage());
         }
+        
         return pageCount;
     }
 }
