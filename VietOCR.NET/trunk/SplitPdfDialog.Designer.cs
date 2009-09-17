@@ -141,16 +141,16 @@
             // 
             // textBoxInput
             // 
-            this.textBoxInput.Location = new System.Drawing.Point(67, 21);
+            this.textBoxInput.Location = new System.Drawing.Point(63, 21);
             this.textBoxInput.Name = "textBoxInput";
-            this.textBoxInput.Size = new System.Drawing.Size(149, 20);
+            this.textBoxInput.Size = new System.Drawing.Size(154, 20);
             this.textBoxInput.TabIndex = 10;
             // 
             // textBoxOutput
             // 
-            this.textBoxOutput.Location = new System.Drawing.Point(67, 47);
+            this.textBoxOutput.Location = new System.Drawing.Point(63, 47);
             this.textBoxOutput.Name = "textBoxOutput";
-            this.textBoxOutput.Size = new System.Drawing.Size(149, 20);
+            this.textBoxOutput.Size = new System.Drawing.Size(154, 20);
             this.textBoxOutput.TabIndex = 11;
             // 
             // buttonBrowseInput
