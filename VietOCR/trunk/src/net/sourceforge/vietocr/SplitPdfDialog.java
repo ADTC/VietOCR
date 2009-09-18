@@ -283,7 +283,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
                 int pageRange = Integer.parseInt(this.jTextFieldNumOfPages.getText());
                 int startPage = 1;
 
-                while (startPage < pageCount) {
+                while (startPage <= pageCount) {
                     int endPage = startPage + pageRange - 1;
                     String outputFileName = outputFilename + startPage + ".pdf";
                     Utilities.splitPdf(inputFilename, outputFileName, String.valueOf(startPage), String.valueOf(endPage));
