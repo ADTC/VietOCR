@@ -85,15 +85,13 @@ namespace VietOCR.NET
             converter.OutputFormat = "pdfwrite"; // -sDEVICE
             converter.ThrowOnlyException = true; // rethrow exceptions
 
- 
-
             //gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -dFirstPage=m -dLastPage=n -sOutputFile=out.pdf in.pdf
-            if (firstPage.Trim().Length != 0)
+            if (firstPage.Trim().Length > 0)
             {
                 converter.FirstPageToConvert = Int32.Parse(firstPage);
             }
 
-            if (lastPage.Trim().Length != 0)
+            if (lastPage.Trim().Length > 0)
             {
                 converter.LastPageToConvert = Int32.Parse(lastPage);
             }
@@ -102,13 +100,40 @@ namespace VietOCR.NET
 
         }
 
-        public static int CountPagePdf(string inputFile)
+        public static int GetPdfPageCount(string inputPdfFile)
         {
             PDFConvert converter = new PDFConvert();
-            converter.OutputFormat = "pdfwrite"; // -sDEVICE
-            converter.Convert(inputFile, null, null); 
-                
-            return 1;
+            converter.RedirectIO = true;
+            converter.ThrowOnlyException = true; // rethrow exceptions
+
+            //gs -q -sPDFname=test.pdf pdfpagecount.ps
+            StringBuilder gsArgs = new StringBuilder();
+            gsArgs.Append("-gs ");
+            gsArgs.Append("-dNOPAUSE ");
+            gsArgs.Append("-dQUIET ");
+            gsArgs.Append("-dBATCH ");
+            gsArgs.Append("-sPDFname=" + inputPdfFile);
+            gsArgs.Append(" Library/pdfpagecount.ps");
+            
+            int pageCount = 0;
+
+            using (StringWriter writer = new StringWriter())
+            {
+                try
+                {
+                    converter.StdOut = writer;
+                    if (converter.Initialize(gsArgs.ToString()))
+                    {
+                        pageCount = Int32.Parse(writer.ToString().Substring("%%Pages: ".Length));
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            return pageCount;
         }
     }
 }

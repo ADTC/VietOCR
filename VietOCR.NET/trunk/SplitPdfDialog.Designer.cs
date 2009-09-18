@@ -215,6 +215,7 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSplit);
             this.Name = "SplitPdfDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Split PDF";
             this.ResumeLayout(false);
             this.PerformLayout();
