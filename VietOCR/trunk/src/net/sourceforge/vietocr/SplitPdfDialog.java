@@ -280,6 +280,10 @@ public class SplitPdfDialog extends javax.swing.JDialog {
                 }
 
                 int pageCount = Utilities.getPdfPageCount(this.jTextFieldInputFile.getText());
+                if (pageCount == 0) {
+                    throw new RuntimeException("Split PDF failed.");
+                }
+                
                 int pageRange = Integer.parseInt(this.jTextFieldNumOfPages.getText());
                 int startPage = 1;
 
