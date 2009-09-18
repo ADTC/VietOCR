@@ -81,10 +81,15 @@ namespace VietOCR.NET
                     }
 
                     int pageCount = Utilities.GetPdfPageCount(inputFilename);
+                    if (pageCount == 0)
+                    {
+                        throw new ApplicationException("Split PDF failed.");
+                    }                    
+                    
                     int pageRange = Int32.Parse(this.textBoxNumOfPages.Text);
                     int startPage = 1;
 
-                    while (startPage < pageCount)
+                    while (startPage <= pageCount)
                     {
                         int endPage = startPage + pageRange - 1;
                         String outputFileName = outputFilename + startPage + ".pdf";
