@@ -212,7 +212,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-            <EmptyBorder bottom="16" left="0" right="22" top="0"/>
+            <EmptyBorder bottom="16" left="0" right="24" top="0"/>
           </Border>
         </Property>
       </Properties>

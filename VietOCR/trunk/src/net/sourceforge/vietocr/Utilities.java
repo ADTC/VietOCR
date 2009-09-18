@@ -167,7 +167,7 @@ public class Utilities {
      * @param inputPdfFile
      * @return number of pages
      */
-    public static int countPagePdf(String inputPdfFile) {
+    public static int getPdfPageCount(String inputPdfFile) {
         //get Ghostscript instance
         Ghostscript gs = Ghostscript.getInstance();
 
@@ -182,8 +182,8 @@ public class Utilities {
         gsArgs.add("-sPDFname=" + inputPdfFile);
         gsArgs.add("lib/pdfpagecount.ps");
 
-        ByteArrayOutputStream os = null;
         int pageCount = 0;
+        ByteArrayOutputStream os = null;
 
         //execute and exit interpreter
         try {
@@ -191,7 +191,6 @@ public class Utilities {
             os = new ByteArrayOutputStream();
             gs.setStdOut(os);
             gs.initialize(gsArgs.toArray(new String[0]));
-            gs.getStdOut();
             pageCount = Integer.parseInt(os.toString().substring("%%Pages: ".length()));
             os.close();
         } catch (GhostscriptException e) {

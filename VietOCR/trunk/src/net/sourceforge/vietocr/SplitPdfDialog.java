@@ -215,7 +215,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 16, 22));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 16, 24));
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         jButtonSplit.setText("Split");
@@ -279,7 +279,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
                     outputFilename = outputFilename.substring(0, outputFilename.lastIndexOf(".pdf"));
                 }
 
-                int pageCount = Utilities.countPagePdf(this.jTextFieldInputFile.getText());
+                int pageCount = Utilities.getPdfPageCount(this.jTextFieldInputFile.getText());
                 int pageRange = Integer.parseInt(this.jTextFieldNumOfPages.getText());
                 int startPage = 1;
 
