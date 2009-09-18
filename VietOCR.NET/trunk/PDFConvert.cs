@@ -60,36 +60,36 @@ namespace ConvertPDF
         /// <param name="pinstance"></param>
         /// <param name="caller_handle"></param>
         /// <returns></returns>
-        [DllImport("gsdll32.dll", EntryPoint="gsapi_new_instance")]
-        private static extern int gsapi_new_instance (out IntPtr pinstance, IntPtr caller_handle);
+        [DllImport("gsdll32.dll", EntryPoint = "gsapi_new_instance")]
+        private static extern int gsapi_new_instance(out IntPtr pinstance, IntPtr caller_handle);
 
         /// <summary>This is the important function that will perform the conversion</summary>
         /// <param name="instance"></param>
         /// <param name="argc"></param>
         /// <param name="argv"></param>
         /// <returns></returns>
-        [DllImport("gsdll32.dll", EntryPoint="gsapi_init_with_args")]
-        private static extern int gsapi_init_with_args (IntPtr instance, int argc, IntPtr argv);
+        [DllImport("gsdll32.dll", EntryPoint = "gsapi_init_with_args")]
+        private static extern int gsapi_init_with_args(IntPtr instance, int argc, IntPtr argv);
         /// <summary>
         /// Exit the interpreter. This must be called on shutdown if gsapi_init_with_args() has been called, and just before gsapi_delete_instance(). 
         /// </summary>
         /// <param name="instance"></param>
         /// <returns></returns>
-        [DllImport("gsdll32.dll", EntryPoint="gsapi_exit")]
-        private static extern int gsapi_exit (IntPtr instance);
+        [DllImport("gsdll32.dll", EntryPoint = "gsapi_exit")]
+        private static extern int gsapi_exit(IntPtr instance);
 
         /// <summary>
         /// Destroy an instance of Ghostscript. Before you call this, Ghostscript must have finished. If Ghostscript has been initialised, you must call gsapi_exit before gsapi_delete_instance. 
         /// </summary>
         /// <param name="instance"></param>
-        [DllImport("gsdll32.dll", EntryPoint="gsapi_delete_instance")]
-        private static extern void gsapi_delete_instance (IntPtr instance);
+        [DllImport("gsdll32.dll", EntryPoint = "gsapi_delete_instance")]
+        private static extern void gsapi_delete_instance(IntPtr instance);
         /// <summary>Get info about the version of Ghostscript i'm using</summary>
         /// <param name="pGSRevisionInfo"></param>
         /// <param name="intLen"></param>
         /// <returns></returns>
-        [DllImport("gsdll32.dll", EntryPoint="gsapi_revision")]
-        private static extern int gsapi_revision (ref GS_Revision pGSRevisionInfo , int intLen );
+        [DllImport("gsdll32.dll", EntryPoint = "gsapi_revision")]
+        private static extern int gsapi_revision(ref GS_Revision pGSRevisionInfo, int intLen);
         /// <summary>Use a different I/O</summary>
         /// <param name="lngGSInstance"></param>
         /// <param name="gsdll_stdin">Function that menage the Standard INPUT</param>
@@ -101,7 +101,7 @@ namespace ConvertPDF
 
         #endregion
         #region Const
-        const int e_Quit=-101;
+        const int e_Quit = -101;
         const int e_NeedInput = -106;
         #endregion
         #region Variables
@@ -131,11 +131,13 @@ namespace ConvertPDF
         public int RenderingThreads
         {
             get { return _iRenderingThreads; }
-            set {
+            set
+            {
                 if (value == 0)
                     _iRenderingThreads = Environment.ProcessorCount;
                 else
-                    _iRenderingThreads = value; }
+                    _iRenderingThreads = value;
+            }
         }
         private bool _bFitPage;
         private bool _bThrowOnlyException = false;
@@ -152,6 +154,15 @@ namespace ConvertPDF
         //public string output;
         //private List<byte> outputBytes;
         //public string error;
+
+        private static StringWriter stdOut;
+
+        public StringWriter StdOut
+        {
+            get { return PDFConvert.stdOut; }
+            set { PDFConvert.stdOut = value; }
+        }
+
         #endregion
         #region Proprieties
         /// <summary>
@@ -303,7 +314,7 @@ namespace ConvertPDF
         /// <returns>True if the conversion succed!</returns>
         public bool Convert(string inputFile, string outputFile)
         {
-            return Convert(inputFile, outputFile, _bThrowOnlyException,null);
+            return Convert(inputFile, outputFile, _bThrowOnlyException, null);
         }
 
         /// <summary>Convert a single file!</summary>
@@ -312,7 +323,7 @@ namespace ConvertPDF
         /// <param name="parameters">You must pass all the parameter for the conversion here</param>
         /// <remarks>Thanks to 	tchu_2000 for the help!</remarks>
         /// <returns>True if the conversion succed!</returns>
-        public bool Convert(string inputFile, string outputFile,string parameters)
+        public bool Convert(string inputFile, string outputFile, string parameters)
         {
             return Convert(inputFile, outputFile, _bThrowOnlyException, parameters);
         }
@@ -325,7 +336,7 @@ namespace ConvertPDF
         /// <remarks>You must pass all the parameter for the conversion
         /// as Proprieties of this class</remarks>
         /// <returns>True if the conversion succed!</returns>
-        private bool Convert(string inputFile, string outputFile,bool throwException,string options)
+        private bool Convert(string inputFile, string outputFile, bool throwException, string options)
         {
             #region Check Input
             //Avoid to work when the file doesn't exist
@@ -372,7 +383,7 @@ namespace ConvertPDF
             GCHandle gchandleArgs;
             #endregion
             //Generate the list of the parameters i need to pass to the dll
-            string[] sArgs = GetGeneratedArgs(inputFile, outputFile,options);
+            string[] sArgs = GetGeneratedArgs(inputFile, outputFile, options);
             #region Convert Unicode strings to null terminated ANSI byte arrays
             // Convert the Unicode strings to null terminated ANSI byte arrays
             // then get pointers to the byte arrays.
@@ -451,7 +462,99 @@ namespace ConvertPDF
             }
             finally//No matter what happen i MUST close the istance!
             {   //free all the memory
-                ClearParameters(ref aGCHandle,ref gchandleArgs);
+                ClearParameters(ref aGCHandle, ref gchandleArgs);
+                gsapi_exit(intGSInstanceHandle);//Close the istance
+                gsapi_delete_instance(intGSInstanceHandle);//delete it
+                //In case i was looking for output now stop
+                if (myProcess != null) myProcess.OutputDataReceived -= new System.Diagnostics.DataReceivedEventHandler(SaveOutputToImage);
+            }
+            //Conversion was successfull if return code was 0 or e_Quit
+            return (intReturn == 0) | (intReturn == e_Quit);//e_Quit = -101
+        }
+
+        public bool Initialize(string gsArgs)
+        {
+            #region Variables
+
+            int intReturn, intCounter, intElementCount;
+            //The pointer to the current istance of the dll
+            IntPtr intGSInstanceHandle;
+            object[] aAnsiArgs;
+            IntPtr[] aPtrArgs;
+            GCHandle[] aGCHandle;
+            IntPtr callerHandle, intptrArgs;
+            GCHandle gchandleArgs;
+
+            #endregion
+
+            //Generate the list of the parameters i need to pass to the dll
+            string[] sArgs = gsArgs.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+            #region Convert Unicode strings to null terminated ANSI byte arrays
+            // Convert the Unicode strings to null terminated ANSI byte arrays
+            // then get pointers to the byte arrays.
+            intElementCount = sArgs.Length;
+            aAnsiArgs = new object[intElementCount];
+            aPtrArgs = new IntPtr[intElementCount];
+            aGCHandle = new GCHandle[intElementCount];
+            //Convert the parameters
+            for (intCounter = 0; intCounter < intElementCount; intCounter++)
+            {
+                aAnsiArgs[intCounter] = StringToAnsiZ(sArgs[intCounter]);
+                aGCHandle[intCounter] = GCHandle.Alloc(aAnsiArgs[intCounter], GCHandleType.Pinned);
+                aPtrArgs[intCounter] = aGCHandle[intCounter].AddrOfPinnedObject();
+            }
+            gchandleArgs = GCHandle.Alloc(aPtrArgs, GCHandleType.Pinned);
+            intptrArgs = gchandleArgs.AddrOfPinnedObject();
+            #endregion
+
+            #region Create a new istance of the library!
+            intReturn = -1;
+            try
+            {
+                intReturn = gsapi_new_instance(out intGSInstanceHandle, _objHandle);
+                //Be sure that we create an istance!
+                if (intReturn < 0)
+                {
+                    ClearParameters(ref aGCHandle, ref gchandleArgs);
+                    throw new ApplicationException("I can't create a new istance of Ghostscript please verify no other istance are running!");
+                }
+            }
+            catch (DllNotFoundException ex)
+            {//in this case the dll we r using isn't the dll we expect
+                ClearParameters(ref aGCHandle, ref gchandleArgs);
+                throw new ApplicationException("The gsdll32.dll wasn't found in default dlls search path " +
+                    "or is not in correct version (doesn't expose the required methods).\nPlease download, install " +
+                    "GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.");
+
+            }
+            callerHandle = IntPtr.Zero;//remove unwanter handler
+            #endregion
+            #region Capture the I/O
+
+            StdioCallBack stdinCallback = new StdioCallBack(gsdll_stdin);
+            StdioCallBack stdoutCallback = new StdioCallBack(gsdll_stdout);
+            StdioCallBack stderrCallback = new StdioCallBack(gsdll_stderr);
+            intReturn = gsapi_set_stdio(intGSInstanceHandle, stdinCallback, stdoutCallback, stderrCallback);
+            //if (output == null) output = new StringBuilder();
+            //else output.Remove(0, output.Length);
+            //myProcess = System.Diagnostics.Process.GetCurrentProcess();
+            //myProcess.OutputDataReceived += new System.Diagnostics.DataReceivedEventHandler(SaveOutputToImage);
+
+            #endregion
+            intReturn = -1;//if nothing change it there is an error!
+            //Ok now is time to call the interesting method
+            try
+            {
+                intReturn = gsapi_init_with_args(intGSInstanceHandle, intElementCount, intptrArgs);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException(ex.Message, ex);
+            }
+            finally//No matter what happen i MUST close the istance!
+            {   //free all the memory
+                ClearParameters(ref aGCHandle, ref gchandleArgs);
                 gsapi_exit(intGSInstanceHandle);//Close the istance
                 gsapi_delete_instance(intGSInstanceHandle);//delete it
                 //In case i was looking for output now stop
@@ -505,16 +608,16 @@ namespace ConvertPDF
         private string[] GetGeneratedArgs(string inputFile, string outputFile, string otherParameters)
         {
             if (!string.IsNullOrEmpty(otherParameters))
-                return GetGeneratedArgs(inputFile,outputFile,otherParameters.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
+                return GetGeneratedArgs(inputFile, outputFile, otherParameters.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
             else
-                return GetGeneratedArgs(inputFile,outputFile,(string[])null);
+                return GetGeneratedArgs(inputFile, outputFile, (string[])null);
         }
 
         /// <summary>This function create the list of parameters to pass to the dll</summary>
         /// <param name="inputFile">the file to convert</param>
         /// <param name="outputFile">where to write the image</param>
         /// <returns>the list of the arguments</returns>
-        private string[] GetGeneratedArgs(string inputFile, string outputFile,string[] presetParameters)
+        private string[] GetGeneratedArgs(string inputFile, string outputFile, string[] presetParameters)
         {
             string[] args;
             ArrayList lstExtraArgs = new ArrayList();
@@ -559,7 +662,7 @@ namespace ConvertPDF
                 if (_iLastPageToConvert > 0)
                 {
                     if ((_iFirstPageToConvert > 0) && (_iFirstPageToConvert > _iLastPageToConvert))
-                        throw new ArgumentOutOfRangeException(string.Format("The 1st page to convert ({0}) can't be after then the last one ({1})",_iFirstPageToConvert,_iLastPageToConvert));
+                        throw new ArgumentOutOfRangeException(string.Format("The 1st page to convert ({0}) can't be after then the last one ({1})", _iFirstPageToConvert, _iLastPageToConvert));
                     lstExtraArgs.Add(String.Format(GS_LastPageFormat, _iLastPageToConvert));
                 }
                 //Set in how many threads i want to do the work
@@ -595,7 +698,7 @@ namespace ConvertPDF
                 for (int i = 1; i < presetParameters.Length; i++)
                     args[i] = presetParameters[i - 1];
             }
-            args[0]=GS_FirstParameter;//this parameter have little real use
+            args[0] = GS_FirstParameter;//this parameter have little real use
             //Now check if i want to update to 1 file per page i have to be sure do add % to the output filename
             if ((_didOutputToMultipleFile) && (!outputFile.Contains(GS_MultiplePageCharacter)))
             {// Thanks to Spillie to show me the error!
@@ -652,8 +755,8 @@ namespace ConvertPDF
         public int gsdll_stdin(IntPtr intGSInstanceHandle, IntPtr strz, int intBytes)
         {
             // This is dumb code that reads one byte at a time
-           // Ghostscript doesn't mind this, it is just very slow
-            if (intBytes == 0) 
+            // Ghostscript doesn't mind this, it is just very slow
+            if (intBytes == 0)
                 return 0;
             else
             {
@@ -673,16 +776,27 @@ namespace ConvertPDF
             }
         }
 
-        public int gsdll_stdout(IntPtr intGSInstanceHandle, IntPtr strz , int intBytes)
+        public int gsdll_stdout(IntPtr intGSInstanceHandle, IntPtr strz, int intBytes)
         {
             if (intBytes > 0)
             {
-                Console.Write(Marshal.PtrToStringAnsi(strz));
+                string stdoutmessage = Marshal.PtrToStringAnsi(strz);
+                Console.Write(stdoutmessage);
+                try
+                {
+                    stdOut.Write(stdoutmessage.ToCharArray(), 0, intBytes);
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                return intBytes;
             }
             return 0;
         }
 
-        public int gsdll_stderr(IntPtr intGSInstanceHandle, IntPtr strz, int intBytes )
+        public int gsdll_stderr(IntPtr intGSInstanceHandle, IntPtr strz, int intBytes)
         {
             //return gsdll_stdout(intGSInstanceHandle, strz, intBytes);
             Console.Write(Marshal.PtrToStringAnsi(strz));

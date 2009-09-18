@@ -37,6 +37,7 @@ namespace VietOCR.NET
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "PDF (*.pdf)|*.pdf";
+            dialog.RestoreDirectory = true;
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -48,6 +49,7 @@ namespace VietOCR.NET
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "PDF (*.pdf)|*.pdf";
+            dialog.RestoreDirectory = true;
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -78,7 +80,7 @@ namespace VietOCR.NET
                         outputFilename = outputFilename.Substring(0, outputFilename.LastIndexOf(".pdf"));
                     }
 
-                    int pageCount = Utilities.CountPagePdf(inputFilename);
+                    int pageCount = Utilities.GetPdfPageCount(inputFilename);
                     int pageRange = Int32.Parse(this.textBoxNumOfPages.Text);
                     int startPage = 1;
 
