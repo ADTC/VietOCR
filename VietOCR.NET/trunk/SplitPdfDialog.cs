@@ -66,43 +66,84 @@ namespace VietOCR.NET
         {
             try
             {
-                String inputFilename = this.textBoxInput.Text;
-                String outputFilename = this.textBoxOutput.Text;
+                //this.toolStripStatusLabel1.Text = Properties.Resources.Scanning;
+                this.Cursor = Cursors.WaitCursor;
+                //this.pictureBox1.UseWaitCursor = true;
+                //this.textBox1.Cursor = Cursors.WaitCursor;
+                //this.toolStripProgressBar1.Enabled = true;
+                //this.toolStripProgressBar1.Visible = true;
+                //this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
 
-                if (this.radioButtonPages.Checked)
-                {
-                    Utilities.SplitPdf(inputFilename, outputFilename, this.textBoxFrom.Text, this.textBoxTo.Text);
-                }
-                else
-                {
-                    if (outputFilename.EndsWith(".pdf"))
-                    {
-                        outputFilename = outputFilename.Substring(0, outputFilename.LastIndexOf(".pdf"));
-                    }
-
-                    int pageCount = Utilities.GetPdfPageCount(inputFilename);
-                    if (pageCount == 0)
-                    {
-                        throw new ApplicationException("Split PDF failed.");
-                    }                    
-                    
-                    int pageRange = Int32.Parse(this.textBoxNumOfPages.Text);
-                    int startPage = 1;
-
-                    while (startPage <= pageCount)
-                    {
-                        int endPage = startPage + pageRange - 1;
-                        String outputFileName = outputFilename + startPage + ".pdf";
-                        Utilities.SplitPdf(inputFilename, outputFileName, startPage.ToString(), endPage.ToString());
-                        startPage = endPage + 1;
-                    }
-                }
-                MessageBox.Show(this, "Split PDF successful.");
+            	// Start the asynchronous operation.
+            	backgroundWorker1.RunWorkerAsync();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(this, ex.Message);
             }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            String inputFilename = this.textBoxInput.Text;
+            String outputFilename = this.textBoxOutput.Text;
+
+            if (this.radioButtonPages.Checked)
+            {
+                Utilities.SplitPdf(inputFilename, outputFilename, this.textBoxFrom.Text, this.textBoxTo.Text);
+            }
+            else
+            {
+                if (outputFilename.EndsWith(".pdf"))
+                {
+                    outputFilename = outputFilename.Substring(0, outputFilename.LastIndexOf(".pdf"));
+                }
+
+                int pageCount = Utilities.GetPdfPageCount(inputFilename);
+                if (pageCount == 0)
+                {
+                    throw new ApplicationException("Split PDF failed.");
+                }
+
+                int pageRange = Int32.Parse(this.textBoxNumOfPages.Text);
+                int startPage = 1;
+
+                while (startPage <= pageCount)
+                {
+                    int endPage = startPage + pageRange - 1;
+                    String outputFileName = outputFilename + startPage + ".pdf";
+                    Utilities.SplitPdf(inputFilename, outputFileName, startPage.ToString(), endPage.ToString());
+                    startPage = endPage + 1;
+                }
+            }
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // First, handle the case where an exception was thrown.
+            if (e.Error != null)
+            {
+                //this.toolStripStatusLabel1.Text = String.Empty;
+                //this.toolStripProgressBar1.Enabled = false;
+                //this.toolStripProgressBar1.Visible = false;
+                MessageBox.Show(e.Error.Message);
+            }
+            else if (e.Cancelled)
+            {
+                // Next, handle the case where the user canceled the operation.
+                // Note that due to a race condition in the DoWork event handler, the Cancelled
+                // flag may not have been set, even though CancelAsync was called.
+                //this.toolStripStatusLabel1.Text = Properties.Resources.Canceled;
+            }
+            else
+            {
+                // Finally, handle the case where the operation succeeded.
+                //openFile(e.Result.ToString());
+                //this.toolStripStatusLabel1.Text = Properties.Resources.Scancompleted;
+                MessageBox.Show(this, "Split PDF successful.");
+            }
+
+            this.Cursor = Cursors.Default;
         }
     }
 }
