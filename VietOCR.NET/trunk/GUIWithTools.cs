@@ -191,7 +191,7 @@ namespace VietOCR.NET
             {
                 // Finally, handle the case where the operation succeeded.
                 this.toolStripStatusLabel1.Text = Properties.Resources.SplitPDF_completed;
-                MessageBox.Show(this, Properties.Resources.SplitPDF_completed + "\n" + Properties.Resources.check_output_in + Path.GetDirectoryName(e.Result.ToString()));
+                MessageBox.Show(this, Properties.Resources.SplitPDF_completed + "\n" + Properties.Resources.check_output_in + Path.GetDirectoryName(e.Result.ToString()), strProgName, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             this.toolStripStatusLabel1.Text = String.Empty;
             this.textBox1.Cursor = Cursors.Default;
