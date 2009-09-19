@@ -98,6 +98,10 @@ namespace VietOCR.NET
 
             bool success = converter.Convert(inputPdfFile, outputPdfFile);
 
+            if (!success)
+            {
+                throw new ApplicationException("Split PDF failed.");
+            }
         }
 
         public static int GetPdfPageCount(string inputPdfFile)
