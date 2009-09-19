@@ -1369,7 +1369,7 @@ public class Gui extends javax.swing.JFrame {
                 workingTiffFile = Utilities.convertPdf2Tiff(selectedFile);
                 iioImageList = ImageIOHelper.getIIOImageList(workingTiffFile);
             } catch (OutOfMemoryError oome) {
-                JOptionPane.showMessageDialog(this, oome.getMessage() + "\nYou may need to split up the PDF file into smaller files before proceed.", bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, oome.getMessage() + bundle.getString("suggest_split"), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
                 return;
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
