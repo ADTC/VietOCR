@@ -484,7 +484,7 @@ namespace VietOCR.NET
                 }
                 catch (ApplicationException e)
                 {
-                    MessageBox.Show(this, e.Message + "\nYou may need to split up the PDF file into smaller files before proceed.", strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, e.Message + Properties.Resources.suggest_split, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 catch (Exception e)
