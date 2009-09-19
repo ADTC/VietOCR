@@ -66,6 +66,48 @@ namespace VietOCR.NET
             }
         }
 
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            ArrayList args = (ArrayList)e.Argument;
+            string[] inputFiles = (string[])args[0];
+            string outputFile = (string)args[1];
+            ImageIOHelper.MergeTiff(inputFiles, outputFile);
+            e.Result = outputFile;
+        }
+
+        private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+        }
+
+        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.toolStripProgressBar1.Enabled = false;
+            this.toolStripProgressBar1.Visible = false;
+
+            // First, handle the case where an exception was thrown.
+            if (e.Error != null)
+            {
+                this.toolStripStatusLabel1.Text = String.Empty;
+                MessageBox.Show(this, e.Error.Message, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (e.Cancelled)
+            {
+                // Next, handle the case where the user canceled the operation.
+                // Note that due to a race condition in the DoWork event handler, the Cancelled
+                // flag may not have been set, even though CancelAsync was called.
+                this.toolStripStatusLabel1.Text = Properties.Resources.Canceled;
+            }
+            else
+            {
+                // Finally, handle the case where the operation succeeded.
+                this.toolStripStatusLabel1.Text = Properties.Resources.Mergecompleted;
+                MessageBox.Show(this, Properties.Resources.Mergecompleted + Path.GetFileName(e.Result.ToString()) + Properties.Resources.created, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            this.toolStripStatusLabel1.Text = String.Empty;
+            this.textBox1.Cursor = Cursors.Default;
+            this.Cursor = Cursors.Default;
+        }
+
         protected override void splitPdfToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SplitPdfDialog dialog = new SplitPdfDialog();
@@ -80,7 +122,6 @@ namespace VietOCR.NET
                 this.toolStripProgressBar1.Enabled = true;
                 this.toolStripProgressBar1.Visible = true;
                 this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
-
 
                 // Start the asynchronous operation.
                 backgroundWorker1.RunWorkerAsync(dialog.Args);
@@ -116,8 +157,8 @@ namespace VietOCR.NET
                 while (startPage <= pageCount)
                 {
                     int endPage = startPage + pageRange - 1;
-                    string outputFileName = outputFilename + startPage + ".pdf";
-                    Utilities.SplitPdf(args.InputFilename, outputFileName, startPage.ToString(), endPage.ToString());
+                    string outputFile = outputFilename + startPage + ".pdf";
+                    Utilities.SplitPdf(args.InputFilename, outputFile, startPage.ToString(), endPage.ToString());
                     startPage = endPage + 1;
                 }
             }
@@ -130,57 +171,13 @@ namespace VietOCR.NET
         }
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            // First, handle the case where an exception was thrown.
-            if (e.Error != null)
-            {
-                this.toolStripStatusLabel1.Text = String.Empty;
-                this.toolStripProgressBar1.Enabled = false;
-                this.toolStripProgressBar1.Visible = false;
-                MessageBox.Show(e.Error.Message);
-            }
-            else if (e.Cancelled)
-            {
-                // Next, handle the case where the user canceled the operation.
-                // Note that due to a race condition in the DoWork event handler, the Cancelled
-                // flag may not have been set, even though CancelAsync was called.
-                this.toolStripStatusLabel1.Text = Properties.Resources.Canceled;
-            }
-            else
-            {
-                // Finally, handle the case where the operation succeeded.
-                this.toolStripStatusLabel1.Text = Properties.Resources.SplitPDF_completed;
-                MessageBox.Show(this, Properties.Resources.SplitPDF_completed + Properties.Resources.check_output_in + Path.GetDirectoryName(e.Result.ToString()));
-            }
-            this.toolStripStatusLabel1.Text = String.Empty;
             this.toolStripProgressBar1.Enabled = false;
             this.toolStripProgressBar1.Visible = false;
-            this.textBox1.Cursor = Cursors.Default;
-            this.Cursor = Cursors.Default;
-        }
-
-        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
-        {
-            ArrayList args = (ArrayList)e.Argument;
-            string[] inputFiles = (string[])args[0];
-            string outputFile = (string)args[1];
-            ImageIOHelper.MergeTiff(inputFiles, outputFile);
-            e.Result = outputFile;
-        }
-
-        private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-
-        }
-
-        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
+            
             // First, handle the case where an exception was thrown.
             if (e.Error != null)
             {
                 this.toolStripStatusLabel1.Text = String.Empty;
-                this.toolStripProgressBar1.Enabled = false;
-                this.toolStripProgressBar1.Visible = false;
-                //MessageBox.Show(e.Error.Message);
                 MessageBox.Show(this, e.Error.Message, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (e.Cancelled)
@@ -193,12 +190,10 @@ namespace VietOCR.NET
             else
             {
                 // Finally, handle the case where the operation succeeded.
-                this.toolStripStatusLabel1.Text = Properties.Resources.Mergecompleted;
-                MessageBox.Show(this, Properties.Resources.Mergecompleted + Path.GetFileName(e.Result.ToString()) + Properties.Resources.created, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.toolStripStatusLabel1.Text = Properties.Resources.SplitPDF_completed;
+                MessageBox.Show(this, Properties.Resources.SplitPDF_completed + "\n" + Properties.Resources.check_output_in + Path.GetDirectoryName(e.Result.ToString()));
             }
             this.toolStripStatusLabel1.Text = String.Empty;
-            this.toolStripProgressBar1.Enabled = false;
-            this.toolStripProgressBar1.Visible = false;
             this.textBox1.Cursor = Cursors.Default;
             this.Cursor = Cursors.Default;
         }
@@ -214,7 +209,5 @@ namespace VietOCR.NET
             base.SaveRegistryInfo(regkey);
             regkey.SetValue(strImageFolder, imageFolder);
         }
-
-
     }
 }
