@@ -94,6 +94,10 @@ public class GuiWithTools extends GuiWithSettings {
 
                     @Override
                     protected void done() {
+                        jLabelStatus.setText(bundle.getString("Mergecompleted"));
+                        jProgressBar1.setIndeterminate(false);
+                        jProgressBar1.setString(bundle.getString("Mergecompleted"));
+
                         try {
                             File result = get();
                             JOptionPane.showMessageDialog(GuiWithTools.this, bundle.getString("Mergecompleted") + result.getName() + bundle.getString("created"), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
@@ -114,9 +118,7 @@ public class GuiWithTools extends GuiWithSettings {
                             e.printStackTrace();
                             JOptionPane.showMessageDialog(GuiWithTools.this, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
                         } finally {
-                            jLabelStatus.setText(bundle.getString("Mergecompleted"));
-                            jProgressBar1.setIndeterminate(false);
-                            jProgressBar1.setString(bundle.getString("Mergecompleted"));
+                            jProgressBar1.setVisible(false);
                             getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
                             getGlassPane().setVisible(false);
                         }
@@ -165,8 +167,8 @@ public class GuiWithTools extends GuiWithSettings {
 
                         while (startPage <= pageCount) {
                             int endPage = startPage + pageRange - 1;
-                            String outputFileName = outputFilename + startPage + ".pdf";
-                            Utilities.splitPdf(inputFilename, outputFileName, String.valueOf(startPage), String.valueOf(endPage));
+                            String outputFile = outputFilename + startPage + ".pdf";
+                            Utilities.splitPdf(inputFilename, outputFile, String.valueOf(startPage), String.valueOf(endPage));
                             startPage = endPage + 1;
                         }
                     }
@@ -176,6 +178,10 @@ public class GuiWithTools extends GuiWithSettings {
 
                 @Override
                 protected void done() {
+                    jLabelStatus.setText(bundle.getString("SplitPDF_completed."));
+                    jProgressBar1.setIndeterminate(false);
+                    jProgressBar1.setString(bundle.getString("SplitPDF_completed."));
+                    
                     try {
                         String result = get();
                         JOptionPane.showMessageDialog(GuiWithTools.this, bundle.getString("SplitPDF_completed.") + bundle.getString("check_output_in") + new File(result).getParent());
@@ -196,9 +202,7 @@ public class GuiWithTools extends GuiWithSettings {
                         e.printStackTrace();
                         JOptionPane.showMessageDialog(GuiWithTools.this, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
                     } finally {
-                        jLabelStatus.setText(bundle.getString("SplitPDF_completed."));
-                        jProgressBar1.setIndeterminate(false);
-                        jProgressBar1.setString(bundle.getString("SplitPDF_completed."));
+                        jProgressBar1.setVisible(false);
                         getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
                         getGlassPane().setVisible(false);
                     }
