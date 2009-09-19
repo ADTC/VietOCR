@@ -6,12 +6,14 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
+using System.IO;
 
 namespace VietOCR.NET
 {
     public partial class SplitPdfDialog : Form
     {
         SplitPdfArgs args;
+        string pdfFolder = null;
 
         internal SplitPdfArgs Args
         {
@@ -44,18 +46,21 @@ namespace VietOCR.NET
         private void buttonBrowseInput_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
+            dialog.InitialDirectory = pdfFolder;
             dialog.Filter = "PDF (*.pdf)|*.pdf";
             dialog.RestoreDirectory = true;
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 this.textBoxInput.Text = dialog.FileName;
+                pdfFolder = Path.GetDirectoryName(dialog.FileName);
             }
         }
 
         private void buttonBrowseOutput_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
+            dialog.InitialDirectory = pdfFolder;
             dialog.Filter = "PDF (*.pdf)|*.pdf";
             dialog.RestoreDirectory = true;
 
@@ -65,7 +70,7 @@ namespace VietOCR.NET
 
                 if (!this.textBoxOutput.Text.EndsWith(".pdf") )
                 {
-                    this.textBoxOutput.Text += "pdf"; // seems not needed
+                    this.textBoxOutput.Text += ".pdf"; // seems not needed
                 }
             }
         }
