@@ -21,7 +21,7 @@ namespace ConvertPDF
     {
         #region Static
         /// <summary>Use to check for default transformation</summary>
-        private static bool useSimpleAnsiConversion = true;
+        //private static bool useSimpleAnsiConversion = true;
         /// <summary>Thanks to 	tchu_2000 to remind that u should never hardcode strings! :)</summary>
         private const string GS_OutputFileFormat = "-sOutputFile={0}";
         private const string GS_DeviceFormat = "-sDEVICE={0}";
@@ -419,7 +419,7 @@ namespace ConvertPDF
                     }
                 }
             }
-            catch (DllNotFoundException ex)
+            catch (DllNotFoundException)
             {//in this case the dll we r using isn't the dll we expect
                 ClearParameters(ref aGCHandle, ref gchandleArgs);
                 if (throwException)
@@ -520,7 +520,7 @@ namespace ConvertPDF
                     throw new ApplicationException("I can't create a new istance of Ghostscript please verify no other istance are running!");
                 }
             }
-            catch (DllNotFoundException ex)
+            catch (DllNotFoundException)
             {//in this case the dll we r using isn't the dll we expect
                 ClearParameters(ref aGCHandle, ref gchandleArgs);
                 throw new ApplicationException("The gsdll32.dll wasn't found in default dlls search path " +
