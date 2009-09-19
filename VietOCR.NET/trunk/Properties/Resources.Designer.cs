@@ -124,6 +124,15 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to \nPlease check output file(s) in\u0020.
+        /// </summary>
+        internal static string check_output_in {
+            get {
+                return ResourceManager.GetString("check_output_in", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  has been created..
         /// </summary>
         internal static string created {
@@ -138,6 +147,15 @@ namespace VietOCR.NET.Properties {
         internal static string loadImage {
             get {
                 return ResourceManager.GetString("loadImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Merge TIFF running....
+        /// </summary>
+        internal static string Merge_running {
+            get {
+                return ResourceManager.GetString("Merge_running", resourceCulture);
             }
         }
         
@@ -264,6 +282,33 @@ namespace VietOCR.NET.Properties {
         internal static string selectLanguage {
             get {
                 return ResourceManager.GetString("selectLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Split PDF completed..
+        /// </summary>
+        internal static string SplitPDF_completed {
+            get {
+                return ResourceManager.GetString("SplitPDF_completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Split PDF running....
+        /// </summary>
+        internal static string SplitPDF_running {
+            get {
+                return ResourceManager.GetString("SplitPDF_running", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to \nYou may need to split up the PDF file into smaller files before proceed..
+        /// </summary>
+        internal static string suggest_split {
+            get {
+                return ResourceManager.GetString("suggest_split", resourceCulture);
             }
         }
     }

@@ -186,4 +186,19 @@
   <data name="Mergecompleted" xml:space="preserve">
     <value>Merge completed. </value>
   </data>
+  <data name="check_output_in" xml:space="preserve">
+    <value>\nPlease check output file(s) in\u0020</value>
+  </data>
+  <data name="Merge_running" xml:space="preserve">
+    <value>Merge TIFF running...</value>
+  </data>
+  <data name="SplitPDF_completed" xml:space="preserve">
+    <value>Split PDF completed.</value>
+  </data>
+  <data name="SplitPDF_running" xml:space="preserve">
+    <value>Split PDF running...</value>
+  </data>
+  <data name="suggest_split" xml:space="preserve">
+    <value>\nYou may need to split up the PDF file into smaller files before proceed.</value>
+  </data>
 </root>
