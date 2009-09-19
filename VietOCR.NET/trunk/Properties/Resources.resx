@@ -184,10 +184,10 @@
     <value> has been created.</value>
   </data>
   <data name="Mergecompleted" xml:space="preserve">
-    <value>Merge completed. </value>
+    <value>Merge TIFF completed. </value>
   </data>
   <data name="check_output_in" xml:space="preserve">
-    <value>\nPlease check output file(s) in\u0020</value>
+    <value>Please check output file(s) in </value>
   </data>
   <data name="Merge_running" xml:space="preserve">
     <value>Merge TIFF running...</value>
@@ -199,6 +199,6 @@
     <value>Split PDF running...</value>
   </data>
   <data name="suggest_split" xml:space="preserve">
-    <value>\nYou may need to split up the PDF file into smaller files before proceed.</value>
+    <value>You may need to split up the PDF file into smaller files before proceed.</value>
   </data>
 </root>
