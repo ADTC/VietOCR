@@ -17,13 +17,9 @@ package net.sourceforge.vietocr;
 
 import java.awt.Cursor;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Locale;
-import javax.swing.JFileChooser;
+import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
 import net.sourceforge.vietpad.SimpleFilter;
 
 public class GuiWithTools extends GuiWithSettings {
@@ -62,7 +58,7 @@ public class GuiWithTools extends GuiWithSettings {
         jf.setAcceptAllFileFilterUsed(false);
         if (jf.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             selectedFilter = jf.getFileFilter();
-            File[] inputs = jf.getSelectedFiles();
+            final File[] inputs = jf.getSelectedFiles();
             imageFolder = jf.getCurrentDirectory();
 
             jf = new JFileChooser();
@@ -71,23 +67,63 @@ public class GuiWithTools extends GuiWithSettings {
             jf.setFileFilter(tiffFilter);
             jf.setAcceptAllFileFilterUsed(false);
             if (jf.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-                File outputTiff = jf.getSelectedFile();
-                if (!(outputTiff.getName().endsWith(".tif") || outputTiff.getName().endsWith(".tiff"))) {
-                    outputTiff = new File(outputTiff.getParent(), outputTiff.getName() + ".tif");
+                File selectedFile = jf.getSelectedFile();
+                if (!(selectedFile.getName().endsWith(".tif") || selectedFile.getName().endsWith(".tiff"))) {
+                    selectedFile = new File(selectedFile.getParent(), selectedFile.getName() + ".tif");
                 }
 
+                final File outputTiff = selectedFile;
                 if (outputTiff.exists()) {
                     outputTiff.delete();
                 }
 
-                try {
-                    ImageIOHelper.mergeTiff(inputs, outputTiff);
-                    JOptionPane.showMessageDialog(this, bundle.getString("Mergecompleted") + outputTiff.getName() + bundle.getString("created"), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, e.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
-                } catch (OutOfMemoryError oome) {
-                    JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
-                }
+                jLabelStatus.setText(bundle.getString("Merge_running..."));
+                jProgressBar1.setIndeterminate(true);
+                jProgressBar1.setString(bundle.getString("Merge_running..."));
+                jProgressBar1.setVisible(true);
+                getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                getGlassPane().setVisible(true);
+
+                SwingWorker worker = new SwingWorker<File, Void>() {
+
+                    @Override
+                    protected File doInBackground() throws Exception {
+                        ImageIOHelper.mergeTiff(inputs, outputTiff);
+                        return outputTiff;
+                    }
+
+                    @Override
+                    protected void done() {
+                        try {
+                            File result = get();
+                            JOptionPane.showMessageDialog(GuiWithTools.this, bundle.getString("Mergecompleted") + result.getName() + bundle.getString("created"), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+                        } catch (InterruptedException ignore) {
+                            ignore.printStackTrace();
+                        } catch (java.util.concurrent.ExecutionException e) {
+                            String why = null;
+                            Throwable cause = e.getCause();
+                            if (cause != null) {
+                                if (cause instanceof OutOfMemoryError) {
+                                    why = bundle.getString("OutOfMemoryError");
+                                } else {
+                                    why = cause.getMessage();
+                                }
+                            } else {
+                                why = e.getMessage();
+                            }
+                            e.printStackTrace();
+                            JOptionPane.showMessageDialog(GuiWithTools.this, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
+                        } finally {
+                            jLabelStatus.setText(bundle.getString("Mergecompleted"));
+                            jProgressBar1.setIndeterminate(false);
+                            jProgressBar1.setString(bundle.getString("Mergecompleted"));
+                            getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                            getGlassPane().setVisible(false);
+                        }
+                    }
+                };
+
+                worker.execute();
             }
         }
     }
@@ -142,7 +178,7 @@ public class GuiWithTools extends GuiWithSettings {
                 protected void done() {
                     try {
                         String result = get();
-                        JOptionPane.showMessageDialog(GuiWithTools.this, "Split PDF completed.\nPlease check output file(s) in " + new File(result).getParent());
+                        JOptionPane.showMessageDialog(GuiWithTools.this, bundle.getString("SplitPDF_completed.") + bundle.getString("check_output_in") + new File(result).getParent());
                     } catch (InterruptedException ignore) {
                         ignore.printStackTrace();
                     } catch (java.util.concurrent.ExecutionException e) {
@@ -150,7 +186,7 @@ public class GuiWithTools extends GuiWithSettings {
                         Throwable cause = e.getCause();
                         if (cause != null) {
                             if (cause instanceof OutOfMemoryError) {
-                                why = bundle.getString("_has_run_out_of_memory.\nPlease_restart_");
+                                why = bundle.getString("OutOfMemoryError");
                             } else {
                                 why = cause.getMessage();
                             }
