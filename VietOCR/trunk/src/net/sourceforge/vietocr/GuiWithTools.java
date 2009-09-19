@@ -15,11 +15,15 @@
  */
 package net.sourceforge.vietocr;
 
+import java.awt.Cursor;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Locale;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import net.sourceforge.vietpad.SimpleFilter;
 
 public class GuiWithTools extends GuiWithSettings {
@@ -91,7 +95,82 @@ public class GuiWithTools extends GuiWithSettings {
     @Override
     void splitPdf() {
         SplitPdfDialog dialog = new SplitPdfDialog(this, true);
-        dialog.setVisible(true);
+        if (dialog.showDialog() == JOptionPane.OK_OPTION) {
+            final SplitPdfArgs args = dialog.getArgs();
+
+            jLabelStatus.setText(bundle.getString("SplitPDF_running..."));
+            jProgressBar1.setIndeterminate(true);
+            jProgressBar1.setString(bundle.getString("SplitPDF_running..."));
+            jProgressBar1.setVisible(true);
+            getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            getGlassPane().setVisible(true);
+
+            SwingWorker worker = new SwingWorker<String, Void>() {
+
+                @Override
+                protected String doInBackground() throws Exception {
+                    String inputFilename = args.getInputFilename();
+                    String outputFilename = args.getOutputFilename();
+
+                    if (args.isPages()) {
+                        Utilities.splitPdf(inputFilename, outputFilename, args.getFromPage(), args.getToPage());
+                    } else {
+                        if (outputFilename.endsWith(".pdf")) {
+                            outputFilename = outputFilename.substring(0, outputFilename.lastIndexOf(".pdf"));
+                        }
+
+                        int pageCount = Utilities.getPdfPageCount(inputFilename);
+                        if (pageCount == 0) {
+                            throw new RuntimeException("Split PDF failed.");
+                        }
+
+                        int pageRange = Integer.parseInt(args.getNumOfPages());
+                        int startPage = 1;
+
+                        while (startPage <= pageCount) {
+                            int endPage = startPage + pageRange - 1;
+                            String outputFileName = outputFilename + startPage + ".pdf";
+                            Utilities.splitPdf(inputFilename, outputFileName, String.valueOf(startPage), String.valueOf(endPage));
+                            startPage = endPage + 1;
+                        }
+                    }
+
+                    return outputFilename;
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        String result = get();
+                        JOptionPane.showMessageDialog(GuiWithTools.this, "Split PDF completed.\nPlease check output file(s) in " + new File(result).getParent());
+                    } catch (InterruptedException ignore) {
+                        ignore.printStackTrace();
+                    } catch (java.util.concurrent.ExecutionException e) {
+                        String why = null;
+                        Throwable cause = e.getCause();
+                        if (cause != null) {
+                            if (cause instanceof OutOfMemoryError) {
+                                why = bundle.getString("_has_run_out_of_memory.\nPlease_restart_");
+                            } else {
+                                why = cause.getMessage();
+                            }
+                        } else {
+                            why = e.getMessage();
+                        }
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(GuiWithTools.this, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
+                    } finally {
+                        jLabelStatus.setText(bundle.getString("SplitPDF_completed."));
+                        jProgressBar1.setIndeterminate(false);
+                        jProgressBar1.setString(bundle.getString("SplitPDF_completed."));
+                        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                        getGlassPane().setVisible(false);
+                    }
+                }
+            };
+
+            worker.execute();
+        }
     }
 
     @Override
