@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SplitPdfDialog));
             this.buttonSplit = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.textBoxFrom = new System.Windows.Forms.TextBox();
@@ -44,166 +45,171 @@
             this.buttonBrowseOutput = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // buttonSplit
             // 
-            this.buttonSplit.Location = new System.Drawing.Point(93, 135);
+            this.buttonSplit.AccessibleDescription = null;
+            this.buttonSplit.AccessibleName = null;
+            resources.ApplyResources(this.buttonSplit, "buttonSplit");
+            this.buttonSplit.BackgroundImage = null;
+            this.buttonSplit.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.buttonSplit.Font = null;
             this.buttonSplit.Name = "buttonSplit";
-            this.buttonSplit.Size = new System.Drawing.Size(75, 23);
-            this.buttonSplit.TabIndex = 0;
-            this.buttonSplit.Text = "Split";
             this.buttonSplit.UseVisualStyleBackColor = true;
             this.buttonSplit.Click += new System.EventHandler(this.buttonSplit_Click);
             // 
             // buttonCancel
             // 
+            this.buttonCancel.AccessibleDescription = null;
+            this.buttonCancel.AccessibleName = null;
+            resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.BackgroundImage = null;
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(174, 135);
+            this.buttonCancel.Font = null;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 1;
-            this.buttonCancel.Text = "Close";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // textBoxFrom
             // 
-            this.textBoxFrom.Location = new System.Drawing.Point(150, 77);
+            this.textBoxFrom.AccessibleDescription = null;
+            this.textBoxFrom.AccessibleName = null;
+            resources.ApplyResources(this.textBoxFrom, "textBoxFrom");
+            this.textBoxFrom.BackgroundImage = null;
+            this.textBoxFrom.Font = null;
             this.textBoxFrom.Name = "textBoxFrom";
-            this.textBoxFrom.Size = new System.Drawing.Size(30, 20);
-            this.textBoxFrom.TabIndex = 2;
             // 
             // textBoxTo
             // 
-            this.textBoxTo.Location = new System.Drawing.Point(207, 77);
+            this.textBoxTo.AccessibleDescription = null;
+            this.textBoxTo.AccessibleName = null;
+            resources.ApplyResources(this.textBoxTo, "textBoxTo");
+            this.textBoxTo.BackgroundImage = null;
+            this.textBoxTo.Font = null;
             this.textBoxTo.Name = "textBoxTo";
-            this.textBoxTo.Size = new System.Drawing.Size(30, 20);
-            this.textBoxTo.TabIndex = 3;
             // 
             // radioButtonPages
             // 
-            this.radioButtonPages.AutoSize = true;
+            this.radioButtonPages.AccessibleDescription = null;
+            this.radioButtonPages.AccessibleName = null;
+            resources.ApplyResources(this.radioButtonPages, "radioButtonPages");
+            this.radioButtonPages.BackgroundImage = null;
             this.radioButtonPages.Checked = true;
-            this.radioButtonPages.Location = new System.Drawing.Point(37, 80);
+            this.radioButtonPages.Font = null;
             this.radioButtonPages.Name = "radioButtonPages";
-            this.radioButtonPages.Size = new System.Drawing.Size(55, 17);
-            this.radioButtonPages.TabIndex = 4;
             this.radioButtonPages.TabStop = true;
-            this.radioButtonPages.Text = "Pages";
             this.radioButtonPages.UseVisualStyleBackColor = true;
             this.radioButtonPages.CheckedChanged += new System.EventHandler(this.radioButtonPages_CheckedChanged);
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(116, 82);
+            this.label1.AccessibleDescription = null;
+            this.label1.AccessibleName = null;
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Font = null;
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "from:";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(183, 82);
+            this.label2.AccessibleDescription = null;
+            this.label2.AccessibleName = null;
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Font = null;
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(19, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "to:";
             // 
             // radioButtonRange
             // 
-            this.radioButtonRange.AutoSize = true;
-            this.radioButtonRange.Location = new System.Drawing.Point(37, 103);
+            this.radioButtonRange.AccessibleDescription = null;
+            this.radioButtonRange.AccessibleName = null;
+            resources.ApplyResources(this.radioButtonRange, "radioButtonRange");
+            this.radioButtonRange.BackgroundImage = null;
+            this.radioButtonRange.Font = null;
             this.radioButtonRange.Name = "radioButtonRange";
-            this.radioButtonRange.Size = new System.Drawing.Size(46, 17);
-            this.radioButtonRange.TabIndex = 7;
-            this.radioButtonRange.Text = "Files";
             this.radioButtonRange.UseVisualStyleBackColor = true;
             this.radioButtonRange.CheckedChanged += new System.EventHandler(this.radioButtonRange_CheckedChanged);
             // 
             // textBoxNumOfPages
             // 
-            this.textBoxNumOfPages.Location = new System.Drawing.Point(207, 100);
+            this.textBoxNumOfPages.AccessibleDescription = null;
+            this.textBoxNumOfPages.AccessibleName = null;
+            resources.ApplyResources(this.textBoxNumOfPages, "textBoxNumOfPages");
+            this.textBoxNumOfPages.BackgroundImage = null;
+            this.textBoxNumOfPages.Font = null;
             this.textBoxNumOfPages.Name = "textBoxNumOfPages";
-            this.textBoxNumOfPages.Size = new System.Drawing.Size(30, 20);
-            this.textBoxNumOfPages.TabIndex = 8;
-            this.textBoxNumOfPages.Text = "50";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(99, 105);
+            this.label3.AccessibleDescription = null;
+            this.label3.AccessibleName = null;
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Font = null;
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(105, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "No. of pages per file:";
             // 
             // textBoxInput
             // 
-            this.textBoxInput.Location = new System.Drawing.Point(63, 21);
+            this.textBoxInput.AccessibleDescription = null;
+            this.textBoxInput.AccessibleName = null;
+            resources.ApplyResources(this.textBoxInput, "textBoxInput");
+            this.textBoxInput.BackgroundImage = null;
+            this.textBoxInput.Font = null;
             this.textBoxInput.Name = "textBoxInput";
-            this.textBoxInput.Size = new System.Drawing.Size(154, 20);
-            this.textBoxInput.TabIndex = 10;
             // 
             // textBoxOutput
             // 
-            this.textBoxOutput.Location = new System.Drawing.Point(63, 47);
+            this.textBoxOutput.AccessibleDescription = null;
+            this.textBoxOutput.AccessibleName = null;
+            resources.ApplyResources(this.textBoxOutput, "textBoxOutput");
+            this.textBoxOutput.BackgroundImage = null;
+            this.textBoxOutput.Font = null;
             this.textBoxOutput.Name = "textBoxOutput";
-            this.textBoxOutput.Size = new System.Drawing.Size(154, 20);
-            this.textBoxOutput.TabIndex = 11;
             // 
             // buttonBrowseInput
             // 
-            this.buttonBrowseInput.Location = new System.Drawing.Point(222, 19);
+            this.buttonBrowseInput.AccessibleDescription = null;
+            this.buttonBrowseInput.AccessibleName = null;
+            resources.ApplyResources(this.buttonBrowseInput, "buttonBrowseInput");
+            this.buttonBrowseInput.BackgroundImage = null;
+            this.buttonBrowseInput.Font = null;
             this.buttonBrowseInput.Name = "buttonBrowseInput";
-            this.buttonBrowseInput.Size = new System.Drawing.Size(27, 23);
-            this.buttonBrowseInput.TabIndex = 12;
-            this.buttonBrowseInput.Text = "...";
             this.buttonBrowseInput.UseVisualStyleBackColor = true;
             this.buttonBrowseInput.Click += new System.EventHandler(this.buttonBrowseInput_Click);
             // 
             // buttonBrowseOutput
             // 
-            this.buttonBrowseOutput.Location = new System.Drawing.Point(222, 45);
+            this.buttonBrowseOutput.AccessibleDescription = null;
+            this.buttonBrowseOutput.AccessibleName = null;
+            resources.ApplyResources(this.buttonBrowseOutput, "buttonBrowseOutput");
+            this.buttonBrowseOutput.BackgroundImage = null;
+            this.buttonBrowseOutput.Font = null;
             this.buttonBrowseOutput.Name = "buttonBrowseOutput";
-            this.buttonBrowseOutput.Size = new System.Drawing.Size(27, 23);
-            this.buttonBrowseOutput.TabIndex = 13;
-            this.buttonBrowseOutput.Text = "...";
             this.buttonBrowseOutput.UseVisualStyleBackColor = true;
             this.buttonBrowseOutput.Click += new System.EventHandler(this.buttonBrowseOutput_Click);
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 24);
+            this.label4.AccessibleDescription = null;
+            this.label4.AccessibleName = null;
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Font = null;
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 13);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Input:";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(19, 50);
+            this.label5.AccessibleDescription = null;
+            this.label5.AccessibleName = null;
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Font = null;
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 13);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Output:";
-            // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // SplitPdfDialog
             // 
             this.AcceptButton = this.buttonSplit;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AccessibleDescription = null;
+            this.AccessibleName = null;
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = null;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(274, 178);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.buttonBrowseOutput);
@@ -220,9 +226,9 @@
             this.Controls.Add(this.textBoxFrom);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSplit);
+            this.Font = null;
+            this.Icon = null;
             this.Name = "SplitPdfDialog";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Split PDF";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,7 +252,6 @@
         private System.Windows.Forms.Button buttonBrowseOutput;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
