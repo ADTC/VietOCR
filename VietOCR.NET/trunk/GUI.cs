@@ -550,12 +550,13 @@ namespace VietOCR.NET
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            this.toolStripProgressBar1.Enabled = false;
+            this.toolStripProgressBar1.Visible = false;
+            
             // First, handle the case where an exception was thrown.
             if (e.Error != null)
             {
                 this.toolStripStatusLabel1.Text = String.Empty;
-                this.toolStripProgressBar1.Enabled = false;
-                this.toolStripProgressBar1.Visible = false;
                 MessageBox.Show(e.Error.Message, Properties.Resources.OCROperation);
             }
             else if (e.Cancelled)
@@ -578,18 +579,17 @@ namespace VietOCR.NET
             this.toolStripBtnOCR.Enabled = true;
             this.oCRToolStripMenuItem.Enabled = true;
             this.oCRAllPagesToolStripMenuItem.Enabled = true;
-            this.toolStripProgressBar1.Enabled = false;
-            this.toolStripProgressBar1.Visible = false;
         }
 
         private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            this.toolStripProgressBar1.Enabled = false;
+            this.toolStripProgressBar1.Visible = false;
+
             // First, handle the case where an exception was thrown.
             if (e.Error != null)
             {
                 this.toolStripStatusLabel1.Text = String.Empty;
-                this.toolStripProgressBar1.Enabled = false;
-                this.toolStripProgressBar1.Visible = false;
                 MessageBox.Show(e.Error.Message, Properties.Resources.ScanningOperation);
             }
             else if (e.Cancelled)
@@ -611,8 +611,6 @@ namespace VietOCR.NET
             this.textBox1.Cursor = Cursors.Default;
             this.toolStripBtnScan.Enabled = true;
             this.scanToolStripMenuItem.Enabled = true;
-            this.toolStripProgressBar1.Enabled = false;
-            this.toolStripProgressBar1.Visible = false;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
