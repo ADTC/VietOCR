@@ -72,6 +72,7 @@ Version 1.1 (6 September 2009)
 Version 1.2 (10 September 2009)
 - Added support for PDF-to-image conversion using GPL Ghostscript
 
-Version 1.3 Beta (13 September 2009)
+Version 1.3 Beta (19 September 2009)
 - Improved exception handling with appropriate error messages
 - Improved handling of PDF documents that has many (>60) pages. Putting too many images, as a result of PDF extraction, in a multi-page TIFF eventually will generate GDI+ exceptions
+- Implemented Split PDF functionality
