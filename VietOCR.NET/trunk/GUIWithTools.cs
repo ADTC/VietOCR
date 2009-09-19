@@ -36,7 +36,7 @@ namespace VietOCR.NET
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 filterIndex = openFileDialog1.FilterIndex;
-                imageFolder = Path.GetDirectoryName(openFileDialog1.FileName); 
+                imageFolder = Path.GetDirectoryName(openFileDialog1.FileName);
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.InitialDirectory = imageFolder;
                 saveFileDialog1.Title = Properties.Resources.Save + " Multi-page TIFF Image";
@@ -64,8 +64,94 @@ namespace VietOCR.NET
         {
             SplitPdfDialog dialog = new SplitPdfDialog();
             dialog.Owner = this;
-            
-            dialog.ShowDialog();
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                this.toolStripStatusLabel1.Text = "Splitting PDF";
+                //this.pictureBox1.UseWaitCursor = true;
+                this.textBox1.Cursor = Cursors.WaitCursor;
+                this.toolStripProgressBar1.Enabled = true;
+                this.toolStripProgressBar1.Visible = true;
+                this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
+
+
+                // Start the asynchronous operation.
+                backgroundWorker1.RunWorkerAsync(dialog.Args);
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            SplitPdfArgs args = (SplitPdfArgs)e.Argument;
+
+            if (args.Pages)
+            {
+                Utilities.SplitPdf(args.InputFilename, args.OutputFilename, args.FromPage, args.ToPage);
+            }
+            else
+            {
+                string outputFilename = String.Empty;
+
+                if (args.OutputFilename.EndsWith(".pdf"))
+                {
+                    outputFilename = args.OutputFilename.Substring(0, args.OutputFilename.LastIndexOf(".pdf"));
+                }
+
+                int pageCount = Utilities.GetPdfPageCount(args.InputFilename);
+                if (pageCount == 0)
+                {
+                    throw new ApplicationException("Split PDF failed.");
+                }
+
+                int pageRange = Int32.Parse(args.NumOfPages);
+                int startPage = 1;
+
+                while (startPage <= pageCount)
+                {
+                    int endPage = startPage + pageRange - 1;
+                    string outputFileName = outputFilename + startPage + ".pdf";
+                    Utilities.SplitPdf(args.InputFilename, outputFileName, startPage.ToString(), endPage.ToString());
+                    startPage = endPage + 1;
+                }
+            }
+
+            e.Result = args.OutputFilename;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // First, handle the case where an exception was thrown.
+            if (e.Error != null)
+            {
+                this.toolStripStatusLabel1.Text = String.Empty;
+                this.toolStripProgressBar1.Enabled = false;
+                this.toolStripProgressBar1.Visible = false;
+                MessageBox.Show(e.Error.Message);
+            }
+            else if (e.Cancelled)
+            {
+                // Next, handle the case where the user canceled the operation.
+                // Note that due to a race condition in the DoWork event handler, the Cancelled
+                // flag may not have been set, even though CancelAsync was called.
+                this.toolStripStatusLabel1.Text = Properties.Resources.Canceled;
+            }
+            else
+            {
+                // Finally, handle the case where the operation succeeded.
+                this.toolStripStatusLabel1.Text = "Split PDF completed";
+                MessageBox.Show(this, "Split PDF completed.\nPlease check output file(s) in " + Path.GetDirectoryName(e.Result.ToString()));
+            }
+            this.toolStripStatusLabel1.Text = String.Empty;
+            this.toolStripProgressBar1.Enabled = false;
+            this.toolStripProgressBar1.Visible = false;
+            this.textBox1.Cursor = Cursors.Default;
+            this.Cursor = Cursors.Default;
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
         }
 
         protected override void LoadRegistryInfo(RegistryKey regkey)
