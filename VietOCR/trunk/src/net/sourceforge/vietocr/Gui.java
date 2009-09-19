@@ -1369,7 +1369,7 @@ public class Gui extends javax.swing.JFrame {
                 workingTiffFile = Utilities.convertPdf2Tiff(selectedFile);
                 iioImageList = ImageIOHelper.getIIOImageList(workingTiffFile);
             } catch (OutOfMemoryError oome) {
-                JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, oome.getMessage() + "\nYou may need to split up the PDF file into smaller files before proceed.", bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
                 return;
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
@@ -1681,7 +1681,7 @@ private void jMenuItemSplitPdfActionPerformed(java.awt.event.ActionEvent evt) {/
     private javax.swing.JLabel jImageLabel;
     private javax.swing.JLabel jLabelCurIndex;
     private javax.swing.JLabel jLabelLanguage;
-    private javax.swing.JLabel jLabelStatus;
+    protected javax.swing.JLabel jLabelStatus;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu jMenuCommand;
     private javax.swing.JMenu jMenuFile;
@@ -1710,7 +1710,7 @@ private void jMenuItemSplitPdfActionPerformed(java.awt.event.ActionEvent evt) {/
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelStatus;
-    private javax.swing.JProgressBar jProgressBar1;
+    protected javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemEng;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemViet;
     private javax.swing.JScrollPane jScrollPane1;

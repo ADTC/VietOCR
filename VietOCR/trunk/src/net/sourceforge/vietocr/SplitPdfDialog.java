@@ -16,11 +16,17 @@
 package net.sourceforge.vietocr;
 
 import java.awt.event.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import net.sourceforge.vietpad.SimpleFilter;
 
 public class SplitPdfDialog extends javax.swing.JDialog {
+
+    private SplitPdfArgs args;
+    private int actionSelected = -1;
+    protected ResourceBundle bundle;
 
     /** Creates new form SplitPdfDialog */
     public SplitPdfDialog(java.awt.Frame parent, boolean modal) {
@@ -75,7 +81,8 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Split PDF");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/SplitPdfDialog"); // NOI18N
+        setTitle(bundle.getString("this.Title")); // NOI18N
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 10, 20));
@@ -137,8 +144,8 @@ public class SplitPdfDialog extends javax.swing.JDialog {
 
         buttonGroup1.add(jRadioButtonPages);
         jRadioButtonPages.setSelected(true);
-        jRadioButtonPages.setText("Pages");
-        jRadioButtonPages.setToolTipText("Extract pages to a file");
+        jRadioButtonPages.setText(bundle.getString("jRadioButtonPages.Text")); // NOI18N
+        jRadioButtonPages.setToolTipText(bundle.getString("jRadioButtonPages.ToolTipText")); // NOI18N
         jRadioButtonPages.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonPagesActionPerformed(evt);
@@ -151,7 +158,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         jPanel1.add(jRadioButtonPages, gridBagConstraints);
 
-        jLabelFrom.setText("from:");
+        jLabelFrom.setText(bundle.getString("jLabelFrom.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -166,7 +173,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(10, 8, 0, 18);
         jPanel1.add(jTextFieldFrom, gridBagConstraints);
 
-        jLabelTo.setText("to:");
+        jLabelTo.setText(bundle.getString("jLabelTo.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
@@ -182,8 +189,8 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         jPanel1.add(jTextFieldTo, gridBagConstraints);
 
         buttonGroup1.add(jRadioButtonFiles);
-        jRadioButtonFiles.setText("Files");
-        jRadioButtonFiles.setToolTipText("Split into multiple files");
+        jRadioButtonFiles.setText(bundle.getString("jRadioButtonFiles.Text")); // NOI18N
+        jRadioButtonFiles.setToolTipText(bundle.getString("jRadioButtonFiles.ToolTipText")); // NOI18N
         jRadioButtonFiles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonFilesActionPerformed(evt);
@@ -195,7 +202,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel1.add(jRadioButtonFiles, gridBagConstraints);
 
-        jLabelNumPages.setText("No. of pages per file:");
+        jLabelNumPages.setText(bundle.getString("jLabelNumPages.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -218,8 +225,8 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 16, 24));
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        jButtonSplit.setText("Split");
-        jButtonSplit.setToolTipText("Split");
+        jButtonSplit.setText(bundle.getString("jButtonSplit.Text")); // NOI18N
+        jButtonSplit.setToolTipText(bundle.getString("jButtonSplit.ToolTipText")); // NOI18N
         jButtonSplit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSplitActionPerformed(evt);
@@ -227,8 +234,8 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         });
         jPanel2.add(jButtonSplit);
 
-        jButtonCancel.setText("Close");
-        jButtonCancel.setToolTipText("Close");
+        jButtonCancel.setText(bundle.getString("jButtonCancel.Text")); // NOI18N
+        jButtonCancel.setToolTipText(bundle.getString("jButtonCancel.ToolTipText")); // NOI18N
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelActionPerformed(evt);
@@ -268,39 +275,22 @@ public class SplitPdfDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonOutputActionPerformed
 
     private void jButtonSplitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSplitActionPerformed
-        try {
-            String inputFilename = this.jTextFieldInputFile.getText();
-            String outputFilename = this.jTextFieldOutputFile.getText();
+        args = new SplitPdfArgs();
+        args.setInputFilename(this.jTextFieldInputFile.getText());
+        args.setOutputFilename(this.jTextFieldOutputFile.getText());
+        args.setFromPage(this.jTextFieldFrom.getText());
+        args.setToPage(this.jTextFieldTo.getText());
+        args.setNumOfPages(this.jTextFieldNumOfPages.getText());
+        args.setPages(this.jRadioButtonPages.isSelected());
 
-            if (this.jRadioButtonPages.isSelected()) {
-                Utilities.splitPdf(inputFilename, outputFilename, this.jTextFieldFrom.getText(), this.jTextFieldTo.getText());
-            } else {
-                if (outputFilename.endsWith(".pdf")) {
-                    outputFilename = outputFilename.substring(0, outputFilename.lastIndexOf(".pdf"));
-                }
+        actionSelected = JOptionPane.OK_OPTION;
+        this.setVisible(false);
 
-                int pageCount = Utilities.getPdfPageCount(this.jTextFieldInputFile.getText());
-                if (pageCount == 0) {
-                    throw new RuntimeException("Split PDF failed.");
-                }
-                
-                int pageRange = Integer.parseInt(this.jTextFieldNumOfPages.getText());
-                int startPage = 1;
 
-                while (startPage <= pageCount) {
-                    int endPage = startPage + pageRange - 1;
-                    String outputFileName = outputFilename + startPage + ".pdf";
-                    Utilities.splitPdf(inputFilename, outputFileName, String.valueOf(startPage), String.valueOf(endPage));
-                    startPage = endPage + 1;
-                }
-            }
-            JOptionPane.showMessageDialog(this, "Split PDF successful.");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
     }//GEN-LAST:event_jButtonSplitActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        actionSelected = JOptionPane.CANCEL_OPTION;
         setVisible(false);
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
@@ -315,6 +305,25 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         this.jTextFieldNumOfPages.setEnabled(enabled);
         this.jTextFieldFrom.setEnabled(!enabled);
         this.jTextFieldTo.setEnabled(!enabled);
+    }
+
+    public int showDialog() {
+        setVisible(true);
+        return actionSelected;
+    }
+
+    void changeUILanguage(final Locale locale) {
+        Locale.setDefault(locale);
+        bundle = ResourceBundle.getBundle("net/sourceforge/vietocr/OptionsDialog");
+
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                FormLocalizer localizer = new FormLocalizer(SplitPdfDialog.this, SplitPdfDialog.class);
+                localizer.ApplyCulture(bundle);
+            }
+        });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -337,4 +346,11 @@ public class SplitPdfDialog extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldOutputFile;
     private javax.swing.JTextField jTextFieldTo;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the args
+     */
+    public SplitPdfArgs getArgs() {
+        return args;
+    }
 }

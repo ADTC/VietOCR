@@ -689,6 +689,9 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabelStatus">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JProgressBar" name="jProgressBar1">
           <Properties>
@@ -696,6 +699,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="this.jProgressBar1.setVisible(false);"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
           </AuxValues>
         </Component>
       </SubComponents>
