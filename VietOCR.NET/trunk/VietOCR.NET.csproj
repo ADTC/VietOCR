@@ -167,6 +167,7 @@
     <Compile Include="Postprocessing\ProcessorFactory.cs" />
     <Compile Include="Postprocessing\TextUtilities.cs" />
     <Compile Include="Postprocessing\ViePP.cs" />
+    <Compile Include="SplitPdfArgs.cs" />
     <Compile Include="SplitPdfDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -280,6 +281,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SplitPdfDialog.resx">
+      <DependentUpon>SplitPdfDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplitPdfDialog.vi-VN.resx">
       <DependentUpon>SplitPdfDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StatusForm.resx">
