@@ -115,6 +115,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         jPanel1.add(jTextFieldOutputFile, gridBagConstraints);
 
         jButtonInput.setText("...");
+        jButtonInput.setToolTipText("Browse");
         jButtonInput.setPreferredSize(new java.awt.Dimension(30, 23));
         jButtonInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,6 +130,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         jPanel1.add(jButtonInput, gridBagConstraints);
 
         jButtonOutput.setText("...");
+        jButtonOutput.setToolTipText("Browse");
         jButtonOutput.setPreferredSize(new java.awt.Dimension(30, 23));
         jButtonOutput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,8 +255,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         FileFilter pdfFilter = new SimpleFilter("pdf", "PDF");
         filechooser.addChoosableFileFilter(pdfFilter);
         filechooser.setAcceptAllFileFilterUsed(false);
-        int returnVal = filechooser.showOpenDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
+        if (filechooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             this.jTextFieldInputFile.setText(filechooser.getSelectedFile().getPath());
         }
     }//GEN-LAST:event_jButtonInputActionPerformed
@@ -264,8 +265,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         FileFilter pdfFilter = new SimpleFilter("pdf", "PDF");
         filechooser.addChoosableFileFilter(pdfFilter);
         filechooser.setAcceptAllFileFilterUsed(false);
-        int returnVal = filechooser.showSaveDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
+        if (filechooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             this.jTextFieldOutputFile.setText(filechooser.getSelectedFile().getPath());
 
             if (!this.jTextFieldOutputFile.getText().endsWith(".pdf")) {
@@ -285,8 +285,6 @@ public class SplitPdfDialog extends javax.swing.JDialog {
 
         actionSelected = JOptionPane.OK_OPTION;
         this.setVisible(false);
-
-
     }//GEN-LAST:event_jButtonSplitActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed

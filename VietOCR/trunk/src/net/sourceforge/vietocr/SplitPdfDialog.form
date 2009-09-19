@@ -83,6 +83,7 @@
         <Component class="javax.swing.JButton" name="jButtonInput">
           <Properties>
             <Property name="text" type="java.lang.String" value="..."/>
+            <Property name="toolTipText" type="java.lang.String" value="Browse"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[30, 23]"/>
             </Property>
@@ -99,6 +100,7 @@
         <Component class="javax.swing.JButton" name="jButtonOutput">
           <Properties>
             <Property name="text" type="java.lang.String" value="..."/>
+            <Property name="toolTipText" type="java.lang.String" value="Browse"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[30, 23]"/>
             </Property>
