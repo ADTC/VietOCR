@@ -125,7 +125,6 @@ namespace VietOCR.NET
         /// Changes localized text and messages
         /// </summary>
         /// <param name="locale"></param>
-        /// <param name="firstTime"></param>
         public virtual void ChangeUILanguage(string locale)
         {
             FormLocalizer localizer = new FormLocalizer(this, typeof(OptionsDialog));
