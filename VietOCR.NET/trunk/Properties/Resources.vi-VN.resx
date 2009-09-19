@@ -184,10 +184,10 @@
     <value> đã được tạo.</value>
   </data>
   <data name="Mergecompleted" xml:space="preserve">
-    <value>Nhập hoàn tất. </value>
+    <value>Nhập TIFF hoàn tất. </value>
   </data>
   <data name="check_output_in" xml:space="preserve">
-    <value>\nHãy kiểm output file(s) trong\u0020</value>
+    <value>Hãy kiểm output file(s) trong </value>
   </data>
   <data name="Merge_running" xml:space="preserve">
     <value>Merge TIFF đang chạy...</value>
@@ -199,6 +199,6 @@
     <value>Tách PDF đang chạy...</value>
   </data>
   <data name="suggest_split" xml:space="preserve">
-    <value>\nBạn có thể cần tách PDF file ra files nhỏ hơn trước khi tiến hành.</value>
+    <value>Bạn có thể cần tách PDF file ra files nhỏ hơn trước khi tiến hành.</value>
   </data>
 </root>

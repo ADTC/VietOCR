@@ -124,7 +124,7 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \nPlease check output file(s) in\u0020.
+        ///   Looks up a localized string similar to Please check output file(s) in .
         /// </summary>
         internal static string check_output_in {
             get {
@@ -160,7 +160,7 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Merge completed. .
+        ///   Looks up a localized string similar to Merge TIFF completed. .
         /// </summary>
         internal static string Mergecompleted {
             get {
@@ -304,7 +304,7 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \nYou may need to split up the PDF file into smaller files before proceed..
+        ///   Looks up a localized string similar to You may need to split up the PDF file into smaller files before proceed..
         /// </summary>
         internal static string suggest_split {
             get {
