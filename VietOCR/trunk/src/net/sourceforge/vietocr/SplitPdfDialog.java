@@ -18,6 +18,7 @@ package net.sourceforge.vietocr;
 import java.awt.event.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import net.sourceforge.vietpad.SimpleFilter;
@@ -275,16 +276,32 @@ public class SplitPdfDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonOutputActionPerformed
 
     private void jButtonSplitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSplitActionPerformed
-        args = new SplitPdfArgs();
-        args.setInputFilename(this.jTextFieldInputFile.getText());
-        args.setOutputFilename(this.jTextFieldOutputFile.getText());
-        args.setFromPage(this.jTextFieldFrom.getText());
-        args.setToPage(this.jTextFieldTo.getText());
-        args.setNumOfPages(this.jTextFieldNumOfPages.getText());
-        args.setPages(this.jRadioButtonPages.isSelected());
+        SplitPdfArgs arguments = new SplitPdfArgs();
+        arguments.setInputFilename(this.jTextFieldInputFile.getText());
+        arguments.setOutputFilename(this.jTextFieldOutputFile.getText());
+        arguments.setFromPage(this.jTextFieldFrom.getText());
+        arguments.setToPage(this.jTextFieldTo.getText());
+        arguments.setNumOfPages(this.jTextFieldNumOfPages.getText());
+        arguments.setPages(this.jRadioButtonPages.isSelected());
 
-        actionSelected = JOptionPane.OK_OPTION;
-        this.setVisible(false);
+        if (arguments.getInputFilename().length() > 0 && arguments.getOutputFilename().length() > 0 &&
+                ((this.jRadioButtonPages.isSelected() && arguments.getFromPage().length() > 0) ||
+                (this.jRadioButtonFiles.isSelected() && arguments.getNumOfPages().length() > 0))) {
+
+            Pattern regexNums = Pattern.compile("^\\d+$");
+
+            if ((this.jRadioButtonPages.isSelected() && regexNums.matcher(arguments.getFromPage()).matches()) || (this.jRadioButtonFiles.isSelected() && regexNums.matcher(arguments.getNumOfPages()).matches())) {
+                this.args = arguments;
+                actionSelected = JOptionPane.OK_OPTION;
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Input invalid.", "Error", JOptionPane.ERROR_MESSAGE);
+                actionSelected = JOptionPane.DEFAULT_OPTION;
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Input incomplete.", "Error", JOptionPane.ERROR_MESSAGE);
+            actionSelected = JOptionPane.DEFAULT_OPTION;
+        }
     }//GEN-LAST:event_jButtonSplitActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
