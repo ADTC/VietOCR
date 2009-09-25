@@ -228,6 +228,8 @@
             this.Controls.Add(this.buttonSplit);
             this.Font = null;
             this.Icon = null;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SplitPdfDialog";
             this.ResumeLayout(false);
             this.PerformLayout();
