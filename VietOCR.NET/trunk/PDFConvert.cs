@@ -149,7 +149,7 @@ namespace ConvertPDF
         /// <summary>If true i will try to output everypage to a different file!</summary>
         private bool _didOutputToMultipleFile = false;
 
-        private System.Diagnostics.Process myProcess;
+        private System.Diagnostics.Process myProcess = null;
         public StringBuilder output;
         //public string output;
         //private List<byte> outputBytes;
