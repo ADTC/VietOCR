@@ -15,7 +15,7 @@
 <h3>MÔ TẢ</h3>
 <p><a href="http://vietocr.sourceforge.net">VietOCR</a> 
 là một Java GUI frontend cho <a href="http://code.google.com/p/tesseract-ocr/">Tesseract OCR 
-engine</a>, cung cấp hỗ trợ nhận dạng ký tự cho các dạng ảnh TIFF, JPEG, GIF, PNG, BMP, 
+engine</a>, cung cấp hỗ trợ nhận dạng ký tự cho các dạng ảnh phổ thông, 
 và ảnh chứa nhiều trang. Chương trình có phần hậu xử lý giúp sửa chữa các lỗi 
 thường gặp trong quy trình OCR, tăng độ chính xác trên kết quả.</p>
 <p>Batch processing nay được hỗ trợ. Chương trình theo dõi watch folder cho 
@@ -54,7 +54,7 @@ WIA Library, copy file <tt>wiaaut.dll</tt> vào <tt>System32</tt> directory
 <blockquote>
 	<p><tt>regsvr32 C:\Windows\System32\wiaaut.dll</tt></p>
 </blockquote>
-<p>Hỗ trợ cho PDF conversion được khả thi qua
+<p>Hỗ trợ cho PDF được khả thi qua
 <a href="http://sourceforge.net/projects/ghostscript/">GPL Ghostscript</a>. 
 Sau khi cài đặt thư viện, hãy bảo đảm shared library object (<tt>gsdll32.dll</tt> hoặc 
 <tt>libgs.so</tt>) nằm trong search path bằng cách 
@@ -68,8 +68,6 @@ biến môi trường phù hợp, như sau cho phiên bản 8.70 trên Windows:<
 <p>nơi trong <tt>/usr/local/lib</tt>, <tt>libgs.so</tt> link tới <tt>libgs.so.8.70</tt> 
 được đặt.</p>
 <h3>HƯỚNG DẪN</h3>
-<p>Tesseract hiện tại chỉ có thể nhận dạng hình uncompressed TIFF; 
-tuy nhiên, VietOCR cho khả năng nhận diện các loại ảnh khác.</p>
 
 <p>Để phóng chương trình:</p>
 <blockquote>

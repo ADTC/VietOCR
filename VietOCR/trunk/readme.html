@@ -15,8 +15,7 @@
 <h3>DESCRIPTION</h3>
 <p><a href="http://vietocr.sourceforge.net">VietOCR</a> 
 is a Java GUI frontend for <a href="http://code.google.com/p/tesseract-ocr/">
-Tesseract OCR engine</a>, providing character recognition support for TIFF, JPEG, GIF, 
-PNG, BMP image formats, and multi-page images. The program has postprocessing 
+Tesseract OCR engine</a>, providing character recognition support for common image formats, and multi-page images. The program has postprocessing 
 which helps correct errors regularly encountered in the OCR process, boosting 
 the accuracy rate on the result.</p>
 <p>Batch processing is now supported. The program monitors a watch folder for 
@@ -59,7 +58,7 @@ from the command line:</p>
 <blockquote>
 	<p><tt>regsvr32 C:\Windows\System32\wiaaut.dll</tt></p>
 </blockquote>
-<p>PDF conversion support is possible via
+<p>PDF support is possible via
 <a href="http://sourceforge.net/projects/ghostscript/">GPL Ghostscript</a>. 
 After installation of the library, please ensure the shared library object (<tt>gsdll32.dll</tt> or <tt>
 libgs.so</tt>) is in the search path by 
@@ -74,10 +73,6 @@ or on Linux:<blockquote>
 <p>where in <tt>/usr/local/lib</tt>, <tt>libgs.so</tt> link to <tt>libgs.so.8.70</tt> is located.</p>
 <h3>
 INSTRUCTIONS</h3>
-<p>
-Tesseract currently can 
-only recognize uncompressed TIFF images; however, VietOCR enables recognition of 
-other image formats.</p>
 
 <p>To launch the program:</p>
 <blockquote>
@@ -108,12 +103,12 @@ grayscale uncompressed TIFF or PNG format.</p>
 Vietnamese text. The recognition errors involving Vietnamese characters can be classified into three 
 categories. Many of the errors are related to the letter cases — for example: 
 hOa, nhắC — which can be easily corrected by popular Unicode text editors. Many 
-other errors are&nbsp;a result of the OCR process, such as missing diacritical marks, 
+other errors are a result of the OCR process, such as missing diacritical marks, 
 wrong letters with similar shape, etc. — huu – hưu, mang – marg, h0a – hoa, la – 
 1a, uhìu - nhìn. These can also be easily fixed by Vietnamese spell checker 
 programs.</p>
 
-<p>The last category of&nbsp; errors is the most difficult to 
+<p>The last category of errors is the most difficult to 
 detect because they are semantic errors, which means that the words are valid 
 entries in the dictionary but are wrong in the context — e.g., tinh – tình, vân 
 – vấn. These errors require the editor to read though and manually correct them 
