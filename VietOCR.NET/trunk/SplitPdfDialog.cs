@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace VietOCR.NET
 {
@@ -74,7 +75,7 @@ namespace VietOCR.NET
                 }
             }
         }
-
+       
         private void buttonSplit_Click(object sender, EventArgs e)
         {
             SplitPdfArgs args = new SplitPdfArgs();
@@ -85,7 +86,27 @@ namespace VietOCR.NET
             args.NumOfPages = this.textBoxNumOfPages.Text;
             args.Pages = this.radioButtonPages.Checked;
 
-            this.args = args;
+            if (args.InputFilename.Length > 0 && args.OutputFilename.Length > 0 && 
+                ((this.radioButtonPages.Checked && args.FromPage.Length > 0) || 
+                (this.radioButtonRange.Checked && args.NumOfPages.Length > 0)))
+            {
+                Regex regexNums = new Regex(@"^\d+$");
+
+                if ((this.radioButtonPages.Checked && regexNums.IsMatch(args.FromPage)) || (this.radioButtonRange.Checked && regexNums.IsMatch(args.NumOfPages)))
+                {
+                    this.args = args;
+                }
+                else
+                {
+                    MessageBox.Show("Input invalid.", "Error");
+                    this.DialogResult = DialogResult.None;       
+                }
+            }
+            else
+            {
+                MessageBox.Show("Input incomplete.", "Error");
+                this.DialogResult = DialogResult.None;
+            }
         }
 
         /// <summary>
