@@ -290,7 +290,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
 
             Pattern regexNums = Pattern.compile("^\\d+$");
 
-            if ((this.jRadioButtonPages.isSelected() && regexNums.matcher(arguments.getFromPage()).matches()) || (this.jRadioButtonFiles.isSelected() && regexNums.matcher(arguments.getNumOfPages()).matches())) {
+            if ((this.jRadioButtonPages.isSelected() && regexNums.matcher(arguments.getFromPage()).matches() && (arguments.getToPage().length() > 0? regexNums.matcher(arguments.getToPage()).matches() : true)) || (this.jRadioButtonFiles.isSelected() && regexNums.matcher(arguments.getNumOfPages()).matches())) {
                 this.args = arguments;
                 actionSelected = JOptionPane.OK_OPTION;
                 this.setVisible(false);
