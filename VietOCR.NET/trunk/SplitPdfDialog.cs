@@ -92,19 +92,19 @@ namespace VietOCR.NET
             {
                 Regex regexNums = new Regex(@"^\d+$");
 
-                if ((this.radioButtonPages.Checked && regexNums.IsMatch(args.FromPage)) || (this.radioButtonRange.Checked && regexNums.IsMatch(args.NumOfPages)))
+                if ((this.radioButtonPages.Checked && regexNums.IsMatch(args.FromPage) && (args.ToPage.Length > 0? regexNums.IsMatch(args.ToPage) : true)) || (this.radioButtonRange.Checked && regexNums.IsMatch(args.NumOfPages)))
                 {
                     this.args = args;
                 }
                 else
                 {
-                    MessageBox.Show("Input invalid.", "Error");
+                    MessageBox.Show(this, "Input invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.DialogResult = DialogResult.None;       
                 }
             }
             else
             {
-                MessageBox.Show("Input incomplete.", "Error");
+                MessageBox.Show(this, "Input incomplete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.DialogResult = DialogResult.None;
             }
         }
