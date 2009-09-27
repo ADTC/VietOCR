@@ -201,4 +201,13 @@
   <data name="suggest_split" xml:space="preserve">
     <value>Bạn có thể cần tách PDF file ra files nhỏ hơn trước khi tiến hành.</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Lỗi</value>
+  </data>
+  <data name="Inputincomplete" xml:space="preserve">
+    <value>Input không đầy đủ.</value>
+  </data>
+  <data name="Inputinvalid" xml:space="preserve">
+    <value>Input không hợp lệ.</value>
+  </data>
 </root>

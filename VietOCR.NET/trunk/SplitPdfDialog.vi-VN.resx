@@ -130,34 +130,34 @@
   <data name="radioButtonPages.Text" xml:space="preserve">
     <value>Trang</value>
   </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelFrom.Location" type="System.Drawing.Point, System.Drawing">
     <value>128, 82</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>19, 13</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
+  <data name="labelFrom.Text" xml:space="preserve">
     <value>từ:</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 13</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
+  <data name="labelTo.Text" xml:space="preserve">
     <value>tới:</value>
   </data>
-  <data name="radioButtonRange.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="radioButtonFiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
   </data>
-  <data name="radioButtonRange.Text" xml:space="preserve">
+  <data name="radioButtonFiles.Text" xml:space="preserve">
     <value>Tập tin</value>
   </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelNumOfPages.Location" type="System.Drawing.Point, System.Drawing">
     <value>103, 105</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelNumOfPages.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 13</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
+  <data name="labelNumOfPages.Text" xml:space="preserve">
     <value>Số trang mỗi tập tin:</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
