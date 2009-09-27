@@ -346,17 +346,17 @@ namespace ConvertPDF
                     throw new ArgumentNullException("inputFile");
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("The inputfile is missing");
+                    System.Windows.Forms.MessageBox.Show("The inputfile is missing.");
                     return false;
                 }
             }
             if (!System.IO.File.Exists(inputFile))
             {
                 if (throwException)
-                    throw new ArgumentException(string.Format("The file :'{0}' doesn't exist", inputFile), "inputFile");
+                    throw new ArgumentException(string.Format("The file '{0}' doesn't exist.", inputFile), "inputFile");
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show(string.Format("The file :'{0}' doesn't exist", inputFile));
+                    System.Windows.Forms.MessageBox.Show(string.Format("The file '{0}' doesn't exist.", inputFile));
                     return false;
                 }
             }
@@ -366,7 +366,7 @@ namespace ConvertPDF
                     throw new ArgumentNullException("Device");
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("You didn't provide a device for the conversion");
+                    System.Windows.Forms.MessageBox.Show("You didn't provide a device for the conversion.");
                     return false;
                 }
             }
