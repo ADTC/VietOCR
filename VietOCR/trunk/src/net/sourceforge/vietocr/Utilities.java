@@ -22,6 +22,8 @@ import net.sf.ghost4j.*;
 
 public class Utilities {
 
+    public static final String GS_INSTALL = "\nPlease download, install GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.";
+
     /**
      * 
      * @return the directory of the running jar
@@ -60,9 +62,9 @@ public class Utilities {
             ImageIOHelper.mergeTiff(pngFiles, tiffFile);
             return tiffFile;
         } catch (UnsatisfiedLinkError ule) {
-            throw new RuntimeException(ule.getMessage() + "\nPlease download, install GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.");
+            throw new RuntimeException(ule.getMessage() + GS_INSTALL);
         } catch (NoClassDefFoundError ncdfe) {
-            throw new RuntimeException(ncdfe.getMessage() + "\nPlease download, install GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.");
+            throw new RuntimeException(ncdfe.getMessage() + GS_INSTALL);
         } finally {
             if (pngFiles != null) {
                 // delete temporary PNG images

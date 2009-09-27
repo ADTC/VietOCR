@@ -181,7 +181,7 @@ public class GuiWithTools extends GuiWithSettings {
                     jLabelStatus.setText(bundle.getString("SplitPDF_completed."));
                     jProgressBar1.setIndeterminate(false);
                     jProgressBar1.setString(bundle.getString("SplitPDF_completed."));
-                    
+
                     try {
                         String result = get();
                         JOptionPane.showMessageDialog(GuiWithTools.this, bundle.getString("SplitPDF_completed.") + bundle.getString("check_output_in") + new File(result).getParent());
@@ -193,6 +193,10 @@ public class GuiWithTools extends GuiWithSettings {
                         if (cause != null) {
                             if (cause instanceof OutOfMemoryError) {
                                 why = bundle.getString("OutOfMemoryError");
+                            } else if (cause instanceof UnsatisfiedLinkError) {
+                                why = cause.getMessage() + Utilities.GS_INSTALL;
+                            } else if (cause instanceof NoClassDefFoundError) {
+                                why = cause.getMessage() + Utilities.GS_INSTALL;
                             } else {
                                 why = cause.getMessage();
                             }
