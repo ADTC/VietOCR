@@ -160,6 +160,10 @@ public class Utilities {
         } catch (GhostscriptException e) {
             System.err.println("ERROR: " + e.getMessage());
             throw new RuntimeException(e.getMessage());
+        } catch (UnsatisfiedLinkError ule) {
+            throw new RuntimeException(ule.getMessage() + GS_INSTALL);
+        } catch (NoClassDefFoundError ncdfe) {
+            throw new RuntimeException(ncdfe.getMessage() + GS_INSTALL);
         }
     }
 
@@ -200,7 +204,7 @@ public class Utilities {
         } catch (Exception e) {
             System.err.println("ERROR: " + e.getMessage());
         }
-        
+
         return pageCount;
     }
 }
