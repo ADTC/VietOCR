@@ -131,13 +131,16 @@
     <value>Trang</value>
   </data>
   <data name="labelFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 82</value>
+    <value>132, 82</value>
   </data>
   <data name="labelFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>19, 13</value>
   </data>
   <data name="labelFrom.Text" xml:space="preserve">
     <value>từ:</value>
+  </data>
+  <data name="labelTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>187, 82</value>
   </data>
   <data name="labelTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 13</value>
@@ -152,7 +155,7 @@
     <value>Tập tin</value>
   </data>
   <data name="labelNumOfPages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 105</value>
+    <value>107, 105</value>
   </data>
   <data name="labelNumOfPages.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 13</value>

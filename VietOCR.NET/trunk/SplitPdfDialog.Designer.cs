@@ -49,33 +49,53 @@
             // 
             // buttonSplit
             // 
-            this.buttonSplit.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.buttonSplit.AccessibleDescription = null;
+            this.buttonSplit.AccessibleName = null;
             resources.ApplyResources(this.buttonSplit, "buttonSplit");
+            this.buttonSplit.BackgroundImage = null;
+            this.buttonSplit.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.buttonSplit.Font = null;
             this.buttonSplit.Name = "buttonSplit";
             this.buttonSplit.UseVisualStyleBackColor = true;
             this.buttonSplit.Click += new System.EventHandler(this.buttonSplit_Click);
             // 
             // buttonCancel
             // 
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonCancel.AccessibleDescription = null;
+            this.buttonCancel.AccessibleName = null;
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.BackgroundImage = null;
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonCancel.Font = null;
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // textBoxFrom
             // 
+            this.textBoxFrom.AccessibleDescription = null;
+            this.textBoxFrom.AccessibleName = null;
             resources.ApplyResources(this.textBoxFrom, "textBoxFrom");
+            this.textBoxFrom.BackgroundImage = null;
+            this.textBoxFrom.Font = null;
             this.textBoxFrom.Name = "textBoxFrom";
             // 
             // textBoxTo
             // 
+            this.textBoxTo.AccessibleDescription = null;
+            this.textBoxTo.AccessibleName = null;
             resources.ApplyResources(this.textBoxTo, "textBoxTo");
+            this.textBoxTo.BackgroundImage = null;
+            this.textBoxTo.Font = null;
             this.textBoxTo.Name = "textBoxTo";
             // 
             // radioButtonPages
             // 
+            this.radioButtonPages.AccessibleDescription = null;
+            this.radioButtonPages.AccessibleName = null;
             resources.ApplyResources(this.radioButtonPages, "radioButtonPages");
+            this.radioButtonPages.BackgroundImage = null;
             this.radioButtonPages.Checked = true;
+            this.radioButtonPages.Font = null;
             this.radioButtonPages.Name = "radioButtonPages";
             this.radioButtonPages.TabStop = true;
             this.radioButtonPages.UseVisualStyleBackColor = true;
@@ -83,70 +103,112 @@
             // 
             // labelFrom
             // 
+            this.labelFrom.AccessibleDescription = null;
+            this.labelFrom.AccessibleName = null;
             resources.ApplyResources(this.labelFrom, "labelFrom");
+            this.labelFrom.Font = null;
             this.labelFrom.Name = "labelFrom";
             // 
             // labelTo
             // 
+            this.labelTo.AccessibleDescription = null;
+            this.labelTo.AccessibleName = null;
             resources.ApplyResources(this.labelTo, "labelTo");
+            this.labelTo.Font = null;
             this.labelTo.Name = "labelTo";
             // 
             // radioButtonFiles
             // 
+            this.radioButtonFiles.AccessibleDescription = null;
+            this.radioButtonFiles.AccessibleName = null;
             resources.ApplyResources(this.radioButtonFiles, "radioButtonFiles");
+            this.radioButtonFiles.BackgroundImage = null;
+            this.radioButtonFiles.Font = null;
             this.radioButtonFiles.Name = "radioButtonFiles";
             this.radioButtonFiles.UseVisualStyleBackColor = true;
             this.radioButtonFiles.CheckedChanged += new System.EventHandler(this.radioButtonFiles_CheckedChanged);
             // 
             // textBoxNumOfPages
             // 
+            this.textBoxNumOfPages.AccessibleDescription = null;
+            this.textBoxNumOfPages.AccessibleName = null;
             resources.ApplyResources(this.textBoxNumOfPages, "textBoxNumOfPages");
+            this.textBoxNumOfPages.BackgroundImage = null;
+            this.textBoxNumOfPages.Font = null;
             this.textBoxNumOfPages.Name = "textBoxNumOfPages";
             // 
             // labelNumOfPages
             // 
+            this.labelNumOfPages.AccessibleDescription = null;
+            this.labelNumOfPages.AccessibleName = null;
             resources.ApplyResources(this.labelNumOfPages, "labelNumOfPages");
+            this.labelNumOfPages.Font = null;
             this.labelNumOfPages.Name = "labelNumOfPages";
             // 
             // textBoxInput
             // 
+            this.textBoxInput.AccessibleDescription = null;
+            this.textBoxInput.AccessibleName = null;
             resources.ApplyResources(this.textBoxInput, "textBoxInput");
+            this.textBoxInput.BackgroundImage = null;
+            this.textBoxInput.Font = null;
             this.textBoxInput.Name = "textBoxInput";
             // 
             // textBoxOutput
             // 
+            this.textBoxOutput.AccessibleDescription = null;
+            this.textBoxOutput.AccessibleName = null;
             resources.ApplyResources(this.textBoxOutput, "textBoxOutput");
+            this.textBoxOutput.BackgroundImage = null;
+            this.textBoxOutput.Font = null;
             this.textBoxOutput.Name = "textBoxOutput";
             // 
             // buttonBrowseInput
             // 
+            this.buttonBrowseInput.AccessibleDescription = null;
+            this.buttonBrowseInput.AccessibleName = null;
             resources.ApplyResources(this.buttonBrowseInput, "buttonBrowseInput");
+            this.buttonBrowseInput.BackgroundImage = null;
+            this.buttonBrowseInput.Font = null;
             this.buttonBrowseInput.Name = "buttonBrowseInput";
             this.buttonBrowseInput.UseVisualStyleBackColor = true;
             this.buttonBrowseInput.Click += new System.EventHandler(this.buttonBrowseInput_Click);
             // 
             // buttonBrowseOutput
             // 
+            this.buttonBrowseOutput.AccessibleDescription = null;
+            this.buttonBrowseOutput.AccessibleName = null;
             resources.ApplyResources(this.buttonBrowseOutput, "buttonBrowseOutput");
+            this.buttonBrowseOutput.BackgroundImage = null;
+            this.buttonBrowseOutput.Font = null;
             this.buttonBrowseOutput.Name = "buttonBrowseOutput";
             this.buttonBrowseOutput.UseVisualStyleBackColor = true;
             this.buttonBrowseOutput.Click += new System.EventHandler(this.buttonBrowseOutput_Click);
             // 
             // labelInput
             // 
+            this.labelInput.AccessibleDescription = null;
+            this.labelInput.AccessibleName = null;
             resources.ApplyResources(this.labelInput, "labelInput");
+            this.labelInput.Font = null;
             this.labelInput.Name = "labelInput";
             // 
             // labelOutput
             // 
+            this.labelOutput.AccessibleDescription = null;
+            this.labelOutput.AccessibleName = null;
             resources.ApplyResources(this.labelOutput, "labelOutput");
+            this.labelOutput.Font = null;
             this.labelOutput.Name = "labelOutput";
             // 
             // SplitPdfDialog
             // 
             this.AcceptButton = this.buttonSplit;
+            this.AccessibleDescription = null;
+            this.AccessibleName = null;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = null;
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.labelOutput);
             this.Controls.Add(this.labelInput);
@@ -164,6 +226,8 @@
             this.Controls.Add(this.textBoxFrom);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSplit);
+            this.Font = null;
+            this.Icon = null;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SplitPdfDialog";
