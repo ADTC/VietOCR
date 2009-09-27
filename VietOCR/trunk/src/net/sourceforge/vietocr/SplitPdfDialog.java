@@ -16,6 +16,7 @@
 package net.sourceforge.vietocr;
 
 import java.awt.event.*;
+import java.io.File;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -284,7 +285,9 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         arguments.setNumOfPages(this.jTextFieldNumOfPages.getText());
         arguments.setPages(this.jRadioButtonPages.isSelected());
 
-        if (arguments.getInputFilename().length() > 0 && arguments.getOutputFilename().length() > 0 &&
+        if (!new File(arguments.getInputFilename()).exists()) {
+            JOptionPane.showMessageDialog(this, "Input file does not exist.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (arguments.getInputFilename().length() > 0 && arguments.getOutputFilename().length() > 0 &&
                 ((this.jRadioButtonPages.isSelected() && arguments.getFromPage().length() > 0) ||
                 (this.jRadioButtonFiles.isSelected() && arguments.getNumOfPages().length() > 0))) {
 
