@@ -37,6 +37,8 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         disableBoxes(!this.jRadioButtonPages.isSelected());
 
         setLocationRelativeTo(getOwner());
+        
+        bundle = ResourceBundle.getBundle("net/sourceforge/vietocr/SplitPdfDialog");
 
         //  Handle escape key to hide the dialog
         KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
@@ -286,7 +288,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         arguments.setPages(this.jRadioButtonPages.isSelected());
 
         if (!new File(arguments.getInputFilename()).exists()) {
-            JOptionPane.showMessageDialog(this, "Input file does not exist.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("File_not_exist"), bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
         } else if (arguments.getInputFilename().length() > 0 && arguments.getOutputFilename().length() > 0 &&
                 ((this.jRadioButtonPages.isSelected() && arguments.getFromPage().length() > 0) ||
                 (this.jRadioButtonFiles.isSelected() && arguments.getNumOfPages().length() > 0))) {
@@ -298,11 +300,11 @@ public class SplitPdfDialog extends javax.swing.JDialog {
                 actionSelected = JOptionPane.OK_OPTION;
                 this.setVisible(false);
             } else {
-                JOptionPane.showMessageDialog(this, "Input invalid.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, bundle.getString("Input_invalid"), bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
                 actionSelected = JOptionPane.DEFAULT_OPTION;
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Input incomplete.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("Input_incomplete"), bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
             actionSelected = JOptionPane.DEFAULT_OPTION;
         }
     }//GEN-LAST:event_jButtonSplitActionPerformed
@@ -332,7 +334,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
 
     void changeUILanguage(final Locale locale) {
         Locale.setDefault(locale);
-        bundle = ResourceBundle.getBundle("net/sourceforge/vietocr/OptionsDialog");
+        bundle = ResourceBundle.getBundle("net/sourceforge/vietocr/SplitPdfDialog");
 
         SwingUtilities.invokeLater(new Runnable() {
 
