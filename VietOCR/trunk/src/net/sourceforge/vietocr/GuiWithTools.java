@@ -193,10 +193,6 @@ public class GuiWithTools extends GuiWithSettings {
                         if (cause != null) {
                             if (cause instanceof OutOfMemoryError) {
                                 why = bundle.getString("OutOfMemoryError");
-                            } else if (cause instanceof UnsatisfiedLinkError) {
-                                why = cause.getMessage() + Utilities.GS_INSTALL;
-                            } else if (cause instanceof NoClassDefFoundError) {
-                                why = cause.getMessage() + Utilities.GS_INSTALL;
                             } else {
                                 why = cause.getMessage();
                             }
