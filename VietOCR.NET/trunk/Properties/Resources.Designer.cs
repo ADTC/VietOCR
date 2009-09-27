@@ -142,6 +142,33 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input incomplete..
+        /// </summary>
+        internal static string Inputincomplete {
+            get {
+                return ResourceManager.GetString("Inputincomplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input invalid..
+        /// </summary>
+        internal static string Inputinvalid {
+            get {
+                return ResourceManager.GetString("Inputinvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please load an image..
         /// </summary>
         internal static string loadImage {

@@ -32,7 +32,7 @@ namespace VietOCR.NET
             disableBoxes(false);
         }
 
-        private void radioButtonRange_CheckedChanged(object sender, EventArgs e)
+        private void radioButtonFiles_CheckedChanged(object sender, EventArgs e)
         {
             disableBoxes(true);
         }
@@ -88,11 +88,11 @@ namespace VietOCR.NET
 
             if (args.InputFilename.Length > 0 && args.OutputFilename.Length > 0 && 
                 ((this.radioButtonPages.Checked && args.FromPage.Length > 0) || 
-                (this.radioButtonRange.Checked && args.NumOfPages.Length > 0)))
+                (this.radioButtonFiles.Checked && args.NumOfPages.Length > 0)))
             {
                 Regex regexNums = new Regex(@"^\d+$");
 
-                if ((this.radioButtonPages.Checked && regexNums.IsMatch(args.FromPage) && (args.ToPage.Length > 0? regexNums.IsMatch(args.ToPage) : true)) || (this.radioButtonRange.Checked && regexNums.IsMatch(args.NumOfPages)))
+                if ((this.radioButtonPages.Checked && regexNums.IsMatch(args.FromPage) && (args.ToPage.Length > 0? regexNums.IsMatch(args.ToPage) : true)) || (this.radioButtonFiles.Checked && regexNums.IsMatch(args.NumOfPages)))
                 {
                     this.args = args;
                 }
