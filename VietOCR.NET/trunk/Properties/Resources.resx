@@ -199,7 +199,7 @@
     <value>Split PDF running...</value>
   </data>
   <data name="suggest_split" xml:space="preserve">
-    <value>You may need to split up the PDF file into smaller files before proceed.</value>
+    <value>You may need to split the PDF file into smaller files before proceed.</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>

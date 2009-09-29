@@ -331,7 +331,7 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You may need to split up the PDF file into smaller files before proceed..
+        ///   Looks up a localized string similar to You may need to split the PDF file into smaller files before proceed..
         /// </summary>
         internal static string suggest_split {
             get {
