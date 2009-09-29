@@ -49,7 +49,7 @@ namespace VietOCR.NET
                     using (MemoryStream byteStream = new MemoryStream())
                     {
                         image.SelectActiveFrame(FrameDimension.Page, i);
-                        image.Save(byteStream, ImageFormat.Bmp);
+                        image.Save(byteStream, ImageFormat.Png);
 
                         // and then create a new Image from it
                         images.Add(Image.FromStream(byteStream));
@@ -57,6 +57,10 @@ namespace VietOCR.NET
                 }
 
                 return images;
+            }
+            catch (OutOfMemoryException e)
+            {
+                throw new ApplicationException(e.Message, e);
             }
             catch
             {
@@ -146,7 +150,7 @@ namespace VietOCR.NET
                         }
                         catch (System.Runtime.InteropServices.ExternalException e)
                         {
-                            throw new ApplicationException(e.Message + "\nIt might have run out of memory due to handling too many input images.");
+                            throw new ApplicationException(e.Message + "\nIt might have run out of memory due to handling too many input images.", e);
                         }
                         finally 
                         {
