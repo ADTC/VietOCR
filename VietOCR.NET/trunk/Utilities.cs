@@ -111,13 +111,13 @@ namespace VietOCR.NET
             converter.ThrowOnlyException = true; // rethrow exceptions
 
             //gs -q -sPDFname=test.pdf pdfpagecount.ps
-            StringBuilder gsArgs = new StringBuilder();
-            gsArgs.Append("-gs ");
-            gsArgs.Append("-dNOPAUSE ");
-            gsArgs.Append("-dQUIET ");
-            gsArgs.Append("-dBATCH ");
-            gsArgs.Append("-sPDFname=" + inputPdfFile);
-            gsArgs.Append(" Library/pdfpagecount.ps");
+            List<string> gsArgs = new List<string>();
+            gsArgs.Add("-gs");
+            gsArgs.Add("-dNOPAUSE");
+            gsArgs.Add("-dQUIET");
+            gsArgs.Add("-dBATCH");
+            gsArgs.Add("-sPDFname=" + inputPdfFile);
+            gsArgs.Add("Library/pdfpagecount.ps");
             
             int pageCount = 0;
 
@@ -126,9 +126,9 @@ namespace VietOCR.NET
                 try
                 {
                     converter.StdOut = writer;
-                    if (converter.Initialize(gsArgs.ToString()))
+                    if (converter.Initialize(gsArgs.ToArray()))
                     {
-                        pageCount = Int32.Parse(writer.ToString().Substring("%%Pages: ".Length));
+                        pageCount = Int32.Parse(writer.ToString().Replace("%%Pages: ", String.Empty));
                     }
                 }
                 catch (Exception e)
