@@ -472,7 +472,7 @@ namespace ConvertPDF
             return (intReturn == 0) | (intReturn == e_Quit);//e_Quit = -101
         }
 
-        public bool Initialize(string gsArgs)
+        public bool Initialize(string[] sArgs)
         {
             #region Variables
 
@@ -486,9 +486,6 @@ namespace ConvertPDF
             GCHandle gchandleArgs;
 
             #endregion
-
-            //Generate the list of the parameters i need to pass to the dll
-            string[] sArgs = gsArgs.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
             #region Convert Unicode strings to null terminated ANSI byte arrays
             // Convert the Unicode strings to null terminated ANSI byte arrays
@@ -662,7 +659,7 @@ namespace ConvertPDF
                 if (_iLastPageToConvert > 0)
                 {
                     if ((_iFirstPageToConvert > 0) && (_iFirstPageToConvert > _iLastPageToConvert))
-                        throw new ArgumentOutOfRangeException(string.Format("The 1st page to convert ({0}) can't be after then the last one ({1})", _iFirstPageToConvert, _iLastPageToConvert));
+                        throw new ArgumentOutOfRangeException(string.Format("The 1st page to convert ({0}) can't be after then the last one ({1}).", _iFirstPageToConvert, _iLastPageToConvert));
                     lstExtraArgs.Add(String.Format(GS_LastPageFormat, _iLastPageToConvert));
                 }
                 //Set in how many threads i want to do the work
