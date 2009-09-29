@@ -62,6 +62,10 @@ namespace VietOCR.NET
             {
                 throw new ApplicationException(e.Message, e);
             }
+            catch (System.Runtime.InteropServices.ExternalException e)
+            {
+                throw new ApplicationException(e.Message + "\nIt might have run out of memory due to handling too many input images.", e);
+            }
             catch
             {
                 return null;
