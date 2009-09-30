@@ -1362,9 +1362,9 @@ public class Gui extends javax.swing.JFrame {
      *
      */
     public void openFile(final File selectedFile) {
-        jLabelStatus.setText("Loading image...");
+        jLabelStatus.setText(bundle.getString("Loading_image..."));
         jProgressBar1.setIndeterminate(true);
-        jProgressBar1.setString("Loading image...");
+        jProgressBar1.setString(bundle.getString("Loading_image..."));
         jProgressBar1.setVisible(true);
         getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         getGlassPane().setVisible(true);
@@ -1395,8 +1395,8 @@ public class Gui extends javax.swing.JFrame {
             protected void done() {
                 try {
                     loadImage(get());
-                    jLabelStatus.setText("Loading completed.");
-                    jProgressBar1.setString("Loading completed.");
+                    jLabelStatus.setText(bundle.getString("Loading_completed"));
+                    jProgressBar1.setString(bundle.getString("Loading_completed"));
                 } catch (InterruptedException ignore) {
                     ignore.printStackTrace();
                     jLabelStatus.setText("Loading canceled.");
