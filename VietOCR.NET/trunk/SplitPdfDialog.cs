@@ -118,5 +118,17 @@ namespace VietOCR.NET
             FormLocalizer localizer = new FormLocalizer(this, typeof(SplitPdfDialog));
             localizer.ApplyCulture(new CultureInfo(locale));
         }
+
+        class NumericTextBox : TextBox
+        {
+            protected override void OnKeyPress(KeyPressEventArgs e)
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+                base.OnKeyPress(e);
+            }
+        }
     }
 }
