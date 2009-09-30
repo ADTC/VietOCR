@@ -466,38 +466,33 @@ namespace VietOCR.NET
         /// <param name="selectedImageFile"></param>
         public void openFile(string selectedImageFile)
         {
+            this.toolStripStatusLabel1.Text = "Loading image...";
+            this.Cursor = Cursors.WaitCursor;
+            this.pictureBox1.UseWaitCursor = true;
+            this.textBox1.Cursor = Cursors.WaitCursor;
+            this.toolStripBtnOCR.Enabled = false;
+            this.oCRToolStripMenuItem.Enabled = false;
+            this.oCRAllPagesToolStripMenuItem.Enabled = false;
+            this.toolStripProgressBar1.Enabled = true;
+            this.toolStripProgressBar1.Visible = true;
+            this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
+
+            this.backgroundWorker3.RunWorkerAsync(selectedImageFile);
+        }
+
+        private void backgroundWorker3_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string selectedImageFile = (string)e.Argument;
             FileInfo imageFile = new FileInfo(selectedImageFile);
 
             if (selectedImageFile.ToLower().EndsWith(".pdf"))
             {
                 string workingTiffFileName = null;
-
-                try
+                workingTiffFileName = Utilities.ConvertPdf2Tiff(selectedImageFile);
+                imageList = ImageIOHelper.GetImageList(new FileInfo(workingTiffFileName));
+                if (workingTiffFileName != null && File.Exists(workingTiffFileName))
                 {
-                    workingTiffFileName = Utilities.ConvertPdf2Tiff(selectedImageFile);
-                    imageList = ImageIOHelper.GetImageList(new FileInfo(workingTiffFileName));
-                }
-                catch (System.Runtime.InteropServices.ExternalException ee)
-                {
-                    MessageBox.Show(this, ee.Message, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                catch (ApplicationException e)
-                {
-                    MessageBox.Show(this, e.Message + Environment.NewLine + Properties.Resources.suggest_split, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(this, e.Message, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                finally
-                {
-                    if (workingTiffFileName != null && File.Exists(workingTiffFileName))
-                    {
-                        File.Delete(workingTiffFileName);
-                    }
+                    File.Delete(workingTiffFileName);
                 }
             }
             else
@@ -505,6 +500,65 @@ namespace VietOCR.NET
                 imageList = ImageIOHelper.GetImageList(imageFile);
             }
 
+            e.Result = imageFile;
+        }
+
+        private void backgroundWorker3_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+        }
+
+        private void backgroundWorker3_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.toolStripProgressBar1.Enabled = false;
+            this.toolStripProgressBar1.Visible = false;
+
+            // First, handle the case where an exception was thrown.
+            if (e.Error != null)
+            {
+                //                catch (System.Runtime.InteropServices.ExternalException ee)
+                //{
+                //    MessageBox.Show(this, ee.Message, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    return;
+                //}
+                //catch (ApplicationException e)
+                //{
+                //    MessageBox.Show(this, e.Message + Environment.NewLine + Properties.Resources.suggest_split, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    return;
+                //}
+                //catch (Exception e)
+                //{
+                //    MessageBox.Show(this, e.Message, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    return;
+                //}
+
+                this.toolStripStatusLabel1.Text = String.Empty;
+                MessageBox.Show(e.Error.Message, Properties.Resources.OCROperation);
+            }
+            else if (e.Cancelled)
+            {
+                // Next, handle the case where the user canceled the operation.
+                // Note that due to a race condition in the DoWork event handler, the Cancelled
+                // flag may not have been set, even though CancelAsync was called.
+                this.toolStripStatusLabel1.Text = Properties.Resources.Canceled;
+            }
+            else
+            {
+                // Finally, handle the case where the operation succeeded.
+                this.toolStripStatusLabel1.Text = "Loading completed.";               
+                loadImage((FileInfo) e.Result);
+            }
+
+            this.Cursor = Cursors.Default;
+            this.pictureBox1.UseWaitCursor = false;
+            this.textBox1.Cursor = Cursors.Default;
+            this.toolStripBtnOCR.Enabled = true;
+            this.oCRToolStripMenuItem.Enabled = true;
+            this.oCRAllPagesToolStripMenuItem.Enabled = true;
+        }
+
+        void loadImage(FileInfo imageFile)
+        {
             if (imageList == null)
             {
                 MessageBox.Show(this, Properties.Resources.Cannotloadimage, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -517,7 +571,7 @@ namespace VietOCR.NET
             displayImage();
 
             this.Text = imageFile.Name + " - " + strProgName;
-            this.toolStripStatusLabel1.Text = null;
+            //this.toolStripStatusLabel1.Text = null;
             this.pictureBox1.Deselect();
 
             this.toolStripBtnFitImage.Enabled = true;
@@ -552,7 +606,7 @@ namespace VietOCR.NET
         {
             this.toolStripProgressBar1.Enabled = false;
             this.toolStripProgressBar1.Visible = false;
-            
+
             // First, handle the case where an exception was thrown.
             if (e.Error != null)
             {
@@ -654,8 +708,8 @@ namespace VietOCR.NET
                 this.scanToolStripMenuItem.Enabled = false;
                 this.toolStripProgressBar1.Enabled = true;
                 this.toolStripProgressBar1.Visible = true;
-				this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
-				
+                this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
+
                 // Start the asynchronous operation.
                 backgroundWorker2.RunWorkerAsync();
             }
@@ -891,12 +945,12 @@ namespace VietOCR.NET
         {
             this.wordWrapToolStripMenuItem.Checked = this.textBox1.WordWrap;
         }
-       
+
         protected virtual void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("To be implemented", strProgName);
         }
-        
+
         protected virtual void changeCaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("To be implemented", strProgName);
