@@ -1406,7 +1406,7 @@ public class Gui extends javax.swing.JFrame {
                     Throwable cause = e.getCause();
                     if (cause != null) {
                         if (cause instanceof OutOfMemoryError) {
-                            why = bundle.getString("_has_run_out_of_memory.\nPlease_restart_");
+                            why = bundle.getString("OutOfMemoryError");
                         } else {
                             why = cause.getMessage();
                         }
@@ -1414,7 +1414,6 @@ public class Gui extends javax.swing.JFrame {
                         why = e.getMessage();
                     }
                     e.printStackTrace();
-//                    System.err.println(why);
                     jLabelStatus.setText(null);
                     jProgressBar1.setString(null);
                     JOptionPane.showMessageDialog(Gui.this, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
