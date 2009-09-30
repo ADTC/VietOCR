@@ -31,13 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SplitPdfDialog));
             this.buttonSplit = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.textBoxFrom = new System.Windows.Forms.TextBox();
-            this.textBoxTo = new System.Windows.Forms.TextBox();
+            this.textBoxFrom = new NumericTextBox();
+            this.textBoxTo = new NumericTextBox();
             this.radioButtonPages = new System.Windows.Forms.RadioButton();
             this.labelFrom = new System.Windows.Forms.Label();
             this.labelTo = new System.Windows.Forms.Label();
             this.radioButtonFiles = new System.Windows.Forms.RadioButton();
-            this.textBoxNumOfPages = new System.Windows.Forms.TextBox();
+            this.textBoxNumOfPages = new NumericTextBox();
             this.labelNumOfPages = new System.Windows.Forms.Label();
             this.textBoxInput = new System.Windows.Forms.TextBox();
             this.textBoxOutput = new System.Windows.Forms.TextBox();
