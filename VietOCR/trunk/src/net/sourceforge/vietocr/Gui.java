@@ -1361,35 +1361,78 @@ public class Gui extends javax.swing.JFrame {
      * Opens image file.
      *
      */
-    public void openFile(File selectedFile) {
-        if (selectedFile.getName().toLowerCase().endsWith(".pdf")) {
-            File workingTiffFile = null;
+    public void openFile(final File selectedFile) {
+        jLabelStatus.setText("Loading image...");
+        jProgressBar1.setIndeterminate(true);
+        jProgressBar1.setString("Loading image...");
+        jProgressBar1.setVisible(true);
+        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        getGlassPane().setVisible(true);
+        this.jButtonOCR.setEnabled(false);
+        this.jMenuItemOCR.setEnabled(false);
+        this.jMenuItemOCRAll.setEnabled(false);
 
-            try {
-                workingTiffFile = Utilities.convertPdf2Tiff(selectedFile);
-                iioImageList = ImageIOHelper.getIIOImageList(workingTiffFile);
-            } catch (OutOfMemoryError oome) {
-                JOptionPane.showMessageDialog(this, oome.getMessage() + bundle.getString("suggest_split"), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
-                return;
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, e.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
-                return;
-            } finally {
-                if (workingTiffFile != null && workingTiffFile.exists()) {
-                    workingTiffFile.delete();
+        SwingWorker worker = new SwingWorker<File, Void>() {
+
+            @Override
+            protected File doInBackground() throws Exception {
+                if (selectedFile.getName().toLowerCase().endsWith(".pdf")) {
+                    File workingTiffFile = null;
+                    workingTiffFile = Utilities.convertPdf2Tiff(selectedFile);
+                    iioImageList = ImageIOHelper.getIIOImageList(workingTiffFile);
+                    if (workingTiffFile != null && workingTiffFile.exists()) {
+                        workingTiffFile.delete();
+                    }
+                } else {
+                    iioImageList = ImageIOHelper.getIIOImageList(selectedFile);
+                }
+
+                imageList = ImageIconScalable.getImageList(iioImageList);
+                return selectedFile;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    loadImage(get());
+                    jLabelStatus.setText("Loading completed.");
+                    jProgressBar1.setString("Loading completed.");
+                } catch (InterruptedException ignore) {
+                    ignore.printStackTrace();
+                    jLabelStatus.setText("Loading canceled.");
+                    jProgressBar1.setString("Loading canceled.");
+                } catch (java.util.concurrent.ExecutionException e) {
+                    String why = null;
+                    Throwable cause = e.getCause();
+                    if (cause != null) {
+                        if (cause instanceof OutOfMemoryError) {
+                            why = bundle.getString("_has_run_out_of_memory.\nPlease_restart_");
+                        } else {
+                            why = cause.getMessage();
+                        }
+                    } else {
+                        why = e.getMessage();
+                    }
+                    e.printStackTrace();
+//                    System.err.println(why);
+                    jLabelStatus.setText(null);
+                    jProgressBar1.setString(null);
+                    JOptionPane.showMessageDialog(Gui.this, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
+                } finally {
+                    jProgressBar1.setIndeterminate(false);
+                    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                    getGlassPane().setVisible(false);
+                    jButtonOCR.setEnabled(true);
+                    jMenuItemOCR.setEnabled(true);
+                    jMenuItemOCRAll.setEnabled(true);
                 }
             }
-        } else {
-            try {
-                iioImageList = ImageIOHelper.getIIOImageList(selectedFile);
-            } catch (OutOfMemoryError oome) {
-                JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
+        };
 
-        imageList = ImageIconScalable.getImageList(iioImageList);
+        worker.execute();
+    }
 
+    void loadImage(File selectedFile) {
         if (imageList == null) {
             JOptionPane.showMessageDialog(this, bundle.getString("Cannotloadimage"), APP_NAME, JOptionPane.ERROR_MESSAGE);
             return;
@@ -1404,9 +1447,9 @@ public class Gui extends javax.swing.JFrame {
 //        originalH = imageIcon.getIconHeight();
 
         this.setTitle(selectedFile.getName() + " - " + APP_NAME);
-        jLabelStatus.setText(null);
-        jProgressBar1.setString(null);
-        jProgressBar1.setVisible(false);
+//        jLabelStatus.setText(null);
+//        jProgressBar1.setString(null);
+//        jProgressBar1.setVisible(false);
         ((JImageLabel) jImageLabel).deselect();
 
         this.jButtonFitImage.setEnabled(true);
