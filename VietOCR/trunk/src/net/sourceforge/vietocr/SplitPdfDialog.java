@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.text.*;
 import net.sourceforge.vietpad.SimpleFilter;
 
 public class SplitPdfDialog extends javax.swing.JDialog {
@@ -37,7 +38,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         disableBoxes(!this.jRadioButtonPages.isSelected());
 
         setLocationRelativeTo(getOwner());
-        
+
         bundle = ResourceBundle.getBundle("net/sourceforge/vietocr/SplitPdfDialog");
 
         //  Handle escape key to hide the dialog
@@ -74,12 +75,12 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         jButtonOutput = new javax.swing.JButton();
         jRadioButtonPages = new javax.swing.JRadioButton();
         jLabelFrom = new javax.swing.JLabel();
-        jTextFieldFrom = new javax.swing.JTextField();
+        jTextFieldFrom = new NumericTextField();
         jLabelTo = new javax.swing.JLabel();
-        jTextFieldTo = new javax.swing.JTextField();
+        jTextFieldTo = new NumericTextField();
         jRadioButtonFiles = new javax.swing.JRadioButton();
         jLabelNumPages = new javax.swing.JLabel();
-        jTextFieldNumOfPages = new javax.swing.JTextField();
+        jTextFieldNumOfPages = new NumericTextField();
         jPanel2 = new javax.swing.JPanel();
         jButtonSplit = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
@@ -295,7 +296,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
 
             Pattern regexNums = Pattern.compile("^\\d+$");
 
-            if ((this.jRadioButtonPages.isSelected() && regexNums.matcher(arguments.getFromPage()).matches() && (arguments.getToPage().length() > 0? regexNums.matcher(arguments.getToPage()).matches() : true)) || (this.jRadioButtonFiles.isSelected() && regexNums.matcher(arguments.getNumOfPages()).matches())) {
+            if ((this.jRadioButtonPages.isSelected() && regexNums.matcher(arguments.getFromPage()).matches() && (arguments.getToPage().length() > 0 ? regexNums.matcher(arguments.getToPage()).matches() : true)) || (this.jRadioButtonFiles.isSelected() && regexNums.matcher(arguments.getNumOfPages()).matches())) {
                 this.args = arguments;
                 actionSelected = JOptionPane.OK_OPTION;
                 this.setVisible(false);
@@ -372,5 +373,27 @@ public class SplitPdfDialog extends javax.swing.JDialog {
      */
     public SplitPdfArgs getArgs() {
         return args;
+    }
+
+    class NumericTextField extends JTextField {
+
+        @Override
+        protected Document createDefaultModel() {
+            return new NumericDocument();
+        }
+
+        private class NumericDocument extends PlainDocument {
+            // The regular expression to match input against (zero or more digits)
+
+            private final Pattern DIGITS = Pattern.compile("\\d*");
+
+            @Override
+            public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
+                // Only insert the text if it matches the regular expression
+                if (str != null && DIGITS.matcher(str).matches()) {
+                    super.insertString(offs, str, a);
+                }
+            }
+        }
     }
 }
