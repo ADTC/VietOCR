@@ -210,4 +210,10 @@
   <data name="Inputinvalid" xml:space="preserve">
     <value>Input invalid.</value>
   </data>
+  <data name="Loading_completed" xml:space="preserve">
+    <value>Loading completed.</value>
+  </data>
+  <data name="Loading_image" xml:space="preserve">
+    <value>Loading image...</value>
+  </data>
 </root>

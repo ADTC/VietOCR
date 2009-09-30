@@ -466,7 +466,7 @@ namespace VietOCR.NET
         /// <param name="selectedImageFile"></param>
         public void openFile(string selectedImageFile)
         {
-            this.toolStripStatusLabel1.Text = "Loading image...";
+            this.toolStripStatusLabel1.Text = Properties.Resources.Loading_image;
             this.Cursor = Cursors.WaitCursor;
             this.pictureBox1.UseWaitCursor = true;
             this.textBox1.Cursor = Cursors.WaitCursor;
@@ -501,11 +501,6 @@ namespace VietOCR.NET
             }
 
             e.Result = imageFile;
-        }
-
-        private void backgroundWorker3_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-
         }
 
         private void backgroundWorker3_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -545,8 +540,8 @@ namespace VietOCR.NET
             else
             {
                 // Finally, handle the case where the operation succeeded.
-                this.toolStripStatusLabel1.Text = "Loading completed.";               
                 loadImage((FileInfo) e.Result);
+                this.toolStripStatusLabel1.Text = Properties.Resources.Loading_completed;               
             }
 
             this.Cursor = Cursors.Default;
