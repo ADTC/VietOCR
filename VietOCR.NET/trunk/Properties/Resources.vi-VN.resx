@@ -210,4 +210,10 @@
   <data name="Inputinvalid" xml:space="preserve">
     <value>Input không hợp lệ.</value>
   </data>
+  <data name="Loading_completed" xml:space="preserve">
+    <value>Nạp xong ảnh.</value>
+  </data>
+  <data name="Loading_image" xml:space="preserve">
+    <value>Đang nạp ảnh...</value>
+  </data>
 </root>

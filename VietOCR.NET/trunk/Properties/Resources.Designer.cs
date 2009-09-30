@@ -178,6 +178,24 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading completed..
+        /// </summary>
+        internal static string Loading_completed {
+            get {
+                return ResourceManager.GetString("Loading_completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading image....
+        /// </summary>
+        internal static string Loading_image {
+            get {
+                return ResourceManager.GetString("Loading_image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Merge TIFF running....
         /// </summary>
         internal static string Merge_running {
