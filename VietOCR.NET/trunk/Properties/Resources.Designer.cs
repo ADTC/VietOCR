@@ -169,11 +169,20 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load Image.
+        /// </summary>
+        internal static string Load_image {
+            get {
+                return ResourceManager.GetString("Load_image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please load an image..
         /// </summary>
-        internal static string loadImage {
+        internal static string LoadImage {
             get {
-                return ResourceManager.GetString("loadImage", resourceCulture);
+                return ResourceManager.GetString("LoadImage", resourceCulture);
             }
         }
         

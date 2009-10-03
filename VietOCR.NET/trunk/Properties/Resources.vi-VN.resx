@@ -132,7 +132,7 @@
   <data name="Cannotloadimage" xml:space="preserve">
     <value>Không nạp ảnh được.</value>
   </data>
-  <data name="loadImage" xml:space="preserve">
+  <data name="LoadImage" xml:space="preserve">
     <value>Hãy nạp ảnh.</value>
   </data>
   <data name="OCRcompleted" xml:space="preserve">
@@ -215,5 +215,8 @@
   </data>
   <data name="Loading_image" xml:space="preserve">
     <value>Đang nạp ảnh...</value>
+  </data>
+  <data name="Load_image" xml:space="preserve">
+    <value>Nạp ảnh</value>
   </data>
 </root>
