@@ -678,6 +678,7 @@ namespace VietOCR.NET
 
         private void scanToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            scaleX = scaleY = 1f;
             performScan();
         }
 
