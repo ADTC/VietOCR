@@ -52,7 +52,8 @@ namespace VietOCR.NET
         private Rectangle rect = Rectangle.Empty;
         private Rectangle box = Rectangle.Empty;
 
-        private float scaleX, scaleY;
+        private float scaleX = 1f;
+        private float scaleY = 1f;
 
         protected string selectedUILanguage;
         private int filterIndex;
