@@ -133,7 +133,7 @@ public class ImageIOHelper {
         return tempImageFiles;
     }
 
-    public static List<IIOImage> getIIOImageList(File imageFile) {
+    public static List<IIOImage> getIIOImageList(File imageFile) throws Exception {
         ImageReader reader = null;
         ImageInputStream iis = null;
 
@@ -161,8 +161,6 @@ public class ImageIOHelper {
             }
 
             return iioImageList;
-        } catch (Exception e) {
-            return null;
         } finally {
             try {
                 if (iis != null) {
@@ -177,7 +175,7 @@ public class ImageIOHelper {
         }
     }
 
-    public static void mergeTiff(File[] inputImages, File outputTiff) throws IOException {
+    public static void mergeTiff(File[] inputImages, File outputTiff) throws Exception {
         List<IIOImage> imageList = new ArrayList<IIOImage>();
 
         for (int i = 0; i < inputImages.length; i++) {
