@@ -42,6 +42,8 @@ import net.sourceforge.vietocr.wia.*;
 public class Gui extends javax.swing.JFrame {
 
     public static final String APP_NAME = "VietOCR";
+    public static final String TO_BE_IMPLEMENTED = "To be implemented in subclass";
+
     static final boolean MAC_OS_X = System.getProperty("os.name").startsWith("Mac");
     static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
     static final Locale VIETNAM = new Locale("vi", "VN");
@@ -1377,8 +1379,7 @@ public class Gui extends javax.swing.JFrame {
             @Override
             protected File doInBackground() throws Exception {
                 if (selectedFile.getName().toLowerCase().endsWith(".pdf")) {
-                    File workingTiffFile = null;
-                    workingTiffFile = Utilities.convertPdf2Tiff(selectedFile);
+                    File workingTiffFile = Utilities.convertPdf2Tiff(selectedFile);
                     iioImageList = ImageIOHelper.getIIOImageList(workingTiffFile);
                     if (workingTiffFile != null && workingTiffFile.exists()) {
                         workingTiffFile.delete();
@@ -1446,9 +1447,7 @@ public class Gui extends javax.swing.JFrame {
 //        originalH = imageIcon.getIconHeight();
 
         this.setTitle(selectedFile.getName() + " - " + APP_NAME);
-//        jLabelStatus.setText(null);
-//        jProgressBar1.setString(null);
-//        jProgressBar1.setVisible(false);
+
         ((JImageLabel) jImageLabel).deselect();
 
         this.jButtonFitImage.setEnabled(true);
@@ -1599,7 +1598,7 @@ private void jMenuItemOptionsActionPerformed(java.awt.event.ActionEvent evt) {//
 }//GEN-LAST:event_jMenuItemOptionsActionPerformed
 
     void openOptionsDialog() {
-        // to be implemented in subclass
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
 
 private void jMenuItemChangeCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChangeCaseActionPerformed
@@ -1607,14 +1606,14 @@ private void jMenuItemChangeCaseActionPerformed(java.awt.event.ActionEvent evt) 
 }//GEN-LAST:event_jMenuItemChangeCaseActionPerformed
 
     void openChangeCaseDialog() {
-        // to be implemented in subclass
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
 private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRemoveLineBreaksActionPerformed
     removeLineBreaks();
 }//GEN-LAST:event_jMenuItemRemoveLineBreaksActionPerformed
 
     void removeLineBreaks() {
-        // to be implemented in subclass
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
 
 private void jMenuItemMergeTiffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMergeTiffActionPerformed
@@ -1622,7 +1621,7 @@ private void jMenuItemMergeTiffActionPerformed(java.awt.event.ActionEvent evt) {
 }//GEN-LAST:event_jMenuItemMergeTiffActionPerformed
 
     void mergeTiffs() {
-        // to be implemented in subclass
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
 
 private void jMenuItemSplitPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSplitPdfActionPerformed
@@ -1630,7 +1629,7 @@ private void jMenuItemSplitPdfActionPerformed(java.awt.event.ActionEvent evt) {/
 }//GEN-LAST:event_jMenuItemSplitPdfActionPerformed
 
     void splitPdf() {
-        // to be implemented in subclass
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
 
     void rotateImage(int angle) {
