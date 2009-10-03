@@ -43,7 +43,6 @@ public class Gui extends javax.swing.JFrame {
 
     public static final String APP_NAME = "VietOCR";
     public static final String TO_BE_IMPLEMENTED = "To be implemented in subclass";
-
     static final boolean MAC_OS_X = System.getProperty("os.name").startsWith("Mac");
     static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
     static final Locale VIETNAM = new Locale("vi", "VN");
@@ -1379,10 +1378,15 @@ public class Gui extends javax.swing.JFrame {
             @Override
             protected File doInBackground() throws Exception {
                 if (selectedFile.getName().toLowerCase().endsWith(".pdf")) {
-                    File workingTiffFile = Utilities.convertPdf2Tiff(selectedFile);
-                    iioImageList = ImageIOHelper.getIIOImageList(workingTiffFile);
-                    if (workingTiffFile != null && workingTiffFile.exists()) {
-                        workingTiffFile.delete();
+                    File workingTiffFile = null;
+
+                    try {
+                        workingTiffFile = Utilities.convertPdf2Tiff(selectedFile);
+                        iioImageList = ImageIOHelper.getIIOImageList(workingTiffFile);
+                    } finally {
+                        if (workingTiffFile != null && workingTiffFile.exists()) {
+                            workingTiffFile.delete();
+                        }
                     }
                 } else {
                     iioImageList = ImageIOHelper.getIIOImageList(selectedFile);
@@ -1394,6 +1398,8 @@ public class Gui extends javax.swing.JFrame {
 
             @Override
             protected void done() {
+                jProgressBar1.setIndeterminate(false);
+
                 try {
                     loadImage(get());
                     jLabelStatus.setText(bundle.getString("Loading_completed"));
@@ -1415,11 +1421,11 @@ public class Gui extends javax.swing.JFrame {
                         why = e.getMessage();
                     }
                     e.printStackTrace();
-                    jLabelStatus.setText(null);
-                    jProgressBar1.setString(null);
+//                    jLabelStatus.setText(null);
+//                    jProgressBar1.setString(null);
                     JOptionPane.showMessageDialog(Gui.this, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
+                    jProgressBar1.setVisible(false);
                 } finally {
-                    jProgressBar1.setIndeterminate(false);
                     getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
                     getGlassPane().setVisible(false);
                     jButtonOCR.setEnabled(true);
