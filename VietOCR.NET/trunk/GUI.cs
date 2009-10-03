@@ -40,6 +40,7 @@ namespace VietOCR.NET
     {
         //private Bitmap image;
         protected const string strProgName = "VietOCR.NET";
+        public const string TO_BE_IMPLEMENTED = "To be implemented";
 
         protected string curLangCode;
         string[] langCodes;
@@ -268,12 +269,12 @@ namespace VietOCR.NET
 
         protected virtual void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("To be implemented", strProgName);
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
 
         protected virtual void fontToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("To be implemented", strProgName);
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -943,27 +944,27 @@ namespace VietOCR.NET
 
         protected virtual void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("To be implemented", strProgName);
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
 
         protected virtual void changeCaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("To be implemented", strProgName);
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
 
         protected virtual void removeLineBreaksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("To be implemented", strProgName);
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
 
         protected virtual void mergeTiffToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("To be implemented", strProgName);
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
 
         protected virtual void splitPdfToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("To be implemented", strProgName);
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
     }
 }
