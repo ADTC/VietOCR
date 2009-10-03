@@ -178,16 +178,16 @@ public class ImageIOHelper {
     }
 
     public static void mergeTiff(File[] inputImages, File outputTiff) throws IOException {
-//        List<IIOImage> imageList = new ArrayList<IIOImage>();
-//
-//        for (int i = 0; i < inputImages.length; i++) {
-//            imageList.addAll(getIIOImageList(inputImages[i]));
-//        }
-//
-//        if (imageList.size() == 0) {
-//            // if no image
-//            return;
-//        }
+        List<IIOImage> imageList = new ArrayList<IIOImage>();
+
+        for (int i = 0; i < inputImages.length; i++) {
+            imageList.addAll(getIIOImageList(inputImages[i]));
+        }
+
+        if (imageList.size() == 0) {
+            // if no image
+            return;
+        }
 
         Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(TIFF_FORMAT);
         ImageWriter writer = writers.next();
@@ -200,21 +200,17 @@ public class ImageIOHelper {
         IIOMetadata streamMetadata = writer.getDefaultStreamMetadata(tiffWriteParam);
 
         ImageOutputStream ios = ImageIO.createImageOutputStream(outputTiff);
+        writer.setOutput(ios);
 
-        try {
-            writer.setOutput(ios);
+        IIOImage firstIioImage = imageList.remove(0);
+        writer.write(streamMetadata, firstIioImage, tiffWriteParam);
 
-            IIOImage firstIioImage = getIIOImageList(inputImages[0]).get(0);
-            writer.write(streamMetadata, firstIioImage, tiffWriteParam);
-
-            for (int i = 1; i < inputImages.length; i++) {
-                writer.writeInsert(i, getIIOImageList(inputImages[i]).get(0), tiffWriteParam);
-            }
-        } catch (OutOfMemoryError oome) {
-            throw oome;
-        } finally {
-            ios.close();
-            writer.dispose();
+        int i = 1;
+        for (IIOImage iioImage : imageList) {
+            writer.writeInsert(i++, iioImage, tiffWriteParam);
         }
+        ios.close();
+
+        writer.dispose();
     }
 }
