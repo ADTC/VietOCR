@@ -23,7 +23,7 @@ namespace VietOCR.NET
     class OCRImageEntity
     {
         IList<Image> originalImages;
-        
+
         public IList<Image> OriginalImages
         {
             get { return originalImages; }
@@ -80,15 +80,67 @@ namespace VietOCR.NET
             {
                 foreach (Image image in originalImages)
                 {
-                    images.Add(new Bitmap(image));
+                    images.Add(image);
                 }
             }
             else
             {
-                images.Add(new Bitmap(originalImages[index]));
+                images.Add(originalImages[index]);
             }
 
             return images;
         }
+
+        /// <summary>
+        /// Not used after all since the Picturebox already uses copies of these images.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        //private Image Clone(Image source)
+        //{
+            //PixelFormat pxf = source.PixelFormat;
+            //Bitmap bmp = (Bitmap)source;
+            //Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+
+            //BitmapData bData = bmp.LockBits(rect, ImageLockMode.ReadOnly, pxf);
+            //// number of bytes in the bitmap
+            //int byteCount = bData.Stride * bmp.Height;
+            //byte[] bmpBytes = new byte[byteCount];
+
+            //// Copy the locked bytes from memory
+            //Marshal.Copy(bData.Scan0, bmpBytes, 0, byteCount);
+            //bmp.UnlockBits(bData);
+
+            //Bitmap bmpTarget = new Bitmap(source.Width, source.Height, pxf);
+            //bmpTarget.SetResolution(source.HorizontalResolution, source.VerticalResolution);
+            //BitmapData bDataTarget = bmpTarget.LockBits(rect, ImageLockMode.WriteOnly, pxf);
+            //// Copy the bytes to the bitmap object
+            //Marshal.Copy(bmpBytes, 0, bDataTarget.Scan0, bmpBytes.Length);
+            //bmpTarget.UnlockBits(bDataTarget);
+            //return bmpTarget;
+
+
+            ////create temporary
+            //Image temp = new Bitmap(source.Width, source.Height);
+            //((Bitmap)temp).SetResolution(source.HorizontalResolution, source.VerticalResolution);
+
+            ////get graphics
+            //Graphics g = Graphics.FromImage(temp);
+
+            ////copy original
+            //g.DrawImage(source, 0, 0);
+            //g.Dispose();
+
+            ////return temp;
+            //using (MemoryStream ms = new MemoryStream())
+            //{
+            //    bmp.Save(ms, ImageFormat.Png);
+            //    //byte[] bmpBytes = ms.GetBuffer();
+            //    //using (MemoryStream ms1 = new MemoryStream(bmpBytes))
+            //    //{
+            //        return Image.FromStream(ms);
+            //    //}
+            //}
+        //}
     }
 }

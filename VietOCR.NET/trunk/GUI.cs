@@ -38,7 +38,6 @@ namespace VietOCR.NET
 {
     public partial class GUI : GUIWithRegistry
     {
-        //private Bitmap image;
         protected const string strProgName = "VietOCR.NET";
         public const string TO_BE_IMPLEMENTED = "To be implemented";
 
@@ -481,6 +480,7 @@ namespace VietOCR.NET
             this.backgroundWorker3.RunWorkerAsync(selectedImageFile);
         }
 
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void backgroundWorker3_DoWork(object sender, DoWorkEventArgs e)
         {
             string selectedImageFile = (string)e.Argument;
@@ -520,7 +520,7 @@ namespace VietOCR.NET
             if (e.Error != null)
             {
                 this.toolStripStatusLabel1.Text = String.Empty;
-                MessageBox.Show(e.Error.Message, Properties.Resources.Load_image);
+                MessageBox.Show(e.Error.Message, Properties.Resources.Load_image, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (e.Cancelled)
             {
@@ -598,7 +598,7 @@ namespace VietOCR.NET
             if (e.Error != null)
             {
                 this.toolStripStatusLabel1.Text = String.Empty;
-                MessageBox.Show(e.Error.Message, Properties.Resources.OCROperation);
+                MessageBox.Show(e.Error.Message, Properties.Resources.OCROperation, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (e.Cancelled)
             {
@@ -631,7 +631,7 @@ namespace VietOCR.NET
             if (e.Error != null)
             {
                 this.toolStripStatusLabel1.Text = String.Empty;
-                MessageBox.Show(e.Error.Message, Properties.Resources.ScanningOperation);
+                MessageBox.Show(e.Error.Message, Properties.Resources.ScanningOperation, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (e.Cancelled)
             {
@@ -713,13 +713,13 @@ namespace VietOCR.NET
             {
                 try
                 {
-                    string tempFileName = Path.GetTempFileName().Replace(".tmp", ".bmp");
+                    string tempFileName = Path.GetTempFileName().Replace(".tmp", ".png");
                     FileInfo imageFile = new FileInfo(tempFileName);
                     if (imageFile.Exists)
                     {
                         imageFile.Delete();
                     }
-                    adapter.ScanImage(ImageFormat.Bmp, imageFile.FullName);
+                    adapter.ScanImage(ImageFormat.Png, imageFile.FullName);
                     e.Result = tempFileName;
                 }
                 catch (WiaOperationException ex)
@@ -771,7 +771,7 @@ namespace VietOCR.NET
         {
             // Rotating 270 degrees is equivalent to rotating -90 degrees.
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            imageList[imageIndex] = this.pictureBox1.Image;
+            imageList[imageIndex].RotateFlip(RotateFlipType.Rotate270FlipNone);
             this.pictureBox1.Deselect();
             this.pictureBox1.Size = this.pictureBox1.Image.Size;
             this.pictureBox1.Refresh();
@@ -780,7 +780,7 @@ namespace VietOCR.NET
         private void toolStripBtnRotateCW_Click(object sender, EventArgs e)
         {
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            imageList[imageIndex] = this.pictureBox1.Image;
+            imageList[imageIndex].RotateFlip(RotateFlipType.Rotate90FlipNone);
             this.pictureBox1.Deselect();
             this.pictureBox1.Size = this.pictureBox1.Image.Size;
             this.pictureBox1.Refresh();
