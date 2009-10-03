@@ -70,7 +70,8 @@ public class Gui extends javax.swing.JFrame {
     private JFileChooser filechooser;
     protected boolean wordWrapOn, dangAmbigsOn;
     private String selectedInputMethod;
-    private float scaleX, scaleY;
+    private float scaleX = 1f;
+    private float scaleY = 1f;
     protected static String selectedUILang = "en";
     private int originalW, originalH;
     private final float ZOOM_FACTOR = 1.25f;
@@ -1522,6 +1523,7 @@ private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent 
 }//GEN-LAST:event_jRadioButtonMenuItemVietActionPerformed
 
 private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemScanActionPerformed
+    scaleX = scaleY = 1f;
     performScan();
 }//GEN-LAST:event_jMenuItemScanActionPerformed
 
