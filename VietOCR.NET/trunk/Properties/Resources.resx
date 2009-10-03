@@ -126,7 +126,7 @@
   <data name="Cannotloadimage" xml:space="preserve">
     <value>Cannot load image.</value>
   </data>
-  <data name="loadImage" xml:space="preserve">
+  <data name="LoadImage" xml:space="preserve">
     <value>Please load an image.</value>
   </data>
   <data name="OCRcompleted" xml:space="preserve">
@@ -215,5 +215,8 @@
   </data>
   <data name="Loading_image" xml:space="preserve">
     <value>Loading image...</value>
+  </data>
+  <data name="Load_image" xml:space="preserve">
+    <value>Load Image</value>
   </data>
 </root>

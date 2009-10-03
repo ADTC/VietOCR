@@ -64,7 +64,7 @@ namespace VietOCR.NET
             }
             catch (System.Runtime.InteropServices.ExternalException e)
             {
-                throw new ApplicationException(e.Message + "\nIt might have run out of memory due to handling too many images.", e);
+                throw new ApplicationException(e.Message + "\nIt might have run out of memory due to handling too many images or too large a file.", e);
             }
             finally
             {
@@ -150,7 +150,7 @@ namespace VietOCR.NET
                         }
                         catch (System.Runtime.InteropServices.ExternalException e)
                         {
-                            throw new ApplicationException(e.Message + "\nIt might have run out of memory due to handling too many input images.", e);
+                            throw new ApplicationException(e.Message + "\nIt might have run out of memory due to handling too many images or too large a file.", e);
                         }
                         finally 
                         {

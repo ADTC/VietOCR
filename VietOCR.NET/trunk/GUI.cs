@@ -172,7 +172,7 @@ namespace VietOCR.NET
         {
             if (this.pictureBox1.Image == null)
             {
-                MessageBox.Show(this, Properties.Resources.loadImage, strProgName);
+                MessageBox.Show(this, Properties.Resources.LoadImage, strProgName);
                 return;
             }
 
@@ -200,7 +200,7 @@ namespace VietOCR.NET
         {
             if (this.pictureBox1.Image == null)
             {
-                MessageBox.Show(this, Properties.Resources.loadImage, strProgName);
+                MessageBox.Show(this, Properties.Resources.LoadImage, strProgName);
                 return;
             }
 
@@ -489,11 +489,18 @@ namespace VietOCR.NET
             if (selectedImageFile.ToLower().EndsWith(".pdf"))
             {
                 string workingTiffFileName = null;
-                workingTiffFileName = Utilities.ConvertPdf2Tiff(selectedImageFile);
-                imageList = ImageIOHelper.GetImageList(new FileInfo(workingTiffFileName));
-                if (workingTiffFileName != null && File.Exists(workingTiffFileName))
+
+                try
                 {
-                    File.Delete(workingTiffFileName);
+                    workingTiffFileName = Utilities.ConvertPdf2Tiff(selectedImageFile);
+                    imageList = ImageIOHelper.GetImageList(new FileInfo(workingTiffFileName));
+                }
+                finally
+                {
+                    if (workingTiffFileName != null && File.Exists(workingTiffFileName))
+                    {
+                        File.Delete(workingTiffFileName);
+                    }
                 }
             }
             else
@@ -512,24 +519,8 @@ namespace VietOCR.NET
             // First, handle the case where an exception was thrown.
             if (e.Error != null)
             {
-                //                catch (System.Runtime.InteropServices.ExternalException ee)
-                //{
-                //    MessageBox.Show(this, ee.Message, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    return;
-                //}
-                //catch (ApplicationException e)
-                //{
-                //    MessageBox.Show(this, e.Message + Environment.NewLine + Properties.Resources.suggest_split, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    return;
-                //}
-                //catch (Exception e)
-                //{
-                //    MessageBox.Show(this, e.Message, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    return;
-                //}
-
                 this.toolStripStatusLabel1.Text = String.Empty;
-                MessageBox.Show(e.Error.Message, Properties.Resources.OCROperation);
+                MessageBox.Show(e.Error.Message, Properties.Resources.Load_image);
             }
             else if (e.Cancelled)
             {
