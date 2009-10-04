@@ -23,6 +23,7 @@ import java.awt.*;
 import java.awt.datatransfer.*;
 import java.util.prefs.Preferences;
 import java.util.*;
+import java.util.List;
 import java.text.*;
 import java.awt.event.*;
 import javax.swing.undo.*;
@@ -1275,8 +1276,23 @@ public class Gui extends javax.swing.JFrame {
             protected String doInBackground() throws Exception {
                 OCRImageEntity entity = new OCRImageEntity(iioImageList, index);
                 OCR ocrEngine = new OCR(tessPath);
-                return ocrEngine.recognizeText(entity.getClonedImageFiles(), curLangCode);
+                List<File> workingFiles = entity.getClonedImageFiles();
+                String result = ocrEngine.recognizeText(workingFiles, curLangCode);
+
+                // clean up
+                for (File file : workingFiles) {
+                    file.delete();
+                }
+                
+                return result;
             }
+
+//            @Override
+//            protected void process(java.util.List<String> strs) {
+//                for (String str : strs) {
+//                    jTextArea1.append(str);
+//                }
+//            }
 
             @Override
             protected void done() {
