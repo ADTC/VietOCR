@@ -197,7 +197,7 @@ public class Utilities {
             os = new ByteArrayOutputStream();
             gs.setStdOut(os);
             gs.initialize(gsArgs.toArray(new String[0]));
-            pageCount = Integer.parseInt(os.toString().substring("%%Pages: ".length()));
+            pageCount = Integer.parseInt(os.toString().replace("%%Pages: ", ""));
             os.close();
         } catch (GhostscriptException e) {
             System.err.println("ERROR: " + e.getMessage());
