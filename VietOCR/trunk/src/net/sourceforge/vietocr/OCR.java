@@ -39,33 +39,6 @@ public class OCR {
     }
 
     /**
-     *
-     * @param imageList
-     * @param index
-     * @param lang
-     * @return
-     * @throws java.lang.Exception
-     */
-//    String recognizeText(final List<IIOImage> imageList, final int index, final String lang) throws Exception {
-//        List<File> tempImageFiles = ImageIOHelper.createImageFiles(imageList, index);
-//        return recognizeText(tempImageFiles, lang);
-//    }
-
-    /**
-     *
-     * @param imageFile
-     * @param index
-     * @param lang
-     * @return
-     * @throws java.lang.Exception
-     */
-//    String recognizeText(final File imageFile, final int index, final String lang) throws Exception {
-//        List<File> tempImageFiles = ImageIOHelper.createImageFiles(imageFile, index);
-//        return recognizeText(tempImageFiles, lang);
-//    }
-
-    /**
-     * 
      * @param tempImageFiles
      * @param lang
      * @return
@@ -74,7 +47,6 @@ public class OCR {
     String recognizeText(final List<File> tempImageFiles, final String lang) throws Exception {
         File tempTessOutputFile = File.createTempFile(OUTPUT_FILE_NAME, FILE_EXTENSION);
         String outputFileName = tempTessOutputFile.getPath().substring(0, tempTessOutputFile.getPath().length() - FILE_EXTENSION.length()); // chop the .txt extension
-        StringBuffer strB = new StringBuffer();
         
         List<String> cmd = new ArrayList<String>();
         cmd.add(tessPath + "/tesseract");
@@ -85,21 +57,19 @@ public class OCR {
 
         ProcessBuilder pb = new ProcessBuilder();
         pb.directory(new File(System.getProperty("user.home")));
+        pb.redirectErrorStream(true);
             
+        StringBuffer result = new StringBuffer();
+
         for (File tempImageFile : tempImageFiles) {
 //            ProcessBuilder pb = new ProcessBuilder(tessPath + "/tesseract", tempImageFile.getPath(), outputFileName, LANG_OPTION, lang);
             
             cmd.set(1, tempImageFile.getPath());
             pb.command(cmd);
-            pb.redirectErrorStream(true);
             Process process = pb.start();
-//            Process process = Runtime.getRuntime().exec(cmd.toArray(new String[0]));
             
             int w = process.waitFor();
             System.out.println("Exit value = " + w);
-            
-            // delete temp working files
-            tempImageFile.delete();
             
             if (w == 0) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(tempTessOutputFile), "UTF-8"));
@@ -107,7 +77,7 @@ public class OCR {
                 String str;
                 
                 while ((str = in.readLine()) != null) {
-                    strB.append(str).append(EOL);
+                    result.append(str).append(EOL);
                 }
                 in.close();
             } else {
@@ -125,15 +95,13 @@ public class OCR {
                     default:
                         msg = "Errors occurred.";
                 }
-                for (File image : tempImageFiles) {
-                    image.delete();
-                }
+
                 tempTessOutputFile.delete();
                 throw new RuntimeException(msg);
             }
             
         }
         tempTessOutputFile.delete();
-        return strB.toString();
+        return result.toString();
     }
 }
