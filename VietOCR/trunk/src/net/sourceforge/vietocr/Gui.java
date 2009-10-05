@@ -56,8 +56,8 @@ public class Gui extends javax.swing.JFrame {
     private final Rectangle screen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
     private int imageIndex;
     private int imageTotal;
-    private java.util.List<ImageIconScalable> imageList;
-    private java.util.List<IIOImage> iioImageList;
+    private List<ImageIconScalable> imageList;
+    private List<IIOImage> iioImageList;
     public final String EOL = System.getProperty("line.separator");
     private String currentDirectory;
     private String outputDirectory;
@@ -1254,7 +1254,7 @@ public class Gui extends javax.swing.JFrame {
      * @param list List of IIOImage
      * @param index Index of page to be OCRed: -1 for all pages
      */
-    void performOCR(final java.util.List<IIOImage> iioImageList, final int index) {
+    void performOCR(final List<IIOImage> iioImageList, final int index) {
         if (this.jComboBoxLang.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_select_a_language."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -1270,35 +1270,35 @@ public class Gui extends javax.swing.JFrame {
         this.jMenuItemOCR.setEnabled(false);
         this.jMenuItemOCRAll.setEnabled(false);
 
-        SwingWorker worker = new SwingWorker<String, Void>() {
+        SwingWorker worker = new SwingWorker<Void, String>() {
 
             @Override
-            protected String doInBackground() throws Exception {
+            protected Void doInBackground() throws Exception {
                 OCRImageEntity entity = new OCRImageEntity(iioImageList, index);
                 OCR ocrEngine = new OCR(tessPath);
                 List<File> workingFiles = entity.getClonedImageFiles();
-                String result = ocrEngine.recognizeText(workingFiles, curLangCode);
 
-                // clean up
-                for (File file : workingFiles) {
-                    file.delete();
+                for (File workingFile : workingFiles) {
+                    String result = ocrEngine.recognizeText(workingFile, curLangCode);
+                    publish(result); // interim result
+                    
+                    workingFile.delete();   // clean up temporary files
                 }
                 
-                return result;
+                return null;
             }
 
-//            @Override
-//            protected void process(java.util.List<String> strs) {
-//                for (String str : strs) {
-//                    jTextArea1.append(str);
-//                }
-//            }
+            @Override
+            protected void process(List<String> results) {
+                for (String str : results) {
+                    jTextArea1.append(str);
+                }
+            }
 
             @Override
             protected void done() {
                 try {
-                    String result = get();
-                    jTextArea1.append(result);
+                    get(); // dummy method
                 } catch (InterruptedException ignore) {
                     ignore.printStackTrace();
                 } catch (java.util.concurrent.ExecutionException e) {
