@@ -1292,6 +1292,7 @@ public class Gui extends javax.swing.JFrame {
             protected void process(List<String> results) {
                 for (String str : results) {
                     jTextArea1.append(str);
+                    jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
                 }
             }
 
