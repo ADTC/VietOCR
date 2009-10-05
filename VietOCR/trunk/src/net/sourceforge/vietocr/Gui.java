@@ -1278,13 +1278,13 @@ public class Gui extends javax.swing.JFrame {
                 OCR ocrEngine = new OCR(tessPath);
                 List<File> workingFiles = entity.getClonedImageFiles();
 
-                for (File workingFile : workingFiles) {
-                    String result = ocrEngine.recognizeText(workingFile, curLangCode);
+                for (int i = 0; i < workingFiles.size(); i++) {
+                    String result = ocrEngine.recognizeText(workingFiles.subList(i, i + 1), curLangCode);
                     publish(result); // interim result
                     
-                    workingFile.delete();   // clean up temporary files
+                    workingFiles.get(i).delete();   // clean up temporary files
                 }
-                
+
                 return null;
             }
 
