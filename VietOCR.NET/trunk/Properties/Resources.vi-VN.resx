@@ -151,7 +151,7 @@
     <value>Hãy chọn một ngôn ngữ.</value>
   </data>
   <data name="canceled" xml:space="preserve">
-    <value>bãi bỏ.</value>
+    <value>hủy bỏ.</value>
   </data>
   <data name="Scancompleted" xml:space="preserve">
     <value>Quét xong văn bản.</value>
