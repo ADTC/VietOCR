@@ -97,11 +97,11 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Canceled.
+        ///   Looks up a localized string similar to canceled..
         /// </summary>
-        internal static string Canceled {
+        internal static string canceled {
             get {
-                return ResourceManager.GetString("Canceled", resourceCulture);
+                return ResourceManager.GetString("canceled", resourceCulture);
             }
         }
         

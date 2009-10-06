@@ -204,6 +204,9 @@ namespace VietOCR.NET
                 return;
             }
 
+            this.toolStripBtnOCR.Visible = false;
+            this.toolStripButtonCancelOCR.Visible = true;
+            this.toolStripButtonCancelOCR.Enabled = true;
             performOCR(imageList, -1, Rectangle.Empty);
         }
 
@@ -528,7 +531,7 @@ namespace VietOCR.NET
                 // Next, handle the case where the user canceled the operation.
                 // Note that due to a race condition in the DoWork event handler, the Cancelled
                 // flag may not have been set, even though CancelAsync was called.
-                this.toolStripStatusLabel1.Text = Properties.Resources.Canceled;
+                this.toolStripStatusLabel1.Text = "Image loading" + Properties.Resources.canceled;
             }
             else
             {
@@ -589,7 +592,45 @@ namespace VietOCR.NET
             this.pictureBox1.Size = this.pictureBox1.Image.Size;
             this.pictureBox1.Invalidate();
         }
+        
+        private void toolStripButtonCancelOCR_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.CancelAsync();
+            this.toolStripButtonCancelOCR.Enabled = false;
+        }
 
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Get the BackgroundWorker that raised this event.
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            OCRImageEntity entity = (OCRImageEntity)e.Argument;
+            OCR ocrEngine = new OCR();
+
+            // Assign the result of the computation to the Result property of the DoWorkEventArgs
+            // object. This is will be available to the RunWorkerCompleted eventhandler.
+            //e.Result = ocrEngine.RecognizeText(entity.ClonedImages, entity.Lang, entity.Rect, worker, e);
+
+            for (int i = 0; i < entity.ClonedImages.Count; i++)
+            {
+                if (worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+
+                string result = ocrEngine.RecognizeText(((List<Image>)entity.ClonedImages).GetRange(i, 1), entity.Lang, entity.Rect, worker, e);
+                worker.ReportProgress(i, result); // i is not really percentage
+            }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //this.toolStripProgressBar1.Value = e.ProgressPercentage;
+            this.textBox1.AppendText((string) e.UserState);
+        }
+        
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.toolStripProgressBar1.Enabled = false;
@@ -606,74 +647,23 @@ namespace VietOCR.NET
                 // Next, handle the case where the user canceled the operation.
                 // Note that due to a race condition in the DoWork event handler, the Cancelled
                 // flag may not have been set, even though CancelAsync was called.
-                this.toolStripStatusLabel1.Text = Properties.Resources.Canceled;
+                this.toolStripStatusLabel1.Text = "OCR " + Properties.Resources.canceled;
             }
             else
             {
                 // Finally, handle the case where the operation succeeded.
                 this.toolStripStatusLabel1.Text = Properties.Resources.OCRcompleted;
-                this.textBox1.AppendText(e.Result.ToString());
+                //this.textBox1.AppendText(e.Result.ToString());
             }
 
             this.Cursor = Cursors.Default;
             this.pictureBox1.UseWaitCursor = false;
             this.textBox1.Cursor = Cursors.Default;
+            this.toolStripBtnOCR.Visible = true;
             this.toolStripBtnOCR.Enabled = true;
             this.oCRToolStripMenuItem.Enabled = true;
             this.oCRAllPagesToolStripMenuItem.Enabled = true;
-        }
-
-        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            this.toolStripProgressBar1.Enabled = false;
-            this.toolStripProgressBar1.Visible = false;
-
-            // First, handle the case where an exception was thrown.
-            if (e.Error != null)
-            {
-                this.toolStripStatusLabel1.Text = String.Empty;
-                MessageBox.Show(e.Error.Message, Properties.Resources.ScanningOperation, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (e.Cancelled)
-            {
-                // Next, handle the case where the user canceled the operation.
-                // Note that due to a race condition in the DoWork event handler, the Cancelled
-                // flag may not have been set, even though CancelAsync was called.
-                this.toolStripStatusLabel1.Text = Properties.Resources.Canceled;
-            }
-            else
-            {
-                // Finally, handle the case where the operation succeeded.
-                openFile(e.Result.ToString());
-                this.toolStripStatusLabel1.Text = Properties.Resources.Scancompleted;
-            }
-
-            this.Cursor = Cursors.Default;
-            this.pictureBox1.UseWaitCursor = false;
-            this.textBox1.Cursor = Cursors.Default;
-            this.toolStripBtnScan.Enabled = true;
-            this.scanToolStripMenuItem.Enabled = true;
-        }
-
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            this.toolStripProgressBar1.Value = e.ProgressPercentage;
-            //this.toolStripStatusLabel1.Text = e.UserState as String;
-        }
-
-        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            // Get the BackgroundWorker that raised this event.
-            BackgroundWorker worker = sender as BackgroundWorker;
-            worker.ReportProgress(0, "OCR running...");
-
-            OCRImageEntity entity = (OCRImageEntity)e.Argument;
-            OCR ocrEngine = new OCR();
-
-            // Assign the result of the computation to the Result property of the DoWorkEventArgs
-            // object. This is will be available to the RunWorkerCompleted eventhandler.
-            e.Result = ocrEngine.RecognizeText(entity.ClonedImages, entity.Lang, entity.Rect, worker, e);
+            this.toolStripButtonCancelOCR.Visible = false;
         }
 
         private void scanToolStripMenuItem_Click(object sender, EventArgs e)
@@ -730,6 +720,39 @@ namespace VietOCR.NET
                 }
             }
         }
+
+        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.toolStripProgressBar1.Enabled = false;
+            this.toolStripProgressBar1.Visible = false;
+
+            // First, handle the case where an exception was thrown.
+            if (e.Error != null)
+            {
+                this.toolStripStatusLabel1.Text = String.Empty;
+                MessageBox.Show(e.Error.Message, Properties.Resources.ScanningOperation, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (e.Cancelled)
+            {
+                // Next, handle the case where the user canceled the operation.
+                // Note that due to a race condition in the DoWork event handler, the Cancelled
+                // flag may not have been set, even though CancelAsync was called.
+                this.toolStripStatusLabel1.Text = "Scanning " + Properties.Resources.canceled;
+            }
+            else
+            {
+                // Finally, handle the case where the operation succeeded.
+                openFile(e.Result.ToString());
+                this.toolStripStatusLabel1.Text = Properties.Resources.Scancompleted;
+            }
+
+            this.Cursor = Cursors.Default;
+            this.pictureBox1.UseWaitCursor = false;
+            this.textBox1.Cursor = Cursors.Default;
+            this.toolStripBtnScan.Enabled = true;
+            this.scanToolStripMenuItem.Enabled = true;
+        }
+
         private void splitContainer2_Panel2_DragOver(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))

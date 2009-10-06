@@ -150,8 +150,8 @@
   <data name="selectLanguage" xml:space="preserve">
     <value>Hãy chọn một ngôn ngữ.</value>
   </data>
-  <data name="Canceled" xml:space="preserve">
-    <value>Bãi bỏ</value>
+  <data name="canceled" xml:space="preserve">
+    <value>bãi bỏ.</value>
   </data>
   <data name="Scancompleted" xml:space="preserve">
     <value>Quét xong văn bản.</value>
