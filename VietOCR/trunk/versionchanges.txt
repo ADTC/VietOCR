@@ -122,5 +122,6 @@ Version 1.3 (3 October 2009)
 - Improved handling of PDF documents that has many (>50) pages. Putting too many images, as a result of PDF extraction, in a multi-page TIFF eventually will generate out-of-memory exceptions
 - Implemented Split PDF functionality
 
-Version 1.4 Beta (4 October 2009)
-- Publish OCR interim results to produce more responsive performance, improving user experience
+Version 1.4 Beta (5 October 2009)
+- Publish OCR interim results to produce more responsive UI performance, improving user experience
+- Implemented cancellation of running OCR tasks

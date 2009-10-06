@@ -76,6 +76,7 @@ public class Gui extends javax.swing.JFrame {
     protected static String selectedUILang = "en";
     private int originalW, originalH;
     private final float ZOOM_FACTOR = 1.25f;
+    private OcrWorker ocrWorker;
 
     /**
      * Creates new form Gui
@@ -413,6 +414,8 @@ public class Gui extends javax.swing.JFrame {
         jButtonOpen = new javax.swing.JButton();
         jButtonScan = new javax.swing.JButton();
         jButtonOCR = new javax.swing.JButton();
+        jButtonCancelOCR = new javax.swing.JButton();
+        jButtonCancelOCR.setVisible(false);
         jButtonClear = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabelLanguage = new javax.swing.JLabel();
@@ -576,6 +579,18 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(jButtonOCR);
+
+        jButtonCancelOCR.setText(bundle.getString("jButtonCancelOCR.Text")); // NOI18N
+        jButtonCancelOCR.setToolTipText(bundle.getString("jButtonCancelOCR.ToolTipText")); // NOI18N
+        jButtonCancelOCR.setFocusable(false);
+        jButtonCancelOCR.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonCancelOCR.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonCancelOCR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelOCRActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButtonCancelOCR);
 
         jButtonClear.setText(bundle.getString("jButtonClear.Text")); // NOI18N
         jButtonClear.setToolTipText(bundle.getString("jButtonClear.ToolTipText")); // NOI18N
@@ -1108,6 +1123,9 @@ public class Gui extends javax.swing.JFrame {
             return;
         }
 
+        this.jButtonOCR.setVisible(false);
+        this.jButtonCancelOCR.setVisible(true);
+        this.jButtonCancelOCR.setEnabled(true);
         performOCR(iioImageList, -1);
     }//GEN-LAST:event_jMenuItemOCRAllActionPerformed
 
@@ -1270,71 +1288,9 @@ public class Gui extends javax.swing.JFrame {
         this.jMenuItemOCR.setEnabled(false);
         this.jMenuItemOCRAll.setEnabled(false);
 
-        SwingWorker worker = new SwingWorker<Void, String>() {
-
-            @Override
-            protected Void doInBackground() throws Exception {
-                OCRImageEntity entity = new OCRImageEntity(iioImageList, index);
-                OCR ocrEngine = new OCR(tessPath);
-                List<File> workingFiles = entity.getClonedImageFiles();
-
-                for (int i = 0; i < workingFiles.size(); i++) {
-                    String result = ocrEngine.recognizeText(workingFiles.subList(i, i + 1), curLangCode);
-                    publish(result); // interim result
-                    
-                    workingFiles.get(i).delete();   // clean up temporary files
-                }
-
-                return null;
-            }
-
-            @Override
-            protected void process(List<String> results) {
-                for (String str : results) {
-                    jTextArea1.append(str);
-                    jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
-                }
-            }
-
-            @Override
-            protected void done() {
-                try {
-                    get(); // dummy method
-                } catch (InterruptedException ignore) {
-                    ignore.printStackTrace();
-                } catch (java.util.concurrent.ExecutionException e) {
-                    String why = null;
-                    Throwable cause = e.getCause();
-                    if (cause != null) {
-                        if (cause instanceof IOException) {
-                            why = bundle.getString("Cannot_find_Tesseract._Please_set_its_path.");
-                        } else if (cause instanceof FileNotFoundException) {
-                            why = bundle.getString("An_exception_occurred_in_Tesseract_engine_while_recognizing_this_image.");
-                        } else if (cause instanceof OutOfMemoryError) {
-                            why = bundle.getString("_has_run_out_of_memory.\nPlease_restart_");
-                        } else {
-                            why = cause.getMessage();
-                        }
-                    } else {
-                        why = e.getMessage();
-                    }
-                    e.printStackTrace();
-//                    System.err.println(why);
-                    JOptionPane.showMessageDialog(null, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
-                } finally {
-                    jLabelStatus.setText(bundle.getString("OCR_completed."));
-                    jProgressBar1.setIndeterminate(false);
-                    jProgressBar1.setString(bundle.getString("OCR_completed."));
-                    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-                    getGlassPane().setVisible(false);
-                    jButtonOCR.setEnabled(true);
-                    jMenuItemOCR.setEnabled(true);
-                    jMenuItemOCRAll.setEnabled(true);
-                }
-            }
-        };
-
-        worker.execute();
+        // instantiate SwingWorker for OCR
+        ocrWorker = new OcrWorker(new OCRImageEntity(iioImageList, index));
+        ocrWorker.execute();
     }
 
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
@@ -1653,6 +1609,16 @@ private void jMenuItemSplitPdfActionPerformed(java.awt.event.ActionEvent evt) {/
     splitPdf();
 }//GEN-LAST:event_jMenuItemSplitPdfActionPerformed
 
+private void jButtonCancelOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelOCRActionPerformed
+    if (ocrWorker != null && !ocrWorker.isDone()) {
+        // Cancel current OCR op to begin a new one. You want only one OCR op at a time.
+        ocrWorker.cancel(true);
+        ocrWorker = null;
+    }
+
+    this.jButtonCancelOCR.setEnabled(false);
+}//GEN-LAST:event_jButtonCancelOCRActionPerformed
+
     void splitPdf() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
@@ -1714,6 +1680,85 @@ private void jMenuItemSplitPdfActionPerformed(java.awt.event.ActionEvent evt) {/
         return ideal < min + TOLERANCE ? min : (ideal > max - TOLERANCE ? max : ideal);
     }
 
+    class OcrWorker extends SwingWorker<Void, String> {
+
+        OCRImageEntity entity;
+
+        OcrWorker(OCRImageEntity entity) {
+            this.entity = entity;
+        }
+
+        @Override
+        protected Void doInBackground() throws Exception {
+            OCR ocrEngine = new OCR(tessPath);
+            List<File> workingFiles = entity.getClonedImageFiles();
+
+            for (int i = 0; i < workingFiles.size(); i++) {
+                if (!isCancelled()) {
+                    String result = ocrEngine.recognizeText(workingFiles.subList(i, i + 1), curLangCode);
+                    publish(result); // interim result
+                }
+
+                workingFiles.get(i).delete();   // clean up temporary files, even in cancellation
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void process(List<String> results) {
+            for (String str : results) {
+                jTextArea1.append(str);
+                jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+            }
+        }
+
+        @Override
+        protected void done() {
+            jProgressBar1.setIndeterminate(false);
+
+            try {
+                get(); // dummy method
+                jLabelStatus.setText(bundle.getString("OCR_completed."));
+                jProgressBar1.setString(bundle.getString("OCR_completed."));
+            } catch (InterruptedException ignore) {
+                ignore.printStackTrace();
+            } catch (java.util.concurrent.ExecutionException e) {
+                String why = null;
+                Throwable cause = e.getCause();
+                if (cause != null) {
+                    if (cause instanceof IOException) {
+                        why = bundle.getString("Cannot_find_Tesseract._Please_set_its_path.");
+                    } else if (cause instanceof FileNotFoundException) {
+                        why = bundle.getString("An_exception_occurred_in_Tesseract_engine_while_recognizing_this_image.");
+                    } else if (cause instanceof OutOfMemoryError) {
+                        why = bundle.getString("_has_run_out_of_memory.\nPlease_restart_");
+                    } else {
+                        why = cause.getMessage();
+                    }
+                } else {
+                    why = e.getMessage();
+                }
+                e.printStackTrace();
+//                    System.err.println(why);
+                jLabelStatus.setText(null);
+                jProgressBar1.setString(null);
+                JOptionPane.showMessageDialog(null, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
+            } catch (java.util.concurrent.CancellationException e) {
+                jLabelStatus.setText("OCR " + bundle.getString("canceled"));
+                jProgressBar1.setString("OCR " + bundle.getString("canceled"));
+            } finally {
+                getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                getGlassPane().setVisible(false);
+                jButtonOCR.setVisible(true);
+                jButtonOCR.setEnabled(true);
+                jMenuItemOCR.setEnabled(true);
+                jMenuItemOCRAll.setEnabled(true);
+                jButtonCancelOCR.setVisible(false);
+            }
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -1731,6 +1776,7 @@ private void jMenuItemSplitPdfActionPerformed(java.awt.event.ActionEvent evt) {/
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualSize;
+    private javax.swing.JButton jButtonCancelOCR;
     private javax.swing.JButton jButtonClear;
     private javax.swing.JButton jButtonFitImage;
     private javax.swing.JButton jButtonNextPage;
