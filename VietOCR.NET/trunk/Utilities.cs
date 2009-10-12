@@ -75,10 +75,12 @@ namespace VietOCR.NET
         }
 
         /// <summary>
-        /// Convert PDF to PNG format.
+        /// Split PDF.
         /// </summary>
         /// <param name="inputPdfFile"></param>
-        /// <returns>an array of PNG images</returns>
+        /// <param name="outputPdfFile"></param>
+        /// <param name="firstPage"></param>
+        /// <param name="lastPage"></param>
         public static void SplitPdf(string inputPdfFile, string outputPdfFile, string firstPage, string lastPage)
         {
             PDFConvert converter = new PDFConvert();
@@ -104,6 +106,11 @@ namespace VietOCR.NET
             }
         }
 
+        /// <summary>
+        /// Get PDF Page Count.
+        /// </summary>
+        /// <param name="inputPdfFile"></param>
+        /// <returns></returns>
         public static int GetPdfPageCount(string inputPdfFile)
         {
             PDFConvert converter = new PDFConvert();
@@ -118,7 +125,7 @@ namespace VietOCR.NET
             gsArgs.Add("-dBATCH");
             gsArgs.Add("-sPDFname=" + inputPdfFile);
             gsArgs.Add("Library/pdfpagecount.ps");
-            
+
             int pageCount = 0;
 
             using (StringWriter writer = new StringWriter())
@@ -138,6 +145,33 @@ namespace VietOCR.NET
             }
 
             return pageCount;
+        }
+
+        /// <summary>
+        /// Merge PDF files.
+        /// </summary>
+        /// <param name="inputPdfFiles"></param>
+        /// <param name="outputPdfFile"></param>
+        public static void MergePdf(string[] inputPdfFiles, string outputPdfFile)
+        {
+            PDFConvert converter = new PDFConvert();
+            converter.OutputFormat = "pdfwrite"; // -sDEVICE
+            converter.ThrowOnlyException = true; // rethrow exceptions
+
+            //gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -sOutputFile=out.pdf in1.pdf in2.pdf in3.pdf
+
+            StringBuilder strB = new StringBuilder();
+            foreach (string inputPdfFile in inputPdfFiles)
+            {
+                strB.Append(inputPdfFile).Append(" ");
+            }
+
+            bool success = converter.Convert(strB.ToString(), outputPdfFile);
+
+            if (!success)
+            {
+                throw new ApplicationException("Split PDF failed.");
+            }
         }
     }
 }
