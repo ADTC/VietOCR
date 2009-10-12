@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerSplitPdf = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerMergeTiff = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerMergePdf = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // textBox1
@@ -39,17 +40,23 @@
             this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.textBox1.Size = new System.Drawing.Size(396, 555);
             // 
-            // backgroundWorker1
+            // backgroundWorkerSplitPdf
             // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
-            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorkerSplitPdf.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerSplitPdf_DoWork);
+            this.backgroundWorkerSplitPdf.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerSplitPdf_RunWorkerCompleted);
+            this.backgroundWorkerSplitPdf.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerSplitPdf_ProgressChanged);
             // 
-            // backgroundWorker2
+            // backgroundWorkerMergeTiff
             // 
-            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
-            this.backgroundWorker2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker2_RunWorkerCompleted);
-            this.backgroundWorker2.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker2_ProgressChanged);
+            this.backgroundWorkerMergeTiff.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerMergeTiff_DoWork);
+            this.backgroundWorkerMergeTiff.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerMergeTiff_RunWorkerCompleted);
+            this.backgroundWorkerMergeTiff.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerMergeTiff_ProgressChanged);
+            // 
+            // backgroundWorkerMergePdf
+            // 
+            this.backgroundWorkerMergePdf.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerMergePdf_DoWork);
+            this.backgroundWorkerMergePdf.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerMergePdf_RunWorkerCompleted);
+            this.backgroundWorkerMergePdf.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerMergePdf_ProgressChanged);
             // 
             // GUIWithTools
             // 
@@ -64,7 +71,8 @@
 
         #endregion
 
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerSplitPdf;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerMergeTiff;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerMergePdf;
     }
 }
