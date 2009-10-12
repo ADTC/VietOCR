@@ -534,6 +534,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuItemOptions = new javax.swing.JMenuItem();
         jMenuTools = new javax.swing.JMenu();
         jMenuItemMergeTiff = new javax.swing.JMenuItem();
+        jMenuItemMergePdf = new javax.swing.JMenuItem();
         jMenuItemSplitPdf = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemHelp = new javax.swing.JMenuItem();
@@ -908,6 +909,14 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jMenuTools.add(jMenuItemMergeTiff);
+
+        jMenuItemMergePdf.setText("Merge PDF");
+        jMenuItemMergePdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMergePdfActionPerformed(evt);
+            }
+        });
+        jMenuTools.add(jMenuItemMergePdf);
 
         jMenuItemSplitPdf.setText(bundle.getString("jMenuItemSplitPdf.Text")); // NOI18N
         jMenuItemSplitPdf.addActionListener(new java.awt.event.ActionListener() {
@@ -1609,6 +1618,10 @@ private void jMenuItemSplitPdfActionPerformed(java.awt.event.ActionEvent evt) {/
     splitPdf();
 }//GEN-LAST:event_jMenuItemSplitPdfActionPerformed
 
+    void splitPdf() {
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
+    }
+
 private void jButtonCancelOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelOCRActionPerformed
     if (ocrWorker != null && !ocrWorker.isDone()) {
         // Cancel current OCR op to begin a new one. You want only one OCR op at a time.
@@ -1619,7 +1632,11 @@ private void jButtonCancelOCRActionPerformed(java.awt.event.ActionEvent evt) {//
     this.jButtonCancelOCR.setEnabled(false);
 }//GEN-LAST:event_jButtonCancelOCRActionPerformed
 
-    void splitPdf() {
+private void jMenuItemMergePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMergePdfActionPerformed
+    mergePdf();
+}//GEN-LAST:event_jMenuItemMergePdfActionPerformed
+
+    void mergePdf() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
 
@@ -1805,6 +1822,7 @@ private void jButtonCancelOCRActionPerformed(java.awt.event.ActionEvent evt) {//
     private javax.swing.JMenuItem jMenuItemExit;
     private javax.swing.JMenuItem jMenuItemFont;
     private javax.swing.JMenuItem jMenuItemHelp;
+    private javax.swing.JMenuItem jMenuItemMergePdf;
     private javax.swing.JMenuItem jMenuItemMergeTiff;
     private javax.swing.JMenuItem jMenuItemOCR;
     private javax.swing.JMenuItem jMenuItemOCRAll;
