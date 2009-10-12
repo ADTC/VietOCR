@@ -168,7 +168,7 @@ public class Utilities {
     }
 
     /**
-     * Count pages of PDF.
+     * Get PDF Page Count.
      *
      * @param inputPdfFile
      * @return number of pages
@@ -206,5 +206,46 @@ public class Utilities {
         }
 
         return pageCount;
+    }
+
+    /**
+     * Merge PDF files.
+     * 
+     * @param inputPdfFiles
+     * @param outputPdfFile
+     */
+    public static void mergePdf(File[] inputPdfFiles, File outputPdfFile) {
+        //get Ghostscript instance
+        Ghostscript gs = Ghostscript.getInstance();
+
+        //prepare Ghostscript interpreter parameters
+        //refer to Ghostscript documentation for parameter usage
+        //gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -sOutputFile=out.pdf in1.pdf in2.pdf in3.pdf
+        List<String> gsArgs = new ArrayList<String>();
+        gsArgs.add("-gs");
+        gsArgs.add("-dNOPAUSE");
+        gsArgs.add("-dQUIET");
+        gsArgs.add("-dBATCH");
+        gsArgs.add("-sDEVICE=pdfwrite");
+        gsArgs.add("-sOutputFile=" + outputPdfFile.getName());
+
+        StringBuffer strB = new StringBuffer();
+        for (File inputPdfFile : inputPdfFiles) {
+            strB.append(inputPdfFile.getPath()).append(" ");
+        }
+        gsArgs.add(strB.toString().trim());
+
+        //execute and exit interpreter
+        try {
+            gs.initialize(gsArgs.toArray(new String[0]));
+            gs.exit();
+        } catch (GhostscriptException e) {
+            System.err.println("ERROR: " + e.getMessage());
+            throw new RuntimeException(e.getMessage());
+        } catch (UnsatisfiedLinkError ule) {
+            throw new RuntimeException(ule.getMessage() + GS_INSTALL);
+        } catch (NoClassDefFoundError ncdfe) {
+            throw new RuntimeException(ncdfe.getMessage() + GS_INSTALL);
+        }
     }
 }

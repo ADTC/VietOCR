@@ -131,6 +131,89 @@ public class GuiWithTools extends GuiWithSettings {
     }
 
     @Override
+    void mergePdf() {
+       JFileChooser jf = new JFileChooser();
+        jf.setDialogTitle(bundle.getString("Select") + " Input PDFs");
+        jf.setCurrentDirectory(imageFolder);
+        jf.setMultiSelectionEnabled(true);
+        FileFilter pdfFilter = new SimpleFilter("pdf", "PDF");
+        jf.addChoosableFileFilter(pdfFilter);
+        jf.setAcceptAllFileFilterUsed(false);
+
+        if (jf.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            final File[] inputPdfs = jf.getSelectedFiles();
+            imageFolder = jf.getCurrentDirectory();
+
+            jf = new JFileChooser();
+            jf.setDialogTitle(bundle.getString("Save") + " Merge PDF");
+            jf.setCurrentDirectory(imageFolder);
+            jf.setFileFilter(pdfFilter);
+            jf.setAcceptAllFileFilterUsed(false);
+            if (jf.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = jf.getSelectedFile();
+                if (!(selectedFile.getName().endsWith(".pdf"))) {
+                    selectedFile = new File(selectedFile.getParent(), selectedFile.getName() + ".pdf");
+                }
+
+                final File outputPdf = selectedFile;
+                if (outputPdf.exists()) {
+                    outputPdf.delete();
+                }
+
+                jLabelStatus.setText(bundle.getString("Merge_running..."));
+                jProgressBar1.setIndeterminate(true);
+                jProgressBar1.setString(bundle.getString("Merge_running..."));
+                jProgressBar1.setVisible(true);
+                getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                getGlassPane().setVisible(true);
+
+                SwingWorker worker = new SwingWorker<File, Void>() {
+
+                    @Override
+                    protected File doInBackground() throws Exception {
+                        Utilities.mergePdf(inputPdfs, outputPdf);
+                        return outputPdf;
+                    }
+
+                    @Override
+                    protected void done() {
+                        jLabelStatus.setText(bundle.getString("Mergecompleted"));
+                        jProgressBar1.setIndeterminate(false);
+                        jProgressBar1.setString(bundle.getString("Mergecompleted"));
+
+                        try {
+                            File result = get();
+                            JOptionPane.showMessageDialog(GuiWithTools.this, bundle.getString("Mergecompleted") + result.getName() + bundle.getString("created"), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+                        } catch (InterruptedException ignore) {
+                            ignore.printStackTrace();
+                        } catch (java.util.concurrent.ExecutionException e) {
+                            String why = null;
+                            Throwable cause = e.getCause();
+                            if (cause != null) {
+                                if (cause instanceof OutOfMemoryError) {
+                                    why = bundle.getString("OutOfMemoryError");
+                                } else {
+                                    why = cause.getMessage();
+                                }
+                            } else {
+                                why = e.getMessage();
+                            }
+                            e.printStackTrace();
+                            JOptionPane.showMessageDialog(GuiWithTools.this, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
+                        } finally {
+                            jProgressBar1.setVisible(false);
+                            getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                            getGlassPane().setVisible(false);
+                        }
+                    }
+                };
+
+                worker.execute();
+            }
+        }
+    }
+
+    @Override
     void splitPdf() {
         SplitPdfDialog dialog = new SplitPdfDialog(this, true);
         if (dialog.showDialog() == JOptionPane.OK_OPTION) {
