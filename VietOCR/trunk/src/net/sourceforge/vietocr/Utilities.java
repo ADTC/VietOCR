@@ -227,13 +227,11 @@ public class Utilities {
         gsArgs.add("-dQUIET");
         gsArgs.add("-dBATCH");
         gsArgs.add("-sDEVICE=pdfwrite");
-        gsArgs.add("-sOutputFile=" + outputPdfFile.getName());
+        gsArgs.add("-sOutputFile=" + outputPdfFile.getPath());
 
-        StringBuffer strB = new StringBuffer();
         for (File inputPdfFile : inputPdfFiles) {
-            strB.append(inputPdfFile.getPath()).append(" ");
+            gsArgs.add(inputPdfFile.getPath());
         }
-        gsArgs.add(strB.toString().trim());
 
         //execute and exit interpreter
         try {
