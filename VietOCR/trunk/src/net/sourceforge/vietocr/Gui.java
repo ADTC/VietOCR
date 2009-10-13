@@ -910,7 +910,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jMenuTools.add(jMenuItemMergeTiff);
 
-        jMenuItemMergePdf.setText("Merge PDF");
+        jMenuItemMergePdf.setText(bundle.getString("jMenuItemMergePdf.Text")); // NOI18N
         jMenuItemMergePdf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemMergePdfActionPerformed(evt);

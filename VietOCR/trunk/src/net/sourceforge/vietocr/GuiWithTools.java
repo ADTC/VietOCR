@@ -77,9 +77,9 @@ public class GuiWithTools extends GuiWithSettings {
                     outputTiff.delete();
                 }
 
-                jLabelStatus.setText(bundle.getString("Merge_running..."));
+                jLabelStatus.setText(bundle.getString("MergeTIFF_running..."));
                 jProgressBar1.setIndeterminate(true);
-                jProgressBar1.setString(bundle.getString("Merge_running..."));
+                jProgressBar1.setString(bundle.getString("MergeTIFF_running..."));
                 jProgressBar1.setVisible(true);
                 getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 getGlassPane().setVisible(true);
@@ -94,13 +94,13 @@ public class GuiWithTools extends GuiWithSettings {
 
                     @Override
                     protected void done() {
-                        jLabelStatus.setText(bundle.getString("Mergecompleted"));
+                        jLabelStatus.setText(bundle.getString("MergeTIFFcompleted"));
                         jProgressBar1.setIndeterminate(false);
-                        jProgressBar1.setString(bundle.getString("Mergecompleted"));
+                        jProgressBar1.setString(bundle.getString("MergeTIFFcompleted"));
 
                         try {
                             File result = get();
-                            JOptionPane.showMessageDialog(GuiWithTools.this, bundle.getString("Mergecompleted") + result.getName() + bundle.getString("created"), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(GuiWithTools.this, bundle.getString("MergeTIFFcompleted") + result.getName() + bundle.getString("created"), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
                         } catch (InterruptedException ignore) {
                             ignore.printStackTrace();
                         } catch (java.util.concurrent.ExecutionException e) {
@@ -145,7 +145,7 @@ public class GuiWithTools extends GuiWithSettings {
             imageFolder = jf.getCurrentDirectory();
 
             jf = new JFileChooser();
-            jf.setDialogTitle(bundle.getString("Save") + " Merge PDF");
+            jf.setDialogTitle(bundle.getString("Save") + " Merged PDF");
             jf.setCurrentDirectory(imageFolder);
             jf.setFileFilter(pdfFilter);
             jf.setAcceptAllFileFilterUsed(false);
@@ -160,9 +160,9 @@ public class GuiWithTools extends GuiWithSettings {
                     outputPdf.delete();
                 }
 
-                jLabelStatus.setText(bundle.getString("Merge_running..."));
+                jLabelStatus.setText(bundle.getString("MergePDF_running..."));
                 jProgressBar1.setIndeterminate(true);
-                jProgressBar1.setString(bundle.getString("Merge_running..."));
+                jProgressBar1.setString(bundle.getString("MergePDF_running..."));
                 jProgressBar1.setVisible(true);
                 getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 getGlassPane().setVisible(true);
@@ -177,13 +177,13 @@ public class GuiWithTools extends GuiWithSettings {
 
                     @Override
                     protected void done() {
-                        jLabelStatus.setText(bundle.getString("Mergecompleted"));
+                        jLabelStatus.setText(bundle.getString("MergePDFcompleted"));
                         jProgressBar1.setIndeterminate(false);
-                        jProgressBar1.setString(bundle.getString("Mergecompleted"));
+                        jProgressBar1.setString(bundle.getString("MergePDFcompleted"));
 
                         try {
                             File result = get();
-                            JOptionPane.showMessageDialog(GuiWithTools.this, bundle.getString("Mergecompleted") + result.getName() + bundle.getString("created"), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(GuiWithTools.this, bundle.getString("MergePDFcompleted") + result.getName() + bundle.getString("created"), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
                         } catch (InterruptedException ignore) {
                             ignore.printStackTrace();
                         } catch (java.util.concurrent.ExecutionException e) {
