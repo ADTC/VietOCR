@@ -62,9 +62,9 @@ public class Utilities {
             ImageIOHelper.mergeTiff(pngFiles, tiffFile);
             return tiffFile;
         } catch (UnsatisfiedLinkError ule) {
-            throw new RuntimeException(ule.getMessage() + (ule.getMessage().contains("library 'gs")? GS_INSTALL : ""));
+            throw new RuntimeException(getMessage(ule.getMessage()));
         } catch (NoClassDefFoundError ncdfe) {
-            throw new RuntimeException(ncdfe.getMessage() + (ncdfe.getMessage().contains("ghost4j")? GS_INSTALL : ""));
+            throw new RuntimeException(getMessage(ncdfe.getMessage()));
         } finally {
             if (pngFiles != null) {
                 // delete temporary PNG images
@@ -161,9 +161,9 @@ public class Utilities {
             System.err.println("ERROR: " + e.getMessage());
             throw new RuntimeException(e.getMessage());
         } catch (UnsatisfiedLinkError ule) {
-            throw new RuntimeException(ule.getMessage() + (ule.getMessage().contains("library 'gs")? GS_INSTALL : ""));
+            throw new RuntimeException(getMessage(ule.getMessage()));
         } catch (NoClassDefFoundError ncdfe) {
-            throw new RuntimeException(ncdfe.getMessage() + (ncdfe.getMessage().contains("ghost4j")? GS_INSTALL : ""));
+            throw new RuntimeException(getMessage(ncdfe.getMessage()));
         }
     }
 
@@ -241,9 +241,16 @@ public class Utilities {
             System.err.println("ERROR: " + e.getMessage());
             throw new RuntimeException(e.getMessage());
         } catch (UnsatisfiedLinkError ule) {
-            throw new RuntimeException(ule.getMessage() + (ule.getMessage().contains("library 'gs")? GS_INSTALL : ""));
+            throw new RuntimeException(getMessage(ule.getMessage()));
         } catch (NoClassDefFoundError ncdfe) {
-            throw new RuntimeException(ncdfe.getMessage() + (ncdfe.getMessage().contains("ghost4j")? GS_INSTALL : ""));
+            throw new RuntimeException(getMessage(ncdfe.getMessage()));
         }
+    }
+
+    static String getMessage(String message) {
+        if (message.contains("library 'gs") || message.contains("ghost4j")) {
+            return message + GS_INSTALL;
+        }
+        return message;
     }
 }
