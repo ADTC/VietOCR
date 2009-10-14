@@ -69,6 +69,7 @@ namespace VietOCR.NET
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mergeTiffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mergePdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitPdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,10 +86,9 @@ namespace VietOCR.NET
             this.toolStripBtnClear = new System.Windows.Forms.ToolStripButton();
             this.toolStripCbLang = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
-            this.mergePdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backgroundWorkerOcr = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerScan = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerLoad = new System.ComponentModel.BackgroundWorker();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -400,6 +400,12 @@ namespace VietOCR.NET
             resources.ApplyResources(this.mergeTiffToolStripMenuItem, "mergeTiffToolStripMenuItem");
             this.mergeTiffToolStripMenuItem.Click += new System.EventHandler(this.mergeTiffToolStripMenuItem_Click);
             // 
+            // mergePdfToolStripMenuItem
+            // 
+            this.mergePdfToolStripMenuItem.Name = "mergePdfToolStripMenuItem";
+            resources.ApplyResources(this.mergePdfToolStripMenuItem, "mergePdfToolStripMenuItem");
+            this.mergePdfToolStripMenuItem.Click += new System.EventHandler(this.mergePdfToolStripMenuItem_Click);
+            // 
             // splitPdfToolStripMenuItem
             // 
             this.splitPdfToolStripMenuItem.Name = "splitPdfToolStripMenuItem";
@@ -512,33 +518,27 @@ namespace VietOCR.NET
             this.toolStripLabel1.Name = "toolStripLabel1";
             resources.ApplyResources(this.toolStripLabel1, "toolStripLabel1");
             // 
-            // backgroundWorker1
+            // backgroundWorkerOcr
             // 
-            this.backgroundWorker1.WorkerReportsProgress = true;
-            this.backgroundWorker1.WorkerSupportsCancellation = true;
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
-            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorkerOcr.WorkerReportsProgress = true;
+            this.backgroundWorkerOcr.WorkerSupportsCancellation = true;
+            this.backgroundWorkerOcr.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerOcr_DoWork);
+            this.backgroundWorkerOcr.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerOcr_RunWorkerCompleted);
+            this.backgroundWorkerOcr.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerOcr_ProgressChanged);
             // 
-            // backgroundWorker2
+            // backgroundWorkerScan
             // 
-            this.backgroundWorker2.WorkerReportsProgress = true;
-            this.backgroundWorker2.WorkerSupportsCancellation = true;
-            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
-            this.backgroundWorker2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker2_RunWorkerCompleted);
+            this.backgroundWorkerScan.WorkerReportsProgress = true;
+            this.backgroundWorkerScan.WorkerSupportsCancellation = true;
+            this.backgroundWorkerScan.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerScan_DoWork);
+            this.backgroundWorkerScan.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerScan_RunWorkerCompleted);
             // 
-            // backgroundWorker3
+            // backgroundWorkerLoad
             // 
-            this.backgroundWorker3.WorkerReportsProgress = true;
-            this.backgroundWorker3.WorkerSupportsCancellation = true;
-            this.backgroundWorker3.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker3_DoWork);
-            this.backgroundWorker3.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker3_RunWorkerCompleted);
-            // 
-            // mergePdfToolStripMenuItem
-            // 
-            this.mergePdfToolStripMenuItem.Name = "mergePdfToolStripMenuItem";
-            resources.ApplyResources(this.mergePdfToolStripMenuItem, "mergePdfToolStripMenuItem");
-            this.mergePdfToolStripMenuItem.Click += new System.EventHandler(this.mergePdfToolStripMenuItem_Click);
+            this.backgroundWorkerLoad.WorkerReportsProgress = true;
+            this.backgroundWorkerLoad.WorkerSupportsCancellation = true;
+            this.backgroundWorkerLoad.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerLoad_DoWork);
+            this.backgroundWorkerLoad.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerLoad_RunWorkerCompleted);
             // 
             // GUI
             // 
@@ -610,14 +610,14 @@ namespace VietOCR.NET
         private System.Windows.Forms.Label lblCurIndex;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Panel panel1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerOcr;
         protected System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private VietOCR.NET.Controls.ScrollablePictureBox pictureBox1;
         private System.Windows.Forms.ToolStripButton toolStripBtnRotateCCW;
         private System.Windows.Forms.ToolStripButton toolStripBtnRotateCW;
         private System.Windows.Forms.ToolStripMenuItem scanToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripBtnScan;
-        private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerScan;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -631,7 +631,7 @@ namespace VietOCR.NET
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mergeTiffToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem splitPdfToolStripMenuItem;
-        private System.ComponentModel.BackgroundWorker backgroundWorker3;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerLoad;
         private System.Windows.Forms.ToolStripButton toolStripButtonCancelOCR;
         private System.Windows.Forms.ToolStripMenuItem mergePdfToolStripMenuItem;
     }

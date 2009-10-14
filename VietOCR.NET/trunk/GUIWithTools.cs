@@ -53,7 +53,7 @@ namespace VietOCR.NET
                     args.Add(saveFileDialog1.FileName);
 
                     this.Cursor = Cursors.WaitCursor;
-                    this.toolStripStatusLabel1.Text = Properties.Resources.Merge_running;
+                    this.toolStripStatusLabel1.Text = Properties.Resources.MergeTIFF_running;
                     //this.pictureBox1.UseWaitCursor = true;
                     this.textBox1.Cursor = Cursors.WaitCursor;
                     this.toolStripProgressBar1.Enabled = true;
@@ -100,8 +100,8 @@ namespace VietOCR.NET
             else
             {
                 // Finally, handle the case where the operation succeeded.
-                this.toolStripStatusLabel1.Text = Properties.Resources.Mergecompleted;
-                MessageBox.Show(this, Properties.Resources.Mergecompleted + Path.GetFileName(e.Result.ToString()) + Properties.Resources.created, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.toolStripStatusLabel1.Text = Properties.Resources.MergeTIFFcompleted;
+                MessageBox.Show(this, Properties.Resources.MergeTIFFcompleted + Path.GetFileName(e.Result.ToString()) + Properties.Resources.created, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             this.toolStripStatusLabel1.Text = String.Empty;
             this.textBox1.Cursor = Cursors.Default;
@@ -226,7 +226,7 @@ namespace VietOCR.NET
                     args.Add(saveFileDialog1.FileName);
 
                     this.Cursor = Cursors.WaitCursor;
-                    this.toolStripStatusLabel1.Text = Properties.Resources.Merge_running;
+                    this.toolStripStatusLabel1.Text = Properties.Resources.MergePDF_running;
                     //this.pictureBox1.UseWaitCursor = true;
                     this.textBox1.Cursor = Cursors.WaitCursor;
                     this.toolStripProgressBar1.Enabled = true;
@@ -274,8 +274,8 @@ namespace VietOCR.NET
             else
             {
                 // Finally, handle the case where the operation succeeded.
-                this.toolStripStatusLabel1.Text = Properties.Resources.Mergecompleted;
-                MessageBox.Show(this, Properties.Resources.Mergecompleted + Path.GetFileName(e.Result.ToString()) + Properties.Resources.created, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.toolStripStatusLabel1.Text = Properties.Resources.MergePDFcompleted;
+                MessageBox.Show(this, Properties.Resources.MergePDFcompleted + Path.GetFileName(e.Result.ToString()) + Properties.Resources.created, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             this.toolStripStatusLabel1.Text = String.Empty;
             this.textBox1.Cursor = Cursors.Default;

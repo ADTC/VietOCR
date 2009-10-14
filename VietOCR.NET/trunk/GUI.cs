@@ -239,7 +239,7 @@ namespace VietOCR.NET
 
                 OCRImageEntity entity = new OCRImageEntity(imageList, index, rect, curLangCode);
                 // Start the asynchronous operation.
-                backgroundWorker1.RunWorkerAsync(entity);
+                backgroundWorkerOcr.RunWorkerAsync(entity);
             }
             catch (Exception ex)
             {
@@ -481,11 +481,11 @@ namespace VietOCR.NET
             this.toolStripProgressBar1.Visible = true;
             this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
 
-            this.backgroundWorker3.RunWorkerAsync(selectedImageFile);
+            this.backgroundWorkerLoad.RunWorkerAsync(selectedImageFile);
         }
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void backgroundWorker3_DoWork(object sender, DoWorkEventArgs e)
+        private void backgroundWorkerLoad_DoWork(object sender, DoWorkEventArgs e)
         {
             string selectedImageFile = (string)e.Argument;
             FileInfo imageFile = new FileInfo(selectedImageFile);
@@ -515,7 +515,7 @@ namespace VietOCR.NET
             e.Result = imageFile;
         }
 
-        private void backgroundWorker3_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void backgroundWorkerLoad_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.toolStripProgressBar1.Enabled = false;
             this.toolStripProgressBar1.Visible = false;
@@ -595,12 +595,12 @@ namespace VietOCR.NET
         
         private void toolStripButtonCancelOCR_Click(object sender, EventArgs e)
         {
-            backgroundWorker1.CancelAsync();
+            backgroundWorkerOcr.CancelAsync();
             this.toolStripButtonCancelOCR.Enabled = false;
         }
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void backgroundWorkerOcr_DoWork(object sender, DoWorkEventArgs e)
         {
             // Get the BackgroundWorker that raised this event.
             BackgroundWorker worker = sender as BackgroundWorker;
@@ -625,13 +625,13 @@ namespace VietOCR.NET
             }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void backgroundWorkerOcr_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //this.toolStripProgressBar1.Value = e.ProgressPercentage;
             this.textBox1.AppendText((string) e.UserState);
         }
         
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void backgroundWorkerOcr_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.toolStripProgressBar1.Enabled = false;
             this.toolStripProgressBar1.Visible = false;
@@ -690,7 +690,7 @@ namespace VietOCR.NET
                 this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
 
                 // Start the asynchronous operation.
-                backgroundWorker2.RunWorkerAsync();
+                backgroundWorkerScan.RunWorkerAsync();
             }
             catch (Exception ex)
             {
@@ -699,7 +699,7 @@ namespace VietOCR.NET
         }
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        private void backgroundWorkerScan_DoWork(object sender, DoWorkEventArgs e)
         {
             using (WiaScannerAdapter adapter = new WiaScannerAdapter())
             {
@@ -721,7 +721,7 @@ namespace VietOCR.NET
             }
         }
 
-        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void backgroundWorkerScan_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.toolStripProgressBar1.Enabled = false;
             this.toolStripProgressBar1.Visible = false;
