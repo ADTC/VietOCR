@@ -62,9 +62,9 @@ public class Utilities {
             ImageIOHelper.mergeTiff(pngFiles, tiffFile);
             return tiffFile;
         } catch (UnsatisfiedLinkError ule) {
-            throw new RuntimeException(ule.getMessage() + GS_INSTALL);
+            throw new RuntimeException(ule.getMessage() + (ule.getMessage().contains("library 'gs")? GS_INSTALL : ""));
         } catch (NoClassDefFoundError ncdfe) {
-            throw new RuntimeException(ncdfe.getMessage() + GS_INSTALL);
+            throw new RuntimeException(ncdfe.getMessage() + (ncdfe.getMessage().contains("ghost4j")? GS_INSTALL : ""));
         } finally {
             if (pngFiles != null) {
                 // delete temporary PNG images
@@ -161,9 +161,9 @@ public class Utilities {
             System.err.println("ERROR: " + e.getMessage());
             throw new RuntimeException(e.getMessage());
         } catch (UnsatisfiedLinkError ule) {
-            throw new RuntimeException(ule.getMessage() + GS_INSTALL);
+            throw new RuntimeException(ule.getMessage() + (ule.getMessage().contains("library 'gs")? GS_INSTALL : ""));
         } catch (NoClassDefFoundError ncdfe) {
-            throw new RuntimeException(ncdfe.getMessage() + GS_INSTALL);
+            throw new RuntimeException(ncdfe.getMessage() + (ncdfe.getMessage().contains("ghost4j")? GS_INSTALL : ""));
         }
     }
 
@@ -241,9 +241,9 @@ public class Utilities {
             System.err.println("ERROR: " + e.getMessage());
             throw new RuntimeException(e.getMessage());
         } catch (UnsatisfiedLinkError ule) {
-            throw new RuntimeException(ule.getMessage() + GS_INSTALL);
+            throw new RuntimeException(ule.getMessage() + (ule.getMessage().contains("library 'gs")? GS_INSTALL : ""));
         } catch (NoClassDefFoundError ncdfe) {
-            throw new RuntimeException(ncdfe.getMessage() + GS_INSTALL);
+            throw new RuntimeException(ncdfe.getMessage() + (ncdfe.getMessage().contains("ghost4j")? GS_INSTALL : ""));
         }
     }
 }
