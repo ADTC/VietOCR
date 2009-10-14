@@ -216,13 +216,11 @@ namespace VietOCR.NET
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.InitialDirectory = imageFolder;
                 saveFileDialog1.Title = Properties.Resources.Save + " Merged PDF";
-                openFileDialog1.Filter = "PDF Files (*.pdf)|*.pdf";
+                saveFileDialog1.Filter = "PDF Files (*.pdf)|*.pdf";
                 saveFileDialog1.RestoreDirectory = true;
 
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    File.Delete(saveFileDialog1.FileName);
-
                     ArrayList args = new ArrayList();
                     args.Add(openFileDialog1.FileNames);
                     args.Add(saveFileDialog1.FileName);
