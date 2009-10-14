@@ -183,14 +183,14 @@
   <data name="created" xml:space="preserve">
     <value> đã được tạo.</value>
   </data>
-  <data name="Mergecompleted" xml:space="preserve">
+  <data name="MergeTIFFcompleted" xml:space="preserve">
     <value>Nhập TIFF hoàn tất. </value>
   </data>
   <data name="check_output_in" xml:space="preserve">
     <value>Hãy kiểm output file(s) trong </value>
   </data>
-  <data name="Merge_running" xml:space="preserve">
-    <value>Merge TIFF đang chạy...</value>
+  <data name="MergeTIFF_running" xml:space="preserve">
+    <value>Nhập TIFF đang chạy...</value>
   </data>
   <data name="SplitPDF_completed" xml:space="preserve">
     <value>Tách PDF hoàn tất.</value>
@@ -218,5 +218,11 @@
   </data>
   <data name="Load_image" xml:space="preserve">
     <value>Nạp ảnh</value>
+  </data>
+  <data name="MergePDFcompleted" xml:space="preserve">
+    <value>Nhập PDF hoàn tất. </value>
+  </data>
+  <data name="MergePDF_running" xml:space="preserve">
+    <value>Nhập PDF đang chạy...</value>
   </data>
 </root>

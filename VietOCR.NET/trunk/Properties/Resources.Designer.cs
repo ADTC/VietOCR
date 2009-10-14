@@ -205,20 +205,38 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Merge PDF running....
+        /// </summary>
+        internal static string MergePDF_running {
+            get {
+                return ResourceManager.GetString("MergePDF_running", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Merge PDF completed. .
+        /// </summary>
+        internal static string MergePDFcompleted {
+            get {
+                return ResourceManager.GetString("MergePDFcompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Merge TIFF running....
         /// </summary>
-        internal static string Merge_running {
+        internal static string MergeTIFF_running {
             get {
-                return ResourceManager.GetString("Merge_running", resourceCulture);
+                return ResourceManager.GetString("MergeTIFF_running", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Merge TIFF completed. .
         /// </summary>
-        internal static string Mergecompleted {
+        internal static string MergeTIFFcompleted {
             get {
-                return ResourceManager.GetString("Mergecompleted", resourceCulture);
+                return ResourceManager.GetString("MergeTIFFcompleted", resourceCulture);
             }
         }
         

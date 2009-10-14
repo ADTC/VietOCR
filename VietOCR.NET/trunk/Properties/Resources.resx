@@ -183,13 +183,13 @@
   <data name="created" xml:space="preserve">
     <value> has been created.</value>
   </data>
-  <data name="Mergecompleted" xml:space="preserve">
+  <data name="MergeTIFFcompleted" xml:space="preserve">
     <value>Merge TIFF completed. </value>
   </data>
   <data name="check_output_in" xml:space="preserve">
     <value>Please check output file(s) in </value>
   </data>
-  <data name="Merge_running" xml:space="preserve">
+  <data name="MergeTIFF_running" xml:space="preserve">
     <value>Merge TIFF running...</value>
   </data>
   <data name="SplitPDF_completed" xml:space="preserve">
@@ -218,5 +218,11 @@
   </data>
   <data name="Load_image" xml:space="preserve">
     <value>Load Image</value>
+  </data>
+  <data name="MergePDFcompleted" xml:space="preserve">
+    <value>Merge PDF completed. </value>
+  </data>
+  <data name="MergePDF_running" xml:space="preserve">
+    <value>Merge PDF running...</value>
   </data>
 </root>
