@@ -156,9 +156,6 @@ public class GuiWithTools extends GuiWithSettings {
                 }
 
                 final File outputPdf = selectedFile;
-                if (outputPdf.exists()) {
-                    outputPdf.delete();
-                }
 
                 jLabelStatus.setText(bundle.getString("MergePDF_running..."));
                 jProgressBar1.setIndeterminate(true);
