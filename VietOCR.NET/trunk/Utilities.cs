@@ -98,9 +98,7 @@ namespace VietOCR.NET
                 converter.LastPageToConvert = Int32.Parse(lastPage);
             }
 
-            bool success = converter.Convert(inputPdfFile, outputPdfFile);
-
-            if (!success)
+            if (!converter.Convert(inputPdfFile, outputPdfFile))
             {
                 throw new ApplicationException("Split PDF failed.");
             }
@@ -155,22 +153,25 @@ namespace VietOCR.NET
         public static void MergePdf(string[] inputPdfFiles, string outputPdfFile)
         {
             PDFConvert converter = new PDFConvert();
-            converter.OutputFormat = "pdfwrite"; // -sDEVICE
             converter.ThrowOnlyException = true; // rethrow exceptions
 
             //gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -sOutputFile=out.pdf in1.pdf in2.pdf in3.pdf
-
-            StringBuilder strB = new StringBuilder();
+            List<string> gsArgs = new List<string>();
+            gsArgs.Add("-gs");
+            gsArgs.Add("-sDEVICE=pdfwrite");
+            gsArgs.Add("-dNOPAUSE");
+            gsArgs.Add("-dQUIET");
+            gsArgs.Add("-dBATCH");
+            gsArgs.Add("-sOutputFile=" + outputPdfFile);
+            
             foreach (string inputPdfFile in inputPdfFiles)
             {
-                strB.Append(inputPdfFile).Append(" ");
+                gsArgs.Add(inputPdfFile);
             }
 
-            bool success = converter.Convert(strB.ToString(), outputPdfFile);
-
-            if (!success)
+            if (!converter.Initialize(gsArgs.ToArray()))
             {
-                throw new ApplicationException("Split PDF failed.");
+                throw new ApplicationException("Merge PDF failed.");
             }
         }
     }
