@@ -779,6 +779,9 @@ namespace ConvertPDF
             {
                 string stdoutmessage = Marshal.PtrToStringAnsi(strz);
                 Console.Write(stdoutmessage);
+
+                if (stdOut == null) return intBytes;
+
                 try
                 {
                     stdOut.Write(stdoutmessage.ToCharArray(), 0, intBytes);
