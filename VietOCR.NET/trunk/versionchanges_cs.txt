@@ -67,7 +67,7 @@ Version 1.0 (1 August 2009)
 - Added support for custom text replacement in postprocessing
 
 Version 1.1 (6 September 2009)
-- Added Merge TIFF functionality
+- Merge TIFF functionality
 
 Version 1.2 (10 September 2009)
 - Added support for PDF-to-image conversion using GPL Ghostscript
@@ -75,9 +75,10 @@ Version 1.2 (10 September 2009)
 Version 1.3 (3 October 2009)
 - Improved exception handling with appropriate error messages
 - Improved handling of PDF documents that has many (>15) pages. Putting too many images, as a result of PDF extraction, in a multi-page TIFF eventually will generate GDI+ exceptions
-- Implemented Split PDF functionality
+- Split PDF functionality
 - Changed internal image format from BMP to PNG to be able to handle more images
 
-Version 1.4 Beta (5 October 2009)
+Version 1.4 (24 October 2009)
 - Publish OCR interim results to produce more responsive UI performance, improving user experience
 - Implemented cancellation of running OCR tasks
+- Merge PDF functionality
