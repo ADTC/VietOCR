@@ -81,10 +81,6 @@ INSTRUCTIONS</h3>
 
 <p><b><u>Note</u></b>: If you encounter out-of-memory exception, run <tt>ocr.bat</tt> script instead of using 
 the .jar.</p>
-<p>In addition to the built-in text postprocessing algorithm, you can add your 
-own custom text replacement scheme via a text file named <tt>x.DangAmbigs.txt</tt>, where x is 
-the ISO639-3 language code. The UTF-8-encoded file should contain equal 
-sign-delimited <tt>oldValue=newValue</tt> pairs.</p>
 <p>The Vietnamese language data were generated for Times New Roman, Arial, 
 Verdana, and Courier New fonts. Therefore, the recognition would 
 have better success rate for images having similar font glyphs. OCRing images 
@@ -99,14 +95,24 @@ the next release of Tesseract may improve it even further. Even so, the actual
 rates still depend greatly on the quality of the scanned image. The typical settings for 
 scanning are 300 DPI and 1 bpp (bit per pixel) black&amp;white or 8 bpp 
 grayscale uncompressed TIFF or PNG format.</p>
-<p>The following information pertains to the OCR process of 
-Vietnamese text. The recognition errors involving Vietnamese characters can be classified into three 
+<p>In addition to the built-in text postprocessing algorithm, you can add your 
+own custom text replacement scheme via a text file named <tt>x.DangAmbigs.txt</tt>, where x is 
+the ISO639-3 language code. The UTF-8-encoded file should contain equal 
+sign-delimited <tt>oldValue=newValue</tt> pairs.</p>
+<p>
+            Some built-in tools are provided to merge several images or PDF 
+			files into a single one for convenient OCR operations, or to split a 
+			PDF file into smaller ones if it is too large, which can cause 
+			out-of-memory exceptions.</p>
+<h3>POSTPROCESSING</h3>
+<p>The recognition errors can generally be classified into three 
 categories. Many of the errors are related to the letter cases — for example: 
 hOa, nhắC — which can be easily corrected by popular Unicode text editors. Many 
 other errors are a result of the OCR process, such as missing diacritical marks, 
 wrong letters with similar shape, etc. — huu – hưu, mang – marg, h0a – hoa, la – 
-1a, uhìu - nhìn. These can also be easily fixed by Vietnamese spell checker 
-programs.</p>
+1a, uhìu - nhìn. These can also be easily fixed by spell checker 
+programs. The built-in Postprocessing function can help correct many of the 
+aforementioned errors.</p>
 
 <p>The last category of errors is the most difficult to 
 detect because they are semantic errors, which means that the words are valid 
@@ -114,8 +120,7 @@ entries in the dictionary but are wrong in the context — e.g., tinh – tình,
 – vấn. These errors require the editor to read though and manually correct them 
 according to the original image.</p>
 
-<p>Following are instructions on how to correct the OCR errors 
-in a speedy and effective way the first two groups of errors using 
+<p>Following are instructions on how to correct the first two categories of OCR errors using 
 <a href="http://vietpad.sourceforge.net/">VietPad</a> text editor. The process 
 can be summarized as follows:</p>
 

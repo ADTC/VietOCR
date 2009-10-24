@@ -75,11 +75,6 @@ biến môi trường phù hợp, như sau cho phiên bản 8.70 trên Windows:<
 </blockquote>
 <p><u><b>Lưu ý</b></u>: Nếu bạn gặp out-of-memory exception, hãy chạy <tt>ocr.bat</tt> script thay vì sử dụng .jar.</p>
 
-<p>Ngoài&nbsp;thuật toán hậu xử lý xây trong chương trình, bạn có thể thêm cách 
-thức thay thế từ ngữ đặc riêng của bạn qua một tập tin text có tên 
-<tt>x.DangAmbigs.txt</tt>, mà x là ISO639-3 language code. File này, được mã hóa trong 
-UTF-8, chứa các cặp <tt>giáTrịCũ=giáTrịMới</tt> phân cách bởi dấu bằng.</p>
-
 <p>Bộ Vietnamese language data được tạo cho các font Times New Roman, Arial, 
 Verdana, và Courier New. Do đó, việc nhận dạng sẽ có kết quả cao 
 hơn cho các ảnh có font glyphs tương tự. OCR ảnh có font glyph trông khác các 
@@ -95,14 +90,26 @@ xác thực thụ vẫn còn tùy thuộc rất lớn vào phẩm chất của �
 biểu cho 
 quét ảnh là 300 DPI và 1 bpp (bit per pixel) trắng đen hoặc 8 bpp grayscale dạng 
 uncompressed TIFF hay PNG.</p>
-<p>Thông tin sau đây liên quan đến quy trình OCR nhận diện Tiếng 
-Việt. Các lỗi nhận diện ký tự Việt có thể phân làm ba loại. Nhiều lỗi thường 
+
+<p>Ngoài thuật toán hậu xử lý xây trong chương trình, bạn có thể thêm cách 
+thức thay thế từ ngữ đặc riêng của bạn qua một tập tin text có tên 
+<tt>x.DangAmbigs.txt</tt>, mà x là ISO639-3 language code. File này, được mã hóa trong 
+UTF-8, chứa các cặp <tt>giáTrịCũ=giáTrịMới</tt> phân cách bởi dấu bằng.</p>
+
+<p>
+            Vài công cụ gắn liền được cung cấp để nối nhiều file ảnh hoặc PDF 
+			vào một file đơn để thuận tiện cho các tác vụ OCR, hoặc tách một 
+			file PDF thành nhiều file nhỏ hơn nếu nó quá lớn, điều mà có thể gây 
+			ra biệt lệ cạn bộ nhớ.</p>
+<h3>HẬU XỬ LÝ</h3>
+<p>Các lỗi nhận diện ký tự có thể tổng quát phân làm ba loại. Nhiều lỗi thường 
 bị bởi do lẫn lộn chữ hoa và chữ 
 thường (upper and lower) — ví dụ: hOa, nhắC — có thể dễ dàng sửa chữa sử dụng 
 các chương trình Unicode text editor. Lỗi do sự xử lý không chính xác, gây ra 
 các lỗi như thiếu sót dấu, lầm với ký tự có hình dáng tương tự, v.v… — huu – hưu, 
 mang – marg, h0a – hoa, la – 1a, uhìu - nhìn. Đa số các lỗi này cũng có thể dễ 
-dàng sửa chữa dùng các phần mềm duyệt chính tả.</p>
+dàng sửa chữa dùng các phần mềm duyệt chính tả. Hàm Hậu xử lý có thể sửa được 
+nhiều lỗi vừa nêu.</p>
 
 <p>Loại lỗi cuối cùng là khó phát hiện nhất bởi chúng liên quan 
 đến ngữ nghĩa, semantics, có nghĩa là những chữ đánh vần đúng (tức là mục từ có trong 
@@ -110,17 +117,15 @@ tự điển), nhưng sai nghĩa trong ngữ cảnh (context) — ví dụ: tinh
 vấn. Những lỗi này cần phải có người đọc duyệt lại và sửa theo bản gốc trong 
 hình.</p>
 
-<p>Sau đây là hướng dẫn cách sửa chữa 1 cách nhanh chóng và hiệu 
-quả 2 loại lỗi đầu tiên, sử dụng chương trình
-<a href="http://vietpad.sourceforge.net/">VietPad</a> (cả phiên bản Java và 
-.NET). Quy trình có thể tóm tắt như sau:</p>
+<p>Sau đây là hướng dẫn cách sửa chữa hai loại lỗi OCR đầu tiên, sử dụng chương trình
+<a href="http://vietpad.sourceforge.net/">VietPad</a> text editor. Quy trình có thể tóm tắt như sau:</p>
 
 <ol style='margin-top:0in' start=1 type=1>
  <li>Gom dòng. Các hàng chữ (line) cần được gom lại theo từng 
 	đoạn (paragraph), bởi khi được OCR, các hàng chữ đứng riêng trong các đoạn 1 
 	hàng (1-line paragraph). Dùng tính năng <i>Nối dòng</i> trong menu <i>Định 
 	dạng</i>. Lưu ý rằng tác vụ này có thể không cần cho thi thơ.</li>
- <li>Cũng trong menu <i>Định dạng</i> , bấm <i>Đổi ngữ cách</i> 
+ <li>Cũng trong menu <i>Định dạng</i>, bấm <i>Đổi ngữ cách</i> 
 	và chọn <i>Chữ hoa đầu câu</i> để sửa gần như tất cả các lỗi chữ hoa-thường. 
 	Hãy dò tìm và sửa các lỗi hoa-thường còn sót.</li>
  <li>Sửa lỗi chính tả bằng tính năng <i>Dò chính tả</i> dưới 
