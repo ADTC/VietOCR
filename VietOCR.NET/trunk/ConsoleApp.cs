@@ -9,7 +9,12 @@ namespace VietOCR.NET
 {
     class ConsoleApp
     {
-        public static void PerformOCR(string[] args)
+        public static void Main(string[] args)
+        {
+            new ConsoleApp().PerformOCR(args);
+        }
+
+        void PerformOCR(string[] args)
         {
             try
             {
@@ -31,6 +36,7 @@ namespace VietOCR.NET
                 {
                     curLangCode = args[3];
                 }
+
                 IList<Image> imageList;
 
                 if (imageFile.Name.ToLower().EndsWith(".pdf"))
