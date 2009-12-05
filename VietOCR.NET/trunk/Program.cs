@@ -8,7 +8,11 @@ namespace VietOCR.NET
     static class Program
     {
         [DllImport("kernel32.dll")]
-        public static extern Boolean FreeConsole();
+        private static extern bool AllocConsole();
+
+        [DllImport("kernel32.dll")]
+        private static extern bool AttachConsole(int pid);
+
 
         /// <summary>
         /// The main entry point for the application.
@@ -18,11 +22,16 @@ namespace VietOCR.NET
         {
             if (args.Length > 0)
             {
+                // Command line given, display console
+                if (!AttachConsole(-1)) // Attach to a parent process console
+                {
+                    AllocConsole(); // Alloc a new console
+                }
+
                 ConsoleApp.PerformOCR(args);
             }
             else
             {
-                FreeConsole(); // suppress the black console window after it appears for a split nanosecond
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new GUIWithTools());
