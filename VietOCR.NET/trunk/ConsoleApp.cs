@@ -1,0 +1,75 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.IO;
+using System.Drawing;
+using VietOCR.NET.Postprocessing;
+
+namespace VietOCR.NET
+{
+    class ConsoleApp
+    {
+        public static void PerformOCR(string[] args)
+        {
+            try
+            {
+                if (args[0] == "-?" || args[0] == "-help")
+                {
+                    Console.WriteLine("Usage: vietocr imagefile outputfile [-l langcode]");
+                    return;
+                }
+                FileInfo imageFile = new FileInfo(args[0]);
+                FileInfo outputFile = new FileInfo(args[1]);
+
+                string curLangCode;
+
+                if (args.Length == 2)
+                {
+                    curLangCode = "eng"; //default language
+                }
+                else
+                {
+                    curLangCode = args[3];
+                }
+                IList<Image> imageList;
+
+                if (imageFile.Name.ToLower().EndsWith(".pdf"))
+                {
+                    string workingTiffFileName = null;
+
+                    try
+                    {
+                        workingTiffFileName = Utilities.ConvertPdf2Tiff(imageFile.FullName);
+                        imageList = ImageIOHelper.GetImageList(new FileInfo(workingTiffFileName));
+                    }
+                    finally
+                    {
+                        if (workingTiffFileName != null && File.Exists(workingTiffFileName))
+                        {
+                            File.Delete(workingTiffFileName);
+                        }
+                    }
+                }
+                else
+                {
+                    imageList = ImageIOHelper.GetImageList(imageFile);
+                }
+
+                OCR ocrEngine = new OCR();
+                string result = ocrEngine.RecognizeText(imageList, curLangCode);
+
+                // postprocess to correct common OCR errors
+                result = Processor.PostProcess(result, curLangCode);
+
+                using (StreamWriter sw = new StreamWriter(outputFile.FullName + ".txt", false, new System.Text.UTF8Encoding()))
+                {
+                    sw.Write(result);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e.Message);
+            }
+        }
+    }
+}
