@@ -13,7 +13,7 @@ namespace VietOCR.NET
         {
             try
             {
-                if (args[0] == "-?" || args[0] == "-help")
+                if (args[0] == "-?" || args[0] == "-help" || args.Length == 1 || args.Length == 3)
                 {
                     Console.WriteLine("Usage: vietocr imagefile outputfile [-l langcode]");
                     return;
