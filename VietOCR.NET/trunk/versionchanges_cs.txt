@@ -82,3 +82,6 @@ Version 1.4 (24 October 2009)
 - Publish OCR interim results to produce more responsive UI performance, improving user experience
 - Implemented cancellation of running OCR tasks
 - Merge PDF functionality
+
+Version 1.5 Beta (5 December 2009)
+- Added support for execution from command line

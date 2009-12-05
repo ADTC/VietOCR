@@ -27,12 +27,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_0F66AF3E160E7686A71F1C6813FFAE75"
-        "OwnerKey" = "8:_4E6E1A9C9212DE0E1B1438F6DCF0DA0A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_1B642B25FC7D23D5624FAC8B0E7C8FC0"
         "OwnerKey" = "8:_9E057C2EB4AD457E8400FF49592A0AFD"
         "MsmSig" = "8:_UNDEFINED"
@@ -119,6 +113,12 @@
         {
         "MsmKey" = "8:_85736D4FC6484B5FA5FBA1A2BB883C11"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8F735BC804077654D82F5F56211712FD"
+        "OwnerKey" = "8:_4E6E1A9C9212DE0E1B1438F6DCF0DA0A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -366,26 +366,6 @@
                 }
             "SourcePath" = "8:tessnet2_32.dll"
             "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0F66AF3E160E7686A71F1C6813FFAE75"
-            {
-            "SourcePath" = "8:wiaaut.dll"
-            "TargetName" = "8:WIAAut.dll"
             "Tag" = "8:"
             "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
             "Condition" = "8:"
@@ -722,6 +702,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F735BC804077654D82F5F56211712FD"
+            {
+            "SourcePath" = "8:wiaaut.dll"
+            "TargetName" = "8:WIAAut.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9A5EABC1185A49029CF46EAEEA11EC25"
@@ -1135,14 +1135,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:VietOCR.NET"
-        "ProductCode" = "8:{52E92592-658B-419D-A357-19961CF4E816}"
-        "PackageCode" = "8:{9D95D3A1-6C8C-4E2E-9839-09CD76FAC41B}"
+        "ProductCode" = "8:{C5D73B3F-E7A8-4AC7-B51B-71C809EE11E6}"
+        "PackageCode" = "8:{4292C38B-D728-4FF4-A2A6-EA31574E9357}"
         "UpgradeCode" = "8:{2EF42973-7837-44E2-9085-FA4B5B40483E}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.4"
+        "ProductVersion" = "8:1.5"
         "Manufacturer" = "8:VietUnicode"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://vietunicode.sf.net/forum"
@@ -1712,7 +1712,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9E057C2EB4AD457E8400FF49592A0AFD"
             {
-            "SourcePath" = "8:..\\obj\\Release\\VietOCR.NET.exe"
+            "SourcePath" = "8:..\\obj\\Release\\VietOCR.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
