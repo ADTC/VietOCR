@@ -20,7 +20,13 @@ namespace VietOCR.NET
         [STAThread]
         static void Main(string[] args)
         {
-            if (args.Length > 0)
+            if (args.Length == 0)
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new GUIWithTools());
+            }
+            else
             {
                 // Command line given, display console
                 if (!AttachConsole(-1)) // Attach to a parent process console
@@ -28,13 +34,7 @@ namespace VietOCR.NET
                     AllocConsole(); // Alloc a new console
                 }
 
-                ConsoleApp.PerformOCR(args);
-            }
-            else
-            {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new GUIWithTools());
+                ConsoleApp.Main(args);
             }
         }
     }
