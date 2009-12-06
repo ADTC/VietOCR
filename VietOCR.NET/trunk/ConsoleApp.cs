@@ -37,29 +37,7 @@ namespace VietOCR.NET
                     curLangCode = args[3];
                 }
 
-                IList<Image> imageList;
-
-                if (imageFile.Name.ToLower().EndsWith(".pdf"))
-                {
-                    string workingTiffFileName = null;
-
-                    try
-                    {
-                        workingTiffFileName = Utilities.ConvertPdf2Tiff(imageFile.FullName);
-                        imageList = ImageIOHelper.GetImageList(new FileInfo(workingTiffFileName));
-                    }
-                    finally
-                    {
-                        if (workingTiffFileName != null && File.Exists(workingTiffFileName))
-                        {
-                            File.Delete(workingTiffFileName);
-                        }
-                    }
-                }
-                else
-                {
-                    imageList = ImageIOHelper.GetImageList(imageFile);
-                }
+                IList<Image> imageList = ImageIOHelper.GetImageList(imageFile);
 
                 OCR ocrEngine = new OCR();
                 string result = ocrEngine.RecognizeText(imageList, curLangCode);

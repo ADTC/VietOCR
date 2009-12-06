@@ -489,29 +489,7 @@ namespace VietOCR.NET
         {
             string selectedImageFile = (string)e.Argument;
             FileInfo imageFile = new FileInfo(selectedImageFile);
-
-            if (selectedImageFile.ToLower().EndsWith(".pdf"))
-            {
-                string workingTiffFileName = null;
-
-                try
-                {
-                    workingTiffFileName = Utilities.ConvertPdf2Tiff(selectedImageFile);
-                    imageList = ImageIOHelper.GetImageList(new FileInfo(workingTiffFileName));
-                }
-                finally
-                {
-                    if (workingTiffFileName != null && File.Exists(workingTiffFileName))
-                    {
-                        File.Delete(workingTiffFileName);
-                    }
-                }
-            }
-            else
-            {
-                imageList = ImageIOHelper.GetImageList(imageFile);
-            }
-
+            imageList = ImageIOHelper.GetImageList(imageFile);
             e.Result = imageFile;
         }
 

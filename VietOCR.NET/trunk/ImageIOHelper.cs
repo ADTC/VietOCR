@@ -33,10 +33,19 @@ namespace VietOCR.NET
         /// <returns>list of images</returns>
         public static IList<Image> GetImageList(FileInfo imageFile)
         {
+            string workingTiffFileName = null;
+
             Image image = null;
 
             try
             {
+                // convert PDF to TIFF
+                if (imageFile.Name.ToLower().EndsWith(".pdf"))
+                {
+                    workingTiffFileName = Utilities.ConvertPdf2Tiff(imageFile.FullName);
+                    imageFile = new FileInfo(workingTiffFileName);
+                }
+
                 // read in the image
                 image = Image.FromFile(imageFile.FullName);
 
@@ -71,6 +80,11 @@ namespace VietOCR.NET
                 if (image != null)
                 {
                     image.Dispose();
+                }
+
+                if (workingTiffFileName != null && File.Exists(workingTiffFileName))
+                {
+                    File.Delete(workingTiffFileName);
                 }
             }
         }
@@ -152,7 +166,7 @@ namespace VietOCR.NET
                         {
                             throw new ApplicationException(e.Message + "\nIt might have run out of memory due to handling too many images or too large a file.", e);
                         }
-                        finally 
+                        finally
                         {
                             if (bm != null)
                             {
