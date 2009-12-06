@@ -17,15 +17,10 @@ package net.sourceforge.vietocr;
 
 import java.io.*;
 import java.util.List;
-import java.util.prefs.Preferences;
 import javax.imageio.IIOImage;
 import net.sourceforge.vietocr.postprocessing.Processor;
 
 public class ConsoleApp {
-
-    static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
-    protected final String UTF8 = "UTF-8";
-    protected static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
 
     public static void main(String[] args) {
         new ConsoleApp().performOCR(args);
@@ -75,11 +70,11 @@ public class ConsoleApp {
             String tessPath;
 
             File baseDir = Utilities.getBaseDir(this);
-            
-            if (WINDOWS) {
+
+            if (Gui.WINDOWS) {
                 tessPath = new File(baseDir, "tesseract").getPath();
             } else {
-                tessPath = prefs.get("TesseractDirectory", new File(baseDir, "tesseract").getPath());
+                tessPath = Gui.prefs.get("TesseractDirectory", new File(baseDir, "tesseract").getPath());
             }
 
             OCR ocrEngine = new OCR(tessPath);
@@ -88,7 +83,7 @@ public class ConsoleApp {
             // postprocess to correct common OCR errors
             result = Processor.postProcess(result, curLangCode);
 
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile.getPath() + ".txt"), UTF8));
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile.getPath() + ".txt"), Gui.UTF8));
             out.write(result);
             out.close();
         } catch (Exception e) {

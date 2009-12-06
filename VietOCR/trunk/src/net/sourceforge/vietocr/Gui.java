@@ -47,9 +47,9 @@ public class Gui extends javax.swing.JFrame {
     static final boolean MAC_OS_X = System.getProperty("os.name").startsWith("Mac");
     static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
     static final Locale VIETNAM = new Locale("vi", "VN");
-    protected final String UTF8 = "UTF-8";
-    protected ResourceBundle myResources, bundle;
-    protected static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
+    static final String UTF8 = "UTF-8";
+    ResourceBundle myResources, bundle;
+    static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
     private int filterIndex;
     private FileFilter[] fileFilters;
     protected Font font;
