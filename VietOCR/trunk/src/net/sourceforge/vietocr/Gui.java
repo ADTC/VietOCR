@@ -1360,21 +1360,7 @@ public class Gui extends javax.swing.JFrame {
 
             @Override
             protected File doInBackground() throws Exception {
-                if (selectedFile.getName().toLowerCase().endsWith(".pdf")) {
-                    File workingTiffFile = null;
-
-                    try {
-                        workingTiffFile = Utilities.convertPdf2Tiff(selectedFile);
-                        iioImageList = ImageIOHelper.getIIOImageList(workingTiffFile);
-                    } finally {
-                        if (workingTiffFile != null && workingTiffFile.exists()) {
-                            workingTiffFile.delete();
-                        }
-                    }
-                } else {
-                    iioImageList = ImageIOHelper.getIIOImageList(selectedFile);
-                }
-
+                iioImageList = ImageIOHelper.getIIOImageList(selectedFile);
                 imageList = ImageIconScalable.getImageList(iioImageList);
                 return selectedFile;
             }

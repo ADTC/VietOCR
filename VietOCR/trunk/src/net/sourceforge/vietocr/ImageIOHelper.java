@@ -134,10 +134,18 @@ public class ImageIOHelper {
     }
 
     public static List<IIOImage> getIIOImageList(File imageFile) throws Exception {
+        File workingTiffFile = null;
+
         ImageReader reader = null;
         ImageInputStream iis = null;
 
         try {
+            // convert PDF to TIFF
+            if (imageFile.getName().toLowerCase().endsWith(".pdf")) {
+                workingTiffFile = Utilities.convertPdf2Tiff(imageFile);
+                imageFile = workingTiffFile;
+            }
+
             List<IIOImage> iioImageList = new ArrayList<IIOImage>();
 
             String imageFileName = imageFile.getName();
@@ -171,6 +179,9 @@ public class ImageIOHelper {
                 }
             } catch (Exception e) {
                 // ignore
+            }
+            if (workingTiffFile != null && workingTiffFile.exists()) {
+                workingTiffFile.delete();
             }
         }
     }
