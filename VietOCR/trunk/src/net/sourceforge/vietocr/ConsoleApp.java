@@ -47,22 +47,7 @@ public class ConsoleApp {
                 curLangCode = args[3];
             }
 
-            List<IIOImage> iioImageList;
-
-            if (imageFile.getName().toLowerCase().endsWith(".pdf")) {
-                File workingTiffFile = null;
-
-                try {
-                    workingTiffFile = Utilities.convertPdf2Tiff(imageFile);
-                    iioImageList = ImageIOHelper.getIIOImageList(workingTiffFile);
-                } finally {
-                    if (workingTiffFile != null && workingTiffFile.exists()) {
-                        workingTiffFile.delete();
-                    }
-                }
-            } else {
-                iioImageList = ImageIOHelper.getIIOImageList(imageFile);
-            }
+            List<IIOImage> iioImageList = ImageIOHelper.getIIOImageList(imageFile);
 
             OCRImageEntity entity = new OCRImageEntity(iioImageList, -1);
             final List<File> tempImageFiles = entity.getClonedImageFiles();

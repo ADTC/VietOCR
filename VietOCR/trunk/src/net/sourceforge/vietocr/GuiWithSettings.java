@@ -65,23 +65,22 @@ public class GuiWithSettings extends GuiWithFormat {
 //                        queue.clear();
                         return;
                     }
-                   
+
                     OCRImageEntity entity = new OCRImageEntity(imageFile, -1);
                     final List<File> tempImageFiles;
-                    
+
                     try {
                         tempImageFiles = entity.getClonedImageFiles();
                     } catch (Exception exc) {
                         statusFrame.getTextArea().append("    **  " + bundle.getString("Cannotprocess") + " " + imageFile.getName() + "  **\n");
                         return;
                     }
-                    
+
                     SwingUtilities.invokeLater(new Runnable() {
 
                         @Override
                         public void run() {
                             try {
-                                
                                 OCR ocrEngine = new OCR(tessPath);
                                 String result = ocrEngine.recognizeText(tempImageFiles, curLangCode);
 
@@ -123,7 +122,7 @@ public class GuiWithSettings extends GuiWithFormat {
             outputFolder = optionsDialog.getOutputFolder();
             watchEnabled = optionsDialog.isWatchEnabled();
 
-            if (!tessPath.equals(optionsDialog.getTessPath()))  {
+            if (!tessPath.equals(optionsDialog.getTessPath())) {
                 tessPath = optionsDialog.getTessPath();
                 JOptionPane.showMessageDialog(this, bundle.getString("Please_restart_the_application_for_the_change_to_take_effect."), Gui.APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             }
