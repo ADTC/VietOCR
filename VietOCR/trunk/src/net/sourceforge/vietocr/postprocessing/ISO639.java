@@ -12,17 +12,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
-
+ */
 package net.sourceforge.vietocr.postprocessing;
 
-/**
- *
- * @author Quan Nguyen (nguyenq@users.sf.net)
- */
- 
 // ISO369-3 codes: http://www.sil.org/iso639-3/codes.asp
 public enum ISO639 {
-    eng, deu, fra, ita, nld, por, spa, vie
+    ben, bul, cat, ces, cop, dan, deu, ell, eng, eus, fin, fra, hun, ind, ita, kan, khm, lav, lit, mal, nld, nor, pol, por, ron, rus, slk, slv, spa, srp, swe, tam, tel, tgl, tur, ukr, vie
 }
    
