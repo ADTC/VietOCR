@@ -16,11 +16,6 @@
 
 package net.sourceforge.vietocr.postprocessing;
 
-/**
- *
- * @author Quan Nguyen (nguyenq@users.sf.net)
- */
-
 public class ProcessorFactory {
     
      public static IPostProcessor createProcessor(ISO639 code) {
