@@ -238,6 +238,29 @@ public class Gui extends javax.swing.JFrame {
         m_undo.discardAllEdits();
         updateUndoRedo();
         updateCutCopyDelete(false);
+
+//        InputMap imap = this.jMenuBar2.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+//        imap.put(KeyStroke.getKeyStroke("ctrl V"), "pasteImageAction");
+//        Action pasteAction = new AbstractAction("Paste") {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent ae) {
+//                try {
+//                    Image image = ImageIOHelper.getClipboardImage();
+//                    if (image == null) {
+//                        return;
+//                    }
+//                    File tempFile = File.createTempFile("temp", ".png");
+//                    ImageIO.write((BufferedImage) image, "png", tempFile);
+//                    openFile(tempFile);
+//                    tempFile.deleteOnExit();
+//                } catch (Exception e) {
+//                }
+//            }
+//        };
+//
+//        ActionMap amap = this.jMenuBar2.getActionMap();
+//        amap.put("pasteImageAction", pasteAction);
     }
 
     /**
@@ -1148,10 +1171,10 @@ public class Gui extends javax.swing.JFrame {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date releaseDate = sdf.parse(config.getProperty("ReleaseDate"));
 
-            JOptionPane.showMessageDialog(this, APP_NAME + ", " + version + " \u00a9 2007\n" +
-                    "Java GUI Frontend for Tesseract OCR Engine\n" +
-                    DateFormat.getDateInstance(DateFormat.LONG).format(releaseDate) +
-                    "\nhttp://vietocr.sourceforge.net", APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, APP_NAME + ", " + version + " \u00a9 2007\n"
+                    + "Java GUI Frontend for Tesseract OCR Engine\n"
+                    + DateFormat.getDateInstance(DateFormat.LONG).format(releaseDate)
+                    + "\nhttp://vietocr.sourceforge.net", APP_NAME, JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -1856,5 +1879,3 @@ private void jMenuItemMergePdfActionPerformed(java.awt.event.ActionEvent evt) {/
     private final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
     private JFrame helptopicsFrame;
 }
-
-
