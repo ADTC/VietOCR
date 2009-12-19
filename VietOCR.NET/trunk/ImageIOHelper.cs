@@ -89,36 +89,53 @@ namespace VietOCR.NET
             }
         }
 
-        public static Image Crop(Image image, Rectangle cropArea)
-        {
-            try
-            {
-                Bitmap bmp = new Bitmap(cropArea.Width, cropArea.Height);
-                bmp.SetResolution(300, 300);
+        /// <summary>
+        /// Crop an image.
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="cropArea"></param>
+        /// <returns></returns>
+        //public static Image Crop(Image image, Rectangle cropArea)
+        //{
+        //    try
+        //    {
+        //        Bitmap bmp = new Bitmap(cropArea.Width, cropArea.Height);
+        //        bmp.SetResolution(300, 300);
 
-                Graphics gfx = Graphics.FromImage(bmp);
-                gfx.SmoothingMode = SmoothingMode.AntiAlias;
-                gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                gfx.PixelOffsetMode = PixelOffsetMode.HighQuality;
-                gfx.DrawImage(image, 0, 0, cropArea, GraphicsUnit.Pixel);
-                gfx.Dispose();
+        //        Graphics gfx = Graphics.FromImage(bmp);
+        //        gfx.SmoothingMode = SmoothingMode.AntiAlias;
+        //        gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
+        //        gfx.PixelOffsetMode = PixelOffsetMode.HighQuality;
+        //        gfx.DrawImage(image, 0, 0, cropArea, GraphicsUnit.Pixel);
+        //        gfx.Dispose();
 
-                return bmp;
-            }
-            catch (Exception exc)
-            {
-                Console.WriteLine(exc.Message);
-                return null;
-            }
-        }
+        //        return bmp;
+        //    }
+        //    catch (Exception exc)
+        //    {
+        //        Console.WriteLine(exc.Message);
+        //        return null;
+        //    }
+        //}
 
-        public static Image Crop2(Image image, Rectangle cropArea)
-        {
-            Bitmap bitmap = new Bitmap(image);
-            bitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
-            return bitmap.Clone(cropArea, bitmap.PixelFormat);
-        }
+        /// <summary>
+        /// Crop an image (another method).
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="cropArea"></param>
+        /// <returns></returns>
+        //public static Image Crop2(Image image, Rectangle cropArea)
+        //{
+        //    Bitmap bitmap = new Bitmap(image);
+        //    bitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+        //    return bitmap.Clone(cropArea, bitmap.PixelFormat);
+        //}
 
+        /// <summary>
+        /// Merge multiple images into one TIFF image.
+        /// </summary>
+        /// <param name="inputImages"></param>
+        /// <param name="outputTiff"></param>
         public static void MergeTiff(string[] inputImages, string outputTiff)
         {
             //get the codec for tiff files
@@ -191,6 +208,19 @@ namespace VietOCR.NET
                     pages.Dispose();
                 }
             }
+        }
+
+        /// <summary>
+        /// Get an Image from Clipboard
+        /// </summary>
+        /// <returns></returns>
+        public static Image GetClipboardImage()
+        {
+            if (Clipboard.ContainsImage())
+            {
+                return Clipboard.GetImage();
+            }
+            return null;
         }
     }
 }
