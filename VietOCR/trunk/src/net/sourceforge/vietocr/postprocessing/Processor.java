@@ -49,6 +49,7 @@ public class Processor {
         while (iter.hasNext()) {
             String key = iter.next();
             String value = replaceRules.get(key);
+            //TODO: Need to measure performance of StringUtils.replaceAll method
             strB = StringUtils.replaceAll(strB, key, value);
         }
         return strB.toString();
