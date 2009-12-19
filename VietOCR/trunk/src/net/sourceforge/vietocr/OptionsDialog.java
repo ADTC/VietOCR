@@ -328,7 +328,6 @@ public class OptionsDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
         this.jTextFieldWatch.setText(watchFolder);
         this.jTextFieldOutput.setText(outputFolder);
         this.jCheckBoxWatch.setSelected(watchEnabled);
@@ -338,7 +337,6 @@ public class OptionsDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated
-        // TODO add your handling code here:
         watchFolder = this.jTextFieldWatch.getText();
         outputFolder = this.jTextFieldOutput.getText();
         watchEnabled = this.jCheckBoxWatch.isSelected();
