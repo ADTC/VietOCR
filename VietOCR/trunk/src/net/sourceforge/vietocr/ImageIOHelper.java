@@ -21,6 +21,9 @@ import javax.imageio.*;
 import javax.imageio.stream.*;
 import javax.imageio.metadata.*;
 import com.sun.media.imageio.plugins.tiff.*;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.datatransfer.*;
 
 /**
  *
@@ -191,6 +194,12 @@ public class ImageIOHelper {
         }
     }
 
+    /**
+     * Merge multiple images into one TIFF image.
+     * @param inputImages
+     * @param outputTiff
+     * @throws Exception
+     */
     public static void mergeTiff(File[] inputImages, File outputTiff) throws Exception {
         List<IIOImage> imageList = new ArrayList<IIOImage>();
 
@@ -226,5 +235,18 @@ public class ImageIOHelper {
         ios.close();
 
         writer.dispose();
+    }
+
+    /**
+     * Get an Image from Clipboard.
+     * @return
+     */
+    public static Image getClipboardImage() {
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        try {
+            return (Image) clipboard.getData(DataFlavor.imageFlavor);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
