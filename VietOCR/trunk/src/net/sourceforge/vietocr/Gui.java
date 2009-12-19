@@ -179,6 +179,8 @@ public class Gui extends javax.swing.JFrame {
         FileFilter pdfFilter = new SimpleFilter("pdf", "PDF");
         FileFilter tiffFilter = new SimpleFilter("tif;tiff", "TIFF");
         FileFilter jpegFilter = new SimpleFilter("jpg;jpeg", "JPEG");
+        FileFilter jpeg2000Filter = new SimpleFilter("jp2", "JPEG 2000");
+        FileFilter pnmFilter = new SimpleFilter("pnm;pbm;pgm;ppm", "PNM");
         FileFilter gifFilter = new SimpleFilter("gif", "GIF");
         FileFilter pngFilter = new SimpleFilter("png", "PNG");
         FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
@@ -189,6 +191,8 @@ public class Gui extends javax.swing.JFrame {
         filechooser.addChoosableFileFilter(pdfFilter);
         filechooser.addChoosableFileFilter(tiffFilter);
         filechooser.addChoosableFileFilter(jpegFilter);
+        filechooser.addChoosableFileFilter(jpeg2000Filter);
+        filechooser.addChoosableFileFilter(pnmFilter);
         filechooser.addChoosableFileFilter(gifFilter);
         filechooser.addChoosableFileFilter(pngFilter);
         filechooser.addChoosableFileFilter(bmpFilter);
