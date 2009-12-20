@@ -971,7 +971,7 @@ namespace VietOCR.NET
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.V && e.Control)
+            if (e.Control && e.KeyCode == Keys.V)
             {
                 Image image = ImageIOHelper.GetClipboardImage();
                 if (image != null)
@@ -980,6 +980,7 @@ namespace VietOCR.NET
                     tempFileCollection.AddFile(tempFileName, false);
                     image.Save(tempFileName, ImageFormat.Png);
                     openFile(tempFileName);
+                    e.Handled = true;
                 }
             }
             base.OnKeyDown(e);
