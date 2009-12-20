@@ -548,6 +548,7 @@ namespace VietOCR.NET
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "GUI";
             this.splitContainer2.Panel1.ResumeLayout(false);
