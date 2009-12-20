@@ -252,7 +252,8 @@ public class Gui extends javax.swing.JFrame {
                             ImageIO.write((BufferedImage) image, "png", tempFile);
                             openFile(tempFile);
                             tempFile.deleteOnExit();
-                            return true; // not dispatch the event to the component, in this case, the textarea
+                            e.consume();
+//                            return true; // not dispatch the event to the component, in this case, the textarea
                         }
                     } catch (Exception ex) {
                     }
