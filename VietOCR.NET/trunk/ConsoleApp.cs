@@ -26,6 +26,12 @@ namespace VietOCR.NET
                 FileInfo imageFile = new FileInfo(args[0]);
                 FileInfo outputFile = new FileInfo(args[1]);
 
+                if (!imageFile.Exists)
+                {
+                    Console.WriteLine("Input file does not exist.");
+                    return;
+                }
+
                 string curLangCode;
 
                 if (args.Length == 2)
