@@ -239,27 +239,29 @@ public class Gui extends javax.swing.JFrame {
         updateUndoRedo();
         updateCutCopyDelete(false);
 
-        InputMap imap = this.jPanel1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        imap.put(KeyStroke.getKeyStroke("ctrl V"), "pasteImageAction");
-        Action pasteAction = new AbstractAction("Paste") {
+        // Paste image from clipboard
+        KeyEventDispatcher dispatcher = new KeyEventDispatcher() {
 
             @Override
-            public void actionPerformed(ActionEvent ae) {
-                try {
-                    Image image = ImageIOHelper.getClipboardImage();
-                    if (image != null) {
-                        File tempFile = File.createTempFile("temp", ".png");
-                        ImageIO.write((BufferedImage) image, "png", tempFile);
-                        openFile(tempFile);
-                        tempFile.deleteOnExit();
+            public boolean dispatchKeyEvent(KeyEvent e) {
+                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_V) {
+                    try {
+                        Image image = ImageIOHelper.getClipboardImage();
+                        if (image != null) {
+                            File tempFile = File.createTempFile("temp", ".png");
+                            ImageIO.write((BufferedImage) image, "png", tempFile);
+                            openFile(tempFile);
+                            tempFile.deleteOnExit();
+                            return true; // not dispatch the event to the component, in this case, the textarea
+                        }
+                    } catch (Exception ex) {
                     }
-                } catch (Exception e) {
                 }
+                return false;
             }
         };
-
-        ActionMap amap = this.jPanel1.getActionMap();
-        amap.put("pasteImageAction", pasteAction);
+        
+        DefaultKeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(dispatcher);
     }
 
     /**
@@ -443,7 +445,6 @@ public class Gui extends javax.swing.JFrame {
         jButtonCancelOCR = new javax.swing.JButton();
         jButtonCancelOCR.setVisible(false);
         jButtonClear = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
         jLabelLanguage = new javax.swing.JLabel();
         jComboBoxLang = new JComboBox(langs);
         jComboBoxLang.setSelectedItem(prefs.get("langCode", null));
@@ -627,9 +628,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(jButtonClear);
-
-        jPanel2.setPreferredSize(new java.awt.Dimension(100, 10));
-        jToolBar2.add(jPanel2);
+        jToolBar2.add(Box.createHorizontalGlue());
 
         jLabelLanguage.setText(bundle.getString("jLabelLanguage.Text")); // NOI18N
         jToolBar2.add(jLabelLanguage);
@@ -1850,7 +1849,6 @@ private void jMenuItemMergePdfActionPerformed(java.awt.event.ActionEvent evt) {/
     private javax.swing.JMenu jMenuTools;
     private javax.swing.JMenu jMenuUILang;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelStatus;
     protected javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemEng;
