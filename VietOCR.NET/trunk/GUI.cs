@@ -75,6 +75,8 @@ namespace VietOCR.NET
         protected string dangAmbigsPath;
         protected bool dangAmbigsOn;
 
+        System.CodeDom.Compiler.TempFileCollection tempFileCollection = new System.CodeDom.Compiler.TempFileCollection();
+
         public GUI()
         {
             // Access registry to determine which UI Language to be loaded.
@@ -683,7 +685,8 @@ namespace VietOCR.NET
             {
                 try
                 {
-                    string tempFileName = Path.GetTempFileName().Replace(".tmp", ".png");
+                    string tempFileName = Path.ChangeExtension(Path.GetTempFileName(), ".png");
+                    tempFileCollection.AddFile(tempFileName, false);
                     FileInfo imageFile = new FileInfo(tempFileName);
                     if (imageFile.Exists)
                     {
@@ -965,5 +968,21 @@ namespace VietOCR.NET
         {
             MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.V && e.Control)
+            {
+                Image image = ImageIOHelper.GetClipboardImage();
+                if (image != null)
+                {
+                    string tempFileName = Path.ChangeExtension(Path.GetTempFileName(), ".png");
+                    tempFileCollection.AddFile(tempFileName, false);
+                    image.Save(tempFileName, ImageFormat.Png);
+                    openFile(tempFileName);
+                }
+            }
+            base.OnKeyDown(e);
+        }   
     }
 }
