@@ -39,6 +39,11 @@ public class ConsoleApp {
             final File imageFile = new File(args[0]);
             final File outputFile = new File(args[1]);
 
+            if (!imageFile.exists()) {
+                System.err.println("Input file does not exist.");
+                return;
+            }
+
             String curLangCode;
 
             if (args.length == 2) {
