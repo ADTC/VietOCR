@@ -239,28 +239,27 @@ public class Gui extends javax.swing.JFrame {
         updateUndoRedo();
         updateCutCopyDelete(false);
 
-//        InputMap imap = this.jMenuBar2.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-//        imap.put(KeyStroke.getKeyStroke("ctrl V"), "pasteImageAction");
-//        Action pasteAction = new AbstractAction("Paste") {
-//
-//            @Override
-//            public void actionPerformed(ActionEvent ae) {
-//                try {
-//                    Image image = ImageIOHelper.getClipboardImage();
-//                    if (image == null) {
-//                        return;
-//                    }
-//                    File tempFile = File.createTempFile("temp", ".png");
-//                    ImageIO.write((BufferedImage) image, "png", tempFile);
-//                    openFile(tempFile);
-//                    tempFile.deleteOnExit();
-//                } catch (Exception e) {
-//                }
-//            }
-//        };
-//
-//        ActionMap amap = this.jMenuBar2.getActionMap();
-//        amap.put("pasteImageAction", pasteAction);
+        InputMap imap = this.jPanel1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        imap.put(KeyStroke.getKeyStroke("ctrl V"), "pasteImageAction");
+        Action pasteAction = new AbstractAction("Paste") {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                try {
+                    Image image = ImageIOHelper.getClipboardImage();
+                    if (image != null) {
+                        File tempFile = File.createTempFile("temp", ".png");
+                        ImageIO.write((BufferedImage) image, "png", tempFile);
+                        openFile(tempFile);
+                        tempFile.deleteOnExit();
+                    }
+                } catch (Exception e) {
+                }
+            }
+        };
+
+        ActionMap amap = this.jPanel1.getActionMap();
+        amap.put("pasteImageAction", pasteAction);
     }
 
     /**
