@@ -31,7 +31,7 @@ import java.awt.datatransfer.*;
  */
 public class ImageIOHelper {
 
-    final static String OUTPUT_FILE_NAME = "TessTempFile";
+    final static String OUTPUT_FILE_NAME = "TessTmp";
     final static String TIFF_EXT = ".tif";
     final static String TIFF_FORMAT = "tiff";
 

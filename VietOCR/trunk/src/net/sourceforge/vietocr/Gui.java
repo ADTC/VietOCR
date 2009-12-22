@@ -248,7 +248,7 @@ public class Gui extends javax.swing.JFrame {
                     try {
                         Image image = ImageIOHelper.getClipboardImage();
                         if (image != null) {
-                            File tempFile = File.createTempFile("temp", ".png");
+                            File tempFile = File.createTempFile("tmp", ".png");
                             ImageIO.write((BufferedImage) image, "png", tempFile);
                             openFile(tempFile);
                             tempFile.deleteOnExit();
@@ -1541,7 +1541,7 @@ private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             public void run() {
                 try {
                     WiaScannerAdapter adapter = new WiaScannerAdapter();
-                    File tempImageFile = File.createTempFile("tempfile", ".bmp");
+                    File tempImageFile = File.createTempFile("tmp", ".bmp");
 
                     if (tempImageFile.exists()) {
                         tempImageFile.delete();
@@ -1549,6 +1549,7 @@ private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
                     tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
                     openFile(tempImageFile);
+                    tempImageFile.deleteOnExit();
                 } catch (IOException ioe) {
                     JOptionPane.showMessageDialog(null, ioe.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
                 } catch (WiaOperationException woe) {
