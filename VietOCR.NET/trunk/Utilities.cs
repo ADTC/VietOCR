@@ -21,6 +21,7 @@ namespace VietOCR.NET
             {
                 pngFiles = ConvertPdf2Png(inputPdfFile);
                 string tiffFile = Path.GetTempFileName();
+                File.Delete(tiffFile);
                 tiffFile = Path.ChangeExtension(tiffFile, ".tif");
 
                 // put PNG images into a single multi-page TIFF image for return

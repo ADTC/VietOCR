@@ -685,7 +685,9 @@ namespace VietOCR.NET
             {
                 try
                 {
-                    string tempFileName = Path.ChangeExtension(Path.GetTempFileName(), ".png");
+                    string tempFileName = Path.GetTempFileName();
+                    File.Delete(tempFileName);
+                    tempFileName = Path.ChangeExtension(tempFileName, ".png");
                     tempFileCollection.AddFile(tempFileName, false);
                     FileInfo imageFile = new FileInfo(tempFileName);
                     if (imageFile.Exists)
@@ -976,7 +978,9 @@ namespace VietOCR.NET
                 Image image = ImageIOHelper.GetClipboardImage();
                 if (image != null)
                 {
-                    string tempFileName = Path.ChangeExtension(Path.GetTempFileName(), ".png");
+                    string tempFileName = Path.GetTempFileName();
+                    File.Delete(tempFileName);
+                    tempFileName = Path.ChangeExtension(tempFileName, ".png");
                     tempFileCollection.AddFile(tempFileName, false);
                     image.Save(tempFileName, ImageFormat.Png);
                     openFile(tempFileName);
