@@ -127,7 +127,7 @@ Version 1.4 (24 October 2009)
 - Implement cancellation of running OCR tasks
 - Merge PDF functionality
 
-Version 1.5 Beta (20 December 2009)
+Version 1.5 (21 December 2009)
 - Add support for execution from command line
 - Add support for paste image from clipboard
 - Add support for JPEG2000 and PNM image types
