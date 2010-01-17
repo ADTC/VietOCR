@@ -9,6 +9,7 @@
 <entry key="cop">Coptic</entry>
 <entry key="dan">Danish</entry>
 <entry key="deu">German</entry>
+<entry key="deu-f">Fraktur</entry>
 <entry key="ell">Greek</entry>
 <entry key="eng">English</entry>
 <entry key="eus">Basque</entry>
@@ -39,4 +40,5 @@
 <entry key="tur">Turkish</entry>
 <entry key="ukr">Ukrainian</entry>
 <entry key="vie">Vietnamese</entry>
+<entry key="vie-t">Viet VNI-TCVN3</entry>
 </properties>
