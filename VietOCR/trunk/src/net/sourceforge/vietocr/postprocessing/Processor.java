@@ -27,7 +27,7 @@ public class Processor {
 
     public static String postProcess(String text, String langCode) {
         try {
-            IPostProcessor processor = ProcessorFactory.createProcessor(ISO639.valueOf(langCode));
+            IPostProcessor processor = ProcessorFactory.createProcessor(ISO639.valueOf(langCode.substring(0, 3)));
             return processor.postProcess(text);
         } catch (Exception exc) {
             return text;
@@ -44,6 +44,9 @@ public class Processor {
 
         // replace text based on entries read from a DangAmbigs.txt file
         Map<String, String> replaceRules = TextUtilities.loadMap(new File(dangAmbigsPath, langCode + ".DangAmbigs.txt").getPath());
+        if (replaceRules.size() == 0 && langCode.length() > 3) {
+            replaceRules = TextUtilities.loadMap(new File(dangAmbigsPath, langCode.substring(0, 3) + ".DangAmbigs.txt").getPath()); // falls back on base
+        }
         Iterator<String> iter = replaceRules.keySet().iterator();
 
         while (iter.hasNext()) {
