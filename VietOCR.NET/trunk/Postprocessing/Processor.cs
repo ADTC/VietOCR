@@ -27,7 +27,7 @@ namespace VietOCR.NET.Postprocessing
         {
             try
             {
-                IPostProcessor processor = ProcessorFactory.createProcessor((ISO639)Enum.Parse(typeof(ISO639), langCode));
+                IPostProcessor processor = ProcessorFactory.createProcessor((ISO639)Enum.Parse(typeof(ISO639), langCode.Substring(0, 3)));
                 return processor.PostProcess(text);
             }
             catch
@@ -48,6 +48,11 @@ namespace VietOCR.NET.Postprocessing
 
             // replace text based on entries read from a DangAmbigs.txt file
             Dictionary<string, string> replaceRules = TextUtilities.LoadMap(Path.Combine(dangAmbigsPath, langCode + ".DangAmbigs.txt"));
+            if (replaceRules.Count == 0 && langCode.Length > 3)
+            {
+                replaceRules = TextUtilities.LoadMap(Path.Combine(dangAmbigsPath, langCode.Substring(0, 3) + ".DangAmbigs.txt")); // fall back on base
+            }
+            
             Dictionary<string, string>.KeyCollection.Enumerator enumer = replaceRules.Keys.GetEnumerator();
 
             while (enumer.MoveNext())
