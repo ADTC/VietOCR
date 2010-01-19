@@ -458,7 +458,7 @@ public class Gui extends javax.swing.JFrame {
         VietKeyListener.setInputMethod(InputMethods.valueOf(selectedInputMethod));
         VietKeyListener.setSmartMark(true);
         VietKeyListener.consumeRepeatKey(true);
-        VietKeyListener.setVietModeEnabled("vie".equals(curLangCode));
+        VietKeyListener.setVietModeEnabled(curLangCode.contains("vie"));
         jTextArea1.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 if (e.isPopupTrigger()) {
@@ -1006,7 +1006,7 @@ public class Gui extends javax.swing.JFrame {
     private void jComboBoxLangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxLangItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             curLangCode = langCodes[jComboBoxLang.getSelectedIndex()];
-            VietKeyListener.setVietModeEnabled(curLangCode.equals("vie"));
+            VietKeyListener.setVietModeEnabled(curLangCode.contains("vie"));
         }
     }//GEN-LAST:event_jComboBoxLangItemStateChanged
 
