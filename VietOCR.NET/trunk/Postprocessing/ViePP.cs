@@ -25,7 +25,7 @@ namespace VietOCR.NET.Postprocessing
      */
     public class ViePP : IPostProcessor
     {
-        const string TONE = "[\u0300\u0309\u0303\u0301\u0323]?"; // '`?~.
+        const string TONE = "[\u0300\u0309\u0303\u0301\u0323]?"; // `?~'.
         const string DOT_BELOW = "\u0323?"; // .
         const string MARK = "[\u0306\u0302\u031B]?"; // (^+
         const string VOWEL = "[aeiouy]";
@@ -80,7 +80,9 @@ namespace VietOCR.NET.Postprocessing
                         "(?i)(?<![qQ])(u)(?=o\u031B" + TONE + "\\p{L})", "$1\u031B"), // uo+n to u+o+n 
                         "(?i)(?<=u\u031B)(o)(?=" + TONE + "\\p{L})", "$1\u031B"), // u+on to u+o+n
                         "(?i)(i)" + TONE + "(?=[eioy])", "$1"), // remove mark on i followed by certain vowels
-                        "(?i)(?<=" + VOWEL + DOT_BELOW + TONE + MARK + ")(i)" + TONE + "\\b", "$1") // // remove mark on i preceeded by vowels
+                        // It seems to be a bug with .NET: it should be \\b, not \\B,
+                        // unless combining diacritical characters are not considered as words by .NET.
+                        "(?i)(?<=" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\B", "$1") // remove mark on i preceeded by vowels
                     ;
 
             return nfdText.Normalize();
