@@ -23,7 +23,7 @@ import java.text.Normalizer; // available in Java 6.0
  * @author Quan Nguyen (nguyenq@users.sf.net)
  */
 public class ViePP implements IPostProcessor {
-    final String TONE = "[\u0300\u0309\u0303\u0301\u0323]?"; // '`?~.
+    final String TONE = "[\u0300\u0309\u0303\u0301\u0323]?"; // `?~'.
     final String DOT_BELOW = "\u0323?"; // .
     final String MARK = "[\u0306\u0302\u031B]?"; // (^+
     final String VOWEL = "[aeiouy]";
@@ -72,7 +72,7 @@ public class ViePP implements IPostProcessor {
                 .replaceAll("(?i)(?<![qQ])(u)(?=o\u031B" + TONE + "\\p{L})", "$1\u031B") // uo+n to u+o+n 
                 .replaceAll("(?i)(?<=u\u031B)(o)(?=" + TONE + "\\p{L})", "$1\u031B") // u+on to u+o+n
                 .replaceAll("(?i)(i)" + TONE + "(?=[eioy])", "$1") // remove mark on i followed by certain vowels
-                .replaceAll("(?i)(?<=" + VOWEL + DOT_BELOW + TONE + MARK + ")(i)" + TONE + "\\b", "$1") // // remove mark on i preceeded by vowels
+                .replaceAll("(?i)(?<=" + VOWEL + "\\p{InCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\b", "$1") // remove mark on i preceeded by vowels
                 ;
 
         return Normalizer.normalize(nfdText, Normalizer.Form.NFC);
