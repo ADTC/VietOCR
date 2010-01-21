@@ -77,12 +77,12 @@ namespace VietOCR.NET.Postprocessing
                     Regex.Replace(
                     Regex.Replace(
                     Regex.Replace(nfdText,
-                        "(?i)(?<![qQ])(u)(?=o\u031B" + TONE + "\\p{L})", "$1\u031B"), // uo+n to u+o+n 
+                        "(?i)(?<![q])(u)(?=o\u031B" + TONE + "\\p{L})", "$1\u031B"), // uo+n to u+o+n 
                         "(?i)(?<=u\u031B)(o)(?=" + TONE + "\\p{L})", "$1\u031B"), // u+on to u+o+n
                         "(?i)(i)" + TONE + "(?=[eioy])", "$1"), // remove mark on i followed by certain vowels
                         // It seems to be a bug with .NET: it should be \\b, not \\B,
                         // unless combining diacritical characters are not considered as words by .NET.
-                        "(?i)(?<=" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\B", "$1") // remove mark on i preceeded by vowels
+                        "(?i)(?<=[^q]" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\B", "$1") // remove mark on i preceeded by vowels
                     ;
 
             return nfdText.Normalize();
