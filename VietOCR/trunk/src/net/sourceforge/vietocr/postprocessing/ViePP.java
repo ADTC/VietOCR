@@ -69,10 +69,10 @@ public class ViePP implements IPostProcessor {
 //                .replace("ưoi", "ươi");
 
         String nfdText = Normalizer.normalize(text, Normalizer.Form.NFD)
-                .replaceAll("(?i)(?<![qQ])(u)(?=o\u031B" + TONE + "\\p{L})", "$1\u031B") // uo+n to u+o+n 
+                .replaceAll("(?i)(?<![q])(u)(?=o\u031B" + TONE + "\\p{L})", "$1\u031B") // uo+n to u+o+n 
                 .replaceAll("(?i)(?<=u\u031B)(o)(?=" + TONE + "\\p{L})", "$1\u031B") // u+on to u+o+n
                 .replaceAll("(?i)(i)" + TONE + "(?=[eioy])", "$1") // remove mark on i followed by certain vowels
-                .replaceAll("(?i)(?<=" + VOWEL + "\\p{InCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\b", "$1") // remove mark on i preceeded by vowels
+                .replaceAll("(?i)(?<=[^q]" + VOWEL + "\\p{InCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\b", "$1") // remove mark on i preceeded by vowels
                 ;
 
         return Normalizer.normalize(nfdText, Normalizer.Form.NFC);
