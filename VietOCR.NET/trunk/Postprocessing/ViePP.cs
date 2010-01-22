@@ -84,7 +84,7 @@ namespace VietOCR.NET.Postprocessing
                         // It seems to be a bug with .NET: it should be \\b, not \\B,
                         // unless combining diacritical characters are not considered as words by .NET.
                         "(?i)(?<=[^q]" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\B", "$1"), // remove mark on i preceeded by vowels
-                        "(?i)(?<=\u0302)\u2019(?=\\w)", "\u0301"), // ^apostrophy to ^acute
+                        "(?i)(?<=[aeo]\u0302)\u2019", "\u0301"), // ^apostrophy to ^acute
                         "(?i)\u2018([aeo]\u0302)(?!\\p{IsCombiningDiacriticalMarks})", "$1\u0300") // ‘a^ to a^`
                     ;
 
