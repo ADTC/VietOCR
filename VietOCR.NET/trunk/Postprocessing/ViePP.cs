@@ -59,7 +59,6 @@ namespace VietOCR.NET.Postprocessing
                 .Replace("êf", "ết")
                 .Replace("rg", "ng")
                 .Replace("êh", "ến")
-                .Replace("‘â", "ầ")
                 .Replace("fâ", "rầ")
                 ;
 
@@ -76,13 +75,17 @@ namespace VietOCR.NET.Postprocessing
             nfdText = Regex.Replace(
                     Regex.Replace(
                     Regex.Replace(
+                    Regex.Replace(
+                    Regex.Replace(
                     Regex.Replace(nfdText,
                         "(?i)(?<![q])(u)(?=o\u031B" + TONE + "\\p{L})", "$1\u031B"), // uo+n to u+o+n 
                         "(?i)(?<=u\u031B)(o)(?=" + TONE + "\\p{L})", "$1\u031B"), // u+on to u+o+n
                         "(?i)(i)" + TONE + "(?=[eioy])", "$1"), // remove mark on i followed by certain vowels
                         // It seems to be a bug with .NET: it should be \\b, not \\B,
                         // unless combining diacritical characters are not considered as words by .NET.
-                        "(?i)(?<=[^q]" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\B", "$1") // remove mark on i preceeded by vowels
+                        "(?i)(?<=[^q]" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\B", "$1"), // remove mark on i preceeded by vowels
+                        "(?i)(?<=\u0302)\u2019(?=\\w)", "\u0301"), // ^apostrophy to ^acute
+                        "(?i)\u2018([aeo]\u0302)(?!\\p{IsCombiningDiacriticalMarks})", "$1\u0300") // ‘a^ to a^`
                     ;
 
             return nfdText.Normalize();
