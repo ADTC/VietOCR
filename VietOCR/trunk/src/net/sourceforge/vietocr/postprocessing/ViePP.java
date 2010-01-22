@@ -1,3 +1,4 @@
+
 /**
  * Copyright @ 2008 Quan Nguyen
  *
@@ -55,7 +56,6 @@ public class ViePP implements IPostProcessor {
                 .replace("êf", "ết")
                 .replace("rg", "ng")
                 .replace("êh", "ến")
-                .replace("‘â", "ầ")
                 .replace("fâ", "rầ")
                 ;
 
@@ -73,6 +73,8 @@ public class ViePP implements IPostProcessor {
                 .replaceAll("(?i)(?<=u\u031B)(o)(?=" + TONE + "\\p{L})", "$1\u031B") // u+on to u+o+n
                 .replaceAll("(?i)(i)" + TONE + "(?=[eioy])", "$1") // remove mark on i followed by certain vowels
                 .replaceAll("(?i)(?<=[^q]" + VOWEL + "\\p{InCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\b", "$1") // remove mark on i preceeded by vowels
+                .replaceAll("(?i)(?<=\u0302)\u2019(?=\\w)", "\u0301") // ^apostrophy to ^acute
+                .replaceAll("(?i)\u2018([aeo]\u0302)(?!\\p{InCombiningDiacriticalMarks})", "$1\u0300") // ‘a^ to a^`
                 ;
 
         return Normalizer.normalize(nfdText, Normalizer.Form.NFC);
