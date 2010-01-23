@@ -462,7 +462,7 @@ namespace VietOCR.NET
 
             this.pictureBox1.Deselect();
 
-            this.pictureBox1.Dock = DockStyle.None;
+            this.pictureBox1.Dock = DockStyle.Top;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             scaleX = scaleY = 1f;
         }
