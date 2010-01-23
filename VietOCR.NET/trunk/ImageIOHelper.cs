@@ -50,8 +50,17 @@ namespace VietOCR.NET
                 image = Image.FromFile(imageFile.FullName);
 
                 IList<Image> images = new List<Image>();
-
-                int count = image.GetFrameCount(FrameDimension.Page);
+                
+                int count;
+                if (image.RawFormat.Equals(ImageFormat.Gif))
+                {
+                    count = image.GetFrameCount(FrameDimension.Time);
+                }
+                else 
+                {
+                    count = image.GetFrameCount(FrameDimension.Page);
+                }
+                
                 for (int i = 0; i < count; i++)
                 {
                     // save each frame to a bytestream
