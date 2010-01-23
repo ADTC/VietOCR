@@ -441,7 +441,6 @@ namespace VietOCR.NET
             }
         }
 
-
         private void toolStripBtnFitImage_Click(object sender, EventArgs e)
         {
             this.toolStripBtnFitImage.Enabled = false;
@@ -461,8 +460,7 @@ namespace VietOCR.NET
             this.toolStripBtnActualSize.Enabled = false;
 
             this.pictureBox1.Deselect();
-
-            this.pictureBox1.Dock = DockStyle.Top;
+            this.pictureBox1.Dock = DockStyle.None;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             scaleX = scaleY = 1f;
         }
