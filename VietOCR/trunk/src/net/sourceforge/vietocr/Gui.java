@@ -1046,9 +1046,6 @@ public class Gui extends javax.swing.JFrame {
         this.jButtonFitImage.setEnabled(false);
         this.jButtonActualSize.setEnabled(true);
 
-        originalW = imageIcon.getIconWidth();
-        originalH = imageIcon.getIconHeight();
-
         scaleX = (float) imageIcon.getIconWidth() / (float) this.jScrollPane2.getWidth();
         scaleY = (float) imageIcon.getIconHeight() / (float) this.jScrollPane2.getHeight();
         fitImageChange(this.jScrollPane2.getWidth(), this.jScrollPane2.getHeight());
@@ -1444,8 +1441,8 @@ public class Gui extends javax.swing.JFrame {
 
         displayImage();
 
-//        originalW = imageIcon.getIconWidth();
-//        originalH = imageIcon.getIconHeight();
+        originalW = imageIcon.getIconWidth();
+        originalH = imageIcon.getIconHeight();
 
         this.setTitle(selectedFile.getName() + " - " + APP_NAME);
 
@@ -1592,7 +1589,7 @@ private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {/
     fitImageChange(originalW, originalH);
     scaleX = scaleY = 1f;
 
-    reset = true;
+    reset = false;
     ((JImageLabel) jImageLabel).deselect();
 }//GEN-LAST:event_jButtonActualSizeActionPerformed
 
