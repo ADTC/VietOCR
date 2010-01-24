@@ -1438,8 +1438,8 @@ public class Gui extends javax.swing.JFrame {
 
         imageTotal = imageList.size();
         imageIndex = 0;
-        this.jScrollPane2.getViewport().setViewPosition(new Point());
         scaleX = scaleY = 1f;
+        this.jScrollPane2.getViewport().setViewPosition(curScrollPos = new Point());
 
         displayImage();
 
