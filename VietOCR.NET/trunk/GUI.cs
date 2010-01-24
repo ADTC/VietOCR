@@ -74,6 +74,7 @@ namespace VietOCR.NET
         private const float ZOOM_FACTOR = 1.25f;
         protected string dangAmbigsPath;
         protected bool dangAmbigsOn;
+        Point currentScrollPos;
 
         System.CodeDom.Compiler.TempFileCollection tempFileCollection = new System.CodeDom.Compiler.TempFileCollection();
 
@@ -327,7 +328,6 @@ namespace VietOCR.NET
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 openFile(openFileDialog1.FileName);
-                scaleX = scaleY = 1f;
                 filterIndex = openFileDialog1.FilterIndex;
             }
 
@@ -445,7 +445,8 @@ namespace VietOCR.NET
         {
             this.toolStripBtnFitImage.Enabled = false;
             this.toolStripBtnActualSize.Enabled = true;
-
+            currentScrollPos = this.splitContainer2.Panel2.AutoScrollPosition;
+            this.splitContainer2.Panel2.AutoScrollPosition = Point.Empty;
             this.pictureBox1.Deselect();
 
             this.pictureBox1.Dock = DockStyle.Fill;
@@ -458,12 +459,14 @@ namespace VietOCR.NET
         {
             this.toolStripBtnFitImage.Enabled = true;
             this.toolStripBtnActualSize.Enabled = false;
-
             this.pictureBox1.Deselect();
+
             this.pictureBox1.Dock = DockStyle.None;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             scaleX = scaleY = 1f;
+            this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(currentScrollPos.X), Math.Abs(currentScrollPos.Y));
         }
+
         /// <summary>
         /// Opens image file.
         /// </summary>
@@ -536,6 +539,11 @@ namespace VietOCR.NET
 
             imageTotal = imageList.Count;
             imageIndex = 0;
+
+            this.pictureBox1.Dock = DockStyle.None;
+            this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            scaleX = scaleY = 1f;
+            this.splitContainer2.Panel2.AutoScrollPosition = Point.Empty;
 
             displayImage();
 
@@ -986,6 +994,16 @@ namespace VietOCR.NET
                 }
             }
             base.OnKeyDown(e);
-        }   
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            if (this.pictureBox1.Image != null)
+            {
+                scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
+                scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
+            }
+        }
     }
 }
