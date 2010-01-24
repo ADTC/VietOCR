@@ -1018,6 +1018,7 @@ public class Gui extends javax.swing.JFrame {
     void setLineWrap() {
         // to be implemented in subclass
     }
+    
     private void jMenuItemPostProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPostProcessActionPerformed
         if (curLangCode == null) {
             return;
@@ -1043,6 +1044,34 @@ public class Gui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemPostProcessActionPerformed
 
+    private void jButtonPrevPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevPageActionPerformed
+        imageIndex--;
+        if (imageIndex < 0) {
+            imageIndex = 0;
+        } else {
+            this.jLabelStatus.setText(null);
+            jProgressBar1.setString(null);
+            jProgressBar1.setVisible(false);
+            displayImage();
+        }
+        setButton();
+        ((JImageLabel) jImageLabel).deselect();
+    }//GEN-LAST:event_jButtonPrevPageActionPerformed
+
+    private void jButtonNextPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextPageActionPerformed
+        imageIndex++;
+        if (imageIndex > imageTotal - 1) {
+            imageIndex = imageTotal - 1;
+        } else {
+            this.jLabelStatus.setText(null);
+            jProgressBar1.setString(null);
+            jProgressBar1.setVisible(false);
+            displayImage();
+        }
+        setButton();
+        ((JImageLabel) jImageLabel).deselect();
+    }//GEN-LAST:event_jButtonNextPageActionPerformed
+
     private void jButtonFitImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFitImageActionPerformed
         this.jButtonFitImage.setEnabled(false);
         this.jButtonActualSize.setEnabled(true);
@@ -1054,6 +1083,16 @@ public class Gui extends javax.swing.JFrame {
         ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonFitImageActionPerformed
 
+    private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualSizeActionPerformed
+	this.jButtonFitImage.setEnabled(true);
+	this.jButtonActualSize.setEnabled(false);
+        fitImageChange(originalW, originalH);
+	scaleX = scaleY = 1f;
+	
+	reset = false;
+	((JImageLabel) jImageLabel).deselect();
+    }//GEN-LAST:event_jButtonActualSizeActionPerformed
+
     void fitImageChange(final int width, final int height) {
         SwingUtilities.invokeLater(new Runnable() {
 
@@ -1063,6 +1102,7 @@ public class Gui extends javax.swing.JFrame {
                     tempImageIcon.setScaledSize(width, height);
                 }
                 imageIcon = imageList.get(imageIndex);
+                jScrollPane2.getViewport().setViewPosition(curScrollPos);
                 jImageLabel.revalidate();
                 jScrollPane2.repaint();
             }
@@ -1110,6 +1150,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
     }
+    
     private void jButtonOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOpenActionPerformed
         jMenuItemOpenActionPerformed(evt);
     }//GEN-LAST:event_jButtonOpenActionPerformed
@@ -1121,34 +1162,6 @@ public class Gui extends javax.swing.JFrame {
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
         this.jTextArea1.setText(null);
     }//GEN-LAST:event_jButtonClearActionPerformed
-
-    private void jButtonPrevPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevPageActionPerformed
-        imageIndex--;
-        if (imageIndex < 0) {
-            imageIndex = 0;
-        } else {
-            this.jLabelStatus.setText(null);
-            jProgressBar1.setString(null);
-            jProgressBar1.setVisible(false);
-            displayImage();
-        }
-        setButton();
-        ((JImageLabel) jImageLabel).deselect();
-}//GEN-LAST:event_jButtonPrevPageActionPerformed
-
-    private void jButtonNextPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextPageActionPerformed
-        imageIndex++;
-        if (imageIndex > imageTotal - 1) {
-            imageIndex = imageTotal - 1;
-        } else {
-            this.jLabelStatus.setText(null);
-            jProgressBar1.setString(null);
-            jProgressBar1.setVisible(false);
-            displayImage();
-        }
-        setButton();
-        ((JImageLabel) jImageLabel).deselect();
-}//GEN-LAST:event_jButtonNextPageActionPerformed
 
     private void jMenuItemOCRAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRAllActionPerformed
         if (this.jImageLabel.getIcon() == null) {
@@ -1180,6 +1193,7 @@ public class Gui extends javax.swing.JFrame {
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
         quit();
     }//GEN-LAST:event_jMenuItemExitActionPerformed
+    
     void quit() {
         prefs.put("UILanguage", selectedUILang);
 
@@ -1220,6 +1234,7 @@ public class Gui extends javax.swing.JFrame {
 
 //        System.exit(0);
     }
+    
     private void jMenuItemFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFontActionPerformed
         openFontDialog(curLangCode);
     }//GEN-LAST:event_jMenuItemFontActionPerformed
@@ -1227,105 +1242,7 @@ public class Gui extends javax.swing.JFrame {
     void openFontDialog(String langCode) {
         // to be implemented in subclass
     }
-
-    private void jMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveActionPerformed
-        outputDirectory = prefs.get("outputDirectory", null);
-        JFileChooser chooser = new JFileChooser(outputDirectory);
-        FileFilter txtFilter = new SimpleFilter("txt", "Unicode UTF-8 Text");
-        chooser.addChoosableFileFilter(txtFilter);
-
-        int returnVal = chooser.showSaveDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            outputDirectory = chooser.getCurrentDirectory().getPath();
-            File textFile = chooser.getSelectedFile();
-            if (chooser.getFileFilter() == txtFilter) {
-                if (!textFile.getName().endsWith(".txt")) {
-                    textFile = new File(textFile.getPath() + ".txt");
-                }
-            }
-            saveFile(textFile);
-        }
-
-    }
-
-    void saveFile(File file) {
-        try {
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), UTF8));
-            jTextArea1.write(out);
-            out.close();
-        } catch (OutOfMemoryError oome) {
-            oome.printStackTrace();
-            JOptionPane.showMessageDialog(this, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
-        } catch (FileNotFoundException fnfe) {
-            showError(fnfe, myResources.getString("Error_saving_file_") + file + myResources.getString(".\nFile_is_inaccessible."));
-        } catch (Exception ex) {
-            showError(ex, myResources.getString("Error_saving_file_") + file);
-        } finally {
-            SwingUtilities.invokeLater(new Runnable() {
-
-                @Override
-                public void run() {
-                    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-                    getGlassPane().setVisible(false);
-                }
-            });
-        }
-
-    }//GEN-LAST:event_jMenuItemSaveActionPerformed
-
-    private void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRActionPerformed
-        if (jImageLabel.getIcon() == null) {
-            JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        Rectangle rect = ((JImageLabel) jImageLabel).getRect();
-
-        if (rect != null) {
-            try {
-                ImageIcon ii = (ImageIcon) this.jImageLabel.getIcon();
-                BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) (rect.x * scaleX), (int) (rect.y * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
-                IIOImage iioImage = new IIOImage(bi, null, null);
-                ArrayList<IIOImage> tempList = new ArrayList<IIOImage>();
-                tempList.add(iioImage);
-                performOCR(tempList, 0);
-            } catch (RasterFormatException rfe) {
-                rfe.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            performOCR(iioImageList, imageIndex);
-        }
-    }//GEN-LAST:event_jMenuItemOCRActionPerformed
-
-    /**
-     * Perform OCR on images represented by IIOImage.
-     * 
-     * @param list List of IIOImage
-     * @param index Index of page to be OCRed: -1 for all pages
-     */
-    void performOCR(final List<IIOImage> iioImageList, final int index) {
-        if (this.jComboBoxLang.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(this, bundle.getString("Please_select_a_language."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        jLabelStatus.setText(bundle.getString("OCR_running..."));
-        jProgressBar1.setIndeterminate(true);
-        jProgressBar1.setString(bundle.getString("OCR_running..."));
-        jProgressBar1.setVisible(true);
-        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        getGlassPane().setVisible(true);
-        this.jButtonOCR.setEnabled(false);
-        this.jMenuItemOCR.setEnabled(false);
-        this.jMenuItemOCRAll.setEnabled(false);
-
-        // instantiate SwingWorker for OCR
-        ocrWorker = new OcrWorker(new OCRImageEntity(iioImageList, index));
-        ocrWorker.execute();
-    }
-
+    
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
 
         int returnVal = filechooser.showOpenDialog(this);
@@ -1341,28 +1258,6 @@ public class Gui extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jMenuItemOpenActionPerformed
-
-    /**
-     *  Updates UI component if changes in LAF
-     *
-     *@param  laf  the look and feel class name
-     */
-    protected void updateLaF(String laf) {
-        try {
-            UIManager.setLookAndFeel(laf);
-        } catch (Exception exc) {
-            // do nothing
-            exc.printStackTrace();
-        }
-
-        for (Window win : Window.getWindows()) {
-            SwingUtilities.updateComponentTreeUI(win);
-            win.validate();
-        }
-
-        SwingUtilities.updateComponentTreeUI(popup);
-        SwingUtilities.updateComponentTreeUI(filechooser);
-    }
 
     /**
      * Opens image file.
@@ -1439,7 +1334,6 @@ public class Gui extends javax.swing.JFrame {
         imageTotal = imageList.size();
         imageIndex = 0;
         scaleX = scaleY = 1f;
-        this.jScrollPane2.getViewport().setViewPosition(curScrollPos = new Point());
 
         displayImage();
 
@@ -1474,7 +1368,105 @@ public class Gui extends javax.swing.JFrame {
         imageIcon = imageList.get(imageIndex);
 
         jImageLabel.setIcon(imageIcon);
+        this.jScrollPane2.getViewport().setViewPosition(curScrollPos = new Point());
         jImageLabel.revalidate();
+    }
+    
+    private void jMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveActionPerformed
+        outputDirectory = prefs.get("outputDirectory", null);
+        JFileChooser chooser = new JFileChooser(outputDirectory);
+        FileFilter txtFilter = new SimpleFilter("txt", "Unicode UTF-8 Text");
+        chooser.addChoosableFileFilter(txtFilter);
+
+        int returnVal = chooser.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            outputDirectory = chooser.getCurrentDirectory().getPath();
+            File textFile = chooser.getSelectedFile();
+            if (chooser.getFileFilter() == txtFilter) {
+                if (!textFile.getName().endsWith(".txt")) {
+                    textFile = new File(textFile.getPath() + ".txt");
+                }
+            }
+            saveFile(textFile);
+        }
+    }//GEN-LAST:event_jMenuItemSaveActionPerformed
+
+    void saveFile(File file) {
+        try {
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), UTF8));
+            jTextArea1.write(out);
+            out.close();
+        } catch (OutOfMemoryError oome) {
+            oome.printStackTrace();
+            JOptionPane.showMessageDialog(this, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
+        } catch (FileNotFoundException fnfe) {
+            showError(fnfe, myResources.getString("Error_saving_file_") + file + myResources.getString(".\nFile_is_inaccessible."));
+        } catch (Exception ex) {
+            showError(ex, myResources.getString("Error_saving_file_") + file);
+        } finally {
+            SwingUtilities.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                    getGlassPane().setVisible(false);
+                }
+            });
+        }
+
+    }
+
+    private void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRActionPerformed
+        if (jImageLabel.getIcon() == null) {
+            JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        Rectangle rect = ((JImageLabel) jImageLabel).getRect();
+
+        if (rect != null) {
+            try {
+                ImageIcon ii = (ImageIcon) this.jImageLabel.getIcon();
+                BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) (rect.x * scaleX), (int) (rect.y * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
+                IIOImage iioImage = new IIOImage(bi, null, null);
+                ArrayList<IIOImage> tempList = new ArrayList<IIOImage>();
+                tempList.add(iioImage);
+                performOCR(tempList, 0);
+            } catch (RasterFormatException rfe) {
+                rfe.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            performOCR(iioImageList, imageIndex);
+        }
+    }//GEN-LAST:event_jMenuItemOCRActionPerformed
+
+    /**
+     * Perform OCR on images represented by IIOImage.
+     * 
+     * @param list List of IIOImage
+     * @param index Index of page to be OCRed: -1 for all pages
+     */
+    void performOCR(final List<IIOImage> iioImageList, final int index) {
+        if (this.jComboBoxLang.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(this, bundle.getString("Please_select_a_language."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        jLabelStatus.setText(bundle.getString("OCR_running..."));
+        jProgressBar1.setIndeterminate(true);
+        jProgressBar1.setString(bundle.getString("OCR_running..."));
+        jProgressBar1.setVisible(true);
+        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        getGlassPane().setVisible(true);
+        this.jButtonOCR.setEnabled(false);
+        this.jMenuItemOCR.setEnabled(false);
+        this.jMenuItemOCRAll.setEnabled(false);
+
+        // instantiate SwingWorker for OCR
+        ocrWorker = new OcrWorker(new OCRImageEntity(iioImageList, index));
+        ocrWorker.execute();
     }
 
     void setButton() {
@@ -1490,7 +1482,29 @@ public class Gui extends javax.swing.JFrame {
             this.jButtonNextPage.setEnabled(true);
         }
     }
+    
+    /**
+     *  Updates UI component if changes in LAF
+     *
+     *@param  laf  the look and feel class name
+     */
+    protected void updateLaF(String laf) {
+        try {
+            UIManager.setLookAndFeel(laf);
+        } catch (Exception exc) {
+            // do nothing
+            exc.printStackTrace();
+        }
 
+        for (Window win : Window.getWindows()) {
+            SwingUtilities.updateComponentTreeUI(win);
+            win.validate();
+        }
+
+        SwingUtilities.updateComponentTreeUI(popup);
+        SwingUtilities.updateComponentTreeUI(filechooser);
+    }
+    
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         jSplitPane1.setDividerLocation(jSplitPane1.getWidth() / 2);
 
@@ -1584,18 +1598,6 @@ private void jButtonRotateCCWActionPerformed(java.awt.event.ActionEvent evt) {//
 private void jButtonRotateCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateCWActionPerformed
     rotateImage(90);
 }//GEN-LAST:event_jButtonRotateCWActionPerformed
-
-private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualSizeActionPerformed
-    this.jButtonFitImage.setEnabled(true);
-    this.jButtonActualSize.setEnabled(false);
-
-    fitImageChange(originalW, originalH);
-    scaleX = scaleY = 1f;
-
-    reset = false;
-    ((JImageLabel) jImageLabel).deselect();
-    this.jScrollPane2.getViewport().setViewPosition(curScrollPos);
-}//GEN-LAST:event_jButtonActualSizeActionPerformed
 
 private void jMenuItemOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOptionsActionPerformed
     openOptionsDialog();
