@@ -60,9 +60,6 @@
     <Compile Include="ViePPTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AuthoringTests.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\VietOCR.NET.csproj">
       <Project>{24669862-3162-44AE-A050-E5205A683828}</Project>
       <Name>VietOCR.NET</Name>
