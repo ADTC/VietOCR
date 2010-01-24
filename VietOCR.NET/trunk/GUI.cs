@@ -74,7 +74,7 @@ namespace VietOCR.NET
         private const float ZOOM_FACTOR = 1.25f;
         protected string dangAmbigsPath;
         protected bool dangAmbigsOn;
-        Point currentScrollPos;
+        private Point curScrollPos;
 
         System.CodeDom.Compiler.TempFileCollection tempFileCollection = new System.CodeDom.Compiler.TempFileCollection();
 
@@ -445,7 +445,7 @@ namespace VietOCR.NET
         {
             this.toolStripBtnFitImage.Enabled = false;
             this.toolStripBtnActualSize.Enabled = true;
-            currentScrollPos = this.splitContainer2.Panel2.AutoScrollPosition;
+            curScrollPos = this.splitContainer2.Panel2.AutoScrollPosition;
             this.splitContainer2.Panel2.AutoScrollPosition = Point.Empty;
             this.pictureBox1.Deselect();
 
@@ -464,7 +464,7 @@ namespace VietOCR.NET
             this.pictureBox1.Dock = DockStyle.None;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             scaleX = scaleY = 1f;
-            this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(currentScrollPos.X), Math.Abs(currentScrollPos.Y));
+            this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(curScrollPos.X), Math.Abs(curScrollPos.Y));
         }
 
         /// <summary>
@@ -543,7 +543,7 @@ namespace VietOCR.NET
             this.pictureBox1.Dock = DockStyle.None;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             scaleX = scaleY = 1f;
-            this.splitContainer2.Panel2.AutoScrollPosition = Point.Empty;
+            this.splitContainer2.Panel2.AutoScrollPosition = curScrollPos = Point.Empty;
 
             displayImage();
 
