@@ -77,6 +77,7 @@ public class Gui extends javax.swing.JFrame {
     private int originalW, originalH;
     private final float ZOOM_FACTOR = 1.25f;
     private OcrWorker ocrWorker;
+    private Point curScrollPos;
 
     /**
      * Creates new form Gui
@@ -1045,7 +1046,7 @@ public class Gui extends javax.swing.JFrame {
     private void jButtonFitImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFitImageActionPerformed
         this.jButtonFitImage.setEnabled(false);
         this.jButtonActualSize.setEnabled(true);
-
+        curScrollPos = this.jScrollPane2.getViewport().getViewPosition();
         scaleX = (float) imageIcon.getIconWidth() / (float) this.jScrollPane2.getWidth();
         scaleY = (float) imageIcon.getIconHeight() / (float) this.jScrollPane2.getHeight();
         fitImageChange(this.jScrollPane2.getWidth(), this.jScrollPane2.getHeight());
@@ -1331,7 +1332,6 @@ public class Gui extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             currentDirectory = filechooser.getCurrentDirectory().getPath();
             openFile(filechooser.getSelectedFile());
-            scaleX = scaleY = 1f;
 
             for (int i = 0; i < fileFilters.length; i++) {
                 if (fileFilters[i] == filechooser.getFileFilter()) {
@@ -1438,6 +1438,8 @@ public class Gui extends javax.swing.JFrame {
 
         imageTotal = imageList.size();
         imageIndex = 0;
+        this.jScrollPane2.getViewport().setViewPosition(new Point());
+        scaleX = scaleY = 1f;
 
         displayImage();
 
@@ -1449,6 +1451,7 @@ public class Gui extends javax.swing.JFrame {
         ((JImageLabel) jImageLabel).deselect();
 
         this.jButtonFitImage.setEnabled(true);
+        this.jButtonActualSize.setEnabled(false);
         this.jButtonZoomIn.setEnabled(true);
         this.jButtonZoomOut.setEnabled(true);
 
@@ -1591,6 +1594,7 @@ private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {/
 
     reset = false;
     ((JImageLabel) jImageLabel).deselect();
+    this.jScrollPane2.getViewport().setViewPosition(curScrollPos);
 }//GEN-LAST:event_jButtonActualSizeActionPerformed
 
 private void jMenuItemOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOptionsActionPerformed
