@@ -45,6 +45,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_302001D5AE44400D859E2002E01FC7EC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_31786D05C8F5457BB88E336D27515B0D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -52,6 +58,12 @@
         "Entry"
         {
         "MsmKey" = "8:_3880F5B07A5341F0A8D6744475DCC443"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3D5388FBDF8043969F179A926B4F245B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -87,6 +99,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_62ABC0B14AB046BD93C298CCDF826906"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_684AB781D68E4AECBE992D7EBB330B3D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6C90B05A45B5417B8DFB48BCFF682FB5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -117,6 +141,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8CC9612477E04C85B48A7324EE386261"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8F735BC804077654D82F5F56211712FD"
         "OwnerKey" = "8:_4E6E1A9C9212DE0E1B1438F6DCF0DA0A"
         "MsmSig" = "8:_UNDEFINED"
@@ -136,6 +166,12 @@
         "Entry"
         {
         "MsmKey" = "8:_9E057C2EB4AD457E8400FF49592A0AFD"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9EB6F61EB67C4DF78F5526D5DFB5ADAE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -171,6 +207,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_C9B71C2330594914B7B04F54F830501D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_CB534E76A5FB447DA3761CDC90D7690E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -184,6 +226,12 @@
         "Entry"
         {
         "MsmKey" = "8:_D1782A6647F545CDBA36D5A773BA8B90"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D3B4D6D94D9B4EDE97F29C83C6FEF854"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -208,6 +256,18 @@
         "Entry"
         {
         "MsmKey" = "8:_E97991C219A1412C896F0FF595A5CC9A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EB8A9549B1144EB3B020B3DE9FAC7166"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EBDA5C8E83754CE1BBDFFF09FB24F884"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -453,6 +513,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_302001D5AE44400D859E2002E01FC7EC"
+            {
+            "SourcePath" = "8:..\\tessdata\\vie-t.user-words"
+            "TargetName" = "8:vie-t.user-words"
+            "Tag" = "8:"
+            "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_31786D05C8F5457BB88E336D27515B0D"
             {
             "SourcePath" = "8:..\\tessdata\\vie.freq-dawg"
@@ -477,6 +557,26 @@
             {
             "SourcePath" = "8:..\\tessdata\\vie.pffmtable"
             "TargetName" = "8:vie.pffmtable"
+            "Tag" = "8:"
+            "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3D5388FBDF8043969F179A926B4F245B"
+            {
+            "SourcePath" = "8:..\\tessdata\\vie-t.pffmtable"
+            "TargetName" = "8:vie-t.pffmtable"
             "Tag" = "8:"
             "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
             "Condition" = "8:"
@@ -604,6 +704,46 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_62ABC0B14AB046BD93C298CCDF826906"
+            {
+            "SourcePath" = "8:..\\tessdata\\vie-t.DangAmbigs"
+            "TargetName" = "8:vie-t.DangAmbigs"
+            "Tag" = "8:"
+            "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_684AB781D68E4AECBE992D7EBB330B3D"
+            {
+            "SourcePath" = "8:..\\tessdata\\vie-t.freq-dawg"
+            "TargetName" = "8:vie-t.freq-dawg"
+            "Tag" = "8:"
+            "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6C90B05A45B5417B8DFB48BCFF682FB5"
             {
             "SourcePath" = "8:..\\readme_cs.html"
@@ -704,6 +844,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8CC9612477E04C85B48A7324EE386261"
+            {
+            "SourcePath" = "8:..\\tessdata\\configs\\viet"
+            "TargetName" = "8:viet"
+            "Tag" = "8:"
+            "Folder" = "8:_5B40BDA5449E4EE58EECC114B756ADAD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F735BC804077654D82F5F56211712FD"
             {
             "SourcePath" = "8:wiaaut.dll"
@@ -750,6 +910,26 @@
             "TargetName" = "8:vietsample2.tif"
             "Tag" = "8:"
             "Folder" = "8:_01DB017D98454EC9B137623356AF645E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9EB6F61EB67C4DF78F5526D5DFB5ADAE"
+            {
+            "SourcePath" = "8:..\\tessdata\\vie-t.normproto"
+            "TargetName" = "8:vie-t.normproto"
+            "Tag" = "8:"
+            "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -864,6 +1044,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C9B71C2330594914B7B04F54F830501D"
+            {
+            "SourcePath" = "8:..\\tessdata\\vie-t.unicharset"
+            "TargetName" = "8:vie-t.unicharset"
+            "Tag" = "8:"
+            "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CB534E76A5FB447DA3761CDC90D7690E"
             {
             "SourcePath" = "8:..\\samples\\vietsample.tif"
@@ -908,6 +1108,26 @@
             {
             "SourcePath" = "8:..\\tessdata\\vie.unicharset"
             "TargetName" = "8:vie.unicharset"
+            "Tag" = "8:"
+            "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D3B4D6D94D9B4EDE97F29C83C6FEF854"
+            {
+            "SourcePath" = "8:..\\tessdata\\vie-t.word-dawg"
+            "TargetName" = "8:vie-t.word-dawg"
             "Tag" = "8:"
             "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
             "Condition" = "8:"
@@ -988,6 +1208,46 @@
             {
             "SourcePath" = "8:..\\tessdata\\vie.DangAmbigs"
             "TargetName" = "8:vie.DangAmbigs"
+            "Tag" = "8:"
+            "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EB8A9549B1144EB3B020B3DE9FAC7166"
+            {
+            "SourcePath" = "8:..\\tessdata\\vie-t.Microfeat"
+            "TargetName" = "8:vie-t.Microfeat"
+            "Tag" = "8:"
+            "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EBDA5C8E83754CE1BBDFFF09FB24F884"
+            {
+            "SourcePath" = "8:..\\tessdata\\vie-t.inttemp"
+            "TargetName" = "8:vie-t.inttemp"
             "Tag" = "8:"
             "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
             "Condition" = "8:"
@@ -1093,6 +1353,17 @@
                     "Property" = "8:_DF5299D2EC2247A092465F68A177B3D5"
                         "Folders"
                         {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_5B40BDA5449E4EE58EECC114B756ADAD"
+                            {
+                            "Name" = "8:configs"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_02036302207844188A2EA38F8C2F15EA"
+                                "Folders"
+                                {
+                                }
+                            }
                         }
                     }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_69B414EFD2C243ABA1307C6342D57521"
