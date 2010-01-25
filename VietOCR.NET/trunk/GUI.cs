@@ -390,6 +390,7 @@ namespace VietOCR.NET
 
         private void toolStripBtnPrev_Click(object sender, EventArgs e)
         {
+            this.pictureBox1.Deselect();
             imageIndex--;
             if (imageIndex < 0)
             {
@@ -401,11 +402,11 @@ namespace VietOCR.NET
                 displayImage();
             }
             setButton();
-            this.pictureBox1.Deselect();
         }
 
         private void toolStripBtnNext_Click(object sender, EventArgs e)
         {
+            this.pictureBox1.Deselect();
             imageIndex++;
             if (imageIndex > imageTotal - 1)
             {
@@ -417,7 +418,6 @@ namespace VietOCR.NET
                 displayImage();
             }
             setButton();
-            this.pictureBox1.Deselect();
         }
 
         void setButton()
@@ -784,25 +784,26 @@ namespace VietOCR.NET
 
         private void toolStripBtnRotateCCW_Click(object sender, EventArgs e)
         {
+            this.pictureBox1.Deselect();
             // Rotating 270 degrees is equivalent to rotating -90 degrees.
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
             imageList[imageIndex].RotateFlip(RotateFlipType.Rotate270FlipNone);
-            this.pictureBox1.Deselect();
             this.pictureBox1.Size = this.pictureBox1.Image.Size;
             this.pictureBox1.Refresh();
         }
 
         private void toolStripBtnRotateCW_Click(object sender, EventArgs e)
         {
+            this.pictureBox1.Deselect();
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
             imageList[imageIndex].RotateFlip(RotateFlipType.Rotate90FlipNone);
-            this.pictureBox1.Deselect();
             this.pictureBox1.Size = this.pictureBox1.Image.Size;
             this.pictureBox1.Refresh();
         }
 
         private void toolStripBtnZoomIn_Click(object sender, EventArgs e)
         {
+            this.pictureBox1.Deselect();
             IsFitForZoomIn = true;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
@@ -813,11 +814,11 @@ namespace VietOCR.NET
             this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height * ZOOM_FACTOR);
             scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
             scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
-            this.pictureBox1.Deselect();
         }
 
         private void toolStripBtnZoomOut_Click(object sender, EventArgs e)
         {
+            this.pictureBox1.Deselect();
             // Zoom works best if you first fit the image according to its true aspect ratio.
             Fit();
             // StretchImage SizeMode works best for zooming.
@@ -827,7 +828,6 @@ namespace VietOCR.NET
             this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height / ZOOM_FACTOR);
             scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
             scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
-            this.pictureBox1.Deselect();
         }
 
         // This method makes the image fit properly in the PictureBox. You might think 
@@ -1002,6 +1002,7 @@ namespace VietOCR.NET
             base.OnResize(e);
             if (this.pictureBox1.Image != null)
             {
+                this.pictureBox1.Deselect();
                 scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
                 scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
             }
