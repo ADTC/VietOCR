@@ -1045,6 +1045,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemPostProcessActionPerformed
 
     private void jButtonPrevPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevPageActionPerformed
+        ((JImageLabel) jImageLabel).deselect();
         imageIndex--;
         if (imageIndex < 0) {
             imageIndex = 0;
@@ -1055,10 +1056,10 @@ public class Gui extends javax.swing.JFrame {
             displayImage();
         }
         setButton();
-        ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonPrevPageActionPerformed
 
     private void jButtonNextPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextPageActionPerformed
+        ((JImageLabel) jImageLabel).deselect();
         imageIndex++;
         if (imageIndex > imageTotal - 1) {
             imageIndex = imageTotal - 1;
@@ -1069,28 +1070,26 @@ public class Gui extends javax.swing.JFrame {
             displayImage();
         }
         setButton();
-        ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonNextPageActionPerformed
 
     private void jButtonFitImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFitImageActionPerformed
         this.jButtonFitImage.setEnabled(false);
         this.jButtonActualSize.setEnabled(true);
+        ((JImageLabel) jImageLabel).deselect();
         curScrollPos = this.jScrollPane2.getViewport().getViewPosition();
         scaleX = (float) imageIcon.getIconWidth() / (float) this.jScrollPane2.getWidth();
         scaleY = (float) imageIcon.getIconHeight() / (float) this.jScrollPane2.getHeight();
         fitImageChange(this.jScrollPane2.getWidth(), this.jScrollPane2.getHeight());
         reset = true;
-        ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonFitImageActionPerformed
 
     private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualSizeActionPerformed
-	this.jButtonFitImage.setEnabled(true);
-	this.jButtonActualSize.setEnabled(false);
-        fitImageChange(originalW, originalH);
-	scaleX = scaleY = 1f;
-	
-	reset = false;
-	((JImageLabel) jImageLabel).deselect();
+        this.jButtonFitImage.setEnabled(true);
+        this.jButtonActualSize.setEnabled(false);
+        ((JImageLabel) jImageLabel).deselect();
+		fitImageChange(originalW, originalH);
+        scaleX = scaleY = 1f;
+        reset = false;
     }//GEN-LAST:event_jButtonActualSizeActionPerformed
 
     void fitImageChange(final int width, final int height) {
@@ -1110,15 +1109,15 @@ public class Gui extends javax.swing.JFrame {
     }
 
     private void jButtonZoomOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomOutActionPerformed
+        ((JImageLabel) jImageLabel).deselect();
         doChange(false);
         reset = false;
-        ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonZoomOutActionPerformed
 
     private void jButtonZoomInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomInActionPerformed
+        ((JImageLabel) jImageLabel).deselect();
         doChange(true);
         reset = false;
-        ((JImageLabel) jImageLabel).deselect();
     }//GEN-LAST:event_jButtonZoomInActionPerformed
 
     void doChange(final boolean isZoomIn) {
@@ -1244,7 +1243,6 @@ public class Gui extends javax.swing.JFrame {
     }
     
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
-
         int returnVal = filechooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             currentDirectory = filechooser.getCurrentDirectory().getPath();
@@ -1413,7 +1411,6 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
         }
-
     }
 
     private void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRActionPerformed
@@ -1513,27 +1510,30 @@ public class Gui extends javax.swing.JFrame {
 
                 @Override
                 public void run() {
-                    jButtonFitImageActionPerformed(null);
+                    ((JImageLabel) jImageLabel).deselect();
+                    scaleX *= (float) imageIcon.getIconWidth() / (float) jScrollPane2.getWidth();
+                    scaleY *= (float) imageIcon.getIconHeight() / (float) jScrollPane2.getHeight();
+                    fitImageChange(jScrollPane2.getWidth(), jScrollPane2.getHeight());
                 }
             });
         }
     }//GEN-LAST:event_formComponentResized
 
-	private void jRadioButtonMenuItemEngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemEngActionPerformed
-		if (!selectedUILang.equals(evt.getActionCommand())) {
-		selectedUILang = evt.getActionCommand();
-		changeUILanguage(selectedUILang.equals("vi") ? VIETNAM : Locale.US);
-		}
-	}//GEN-LAST:event_jRadioButtonMenuItemEngActionPerformed
-	
-	private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemVietActionPerformed
-		jRadioButtonMenuItemEngActionPerformed(evt);
-	}//GEN-LAST:event_jRadioButtonMenuItemVietActionPerformed
-	
-	private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemScanActionPerformed
-		scaleX = scaleY = 1f;
-		performScan();
-	}//GEN-LAST:event_jMenuItemScanActionPerformed
+    private void jRadioButtonMenuItemEngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemEngActionPerformed
+        if (!selectedUILang.equals(evt.getActionCommand())) {
+            selectedUILang = evt.getActionCommand();
+            changeUILanguage(selectedUILang.equals("vi") ? VIETNAM : Locale.US);
+        }
+    }//GEN-LAST:event_jRadioButtonMenuItemEngActionPerformed
+    
+    private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemVietActionPerformed
+        jRadioButtonMenuItemEngActionPerformed(evt);
+    }//GEN-LAST:event_jRadioButtonMenuItemVietActionPerformed
+    
+    private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemScanActionPerformed
+        scaleX = scaleY = 1f;
+        performScan();
+    }//GEN-LAST:event_jMenuItemScanActionPerformed
 
     /**
      * Access scanner and scan documents via WIA.
@@ -1587,71 +1587,71 @@ public class Gui extends javax.swing.JFrame {
         });
     }
 
-	private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonScanActionPerformed
-		jMenuItemScanActionPerformed(evt);
-	}//GEN-LAST:event_jButtonScanActionPerformed
-	
-	private void jButtonRotateCCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateCCWActionPerformed
-		rotateImage(270);
-	}//GEN-LAST:event_jButtonRotateCCWActionPerformed
-	
-	private void jButtonRotateCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateCWActionPerformed
-		rotateImage(90);
-	}//GEN-LAST:event_jButtonRotateCWActionPerformed
-	
-	private void jMenuItemOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOptionsActionPerformed
-		openOptionsDialog();
-	}//GEN-LAST:event_jMenuItemOptionsActionPerformed
+    private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonScanActionPerformed
+        jMenuItemScanActionPerformed(evt);
+    }//GEN-LAST:event_jButtonScanActionPerformed
+    
+    private void jButtonRotateCCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateCCWActionPerformed
+        rotateImage(270);
+    }//GEN-LAST:event_jButtonRotateCCWActionPerformed
+    
+    private void jButtonRotateCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateCWActionPerformed
+        rotateImage(90);
+    }//GEN-LAST:event_jButtonRotateCWActionPerformed
+    
+    private void jMenuItemOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOptionsActionPerformed
+        openOptionsDialog();
+    }//GEN-LAST:event_jMenuItemOptionsActionPerformed
 
     void openOptionsDialog() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
 
-	private void jMenuItemChangeCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChangeCaseActionPerformed
-		openChangeCaseDialog();
-	}//GEN-LAST:event_jMenuItemChangeCaseActionPerformed
+    private void jMenuItemChangeCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChangeCaseActionPerformed
+        openChangeCaseDialog();
+    }//GEN-LAST:event_jMenuItemChangeCaseActionPerformed
 
     void openChangeCaseDialog() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
     
-	private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRemoveLineBreaksActionPerformed
-		removeLineBreaks();
-	}//GEN-LAST:event_jMenuItemRemoveLineBreaksActionPerformed
+    private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRemoveLineBreaksActionPerformed
+        removeLineBreaks();
+    }//GEN-LAST:event_jMenuItemRemoveLineBreaksActionPerformed
 
     void removeLineBreaks() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
 
-	private void jMenuItemMergeTiffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMergeTiffActionPerformed
-		mergeTiffs();
-	}//GEN-LAST:event_jMenuItemMergeTiffActionPerformed
+    private void jMenuItemMergeTiffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMergeTiffActionPerformed
+        mergeTiffs();
+    }//GEN-LAST:event_jMenuItemMergeTiffActionPerformed
 
     void mergeTiffs() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
 
-	private void jMenuItemSplitPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSplitPdfActionPerformed
-		splitPdf();
-	}//GEN-LAST:event_jMenuItemSplitPdfActionPerformed
+    private void jMenuItemSplitPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSplitPdfActionPerformed
+        splitPdf();
+    }//GEN-LAST:event_jMenuItemSplitPdfActionPerformed
 
     void splitPdf() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
 
     private void jButtonCancelOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelOCRActionPerformed
-		if (ocrWorker != null && !ocrWorker.isDone()) {
-			// Cancel current OCR op to begin a new one. You want only one OCR op at a time.
-			ocrWorker.cancel(true);
-			ocrWorker = null;
-		}
-	
-		this.jButtonCancelOCR.setEnabled(false);
-	}//GEN-LAST:event_jButtonCancelOCRActionPerformed
+        if (ocrWorker != null && !ocrWorker.isDone()) {
+            // Cancel current OCR op to begin a new one. You want only one OCR op at a time.
+            ocrWorker.cancel(true);
+            ocrWorker = null;
+        }
+    
+        this.jButtonCancelOCR.setEnabled(false);
+    }//GEN-LAST:event_jButtonCancelOCRActionPerformed
 
-	private void jMenuItemMergePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMergePdfActionPerformed
-		mergePdf();
-	}//GEN-LAST:event_jMenuItemMergePdfActionPerformed
+    private void jMenuItemMergePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMergePdfActionPerformed
+        mergePdf();
+    }//GEN-LAST:event_jMenuItemMergePdfActionPerformed
 
     void mergePdf() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
