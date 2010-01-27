@@ -552,6 +552,7 @@ namespace VietOCR.NET
             this.pictureBox1.Deselect();
 
             this.toolStripBtnFitImage.Enabled = true;
+            this.toolStripBtnActualSize.Enabled = false;
             this.toolStripBtnZoomIn.Enabled = true;
             this.toolStripBtnZoomOut.Enabled = true;
             this.toolStripBtnRotateCCW.Enabled = true;
