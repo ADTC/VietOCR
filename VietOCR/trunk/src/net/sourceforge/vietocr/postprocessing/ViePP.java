@@ -63,8 +63,7 @@ public class ViePP implements IPostProcessor {
         text = TextUtilities.correctLetterCases(text);
 
         // add hook marks
-//        text = text.replaceAll("(?<![qQ])(u)(?=[ơờởỡớợ]\\p{L})", "ư")
-//                .replaceAll("(?<![qQ])(U)(?=[ƠỜỞỠỚỢ]\\p{L})", "Ư")
+//        text = text.replaceAll("(?i)(?<![q])(u)(?=[ơờởỡớợ]\\p{L})", "ư")
 //                .replace("ưon", "ươn")
 //                .replace("ưoi", "ươi");
 
@@ -72,9 +71,9 @@ public class ViePP implements IPostProcessor {
                 .replaceAll("(?i)(?<![q])(u)(?=o\u031B" + TONE + "\\p{L})", "$1\u031B") // uo+n to u+o+n 
                 .replaceAll("(?i)(?<=u\u031B)(o)(?=" + TONE + "\\p{L})", "$1\u031B") // u+on to u+o+n
                 .replaceAll("(?i)(i)" + TONE + "(?=[eioy])", "$1") // remove mark on i followed by certain vowels
-                .replaceAll("(?i)(?<=[^q]" + VOWEL + "\\p{InCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\b", "$1") // remove mark on i preceeded by vowels
-                .replaceAll("(?i)(?<=[aeo]\u0302)\u2019", "\u0301") // ^apostrophy to ^acute
-                .replaceAll("(?i)\u2018([aeo]\u0302)(?!\\p{InCombiningDiacriticalMarks})", "$1\u0300") // ‘a^ to a^`
+                .replaceAll("(?i)(?<=[^q]" + VOWEL + "\\p{InCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\b", "$1") // remove mark on i preceeded by vowels w/ or w/o diacritics
+                .replaceAll("(?i)(?<=[aeo]\u0302)\u2019", "\u0301") // ^right-single-quote to ^acute
+                .replaceAll("(?i)\u2018([aeo]\u0302)(?!\\p{InCombiningDiacriticalMarks})", "$1\u0300") // left-single-quote+a^ to a^grave
                 ;
 
         return Normalizer.normalize(nfdText, Normalizer.Form.NFC);
