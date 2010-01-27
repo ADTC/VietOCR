@@ -66,8 +66,7 @@ namespace VietOCR.NET.Postprocessing
             text = TextUtilities.CorrectLetterCases(strB.ToString());
 
             // add hook marks
-            //                    .ReplaceAll("(?<![qQ])(u)(?=[ơờởỡớợ]\\p{L})", "ư")
-            //                    .ReplaceAll("(?<![qQ])(U)(?=[ƠỜỞỠỚỢ]\\p{L})", "Ư")
+            //                    .ReplaceAll("(?i)(?<![q])(u)(?=[ơờởỡớợ]\\p{L})", "ư")
             //                    .Replace("ưon", "ươn")
             //                    .Replace("ưoi", "ươi");
 
@@ -83,9 +82,9 @@ namespace VietOCR.NET.Postprocessing
                         "(?i)(i)" + TONE + "(?=[eioy])", "$1"), // remove mark on i followed by certain vowels
                         // It seems to be a bug with .NET: it should be \\b, not \\B,
                         // unless combining diacritical characters are not considered as words by .NET.
-                        "(?i)(?<=[^q]" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\B", "$1"), // remove mark on i preceeded by vowels
-                        "(?i)(?<=[aeo]\u0302)\u2019", "\u0301"), // ^apostrophy to ^acute
-                        "(?i)\u2018([aeo]\u0302)(?!\\p{IsCombiningDiacriticalMarks})", "$1\u0300") // ‘a^ to a^`
+                        "(?i)(?<=[^q]" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\B", "$1"), // remove mark on i preceeded by vowels w/ or w/o diacritics
+                        "(?i)(?<=[aeo]\u0302)\u2019", "\u0301"), // ^right-single-quote to ^acute
+                        "(?i)\u2018([aeo]\u0302)(?!\\p{IsCombiningDiacriticalMarks})", "$1\u0300") // left-single-quote+a^ to a^grave
                     ;
 
             return nfdText.Normalize();
