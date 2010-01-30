@@ -44,7 +44,6 @@ public class ViePP implements IPostProcessor {
                 .replace("uh", "nh")
                 .replace("rn", "m")
                 .replace("iii", "m")
-                .replace("ll", "u")
                 .replace("II", "u")
                 .replace("ôh", "ốn")
                 .replace("âỳ", "ấy")
