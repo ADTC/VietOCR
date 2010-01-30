@@ -1561,6 +1561,7 @@ public class Gui extends javax.swing.JFrame {
                         tempImageFile.delete();
                     }
 
+                    // The reason for not using PNG format is that jai-imageio library would throw an "I/O error reading PNG header" error.
                     tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
                     openFile(tempImageFile);
                     tempImageFile.deleteOnExit();
