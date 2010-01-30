@@ -132,7 +132,8 @@ Version 1.5 (21 December 2009)
 - Add support for paste image from clipboard
 - Add support for JPEG2000 and PNM image types
 
-Version 1.6 (24 January 2010)
-- Fix an image size issue when toggling between Fit Image vs. Actual Size after resizing window
+Version 1.6 (30 January 2010)
+- Fix an image size issue and associated scale factor when toggling between Fit Image vs. Actual Size after resizing window
 - Add unit test
 - Improve post-OCR correction for Vietnamese
+- Bundle Vietnamese language data for VNI & TCVN3 (ABC) fonts
