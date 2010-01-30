@@ -87,7 +87,8 @@ Version 1.5 (21 December 2009)
 - Add support for execution from command line
 - Add support for paste image from clipboard
 
-Version 1.6 (24 January 2010)
-- Fix an image size issue when toggling between Fit Image vs. Actual Size after scrolling in picturebox
+Version 1.6 (30 January 2010)
+- Fix an image size issue and associated scale factor when toggling between Fit Image vs. Actual Size after scrolling in picturebox
 - Add unit test
 - Improve post-OCR correction for Vietnamese
+- Bundle Vietnamese language data for VNI & TCVN3 (ABC) fonts (VNI-Aptima, VNI-Book, VNI-Helve, VNI-Palatin, VNI-Tekon, VNI-Times, VNI-Univer; .VnTime, .VnArial)
