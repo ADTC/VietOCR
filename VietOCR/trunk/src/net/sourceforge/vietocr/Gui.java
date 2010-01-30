@@ -1430,6 +1430,7 @@ public class Gui extends javax.swing.JFrame {
                 tempList.add(iioImage);
                 performOCR(tempList, 0);
             } catch (RasterFormatException rfe) {
+                JOptionPane.showMessageDialog(this, rfe.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
                 rfe.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
