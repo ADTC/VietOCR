@@ -47,7 +47,6 @@ namespace VietOCR.NET.Postprocessing
                 .Replace("uh", "nh")
                 .Replace("rn", "m")
                 .Replace("iii", "m")
-                .Replace("ll", "u")
                 .Replace("II", "u")
                 .Replace("ôh", "ốn")
                 .Replace("âỳ", "ấy")
