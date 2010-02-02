@@ -259,7 +259,9 @@ namespace VietOCR.NET
                 if (!String.IsNullOrEmpty(selectedText))
                 {
                     selectedText = Processor.PostProcess(selectedText, curLangCode, dangAmbigsPath, dangAmbigsOn);
+                    int start = this.textBox1.SelectionStart;
                     this.textBox1.SelectedText = selectedText;
+                    this.textBox1.Select(start, selectedText.Length);
                 }
                 else
                 {
