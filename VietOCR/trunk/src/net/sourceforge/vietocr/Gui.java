@@ -814,6 +814,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuCommand.setMnemonic('c');
         jMenuCommand.setText(bundle.getString("jMenuCommand.Text")); // NOI18N
 
+        jMenuItemOCR.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemOCR.setText(bundle.getString("jMenuItemOCR.Text")); // NOI18N
         jMenuItemOCR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -831,6 +832,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuCommand.add(jMenuItemOCRAll);
         jMenuCommand.add(jSeparator1);
 
+        jMenuItemPostProcess.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemPostProcess.setText(bundle.getString("jMenuItemPostProcess.Text")); // NOI18N
         jMenuItemPostProcess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
