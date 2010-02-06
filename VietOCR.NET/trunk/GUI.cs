@@ -787,7 +787,19 @@ namespace VietOCR.NET
             if (!this.textBox1.Focused)
             {
                 textBox1.HideSelection = false;
+
+                bool isTextSelected = false;
+                if (this.textBox1.SelectionLength > 0)
+                {
+                    isTextSelected = true;
+                }
+
                 this.textBox1.Focus();
+
+                if (!isTextSelected)
+                {
+                    this.textBox1.SelectionLength = 0;
+                }
             }
         }
 
