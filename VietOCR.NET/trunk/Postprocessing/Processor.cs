@@ -46,7 +46,7 @@ namespace VietOCR.NET.Postprocessing
                 return strB.ToString();
             }
 
-            // replace text based on entries read from a DangAmbigs.txt file
+            // replace text based on entries read from an x.DangAmbigs.txt file
             Dictionary<string, string> replaceRules = TextUtilities.LoadMap(Path.Combine(dangAmbigsPath, langCode + ".DangAmbigs.txt"));
             if (replaceRules.Count == 0 && langCode.Length > 3)
             {
