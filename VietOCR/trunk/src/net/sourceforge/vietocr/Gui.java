@@ -186,6 +186,7 @@ public class Gui extends javax.swing.JFrame {
         FileFilter pngFilter = new SimpleFilter("png", "PNG");
         FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
         FileFilter allImageFilter = new SimpleFilter("tif;tiff;jpg;jpeg;gif;png;bmp", "All Image Files");
+        FileFilter textFilter = new SimpleFilter("txt", "Unicode UTF-8 Text");
 
         filechooser.setAcceptAllFileFilterUsed(true);
         filechooser.addChoosableFileFilter(allImageFilter);
@@ -197,6 +198,7 @@ public class Gui extends javax.swing.JFrame {
         filechooser.addChoosableFileFilter(gifFilter);
         filechooser.addChoosableFileFilter(pngFilter);
         filechooser.addChoosableFileFilter(bmpFilter);
+        filechooser.addChoosableFileFilter(textFilter);
 
         filterIndex = prefs.getInt("filterIndex", 0);
         fileFilters = filechooser.getChoosableFileFilters();
@@ -262,7 +264,7 @@ public class Gui extends javax.swing.JFrame {
                 return false;
             }
         };
-        
+
         DefaultKeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(dispatcher);
     }
 
@@ -1020,30 +1022,90 @@ public class Gui extends javax.swing.JFrame {
     void setLineWrap() {
         // to be implemented in subclass
     }
-    
+
     private void jMenuItemPostProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPostProcessActionPerformed
         if (curLangCode == null) {
             return;
         }
 
-        try {
-            String selectedText = this.jTextArea1.getSelectedText();
-            if (selectedText != null) {
-                selectedText = Processor.postProcess(selectedText, curLangCode, dangAmbigsPath, dangAmbigsOn);
-                int start = this.jTextArea1.getSelectionStart();
-                this.jTextArea1.replaceSelection(selectedText);
-                this.jTextArea1.select(start, start + selectedText.length());
-            } else {
-                this.jTextArea1.setText(Processor.postProcess(jTextArea1.getText(), curLangCode, dangAmbigsPath, dangAmbigsOn));
+//        jLabelStatus.setText(bundle.getString("Correcting_OCR_errors..."));
+        jProgressBar1.setIndeterminate(true);
+//        jProgressBar1.setString(bundle.getString("Correcting_OCR_errors..."));
+        jProgressBar1.setVisible(true);
+        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        getGlassPane().setVisible(true);
+        this.jMenuItemPostProcess.setEnabled(false);
+
+        SwingWorker<String, Void> worker = new SwingWorker<String, Void>() {
+
+            String selectedText;
+
+            @Override
+            public String doInBackground() {
+                selectedText = jTextArea1.getSelectedText();
+                return Processor.postProcess((selectedText != null) ? selectedText : jTextArea1.getText(), curLangCode, dangAmbigsPath, dangAmbigsOn);
             }
-        } catch (UnsupportedOperationException uoe) {
-            uoe.printStackTrace();
-            JOptionPane.showMessageDialog(null, String.format(bundle.getString("Post-processing_not_supported_for_%1$s_language."), prop.getProperty(uoe.getMessage())), APP_NAME, JOptionPane.ERROR_MESSAGE);
-        } catch (RuntimeException re) {
-            re.printStackTrace();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+
+            @Override
+            public void done() {
+                try {
+                    String result = get();
+
+                    if (selectedText != null) {
+                        int start = jTextArea1.getSelectionStart();
+                        jTextArea1.replaceSelection(result);
+                        jTextArea1.select(start, start + result.length());
+                    } else {
+                        jTextArea1.setText(result);
+                    }
+//                    jLabelStatus.setText(bundle.getString("Correcting_completed"));
+//                    jProgressBar1.setString(bundle.getString("Correcting_completed"));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (java.util.concurrent.ExecutionException e) {
+                    String why = null;
+                    Throwable cause = e.getCause();
+                    if (cause != null) {
+                        if (cause instanceof UnsupportedOperationException) {
+                            why = String.format(bundle.getString("Post-processing_not_supported_for_%1$s_language."), prop.getProperty(e.getMessage()));
+                        } else if (cause instanceof RuntimeException) {
+                            why = cause.getMessage();
+                        } else {
+                            why = cause.getMessage();
+                        }
+                    } else {
+                        why = e.getMessage();
+                    }
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
+                    jProgressBar1.setVisible(false);
+                } finally {
+                    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                    getGlassPane().setVisible(false);
+                    jMenuItemPostProcess.setEnabled(true);
+                }
+            }
+        };
+        worker.execute();
+
+//        try {
+//            String selectedText = this.jTextArea1.getSelectedText();
+//            if (selectedText != null) {
+//                selectedText = Processor.postProcess(selectedText, curLangCode, dangAmbigsPath, dangAmbigsOn);
+//                int start = this.jTextArea1.getSelectionStart();
+//                this.jTextArea1.replaceSelection(selectedText);
+//                this.jTextArea1.select(start, start + selectedText.length());
+//            } else {
+//                this.jTextArea1.setText(Processor.postProcess(jTextArea1.getText(), curLangCode, dangAmbigsPath, dangAmbigsOn));
+//            }
+//        } catch (UnsupportedOperationException uoe) {
+//            uoe.printStackTrace();
+//            JOptionPane.showMessageDialog(null, String.format(bundle.getString("Post-processing_not_supported_for_%1$s_language."), prop.getProperty(uoe.getMessage())), APP_NAME, JOptionPane.ERROR_MESSAGE);
+//        } catch (RuntimeException re) {
+//            re.printStackTrace();
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
     }//GEN-LAST:event_jMenuItemPostProcessActionPerformed
 
     private void jButtonPrevPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevPageActionPerformed
@@ -1089,7 +1151,7 @@ public class Gui extends javax.swing.JFrame {
         this.jButtonFitImage.setEnabled(true);
         this.jButtonActualSize.setEnabled(false);
         ((JImageLabel) jImageLabel).deselect();
-		fitImageChange(originalW, originalH);
+        fitImageChange(originalW, originalH);
         scaleX = scaleY = 1f;
         reset = false;
     }//GEN-LAST:event_jButtonActualSizeActionPerformed
@@ -1151,7 +1213,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void jButtonOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOpenActionPerformed
         jMenuItemOpenActionPerformed(evt);
     }//GEN-LAST:event_jButtonOpenActionPerformed
@@ -1194,7 +1256,7 @@ public class Gui extends javax.swing.JFrame {
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
         quit();
     }//GEN-LAST:event_jMenuItemExitActionPerformed
-    
+
     void quit() {
         prefs.put("UILanguage", selectedUILang);
 
@@ -1235,7 +1297,7 @@ public class Gui extends javax.swing.JFrame {
 
 //        System.exit(0);
     }
-    
+
     private void jMenuItemFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFontActionPerformed
         openFontDialog(curLangCode);
     }//GEN-LAST:event_jMenuItemFontActionPerformed
@@ -1243,7 +1305,7 @@ public class Gui extends javax.swing.JFrame {
     void openFontDialog(String langCode) {
         // to be implemented in subclass
     }
-    
+
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
         int returnVal = filechooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -1264,6 +1326,18 @@ public class Gui extends javax.swing.JFrame {
      *
      */
     public void openFile(final File selectedFile) {
+        // if text file, load it into textarea
+        if (selectedFile.getName().endsWith(".txt")) {
+            try {
+                BufferedReader in = new BufferedReader(new InputStreamReader(
+                        new FileInputStream(selectedFile), "UTF8"));
+                this.jTextArea1.read(in, null);
+                in.close();
+            } catch (Exception e) {
+            }
+            return;
+        }
+
         jLabelStatus.setText(bundle.getString("Loading_image..."));
         jProgressBar1.setIndeterminate(true);
         jProgressBar1.setString(bundle.getString("Loading_image..."));
@@ -1371,7 +1445,7 @@ public class Gui extends javax.swing.JFrame {
         this.jScrollPane2.getViewport().setViewPosition(curScrollPos = new Point());
         jImageLabel.revalidate();
     }
-    
+
     private void jMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveActionPerformed
         outputDirectory = prefs.get("outputDirectory", null);
         JFileChooser chooser = new JFileChooser(outputDirectory);
@@ -1482,7 +1556,7 @@ public class Gui extends javax.swing.JFrame {
             this.jButtonNextPage.setEnabled(true);
         }
     }
-    
+
     /**
      *  Updates UI component if changes in LAF
      *
@@ -1504,7 +1578,7 @@ public class Gui extends javax.swing.JFrame {
         SwingUtilities.updateComponentTreeUI(popup);
         SwingUtilities.updateComponentTreeUI(filechooser);
     }
-    
+
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         jSplitPane1.setDividerLocation(jSplitPane1.getWidth() / 2);
 
@@ -1528,11 +1602,11 @@ public class Gui extends javax.swing.JFrame {
             changeUILanguage(selectedUILang.equals("vi") ? VIETNAM : Locale.US);
         }
     }//GEN-LAST:event_jRadioButtonMenuItemEngActionPerformed
-    
+
     private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemVietActionPerformed
         jRadioButtonMenuItemEngActionPerformed(evt);
     }//GEN-LAST:event_jRadioButtonMenuItemVietActionPerformed
-    
+
     private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemScanActionPerformed
         scaleX = scaleY = 1f;
         performScan();
@@ -1594,15 +1668,15 @@ public class Gui extends javax.swing.JFrame {
     private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonScanActionPerformed
         jMenuItemScanActionPerformed(evt);
     }//GEN-LAST:event_jButtonScanActionPerformed
-    
+
     private void jButtonRotateCCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateCCWActionPerformed
         rotateImage(270);
     }//GEN-LAST:event_jButtonRotateCCWActionPerformed
-    
+
     private void jButtonRotateCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateCWActionPerformed
         rotateImage(90);
     }//GEN-LAST:event_jButtonRotateCWActionPerformed
-    
+
     private void jMenuItemOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOptionsActionPerformed
         openOptionsDialog();
     }//GEN-LAST:event_jMenuItemOptionsActionPerformed
@@ -1618,7 +1692,7 @@ public class Gui extends javax.swing.JFrame {
     void openChangeCaseDialog() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
-    
+
     private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRemoveLineBreaksActionPerformed
         removeLineBreaks();
     }//GEN-LAST:event_jMenuItemRemoveLineBreaksActionPerformed
@@ -1649,7 +1723,7 @@ public class Gui extends javax.swing.JFrame {
             ocrWorker.cancel(true);
             ocrWorker = null;
         }
-    
+
         this.jButtonCancelOCR.setEnabled(false);
     }//GEN-LAST:event_jButtonCancelOCRActionPerformed
 
