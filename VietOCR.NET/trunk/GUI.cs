@@ -253,26 +253,16 @@ namespace VietOCR.NET
         {
             if (curLangCode == null) return;
 
-            try
-            {
-                string selectedText = this.textBox1.SelectedText;
-                if (!String.IsNullOrEmpty(selectedText))
-                {
-                    selectedText = Processor.PostProcess(selectedText, curLangCode, dangAmbigsPath, dangAmbigsOn);
-                    int start = this.textBox1.SelectionStart;
-                    this.textBox1.SelectedText = selectedText;
-                    this.textBox1.Select(start, selectedText.Length);
-                }
-                else
-                {
-                    this.textBox1.Text = Processor.PostProcess(this.textBox1.Text, curLangCode, dangAmbigsPath, dangAmbigsOn);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-                MessageBox.Show(this, string.Format("Post-processing not supported for {0} language.", ex.Message), strProgName);
-            }
+            //this.toolStripStatusLabel1.Text = Properties.Resources.Loading_image;
+            this.Cursor = Cursors.WaitCursor;
+            this.pictureBox1.UseWaitCursor = true;
+            this.textBox1.Cursor = Cursors.WaitCursor;
+            this.postprocessToolStripMenuItem.Enabled = false;
+            this.toolStripProgressBar1.Enabled = true;
+            this.toolStripProgressBar1.Visible = true;
+            this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
+
+            this.backgroundWorkerCorrect.RunWorkerAsync();
         }
 
         protected virtual void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
@@ -535,7 +525,7 @@ namespace VietOCR.NET
             else
             {
                 // Finally, handle the case where the operation succeeded.
-                loadImage((FileInfo) e.Result);
+                loadImage((FileInfo)e.Result);
                 this.toolStripStatusLabel1.Text = Properties.Resources.Loading_completed;
             }
 
@@ -634,7 +624,7 @@ namespace VietOCR.NET
         private void backgroundWorkerOcr_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //this.toolStripProgressBar1.Value = e.ProgressPercentage;
-            this.textBox1.AppendText((string) e.UserState);
+            this.textBox1.AppendText((string)e.UserState);
         }
 
         private void backgroundWorkerOcr_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -1029,12 +1019,54 @@ namespace VietOCR.NET
 
         private void backgroundWorkerCorrect_DoWork(object sender, DoWorkEventArgs e)
         {
-
+            // Perform post-OCR corrections
+            e.Result = Processor.PostProcess(this.textBox1.SelectionLength > 0 ? this.textBox1.SelectedText : this.textBox1.Text, curLangCode, dangAmbigsPath, dangAmbigsOn);
         }
 
         private void backgroundWorkerCorrect_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            this.toolStripProgressBar1.Enabled = false;
+            this.toolStripProgressBar1.Visible = false;
 
+            // First, handle the case where an exception was thrown.
+            if (e.Error != null)
+            {
+                Console.WriteLine(e.Error.StackTrace);
+                MessageBox.Show(this, string.Format("Post-processing not supported for {0} language.", e.Error.Message), strProgName);
+            }
+            else if (e.Cancelled)
+            {
+                // Next, handle the case where the user canceled 
+                // the operation.
+                // Note that due to a race condition in 
+                // the DoWork event handler, the Cancelled
+                // flag may not have been set, even though
+                // CancelAsync was called.
+                //this.toolStripStatusLabel1.Text = "Image loading" + Properties.Resources.canceled;
+            }
+            else
+            {
+                // Finally, handle the case where the operation 
+                // succeeded.
+                string result = e.Result.ToString();
+
+                if (this.textBox1.SelectionLength == 0)
+                {
+                    int start = this.textBox1.SelectionStart;
+                    this.textBox1.SelectedText = result;
+                    this.textBox1.Select(start, result.Length);
+                }
+                else
+                {
+                    this.textBox1.Text = result;
+                }
+                //this.toolStripStatusLabel1.Text = Properties.Resources.Loading_completed;
+            }
+
+            this.Cursor = Cursors.Default;
+            this.pictureBox1.UseWaitCursor = false;
+            this.textBox1.Cursor = Cursors.Default;
+            this.postprocessToolStripMenuItem.Enabled = true;
         }
     }
 }
