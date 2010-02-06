@@ -1026,5 +1026,15 @@ namespace VietOCR.NET
                 scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
             }
         }
+
+        private void backgroundWorkerCorrect_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
+
+        private void backgroundWorkerCorrect_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
     }
 }
