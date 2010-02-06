@@ -262,7 +262,7 @@ namespace VietOCR.NET
             this.toolStripProgressBar1.Visible = true;
             this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
 
-            this.backgroundWorkerCorrect.RunWorkerAsync();
+            this.backgroundWorkerCorrect.RunWorkerAsync(this.textBox1.SelectionLength > 0 ? this.textBox1.SelectedText : this.textBox1.Text);
         }
 
         protected virtual void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1020,7 +1020,8 @@ namespace VietOCR.NET
         private void backgroundWorkerCorrect_DoWork(object sender, DoWorkEventArgs e)
         {
             // Perform post-OCR corrections
-            e.Result = Processor.PostProcess(this.textBox1.SelectionLength > 0 ? this.textBox1.SelectedText : this.textBox1.Text, curLangCode, dangAmbigsPath, dangAmbigsOn);
+            string text = (string)e.Argument;
+            e.Result = Processor.PostProcess(text, curLangCode, dangAmbigsPath, dangAmbigsOn);
         }
 
         private void backgroundWorkerCorrect_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -1050,7 +1051,7 @@ namespace VietOCR.NET
                 // succeeded.
                 string result = e.Result.ToString();
 
-                if (this.textBox1.SelectionLength == 0)
+                if (this.textBox1.SelectionLength > 0)
                 {
                     int start = this.textBox1.SelectionStart;
                     this.textBox1.SelectedText = result;
