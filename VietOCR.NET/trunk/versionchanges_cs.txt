@@ -92,3 +92,7 @@ Version 1.6 (30 January 2010)
 - Add unit test
 - Improve post-OCR correction for Vietnamese
 - Bundle Vietnamese language data for VNI & TCVN3 (ABC) fonts (VNI-Aptima, VNI-Book, VNI-Helve, VNI-Palatin, VNI-Tekon, VNI-Times, VNI-Univer; .VnTime, .VnArial)
+
+Version 1.7 Beta (5 Feb 2010)
+- Add provision to load UTF-8 text file into textbox
+- Improve postprocessing for Vietnamese
