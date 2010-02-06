@@ -89,6 +89,7 @@ namespace VietOCR.NET
             this.backgroundWorkerOcr = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerScan = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerLoad = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerCorrect = new System.ComponentModel.BackgroundWorker();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -541,6 +542,13 @@ namespace VietOCR.NET
             this.backgroundWorkerLoad.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerLoad_DoWork);
             this.backgroundWorkerLoad.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerLoad_RunWorkerCompleted);
             // 
+            // backgroundWorkerCorrect
+            // 
+            this.backgroundWorkerCorrect.WorkerReportsProgress = true;
+            this.backgroundWorkerCorrect.WorkerSupportsCancellation = true;
+            this.backgroundWorkerCorrect.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerCorrect_DoWork);
+            this.backgroundWorkerCorrect.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerCorrect_RunWorkerCompleted);
+            // 
             // GUI
             // 
             resources.ApplyResources(this, "$this");
@@ -636,5 +644,6 @@ namespace VietOCR.NET
         private System.ComponentModel.BackgroundWorker backgroundWorkerLoad;
         private System.Windows.Forms.ToolStripButton toolStripButtonCancelOCR;
         private System.Windows.Forms.ToolStripMenuItem mergePdfToolStripMenuItem;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerCorrect;
     }
 }
