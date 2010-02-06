@@ -38,25 +38,28 @@ public class ViePP implements IPostProcessor {
         // correct common errors caused by OCR
         text = TextUtilities.correctOCRErrors(text);
 
-        // substitute Vietnamese letters frequently misrecognized by Tesseract
-        text = text.replace("êĩ-", "ết")
-                .replace("ug", "ng")
-                .replace("uh", "nh")
-                .replace("rn", "m")
-                .replace("iii", "m")
-                .replace("II", "u")
-                .replace("ôh", "ốn")
-                .replace("âỳ", "ấy")
-                .replace("u1I", "ưn")
-                .replace("q1I", "qu")
-                .replace("tmg", "úng")
-                .replace("tm", "trư")
-                .replace("Tm", "Trư")
-                .replace("êf", "ết")
-                .replace("rg", "ng")
-                .replace("êh", "ến")
-                .replace("fâ", "rầ")
-                ;
+        // Move all of these String replace to external vie.DangAmbigs.txt since it is more
+        // efficient using StringBuffer-based string manipulations.
+        // The file location also gives users more control over the choice of word corrections.
+//        // substitute Vietnamese letters frequently misrecognized by Tesseract
+//        text = text.replace("êĩ-", "ết")
+//                .replace("ug", "ng")
+//                .replace("uh", "nh")
+//                .replace("rn", "m")
+//                .replace("iii", "m")
+//                .replace("II", "u")
+//                .replace("ôh", "ốn")
+//                .replace("âỳ", "ấy")
+//                .replace("u1I", "ưn")
+//                .replace("q1I", "qu")
+//                .replace("tmg", "úng")
+//                .replace("tm", "trư")
+//                .replace("Tm", "Trư")
+//                .replace("êf", "ết")
+//                .replace("rg", "ng")
+//                .replace("êh", "ến")
+//                .replace("fâ", "rầ")
+//                ;
 
         // correct letter cases
         text = TextUtilities.correctLetterCases(text);
