@@ -40,29 +40,31 @@ namespace VietOCR.NET.Postprocessing
             // correct common errors caused by OCR
             text = TextUtilities.CorrectOCRErrors(text);
 
-            // substitute Vietnamese letters frequently misrecognized by Tesseract 2.03
-            StringBuilder strB = new StringBuilder(text);
-            strB.Replace("êĩ-", "ết")
-                .Replace("ug", "ng")
-                .Replace("uh", "nh")
-                .Replace("rn", "m")
-                .Replace("iii", "m")
-                .Replace("II", "u")
-                .Replace("ôh", "ốn")
-                .Replace("âỳ", "ấy")
-                .Replace("u1I", "ưn")
-                .Replace("q1I", "qu")
-                .Replace("tmg", "úng")
-                .Replace("tm", "trư")
-                .Replace("Tm", "Trư")
-                .Replace("êf", "ết")
-                .Replace("rg", "ng")
-                .Replace("êh", "ến")
-                .Replace("fâ", "rầ")
-                ;
+            // Move all of these String replace to external vie.DangAmbigs.txt.
+            // The file location also gives users more control over the choice of word corrections.
+            //// substitute Vietnamese letters frequently misrecognized by Tesseract 2.03
+            //StringBuilder strB = new StringBuilder(text);
+            //strB.Replace("êĩ-", "ết")
+            //    .Replace("ug", "ng")
+            //    .Replace("uh", "nh")
+            //    .Replace("rn", "m")
+            //    .Replace("iii", "m")
+            //    .Replace("II", "u")
+            //    .Replace("ôh", "ốn")
+            //    .Replace("âỳ", "ấy")
+            //    .Replace("u1I", "ưn")
+            //    .Replace("q1I", "qu")
+            //    .Replace("tmg", "úng")
+            //    .Replace("tm", "trư")
+            //    .Replace("Tm", "Trư")
+            //    .Replace("êf", "ết")
+            //    .Replace("rg", "ng")
+            //    .Replace("êh", "ến")
+            //    .Replace("fâ", "rầ")
+            //    ;
 
             // correct letter cases
-            text = TextUtilities.CorrectLetterCases(strB.ToString());
+            text = TextUtilities.CorrectLetterCases(text);
 
             // add hook marks
             //                    .ReplaceAll("(?i)(?<![q])(u)(?=[ơờởỡớợ]\\p{L})", "ư")
