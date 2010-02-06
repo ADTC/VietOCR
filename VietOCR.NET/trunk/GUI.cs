@@ -323,7 +323,7 @@ namespace VietOCR.NET
 
             //openFileDialog1.InitialDirectory = "c:\\";
             openFileDialog1.Title = Properties.Resources.OpenImageFile;
-            openFileDialog1.Filter = "PDF Files (*.pdf)|*.pdf;|Image Files (*.tif;*.tiff)|*.tif;*.tiff|Image Files (*.bmp)|*.bmp|Image Files (*.gif)|*.gif|Image Files (*.jpg;*.jpeg)|*.jpg;*.jpeg|Image Files (*.png)|*.png|All Image Files|*.tif;*.tiff;*.gif;*.bmp;*.jpg;*.jpeg;*.png|Unicode UTF-8 Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            openFileDialog1.Filter = "PDF Files (*.pdf)|*.pdf;|Image Files (*.tif;*.tiff)|*.tif;*.tiff|Image Files (*.bmp)|*.bmp|Image Files (*.gif)|*.gif|Image Files (*.jpg;*.jpeg)|*.jpg;*.jpeg|Image Files (*.png)|*.png|All Image Files|*.tif;*.tiff;*.gif;*.bmp;*.jpg;*.jpeg;*.png|UTF-8 Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
             openFileDialog1.FilterIndex = filterIndex;
             openFileDialog1.RestoreDirectory = true;
 
@@ -339,7 +339,7 @@ namespace VietOCR.NET
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Title = Properties.Resources.Save_As;
-            saveFileDialog1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.Filter = "UTF-8 Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
 
