@@ -186,7 +186,7 @@ public class Gui extends javax.swing.JFrame {
         FileFilter pngFilter = new SimpleFilter("png", "PNG");
         FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
         FileFilter allImageFilter = new SimpleFilter("tif;tiff;jpg;jpeg;gif;png;bmp", "All Image Files");
-        FileFilter textFilter = new SimpleFilter("txt", "Unicode UTF-8 Text");
+        FileFilter textFilter = new SimpleFilter("txt", "UTF-8 Text");
 
         filechooser.setAcceptAllFileFilterUsed(true);
         filechooser.addChoosableFileFilter(allImageFilter);
@@ -1449,7 +1449,7 @@ public class Gui extends javax.swing.JFrame {
     private void jMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveActionPerformed
         outputDirectory = prefs.get("outputDirectory", null);
         JFileChooser chooser = new JFileChooser(outputDirectory);
-        FileFilter txtFilter = new SimpleFilter("txt", "Unicode UTF-8 Text");
+        FileFilter txtFilter = new SimpleFilter("txt", "UTF-8 Text");
         chooser.addChoosableFileFilter(txtFilter);
 
         int returnVal = chooser.showSaveDialog(this);
