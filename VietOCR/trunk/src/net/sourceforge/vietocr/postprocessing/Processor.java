@@ -42,7 +42,7 @@ public class Processor {
             return strB.toString();
         }
 
-        // replace text based on entries read from a DangAmbigs.txt file
+        // replace text based on entries read from an x.DangAmbigs.txt file
         Map<String, String> replaceRules = TextUtilities.loadMap(new File(dangAmbigsPath, langCode + ".DangAmbigs.txt").getPath());
         if (replaceRules.size() == 0 && langCode.length() > 3) {
             replaceRules = TextUtilities.loadMap(new File(dangAmbigsPath, langCode.substring(0, 3) + ".DangAmbigs.txt").getPath()); // falls back on base
