@@ -323,7 +323,7 @@ namespace VietOCR.NET
 
             //openFileDialog1.InitialDirectory = "c:\\";
             openFileDialog1.Title = Properties.Resources.OpenImageFile;
-            openFileDialog1.Filter = "PDF Files (*.pdf)|*.pdf;|Image Files (*.tif;*.tiff)|*.tif;*.tiff|Image Files (*.bmp)|*.bmp|Image Files (*.gif)|*.gif|Image Files (*.jpg;*.jpeg)|*.jpg;*.jpeg|Image Files (*.png)|*.png|All Image Files|*.tif;*.tiff;*.gif;*.bmp;*.jpg;*.jpeg;*.png|All Files (*.*)|*.*";
+            openFileDialog1.Filter = "PDF Files (*.pdf)|*.pdf;|Image Files (*.tif;*.tiff)|*.tif;*.tiff|Image Files (*.bmp)|*.bmp|Image Files (*.gif)|*.gif|Image Files (*.jpg;*.jpeg)|*.jpg;*.jpeg|Image Files (*.png)|*.png|All Image Files|*.tif;*.tiff;*.gif;*.bmp;*.jpg;*.jpeg;*.png|Unicode UTF-8 Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
             openFileDialog1.FilterIndex = filterIndex;
             openFileDialog1.RestoreDirectory = true;
 
@@ -470,11 +470,27 @@ namespace VietOCR.NET
         }
 
         /// <summary>
-        /// Opens image file.
+        /// Opens image or text file.
         /// </summary>
-        /// <param name="selectedImageFile"></param>
-        public void openFile(string selectedImageFile)
+        /// <param name="selectedFile"></param>
+        public void openFile(string selectedFile)
         {
+            // if text file, load it into textbox
+            if (selectedFile.EndsWith(".txt"))
+            {
+                try
+                {
+                    using (StreamReader sr = new StreamReader(selectedFile, Encoding.UTF8, true))
+                    {
+                        this.textBox1.Text = sr.ReadToEnd();
+                    }
+                }
+                catch
+                {
+                }
+                return;
+            }
+
             this.toolStripStatusLabel1.Text = Properties.Resources.Loading_image;
             this.Cursor = Cursors.WaitCursor;
             this.pictureBox1.UseWaitCursor = true;
@@ -486,7 +502,7 @@ namespace VietOCR.NET
             this.toolStripProgressBar1.Visible = true;
             this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
 
-            this.backgroundWorkerLoad.RunWorkerAsync(selectedImageFile);
+            this.backgroundWorkerLoad.RunWorkerAsync(selectedFile);
         }
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -520,7 +536,7 @@ namespace VietOCR.NET
             {
                 // Finally, handle the case where the operation succeeded.
                 loadImage((FileInfo) e.Result);
-                this.toolStripStatusLabel1.Text = Properties.Resources.Loading_completed;               
+                this.toolStripStatusLabel1.Text = Properties.Resources.Loading_completed;
             }
 
             this.Cursor = Cursors.Default;
@@ -579,10 +595,10 @@ namespace VietOCR.NET
             this.lblCurIndex.Text = Properties.Resources.Page_ + (imageIndex + 1) + Properties.Resources._of_ + imageTotal;
             this.pictureBox1.Image = new Bitmap(imageList[imageIndex]);
             this.pictureBox1.Size = this.pictureBox1.Image.Size;
-            this.splitContainer2.Panel2.AutoScrollPosition = Point.Empty; 
+            this.splitContainer2.Panel2.AutoScrollPosition = Point.Empty;
             this.pictureBox1.Invalidate();
         }
-        
+
         private void toolStripButtonCancelOCR_Click(object sender, EventArgs e)
         {
             backgroundWorkerOcr.CancelAsync();
@@ -620,7 +636,7 @@ namespace VietOCR.NET
             //this.toolStripProgressBar1.Value = e.ProgressPercentage;
             this.textBox1.AppendText((string) e.UserState);
         }
-        
+
         private void backgroundWorkerOcr_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.toolStripProgressBar1.Enabled = false;
