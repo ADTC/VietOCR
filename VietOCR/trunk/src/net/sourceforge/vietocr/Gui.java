@@ -1048,6 +1048,8 @@ public class Gui extends javax.swing.JFrame {
 
             @Override
             public void done() {
+                jProgressBar1.setIndeterminate(false);
+
                 try {
                     String result = get();
 
@@ -1333,6 +1335,11 @@ public class Gui extends javax.swing.JFrame {
                         new FileInputStream(selectedFile), "UTF8"));
                 this.jTextArea1.read(in, null);
                 in.close();
+                
+                javax.swing.text.Document doc = this.jTextArea1.getDocument();
+                if (doc.getText(0, 1).equals("\uFEFF")) {
+                    doc.remove(0, 1); // remove BOM
+                }
             } catch (Exception e) {
             }
             return;
