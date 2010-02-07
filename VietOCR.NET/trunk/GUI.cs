@@ -253,7 +253,7 @@ namespace VietOCR.NET
         {
             if (curLangCode == null) return;
 
-            //this.toolStripStatusLabel1.Text = Properties.Resources.Loading_image;
+            this.toolStripStatusLabel1.Text = Properties.Resources.Correcting_errors;
             this.Cursor = Cursors.WaitCursor;
             this.pictureBox1.UseWaitCursor = true;
             this.textBox1.Cursor = Cursors.WaitCursor;
@@ -1069,7 +1069,7 @@ namespace VietOCR.NET
                 // the DoWork event handler, the Cancelled
                 // flag may not have been set, even though
                 // CancelAsync was called.
-                //this.toolStripStatusLabel1.Text = "Image loading" + Properties.Resources.canceled;
+                this.toolStripStatusLabel1.Text = "Post-OCR correction" + Properties.Resources.canceled;
             }
             else
             {
@@ -1087,7 +1087,7 @@ namespace VietOCR.NET
                 {
                     this.textBox1.Text = result;
                 }
-                //this.toolStripStatusLabel1.Text = Properties.Resources.Loading_completed;
+                this.toolStripStatusLabel1.Text = Properties.Resources.Correcting_completed;
             }
 
             this.Cursor = Cursors.Default;
