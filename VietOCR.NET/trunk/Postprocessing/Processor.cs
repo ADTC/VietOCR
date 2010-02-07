@@ -52,7 +52,12 @@ namespace VietOCR.NET.Postprocessing
             {
                 replaceRules = TextUtilities.LoadMap(Path.Combine(dangAmbigsPath, langCode.Substring(0, 3) + ".DangAmbigs.txt")); // fall back on base
             }
-            
+
+            if (replaceRules.Count == 0)
+            {
+                throw new NotSupportedException(langCode);
+            }
+
             Dictionary<string, string>.KeyCollection.Enumerator enumer = replaceRules.Keys.GetEnumerator();
 
             while (enumer.MoveNext())

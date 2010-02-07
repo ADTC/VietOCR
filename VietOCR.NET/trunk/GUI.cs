@@ -1059,7 +1059,14 @@ namespace VietOCR.NET
             if (e.Error != null)
             {
                 Console.WriteLine(e.Error.StackTrace);
-                MessageBox.Show(this, string.Format("Post-processing not supported for {0} language.", e.Error.Message), strProgName);
+                if (e.Error.GetBaseException() is NotSupportedException)
+                {
+                    MessageBox.Show(this, string.Format("Post-processing not supported for {0} language.\nYou can provide one via a \"{1}.DangAmbigs.txt\" file.", this.toolStripCbLang.Text, curLangCode), strProgName);
+                }
+                else
+                {
+                    MessageBox.Show(this, e.Error.Message, strProgName);
+                }
             }
             else if (e.Cancelled)
             {
