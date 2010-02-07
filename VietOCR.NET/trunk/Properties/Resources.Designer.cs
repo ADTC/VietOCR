@@ -133,6 +133,24 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Correction completed..
+        /// </summary>
+        internal static string Correcting_completed {
+            get {
+                return ResourceManager.GetString("Correcting_completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Correcting recognition errors....
+        /// </summary>
+        internal static string Correcting_errors {
+            get {
+                return ResourceManager.GetString("Correcting_errors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  has been created..
         /// </summary>
         internal static string created {

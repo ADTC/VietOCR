@@ -225,4 +225,10 @@
   <data name="MergePDF_running" xml:space="preserve">
     <value>Nối PDF đang chạy...</value>
   </data>
+  <data name="Correcting_completed" xml:space="preserve">
+    <value>Sửa lỗi hoàn tất.</value>
+  </data>
+  <data name="Correcting_errors" xml:space="preserve">
+    <value>Đang sửa lỗi nhận dạng...</value>
+  </data>
 </root>

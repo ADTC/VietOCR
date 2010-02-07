@@ -225,4 +225,10 @@
   <data name="MergePDF_running" xml:space="preserve">
     <value>Merge PDF running...</value>
   </data>
+  <data name="Correcting_completed" xml:space="preserve">
+    <value>Correction completed.</value>
+  </data>
+  <data name="Correcting_errors" xml:space="preserve">
+    <value>Correcting recognition errors...</value>
+  </data>
 </root>
