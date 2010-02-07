@@ -76,7 +76,11 @@ public class OCR {
                 while ((str = in.readLine()) != null) {
                     result.append(str).append(EOL);
                 }
-                result.setLength(result.length() - EOL.length()); // remove last EOL
+                
+                int length = result.length();
+                if (length >= EOL.length()) {
+                    result.setLength(length - EOL.length()); // remove last EOL
+                }
                 in.close();
             } else {
                 String msg;
