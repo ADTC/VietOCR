@@ -392,6 +392,13 @@ namespace VietOCR.NET
             {
                 this.toolStripStatusLabel1.Text = null;
                 displayImage();
+
+                // recalculate scale factors if in Fit Image mode
+                if (this.pictureBox1.SizeMode == PictureBoxSizeMode.StretchImage)
+                {
+                    scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
+                    scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
+                }
             }
             setButton();
         }
@@ -408,6 +415,13 @@ namespace VietOCR.NET
             {
                 this.toolStripStatusLabel1.Text = null;
                 displayImage();
+
+                // recalculate scale factors if in Fit Image mode
+                if (this.pictureBox1.SizeMode == PictureBoxSizeMode.StretchImage)
+                {
+                    scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
+                    scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
+                }
             }
             setButton();
         }
