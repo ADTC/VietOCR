@@ -34,7 +34,7 @@ public class Processor {
         }
     }
 
-    public static String postProcess(String text, String langCode, String dangAmbigsPath, boolean dangAmbigsOn) {
+    public static String postProcess(String text, String langCode, String dangAmbigsPath, boolean dangAmbigsOn) throws Exception {
         // postprocessor
         StringBuffer strB = new StringBuffer(postProcess(text, langCode));
 
@@ -47,6 +47,11 @@ public class Processor {
         if (replaceRules.size() == 0 && langCode.length() > 3) {
             replaceRules = TextUtilities.loadMap(new File(dangAmbigsPath, langCode.substring(0, 3) + ".DangAmbigs.txt").getPath()); // falls back on base
         }
+
+        if (replaceRules.size() == 0) {
+            throw new UnsupportedOperationException(langCode);
+        }
+
         Iterator<String> iter = replaceRules.keySet().iterator();
 
         while (iter.hasNext()) {

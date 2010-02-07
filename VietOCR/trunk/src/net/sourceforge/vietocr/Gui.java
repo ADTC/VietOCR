@@ -1041,7 +1041,7 @@ public class Gui extends javax.swing.JFrame {
             String selectedText;
 
             @Override
-            public String doInBackground() {
+            public String doInBackground() throws Exception {
                 selectedText = jTextArea1.getSelectedText();
                 return Processor.postProcess((selectedText != null) ? selectedText : jTextArea1.getText(), curLangCode, dangAmbigsPath, dangAmbigsOn);
             }
@@ -1069,7 +1069,7 @@ public class Gui extends javax.swing.JFrame {
                     Throwable cause = e.getCause();
                     if (cause != null) {
                         if (cause instanceof UnsupportedOperationException) {
-                            why = String.format(bundle.getString("Post-processing_not_supported_for_%1$s_language."), prop.getProperty(e.getMessage()));
+                            why = String.format("Post-processing not supported for %1$s language.\nYou can provide one via a \"%2$s.DangAmbigs.txt\" file.", jComboBoxLang.getSelectedItem(), curLangCode);
                         } else if (cause instanceof RuntimeException) {
                             why = cause.getMessage();
                         } else {
@@ -1089,25 +1089,6 @@ public class Gui extends javax.swing.JFrame {
             }
         };
         correctWorker.execute();
-
-//        try {
-//            String selectedText = this.jTextArea1.getSelectedText();
-//            if (selectedText != null) {
-//                selectedText = Processor.postProcess(selectedText, curLangCode, dangAmbigsPath, dangAmbigsOn);
-//                int start = this.jTextArea1.getSelectionStart();
-//                this.jTextArea1.replaceSelection(selectedText);
-//                this.jTextArea1.select(start, start + selectedText.length());
-//            } else {
-//                this.jTextArea1.setText(Processor.postProcess(jTextArea1.getText(), curLangCode, dangAmbigsPath, dangAmbigsOn));
-//            }
-//        } catch (UnsupportedOperationException uoe) {
-//            uoe.printStackTrace();
-//            JOptionPane.showMessageDialog(null, String.format(bundle.getString("Post-processing_not_supported_for_%1$s_language."), prop.getProperty(uoe.getMessage())), APP_NAME, JOptionPane.ERROR_MESSAGE);
-//        } catch (RuntimeException re) {
-//            re.printStackTrace();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
     }//GEN-LAST:event_jMenuItemPostProcessActionPerformed
 
     private void jButtonPrevPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevPageActionPerformed
