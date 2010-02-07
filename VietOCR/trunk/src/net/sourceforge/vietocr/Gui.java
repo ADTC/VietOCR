@@ -1862,7 +1862,7 @@ public class Gui extends javax.swing.JFrame {
 //                    System.err.println(why);
                 jLabelStatus.setText(null);
                 jProgressBar1.setString(null);
-                JOptionPane.showMessageDialog(null, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, why, "OCR Operation", JOptionPane.ERROR_MESSAGE);
             } catch (java.util.concurrent.CancellationException e) {
                 jLabelStatus.setText("OCR " + bundle.getString("canceled"));
                 jProgressBar1.setString("OCR " + bundle.getString("canceled"));
