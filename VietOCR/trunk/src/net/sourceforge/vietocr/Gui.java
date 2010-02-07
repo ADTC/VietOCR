@@ -1028,15 +1028,15 @@ public class Gui extends javax.swing.JFrame {
             return;
         }
 
-//        jLabelStatus.setText(bundle.getString("Correcting_OCR_errors..."));
+        jLabelStatus.setText(bundle.getString("Correcting_errors..."));
         jProgressBar1.setIndeterminate(true);
-//        jProgressBar1.setString(bundle.getString("Correcting_OCR_errors..."));
+        jProgressBar1.setString(bundle.getString("Correcting_errors..."));
         jProgressBar1.setVisible(true);
         getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         getGlassPane().setVisible(true);
         this.jMenuItemPostProcess.setEnabled(false);
 
-        SwingWorker<String, Void> worker = new SwingWorker<String, Void>() {
+        SwingWorker<String, Void> correctWorker = new SwingWorker<String, Void>() {
 
             String selectedText;
 
@@ -1060,8 +1060,8 @@ public class Gui extends javax.swing.JFrame {
                     } else {
                         jTextArea1.setText(result);
                     }
-//                    jLabelStatus.setText(bundle.getString("Correcting_completed"));
-//                    jProgressBar1.setString(bundle.getString("Correcting_completed"));
+                    jLabelStatus.setText(bundle.getString("Correction_completed"));
+                    jProgressBar1.setString(bundle.getString("Correction_completed"));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (java.util.concurrent.ExecutionException e) {
@@ -1088,7 +1088,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             }
         };
-        worker.execute();
+        correctWorker.execute();
 
 //        try {
 //            String selectedText = this.jTextArea1.getSelectedText();
@@ -1355,7 +1355,7 @@ public class Gui extends javax.swing.JFrame {
         this.jMenuItemOCR.setEnabled(false);
         this.jMenuItemOCRAll.setEnabled(false);
 
-        SwingWorker worker = new SwingWorker<File, Void>() {
+        SwingWorker loadWorker = new SwingWorker<File, Void>() {
 
             @Override
             protected File doInBackground() throws Exception {
@@ -1403,7 +1403,7 @@ public class Gui extends javax.swing.JFrame {
             }
         };
 
-        worker.execute();
+        loadWorker.execute();
     }
 
     void loadImage(File selectedFile) {
