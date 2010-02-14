@@ -38,35 +38,47 @@ namespace VietOCR.NET.Postprocessing
 
         public static string PostProcess(string text, string langCode, string dangAmbigsPath, bool dangAmbigsOn)
         {
+            if (text.Trim().Length == 0)
+            {
+                return text;
+            }
+
+            // correct using external x.DangAmbigs.txt file first, if enabled
+            if (dangAmbigsOn)
+            {
+                StringBuilder strB = new StringBuilder(text);
+
+                // replace text based on entries read from an x.DangAmbigs.txt file
+                Dictionary<string, string> replaceRules = TextUtilities.LoadMap(Path.Combine(dangAmbigsPath, langCode + ".DangAmbigs.txt"));
+                if (replaceRules.Count == 0 && langCode.Length > 3)
+                {
+                    replaceRules = TextUtilities.LoadMap(Path.Combine(dangAmbigsPath, langCode.Substring(0, 3) + ".DangAmbigs.txt")); // fall back on base
+                }
+
+                if (replaceRules.Count == 0)
+                {
+                    throw new NotSupportedException(langCode);
+                }
+
+                Dictionary<string, string>.KeyCollection.Enumerator enumer = replaceRules.Keys.GetEnumerator();
+
+                while (enumer.MoveNext())
+                {
+                    string key = enumer.Current;
+                    string value = replaceRules[key];
+                    strB = strB.Replace(key, value);
+                }
+                text = strB.ToString();
+            }
+
             // postprocessor
-            StringBuilder strB = new StringBuilder(PostProcess(text, langCode));
+            text = PostProcess(text, langCode);
 
-            if (!dangAmbigsOn)
-            {
-                return strB.ToString();
-            }
+            // correct common errors caused by OCR
+            text = TextUtilities.CorrectOCRErrors(text);
 
-            // replace text based on entries read from an x.DangAmbigs.txt file
-            Dictionary<string, string> replaceRules = TextUtilities.LoadMap(Path.Combine(dangAmbigsPath, langCode + ".DangAmbigs.txt"));
-            if (replaceRules.Count == 0 && langCode.Length > 3)
-            {
-                replaceRules = TextUtilities.LoadMap(Path.Combine(dangAmbigsPath, langCode.Substring(0, 3) + ".DangAmbigs.txt")); // fall back on base
-            }
-
-            if (replaceRules.Count == 0)
-            {
-                throw new NotSupportedException(langCode);
-            }
-
-            Dictionary<string, string>.KeyCollection.Enumerator enumer = replaceRules.Keys.GetEnumerator();
-
-            while (enumer.MoveNext())
-            {
-                string key = enumer.Current;
-                string value = replaceRules[key];
-                strB = strB.Replace(key, value);
-            }
-            return strB.ToString();
+            // correct letter cases
+            return TextUtilities.CorrectLetterCases(text);
         }
     }
 }
