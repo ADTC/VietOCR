@@ -1,6 +1,4 @@
 tmg=úng
-tm=trư
-Tm=Trư
 iii=m
 rl=n
 rr=n
@@ -22,3 +20,5 @@ fâ=rầ
 ê‘=ế
 fê=iề
 xiê =về 
+ýê=yề
+lc=k
