@@ -12,28 +12,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
-
+ */
 package net.sourceforge.vietocr.postprocessing;
 
-/**
- *
- * @author Quan Nguyen (nguyenq@users.sf.net)
- */
 public class EngPP implements IPostProcessor {
 
     @Override
     public String postProcess(String text) {
-        if (text.trim().length() == 0) {
-            return text;
-        }
-
-        // correct common errors caused by OCR
-        text = TextUtilities.correctOCRErrors(text);
-
-        // correct letter cases
-        text = TextUtilities.correctLetterCases(text);
-
+        // no special processing for English
         return text;
     }
 }
