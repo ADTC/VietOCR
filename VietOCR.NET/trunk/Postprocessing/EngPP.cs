@@ -23,17 +23,7 @@ namespace VietOCR.NET.Postprocessing
     {
         public string PostProcess(string text)
         {
-            if (text.Trim().Length == 0)
-            {
-                return text;
-            }
-
-            // correct common errors caused by OCR
-            text = TextUtilities.CorrectOCRErrors(text);
-
-            // correct letter cases
-            text = TextUtilities.CorrectLetterCases(text);
-
+            // no special processing for English
             return text;
         }
     }
