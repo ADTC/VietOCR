@@ -32,39 +32,19 @@ namespace VietOCR.NET.Postprocessing
 
         public string PostProcess(string text)
         {
-            if (text.Trim().Length == 0)
-            {
-                return text;
-            }
-
-            // correct common errors caused by OCR
-            text = TextUtilities.CorrectOCRErrors(text);
-
             // Move all of these String replace to external vie.DangAmbigs.txt.
             // The file location also gives users more control over the choice of word corrections.
             //// substitute Vietnamese letters frequently misrecognized by Tesseract 2.03
             //StringBuilder strB = new StringBuilder(text);
             //strB.Replace("êĩ-", "ết")
-            //    .Replace("ug", "ng")
-            //    .Replace("uh", "nh")
-            //    .Replace("rn", "m")
-            //    .Replace("iii", "m")
-            //    .Replace("II", "u")
-            //    .Replace("ôh", "ốn")
-            //    .Replace("âỳ", "ấy")
-            //    .Replace("u1I", "ưn")
-            //    .Replace("q1I", "qu")
             //    .Replace("tmg", "úng")
-            //    .Replace("tm", "trư")
-            //    .Replace("Tm", "Trư")
-            //    .Replace("êf", "ết")
-            //    .Replace("rg", "ng")
-            //    .Replace("êh", "ến")
-            //    .Replace("fâ", "rầ")
             //    ;
 
-            // correct letter cases
-            text = TextUtilities.CorrectLetterCases(text);
+            text = Regex.Replace(
+                   Regex.Replace(text,
+                        "(?i)ă(?![cmnpt])", "à"),
+                        "(?<=\\b[Tt])m", "rư")
+                    ;
 
             string nfdText = text.Normalize(NormalizationForm.FormD);
             nfdText = Regex.Replace(
@@ -76,7 +56,8 @@ namespace VietOCR.NET.Postprocessing
                     Regex.Replace(
                     Regex.Replace(
                     Regex.Replace(
-                    //Regex.Replace(
+                    Regex.Replace(
+                    Regex.Replace(
                     Regex.Replace(
                     Regex.Replace(
                     Regex.Replace(nfdText,
@@ -86,15 +67,16 @@ namespace VietOCR.NET.Postprocessing
                         // It seems to be a bug with .NET: it should be \\b, not \\B,
                         // unless combining diacritical characters are not considered as words by .NET.
                         "(?i)(?<=[^q]" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\B", "$1"), // remove mark on i preceeded by vowels w/ or w/o diacritics
-                        "(?i)(?<=[aeo]\u0302)\u2019", "\u0301"), // ^right-single-quote to ^acute
+                        "(?i)(?<=[aeo]\u0302)['\u2019]", "\u0301"), // ^right-single-quote to ^acute
                         "(?i)\u2018([aeo]\u0302)(?!\\p{IsCombiningDiacriticalMarks})", "$1\u0300"), // left-single-quote+a^ to a^grave
                         "(?i)(?<=[aeo]\u0302)\u2018", "\u0301"), // a^+left-single-quote to a^acute
+                        "(?i)(?<=[uo]" + TONE + ")['\u2018]", "\u031B"), // u'+left-single-quote) to u+' 
                         "(?i)(?<=" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})l\\b", "t"), // vowel+diacritics+l to vowel+diacritics+t
+                        "(?i)(?<=" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})ll\\b", "u"), // vowel+diacritics+ll to vowel+diacritics+u
                         "(?i)\\bl(?=[rh])", "t"),
                         "(?i)(u|ll)(?=[gh])", "n"),
-                        //"(?i)(?<=[qr])ll", "u"),
-                        "(?i)(?<=[qr])ll", "u"),
-                        "(?i)(?<=[ct])ll", "h")
+                        "(?i)(?<=[qrgsv])ll", "u"),
+                        "(?i)(?<=[p])ll", "h")
                     ;
 
             return nfdText.Normalize();
