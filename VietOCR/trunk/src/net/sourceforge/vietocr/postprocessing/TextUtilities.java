@@ -89,7 +89,8 @@ public class TextUtilities {
             bs.close();
             stream.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
+//            e.printStackTrace();
         }
 
         return map;
