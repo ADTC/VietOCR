@@ -52,7 +52,7 @@ namespace VietOCR.NET.Postprocessing
                     Regex.Replace(
                     Regex.Replace(text,
                         "(?i)(?<=đ)ă\\b", "ã"),
-                        "(?i)(?<=h)ă\\b", "ả"),
+                        "(?i)(?<=[ch])ă\\b", "ả"),
                         "(?i)ă(?![cmnpt])", "à"),
                         "(?i)ẵ(?=[cpt])", "ắ"),
                         "(?<=\\b[Tt])m", "rư"),

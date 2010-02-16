@@ -46,7 +46,7 @@ namespace VietOCR.NET.Postprocessing
                     Regex.Replace(input,
                         "\\b1(?=\\p{L}+\\b)", "l"), // 1 to l
                         "\\b11(?=\\p{L}+\\b)", "n"), // 11 to n
-                        "\\bI(?=\\p{Ll}+\\b)", "l"), // I to l
+                        "\\bI(?![mn]+\\b)", "l"), // I to l
                         "(?<=\\b\\p{L}*)0(?=\\p{L}*\\b)", "o") // 0 to o
                 //Regex.Replace("(?<!\\.) S(?=\\p{L}*\\b)", " s") // S to s
                 //Regex.Replace("(?<![cn])h\\b", "n")
