@@ -40,18 +40,32 @@ namespace VietOCR.NET.Postprocessing
             //    .Replace("tmg", "úng")
             //    ;
 
-            text = Regex.Replace(
-                   Regex.Replace(text,
+            text =  Regex.Replace(
+                    Regex.Replace(
+                    Regex.Replace(
+                    Regex.Replace(
+                    Regex.Replace(
+                    Regex.Replace(
+                    Regex.Replace(
+                    Regex.Replace(
+                    Regex.Replace(
+                    Regex.Replace(
+                    Regex.Replace(text,
+                        "(?i)(?<=đ)ă\\b", "ã"),
+                        "(?i)(?<=h)ă\\b", "ả"),
                         "(?i)ă(?![cmnpt])", "à"),
-                        "(?<=\\b[Tt])m", "rư")
+                        "(?i)ẵ(?=[cpt])", "ắ"),
+                        "(?<=\\b[Tt])m", "rư"),
+                        "(?i)\\bl(?=[rh])", "t"),
+                        "(u|ll|r)(?=[gh])", "n"),
+                        "(iii|ln|rn)", "m"),
+                        "(?i)(?<=[qrgsv])ll", "u"),
+                        "(?i)(?<=[np])ll", "h"),
+                        "(?i)[oe](?=h)", "c")
                     ;
 
             string nfdText = text.Normalize(NormalizationForm.FormD);
             nfdText = Regex.Replace(
-                    Regex.Replace(
-                    Regex.Replace(
-                    Regex.Replace(
-                    Regex.Replace(
                     Regex.Replace(
                     Regex.Replace(
                     Regex.Replace(
@@ -67,16 +81,12 @@ namespace VietOCR.NET.Postprocessing
                         // It seems to be a bug with .NET: it should be \\b, not \\B,
                         // unless combining diacritical characters are not considered as words by .NET.
                         "(?i)(?<=[^q]" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})(i)" + TONE + "\\B", "$1"), // remove mark on i preceeded by vowels w/ or w/o diacritics
-                        "(?i)(?<=[aeo]\u0302)['\u2019]", "\u0301"), // ^right-single-quote to ^acute
+                        "(?i)(?<=[aeo]\u0302)['\u2018\u2019]", "\u0301"), // ^right-single-quote to ^acute
                         "(?i)\u2018([aeo]\u0302)(?!\\p{IsCombiningDiacriticalMarks})", "$1\u0300"), // left-single-quote+a^ to a^grave
-                        "(?i)(?<=[aeo]\u0302)\u2018", "\u0301"), // a^+left-single-quote to a^acute
+                        "(?i)(?<=[aeo]\u0302)h", "\u0301n"), // a^+h to a^acute+n
                         "(?i)(?<=[uo]" + TONE + ")['\u2018]", "\u031B"), // u'+left-single-quote) to u+' 
                         "(?i)(?<=" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})l\\b", "t"), // vowel+diacritics+l to vowel+diacritics+t
-                        "(?i)(?<=" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})ll\\b", "u"), // vowel+diacritics+ll to vowel+diacritics+u
-                        "(?i)\\bl(?=[rh])", "t"),
-                        "(?i)(u|ll)(?=[gh])", "n"),
-                        "(?i)(?<=[qrgsv])ll", "u"),
-                        "(?i)(?<=[p])ll", "h")
+                        "(?i)(?<=" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})ll\\b", "u") // vowel+diacritics+ll to vowel+diacritics+u
                     ;
 
             return nfdText.Normalize();
