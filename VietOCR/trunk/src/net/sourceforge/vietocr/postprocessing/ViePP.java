@@ -40,7 +40,7 @@ public class ViePP implements IPostProcessor {
         
         text = text
                 .replaceAll("(?i)(?<=đ)ă\\b", "ã")
-                .replaceAll("(?i)(?<=h)ă\\b", "ả")
+                .replaceAll("(?i)(?<=[ch])ă\\b", "ả")
                 .replaceAll("(?i)ă(?![cmnpt])", "à")
                 .replaceAll("(?i)ẵ(?=[cpt])", "ắ")
                 .replaceAll("(?<=\\b[Tt])m", "rư")

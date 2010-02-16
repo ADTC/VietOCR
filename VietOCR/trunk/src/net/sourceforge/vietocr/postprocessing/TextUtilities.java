@@ -62,7 +62,7 @@ public class TextUtilities {
         // substitute letters frequently misrecognized by Tesseract 2.03
         return input.replaceAll("\\b1(?=\\p{L}+\\b)", "l") // 1 to l
                 .replaceAll("\\b11(?=\\p{L}+\\b)", "n") // 11 to n
-                .replaceAll("\\bI(?=\\p{Ll}+\\b)", "l") // I to l
+                .replaceAll("\\bI(?![mn]+\\b)", "l") // I to l
                 .replaceAll("(?<=\\b\\p{L}*)0(?=\\p{L}*\\b)", "o") // 0 to o
                 //                .replaceAll("(?<!\\.) S(?=\\p{L}*\\b)", " s") // S to s
                 //                .replaceAll("(?<![cn])h\\b", "n")
