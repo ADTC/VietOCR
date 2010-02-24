@@ -54,10 +54,10 @@ public class Gui extends javax.swing.JFrame {
     private FileFilter[] fileFilters;
     protected Font font;
     private final Rectangle screen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-    private int imageIndex;
+    protected int imageIndex;
     private int imageTotal;
     private List<ImageIconScalable> imageList;
-    private List<IIOImage> iioImageList;
+    protected List<IIOImage> iioImageList;
     public final String EOL = System.getProperty("line.separator");
     private String currentDirectory;
     private String outputDirectory;
@@ -71,8 +71,8 @@ public class Gui extends javax.swing.JFrame {
     private JFileChooser filechooser;
     protected boolean wordWrapOn, dangAmbigsOn;
     private String selectedInputMethod;
-    private float scaleX = 1f;
-    private float scaleY = 1f;
+    protected float scaleX = 1f;
+    protected float scaleY = 1f;
     protected static String selectedUILang = "en";
     private int originalW, originalH;
     private final float ZOOM_FACTOR = 1.25f;
@@ -1890,7 +1890,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton jButtonZoomOut;
     protected javax.swing.JCheckBoxMenuItem jCheckBoxMenuWordWrap;
     private javax.swing.JComboBox jComboBoxLang;
-    private javax.swing.JLabel jImageLabel;
+    protected javax.swing.JLabel jImageLabel;
     private javax.swing.JLabel jLabelCurIndex;
     private javax.swing.JLabel jLabelLanguage;
     protected javax.swing.JLabel jLabelStatus;
