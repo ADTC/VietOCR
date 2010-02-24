@@ -17,10 +17,10 @@ package net.sourceforge.vietocr;
 
 import java.io.*;
 import java.util.*;
-import java.util.regex.*;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import net.sourceforge.vietpad.*;
+import net.sourceforge.vietpad.utilities.TextUtilities;
 
 public class GuiWithFormat extends Gui {
     private ChangeCaseDialog changeCaseDlg;
@@ -110,42 +110,7 @@ public class GuiWithFormat extends Gui {
             }
         }
 
-        String result = jTextArea1.getSelectedText();
-
-        if (typeOfCase.equals("UPPER CASE")) {
-            result = result.toUpperCase();
-        } else if (typeOfCase.equals("lower case")) {
-            result = result.toLowerCase();
-        } else if (typeOfCase.equals("Title Case")) {
-            StringBuffer strB = new StringBuffer(result.toLowerCase());
-            Pattern pattern = Pattern.compile("(?<!\\p{InCombiningDiacriticalMarks}|\\p{L})\\p{L}");
-            // word boundary
-            Matcher matcher = pattern.matcher(result);
-            while (matcher.find()) {
-                int index = matcher.start();
-                strB.setCharAt(index, Character.toTitleCase(strB.charAt(index)));
-            }
-            result = strB.toString();
-        } else if (typeOfCase.equals("Sentence case")) {
-            StringBuffer strB = new StringBuffer(result.toUpperCase().equals(result) ? result.toLowerCase() : result);
-            Matcher matcher = Pattern.compile("\\p{L}(\\p{L}+)").matcher(result);
-            while (matcher.find()) {
-                if (!(matcher.group(0).toUpperCase().equals(matcher.group(0)) ||
-                        matcher.group(1).toLowerCase().equals(matcher.group(1)))) {
-                    for (int i = matcher.start(); i < matcher.end(); i++) {
-                        strB.setCharAt(i, Character.toLowerCase(strB.charAt(i)));
-                    }
-                }
-            }
-            final String QUOTE = "\"'`,<>\u00AB\u00BB\u2018-\u203A";
-            matcher = Pattern.compile("(?:[.?!\u203C-\u2049][])}" + QUOTE + "]*|^|\n|:\\s+[" + QUOTE + "])[-=_*\u2010-\u2015\\s]*[" + QUOTE + "\\[({]*\\p{L}").matcher(result);
-            // begin of a sentence
-            while (matcher.find()) {
-                int i = matcher.end() - 1;
-                strB.setCharAt(i, Character.toUpperCase(strB.charAt(i)));
-            }
-            result = strB.toString();
-        }
+        String result = TextUtilities.changeCase(jTextArea1.getSelectedText(), typeOfCase);
 
         undoSupport.beginUpdate();
         int start = jTextArea1.getSelectionStart();
@@ -164,7 +129,8 @@ public class GuiWithFormat extends Gui {
                 return;
             }
         }
-        String result = jTextArea1.getSelectedText().replace("\r\n", "\n").replaceAll("(?<=\n|^)[\t ]+|[\t ]+(?=$|\n)", "").replaceAll("(?<=.)\n(?=.)", " ");
+        String result = TextUtilities.removeLineBreaks(jTextArea1.getSelectedText());
+//        .replace("\r\n", "\n").replaceAll("(?<=\n|^)[\t ]+|[\t ]+(?=$|\n)", "").replaceAll("(?<=.)\n(?=.)", " ");
 
         undoSupport.beginUpdate();
         int start = jTextArea1.getSelectionStart();
