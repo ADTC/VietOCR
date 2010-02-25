@@ -11,6 +11,12 @@ import java.util.regex.*;
  */
 public class TextUtilities {
 
+    /**
+     * Changes letter case.
+     * @param text
+     * @param typeOfCase
+     * @return
+     */
     public static String changeCase(String text, String typeOfCase) {
         String result;
 
@@ -57,6 +63,11 @@ public class TextUtilities {
         return result;
     }
 
+    /**
+     * Removes line breaks.
+     * @param text
+     * @return
+     */
     public static String removeLineBreaks(String text) {
         return text.replaceAll("(?<=\n|^)[\t ]+|[\t ]+(?=$|\n)", "").replaceAll("(?<=.)\n(?=.)", " ");
     }
