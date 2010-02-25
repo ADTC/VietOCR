@@ -26,7 +26,7 @@ using System.Globalization;
 
 namespace VietOCR.NET
 {
-    public partial class GUIWithFormat : VietOCR.NET.GUI
+    public partial class GUIWithFormat : VietOCR.NET.GUIWithCommand
     {
         const string strSelectedCase = "SelectedCase";
 
