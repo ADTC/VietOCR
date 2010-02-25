@@ -117,6 +117,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FormLocalizer.cs" />
+    <Compile Include="GUIWithCommand.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIWithCommand.Designer.cs">
+      <DependentUpon>GUIWithCommand.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUIWithFormat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +228,33 @@
     <None Include="tessdata\eng.word-dawg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="tessdata\vie-1.DangAmbigs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\vie-1.freq-dawg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\vie-1.inttemp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\vie-1.Microfeat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\vie-1.normproto">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\vie-1.pffmtable">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\vie-1.unicharset">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\vie-1.user-words">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\vie-1.word-dawg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="tessdata\vie-t.DangAmbigs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -284,6 +317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI.vi-VN.resx">
       <DependentUpon>GUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIWithCommand.resx">
+      <DependentUpon>GUIWithCommand.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIWithInputMethod.resx">
       <SubType>Designer</SubType>
