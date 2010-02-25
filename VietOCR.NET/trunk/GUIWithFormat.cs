@@ -23,6 +23,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using Microsoft.Win32;
 using System.Globalization;
+using Net.SourceForge.Vietpad.Utilities;
 
 namespace VietOCR.NET
 {
@@ -127,91 +128,23 @@ namespace VietOCR.NET
             this.Focus();
         }
 
-        /**
-          *  Change Case
-          *
-          *@param  string typeOfCase
-          */
+        /// <summary>
+        /// Changes letter case.
+        /// </summary>
+        /// <param name="typeOfCase"></param>
         private void changeCase(string typeOfCase)
         {
-            string result = textBox1.SelectedText;
             int start = textBox1.SelectionStart;
-
-            if (typeOfCase == "UPPER CASE")
-            {
-                result = result.ToUpper();
-            }
-            else if (typeOfCase == "lower case")
-            {
-                result = result.ToLower();
-            }
-            else if (typeOfCase == "Title Case")
-            {
-                StringBuilder strB = new StringBuilder(result.ToLower());
-
-                Regex regex = new Regex("(?<!\\p{IsCombiningDiacriticalMarks}|\\p{L})\\p{L}");      // word boundary \\b\\w
-                MatchCollection mc = regex.Matches(result);
-
-                // Loop through  the match collection to retrieve all 
-                // matches and positions.
-                for (int i = 0; i < mc.Count; i++)
-                {
-                    int index = mc[i].Index;
-                    strB[index] = Char.ToUpper(strB[index]);
-                }
-
-                result = strB.ToString();
-            }
-            else if (typeOfCase == "Sentence case")
-            {
-                StringBuilder strB = new StringBuilder(result.ToUpper() == result ? result.ToLower() : result);
-                Regex regex = new Regex("\\p{L}(\\p{L}+)");
-                MatchCollection mc = regex.Matches(result);
-
-                for (Match m = regex.Match(result); m.Success; m = m.NextMatch())
-                {
-                    if (!(
-                        m.Groups[0].Value.ToUpper() == m.Groups[0].Value ||
-                        m.Groups[1].Value.ToLower() == m.Groups[1].Value
-                        ))
-                    {
-                        for (int i = 0; i < mc.Count; i++)
-                        {
-                            int j = mc[i].Index;
-                            strB[j] = Char.ToLower(strB[j]);
-                        }
-                    }
-                }
-
-                const string QUOTE = "\"'`,<>\u00AB\u00BB\u2018-\u203A";
-                regex = new Regex("(?:[.?!\u203C-\u2049][])}"
-                    + QUOTE + "]*|^|\n|:\\s+["
-                    + QUOTE + "])[-=_*\u2010-\u2015\\s]*["
-                    + QUOTE + "\\[({]*\\p{L}"
-                    ); // begin of a sentence                  
-
-                // Use the Matches method to find all matches in the input string.
-                mc = regex.Matches(result);
-                // Loop through  the match collection to retrieve all 
-                // matches and positions.
-                for (int i = 0; i < mc.Count; i++)
-                {
-                    int j = mc[i].Index + mc[i].Length - 1;
-                    strB[j] = Char.ToUpper(strB[j]);
-                }
-
-                result = strB.ToString();
-            }
-            else
-            {
-                return;
-            }
-
+            string result = VietUtilities.ChangeCase(textBox1.SelectedText, typeOfCase);
             textBox1.SelectedText = result;
-            textBox1.SelectionStart = start;
-            textBox1.SelectionLength = result.Length;
+            textBox1.Select(start, result.Length);
         }
 
+        /// <summary>
+        /// Removes line breaks.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected override void removeLineBreaksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (textBox1.SelectedText == "")
@@ -222,10 +155,12 @@ namespace VietOCR.NET
 
             int start = textBox1.SelectionStart;
 
-            Regex regex = new Regex("(?<=\n|^)[\t ]+|[\t ]+(?=$|\n)");
-            string result = regex.Replace(textBox1.SelectedText.Replace(Environment.NewLine, "\n"), "");
-            regex = new Regex("(?<=.)\n(?=.)");
-            result = regex.Replace(result, " ").Replace("\n", Environment.NewLine);
+            //Regex regex = new Regex("(?<=\n|^)[\t ]+|[\t ]+(?=$|\n)");
+            //string result = regex.Replace(textBox1.SelectedText.Replace(Environment.NewLine, "\n"), "");
+            //regex = new Regex("(?<=.)\n(?=.)");
+            //result = regex.Replace(result, " ").Replace("\n", Environment.NewLine);
+
+            string result = VietUtilities.RemoveLineBreaks(textBox1.SelectedText.Replace(Environment.NewLine, "\n").Replace("\n", Environment.NewLine));
             textBox1.SelectedText = result;
             textBox1.Select(start, result.Length);
         }
