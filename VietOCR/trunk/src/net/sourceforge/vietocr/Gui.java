@@ -30,7 +30,6 @@ import javax.swing.undo.*;
 import java.awt.dnd.DropTarget;
 import javax.swing.event.*;
 import javax.swing.filechooser.FileFilter;
-import net.sourceforge.vietocr.postprocessing.Processor;
 import net.sourceforge.vietpad.*;
 import net.sourceforge.vietpad.inputmethod.*;
 import net.sourceforge.vietocr.wia.*;
@@ -76,7 +75,6 @@ public class Gui extends javax.swing.JFrame {
     protected static String selectedUILang = "en";
     private int originalW, originalH;
     private final float ZOOM_FACTOR = 1.25f;
-    private OcrWorker ocrWorker;
     private Point curScrollPos;
 
     /**
@@ -1024,73 +1022,13 @@ public class Gui extends javax.swing.JFrame {
     }
 
     private void jMenuItemPostProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPostProcessActionPerformed
-        if (curLangCode == null) {
-            return;
-        }
-
-        jLabelStatus.setText(bundle.getString("Correcting_errors..."));
-        jProgressBar1.setIndeterminate(true);
-        jProgressBar1.setString(bundle.getString("Correcting_errors..."));
-        jProgressBar1.setVisible(true);
-        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        getGlassPane().setVisible(true);
-        this.jMenuItemPostProcess.setEnabled(false);
-
-        SwingWorker<String, Void> correctWorker = new SwingWorker<String, Void>() {
-
-            String selectedText;
-
-            @Override
-            public String doInBackground() throws Exception {
-                selectedText = jTextArea1.getSelectedText();
-                return Processor.postProcess((selectedText != null) ? selectedText : jTextArea1.getText(), curLangCode, dangAmbigsPath, dangAmbigsOn);
-            }
-
-            @Override
-            public void done() {
-                jProgressBar1.setIndeterminate(false);
-
-                try {
-                    String result = get();
-
-                    if (selectedText != null) {
-                        int start = jTextArea1.getSelectionStart();
-                        jTextArea1.replaceSelection(result);
-                        jTextArea1.select(start, start + result.length());
-                    } else {
-                        jTextArea1.setText(result);
-                    }
-                    jLabelStatus.setText(bundle.getString("Correction_completed"));
-                    jProgressBar1.setString(bundle.getString("Correction_completed"));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (java.util.concurrent.ExecutionException e) {
-                    String why = null;
-                    Throwable cause = e.getCause();
-                    if (cause != null) {
-                        if (cause instanceof UnsupportedOperationException) {
-                            why = String.format("Post-processing not supported for %1$s language.\nYou can provide one via a \"%2$s.DangAmbigs.txt\" file.", jComboBoxLang.getSelectedItem(), curLangCode);
-                        } else if (cause instanceof RuntimeException) {
-                            why = cause.getMessage();
-                        } else {
-                            why = cause.getMessage();
-                        }
-                    } else {
-                        why = e.getMessage();
-                    }
-                    e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
-                    jProgressBar1.setVisible(false);
-                } finally {
-                    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-                    getGlassPane().setVisible(false);
-                    jMenuItemPostProcess.setEnabled(true);
-                }
-            }
-        };
-        correctWorker.execute();
+        PostProcessActionPerformed();
     }//GEN-LAST:event_jMenuItemPostProcessActionPerformed
 
+    void PostProcessActionPerformed() {
+        // to be implemented in subclass
+    }
+    
     private void jButtonPrevPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevPageActionPerformed
         ((JImageLabel) jImageLabel).deselect();
         imageIndex--;
@@ -1210,17 +1148,12 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonClearActionPerformed
 
     private void jMenuItemOCRAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRAllActionPerformed
-        if (this.jImageLabel.getIcon() == null) {
-            JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        this.jButtonOCR.setVisible(false);
-        this.jButtonCancelOCR.setVisible(true);
-        this.jButtonCancelOCR.setEnabled(true);
-        performOCR(iioImageList, -1);
+        OCRAllActionPerformed();
     }//GEN-LAST:event_jMenuItemOCRAllActionPerformed
 
+    void OCRAllActionPerformed() {
+        // to be implemented in subclass
+    }
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         try {
             String version = config.getProperty("Version");
@@ -1478,57 +1411,11 @@ public class Gui extends javax.swing.JFrame {
     }
 
     private void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRActionPerformed
-        if (jImageLabel.getIcon() == null) {
-            JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        Rectangle rect = ((JImageLabel) jImageLabel).getRect();
-
-        if (rect != null) {
-            try {
-                ImageIcon ii = (ImageIcon) this.jImageLabel.getIcon();
-                BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) (rect.x * scaleX), (int) (rect.y * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
-                IIOImage iioImage = new IIOImage(bi, null, null);
-                ArrayList<IIOImage> tempList = new ArrayList<IIOImage>();
-                tempList.add(iioImage);
-                performOCR(tempList, 0);
-            } catch (RasterFormatException rfe) {
-                JOptionPane.showMessageDialog(this, rfe.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
-//                rfe.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            performOCR(iioImageList, imageIndex);
-        }
+        OCRActionPerformed();
     }//GEN-LAST:event_jMenuItemOCRActionPerformed
 
-    /**
-     * Perform OCR on images represented by IIOImage.
-     * 
-     * @param list List of IIOImage
-     * @param index Index of page to be OCRed: -1 for all pages
-     */
-    void performOCR(final List<IIOImage> iioImageList, final int index) {
-        if (this.jComboBoxLang.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(this, bundle.getString("Please_select_a_language."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        jLabelStatus.setText(bundle.getString("OCR_running..."));
-        jProgressBar1.setIndeterminate(true);
-        jProgressBar1.setString(bundle.getString("OCR_running..."));
-        jProgressBar1.setVisible(true);
-        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        getGlassPane().setVisible(true);
-        this.jButtonOCR.setEnabled(false);
-        this.jMenuItemOCR.setEnabled(false);
-        this.jMenuItemOCRAll.setEnabled(false);
-
-        // instantiate SwingWorker for OCR
-        ocrWorker = new OcrWorker(new OCRImageEntity(iioImageList, index));
-        ocrWorker.execute();
+    void OCRActionPerformed() {
+        // to be implemented in subclass
     }
 
     void setButton() {
@@ -1706,15 +1593,12 @@ public class Gui extends javax.swing.JFrame {
     }
 
     private void jButtonCancelOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelOCRActionPerformed
-        if (ocrWorker != null && !ocrWorker.isDone()) {
-            // Cancel current OCR op to begin a new one. You want only one OCR op at a time.
-            ocrWorker.cancel(true);
-            ocrWorker = null;
-        }
-
-        this.jButtonCancelOCR.setEnabled(false);
+        CancelOCRActionPerformed();
     }//GEN-LAST:event_jButtonCancelOCRActionPerformed
 
+    void CancelOCRActionPerformed() {
+        // to be implemented in subclass
+    }
     private void jMenuItemMergePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMergePdfActionPerformed
         mergePdf();
     }//GEN-LAST:event_jMenuItemMergePdfActionPerformed
@@ -1780,85 +1664,6 @@ public class Gui extends javax.swing.JFrame {
         return ideal < min + TOLERANCE ? min : (ideal > max - TOLERANCE ? max : ideal);
     }
 
-    class OcrWorker extends SwingWorker<Void, String> {
-
-        OCRImageEntity entity;
-
-        OcrWorker(OCRImageEntity entity) {
-            this.entity = entity;
-        }
-
-        @Override
-        protected Void doInBackground() throws Exception {
-            OCR ocrEngine = new OCR(tessPath);
-            List<File> workingFiles = entity.getClonedImageFiles();
-
-            for (int i = 0; i < workingFiles.size(); i++) {
-                if (!isCancelled()) {
-                    String result = ocrEngine.recognizeText(workingFiles.subList(i, i + 1), curLangCode);
-                    publish(result); // interim result
-                }
-
-                workingFiles.get(i).delete();   // clean up temporary files, even in cancellation
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void process(List<String> results) {
-            for (String str : results) {
-                jTextArea1.append(str);
-                jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
-            }
-        }
-
-        @Override
-        protected void done() {
-            jProgressBar1.setIndeterminate(false);
-
-            try {
-                get(); // dummy method
-                jLabelStatus.setText(bundle.getString("OCR_completed."));
-                jProgressBar1.setString(bundle.getString("OCR_completed."));
-            } catch (InterruptedException ignore) {
-                ignore.printStackTrace();
-            } catch (java.util.concurrent.ExecutionException e) {
-                String why = null;
-                Throwable cause = e.getCause();
-                if (cause != null) {
-                    if (cause instanceof IOException) {
-                        why = bundle.getString("Cannot_find_Tesseract._Please_set_its_path.");
-                    } else if (cause instanceof FileNotFoundException) {
-                        why = bundle.getString("An_exception_occurred_in_Tesseract_engine_while_recognizing_this_image.");
-                    } else if (cause instanceof OutOfMemoryError) {
-                        why = bundle.getString("_has_run_out_of_memory.\nPlease_restart_");
-                    } else {
-                        why = cause.getMessage();
-                    }
-                } else {
-                    why = e.getMessage();
-                }
-                e.printStackTrace();
-//                    System.err.println(why);
-                jLabelStatus.setText(null);
-                jProgressBar1.setString(null);
-                JOptionPane.showMessageDialog(null, why, "OCR Operation", JOptionPane.ERROR_MESSAGE);
-            } catch (java.util.concurrent.CancellationException e) {
-                jLabelStatus.setText("OCR " + bundle.getString("canceled"));
-                jProgressBar1.setString("OCR " + bundle.getString("canceled"));
-            } finally {
-                getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-                getGlassPane().setVisible(false);
-                jButtonOCR.setVisible(true);
-                jButtonOCR.setEnabled(true);
-                jMenuItemOCR.setEnabled(true);
-                jMenuItemOCRAll.setEnabled(true);
-                jButtonCancelOCR.setVisible(false);
-            }
-        }
-    }
-
     /**
      * @param args the command line arguments
      */
@@ -1876,11 +1681,11 @@ public class Gui extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualSize;
-    private javax.swing.JButton jButtonCancelOCR;
+    protected javax.swing.JButton jButtonCancelOCR;
     private javax.swing.JButton jButtonClear;
     private javax.swing.JButton jButtonFitImage;
     private javax.swing.JButton jButtonNextPage;
-    private javax.swing.JButton jButtonOCR;
+    protected javax.swing.JButton jButtonOCR;
     private javax.swing.JButton jButtonOpen;
     private javax.swing.JButton jButtonPrevPage;
     private javax.swing.JButton jButtonRotateCCW;
@@ -1889,7 +1694,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton jButtonZoomIn;
     private javax.swing.JButton jButtonZoomOut;
     protected javax.swing.JCheckBoxMenuItem jCheckBoxMenuWordWrap;
-    private javax.swing.JComboBox jComboBoxLang;
+    protected javax.swing.JComboBox jComboBoxLang;
     protected javax.swing.JLabel jImageLabel;
     private javax.swing.JLabel jLabelCurIndex;
     private javax.swing.JLabel jLabelLanguage;
@@ -1907,11 +1712,11 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemHelp;
     private javax.swing.JMenuItem jMenuItemMergePdf;
     private javax.swing.JMenuItem jMenuItemMergeTiff;
-    private javax.swing.JMenuItem jMenuItemOCR;
-    private javax.swing.JMenuItem jMenuItemOCRAll;
+    protected javax.swing.JMenuItem jMenuItemOCR;
+    protected javax.swing.JMenuItem jMenuItemOCRAll;
     private javax.swing.JMenuItem jMenuItemOpen;
     private javax.swing.JMenuItem jMenuItemOptions;
-    private javax.swing.JMenuItem jMenuItemPostProcess;
+    protected javax.swing.JMenuItem jMenuItemPostProcess;
     private javax.swing.JMenuItem jMenuItemRemoveLineBreaks;
     private javax.swing.JMenuItem jMenuItemSave;
     private javax.swing.JMenuItem jMenuItemScan;
