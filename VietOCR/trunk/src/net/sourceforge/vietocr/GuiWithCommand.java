@@ -15,17 +15,21 @@
  */
 package net.sourceforge.vietocr;
 
-import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.awt.image.RasterFormatException;
-import java.util.ArrayList;
+import java.awt.*;
+import java.awt.image.*;
+import java.io.*;
+import java.util.*;
+import java.util.List;
 import javax.imageio.IIOImage;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import net.sourceforge.vietocr.postprocessing.Processor;
 
 public class GuiWithCommand extends Gui {
 
-    void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {
+    private OcrWorker ocrWorker;
+
+    @Override
+    void OCRActionPerformed() {
         if (jImageLabel.getIcon() == null) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -49,6 +53,205 @@ public class GuiWithCommand extends Gui {
             }
         } else {
             performOCR(iioImageList, imageIndex);
+        }
+    }
+
+    @Override
+    void OCRAllActionPerformed() {
+        if (this.jImageLabel.getIcon() == null) {
+            JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        this.jButtonOCR.setVisible(false);
+        this.jButtonCancelOCR.setVisible(true);
+        this.jButtonCancelOCR.setEnabled(true);
+        performOCR(iioImageList, -1);
+    }
+
+    @Override
+    void PostProcessActionPerformed() {
+        if (curLangCode == null) {
+            return;
+        }
+
+        jLabelStatus.setText(bundle.getString("Correcting_errors..."));
+        jProgressBar1.setIndeterminate(true);
+        jProgressBar1.setString(bundle.getString("Correcting_errors..."));
+        jProgressBar1.setVisible(true);
+        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        getGlassPane().setVisible(true);
+        this.jMenuItemPostProcess.setEnabled(false);
+
+        SwingWorker<String, Void> correctWorker = new SwingWorker<String, Void>() {
+
+            String selectedText;
+
+            @Override
+            public String doInBackground() throws Exception {
+                selectedText = jTextArea1.getSelectedText();
+                return Processor.postProcess((selectedText != null) ? selectedText : jTextArea1.getText(), curLangCode, dangAmbigsPath, dangAmbigsOn);
+            }
+
+            @Override
+            public void done() {
+                jProgressBar1.setIndeterminate(false);
+
+                try {
+                    String result = get();
+
+                    if (selectedText != null) {
+                        int start = jTextArea1.getSelectionStart();
+                        jTextArea1.replaceSelection(result);
+                        jTextArea1.select(start, start + result.length());
+                    } else {
+                        jTextArea1.setText(result);
+                    }
+                    jLabelStatus.setText(bundle.getString("Correction_completed"));
+                    jProgressBar1.setString(bundle.getString("Correction_completed"));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (java.util.concurrent.ExecutionException e) {
+                    String why = null;
+                    Throwable cause = e.getCause();
+                    if (cause != null) {
+                        if (cause instanceof UnsupportedOperationException) {
+                            why = String.format("Post-processing not supported for %1$s language.\nYou can provide one via a \"%2$s.DangAmbigs.txt\" file.", jComboBoxLang.getSelectedItem(), curLangCode);
+                        } else if (cause instanceof RuntimeException) {
+                            why = cause.getMessage();
+                        } else {
+                            why = cause.getMessage();
+                        }
+                    } else {
+                        why = e.getMessage();
+                    }
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
+                    jProgressBar1.setVisible(false);
+                } finally {
+                    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                    getGlassPane().setVisible(false);
+                    jMenuItemPostProcess.setEnabled(true);
+                }
+            }
+        };
+        correctWorker.execute();
+    }
+
+    /**
+     * Perform OCR on images represented by IIOImage.
+     *
+     * @param list List of IIOImage
+     * @param index Index of page to be OCRed: -1 for all pages
+     */
+    void performOCR(final List<IIOImage> iioImageList, final int index) {
+        if (this.jComboBoxLang.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(this, bundle.getString("Please_select_a_language."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        jLabelStatus.setText(bundle.getString("OCR_running..."));
+        jProgressBar1.setIndeterminate(true);
+        jProgressBar1.setString(bundle.getString("OCR_running..."));
+        jProgressBar1.setVisible(true);
+        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        getGlassPane().setVisible(true);
+        this.jButtonOCR.setEnabled(false);
+        this.jMenuItemOCR.setEnabled(false);
+        this.jMenuItemOCRAll.setEnabled(false);
+
+        // instantiate SwingWorker for OCR
+        ocrWorker = new OcrWorker(new OCRImageEntity(iioImageList, index));
+        ocrWorker.execute();
+    }
+
+    @Override
+    void CancelOCRActionPerformed() {
+        if (ocrWorker != null && !ocrWorker.isDone()) {
+            // Cancel current OCR op to begin a new one. You want only one OCR op at a time.
+            ocrWorker.cancel(true);
+            ocrWorker = null;
+        }
+
+        this.jButtonCancelOCR.setEnabled(false);
+    }
+
+    class OcrWorker extends SwingWorker<Void, String> {
+
+        OCRImageEntity entity;
+
+        OcrWorker(OCRImageEntity entity) {
+            this.entity = entity;
+        }
+
+        @Override
+        protected Void doInBackground() throws Exception {
+            OCR ocrEngine = new OCR(tessPath);
+            List<File> workingFiles = entity.getClonedImageFiles();
+
+            for (int i = 0; i < workingFiles.size(); i++) {
+                if (!isCancelled()) {
+                    String result = ocrEngine.recognizeText(workingFiles.subList(i, i + 1), curLangCode);
+                    publish(result); // interim result
+                }
+
+                workingFiles.get(i).delete();   // clean up temporary files, even in cancellation
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void process(List<String> results) {
+            for (String str : results) {
+                jTextArea1.append(str);
+                jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+            }
+        }
+
+        @Override
+        protected void done() {
+            jProgressBar1.setIndeterminate(false);
+
+            try {
+                get(); // dummy method
+                jLabelStatus.setText(bundle.getString("OCR_completed."));
+                jProgressBar1.setString(bundle.getString("OCR_completed."));
+            } catch (InterruptedException ignore) {
+                ignore.printStackTrace();
+            } catch (java.util.concurrent.ExecutionException e) {
+                String why = null;
+                Throwable cause = e.getCause();
+                if (cause != null) {
+                    if (cause instanceof IOException) {
+                        why = bundle.getString("Cannot_find_Tesseract._Please_set_its_path.");
+                    } else if (cause instanceof FileNotFoundException) {
+                        why = bundle.getString("An_exception_occurred_in_Tesseract_engine_while_recognizing_this_image.");
+                    } else if (cause instanceof OutOfMemoryError) {
+                        why = bundle.getString("_has_run_out_of_memory.\nPlease_restart_");
+                    } else {
+                        why = cause.getMessage();
+                    }
+                } else {
+                    why = e.getMessage();
+                }
+                e.printStackTrace();
+//                    System.err.println(why);
+                jLabelStatus.setText(null);
+                jProgressBar1.setString(null);
+                JOptionPane.showMessageDialog(null, why, "OCR Operation", JOptionPane.ERROR_MESSAGE);
+            } catch (java.util.concurrent.CancellationException e) {
+                jLabelStatus.setText("OCR " + bundle.getString("canceled"));
+                jProgressBar1.setString("OCR " + bundle.getString("canceled"));
+            } finally {
+                getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                getGlassPane().setVisible(false);
+                jButtonOCR.setVisible(true);
+                jButtonOCR.setEnabled(true);
+                jMenuItemOCR.setEnabled(true);
+                jMenuItemOCRAll.setEnabled(true);
+                jButtonCancelOCR.setVisible(false);
+            }
         }
     }
 }

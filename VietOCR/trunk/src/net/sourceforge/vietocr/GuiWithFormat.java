@@ -22,7 +22,7 @@ import javax.swing.SwingUtilities;
 import net.sourceforge.vietpad.*;
 import net.sourceforge.vietpad.utilities.TextUtilities;
 
-public class GuiWithFormat extends Gui {
+public class GuiWithFormat extends GuiWithCommand {
     private ChangeCaseDialog changeCaseDlg;
 
     @Override
