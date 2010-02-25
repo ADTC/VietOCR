@@ -159,6 +159,7 @@
     <Compile Include="HtmlHelpForm.Designer.cs">
       <DependentUpon>HtmlHelpForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImageHelper.cs" />
     <Compile Include="ImageIOHelper.cs" />
     <Compile Include="OCR.cs" />
     <Compile Include="OCRImageEntity.cs" />
@@ -188,7 +189,6 @@
     <Compile Include="StatusForm.Designer.cs">
       <DependentUpon>StatusForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utilities.cs" />
     <Compile Include="Watcher.cs" />
     <Compile Include="WIA\WiaOperationException.cs" />
     <Compile Include="WIA\WiaScannerAdapter.cs" />
