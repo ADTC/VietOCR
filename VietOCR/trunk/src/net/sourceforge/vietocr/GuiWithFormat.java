@@ -89,11 +89,10 @@ public class GuiWithFormat extends GuiWithCommand {
 
     @Override
     void quit() {
-        super.quit();
-
         if (changeCaseDlg != null) {
             prefs.put("selectedCase", changeCaseDlg.getSelectedCase());
         }
+        super.quit();
     }
 
     /**

@@ -295,11 +295,8 @@ public class GuiWithTools extends GuiWithSettings {
 
     @Override
     void quit() {
-        super.quit();
-
         prefs.put("ImageFolder", imageFolder.getPath());
-
-        System.exit(0);
+        super.quit();
     }
 
     /**
