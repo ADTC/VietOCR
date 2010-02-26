@@ -1013,11 +1013,19 @@ public class Gui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxLangItemStateChanged
 
-    private void jCheckBoxMenuWordWrapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuWordWrapActionPerformed
-        setLineWrap();
-    }//GEN-LAST:event_jCheckBoxMenuWordWrapActionPerformed
+    private void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRActionPerformed
+        OCRActionPerformed();
+    }//GEN-LAST:event_jMenuItemOCRActionPerformed
 
-    void setLineWrap() {
+    void OCRActionPerformed() {
+        // to be implemented in subclas
+    }
+
+    private void jMenuItemOCRAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRAllActionPerformed
+        OCRAllActionPerformed();
+    }//GEN-LAST:event_jMenuItemOCRAllActionPerformed
+
+    void OCRAllActionPerformed() {
         // to be implemented in subclass
     }
 
@@ -1147,13 +1155,14 @@ public class Gui extends javax.swing.JFrame {
         this.jTextArea1.setText(null);
     }//GEN-LAST:event_jButtonClearActionPerformed
 
-    private void jMenuItemOCRAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRAllActionPerformed
-        OCRAllActionPerformed();
-    }//GEN-LAST:event_jMenuItemOCRAllActionPerformed
+    private void jCheckBoxMenuWordWrapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuWordWrapActionPerformed
+        setLineWrap();
+    }//GEN-LAST:event_jCheckBoxMenuWordWrapActionPerformed
 
-    void OCRAllActionPerformed() {
+    void setLineWrap() {
         // to be implemented in subclass
     }
+
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         try {
             String version = config.getProperty("Version");
@@ -1211,7 +1220,7 @@ public class Gui extends javax.swing.JFrame {
 
         prefs.putInt("filterIndex", filterIndex);
 
-//        System.exit(0);
+        System.exit(0);
     }
 
     private void jMenuItemFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFontActionPerformed
@@ -1408,14 +1417,6 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
         }
-    }
-
-    private void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRActionPerformed
-        OCRActionPerformed();
-    }//GEN-LAST:event_jMenuItemOCRActionPerformed
-
-    void OCRActionPerformed() {
-        // to be implemented in subclass
     }
 
     void setButton() {
