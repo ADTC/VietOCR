@@ -19,15 +19,17 @@ namespace Net.SourceForge.Vietpad.Utilities
         {
             string result;
 
+            typeOfCase = typeOfCase.ToUpper();
+
             if (typeOfCase == "UPPERCASE")
             {
                 result = text.ToUpper();
             }
-            else if (typeOfCase == "lowercase")
+            else if (typeOfCase == "LOWERCASE")
             {
                 result = text.ToLower();
             }
-            else if (typeOfCase == "Title_Case")
+            else if (typeOfCase == "TITLECASE")
             {
                 StringBuilder strB = new StringBuilder(text.ToLower());
 
@@ -44,7 +46,7 @@ namespace Net.SourceForge.Vietpad.Utilities
 
                 result = strB.ToString();
             }
-            else if (typeOfCase == "Sentence_case")
+            else if (typeOfCase == "SENTENCECASE")
             {
                 StringBuilder strB = new StringBuilder(text.ToUpper() == text ? text.ToLower() : text);
                 Regex regex = new Regex("\\p{L}(\\p{L}+)");
