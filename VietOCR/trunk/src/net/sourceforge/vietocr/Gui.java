@@ -154,7 +154,8 @@ public class Gui extends javax.swing.JFrame {
             this.jMenuFile.remove(this.jMenuItemScan);
         }
 
-        new DropTarget(this.jImageLabel, new ImageDropTargetListener(this));
+        new DropTarget(this.jImageLabel, new FileDropTargetListener(this));
+        new DropTarget(this.jTextArea1, new FileDropTargetListener(this));
 
         addWindowListener(
                 new WindowAdapter() {
