@@ -6,23 +6,23 @@ import java.io.*;
 import java.net.URI;
 
 /**
- *  Image Drop Target Listener
+ *  File Drop Target Listener
  *
  *@author     Quan Nguyen (nguyenq@users.sf.net)
  *@version    1.1, 23 December 2007
  *@see        http://vietpad.sourceforge.net
  */
-class ImageDropTargetListener extends DropTargetAdapter {
+class FileDropTargetListener extends DropTargetAdapter {
     private Gui holder;
     private File droppedFile;
     
     /**
-     *  Constructor for the ImageDropTargetListener object
+     *  Constructor for the FileDropTargetListener object
      *
      *
-     * @param fm  instance of VietPad
+     * @param holder  instance of Gui
      */
-    public ImageDropTargetListener(Gui holder) {
+    public FileDropTargetListener(Gui holder) {
         this.holder = holder;
     }
     
