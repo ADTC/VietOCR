@@ -59,8 +59,8 @@ namespace VietOCR.NET.Postprocessing
                         "(?i)\\bl(?=[rh])", "t"),
                         "(u|ll|r)(?=[gh])", "n"),
                         "(iii|ln|rn)", "m"),
-                        "(?i)(?<=[qrgsv])ll", "u"),
-                        "(?i)(?<=[cnpt])ll", "h"),
+                        "(?i)(?<=[mqrgsv])ll", "u"),
+                        "(?i)(?<=[cknpt])ll", "h"),
                         "(?i)[oe](?=h)", "c")
                     ;
 
