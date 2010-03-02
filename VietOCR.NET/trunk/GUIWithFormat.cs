@@ -160,7 +160,7 @@ namespace VietOCR.NET
             //regex = new Regex("(?<=.)\n(?=.)");
             //result = regex.Replace(result, " ").Replace("\n", Environment.NewLine);
 
-            string result = VietUtilities.RemoveLineBreaks(textBox1.SelectedText.Replace(Environment.NewLine, "\n")).Replace("\n", Environment.NewLine);
+            string result = VietUtilities.RemoveLineBreaks(textBox1.SelectedText);
             textBox1.SelectedText = result;
             textBox1.Select(start, result.Length);
         }
