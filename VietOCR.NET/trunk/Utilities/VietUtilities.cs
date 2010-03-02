@@ -102,9 +102,9 @@ namespace Net.SourceForge.Vietpad.Utilities
         public static string RemoveLineBreaks(string text)
         {
             return Regex.Replace(
-                    Regex.Replace(text,
+                    Regex.Replace(text.Replace(Environment.NewLine, "\n"),
                     "(?<=\n|^)[\t ]+|[\t ]+(?=$|\n)", string.Empty),
-                    "(?<=.)\n(?=.)", " ");
+                    "(?<=.)\n(?=.)", " ").Replace("\n", Environment.NewLine);
         }
     }
 }
