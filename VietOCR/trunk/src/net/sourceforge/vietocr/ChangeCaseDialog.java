@@ -71,22 +71,22 @@ public class ChangeCaseDialog extends javax.swing.JDialog {
 
         buttonGroup1.add(jRadioButtonSen);
         jRadioButtonSen.setText(bundle.getString("jRadioButtonSen.Text")); // NOI18N
-        jRadioButtonSen.setActionCommand("Sentence case");
+        jRadioButtonSen.setActionCommand("Sentence_case");
         jPanel1.add(jRadioButtonSen);
 
         buttonGroup1.add(jRadioButtonLower);
         jRadioButtonLower.setText(bundle.getString("jRadioButtonLower.Text")); // NOI18N
-        jRadioButtonLower.setActionCommand("lower case");
+        jRadioButtonLower.setActionCommand("lowercase");
         jPanel1.add(jRadioButtonLower);
 
         buttonGroup1.add(jRadioButtonUpper);
         jRadioButtonUpper.setText(bundle.getString("jRadioButtonUpper.Text")); // NOI18N
-        jRadioButtonUpper.setActionCommand("UPPER CASE");
+        jRadioButtonUpper.setActionCommand("UPPERCASE");
         jPanel1.add(jRadioButtonUpper);
 
         buttonGroup1.add(jRadioButtonTitle);
         jRadioButtonTitle.setText(bundle.getString("jRadioButtonTitle.Text")); // NOI18N
-        jRadioButtonTitle.setActionCommand("Title Case");
+        jRadioButtonTitle.setActionCommand("Title_Case");
         jPanel1.add(jRadioButtonTitle);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
