@@ -189,7 +189,7 @@
     <Compile Include="StatusForm.Designer.cs">
       <DependentUpon>StatusForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\VietUtilities.cs" />
+    <Compile Include="Utilities\TextUtilities.cs" />
     <Compile Include="Watcher.cs" />
     <Compile Include="WIA\WiaOperationException.cs" />
     <Compile Include="WIA\WiaScannerAdapter.cs" />

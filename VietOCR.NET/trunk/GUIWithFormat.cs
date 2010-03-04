@@ -135,7 +135,7 @@ namespace VietOCR.NET
         private void changeCase(string typeOfCase)
         {
             int start = textBox1.SelectionStart;
-            string result = VietUtilities.ChangeCase(textBox1.SelectedText, typeOfCase);
+            string result = TextUtilities.ChangeCase(textBox1.SelectedText, typeOfCase);
             textBox1.SelectedText = result;
             textBox1.Select(start, result.Length);
         }
@@ -160,7 +160,7 @@ namespace VietOCR.NET
             //regex = new Regex("(?<=.)\n(?=.)");
             //result = regex.Replace(result, " ").Replace("\n", Environment.NewLine);
 
-            string result = VietUtilities.RemoveLineBreaks(textBox1.SelectedText);
+            string result = TextUtilities.RemoveLineBreaks(textBox1.SelectedText);
             textBox1.SelectedText = result;
             textBox1.Select(start, result.Length);
         }
