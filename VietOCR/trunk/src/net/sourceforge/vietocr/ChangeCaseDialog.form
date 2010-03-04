@@ -56,7 +56,7 @@
               <ResourceString bundle="net/sourceforge/vietocr/ChangeCaseDialog.properties" key="jRadioButtonSen.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;Sentence case&quot;" type="code"/>
+              <Connection code="&quot;Sentence_case&quot;" type="code"/>
             </Property>
           </Properties>
         </Component>
@@ -69,7 +69,7 @@
               <ResourceString bundle="net/sourceforge/vietocr/ChangeCaseDialog.properties" key="jRadioButtonLower.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;lower case&quot;" type="code"/>
+              <Connection code="&quot;lowercase&quot;" type="code"/>
             </Property>
           </Properties>
         </Component>
@@ -82,7 +82,7 @@
               <ResourceString bundle="net/sourceforge/vietocr/ChangeCaseDialog.properties" key="jRadioButtonUpper.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;UPPER CASE&quot;" type="code"/>
+              <Connection code="&quot;UPPERCASE&quot;" type="code"/>
             </Property>
           </Properties>
         </Component>
@@ -95,7 +95,7 @@
               <ResourceString bundle="net/sourceforge/vietocr/ChangeCaseDialog.properties" key="jRadioButtonTitle.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;Title Case&quot;" type="code"/>
+              <Connection code="&quot;Title_Case&quot;" type="code"/>
             </Property>
           </Properties>
         </Component>
