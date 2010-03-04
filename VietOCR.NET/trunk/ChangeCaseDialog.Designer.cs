@@ -44,7 +44,7 @@
             resources.ApplyResources(this.radioButton1, "radioButton1");
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.TabStop = true;
-            this.radioButton1.Tag = "Sentencecase";
+            this.radioButton1.Tag = "Sentence_case";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // radioButton2
@@ -68,7 +68,7 @@
             resources.ApplyResources(this.radioButton4, "radioButton4");
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.TabStop = true;
-            this.radioButton4.Tag = "TitleCase";
+            this.radioButton4.Tag = "Title_Case";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
             // buttonChange

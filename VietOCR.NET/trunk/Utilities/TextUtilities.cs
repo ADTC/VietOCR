@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Net.SourceForge.Vietpad.Utilities
 {
-    class VietUtilities
+    class TextUtilities
     {
         /// <summary>
         /// Changes letter case.
@@ -19,17 +19,15 @@ namespace Net.SourceForge.Vietpad.Utilities
         {
             string result;
 
-            typeOfCase = typeOfCase.ToUpper();
-
             if (typeOfCase == "UPPERCASE")
             {
                 result = text.ToUpper();
             }
-            else if (typeOfCase == "LOWERCASE")
+            else if (typeOfCase == "lowercase")
             {
                 result = text.ToLower();
             }
-            else if (typeOfCase == "TITLECASE")
+            else if (typeOfCase == "Title_Case")
             {
                 StringBuilder strB = new StringBuilder(text.ToLower());
 
@@ -46,7 +44,7 @@ namespace Net.SourceForge.Vietpad.Utilities
 
                 result = strB.ToString();
             }
-            else if (typeOfCase == "SENTENCECASE")
+            else if (typeOfCase == "Sentence_case")
             {
                 StringBuilder strB = new StringBuilder(text.ToUpper() == text ? text.ToLower() : text);
                 Regex regex = new Regex("\\p{L}(\\p{L}+)");
