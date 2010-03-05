@@ -50,6 +50,7 @@ public class ViePP implements IPostProcessor {
                 .replaceAll("(?i)(?<=[qrgsv])ll", "u")
                 .replaceAll("(?i)(?<=[np])ll", "h")
                 .replaceAll("(?i)[oe](?=h)", "c")
+                .replaceAll("\\Bđ", "ớ")
                 ;
 
         String nfdText = Normalizer.normalize(text, Normalizer.Form.NFD)
