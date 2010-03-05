@@ -50,6 +50,7 @@ namespace VietOCR.NET.Postprocessing
                     Regex.Replace(
                     Regex.Replace(
                     Regex.Replace(
+                    Regex.Replace(
                     Regex.Replace(text,
                         "(?i)(?<=đ)ă\\b", "ã"),
                         "(?i)(?<=[ch])ă\\b", "ả"),
@@ -61,7 +62,8 @@ namespace VietOCR.NET.Postprocessing
                         "(iii|ln|rn)", "m"),
                         "(?i)(?<=[mqrgsv])ll", "u"),
                         "(?i)(?<=[cknpt])ll", "h"),
-                        "(?i)[oe](?=h)", "c")
+                        "(?i)[oe](?=h)", "c"),
+                        "\\Bđ", "ớ")
                     ;
 
             string nfdText = text.Normalize(NormalizationForm.FormD);
