@@ -7,12 +7,12 @@
     <import file="nbproject/build-impl.xml"/>
     <target name="-post-jar">
         <move todir="./">
-            <fileset dir="${dist.dir}" includes="${projectname}.jar" />
+            <fileset dir="${dist.dir}" includes="${ant.project.name}.jar" />
         </move>
         <delete dir="${dist.dir}/lib"/>
     </target>
     <target name="-post-clean">
-        <delete file="${projectname}.jar"/>
+        <delete file="${ant.project.name}.jar"/>
     </target>
     <target name="-do-jar-with-libraries" depends="init,compile,-pre-pre-jar,-pre-jar" if="manifest.available+main.class+mkdist.available">
         <property name="build.classes.dir.resolved" location="${build.classes.dir}"/>
@@ -43,25 +43,25 @@
     <target name="jar" depends="init,compile,-pre-jar,-do-jar-with-mainclass,-do-jar-with-libraries,-post-jar" description="Build JAR."/>
     <target name="run" depends="jar"
                 description="run the program">
-        <java fork="true" jar="${projectname}.jar">
+        <java fork="true" jar="${ant.project.name}.jar">
             <jvmarg value="-Xms128m" />
             <jvmarg value="-Xmx512m" />
         </java>
     </target>
     <target name="dist" depends="clean,jar"
                 description="create binary and source distribution archives">
-        <zip zipfile="${dist.dir}/${projectname}-${version}-src.zip">
-            <zipfileset dir="." prefix="${projectname}">
+        <zip zipfile="${dist.dir}/${ant.project.name}-${version}-src.zip">
+            <zipfileset dir="." prefix="${ant.project.name}">
                 <exclude name="**/.*"/>
                 <exclude name="${dist.dir}/**"/>
                 <exclude name="${build.dir}/**"/>
                 <exclude name="doc/**"/>
-                <exclude name="${projectname}.jar"/>
+                <exclude name="${ant.project.name}.jar"/>
             </zipfileset>
         </zip>
-        <zip zipfile="${dist.dir}/${projectname}-${version}.zip">
-            <zipfileset dir="." includes="*,tesseract/**,lib/**,data/**,samples/**" prefix="${projectname}"
-            		excludes="build.xml,src,build,dist,dict,res,doc,nbproject">
+        <zip zipfile="${dist.dir}/${ant.project.name}-${version}.zip">
+            <zipfileset dir="." includes="*,tesseract/**,lib/**,data/**,samples/**" prefix="${ant.project.name}"
+            		excludes="build.xml,src,build,dist,dict,res,doc,test,nbproject">
                 <exclude name="*.mf"/>
             </zipfileset>
         </zip>
