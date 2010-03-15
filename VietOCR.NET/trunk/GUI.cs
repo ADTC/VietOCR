@@ -51,6 +51,7 @@ namespace VietOCR.NET
 
         protected string selectedUILanguage;
         private int filterIndex;
+        private string textFilename;
 
         const string strUILang = "UILanguage";
         const string strOcrLanguage = "OcrLanguage";
@@ -243,6 +244,14 @@ namespace VietOCR.NET
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (textFilename != null)
+            {
+                saveTextFile(textFilename);
+            }
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Title = Properties.Resources.Save_As;
             saveFileDialog1.Filter = "UTF-8 Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
@@ -254,9 +263,8 @@ namespace VietOCR.NET
                 try
                 {
                     this.Cursor = Cursors.WaitCursor;
-                    StreamWriter sw = new StreamWriter(saveFileDialog1.FileName, false, new System.Text.UTF8Encoding());
-                    sw.Write(this.textBox1.Text);
-                    sw.Close();
+                    textFilename = saveFileDialog1.FileName;
+                    saveTextFile(textFilename);
                     this.textBox1.Modified = false;
                 }
                 catch (Exception exc)
@@ -267,6 +275,13 @@ namespace VietOCR.NET
                 {
                     this.Cursor = Cursors.Default;
                 }
+            }
+        }
+
+        void saveTextFile(string fileName) {
+            using (StreamWriter sw = new StreamWriter(fileName, false, new System.Text.UTF8Encoding()))
+            {
+                sw.Write(this.textBox1.Text);
             }
         }
 
@@ -879,6 +894,5 @@ namespace VietOCR.NET
             }
         }
 
-   
     }
 }
