@@ -1048,7 +1048,7 @@ public class Gui extends javax.swing.JFrame {
     void PostProcessActionPerformed() {
         // to be implemented in subclass
     }
-    
+
     private void jButtonPrevPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevPageActionPerformed
         ((JImageLabel) jImageLabel).deselect();
         imageIndex--;
@@ -1270,7 +1270,7 @@ public class Gui extends javax.swing.JFrame {
                         new FileInputStream(selectedFile), "UTF8"));
                 this.jTextArea1.read(in, null);
                 in.close();
-                
+
                 javax.swing.text.Document doc = this.jTextArea1.getDocument();
                 if (doc.getText(0, 1).equals("\uFEFF")) {
                     doc.remove(0, 1); // remove BOM
@@ -1389,12 +1389,18 @@ public class Gui extends javax.swing.JFrame {
     }
 
     private void jMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveActionPerformed
-        if (textFile != null) {
-            saveTextFile(textFile);            
+        if (textFile == null || !textFile.exists()) {
+            saveFileDlg();
+        } else {
+            saveTextFile();
         }
     }//GEN-LAST:event_jMenuItemSaveActionPerformed
 
     private void jMenuItemSaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsActionPerformed
+        saveFileDlg();
+    }//GEN-LAST:event_jMenuItemSaveAsActionPerformed
+    
+    void saveFileDlg() {
         outputDirectory = prefs.get("outputDirectory", null);
         JFileChooser chooser = new JFileChooser(outputDirectory);
         FileFilter txtFilter = new SimpleFilter("txt", "UTF-8 Text");
@@ -1409,22 +1415,25 @@ public class Gui extends javax.swing.JFrame {
                     textFile = new File(textFile.getPath() + ".txt");
                 }
             }
-            saveTextFile(textFile);
+            saveTextFile();
         }
-    }//GEN-LAST:event_jMenuItemSaveAsActionPerformed
+    }
 
-    void saveTextFile(File file) {
+    void saveTextFile() {
+        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        getGlassPane().setVisible(true);
+        
         try {
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), UTF8));
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(textFile), UTF8));
             jTextArea1.write(out);
             out.close();
         } catch (OutOfMemoryError oome) {
             oome.printStackTrace();
             JOptionPane.showMessageDialog(this, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
         } catch (FileNotFoundException fnfe) {
-            showError(fnfe, myResources.getString("Error_saving_file_") + file + myResources.getString(".\nFile_is_inaccessible."));
+            showError(fnfe, myResources.getString("Error_saving_file_") + textFile + myResources.getString(".\nFile_is_inaccessible."));
         } catch (Exception ex) {
-            showError(ex, myResources.getString("Error_saving_file_") + file);
+            showError(ex, myResources.getString("Error_saving_file_") + textFile);
         } finally {
             SwingUtilities.invokeLater(new Runnable() {
 
