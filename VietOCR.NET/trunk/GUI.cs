@@ -244,13 +244,22 @@ namespace VietOCR.NET
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (textFilename != null)
+            if (textFilename == null || textFilename.Length == 0)
             {
-                saveTextFile(textFilename);
+                SaveFileDlg();
+            }
+            else
+            {
+                SaveTextFile();
             }
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDlg();
+        }
+
+        void SaveFileDlg()
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Title = Properties.Resources.Save_As;
@@ -260,29 +269,29 @@ namespace VietOCR.NET
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                try
-                {
-                    this.Cursor = Cursors.WaitCursor;
-                    textFilename = saveFileDialog1.FileName;
-                    saveTextFile(textFilename);
-                    this.textBox1.Modified = false;
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show(exc.Message, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    this.Cursor = Cursors.Default;
-                }
+                textFilename = saveFileDialog1.FileName;
+                SaveTextFile();
             }
         }
 
-        void saveTextFile(string fileName) {
-            using (StreamWriter sw = new StreamWriter(fileName, false, new System.Text.UTF8Encoding()))
+        void SaveTextFile()
+        {
+            this.Cursor = Cursors.WaitCursor;
+
+            try
             {
-                sw.Write(this.textBox1.Text);
+                using (StreamWriter sw = new StreamWriter(textFilename, false, new System.Text.UTF8Encoding()))
+                {
+                    sw.Write(this.textBox1.Text);
+                }
             }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            this.textBox1.Modified = false;
+            this.Cursor = Cursors.Default;
         }
 
         private void toolStripCbLang_SelectedIndexChanged(object sender, EventArgs e)
@@ -532,7 +541,7 @@ namespace VietOCR.NET
             this.pictureBox1.Size = this.pictureBox1.Image.Size;
             this.splitContainer2.Panel2.AutoScrollPosition = Point.Empty;
             this.pictureBox1.Invalidate();
-        }   
+        }
 
         private void scanToolStripMenuItem_Click(object sender, EventArgs e)
         {
