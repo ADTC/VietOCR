@@ -76,6 +76,7 @@ public class Gui extends javax.swing.JFrame {
     private int originalW, originalH;
     private final float ZOOM_FACTOR = 1.25f;
     private Point curScrollPos;
+    private File textFile;
 
     /**
      * Creates new form Gui
@@ -504,6 +505,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuItemOpen = new javax.swing.JMenuItem();
         jMenuItemScan = new javax.swing.JMenuItem();
         jMenuItemSave = new javax.swing.JMenuItem();
+        jMenuItemSaveAs = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JSeparator();
         jMenuItemExit = new javax.swing.JMenuItem();
         jMenuCommand = new javax.swing.JMenu();
@@ -800,6 +802,15 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jMenuFile.add(jMenuItemSave);
+
+        jMenuItemSaveAs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemSaveAs.setText(bundle.getString("jMenuItemSaveAs.Text")); // NOI18N
+        jMenuItemSaveAs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSaveAsActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuItemSaveAs);
         jMenuFile.add(jSeparator2);
 
         jMenuItemExit.setText(bundle.getString("jMenuItemExit.Text")); // NOI18N
@@ -1378,6 +1389,12 @@ public class Gui extends javax.swing.JFrame {
     }
 
     private void jMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveActionPerformed
+        if (textFile != null) {
+            saveTextFile(textFile);            
+        }
+    }//GEN-LAST:event_jMenuItemSaveActionPerformed
+
+    private void jMenuItemSaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsActionPerformed
         outputDirectory = prefs.get("outputDirectory", null);
         JFileChooser chooser = new JFileChooser(outputDirectory);
         FileFilter txtFilter = new SimpleFilter("txt", "UTF-8 Text");
@@ -1386,17 +1403,17 @@ public class Gui extends javax.swing.JFrame {
         int returnVal = chooser.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             outputDirectory = chooser.getCurrentDirectory().getPath();
-            File textFile = chooser.getSelectedFile();
+            textFile = chooser.getSelectedFile();
             if (chooser.getFileFilter() == txtFilter) {
                 if (!textFile.getName().endsWith(".txt")) {
                     textFile = new File(textFile.getPath() + ".txt");
                 }
             }
-            saveFile(textFile);
+            saveTextFile(textFile);
         }
-    }//GEN-LAST:event_jMenuItemSaveActionPerformed
+    }//GEN-LAST:event_jMenuItemSaveAsActionPerformed
 
-    void saveFile(File file) {
+    void saveTextFile(File file) {
         try {
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), UTF8));
             jTextArea1.write(out);
@@ -1721,6 +1738,7 @@ public class Gui extends javax.swing.JFrame {
     protected javax.swing.JMenuItem jMenuItemPostProcess;
     private javax.swing.JMenuItem jMenuItemRemoveLineBreaks;
     private javax.swing.JMenuItem jMenuItemSave;
+    private javax.swing.JMenuItem jMenuItemSaveAs;
     private javax.swing.JMenuItem jMenuItemScan;
     private javax.swing.JMenuItem jMenuItemSplitPdf;
     private javax.swing.JMenu jMenuLookAndFeel;
