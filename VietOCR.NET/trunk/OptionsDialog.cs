@@ -110,7 +110,7 @@ namespace VietOCR.NET
 
         private void btnDangAmbigs_Click(object sender, EventArgs e)
         {
-            this.openFileDialog1.Title = String.Format("Set Path to {0}.DangAmbigs.txt.", curLangCode);
+            this.openFileDialog1.Title = String.Format("Set Path to {0}.DangAmbigs.txt", curLangCode);
             this.openFileDialog1.InitialDirectory = dangAmbigsPath;
 
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
