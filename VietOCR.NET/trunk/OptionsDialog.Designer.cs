@@ -45,6 +45,7 @@
             this.textBoxDangAmbigs = new System.Windows.Forms.TextBox();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -165,6 +166,12 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.DefaultExt = "txt";
+            resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
+            this.openFileDialog1.RestoreDirectory = true;
+            // 
             // OptionsDialog
             // 
             this.AcceptButton = this.buttonOK;
@@ -204,6 +211,7 @@
         private System.Windows.Forms.Label labelPath;
         private System.Windows.Forms.Button btnDangAmbigs;
         private System.Windows.Forms.TextBox textBoxDangAmbigs;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
