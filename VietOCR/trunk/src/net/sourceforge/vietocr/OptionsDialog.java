@@ -296,8 +296,9 @@ public class OptionsDialog extends javax.swing.JDialog {
         pathchooser.setDialogTitle(bundle.getString("Locate_Tesseract"));
         int returnVal = pathchooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            if (!tessPath.equals(pathchooser.getCurrentDirectory().getPath())) {
-                setTessPath(pathchooser.getCurrentDirectory().getPath());
+            String path = pathchooser.getCurrentDirectory().getPath();
+            if (!tessPath.equals(path)) {
+                setTessPath(path);
             }
         }
     }//GEN-LAST:event_jButtonTessActionPerformed
@@ -311,8 +312,9 @@ public class OptionsDialog extends javax.swing.JDialog {
         pathchooser.setDialogTitle(bundle.getString("Path_to") + " " + curLangCode + ".DangAmbigs.txt");
         int returnVal = pathchooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            if (!dangAmbigsPath.equals(pathchooser.getCurrentDirectory().getPath())) {
-                setDangAmbigsPath(pathchooser.getCurrentDirectory().getPath());
+            String path = pathchooser.getCurrentDirectory().getPath();
+            if (!dangAmbigsPath.equals(path)) {
+                setDangAmbigsPath(path);
             }
         }
     }//GEN-LAST:event_jButtonDangAmbigsActionPerformed
