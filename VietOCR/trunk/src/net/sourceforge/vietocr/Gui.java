@@ -47,7 +47,7 @@ public class Gui extends javax.swing.JFrame {
     static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
     static final Locale VIETNAM = new Locale("vi", "VN");
     static final String UTF8 = "UTF-8";
-    ResourceBundle myResources, bundle;
+    ResourceBundle vietpadResources, bundle;
     static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
     private int filterIndex;
     private FileFilter[] fileFilters;
@@ -77,6 +77,8 @@ public class Gui extends javax.swing.JFrame {
     private final float ZOOM_FACTOR = 1.25f;
     private Point curScrollPos;
     private File textFile;
+    private java.util.List<String> mruList = new java.util.ArrayList<String>();
+    private String strClearRecentFiles;
 
     /**
      * Creates new form Gui
@@ -204,7 +206,7 @@ public class Gui extends javax.swing.JFrame {
         fileFilters = filechooser.getChoosableFileFilters();
         filechooser.setFileFilter(fileFilters[filterIndex]);
 
-        myResources = ResourceBundle.getBundle("net.sourceforge.vietpad.Resources");
+        vietpadResources = ResourceBundle.getBundle("net.sourceforge.vietpad.Resources");
 
         wordWrapOn = prefs.getBoolean("wordWrap", false);
 
@@ -242,6 +244,15 @@ public class Gui extends javax.swing.JFrame {
         updateUndoRedo();
         updateCutCopyDelete(false);
 
+        // Populate MRU List
+        String[] fileNames = prefs.get("MruList", "").split(File.pathSeparator);
+        for (String fileName : fileNames) {
+            if (!fileName.equals("")) {
+                mruList.add(fileName);
+            }
+        }
+        updateMRUMenu();
+
         // Paste image from clipboard
         KeyEventDispatcher dispatcher = new KeyEventDispatcher() {
 
@@ -274,7 +285,7 @@ public class Gui extends javax.swing.JFrame {
     void populatePopupMenu() {
         popup.removeAll();
 
-        m_undoAction = new AbstractAction(myResources.getString("Undo")) {
+        m_undoAction = new AbstractAction(vietpadResources.getString("Undo")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -290,7 +301,7 @@ public class Gui extends javax.swing.JFrame {
 
         popup.add(m_undoAction);
 
-        m_redoAction = new AbstractAction(myResources.getString("Redo")) {
+        m_redoAction = new AbstractAction(vietpadResources.getString("Redo")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -307,7 +318,7 @@ public class Gui extends javax.swing.JFrame {
         popup.add(m_redoAction);
         popup.addSeparator();
 
-        actionCut = new AbstractAction(myResources.getString("Cut")) {
+        actionCut = new AbstractAction(vietpadResources.getString("Cut")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -318,7 +329,7 @@ public class Gui extends javax.swing.JFrame {
 
         popup.add(actionCut);
 
-        actionCopy = new AbstractAction(myResources.getString("Copy")) {
+        actionCopy = new AbstractAction(vietpadResources.getString("Copy")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -330,7 +341,7 @@ public class Gui extends javax.swing.JFrame {
 
         popup.add(actionCopy);
 
-        actionPaste = new AbstractAction(myResources.getString("Paste")) {
+        actionPaste = new AbstractAction(vietpadResources.getString("Paste")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -342,7 +353,7 @@ public class Gui extends javax.swing.JFrame {
 
         popup.add(actionPaste);
 
-        actionDelete = new AbstractAction(myResources.getString("Delete")) {
+        actionDelete = new AbstractAction(vietpadResources.getString("Delete")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -353,7 +364,7 @@ public class Gui extends javax.swing.JFrame {
         popup.add(actionDelete);
         popup.addSeparator();
 
-        actionSelectAll = new AbstractAction(myResources.getString("Select_All"), null) {
+        actionSelectAll = new AbstractAction(vietpadResources.getString("Select_All"), null) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -362,6 +373,61 @@ public class Gui extends javax.swing.JFrame {
         };
 
         popup.add(actionSelectAll);
+    }
+
+    /**
+     * Update MRU Submenu.
+     */
+    private void updateMRUMenu() {
+        this.jMenuRecentFiles.removeAll();
+
+        if (mruList.size() == 0) {
+            this.jMenuRecentFiles.add(bundle.getString("No_Recent_Files"));
+        } else {
+            Action mruAction = new AbstractAction() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JMenuItem item = (JMenuItem) e.getSource();
+                    String fileName = item.getText();
+
+                    if (fileName.equals(strClearRecentFiles)) {
+                        mruList.clear();
+                        jMenuRecentFiles.removeAll();
+                        jMenuRecentFiles.add(bundle.getString("No_Recent_Files"));
+                    } else {
+                        openFile(new File(fileName));
+                    }
+                }
+            };
+
+            for (String fileName : mruList) {
+                JMenuItem item = this.jMenuRecentFiles.add(fileName);
+                item.addActionListener(mruAction);
+            }
+            this.jMenuRecentFiles.addSeparator();
+            strClearRecentFiles = bundle.getString("Clear_Recent_Files");
+            JMenuItem clearItem = this.jMenuRecentFiles.add(strClearRecentFiles);
+            clearItem.addActionListener(mruAction);
+        }
+    }
+
+    /**
+     * Update MRU List.
+     *
+     * @param fileName
+     */
+    private void updateMRUList(String fileName) {
+        if (mruList.contains(fileName)) {
+            mruList.remove(fileName);
+        }
+        mruList.add(0, fileName);
+
+        if (mruList.size() > 10) {
+            mruList.remove(10);
+        }
+
+        updateMRUMenu();
     }
 
     /**
@@ -429,7 +495,7 @@ public class Gui extends javax.swing.JFrame {
             }
         } catch (OutOfMemoryError oome) {
             oome.printStackTrace();
-            JOptionPane.showMessageDialog(this, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, APP_NAME + vietpadResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + vietpadResources.getString("_and_try_again."), vietpadResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -506,6 +572,8 @@ public class Gui extends javax.swing.JFrame {
         jMenuItemScan = new javax.swing.JMenuItem();
         jMenuItemSave = new javax.swing.JMenuItem();
         jMenuItemSaveAs = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        jMenuRecentFiles = new javax.swing.JMenu();
         jSeparator2 = new javax.swing.JSeparator();
         jMenuItemExit = new javax.swing.JMenuItem();
         jMenuCommand = new javax.swing.JMenu();
@@ -811,6 +879,10 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jMenuFile.add(jMenuItemSaveAs);
+        jMenuFile.add(jSeparator4);
+
+        jMenuRecentFiles.setText(bundle.getString("jMenuRecentFiles.Text")); // NOI18N
+        jMenuFile.add(jMenuRecentFiles);
         jMenuFile.add(jSeparator2);
 
         jMenuItemExit.setText(bundle.getString("jMenuItemExit.Text")); // NOI18N
@@ -1223,6 +1295,12 @@ public class Gui extends javax.swing.JFrame {
         prefs.putBoolean("wordWrap", wordWrapOn);
         prefs.putBoolean("dangAmbigs", dangAmbigsOn);
 
+        StringBuffer buf = new StringBuffer();
+        for (int i = 0; i < this.mruList.size(); i++) {
+            buf.append(this.mruList.get(i)).append(File.pathSeparatorChar);
+        }
+        prefs.put("MruList", buf.toString());
+
         if (getExtendedState() == NORMAL) {
             prefs.putInt("frameHeight", getHeight());
             prefs.putInt("frameWidth", getWidth());
@@ -1275,6 +1353,7 @@ public class Gui extends javax.swing.JFrame {
                 if (doc.getText(0, 1).equals("\uFEFF")) {
                     doc.remove(0, 1); // remove BOM
                 }
+                updateMRUList(selectedFile.getPath());
             } catch (Exception e) {
             }
             return;
@@ -1307,6 +1386,7 @@ public class Gui extends javax.swing.JFrame {
                     loadImage(get());
                     jLabelStatus.setText(bundle.getString("Loading_completed"));
                     jProgressBar1.setString(bundle.getString("Loading_completed"));
+                    updateMRUList(selectedFile.getPath());
                 } catch (InterruptedException ignore) {
                     ignore.printStackTrace();
                     jLabelStatus.setText("Loading canceled.");
@@ -1399,7 +1479,7 @@ public class Gui extends javax.swing.JFrame {
     private void jMenuItemSaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsActionPerformed
         saveFileDlg();
     }//GEN-LAST:event_jMenuItemSaveAsActionPerformed
-    
+
     void saveFileDlg() {
         outputDirectory = prefs.get("outputDirectory", null);
         JFileChooser chooser = new JFileChooser(outputDirectory);
@@ -1422,18 +1502,19 @@ public class Gui extends javax.swing.JFrame {
     void saveTextFile() {
         getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         getGlassPane().setVisible(true);
-        
+
         try {
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(textFile), UTF8));
             jTextArea1.write(out);
             out.close();
+            updateMRUList(textFile.getPath());
         } catch (OutOfMemoryError oome) {
             oome.printStackTrace();
-            JOptionPane.showMessageDialog(this, APP_NAME + myResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + myResources.getString("_and_try_again."), myResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, APP_NAME + vietpadResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + vietpadResources.getString("_and_try_again."), vietpadResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
         } catch (FileNotFoundException fnfe) {
-            showError(fnfe, myResources.getString("Error_saving_file_") + textFile + myResources.getString(".\nFile_is_inaccessible."));
+            showError(fnfe, vietpadResources.getString("Error_saving_file_") + textFile + vietpadResources.getString(".\nFile_is_inaccessible."));
         } catch (Exception ex) {
-            showError(ex, myResources.getString("Error_saving_file_") + textFile);
+            showError(ex, vietpadResources.getString("Error_saving_file_") + textFile);
         } finally {
             SwingUtilities.invokeLater(new Runnable() {
 
@@ -1654,7 +1735,7 @@ public class Gui extends javax.swing.JFrame {
         }
         Locale.setDefault(locale);
         bundle = java.util.ResourceBundle.getBundle("net.sourceforge.vietocr.Gui");
-        myResources = ResourceBundle.getBundle("net.sourceforge.vietpad.Resources");
+        vietpadResources = ResourceBundle.getBundle("net.sourceforge.vietpad.Resources");
 
         SwingUtilities.invokeLater(new Runnable() {
 
@@ -1751,6 +1832,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemScan;
     private javax.swing.JMenuItem jMenuItemSplitPdf;
     private javax.swing.JMenu jMenuLookAndFeel;
+    private javax.swing.JMenu jMenuRecentFiles;
     private javax.swing.JMenu jMenuSettings;
     private javax.swing.JMenu jMenuTools;
     private javax.swing.JMenu jMenuUILang;
@@ -1765,6 +1847,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
