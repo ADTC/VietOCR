@@ -53,6 +53,9 @@ namespace VietOCR.NET
         private int filterIndex;
         private string textFilename;
 
+        List<string> mruList = new List<string>();
+        private string strClearRecentFiles;
+
         const string strUILang = "UILanguage";
         const string strOcrLanguage = "OcrLanguage";
         const string strWordWrap = "WordWrap";
@@ -62,6 +65,7 @@ namespace VietOCR.NET
         const string strForeColor = "ForeColor";
         const string strBackColor = "BackColor";
         const string strFilterIndex = "FilterIndex";
+        const string strMruList = "MruList";
 
         private bool IsFitForZoomIn = false;
         private const float ZOOM_FACTOR = 1.25f;
@@ -93,6 +97,18 @@ namespace VietOCR.NET
 
             LoadLang();
             this.toolStripCbLang.Items.AddRange(langs);
+        }
+
+        // Event overrides
+        protected override void OnLoad(EventArgs ea)
+        {
+            base.OnLoad(ea);
+
+            // Work around a bug which causes Modified property
+            // to be true when system default locale is vi-VN.
+            this.textBox1.Modified = false;
+
+            updateMRUMenu();
         }
 
         void LoadLang()
@@ -283,6 +299,7 @@ namespace VietOCR.NET
                 using (StreamWriter sw = new StreamWriter(textFilename, false, new System.Text.UTF8Encoding()))
                 {
                     sw.Write(this.textBox1.Text);
+                    updateMRUList(textFilename);
                 }
             }
             catch (Exception exc)
@@ -292,6 +309,71 @@ namespace VietOCR.NET
 
             this.textBox1.Modified = false;
             this.Cursor = Cursors.Default;
+        }
+
+        /// <summary>
+        /// Update MRU Submenu.
+        /// </summary>
+        private void updateMRUMenu()
+        {
+            this.recentFilesToolStripMenuItem.DropDownItems.Clear();
+
+            if (mruList.Count == 0)
+            {
+                this.recentFilesToolStripMenuItem.DropDownItems.Add(Properties.Resources.No_Recent_Files);
+            }
+            else
+            {
+                EventHandler eh = new EventHandler(MenuRecentFilesOnClick);
+
+                foreach (string fileName in mruList)
+                {
+                    ToolStripItem item = this.recentFilesToolStripMenuItem.DropDownItems.Add(fileName);
+                    item.Click += eh;
+                }
+                this.recentFilesToolStripMenuItem.DropDownItems.Add("-");
+                strClearRecentFiles = Properties.Resources.Clear_Recent_Files;
+                ToolStripItem clearItem = this.recentFilesToolStripMenuItem.DropDownItems.Add(strClearRecentFiles);
+                clearItem.Click += eh;
+            }
+        }
+
+        void MenuRecentFilesOnClick(object obj, EventArgs ea)
+        {
+            ToolStripDropDownItem item = (ToolStripDropDownItem)obj;
+            string fileName = item.Text;
+
+            if (fileName == strClearRecentFiles)
+            {
+                mruList.Clear();
+                this.recentFilesToolStripMenuItem.DropDownItems.Clear();
+                this.recentFilesToolStripMenuItem.DropDownItems.Add(Properties.Resources.No_Recent_Files);
+            }
+            else
+            {
+                openFile(fileName);
+            }
+        }
+
+        /// <summary>
+        /// Update MRU List.
+        /// </summary>
+        /// <param name="fileName"></param>
+        private void updateMRUList(String fileName)
+        {
+            if (mruList.Contains(fileName))
+            {
+                mruList.Remove(fileName);
+            }
+
+            mruList.Insert(0, fileName);
+
+            if (mruList.Count > 10)
+            {
+                mruList.RemoveAt(10);
+            }
+
+            updateMRUMenu();
         }
 
         private void toolStripCbLang_SelectedIndexChanged(object sender, EventArgs e)
@@ -427,10 +509,12 @@ namespace VietOCR.NET
                     using (StreamReader sr = new StreamReader(selectedFile, Encoding.UTF8, true))
                     {
                         this.textBox1.Text = sr.ReadToEnd();
+                        updateMRUList(selectedFile);
                     }
                 }
                 catch
                 {
+                    //ignore
                 }
                 return;
             }
@@ -447,6 +531,7 @@ namespace VietOCR.NET
             this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
 
             this.backgroundWorkerLoad.RunWorkerAsync(selectedFile);
+            updateMRUList(selectedFile);
         }
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -818,6 +903,12 @@ namespace VietOCR.NET
                 (int)regkey.GetValue(strBackColor, Color.FromKnownColor(KnownColor.White).ToArgb()));
             filterIndex = (int)regkey.GetValue(strFilterIndex, 1);
             selectedUILanguage = (string)regkey.GetValue(strUILang, "en-US");
+            string[] fileNames = ((string)regkey.GetValue(strMruList, String.Empty)).Split(new[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string fileName in fileNames)
+            {
+                mruList.Add(fileName);
+            }
         }
 
         protected override void SaveRegistryInfo(RegistryKey regkey)
@@ -836,6 +927,12 @@ namespace VietOCR.NET
             regkey.SetValue(strBackColor, this.textBox1.BackColor.ToArgb());
             regkey.SetValue(strFilterIndex, filterIndex);
             regkey.SetValue(strUILang, selectedUILanguage);
+            StringBuilder strB = new StringBuilder();
+            foreach (string name in mruList)
+            {
+                strB.Append(name).Append(';');
+            }
+            regkey.SetValue(strMruList, strB.ToString());
         }
 
         private void formatToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
@@ -902,6 +999,5 @@ namespace VietOCR.NET
                 scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
             }
         }
-
     }
 }

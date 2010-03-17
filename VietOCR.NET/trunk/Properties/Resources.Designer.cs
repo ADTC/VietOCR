@@ -133,6 +133,15 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear Recent Files.
+        /// </summary>
+        internal static string Clear_Recent_Files {
+            get {
+                return ResourceManager.GetString("Clear_Recent_Files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Correction completed..
         /// </summary>
         internal static string Correcting_completed {
@@ -255,6 +264,15 @@ namespace VietOCR.NET.Properties {
         internal static string MergeTIFFcompleted {
             get {
                 return ResourceManager.GetString("MergeTIFFcompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Recent Files.
+        /// </summary>
+        internal static string No_Recent_Files {
+            get {
+                return ResourceManager.GetString("No_Recent_Files", resourceCulture);
             }
         }
         
