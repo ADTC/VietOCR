@@ -6,8 +6,13 @@
     <description>Builds, tests, and runs the project VietOCR.</description>
     <import file="nbproject/build-impl.xml"/>
     <!-- set global properties for this build -->
-    <property name="version" value="1.7"/>
+    <property name="version" value="1.7-Beta"/>
 
+    <target name="-post-compile">
+        <copy todir="${build.classes.dir}">
+            <fileset dir="." includes="readme*.html"/>
+        </copy>
+    </target>
     <target name="-post-jar">
         <move todir="./">
             <fileset dir="${dist.dir}" includes="${ant.project.name}.jar" />
@@ -18,18 +23,7 @@
     <target name="-post-clean">
         <delete file="${ant.project.name}.jar"/>
     </target>
-    <target name="combine-jar" depends="compile"
-            description="generate executable JAR file">
-        <jar destfile="${ant.project.name}.jar" basedir="${build.classes.dir}" compress="false">
-            <zipgroupfileset dir="lib" includes="*.jar"/>
-            <manifest>
-                <attribute name="Built-By" value="${user.name}"/>
-                <attribute name="Main-Class" value="${main.class}"/>
-            </manifest>
-        </jar>
-        <chmod file="ocr" perm="ugo+rx"/>
-    </target>
-    <target name="dist" depends="clean,combine-jar"
+    <target name="dist" depends="clean,jar"
             description="create binary and source distribution archives">
         <mkdir dir="${dist.dir}"/>
         <zip zipfile="${dist.dir}/${ant.project.name}-${version}-src.zip">
