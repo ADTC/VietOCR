@@ -5,51 +5,33 @@
 <project name="VietOCR" default="default" basedir=".">
     <description>Builds, tests, and runs the project VietOCR.</description>
     <import file="nbproject/build-impl.xml"/>
+    <!-- set global properties for this build -->
+    <property name="version" value="1.7"/>
+
     <target name="-post-jar">
         <move todir="./">
             <fileset dir="${dist.dir}" includes="${ant.project.name}.jar" />
         </move>
         <delete dir="${dist.dir}/lib"/>
+        <chmod file="ocr" perm="ugo+rx"/>
     </target>
     <target name="-post-clean">
         <delete file="${ant.project.name}.jar"/>
     </target>
-    <target name="-do-jar-with-libraries" depends="init,compile,-pre-pre-jar,-pre-jar" if="manifest.available+main.class+mkdist.available">
-        <property name="build.classes.dir.resolved" location="${build.classes.dir}"/>
-        <pathconvert property="run.classpath.without.build.classes.dir">
-            <path path="${run.classpath}"/>
-            <map from="${build.classes.dir.resolved}" to=""/>
-        </pathconvert>
-        <pathconvert property="jar.classpath" pathsep=" ">
-            <path path="${run.classpath.without.build.classes.dir}"/>
-            <chainedmapper>
-                <flattenmapper/>
-                <globmapper from="*" to="lib/*"/>
-            </chainedmapper>
-        </pathconvert>
-        <taskdef classname="org.netbeans.modules.java.j2seproject.copylibstask.CopyLibs" name="copylibs" classpath="${libs.CopyLibs.classpath}"/>
-        <copylibs manifest="${manifest.file}" runtimeclasspath="${run.classpath.without.build.classes.dir}" jarfile="${dist.jar}" compress="${jar.compress}">
-            <fileset dir="${build.classes.dir}"/>
-            <fileset dir="." includes="readme*.html"/>
+    <target name="combine-jar" depends="compile"
+            description="generate executable JAR file">
+        <jar destfile="${ant.project.name}.jar" basedir="${build.classes.dir}" compress="false">
+            <zipgroupfileset dir="lib" includes="*.jar"/>
             <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
                 <attribute name="Main-Class" value="${main.class}"/>
-                <attribute name="Class-Path" value="${jar.classpath}"/>
             </manifest>
-        </copylibs>
-        <echo>To run this application from the command line without Ant, try:</echo>
-        <property name="dist.jar.resolved" location="${dist.jar}"/>
-        <echo>java -jar "${dist.jar.resolved}"</echo>
+        </jar>
+        <chmod file="ocr" perm="ugo+rx"/>
     </target>
-    <target name="jar" depends="init,compile,-pre-jar,-do-jar-with-mainclass,-do-jar-with-libraries,-post-jar" description="Build JAR."/>
-    <target name="run" depends="jar"
-                description="run the program">
-        <java fork="true" jar="${ant.project.name}.jar">
-            <jvmarg value="-Xms128m" />
-            <jvmarg value="-Xmx512m" />
-        </java>
-    </target>
-    <target name="dist" depends="clean,jar"
-                description="create binary and source distribution archives">
+    <target name="dist" depends="clean,combine-jar"
+            description="create binary and source distribution archives">
+        <mkdir dir="${dist.dir}"/>
         <zip zipfile="${dist.dir}/${ant.project.name}-${version}-src.zip">
             <zipfileset dir="." prefix="${ant.project.name}">
                 <exclude name="**/.*"/>
@@ -61,7 +43,7 @@
         </zip>
         <zip zipfile="${dist.dir}/${ant.project.name}-${version}.zip">
             <zipfileset dir="." includes="*,tesseract/**,lib/**,data/**,samples/**" prefix="${ant.project.name}"
-            		excludes="build.xml,src,build,dist,dict,res,doc,test,nbproject">
+                        excludes="build.xml,src,build,dist,doc,test,nbproject">
                 <exclude name="*.mf"/>
             </zipfileset>
         </zip>
@@ -69,9 +51,9 @@
     </target>
     <!--
 
-    There exist several targets which are by default empty and which can be 
-    used for execution of your tasks. These targets are usually executed 
-    before and after some main targets. They are: 
+    There exist several targets which are by default empty and which can be
+    used for execution of your tasks. These targets are usually executed
+    before and after some main targets. They are:
 
       -pre-init:                 called before initialization of project properties
       -post-init:                called after initialization of project properties
@@ -97,12 +79,12 @@
             </obfuscate>
         </target>
 
-    For list of available properties check the imported 
-    nbproject/build-impl.xml file. 
+    For list of available properties check the imported
+    nbproject/build-impl.xml file.
 
 
     Another way to customize the build is by overriding existing main targets.
-    The targets of interest are: 
+    The targets of interest are:
 
       -init-macrodef-javac:     defines macro for javac compilation
       -init-macrodef-junit:     defines macro for junit execution
@@ -110,7 +92,7 @@
       -init-macrodef-java:      defines macro for class execution
       -do-jar-with-manifest:    JAR building (if you are using a manifest)
       -do-jar-without-manifest: JAR building (if you are not using a manifest)
-      run:                      execution of project 
+      run:                      execution of project
       -javadoc-build:           Javadoc generation
       test-report:              JUnit report generation
 
@@ -122,10 +104,10 @@
             </exec>
         </target>
 
-    Notice that the overridden target depends on the jar target and not only on 
-    the compile target as the regular run target does. Again, for a list of available 
+    Notice that the overridden target depends on the jar target and not only on
+    the compile target as the regular run target does. Again, for a list of available
     properties which you can use, check the target you are overriding in the
-    nbproject/build-impl.xml file. 
+    nbproject/build-impl.xml file.
 
     -->
 </project>
