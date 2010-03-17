@@ -231,4 +231,10 @@
   <data name="Correcting_errors" xml:space="preserve">
     <value>Correcting recognition errors...</value>
   </data>
+  <data name="Clear_Recent_Files" xml:space="preserve">
+    <value>Clear Recent Files</value>
+  </data>
+  <data name="No_Recent_Files" xml:space="preserve">
+    <value>No Recent Files</value>
+  </data>
 </root>
