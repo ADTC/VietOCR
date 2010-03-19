@@ -44,6 +44,9 @@ namespace ConvertPDF
         private const string GS_QuietOperation = "-q";
         private const string GS_StandardOutputDevice = "-";
         private const string GS_MultiplePageCharacter = "%";
+        private const string GSDLL_NOT_FOUND = "The gsdll32.dll wasn't found in default dlls search path.\nPlease download, install " +
+                        "GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.";
+        private const string GSDLL_INSTANCE = "I can't create a new instance of Ghostscript. Please verify no other instances are running!";
         #endregion
         #region Windows Import
         /// <summary>Needed to copy memory from one location to another, used to fill the struct</summary>
@@ -232,7 +235,7 @@ namespace ConvertPDF
             set
             {
                 if ((value > 4) | (value == 3))
-                    throw new ArgumentOutOfRangeException("The Graphics Alpha Bit must have a value between 1 2 and 4, or <= 0 if not set");
+                    throw new ArgumentOutOfRangeException("The Graphics Alpha Bit must have a value between 1 2 and 4, or <= 0 if not set.");
                 _iGraphicsAlphaBit = value;
             }
         }
@@ -245,7 +248,7 @@ namespace ConvertPDF
             set
             {
                 if ((value > 4) | (value == 3))
-                    throw new ArgumentOutOfRangeException("The Text ALpha Bit must have a value between 1 2 and 4, or <= 0 if not set");
+                    throw new ArgumentOutOfRangeException("The Text Alpha Bit must have a value between 1 2 and 4, or <= 0 if not set.");
                 _iTextAlphaBit = value;
             }
         }
@@ -411,10 +414,10 @@ namespace ConvertPDF
                 {
                     ClearParameters(ref aGCHandle, ref gchandleArgs);
                     if (throwException)
-                        throw new ApplicationException("I can't create a new istance of Ghostscript please verify no other istance are running!");
+                        throw new ApplicationException(GSDLL_INSTANCE);
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("I can't create a new istance of Ghostscript please verify no other istance are running!");
+                        System.Windows.Forms.MessageBox.Show(GSDLL_INSTANCE);
                         return false;
                     }
                 }
@@ -423,15 +426,10 @@ namespace ConvertPDF
             {//in this case the dll we r using isn't the dll we expect
                 ClearParameters(ref aGCHandle, ref gchandleArgs);
                 if (throwException)
-                    throw new ApplicationException("The gsdll32.dll wasn't found in default dlls search path " +
-                        "or is not in correct version (doesn't expose the required methods).\nPlease download, install " +
-                        "GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.");
+                    throw new ApplicationException(GSDLL_NOT_FOUND);
                 else
                 {
-                    //Barbara post write much better then me, thanks her for the nice words :P
-                    System.Windows.Forms.MessageBox.Show("The gsdll32.dll wasn't found in default dlls search path " +
-                        "or is not in correct version (doesn't expose the required methods).\nPlease download, install " +
-                        "GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.");
+                    System.Windows.Forms.MessageBox.Show(GSDLL_NOT_FOUND);
                     return false;
                 }
             }
@@ -514,16 +512,13 @@ namespace ConvertPDF
                 if (intReturn < 0)
                 {
                     ClearParameters(ref aGCHandle, ref gchandleArgs);
-                    throw new ApplicationException("I can't create a new istance of Ghostscript please verify no other istance are running!");
+                    throw new ApplicationException(GSDLL_INSTANCE);
                 }
             }
             catch (DllNotFoundException)
             {//in this case the dll we r using isn't the dll we expect
                 ClearParameters(ref aGCHandle, ref gchandleArgs);
-                throw new ApplicationException("The gsdll32.dll wasn't found in default dlls search path " +
-                    "or is not in correct version (doesn't expose the required methods).\nPlease download, install " +
-                    "GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.");
-
+                throw new ApplicationException(GSDLL_NOT_FOUND);
             }
             callerHandle = IntPtr.Zero;//remove unwanter handler
             #endregion
