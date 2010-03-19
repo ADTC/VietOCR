@@ -90,6 +90,13 @@ public class ImageIconScalable extends ImageIcon {
         this.height = height;
     }
 
+    @Override
+    public ImageIconScalable clone() {
+        BufferedImage source = (BufferedImage) this.getImage();
+        BufferedImage copy = new BufferedImage(source.getColorModel(), source.copyData(null), source.isAlphaPremultiplied(), null);
+        return new ImageIconScalable(copy);
+    }
+
     public ImageIconScalable getRotatedImageIcon(double angle) {
         double sin = Math.abs(Math.sin(angle));
         double cos = Math.abs(Math.cos(angle));
