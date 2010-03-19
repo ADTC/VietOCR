@@ -473,6 +473,8 @@ namespace VietOCR.NET
         {
             this.toolStripBtnFitImage.Enabled = false;
             this.toolStripBtnActualSize.Enabled = true;
+            this.toolStripBtnZoomIn.Enabled = false;
+            this.toolStripBtnZoomOut.Enabled = false;
             curScrollPos = this.splitContainer2.Panel2.AutoScrollPosition;
             this.splitContainer2.Panel2.AutoScrollPosition = Point.Empty;
             this.pictureBox1.Deselect();
@@ -487,6 +489,9 @@ namespace VietOCR.NET
         {
             this.toolStripBtnFitImage.Enabled = true;
             this.toolStripBtnActualSize.Enabled = false;
+            this.toolStripBtnZoomIn.Enabled = true;
+            this.toolStripBtnZoomOut.Enabled = true;
+
             this.pictureBox1.Deselect();
 
             this.pictureBox1.Dock = DockStyle.None;
