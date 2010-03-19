@@ -34,11 +34,6 @@ import net.sourceforge.vietpad.*;
 import net.sourceforge.vietpad.inputmethod.*;
 import net.sourceforge.vietocr.wia.*;
 
-/**
- *
- * @author  Quan Nguyen (nguyenq@users.sf.net)
- *
- */
 public class Gui extends javax.swing.JFrame {
 
     public static final String APP_NAME = "VietOCR";
@@ -66,7 +61,7 @@ public class Gui extends javax.swing.JFrame {
     protected String[] langCodes;
     private String[] langs;
     private ImageIconScalable imageIcon;
-    private boolean reset;
+    private boolean isFitImageSelected;
     private JFileChooser filechooser;
     protected boolean wordWrapOn, dangAmbigsOn;
     private String selectedInputMethod;
@@ -1157,7 +1152,7 @@ public class Gui extends javax.swing.JFrame {
         scaleX = (float) imageIcon.getIconWidth() / (float) this.jScrollPane2.getWidth();
         scaleY = (float) imageIcon.getIconHeight() / (float) this.jScrollPane2.getHeight();
         fitImageChange(this.jScrollPane2.getWidth(), this.jScrollPane2.getHeight());
-        reset = true;
+        isFitImageSelected = true;
     }//GEN-LAST:event_jButtonFitImageActionPerformed
 
     private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualSizeActionPerformed
@@ -1166,7 +1161,7 @@ public class Gui extends javax.swing.JFrame {
         ((JImageLabel) jImageLabel).deselect();
         fitImageChange(originalW, originalH);
         scaleX = scaleY = 1f;
-        reset = false;
+        isFitImageSelected = false;
     }//GEN-LAST:event_jButtonActualSizeActionPerformed
 
     void fitImageChange(final int width, final int height) {
@@ -1174,10 +1169,7 @@ public class Gui extends javax.swing.JFrame {
 
             @Override
             public void run() {
-                for (ImageIconScalable tempImageIcon : imageList) {
-                    tempImageIcon.setScaledSize(width, height);
-                }
-                imageIcon = imageList.get(imageIndex);
+                imageIcon.setScaledSize(width, height);
                 jScrollPane2.getViewport().setViewPosition(curScrollPos);
                 jImageLabel.revalidate();
                 jScrollPane2.repaint();
@@ -1188,13 +1180,13 @@ public class Gui extends javax.swing.JFrame {
     private void jButtonZoomOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomOutActionPerformed
         ((JImageLabel) jImageLabel).deselect();
         doChange(false);
-        reset = false;
+        isFitImageSelected = false;
     }//GEN-LAST:event_jButtonZoomOutActionPerformed
 
     private void jButtonZoomInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomInActionPerformed
         ((JImageLabel) jImageLabel).deselect();
         doChange(true);
-        reset = false;
+        isFitImageSelected = false;
     }//GEN-LAST:event_jButtonZoomInActionPerformed
 
     void doChange(final boolean isZoomIn) {
@@ -1202,17 +1194,14 @@ public class Gui extends javax.swing.JFrame {
 
             @Override
             public void run() {
-                for (ImageIconScalable tempImageIcon : imageList) {
-                    int width = tempImageIcon.getIconWidth();
-                    int height = tempImageIcon.getIconHeight();
+                int width = imageIcon.getIconWidth();
+                int height = imageIcon.getIconHeight();
 
-                    if (isZoomIn) {
-                        tempImageIcon.setScaledSize((int) (width * ZOOM_FACTOR), (int) (height * ZOOM_FACTOR));
-                    } else {
-                        tempImageIcon.setScaledSize((int) (width / ZOOM_FACTOR), (int) (height / ZOOM_FACTOR));
-                    }
+                if (isZoomIn) {
+                    imageIcon.setScaledSize((int) (width * ZOOM_FACTOR), (int) (height * ZOOM_FACTOR));
+                } else {
+                    imageIcon.setScaledSize((int) (width / ZOOM_FACTOR), (int) (height / ZOOM_FACTOR));
                 }
-                imageIcon = imageList.get(imageIndex);
                 jImageLabel.revalidate();
                 jScrollPane2.repaint();
 
@@ -1430,11 +1419,9 @@ public class Gui extends javax.swing.JFrame {
         imageTotal = imageList.size();
         imageIndex = 0;
         scaleX = scaleY = 1f;
+        isFitImageSelected = false;
 
         displayImage();
-
-        originalW = imageIcon.getIconWidth();
-        originalH = imageIcon.getIconHeight();
 
         this.setTitle(selectedFile.getName() + " - " + APP_NAME);
 
@@ -1461,7 +1448,17 @@ public class Gui extends javax.swing.JFrame {
 
     void displayImage() {
         this.jLabelCurIndex.setText(bundle.getString("Page_") + (imageIndex + 1) + " " + bundle.getString("of_") + imageTotal);
-        imageIcon = imageList.get(imageIndex);
+        imageIcon = imageList.get(imageIndex).clone();
+        originalW = imageIcon.getIconWidth();
+        originalH = imageIcon.getIconHeight();
+
+        if (this.isFitImageSelected) {
+            // scale image to fit the scrollpane
+            imageIcon.setScaledSize(this.jScrollPane2.getWidth(), this.jScrollPane2.getHeight());
+        } else if (Math.abs(scaleX - 1f) > 0.001f) {
+            // scale image for zoom
+            imageIcon.setScaledSize((int) (originalW / scaleX), (int) (originalH / scaleY));
+        }
 
         jImageLabel.setIcon(imageIcon);
         this.jScrollPane2.getViewport().setViewPosition(curScrollPos = new Point());
@@ -1566,7 +1563,7 @@ public class Gui extends javax.swing.JFrame {
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         jSplitPane1.setDividerLocation(jSplitPane1.getWidth() / 2);
 
-        if (reset && imageIcon != null) {
+        if (isFitImageSelected && imageIcon != null) {
             SwingUtilities.invokeLater(new Runnable() {
 
                 @Override
