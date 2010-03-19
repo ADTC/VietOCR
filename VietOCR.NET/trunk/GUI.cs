@@ -782,6 +782,12 @@ namespace VietOCR.NET
             imageList[imageIndex].RotateFlip(RotateFlipType.Rotate270FlipNone);
             this.pictureBox1.Size = this.pictureBox1.Image.Size;
             this.pictureBox1.Refresh();
+            // recalculate scale factors if in Fit Image mode
+            if (this.pictureBox1.SizeMode == PictureBoxSizeMode.StretchImage)
+            {
+                scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
+                scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
+            }
         }
 
         private void toolStripBtnRotateCW_Click(object sender, EventArgs e)
@@ -791,6 +797,12 @@ namespace VietOCR.NET
             imageList[imageIndex].RotateFlip(RotateFlipType.Rotate90FlipNone);
             this.pictureBox1.Size = this.pictureBox1.Image.Size;
             this.pictureBox1.Refresh();
+            // recalculate scale factors if in Fit Image mode
+            if (this.pictureBox1.SizeMode == PictureBoxSizeMode.StretchImage)
+            {
+                scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
+                scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
+            }
         }
 
         private void toolStripBtnZoomIn_Click(object sender, EventArgs e)
