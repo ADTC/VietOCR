@@ -1147,6 +1147,8 @@ public class Gui extends javax.swing.JFrame {
     private void jButtonFitImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFitImageActionPerformed
         this.jButtonFitImage.setEnabled(false);
         this.jButtonActualSize.setEnabled(true);
+        this.jButtonZoomIn.setEnabled(false);
+        this.jButtonZoomOut.setEnabled(false);
         ((JImageLabel) jImageLabel).deselect();
         curScrollPos = this.jScrollPane2.getViewport().getViewPosition();
         scaleX = (float) imageIcon.getIconWidth() / (float) this.jScrollPane2.getWidth();
@@ -1158,6 +1160,8 @@ public class Gui extends javax.swing.JFrame {
     private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualSizeActionPerformed
         this.jButtonFitImage.setEnabled(true);
         this.jButtonActualSize.setEnabled(false);
+        this.jButtonZoomIn.setEnabled(true);
+        this.jButtonZoomOut.setEnabled(true);
         ((JImageLabel) jImageLabel).deselect();
         fitImageChange(originalW, originalH);
         scaleX = scaleY = 1f;
@@ -1455,6 +1459,8 @@ public class Gui extends javax.swing.JFrame {
         if (this.isFitImageSelected) {
             // scale image to fit the scrollpane
             imageIcon.setScaledSize(this.jScrollPane2.getWidth(), this.jScrollPane2.getHeight());
+            scaleX = (float) originalW / (float) this.jScrollPane2.getWidth();
+            scaleY = (float) originalH / (float) this.jScrollPane2.getHeight();
         } else if (Math.abs(scaleX - 1f) > 0.001f) {
             // scale image for zoom
             imageIcon.setScaledSize((int) (originalW / scaleX), (int) (originalH / scaleY));
@@ -1658,6 +1664,18 @@ public class Gui extends javax.swing.JFrame {
         rotateImage(90);
     }//GEN-LAST:event_jButtonRotateCWActionPerformed
 
+    void rotateImage(int angle) {
+        try {
+            imageIcon = imageList.get(imageIndex).getRotatedImageIcon(Math.toRadians(angle));
+            imageList.set(imageIndex, imageIcon); // persist the rotated image
+            iioImageList.get(imageIndex).setRenderedImage((BufferedImage) imageIcon.getImage());
+            displayImage();
+        } catch (OutOfMemoryError oome) {
+            oome.printStackTrace();
+            JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     private void jMenuItemOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOptionsActionPerformed
         openOptionsDialog();
     }//GEN-LAST:event_jMenuItemOptionsActionPerformed
@@ -1711,19 +1729,6 @@ public class Gui extends javax.swing.JFrame {
 
     void mergePdf() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
-    }
-
-    void rotateImage(int angle) {
-        try {
-            imageIcon = imageIcon.getRotatedImageIcon(Math.toRadians(angle));
-            jImageLabel.setIcon(imageIcon);
-            imageList.set(imageIndex, imageIcon);
-            iioImageList.get(imageIndex).setRenderedImage((BufferedImage) imageIcon.getImage());
-            ((JImageLabel) jImageLabel).deselect();
-        } catch (OutOfMemoryError oome) {
-            oome.printStackTrace();
-            JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     void changeUILanguage(final Locale locale) {
