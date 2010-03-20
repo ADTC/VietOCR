@@ -513,7 +513,7 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JComboBox(langs);"/>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jComboBoxLang.setSelectedItem(prefs.get(&quot;langCode&quot;, null));&#xa;if (langCodes != null &amp;&amp; jComboBoxLang.getSelectedIndex() != -1) curLangCode = langCodes[jComboBoxLang.getSelectedIndex()];"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jComboBoxLang.setSelectedItem(prefs.get(&quot;langCode&quot;, null));&#xa;if (langCodes != null &amp;&amp; jComboBoxLang.getSelectedIndex() != -1) {&#xa;curLangCode = langCodes[jComboBoxLang.getSelectedIndex()];&#xa;}"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
           </AuxValues>
         </Component>

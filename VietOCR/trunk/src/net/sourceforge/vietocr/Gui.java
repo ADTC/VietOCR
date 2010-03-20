@@ -57,7 +57,7 @@ public class Gui extends javax.swing.JFrame {
     private String outputDirectory;
     protected String tessPath, dangAmbigsPath;
     private Properties prop, config;
-    protected String curLangCode;
+    protected String curLangCode = "eng";
     protected String[] langCodes;
     private String[] langs;
     private ImageIconScalable imageIcon;
@@ -513,7 +513,9 @@ public class Gui extends javax.swing.JFrame {
         jLabelLanguage = new javax.swing.JLabel();
         jComboBoxLang = new JComboBox(langs);
         jComboBoxLang.setSelectedItem(prefs.get("langCode", null));
-        if (langCodes != null && jComboBoxLang.getSelectedIndex() != -1) curLangCode = langCodes[jComboBoxLang.getSelectedIndex()];
+        if (langCodes != null && jComboBoxLang.getSelectedIndex() != -1) {
+            curLangCode = langCodes[jComboBoxLang.getSelectedIndex()];
+        }
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
