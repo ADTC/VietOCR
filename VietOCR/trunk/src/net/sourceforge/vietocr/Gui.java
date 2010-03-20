@@ -1151,8 +1151,8 @@ public class Gui extends javax.swing.JFrame {
         this.jButtonZoomOut.setEnabled(false);
         ((JImageLabel) jImageLabel).deselect();
         curScrollPos = this.jScrollPane2.getViewport().getViewPosition();
-        scaleX = (float) imageIcon.getIconWidth() / (float) this.jScrollPane2.getWidth();
-        scaleY = (float) imageIcon.getIconHeight() / (float) this.jScrollPane2.getHeight();
+        scaleX = (float) originalW / (float) this.jScrollPane2.getWidth();
+        scaleY = (float) originalH / (float) this.jScrollPane2.getHeight();
         fitImageChange(this.jScrollPane2.getWidth(), this.jScrollPane2.getHeight());
         isFitImageSelected = true;
     }//GEN-LAST:event_jButtonFitImageActionPerformed
@@ -1844,7 +1844,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemEng;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemViet;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    protected javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator2;
