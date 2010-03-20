@@ -40,7 +40,15 @@ public class GuiWithCommand extends Gui {
         if (rect != null) {
             try {
                 ImageIcon ii = (ImageIcon) this.jImageLabel.getIcon();
-                BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) (rect.x * scaleX), (int) (rect.y * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
+                int offsetX = 0;
+                int offsetY = 0;
+                if (ii.getIconWidth() < this.jScrollPane2.getWidth()) {
+                    offsetX = (this.jScrollPane2.getViewport().getWidth() - ii.getIconWidth()) / 2;
+                }
+                if (ii.getIconHeight() < this.jScrollPane2.getHeight()) {
+                    offsetY = (this.jScrollPane2.getViewport().getHeight() - ii.getIconHeight()) / 2;
+                }
+                BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) ((rect.x - offsetX) * scaleX), (int) ((rect.y - offsetY) * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
                 IIOImage iioImage = new IIOImage(bi, null, null);
                 ArrayList<IIOImage> tempList = new ArrayList<IIOImage>();
                 tempList.add(iioImage);
