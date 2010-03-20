@@ -629,7 +629,31 @@ namespace VietOCR.NET
             this.lblCurIndex.Text = Properties.Resources.Page_ + (imageIndex + 1) + Properties.Resources._of_ + imageTotal;
             this.pictureBox1.Image = new Bitmap(imageList[imageIndex]);
             this.pictureBox1.Size = this.pictureBox1.Image.Size;
+            if (this.pictureBox1.SizeMode != PictureBoxSizeMode.StretchImage)
+            {
+                this.pictureBox1.Width = Convert.ToInt32(this.pictureBox1.Width / scaleX);
+                this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height / scaleY);
+            }
             this.splitContainer2.Panel2.AutoScrollPosition = Point.Empty;
+            centerPicturebox();
+        }
+
+        void centerPicturebox()
+        {
+            int x = 0;
+            int y = 0;
+
+            if (this.pictureBox1.Width < this.splitContainer2.Panel2.Width)
+            {
+                x = (this.splitContainer2.Panel2.Width - this.pictureBox1.Width) / 2;
+            }
+
+            if (this.pictureBox1.Height < this.splitContainer2.Panel2.Height)
+            {
+                y = (this.splitContainer2.Panel2.Height - this.pictureBox1.Height) / 2;
+            }
+
+            this.pictureBox1.Location = new Point(x, y);
             this.pictureBox1.Invalidate();
         }
 
@@ -788,6 +812,7 @@ namespace VietOCR.NET
                 scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
                 scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
             }
+            centerPicturebox();
         }
 
         private void toolStripBtnRotateCW_Click(object sender, EventArgs e)
@@ -803,6 +828,7 @@ namespace VietOCR.NET
                 scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
                 scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
             }
+            centerPicturebox();
         }
 
         private void toolStripBtnZoomIn_Click(object sender, EventArgs e)
@@ -818,6 +844,7 @@ namespace VietOCR.NET
             this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height * ZOOM_FACTOR);
             scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
             scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
+            centerPicturebox();
         }
 
         private void toolStripBtnZoomOut_Click(object sender, EventArgs e)
@@ -832,6 +859,7 @@ namespace VietOCR.NET
             this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height / ZOOM_FACTOR);
             scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
             scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
+            centerPicturebox();
         }
 
         // This method makes the image fit properly in the PictureBox. You might think 
