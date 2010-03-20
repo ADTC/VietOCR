@@ -493,11 +493,12 @@ namespace VietOCR.NET
             this.toolStripBtnZoomOut.Enabled = true;
 
             this.pictureBox1.Deselect();
-
+            this.pictureBox1.Size = this.pictureBox1.Image.Size;
             this.pictureBox1.Dock = DockStyle.None;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             scaleX = scaleY = 1f;
             this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(curScrollPos.X), Math.Abs(curScrollPos.Y));
+            this.centerPicturebox();
         }
 
         /// <summary>
@@ -629,16 +630,16 @@ namespace VietOCR.NET
             this.lblCurIndex.Text = Properties.Resources.Page_ + (imageIndex + 1) + Properties.Resources._of_ + imageTotal;
             this.pictureBox1.Image = new Bitmap(imageList[imageIndex]);
             this.pictureBox1.Size = this.pictureBox1.Image.Size;
-            if (this.pictureBox1.SizeMode != PictureBoxSizeMode.StretchImage)
+            if (this.scaleX != 1f)
             {
                 this.pictureBox1.Width = Convert.ToInt32(this.pictureBox1.Width / scaleX);
                 this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height / scaleY);
             }
             this.splitContainer2.Panel2.AutoScrollPosition = Point.Empty;
-            centerPicturebox();
+            this.centerPicturebox();
         }
 
-        void centerPicturebox()
+        private void centerPicturebox()
         {
             int x = 0;
             int y = 0;
@@ -804,7 +805,7 @@ namespace VietOCR.NET
             // Rotating 270 degrees is equivalent to rotating -90 degrees.
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
             imageList[imageIndex].RotateFlip(RotateFlipType.Rotate270FlipNone);
-            this.pictureBox1.Size = this.pictureBox1.Image.Size;
+            this.pictureBox1.Size = new Size(this.pictureBox1.Height, this.pictureBox1.Width);
             this.pictureBox1.Refresh();
             // recalculate scale factors if in Fit Image mode
             if (this.pictureBox1.SizeMode == PictureBoxSizeMode.StretchImage)
@@ -812,7 +813,7 @@ namespace VietOCR.NET
                 scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
                 scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
             }
-            centerPicturebox();
+            this.centerPicturebox();
         }
 
         private void toolStripBtnRotateCW_Click(object sender, EventArgs e)
@@ -820,7 +821,7 @@ namespace VietOCR.NET
             this.pictureBox1.Deselect();
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
             imageList[imageIndex].RotateFlip(RotateFlipType.Rotate90FlipNone);
-            this.pictureBox1.Size = this.pictureBox1.Image.Size;
+            this.pictureBox1.Size = new Size(this.pictureBox1.Height, this.pictureBox1.Width);
             this.pictureBox1.Refresh();
             // recalculate scale factors if in Fit Image mode
             if (this.pictureBox1.SizeMode == PictureBoxSizeMode.StretchImage)
@@ -828,7 +829,7 @@ namespace VietOCR.NET
                 scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
                 scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
             }
-            centerPicturebox();
+            this.centerPicturebox();
         }
 
         private void toolStripBtnZoomIn_Click(object sender, EventArgs e)
@@ -844,7 +845,7 @@ namespace VietOCR.NET
             this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height * ZOOM_FACTOR);
             scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
             scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
-            centerPicturebox();
+            this.centerPicturebox();
         }
 
         private void toolStripBtnZoomOut_Click(object sender, EventArgs e)
@@ -859,7 +860,7 @@ namespace VietOCR.NET
             this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height / ZOOM_FACTOR);
             scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
             scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
-            centerPicturebox();
+            this.centerPicturebox();
         }
 
         // This method makes the image fit properly in the PictureBox. You might think 
@@ -1042,6 +1043,7 @@ namespace VietOCR.NET
                 this.pictureBox1.Deselect();
                 scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
                 scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
+                this.centerPicturebox();
             }
         }
     }
