@@ -497,8 +497,8 @@ namespace VietOCR.NET
             this.pictureBox1.Dock = DockStyle.None;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             scaleX = scaleY = 1f;
-            this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(curScrollPos.X), Math.Abs(curScrollPos.Y));
             this.centerPicturebox();
+            this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(curScrollPos.X), Math.Abs(curScrollPos.Y));
         }
 
         /// <summary>
@@ -851,10 +851,10 @@ namespace VietOCR.NET
         private void toolStripBtnZoomOut_Click(object sender, EventArgs e)
         {
             this.pictureBox1.Deselect();
-            // Zoom works best if you first fit the image according to its true aspect ratio.
-            Fit();
             // StretchImage SizeMode works best for zooming.
             this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            // Zoom works best if you first fit the image according to its true aspect ratio.
+            Fit();
             // Make the PictureBox dimensions smaller by 25% to effect the Zoom.
             this.pictureBox1.Width = Convert.ToInt32(this.pictureBox1.Width / ZOOM_FACTOR);
             this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height / ZOOM_FACTOR);
