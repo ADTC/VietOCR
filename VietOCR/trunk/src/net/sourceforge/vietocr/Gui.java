@@ -506,6 +506,7 @@ public class Gui extends javax.swing.JFrame {
         jToolBar2 = new javax.swing.JToolBar();
         jButtonOpen = new javax.swing.JButton();
         jButtonScan = new javax.swing.JButton();
+        jButtonSave = new javax.swing.JButton();
         jButtonOCR = new javax.swing.JButton();
         jButtonCancelOCR = new javax.swing.JButton();
         jButtonCancelOCR.setVisible(false);
@@ -668,6 +669,18 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(jButtonScan);
+
+        jButtonSave.setText(bundle.getString("jButtonSave.Text")); // NOI18N
+        jButtonSave.setToolTipText(bundle.getString("jButtonSave.ToolTipText")); // NOI18N
+        jButtonSave.setFocusable(false);
+        jButtonSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButtonSave);
 
         jButtonOCR.setText("OCR");
         jButtonOCR.setToolTipText(bundle.getString("jButtonOCR.ToolTipText")); // NOI18N
@@ -1225,6 +1238,10 @@ public class Gui extends javax.swing.JFrame {
     private void jButtonOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOpenActionPerformed
         jMenuItemOpenActionPerformed(evt);
     }//GEN-LAST:event_jButtonOpenActionPerformed
+
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
+        jMenuItemSaveActionPerformed(evt);
+    }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButtonOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOCRActionPerformed
         jMenuItemOCRActionPerformed(evt);
@@ -1803,6 +1820,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton jButtonPrevPage;
     private javax.swing.JButton jButtonRotateCCW;
     private javax.swing.JButton jButtonRotateCW;
+    private javax.swing.JButton jButtonSave;
     private javax.swing.JButton jButtonScan;
     private javax.swing.JButton jButtonZoomIn;
     private javax.swing.JButton jButtonZoomOut;
