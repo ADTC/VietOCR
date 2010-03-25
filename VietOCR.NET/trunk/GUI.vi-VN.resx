@@ -412,6 +412,15 @@
   <data name="toolStripBtnScan.ToolTipText" xml:space="preserve">
     <value>Quét văn bản</value>
   </data>
+  <data name="toolStripBtnSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 22</value>
+  </data>
+  <data name="toolStripBtnSave.Text" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="toolStripBtnSave.ToolTipText" xml:space="preserve">
+    <value>Lưu tập tin text</value>
+  </data>
   <data name="toolStripBtnOCR.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
