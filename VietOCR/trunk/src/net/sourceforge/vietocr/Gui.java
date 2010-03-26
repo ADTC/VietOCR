@@ -1360,7 +1360,7 @@ public class Gui extends javax.swing.JFrame {
                         new FileInputStream(selectedFile), "UTF8"));
                 this.jTextArea1.read(in, null);
                 in.close();
-
+                this.textFile = selectedFile;
                 javax.swing.text.Document doc = this.jTextArea1.getDocument();
                 if (doc.getText(0, 1).equals("\uFEFF")) {
                     doc.remove(0, 1); // remove BOM
@@ -1507,14 +1507,25 @@ public class Gui extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser(outputDirectory);
         FileFilter txtFilter = new SimpleFilter("txt", "UTF-8 Text");
         chooser.addChoosableFileFilter(txtFilter);
-
+        chooser.setDialogTitle(vietpadResources.getString("Save_As"));
         int returnVal = chooser.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             outputDirectory = chooser.getCurrentDirectory().getPath();
-            textFile = chooser.getSelectedFile();
+            File f = chooser.getSelectedFile();
             if (chooser.getFileFilter() == txtFilter) {
-                if (!textFile.getName().endsWith(".txt")) {
-                    textFile = new File(textFile.getPath() + ".txt");
+                if (!f.getName().endsWith(".txt")) {
+                    f = new File(textFile.getPath() + ".txt");
+                }
+                if (textFile.getPath().equals(f.getPath())) {
+                    if (JOptionPane.NO_OPTION == JOptionPane.showConfirmDialog(
+                            Gui.this,
+                            textFile.getName() + " already exists.\nDo you want to replace it?",
+                            "Confirm Save As", JOptionPane.YES_NO_OPTION,
+                            JOptionPane.WARNING_MESSAGE)) {
+                        return;
+                    }
+                } else {
+                    textFile = f;
                 }
             }
             saveTextFile();
@@ -1694,7 +1705,7 @@ public class Gui extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void jMenuItemOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOptionsActionPerformed
         openOptionsDialog();
     }//GEN-LAST:event_jMenuItemOptionsActionPerformed
