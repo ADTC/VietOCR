@@ -1249,6 +1249,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
         this.jTextArea1.setText(null);
+        textFile = null;
     }//GEN-LAST:event_jButtonClearActionPerformed
 
     private void jCheckBoxMenuWordWrapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuWordWrapActionPerformed
@@ -1508,6 +1509,9 @@ public class Gui extends javax.swing.JFrame {
         FileFilter txtFilter = new SimpleFilter("txt", "UTF-8 Text");
         chooser.addChoosableFileFilter(txtFilter);
         chooser.setDialogTitle(vietpadResources.getString("Save_As"));
+        if (textFile != null) {
+            chooser.setSelectedFile(textFile);
+        }
         int returnVal = chooser.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             outputDirectory = chooser.getCurrentDirectory().getPath();
