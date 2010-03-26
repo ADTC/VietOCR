@@ -74,6 +74,8 @@ public class Gui extends javax.swing.JFrame {
     private File textFile;
     private java.util.List<String> mruList = new java.util.ArrayList<String>();
     private String strClearRecentFiles;
+    private boolean textChanged = true;
+    private RawListener rawListener;
 
     /**
      * Creates new form Gui
@@ -165,6 +167,7 @@ public class Gui extends javax.swing.JFrame {
 
                     @Override
                     public void windowOpened(WindowEvent e) {
+                        updateSave(false);
                         setExtendedState(prefs.getInt("windowState", Frame.NORMAL));
                     }
                 });
@@ -232,8 +235,8 @@ public class Gui extends javax.swing.JFrame {
         }
 
         populatePopupMenu();
-
-        this.jTextArea1.getDocument().addUndoableEditListener(new RawListener());
+        rawListener = new RawListener();
+        this.jTextArea1.getDocument().addUndoableEditListener(rawListener);
         undoSupport.addUndoableEditListener(new SupportListener());
         m_undo.discardAllEdits();
         updateUndoRedo();
@@ -391,7 +394,9 @@ public class Gui extends javax.swing.JFrame {
                         jMenuRecentFiles.removeAll();
                         jMenuRecentFiles.add(bundle.getString("No_Recent_Files"));
                     } else {
-                        openFile(new File(fileName));
+                        if (promptToSave()) {
+                            openFile(new File(fileName));
+                        }
                     }
                 }
             };
@@ -474,6 +479,7 @@ public class Gui extends javax.swing.JFrame {
          */
         @Override
         public void undoableEditHappened(UndoableEditEvent e) {
+            updateSave(true);
             m_undo.addEdit(e.getEdit());
             updateUndoRedo();
         }
@@ -639,7 +645,7 @@ public class Gui extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jMenuItemAbout = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(800, 600));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -1249,7 +1255,9 @@ public class Gui extends javax.swing.JFrame {
 
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
         this.jTextArea1.setText(null);
+        this.jTextArea1.requestFocusInWindow();
         textFile = null;
+        updateSave(false);
     }//GEN-LAST:event_jButtonClearActionPerformed
 
     private void jCheckBoxMenuWordWrapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuWordWrapActionPerformed
@@ -1280,6 +1288,9 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemExitActionPerformed
 
     void quit() {
+        if (!promptToSave()) {
+            return;
+        }
         prefs.put("UILanguage", selectedUILang);
 
         if (currentDirectory != null) {
@@ -1356,6 +1367,9 @@ public class Gui extends javax.swing.JFrame {
     public void openFile(final File selectedFile) {
         // if text file, load it into textarea
         if (selectedFile.getName().endsWith(".txt")) {
+            if (!promptToSave()) {
+                return;
+            }
             try {
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         new FileInputStream(selectedFile), "UTF8"));
@@ -1366,7 +1380,9 @@ public class Gui extends javax.swing.JFrame {
                 if (doc.getText(0, 1).equals("\uFEFF")) {
                     doc.remove(0, 1); // remove BOM
                 }
+                doc.addUndoableEditListener(rawListener);
                 updateMRUList(selectedFile.getPath());
+                updateSave(false);
             } catch (Exception e) {
             }
             return;
@@ -1518,9 +1534,9 @@ public class Gui extends javax.swing.JFrame {
             File f = chooser.getSelectedFile();
             if (chooser.getFileFilter() == txtFilter) {
                 if (!f.getName().endsWith(".txt")) {
-                    f = new File(textFile.getPath() + ".txt");
+                    f = new File(f.getPath() + ".txt");
                 }
-                if (textFile.getPath().equals(f.getPath())) {
+                if (textFile != null && textFile.getPath().equals(f.getPath())) {
                     if (JOptionPane.NO_OPTION == JOptionPane.showConfirmDialog(
                             Gui.this,
                             textFile.getName() + " already exists.\nDo you want to replace it?",
@@ -1545,6 +1561,7 @@ public class Gui extends javax.swing.JFrame {
             jTextArea1.write(out);
             out.close();
             updateMRUList(textFile.getPath());
+            updateSave(false);
         } catch (OutOfMemoryError oome) {
             oome.printStackTrace();
             JOptionPane.showMessageDialog(this, APP_NAME + vietpadResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + vietpadResources.getString("_and_try_again."), vietpadResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
@@ -1561,6 +1578,44 @@ public class Gui extends javax.swing.JFrame {
                     getGlassPane().setVisible(false);
                 }
             });
+        }
+    }
+
+    /**
+     *  Displays a dialog to save changes.
+     *
+     *@return    false if user canceled, true else
+     */
+    protected boolean promptToSave() {
+        if (!textChanged) {
+            return true;
+        }
+        switch (JOptionPane.showConfirmDialog(this,
+                vietpadResources.getString("Do_you_want_to_save_the_changes_to")
+                + "\n\"" + (textFile == null ? vietpadResources.getString("Untitled") : textFile.getName()) + "\"?",
+                APP_NAME, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE)) {
+            case JOptionPane.YES_OPTION:
+                jMenuItemSaveActionPerformed(null);
+                return true;
+            case JOptionPane.NO_OPTION:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /**
+     *  Updates the Save action.
+     *
+     *@param  modified  whether file has been modified
+     */
+    void updateSave(boolean modified) {
+        if (textChanged != modified) {
+            textChanged = modified;
+            this.jButtonSave.setEnabled(modified);
+            this.jMenuItemSave.setEnabled(modified);
+            rootPane.putClientProperty("windowModified", Boolean.valueOf(modified));
+            // see http://developer.apple.com/qa/qa2001/qa1146.html
         }
     }
 
