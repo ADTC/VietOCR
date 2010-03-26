@@ -282,6 +282,11 @@ namespace VietOCR.NET
             saveFileDialog1.Filter = "UTF-8 Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
+            if (textFilename != null && textFilename.Length > 1)
+            {
+                saveFileDialog1.InitialDirectory = Path.GetDirectoryName(textFilename);
+                saveFileDialog1.FileName = Path.GetFileName(textFilename);
+            }
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -395,6 +400,7 @@ namespace VietOCR.NET
         private void toolStripBtnClear_Click(object sender, EventArgs e)
         {
             this.textBox1.Clear();
+            textFilename = null;
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -516,6 +522,7 @@ namespace VietOCR.NET
                     {
                         this.textBox1.Text = sr.ReadToEnd();
                         updateMRUList(selectedFile);
+                        textFilename = selectedFile;
                     }
                 }
                 catch
