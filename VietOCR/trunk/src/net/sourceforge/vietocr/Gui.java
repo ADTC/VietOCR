@@ -1254,10 +1254,12 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonOCRActionPerformed
 
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
-        this.jTextArea1.setText(null);
-        this.jTextArea1.requestFocusInWindow();
-        textFile = null;
-        updateSave(false);
+        if (textFile == null || promptToSave()) {
+            this.jTextArea1.setText(null);
+            this.jTextArea1.requestFocusInWindow();
+            textFile = null;
+            updateSave(false);
+        }
     }//GEN-LAST:event_jButtonClearActionPerformed
 
     private void jCheckBoxMenuWordWrapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuWordWrapActionPerformed
