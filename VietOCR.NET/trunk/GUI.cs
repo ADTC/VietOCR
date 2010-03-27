@@ -97,6 +97,9 @@ namespace VietOCR.NET
 
             LoadLang();
             this.toolStripCbLang.Items.AddRange(langs);
+
+            //// Set system event.
+            SystemEvents.SessionEnding += new SessionEndingEventHandler(OnSessionEnding);
         }
 
         // Event overrides
@@ -109,6 +112,18 @@ namespace VietOCR.NET
             this.textBox1.Modified = false;
 
             updateMRUMenu();
+        }
+        protected override void OnClosing(CancelEventArgs cea)
+        {
+            base.OnClosing(cea);
+
+            cea.Cancel = !OkToTrash();
+        }
+        
+        // Event handlers
+        void OnSessionEnding(object obj, SessionEndingEventArgs seea)
+        {
+            seea.Cancel = !OkToTrash();
         }
 
         void LoadLang()
@@ -275,7 +290,7 @@ namespace VietOCR.NET
             SaveFileDlg();
         }
 
-        void SaveFileDlg()
+        bool SaveFileDlg()
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Title = Properties.Resources.Save_As;
@@ -292,6 +307,11 @@ namespace VietOCR.NET
             {
                 textFilename = saveFileDialog1.FileName;
                 SaveTextFile();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -356,7 +376,10 @@ namespace VietOCR.NET
             }
             else
             {
-                openFile(fileName);
+                if (OkToTrash())
+                {
+                    openFile(fileName);
+                }
             }
         }
 
@@ -399,13 +422,21 @@ namespace VietOCR.NET
 
         private void toolStripBtnClear_Click(object sender, EventArgs e)
         {
+            if (!OkToTrash())
+                return;
+
             this.textBox1.Clear();
+            this.textBox1.ClearUndo();
+            this.textBox1.Modified = false;
             textFilename = null;
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (OkToTrash())
+            {
+                Application.Exit();
+            }
         }
 
         private void toolStripBtnPrev_Click(object sender, EventArgs e)
@@ -453,7 +484,38 @@ namespace VietOCR.NET
             }
             setButton();
         }
+        
+        protected bool OkToTrash()
+        {
+            if (!this.textBox1.Modified)
+            {
+                return true;
+            }
 
+            DialogResult dr =
+                MessageBox.Show(Properties.Resources.The_text_in_the + " \"" + FileTitle() + "\" " +
+                Properties.Resources.file_has_changed + ".\n\n" +
+                Properties.Resources.Do_you_want_to_save_the_changes + "?",
+                strProgName,
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Exclamation);
+            switch (dr)
+            {
+                case DialogResult.Yes:
+                     saveToolStripMenuItem_Click(null, null);
+                     return true;
+                case DialogResult.No:
+                    return true;
+                case DialogResult.Cancel:
+                    return false;
+            }
+            return false;
+        }
+        protected string FileTitle()
+        {
+            return (this.textFilename != null && this.textFilename.Length > 1) ?
+                Path.GetFileName(this.textFilename) : Properties.Resources.Untitled;
+        }
         void setButton()
         {
             if (imageIndex == 0)
@@ -516,6 +578,9 @@ namespace VietOCR.NET
             // if text file, load it into textbox
             if (selectedFile.EndsWith(".txt"))
             {
+                if (!OkToTrash())
+                    return;
+
                 try
                 {
                     using (StreamReader sr = new StreamReader(selectedFile, Encoding.UTF8, true))
@@ -1052,6 +1117,12 @@ namespace VietOCR.NET
                 scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
                 this.centerPicturebox();
             }
+        }
+
+        private void textBox1_ModifiedChanged(object sender, EventArgs e)
+        {
+            this.toolStripBtnSave.Enabled = this.textBox1.Modified;
+            this.saveToolStripMenuItem.Enabled = this.textBox1.Modified;
         }
     }
 }
