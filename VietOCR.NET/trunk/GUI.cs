@@ -493,9 +493,7 @@ namespace VietOCR.NET
             }
 
             DialogResult dr =
-                MessageBox.Show(Properties.Resources.The_text_in_the + " \"" + FileTitle() + "\" " +
-                Properties.Resources.file_has_changed + ".\n\n" +
-                Properties.Resources.Do_you_want_to_save_the_changes + "?",
+                MessageBox.Show(Properties.Resources.Do_you_want_to_save_the_changes_to + " \"" + FileTitle() + "\"?",
                 strProgName,
                 MessageBoxButtons.YesNoCancel,
                 MessageBoxIcon.Exclamation);
