@@ -666,7 +666,6 @@ public class Gui extends javax.swing.JFrame {
 
         jButtonScan.setText(bundle.getString("jButtonScan.Text")); // NOI18N
         jButtonScan.setToolTipText(bundle.getString("jButtonScan.ToolTipText")); // NOI18N
-        jButtonScan.setFocusable(false);
         jButtonScan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonScan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonScan.addActionListener(new java.awt.event.ActionListener() {
@@ -678,7 +677,6 @@ public class Gui extends javax.swing.JFrame {
 
         jButtonSave.setText(bundle.getString("jButtonSave.Text")); // NOI18N
         jButtonSave.setToolTipText(bundle.getString("jButtonSave.ToolTipText")); // NOI18N
-        jButtonSave.setFocusable(false);
         jButtonSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -699,7 +697,6 @@ public class Gui extends javax.swing.JFrame {
 
         jButtonCancelOCR.setText(bundle.getString("jButtonCancelOCR.Text")); // NOI18N
         jButtonCancelOCR.setToolTipText(bundle.getString("jButtonCancelOCR.ToolTipText")); // NOI18N
-        jButtonCancelOCR.setFocusable(false);
         jButtonCancelOCR.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonCancelOCR.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonCancelOCR.addActionListener(new java.awt.event.ActionListener() {
@@ -1385,6 +1382,7 @@ public class Gui extends javax.swing.JFrame {
                 doc.addUndoableEditListener(rawListener);
                 updateMRUList(selectedFile.getPath());
                 updateSave(false);
+                this.jTextArea1.requestFocusInWindow();
             } catch (Exception e) {
             }
             return;
@@ -1594,7 +1592,7 @@ public class Gui extends javax.swing.JFrame {
         }
         switch (JOptionPane.showConfirmDialog(this,
                 vietpadResources.getString("Do_you_want_to_save_the_changes_to")
-                + "\n\"" + (textFile == null ? vietpadResources.getString("Untitled") : textFile.getName()) + "\"?",
+                + " \"" + (textFile == null ? vietpadResources.getString("Untitled") : textFile.getName()) + "\"?",
                 APP_NAME, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE)) {
             case JOptionPane.YES_OPTION:
                 jMenuItemSaveActionPerformed(null);
