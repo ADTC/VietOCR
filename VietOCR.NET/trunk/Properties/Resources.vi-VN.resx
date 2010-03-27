@@ -237,4 +237,16 @@
   <data name="No_Recent_Files" xml:space="preserve">
     <value>Không có các tập tin mới đây</value>
   </data>
+  <data name="Do_you_want_to_save_the_changes" xml:space="preserve">
+    <value>Bạn có muốn lưu lại</value>
+  </data>
+  <data name="file_has_changed" xml:space="preserve">
+    <value>đã thay đổi</value>
+  </data>
+  <data name="The_text_in_the" xml:space="preserve">
+    <value>Văn bản trong</value>
+  </data>
+  <data name="Untitled" xml:space="preserve">
+    <value>Không tên</value>
+  </data>
 </root>

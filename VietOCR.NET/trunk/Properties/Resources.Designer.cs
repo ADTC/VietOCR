@@ -169,11 +169,29 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to save the changes.
+        /// </summary>
+        internal static string Do_you_want_to_save_the_changes {
+            get {
+                return ResourceManager.GetString("Do_you_want_to_save_the_changes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to file has changed.
+        /// </summary>
+        internal static string file_has_changed {
+            get {
+                return ResourceManager.GetString("file_has_changed", resourceCulture);
             }
         }
         
@@ -417,6 +435,24 @@ namespace VietOCR.NET.Properties {
         internal static string suggest_split {
             get {
                 return ResourceManager.GetString("suggest_split", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The text in the.
+        /// </summary>
+        internal static string The_text_in_the {
+            get {
+                return ResourceManager.GetString("The_text_in_the", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Untitled.
+        /// </summary>
+        internal static string Untitled {
+            get {
+                return ResourceManager.GetString("Untitled", resourceCulture);
             }
         }
     }
