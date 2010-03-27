@@ -119,7 +119,7 @@ namespace VietOCR.NET
 
             cea.Cancel = !OkToTrash();
         }
-        
+
         // Event handlers
         void OnSessionEnding(object obj, SessionEndingEventArgs seea)
         {
@@ -422,13 +422,13 @@ namespace VietOCR.NET
 
         private void toolStripBtnClear_Click(object sender, EventArgs e)
         {
-            if (!OkToTrash())
-                return;
-
-            this.textBox1.Clear();
-            this.textBox1.ClearUndo();
-            this.textBox1.Modified = false;
-            textFilename = null;
+            if (textFilename == null || OkToTrash())
+            {
+                this.textBox1.Clear();
+                this.textBox1.ClearUndo();
+                this.textBox1.Modified = false;
+                textFilename = null;
+            }
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -484,7 +484,7 @@ namespace VietOCR.NET
             }
             setButton();
         }
-        
+
         protected bool OkToTrash()
         {
             if (!this.textBox1.Modified)
@@ -502,8 +502,8 @@ namespace VietOCR.NET
             switch (dr)
             {
                 case DialogResult.Yes:
-                     saveToolStripMenuItem_Click(null, null);
-                     return true;
+                    saveToolStripMenuItem_Click(null, null);
+                    return true;
                 case DialogResult.No:
                     return true;
                 case DialogResult.Cancel:
