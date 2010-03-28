@@ -275,16 +275,21 @@ namespace VietOCR.NET
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            saveAction();
+        }
+
+        bool saveAction()
+        {
             if (textFilename == null || textFilename.Length == 0)
             {
-                SaveFileDlg();
+                return SaveFileDlg();
             }
             else
             {
-                SaveTextFile();
+                return SaveTextFile();
             }
         }
-
+        
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDlg();
@@ -306,8 +311,7 @@ namespace VietOCR.NET
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 textFilename = saveFileDialog1.FileName;
-                SaveTextFile();
-                return true;
+                return SaveTextFile();
             }
             else
             {
@@ -315,7 +319,7 @@ namespace VietOCR.NET
             }
         }
 
-        void SaveTextFile()
+        bool SaveTextFile()
         {
             this.Cursor = Cursors.WaitCursor;
 
@@ -334,6 +338,8 @@ namespace VietOCR.NET
 
             this.textBox1.Modified = false;
             this.Cursor = Cursors.Default;
+            
+            return true;
         }
 
         /// <summary>
@@ -500,8 +506,7 @@ namespace VietOCR.NET
             switch (dr)
             {
                 case DialogResult.Yes:
-                    saveToolStripMenuItem_Click(null, null);
-                    return true;
+                    return saveAction();
                 case DialogResult.No:
                     return true;
                 case DialogResult.Cancel:
