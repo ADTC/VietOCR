@@ -1345,8 +1345,7 @@ public class Gui extends javax.swing.JFrame {
     }
 
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
-        int returnVal = filechooser.showOpenDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
+        if (filechooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             currentDirectory = filechooser.getCurrentDirectory().getPath();
             openFile(filechooser.getSelectedFile());
 
@@ -1508,18 +1507,22 @@ public class Gui extends javax.swing.JFrame {
     }
 
     private void jMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveActionPerformed
-        if (textFile == null || !textFile.exists()) {
-            saveFileDlg();
-        } else {
-            saveTextFile();
-        }
+        saveAction();
     }//GEN-LAST:event_jMenuItemSaveActionPerformed
 
+    boolean saveAction() {
+        if (textFile == null || !textFile.exists()) {
+            return saveFileDlg();
+        } else {
+            return saveTextFile();
+        }
+    }
+    
     private void jMenuItemSaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsActionPerformed
         saveFileDlg();
     }//GEN-LAST:event_jMenuItemSaveAsActionPerformed
 
-    void saveFileDlg() {
+    boolean saveFileDlg() {
         outputDirectory = prefs.get("outputDirectory", null);
         JFileChooser chooser = new JFileChooser(outputDirectory);
         FileFilter txtFilter = new SimpleFilter("txt", "UTF-8 Text");
@@ -1528,8 +1531,8 @@ public class Gui extends javax.swing.JFrame {
         if (textFile != null) {
             chooser.setSelectedFile(textFile);
         }
-        int returnVal = chooser.showSaveDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+        if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             outputDirectory = chooser.getCurrentDirectory().getPath();
             File f = chooser.getSelectedFile();
             if (chooser.getFileFilter() == txtFilter) {
@@ -1542,17 +1545,19 @@ public class Gui extends javax.swing.JFrame {
                             textFile.getName() + " already exists.\nDo you want to replace it?",
                             "Confirm Save As", JOptionPane.YES_NO_OPTION,
                             JOptionPane.WARNING_MESSAGE)) {
-                        return;
+                        return false;
                     }
                 } else {
                     textFile = f;
                 }
             }
-            saveTextFile();
+            return saveTextFile();
+        } else {
+            return false;
         }
     }
 
-    void saveTextFile() {
+    boolean saveTextFile() {
         getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         getGlassPane().setVisible(true);
 
@@ -1579,6 +1584,8 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
         }
+
+        return true;
     }
 
     /**
@@ -1595,8 +1602,7 @@ public class Gui extends javax.swing.JFrame {
                 + " \"" + (textFile == null ? vietpadResources.getString("Untitled") : textFile.getName()) + "\"?",
                 APP_NAME, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE)) {
             case JOptionPane.YES_OPTION:
-                jMenuItemSaveActionPerformed(null);
-                return true;
+                return saveAction();
             case JOptionPane.NO_OPTION:
                 return true;
             default:
