@@ -76,7 +76,7 @@
                 </Property>
               </Properties>
             </Menu>
-            <MenuItem class="javax.swing.JSeparator" name="jSeparator2">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemExit">
               <Properties>
@@ -127,7 +127,7 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
               </AuxValues>
             </MenuItem>
-            <MenuItem class="javax.swing.JSeparator" name="jSeparator1">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemPostProcess">
               <Properties>
@@ -180,7 +180,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemFontActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JSeparator" name="jSeparator10">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator10">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemChangeCase">
               <Properties>
@@ -225,7 +225,7 @@
                 <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="        ActionListener imlst = new ActionListener() {&#xa;                public void actionPerformed(ActionEvent ae) {&#xa;                    selectedInputMethod = ae.getActionCommand();&#xa;                    VietKeyListener.setInputMethod(InputMethods.valueOf(selectedInputMethod));&#xa;                }&#xa;            };&#xa;&#xa;        ButtonGroup groupInputMethod = new ButtonGroup();&#xa;        &#xa;        for (InputMethods im : InputMethods.values()) {&#xa;            String inputMethod = im.name();&#xa;            JRadioButtonMenuItem radioItem = new JRadioButtonMenuItem(inputMethod, selectedInputMethod.equals(inputMethod));&#xa;            radioItem.addActionListener(imlst);&#xa;            jMenuInputMethod.add(radioItem);&#xa;            groupInputMethod.add(radioItem);            &#xa;        }&#xa;        "/>
               </AuxValues>
             </Menu>
-            <MenuItem class="javax.swing.JSeparator" name="jSeparator6">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator6">
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="jMenuUILang">
               <Properties>
@@ -284,7 +284,7 @@
                 <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="ActionListener lafLst = new ActionListener() {&#xa;                public void actionPerformed(ActionEvent ae) {&#xa;                    updateLaF(ae.getActionCommand());&#xa;                }&#xa;            };&#xa;&#xa;        ButtonGroup groupLookAndFeel = new ButtonGroup();&#xa;        UIManager.LookAndFeelInfo[] lafs = UIManager.getInstalledLookAndFeels();&#xa;        for (int i = 0; i &lt; lafs.length; i++) {&#xa;            JRadioButtonMenuItem lafButton = new JRadioButtonMenuItem(lafs[i].getName());&#xa;            lafButton.setActionCommand(lafs[i].getClassName());&#xa;            if (UIManager.getLookAndFeel().getClass().getName().equals(lafButton.getActionCommand())) {&#xa;                lafButton.setSelected(true);&#xa;            }&#xa;            lafButton.addActionListener(lafLst);&#xa;            groupLookAndFeel.add(lafButton);&#xa;            jMenuLookAndFeel.add(lafButton);&#xa;        }&#xa;"/>
               </AuxValues>
             </Menu>
-            <MenuItem class="javax.swing.JSeparator" name="jSeparator3">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemOptions">
               <Properties>
@@ -355,7 +355,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemHelpActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JSeparator" name="jSeparator5">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator5">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAbout">
               <Properties>

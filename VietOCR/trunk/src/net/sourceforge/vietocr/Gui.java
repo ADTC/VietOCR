@@ -578,17 +578,17 @@ public class Gui extends javax.swing.JFrame {
         jMenuItemSaveAs = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jMenuRecentFiles = new javax.swing.JMenu();
-        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItemExit = new javax.swing.JMenuItem();
         jMenuCommand = new javax.swing.JMenu();
         jMenuItemOCR = new javax.swing.JMenuItem();
         jMenuItemOCRAll = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemPostProcess = new javax.swing.JMenuItem();
         jMenuFormat = new javax.swing.JMenu();
         jCheckBoxMenuWordWrap = new javax.swing.JCheckBoxMenuItem();
         jMenuItemFont = new javax.swing.JMenuItem();
-        jSeparator10 = new javax.swing.JSeparator();
+        jSeparator10 = new javax.swing.JPopupMenu.Separator();
         jMenuItemChangeCase = new javax.swing.JMenuItem();
         jMenuItemRemoveLineBreaks = new javax.swing.JMenuItem();
         jMenuSettings = new javax.swing.JMenu();
@@ -610,7 +610,7 @@ public class Gui extends javax.swing.JFrame {
             groupInputMethod.add(radioItem);
         }
 
-        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
         jMenuUILang = new javax.swing.JMenu();
         ButtonGroup group = new ButtonGroup();
         jRadioButtonMenuItemEng = new javax.swing.JRadioButtonMenuItem();
@@ -634,7 +634,7 @@ public class Gui extends javax.swing.JFrame {
             groupLookAndFeel.add(lafButton);
             jMenuLookAndFeel.add(lafButton);
         }
-        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItemOptions = new javax.swing.JMenuItem();
         jMenuTools = new javax.swing.JMenu();
         jMenuItemMergeTiff = new javax.swing.JMenuItem();
@@ -642,7 +642,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuItemSplitPdf = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemHelp = new javax.swing.JMenuItem();
-        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
         jMenuItemAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -1941,13 +1941,13 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemViet;
     private javax.swing.JScrollPane jScrollPane1;
     protected javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator10;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator10;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JToolBar.Separator jSeparator9;
