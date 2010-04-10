@@ -177,27 +177,27 @@ public class Gui extends javax.swing.JFrame {
         currentDirectory = prefs.get("currentDirectory", null);
         filechooser = new JFileChooser(currentDirectory);
         filechooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
-        FileFilter pdfFilter = new SimpleFilter("pdf", "PDF");
-        FileFilter tiffFilter = new SimpleFilter("tif;tiff", "TIFF");
+        FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
+        FileFilter gifFilter = new SimpleFilter("gif", "GIF");
         FileFilter jpegFilter = new SimpleFilter("jpg;jpeg", "JPEG");
         FileFilter jpeg2000Filter = new SimpleFilter("jp2", "JPEG 2000");
-        FileFilter pnmFilter = new SimpleFilter("pnm;pbm;pgm;ppm", "PNM");
-        FileFilter gifFilter = new SimpleFilter("gif", "GIF");
         FileFilter pngFilter = new SimpleFilter("png", "PNG");
-        FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
+        FileFilter pnmFilter = new SimpleFilter("pnm;pbm;pgm;ppm", "PNM");
+        FileFilter tiffFilter = new SimpleFilter("tif;tiff", "TIFF");
         FileFilter allImageFilter = new SimpleFilter("tif;tiff;jpg;jpeg;gif;png;bmp", "All Image Files");
+        FileFilter pdfFilter = new SimpleFilter("pdf", "PDF");
         FileFilter textFilter = new SimpleFilter("txt", "UTF-8 Text");
 
         filechooser.setAcceptAllFileFilterUsed(true);
         filechooser.addChoosableFileFilter(allImageFilter);
-        filechooser.addChoosableFileFilter(pdfFilter);
-        filechooser.addChoosableFileFilter(tiffFilter);
+        filechooser.addChoosableFileFilter(bmpFilter);
+        filechooser.addChoosableFileFilter(gifFilter);
         filechooser.addChoosableFileFilter(jpegFilter);
         filechooser.addChoosableFileFilter(jpeg2000Filter);
-        filechooser.addChoosableFileFilter(pnmFilter);
-        filechooser.addChoosableFileFilter(gifFilter);
         filechooser.addChoosableFileFilter(pngFilter);
-        filechooser.addChoosableFileFilter(bmpFilter);
+        filechooser.addChoosableFileFilter(pnmFilter);
+        filechooser.addChoosableFileFilter(tiffFilter);
+        filechooser.addChoosableFileFilter(pdfFilter);
         filechooser.addChoosableFileFilter(textFilter);
 
         filterIndex = prefs.getInt("filterIndex", 0);
