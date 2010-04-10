@@ -261,7 +261,7 @@ namespace VietOCR.NET
 
             //openFileDialog1.InitialDirectory = "c:\\";
             openFileDialog1.Title = Properties.Resources.OpenImageFile;
-            openFileDialog1.Filter = "All Image Files|*.tif;*.tiff;*.gif;*.bmp;*.jpg;*.jpeg;*.png|Image Files (*.bmp)|*.bmp|Image Files (*.gif)|*.gif|Image Files (*.jpg;*.jpeg)|*.jpg;*.jpeg|Image Files (*.png)|*.png|Image Files (*.tif;*.tiff)|*.tif;*.tiff|PDF Files (*.pdf)|*.pdf;|UTF-8 Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            openFileDialog1.Filter = "All Image Files|*.tif;*.tiff;*.gif;*.bmp;*.jpg;*.jpeg;*.png|Image Files (*.bmp)|*.bmp|Image Files (*.gif)|*.gif|Image Files (*.jpg;*.jpeg)|*.jpg;*.jpeg|Image Files (*.png)|*.png|Image Files (*.tif;*.tiff)|*.tif;*.tiff|PDF Files (*.pdf)|*.pdf;|UTF-8 Text Files (*.txt)|*.txt";
             openFileDialog1.FilterIndex = filterIndex;
             openFileDialog1.RestoreDirectory = true;
 
