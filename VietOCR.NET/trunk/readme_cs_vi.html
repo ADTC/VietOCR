@@ -60,11 +60,13 @@
         <p>
             Hỗ trợ cho PDF được khả thi qua <a href="http://sourceforge.net/projects/ghostscript/">
                 GPL Ghostscript</a>. Sau khi cài đặt thư viện, hãy bảo đảm dynamic load library
-            <tt>gsdll32.dll</tt> nằm trong search path bằng cách chỉnh biến môi trường <tt>PATH</tt>,
-            như sau cho phiên bản 8.70 trên Windows:</p>
+            <tt>gsdll32.dll</tt> nằm trong search path bằng cách chỉnh biến môi trường <tt>Path</tt>,
+            có thể truy cập được qua Windows&#39; Control
+            Panel &gt; System &gt; Advanced tab &gt; Environment Variables button. Ví dụ, tiếp
+            đuôi (append) đoạn sau đây vào giá trị hiện tại của biến <tt>Path</tt>:</p>
         <blockquote>
             <p>
-                <tt>set PATH=%PATH%;C:\Program Files\gs\gs8.70\bin</tt></p>
+                <tt>;C:\Program Files\gs\gs8.70\bin</tt></p>
         </blockquote>
         <h3>
             HƯỚNG DẪN</h3>
