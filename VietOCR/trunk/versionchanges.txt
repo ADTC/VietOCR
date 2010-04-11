@@ -147,3 +147,4 @@ Version 1.7 (14 April 2010)
 - Add Save button on toolbar
 - Fix scale factor, offset issues in image manipulation
 - Improve postprocessing for Vietnamese
+- Add support for VNI-Centur, VNI-Goudy, VNI-Oxford, VNI-Zap fonts to Vietnamese language data
