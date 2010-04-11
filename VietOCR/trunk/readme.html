@@ -67,13 +67,13 @@
             PDF support is possible via <a href="http://sourceforge.net/projects/ghostscript/">GPL
                 Ghostscript</a>. After installation of the library, please ensure the shared
             library object (<tt>gsdll32.dll</tt> or <tt>libgs.so</tt>) is in the search path
-            by setting the appropriate environment variable, as follows for version 8.70 on
-            Windows:</p>
+            by setting the appropriate environment variable. On Windows, append the following to <tt>Path</tt> value (accessible through Control Panel &gt;
+            System &gt; Advanced tab &gt; Environment Variables button) for GS version 8.70:</p>
         <blockquote>
             <p>
-                <tt>set PATH=%PATH%;C:\Program Files\gs\gs8.70\bin</tt></p>
+                <tt>;C:\Program Files\gs\gs8.70\bin</tt></p>
         </blockquote>
-        or on Linux:<blockquote>
+        On Linux:<blockquote>
             <p>
                 <tt>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib</tt></p>
         </blockquote>
