@@ -93,8 +93,9 @@ Version 1.6 (30 January 2010)
 - Improve post-OCR correction for Vietnamese
 - Bundle Vietnamese language data for VNI & TCVN3 (ABC) fonts (VNI-Aptima, VNI-Book, VNI-Helve, VNI-Palatin, VNI-Tekon, VNI-Times, VNI-Univer; .VnTime, .VnArial)
 
-Version 1.7 Beta (20 March 2010)
+Version 1.7 (14 April 2010)
 - Add provision to load UTF-8 text file into textbox
 - Add Recent Files submenu
 - Fix scale factor issues in image manipulation
 - Improve postprocessing for Vietnamese
+- Add support for VNI-Centur, VNI-Goudy, VNI-Oxford, VNI-Zap fonts to Vietnamese language data
