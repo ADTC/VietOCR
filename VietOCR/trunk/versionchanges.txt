@@ -141,7 +141,7 @@ Version 1.6 (30 January 2010)
 Version 1.6.1 (20 March 2010)
 - Fix a NullPointerException due to an uninitialized variable when launching the application the very first time. This regression bug was introduced in version 1.6.
 
-Version 1.7 Beta (25 March 2010)
+Version 1.7 (14 April 2010)
 - Add provision to load UTF-8 text file into textarea
 - Add Recent Files submenu
 - Add Save button on toolbar
