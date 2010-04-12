@@ -382,10 +382,7 @@ namespace VietOCR.NET
             }
             else
             {
-                if (OkToTrash())
-                {
-                    openFile(fileName);
-                }
+                openFile(fileName);
             }
         }
 
