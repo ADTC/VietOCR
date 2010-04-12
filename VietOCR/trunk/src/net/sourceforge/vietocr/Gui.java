@@ -396,9 +396,7 @@ public class Gui extends javax.swing.JFrame {
                         jMenuRecentFiles.removeAll();
                         jMenuRecentFiles.add(bundle.getString("No_Recent_Files"));
                     } else {
-                        if (promptToSave()) {
-                            openFile(new File(fileName));
-                        }
+                        openFile(new File(fileName));
                     }
                 }
             };
