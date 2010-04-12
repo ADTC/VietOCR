@@ -52,6 +52,7 @@ namespace VietOCR.NET
         protected string selectedUILanguage;
         private int filterIndex;
         private string textFilename;
+        private bool textModified;
 
         List<string> mruList = new List<string>();
         private string strClearRecentFiles;
@@ -336,6 +337,7 @@ namespace VietOCR.NET
                 MessageBox.Show(exc.Message, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            textModified = false;
             this.textBox1.Modified = false;
             this.Cursor = Cursors.Default;
             
@@ -490,7 +492,7 @@ namespace VietOCR.NET
 
         protected bool OkToTrash()
         {
-            if (!this.textBox1.Modified)
+            if (!textModified)
             {
                 return true;
             }
@@ -585,9 +587,11 @@ namespace VietOCR.NET
                 {
                     using (StreamReader sr = new StreamReader(selectedFile, Encoding.UTF8, true))
                     {
+                        textModified = false;
                         this.textBox1.Text = sr.ReadToEnd();
                         updateMRUList(selectedFile);
                         textFilename = selectedFile;
+                        this.textBox1.Modified = false;
                     }
                 }
                 catch
@@ -1121,6 +1125,11 @@ namespace VietOCR.NET
 
         private void textBox1_ModifiedChanged(object sender, EventArgs e)
         {
+            if (textModified && !this.textBox1.Modified)
+            {
+                this.textBox1.Modified = textModified;
+            }
+            textModified = this.textBox1.Modified;
             this.toolStripBtnSave.Enabled = this.textBox1.Modified;
             this.saveToolStripMenuItem.Enabled = this.textBox1.Modified;
         }
