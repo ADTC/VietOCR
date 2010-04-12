@@ -431,6 +431,7 @@ namespace VietOCR.NET
             {
                 this.textBox1.Clear();
                 this.textBox1.ClearUndo();
+                textModified = false;
                 this.textBox1.Modified = false;
                 textFilename = null;
             }
