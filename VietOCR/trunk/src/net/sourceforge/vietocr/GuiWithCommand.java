@@ -187,6 +187,7 @@ public class GuiWithCommand extends Gui {
     class OcrWorker extends SwingWorker<Void, String> {
 
         OCRImageEntity entity;
+        List<File> workingFiles;
 
         OcrWorker(OCRImageEntity entity) {
             this.entity = entity;
@@ -195,15 +196,13 @@ public class GuiWithCommand extends Gui {
         @Override
         protected Void doInBackground() throws Exception {
             OCR ocrEngine = new OCR(tessPath);
-            List<File> workingFiles = entity.getClonedImageFiles();
+            workingFiles = entity.getClonedImageFiles();
 
             for (int i = 0; i < workingFiles.size(); i++) {
                 if (!isCancelled()) {
                     String result = ocrEngine.recognizeText(workingFiles.subList(i, i + 1), curLangCode);
                     publish(result); // interim result
                 }
-
-                workingFiles.get(i).delete();   // clean up temporary files, even in cancellation
             }
 
             return null;
@@ -259,6 +258,11 @@ public class GuiWithCommand extends Gui {
                 jMenuItemOCR.setEnabled(true);
                 jMenuItemOCRAll.setEnabled(true);
                 jButtonCancelOCR.setVisible(false);
+
+                // clean up temporary image files
+                for (File tempImageFile : workingFiles) {
+                    tempImageFile.delete();
+                }
             }
         }
     }
