@@ -64,6 +64,13 @@ public class OCR {
             cmd.set(1, tempImageFile.getPath());
             pb.command(cmd);
             Process process = pb.start();
+            // any error message?
+            StreamGobbler errorGobbler = new StreamGobbler(process.getErrorStream());
+            // any output?
+            StreamGobbler outputGobbler = new StreamGobbler(process.getInputStream());
+            // kick them off
+            errorGobbler.start();
+            outputGobbler.start();
 
             int w = process.waitFor();
             System.out.println("Exit value = " + w);
@@ -76,7 +83,7 @@ public class OCR {
                 while ((str = in.readLine()) != null) {
                     result.append(str).append(EOL);
                 }
-                
+
                 int length = result.length();
                 if (length >= EOL.length()) {
                     result.setLength(length - EOL.length()); // remove last EOL
@@ -105,5 +112,32 @@ public class OCR {
 
         tempTessOutputFile.delete();
         return result.toString();
+    }
+}
+
+/**
+ * When Runtime.exec() won't
+ * http://www.javaworld.com/javaworld/jw-12-2000/jw-1229-traps.html
+ */
+class StreamGobbler extends Thread {
+
+    InputStream is;
+
+    StreamGobbler(InputStream is) {
+        this.is = is;
+    }
+
+    @Override
+    public void run() {
+        try {
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
 }
