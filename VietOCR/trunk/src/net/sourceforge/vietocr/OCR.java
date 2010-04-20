@@ -65,11 +65,11 @@ public class OCR {
             pb.command(cmd);
             Process process = pb.start();
             // any error message?
-            StreamGobbler errorGobbler = new StreamGobbler(process.getErrorStream());
+            // this has become unneccesary b/c the standard error is already merged with the standard output
+//            StreamGobbler errorGobbler = new StreamGobbler(process.getErrorStream());
+//            errorGobbler.start();
             // any output?
             StreamGobbler outputGobbler = new StreamGobbler(process.getInputStream());
-            // kick them off
-            errorGobbler.start();
             outputGobbler.start();
 
             int w = process.waitFor();
@@ -116,7 +116,7 @@ public class OCR {
 }
 
 /**
- * When Runtime.exec() won't
+ * When Runtime.exec() won't.
  * http://www.javaworld.com/javaworld/jw-12-2000/jw-1229-traps.html
  */
 class StreamGobbler extends Thread {
