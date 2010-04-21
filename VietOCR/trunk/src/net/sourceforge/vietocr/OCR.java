@@ -18,10 +18,6 @@ package net.sourceforge.vietocr;
 import java.io.*;
 import java.util.*;
 
-/**
- *
- * @author Quan Nguyen (nguyenq@users.sf.net)
- */
 public class OCR {
 
     private final String LANG_OPTION = "-l";
@@ -59,8 +55,6 @@ public class OCR {
         StringBuffer result = new StringBuffer();
 
         for (File tempImageFile : tempImageFiles) {
-//            ProcessBuilder pb = new ProcessBuilder(tessPath + "/tesseract", tempImageFile.getPath(), outputFileName, LANG_OPTION, lang);
-
             cmd.set(1, tempImageFile.getPath());
             pb.command(cmd);
             Process process = pb.start();
