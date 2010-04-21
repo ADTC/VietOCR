@@ -76,6 +76,7 @@ public class Gui extends javax.swing.JFrame {
     private String strClearRecentFiles;
     private boolean textChanged = true;
     private RawListener rawListener;
+    private final String DATAFILE_SUFFIX = ".inttemp";
 
     /**
      * Creates new form Gui
@@ -111,7 +112,7 @@ public class Gui extends javax.swing.JFrame {
 
                 @Override
                 public boolean accept(File dir, String name) {
-                    return name.endsWith(".inttemp");
+                    return name.endsWith(DATAFILE_SUFFIX);
                 }
             });
 
@@ -129,7 +130,7 @@ public class Gui extends javax.swing.JFrame {
                 langs = new String[langCodes.length];
             }
             for (int i = 0; i < langs.length; i++) {
-                langCodes[i] = langCodes[i].replace(".inttemp", "");
+                langCodes[i] = langCodes[i].replace(DATAFILE_SUFFIX, "");
                 langs[i] = prop.getProperty(langCodes[i], langCodes[i]);
             }
         }
