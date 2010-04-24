@@ -6,7 +6,7 @@
     <description>Builds, tests, and runs the project VietOCR.</description>
     <import file="nbproject/build-impl.xml"/>
     <!-- set global properties for this build -->
-    <property name="version" value="1.7"/>
+    <property name="version" value="2.0-Beta"/>
 
     <target name="-post-compile">
         <copy todir="${build.classes.dir}">
@@ -27,7 +27,7 @@
             description="create binary and source distribution archives">
         <mkdir dir="${dist.dir}"/>
         <zip zipfile="${dist.dir}/${ant.project.name}-${version}-src.zip">
-            <zipfileset dir="." prefix="${ant.project.name}">
+            <zipfileset dir="." prefix="${ant.project.name}2">
                 <exclude name="**/.*"/>
                 <exclude name="${dist.dir}/**"/>
                 <exclude name="${build.dir}/**"/>
@@ -36,7 +36,7 @@
             </zipfileset>
         </zip>
         <zip zipfile="${dist.dir}/${ant.project.name}-${version}.zip">
-            <zipfileset dir="." includes="*,tesseract/**,lib/**,data/**,samples/**" prefix="${ant.project.name}"
+            <zipfileset dir="." includes="*,tesseract/**,lib/**,data/**,samples/**" prefix="${ant.project.name}2"
                         excludes="build.xml,src,build,dist,doc,test,nbproject">
                 <exclude name="*.mf"/>
             </zipfileset>
