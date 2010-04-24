@@ -43,7 +43,7 @@ public class Gui extends javax.swing.JFrame {
     static final Locale VIETNAM = new Locale("vi", "VN");
     static final String UTF8 = "UTF-8";
     ResourceBundle vietpadResources, bundle;
-    static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
+    static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr2");
     private int filterIndex;
     private FileFilter[] fileFilters;
     protected Font font;
@@ -76,7 +76,7 @@ public class Gui extends javax.swing.JFrame {
     private String strClearRecentFiles;
     private boolean textChanged = true;
     private RawListener rawListener;
-    private final String DATAFILE_SUFFIX = ".inttemp";
+    private final String DATAFILE_SUFFIX = ".traineddata";
 
     /**
      * Creates new form Gui
