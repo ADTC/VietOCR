@@ -246,7 +246,6 @@ public class OptionsDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
         jPanelDangAmbigsPath.add(jTextFieldDangAmbigs, gridBagConstraints);
 
-        jCheckBoxDangAmbigs.setSelected(true);
         jCheckBoxDangAmbigs.setText(bundle.getString("jCheckBoxDangAmbigs.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;

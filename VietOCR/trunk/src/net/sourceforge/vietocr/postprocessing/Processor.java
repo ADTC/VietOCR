@@ -19,10 +19,6 @@ import java.io.File;
 import java.util.*;
 import org.apache.jetspeed.util.StringUtils;
 
-/**
- *
- * @author Quan Nguyen (nguyenq@users.sf.net)
- */
 public class Processor {
 
     public static String postProcess(String text, String langCode) {
