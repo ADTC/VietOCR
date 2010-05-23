@@ -19,10 +19,6 @@ import java.io.*;
 import java.util.*;
 import java.util.regex.*;
 
-/**
- *
- * @author Quan Nguyen (nguyenq@users.sf.net)
- */
 public class TextUtilities {
 
     /**
