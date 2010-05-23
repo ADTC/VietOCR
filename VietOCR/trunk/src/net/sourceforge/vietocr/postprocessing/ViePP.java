@@ -17,10 +17,6 @@ package net.sourceforge.vietocr.postprocessing;
 
 import java.text.Normalizer; // available in Java 6.0
 
-/**
- *
- * @author Quan Nguyen (nguyenq@users.sf.net)
- */
 public class ViePP implements IPostProcessor {
 
     final String TONE = "[\u0300\u0309\u0303\u0301\u0323]?"; // `?~'.
