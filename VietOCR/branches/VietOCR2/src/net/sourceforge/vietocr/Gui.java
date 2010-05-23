@@ -212,7 +212,7 @@ public class Gui extends javax.swing.JFrame {
         wordWrapOn = prefs.getBoolean("wordWrap", false);
 
         dangAmbigsPath = prefs.get("DangAmbigsPath", new File(baseDir, "data").getPath());
-        dangAmbigsOn = prefs.getBoolean("dangAmbigs", false);
+        dangAmbigsOn = prefs.getBoolean("dangAmbigs", true);
 
         jTextArea1.setLineWrap(wordWrapOn);
         jCheckBoxMenuWordWrap.setSelected(wordWrapOn);
