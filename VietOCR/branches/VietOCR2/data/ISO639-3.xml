@@ -6,6 +6,8 @@
 <entry key="bul">Bulgarian</entry>
 <entry key="cat">Catalan</entry>
 <entry key="ces">Czech</entry>
+<entry key="chi-sim">Chinese (simplified)</entry>
+<entry key="chi-tra">Chinese (traditional)</entry>
 <entry key="cop">Coptic</entry>
 <entry key="dan">Danish</entry>
 <entry key="deu">German</entry>
@@ -18,8 +20,10 @@
 <entry key="hun">Hungarian</entry>
 <entry key="ind">Indonesian</entry>
 <entry key="ita">Italian</entry>
+<entry key="jpn">Japanese</entry>
 <entry key="kan">Kannada</entry>
 <entry key="khm">Khmer</entry>
+<entry key="kor">Korean</entry>
 <entry key="lav">Latvian</entry>
 <entry key="lit">Lithuanian</entry>
 <entry key="mal">Malayalam</entry>
@@ -37,6 +41,7 @@
 <entry key="tam">Tamil</entry>
 <entry key="tel">Telugu</entry>
 <entry key="tgl">Tagalog</entry>
+<entry key="tha">Thai</entry>
 <entry key="tur">Turkish</entry>
 <entry key="ukr">Ukrainian</entry>
 <entry key="vie">Vietnamese</entry>
