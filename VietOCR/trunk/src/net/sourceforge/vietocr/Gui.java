@@ -586,6 +586,8 @@ public class Gui extends javax.swing.JFrame {
         jMenuItemOCRAll = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemPostProcess = new javax.swing.JMenuItem();
+        jMenuImage = new javax.swing.JMenu();
+        jMenuItemMetadata = new javax.swing.JMenuItem();
         jMenuFormat = new javax.swing.JMenu();
         jCheckBoxMenuWordWrap = new javax.swing.JCheckBoxMenuItem();
         jMenuItemFont = new javax.swing.JMenuItem();
@@ -940,6 +942,18 @@ public class Gui extends javax.swing.JFrame {
         jMenuCommand.add(jMenuItemPostProcess);
 
         jMenuBar2.add(jMenuCommand);
+
+        jMenuImage.setText("Image");
+
+        jMenuItemMetadata.setText("Metadata");
+        jMenuItemMetadata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMetadataActionPerformed(evt);
+            }
+        });
+        jMenuImage.add(jMenuItemMetadata);
+
+        jMenuBar2.add(jMenuImage);
 
         jMenuFormat.setText(bundle.getString("jMenuFormat.Text")); // NOI18N
 
@@ -1518,7 +1532,7 @@ public class Gui extends javax.swing.JFrame {
             return saveTextFile();
         }
     }
-    
+
     private void jMenuItemSaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsActionPerformed
         saveFileDlg();
     }//GEN-LAST:event_jMenuItemSaveAsActionPerformed
@@ -1827,6 +1841,14 @@ public class Gui extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
 
+    private void jMenuItemMetadataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMetadataActionPerformed
+        readImageMetadata();
+    }//GEN-LAST:event_jMenuItemMetadataActionPerformed
+
+    void readImageMetadata() {
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
+    }
+
     void changeUILanguage(final Locale locale) {
         if (locale.equals(Locale.getDefault())) {
             return; // no change in locale
@@ -1912,6 +1934,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuFormat;
     private javax.swing.JMenu jMenuHelp;
+    private javax.swing.JMenu jMenuImage;
     private javax.swing.JMenu jMenuInputMethod;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemChangeCase;
@@ -1920,6 +1943,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemHelp;
     private javax.swing.JMenuItem jMenuItemMergePdf;
     private javax.swing.JMenuItem jMenuItemMergeTiff;
+    private javax.swing.JMenuItem jMenuItemMetadata;
     protected javax.swing.JMenuItem jMenuItemOCR;
     protected javax.swing.JMenuItem jMenuItemOCRAll;
     private javax.swing.JMenuItem jMenuItemOpen;
