@@ -7,9 +7,10 @@ public class GuiWithImage extends GuiWithCommand {
     @Override
     void readImageMetadata() {
         if (iioImageList == null) {
-            JOptionPane.showMessageDialog(this, "Please select an image.");
+            JOptionPane.showMessageDialog(this, "Please load an image.");
             return;
         }
+        
         ImageDialog dialog = new ImageDialog(this, true);
         dialog.setImage(iioImageList.get(imageIndex));
         dialog.setVisible(true);

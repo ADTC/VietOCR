@@ -1,13 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * ImageDialog.java
- *
- * Created on Jul 17, 2010, 8:43:15 AM
- */
 package net.sourceforge.vietocr;
 
 import javax.imageio.IIOImage;
@@ -15,10 +5,6 @@ import javax.imageio.metadata.IIOMetadata;
 import javax.imageio.metadata.IIOMetadataNode;
 import org.w3c.dom.NodeList;
 
-/**
- *
- * @author Quan
- */
 public class ImageDialog extends javax.swing.JDialog {
 
     IIOImage image;
@@ -40,10 +26,14 @@ public class ImageDialog extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldXRes = new javax.swing.JTextField();
+        jTextFieldYRes = new javax.swing.JTextField();
         jButtonOK = new javax.swing.JButton();
         jButtonClose = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldWidth = new javax.swing.JTextField();
+        jTextFieldHeight = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -51,9 +41,9 @@ public class ImageDialog extends javax.swing.JDialog {
 
         jLabel2.setText("Y-Resolution");
 
-        jTextField1.setMinimumSize(new java.awt.Dimension(100, 20));
+        jTextFieldXRes.setMinimumSize(new java.awt.Dimension(100, 20));
 
-        jTextField2.setMinimumSize(new java.awt.Dimension(100, 20));
+        jTextFieldYRes.setMinimumSize(new java.awt.Dimension(100, 20));
 
         jButtonOK.setText("OK");
         jButtonOK.addActionListener(new java.awt.event.ActionListener() {
@@ -69,25 +59,32 @@ public class ImageDialog extends javax.swing.JDialog {
             }
         });
 
+        jLabel3.setText("Image Width");
+
+        jLabel4.setText("Image Height");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonOK)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextFieldHeight)
+                    .addComponent(jTextFieldWidth)
+                    .addComponent(jTextFieldYRes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldXRes, javax.swing.GroupLayout.PREFERRED_SIZE, 90, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addComponent(jButtonClose)
-                .addContainerGap(191, Short.MAX_VALUE))
+                        .addComponent(jButtonOK)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonClose)))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,16 +92,24 @@ public class ImageDialog extends javax.swing.JDialog {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldXRes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                    .addComponent(jTextFieldYRes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextFieldWidth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextFieldHeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonOK)
                     .addComponent(jButtonClose))
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,20 +130,24 @@ public class ImageDialog extends javax.swing.JDialog {
 
     void readImageData() {
         IIOMetadata imageMetadata = image.getMetadata();
-//        IIOMetadataNode dimNode = meta.getAsTree("javax_imageio_1.0");
-//        NodeList nodes = dimNode.getElementsByTagName("HorizontalPixelSize");
-//        IIOMetadataNode dpcWidth = (IIOMetadataNode) nodes.nextElement();
-//        nodes = dimNode.getElementsByTagName("VerticalPixelSize");
-//        IIOMetadataNode dpcHeight = (IIOMetadataNode) nodes.nextElement();
+
         if (imageMetadata != null) {
+            IIOMetadataNode dimNode = (IIOMetadataNode) imageMetadata.getAsTree("javax_imageio_1.0");
+            NodeList nodes = dimNode.getElementsByTagName("HorizontalPixelSize");
+            float dpcWidth = Float.parseFloat(nodes.item(0).getAttributes().item(0).getNodeValue());
+            int resX = (int) Math.ceil(25.4f / dpcWidth);
+            this.jTextFieldXRes.setText(String.valueOf(resX));
+            nodes = dimNode.getElementsByTagName("VerticalPixelSize");
+            float dpcHeight = Float.parseFloat(nodes.item(0).getAttributes().item(0).getNodeValue());
+            int resY = (int) Math.ceil(25.4f / dpcHeight);
+            this.jTextFieldYRes.setText(String.valueOf(resY));
             String[] metadataFormatNames = imageMetadata.getMetadataFormatNames();
             if (metadataFormatNames != null) {
                 for (int j = 0; j < metadataFormatNames.length; j++) {
                     System.out.println("\n--- Image metadata --- "
                             + metadataFormatNames[j]
                             + "\n");
-                    IIOExampleUtils.printMetadata(imageMetadata,
-                            metadataFormatNames[j]);
+                    IIOExampleUtils.printMetadata(imageMetadata, metadataFormatNames[j]);
                 }
             }
         }
@@ -150,10 +159,12 @@ public class ImageDialog extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
+            @Override
             public void run() {
                 ImageDialog dialog = new ImageDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 
+                    @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
@@ -167,7 +178,11 @@ public class ImageDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButtonOK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField jTextFieldHeight;
+    private javax.swing.JTextField jTextFieldWidth;
+    private javax.swing.JTextField jTextFieldXRes;
+    private javax.swing.JTextField jTextFieldYRes;
     // End of variables declaration//GEN-END:variables
 }

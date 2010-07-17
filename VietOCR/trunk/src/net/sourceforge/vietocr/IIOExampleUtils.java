@@ -63,8 +63,7 @@ public class IIOExampleUtils {
         }
     }
 
-    public static void printMetadata(IIOMetadata metadata,
-                                     String metadataFormat) {
+    public static void printMetadata(IIOMetadata metadata, String metadataFormat) {
         Node tree = metadata.getAsTree(metadataFormat);
         printNode(tree, 0);
     }
