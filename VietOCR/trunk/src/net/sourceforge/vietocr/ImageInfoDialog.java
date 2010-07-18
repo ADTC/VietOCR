@@ -5,12 +5,12 @@ import javax.imageio.metadata.IIOMetadata;
 import javax.imageio.metadata.IIOMetadataNode;
 import org.w3c.dom.NodeList;
 
-public class ImageDialog extends javax.swing.JDialog {
+public class ImageInfoDialog extends javax.swing.JDialog {
 
     IIOImage image;
 
     /** Creates new form ImageDialog */
-    public ImageDialog(java.awt.Frame parent, boolean modal) {
+    public ImageInfoDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -161,7 +161,7 @@ public class ImageDialog extends javax.swing.JDialog {
 
             @Override
             public void run() {
-                ImageDialog dialog = new ImageDialog(new javax.swing.JFrame(), true);
+                ImageInfoDialog dialog = new ImageInfoDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 
                     @Override

@@ -11,7 +11,7 @@ public class GuiWithImage extends GuiWithCommand {
             return;
         }
         
-        ImageDialog dialog = new ImageDialog(this, true);
+        ImageInfoDialog dialog = new ImageInfoDialog(this, true);
         dialog.setImage(iioImageList.get(imageIndex));
         dialog.setVisible(true);
     }
