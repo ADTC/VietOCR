@@ -259,7 +259,7 @@ public class Gui extends javax.swing.JFrame {
 
             @Override
             public boolean dispatchKeyEvent(KeyEvent e) {
-                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_V) {
+                if (e.isControlDown() && e.getID() == KeyEvent.KEY_PRESSED && e.getKeyCode() == KeyEvent.VK_V) {
                     try {
                         Image image = ImageIOHelper.getClipboardImage();
                         if (image != null) {
