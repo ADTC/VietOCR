@@ -27,7 +27,7 @@ using Net.SourceForge.Vietpad.Utilities;
 
 namespace VietOCR.NET
 {
-    public partial class GUIWithFormat : VietOCR.NET.GUIWithCommand
+    public partial class GUIWithFormat : VietOCR.NET.GUIWithImage
     {
         const string strSelectedCase = "SelectedCase";
 
