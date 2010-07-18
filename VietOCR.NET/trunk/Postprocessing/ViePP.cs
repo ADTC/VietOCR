@@ -19,10 +19,6 @@ namespace VietOCR.NET.Postprocessing
     using System.Text;
     using System.Text.RegularExpressions;
 
-    /**
-     *
-     * @author Quan Nguyen (nguyenq@users.sf.net)
-     */
     public class ViePP : IPostProcessor
     {
         const string TONE = "[\u0300\u0309\u0303\u0301\u0323]?"; // `?~'.

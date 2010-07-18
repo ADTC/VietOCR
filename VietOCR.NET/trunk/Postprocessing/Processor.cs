@@ -22,7 +22,6 @@ namespace VietOCR.NET.Postprocessing
 
     public class Processor
     {
-
         public static string PostProcess(string text, string langCode)
         {
             try
