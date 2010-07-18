@@ -16,11 +16,6 @@
 
 namespace VietOCR.NET.Postprocessing
 {
-
-    /**
-     *
-     * @author Quan Nguyen (nguyenq@users.sf.net)
-     */
     public interface IPostProcessor
     {
         string PostProcess(string text);
