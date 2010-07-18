@@ -27,8 +27,8 @@ namespace VietOCR.NET
         {
             base.OnLoad(ea);
 
-            this.textBoxXRes.Text = this.image.HorizontalResolution.ToString();
-            this.textBoxYRes.Text = this.image.VerticalResolution.ToString();
+            this.textBoxXRes.Text = Math.Round(this.image.HorizontalResolution).ToString();
+            this.textBoxYRes.Text = Math.Round(this.image.VerticalResolution).ToString();
             this.textBoxWidth.Text = this.image.Width.ToString();
             this.textBoxHeight.Text = this.image.Height.ToString();
 
