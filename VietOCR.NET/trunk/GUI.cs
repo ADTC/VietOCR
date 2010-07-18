@@ -1134,5 +1134,10 @@ namespace VietOCR.NET
             this.toolStripBtnSave.Enabled = this.textBox1.Modified;
             this.saveToolStripMenuItem.Enabled = this.textBox1.Modified;
         }
+
+        protected virtual void metadataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
+        }
     }
 }
