@@ -197,18 +197,23 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         IIOMetadata imageMetadata = iimage.getMetadata();
 
         if (imageMetadata != null) {
-            IIOMetadataNode dimNode = (IIOMetadataNode) imageMetadata.getAsTree("javax_imageio_1.0");
-            NodeList nodes = dimNode.getElementsByTagName("HorizontalPixelSize");
-            float dpcWidth = Float.parseFloat(nodes.item(0).getAttributes().item(0).getNodeValue());
-            int resX = (int) Math.round(25.4f / dpcWidth);
-            this.jTextFieldXRes.setText(String.valueOf(resX));
-            nodes = dimNode.getElementsByTagName("VerticalPixelSize");
-            float dpcHeight = Float.parseFloat(nodes.item(0).getAttributes().item(0).getNodeValue());
-            int resY = (int) Math.round(25.4f / dpcHeight);
-            this.jTextFieldYRes.setText(String.valueOf(resY));
-
             this.jTextFieldWidth.setText(String.valueOf(iimage.getRenderedImage().getWidth()));
             this.jTextFieldHeight.setText(String.valueOf(iimage.getRenderedImage().getHeight()));
+
+            IIOMetadataNode dimNode = (IIOMetadataNode) imageMetadata.getAsTree("javax_imageio_1.0");
+            NodeList nodes = dimNode.getElementsByTagName("HorizontalPixelSize");
+            if (nodes.getLength() > 0) {
+                float dpcWidth = Float.parseFloat(nodes.item(0).getAttributes().item(0).getNodeValue());
+                int resX = (int) Math.round(25.4f / dpcWidth);
+                this.jTextFieldXRes.setText(String.valueOf(resX));
+            }
+
+            nodes = dimNode.getElementsByTagName("VerticalPixelSize");
+            if (nodes.getLength() > 0) {
+                float dpcHeight = Float.parseFloat(nodes.item(0).getAttributes().item(0).getNodeValue());
+                int resY = (int) Math.round(25.4f / dpcHeight);
+                this.jTextFieldYRes.setText(String.valueOf(resY));
+            }
 
             String[] metadataFormatNames = imageMetadata.getMetadataFormatNames();
             if (metadataFormatNames != null) {
