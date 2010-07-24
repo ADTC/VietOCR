@@ -1,5 +1,6 @@
 package net.sourceforge.vietocr;
 
+import java.awt.Toolkit;
 import java.awt.event.*;
 import javax.imageio.IIOImage;
 import javax.imageio.metadata.IIOMetadata;
@@ -206,6 +207,9 @@ public class ImageInfoDialog extends javax.swing.JDialog {
                 float dpcWidth = Float.parseFloat(nodes.item(0).getAttributes().item(0).getNodeValue());
                 int resX = (int) Math.round(25.4f / dpcWidth);
                 this.jTextFieldXRes.setText(String.valueOf(resX));
+            } else {
+                int dpi = Toolkit.getDefaultToolkit().getScreenResolution();
+                this.jTextFieldXRes.setText(String.valueOf(dpi));
             }
 
             nodes = dimNode.getElementsByTagName("VerticalPixelSize");
@@ -213,6 +217,9 @@ public class ImageInfoDialog extends javax.swing.JDialog {
                 float dpcHeight = Float.parseFloat(nodes.item(0).getAttributes().item(0).getNodeValue());
                 int resY = (int) Math.round(25.4f / dpcHeight);
                 this.jTextFieldYRes.setText(String.valueOf(resY));
+            } else {
+                int dpi = Toolkit.getDefaultToolkit().getScreenResolution();
+                this.jTextFieldYRes.setText(String.valueOf(dpi));
             }
 
             String[] metadataFormatNames = imageMetadata.getMetadataFormatNames();
