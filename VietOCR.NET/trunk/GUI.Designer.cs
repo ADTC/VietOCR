@@ -62,6 +62,8 @@ namespace VietOCR.NET
             this.oCRAllPagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.postprocessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.metadataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.formatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordWrapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,8 +94,6 @@ namespace VietOCR.NET
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.backgroundWorkerScan = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerLoad = new System.ComponentModel.BackgroundWorker();
-            this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.metadataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -360,6 +360,19 @@ namespace VietOCR.NET
             resources.ApplyResources(this.postprocessToolStripMenuItem, "postprocessToolStripMenuItem");
             this.postprocessToolStripMenuItem.Click += new System.EventHandler(this.postprocessToolStripMenuItem_Click);
             // 
+            // imageToolStripMenuItem
+            // 
+            this.imageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.metadataToolStripMenuItem});
+            this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
+            resources.ApplyResources(this.imageToolStripMenuItem, "imageToolStripMenuItem");
+            // 
+            // metadataToolStripMenuItem
+            // 
+            this.metadataToolStripMenuItem.Name = "metadataToolStripMenuItem";
+            resources.ApplyResources(this.metadataToolStripMenuItem, "metadataToolStripMenuItem");
+            this.metadataToolStripMenuItem.Click += new System.EventHandler(this.metadataToolStripMenuItem_Click);
+            // 
             // formatToolStripMenuItem
             // 
             this.formatToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -569,19 +582,6 @@ namespace VietOCR.NET
             this.backgroundWorkerLoad.WorkerSupportsCancellation = true;
             this.backgroundWorkerLoad.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerLoad_DoWork);
             this.backgroundWorkerLoad.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerLoad_RunWorkerCompleted);
-            // 
-            // imageToolStripMenuItem
-            // 
-            this.imageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.metadataToolStripMenuItem});
-            this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-            resources.ApplyResources(this.imageToolStripMenuItem, "imageToolStripMenuItem");
-            // 
-            // metadataToolStripMenuItem
-            // 
-            this.metadataToolStripMenuItem.Name = "metadataToolStripMenuItem";
-            resources.ApplyResources(this.metadataToolStripMenuItem, "metadataToolStripMenuItem");
-            this.metadataToolStripMenuItem.Click += new System.EventHandler(this.metadataToolStripMenuItem_Click);
             // 
             // GUI
             // 
