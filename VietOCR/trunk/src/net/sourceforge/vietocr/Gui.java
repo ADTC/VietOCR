@@ -945,7 +945,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuImage.setText("Image");
 
-        jMenuItemMetadata.setText("Metadata");
+        jMenuItemMetadata.setText("Properties");
         jMenuItemMetadata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemMetadataActionPerformed(evt);
