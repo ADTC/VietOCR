@@ -210,13 +210,13 @@ public class ImageInfoDialog extends javax.swing.JDialog {
 
         switch (unit) {
             case 1: //"inches"
-                this.jTextFieldWidth.setText(String.valueOf(width / Integer.parseInt(this.jTextFieldXRes.getText())));
-                this.jTextFieldHeight.setText(String.valueOf(height / Integer.parseInt(this.jTextFieldYRes.getText())));
+                this.jTextFieldWidth.setText(String.valueOf(width / Float.parseFloat(this.jTextFieldXRes.getText())));
+                this.jTextFieldHeight.setText(String.valueOf(height / Float.parseFloat(this.jTextFieldYRes.getText())));
                 break;
 
             case 2: // "cm"
-                this.jTextFieldWidth.setText(String.valueOf(width / Integer.parseInt(this.jTextFieldXRes.getText()) * 2.54));
-                this.jTextFieldHeight.setText(String.valueOf(height / Integer.parseInt(this.jTextFieldYRes.getText()) * 2.54));
+                this.jTextFieldWidth.setText(String.valueOf(width / Float.parseFloat(this.jTextFieldXRes.getText()) * 2.54));
+                this.jTextFieldHeight.setText(String.valueOf(height / Float.parseFloat(this.jTextFieldYRes.getText()) * 2.54));
                 break;
 
             default:
