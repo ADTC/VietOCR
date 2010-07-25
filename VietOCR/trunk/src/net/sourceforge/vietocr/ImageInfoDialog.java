@@ -52,16 +52,16 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         jTextFieldHeight = new javax.swing.JTextField();
         jTextFieldXRes = new javax.swing.JTextField();
         jTextFieldYRes = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox2 = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         jButtonOK = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Image Information");
+        setTitle("Image Properties");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 30, 10, 30));
@@ -127,21 +127,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         jPanel1.add(jTextFieldYRes, gridBagConstraints);
 
-        jLabel5.setText("pixels");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 2, 0);
-        jPanel1.add(jLabel5, gridBagConstraints);
-
-        jLabel6.setText("pixels");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 2, 0);
-        jPanel1.add(jLabel6, gridBagConstraints);
-
-        jLabel7.setText("pixels/inch");
+        jLabel7.setText("DPI");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -149,12 +135,31 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 2, 0);
         jPanel1.add(jLabel7, gridBagConstraints);
 
-        jLabel8.setText("pixels/inch");
+        jLabel8.setText("DPI");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel1.add(jLabel8, gridBagConstraints);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "pixels", "inches", "cm" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox1, new java.awt.GridBagConstraints());
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "pixels", "inches", "cm" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        jPanel1.add(jComboBox2, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -188,6 +193,38 @@ public class ImageInfoDialog extends javax.swing.JDialog {
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        this.jComboBox2.setSelectedItem(this.jComboBox1.getSelectedItem());
+        convertUnits(this.jComboBox1.getSelectedIndex());
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        this.jComboBox1.setSelectedItem(this.jComboBox2.getSelectedItem());
+        convertUnits(this.jComboBox2.getSelectedIndex());
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void convertUnits(int unit) {
+        int width = iimage.getRenderedImage().getWidth();
+        int height = iimage.getRenderedImage().getHeight();
+
+        switch (unit) {
+            case 1: //"inches"
+                this.jTextFieldWidth.setText(String.valueOf(width / Integer.parseInt(this.jTextFieldXRes.getText())));
+                this.jTextFieldHeight.setText(String.valueOf(height / Integer.parseInt(this.jTextFieldYRes.getText())));
+                break;
+
+            case 2: // "cm"
+                this.jTextFieldWidth.setText(String.valueOf(width / Integer.parseInt(this.jTextFieldXRes.getText()) * 2.54));
+                this.jTextFieldHeight.setText(String.valueOf(height / Integer.parseInt(this.jTextFieldYRes.getText()) * 2.54));
+                break;
+
+            default:
+                this.jTextFieldWidth.setText(String.valueOf(width));
+                this.jTextFieldHeight.setText(String.valueOf(height));
+                break;
+        }
+    }
 
     public void setImage(IIOImage iimage) {
         this.iimage = iimage;
@@ -257,12 +294,12 @@ public class ImageInfoDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonOK;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
