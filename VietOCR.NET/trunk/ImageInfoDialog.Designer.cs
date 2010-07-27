@@ -61,11 +61,13 @@
             // 
             resources.ApplyResources(this.textBoxXRes, "textBoxXRes");
             this.textBoxXRes.Name = "textBoxXRes";
+            this.textBoxXRes.ReadOnly = true;
             // 
             // textBoxYRes
             // 
             resources.ApplyResources(this.textBoxYRes, "textBoxYRes");
             this.textBoxYRes.Name = "textBoxYRes";
+            this.textBoxYRes.ReadOnly = true;
             // 
             // label2
             // 
@@ -76,6 +78,7 @@
             // 
             resources.ApplyResources(this.textBoxWidth, "textBoxWidth");
             this.textBoxWidth.Name = "textBoxWidth";
+            this.textBoxWidth.ReadOnly = true;
             // 
             // label3
             // 
@@ -86,6 +89,7 @@
             // 
             resources.ApplyResources(this.textBoxHeight, "textBoxHeight");
             this.textBoxHeight.Name = "textBoxHeight";
+            this.textBoxHeight.ReadOnly = true;
             // 
             // label4
             // 
