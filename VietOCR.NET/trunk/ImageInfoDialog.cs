@@ -55,13 +55,13 @@ namespace VietOCR.NET
             switch (unit)
             {
                 case "inches":
-                    this.textBoxWidth.Text = (this.image.Width / this.image.HorizontalResolution).ToString();
-                    this.textBoxHeight.Text = (this.image.Height / this.image.VerticalResolution).ToString();
+                    this.textBoxWidth.Text = Math.Round(this.image.Width / this.image.HorizontalResolution, 1).ToString();
+                    this.textBoxHeight.Text = Math.Round(this.image.Height / this.image.VerticalResolution, 1).ToString();
                     break;
 
                 case "cm":
-                    this.textBoxWidth.Text = (this.image.Width / this.image.HorizontalResolution * 2.54).ToString();
-                    this.textBoxHeight.Text = (this.image.Height / this.image.VerticalResolution * 2.54).ToString();
+                    this.textBoxWidth.Text = Math.Round(this.image.Width / this.image.HorizontalResolution * 2.54, 2).ToString();
+                    this.textBoxHeight.Text = Math.Round(this.image.Height / this.image.VerticalResolution * 2.54, 2).ToString();
                     break;
 
                 default:
