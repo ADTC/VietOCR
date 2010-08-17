@@ -62,6 +62,11 @@ public class ImageHelper {
     public static File[] convertPdf2Png(File inputPdfFile) {
         File imageDir = inputPdfFile.getParentFile();
 
+        if (imageDir == null) {
+            String userDir = System.getProperty("user.dir");
+            imageDir = new File(userDir);
+        }
+
         //get Ghostscript instance
         Ghostscript gs = Ghostscript.getInstance();
 
