@@ -29,7 +29,7 @@ public class ImageHelper {
      * @param inputPdfFile
      * @return a multi-page TIFF image
      */
-    public static File convertPdf2Tiff(File inputPdfFile) throws Exception {
+    public static File convertPdf2Tiff(File inputPdfFile) throws IOException  {
         File[] pngFiles = null;
 
         try {
