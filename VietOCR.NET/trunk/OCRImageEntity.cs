@@ -83,7 +83,11 @@ namespace VietOCR.NET
 
             foreach (Image image in (index == -1 ? originalImages : ((List<Image>)originalImages).GetRange(index, 1)))
             {
-                if (dpiX != 0 && dpiY != 0)
+                if (dpiX == 0 || dpiY == 0)
+                {
+                    images.Add(image);
+                }
+                else
                 {
                     Image im = ImageIOHelper.Resample(image, dpiX, dpiY);
                     images.Add(im);
@@ -92,10 +96,6 @@ namespace VietOCR.NET
                     rect.Width *= im.Width / image.Width;
                     rect.Y *= im.Height / image.Height;
                     rect.Height *= im.Height / image.Height;
-                }
-                else
-                {
-                    images.Add(image);
                 }
             }
 
