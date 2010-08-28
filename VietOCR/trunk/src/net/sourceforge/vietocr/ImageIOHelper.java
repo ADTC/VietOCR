@@ -64,30 +64,21 @@ public class ImageIOHelper {
         //Read the stream metadata
         IIOMetadata streamMetadata = writer.getDefaultStreamMetadata(tiffWriteParam);
 
-        if (index == -1) {
-            int imageTotal = reader.getNumImages(true);
+        int imageTotal = reader.getNumImages(true);
 
-            for (int i = 0; i < imageTotal; i++) {
+        for (int i = 0; i < imageTotal; i++) {
+            // all if index == -1; otherwise, only index-th
+            if (index == -1 || i == index) {
 //                BufferedImage bi = reader.read(i);
-//                IIOImage image = new IIOImage(bi, null, reader.getImageMetadata(i));
-                IIOImage image = reader.readAll(i, reader.getDefaultReadParam());
+//                IIOImage oimage = new IIOImage(bi, null, reader.getImageMetadata(i));
+                IIOImage oimage = reader.readAll(i, reader.getDefaultReadParam());
                 File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
                 ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
                 writer.setOutput(ios);
-                writer.write(streamMetadata, image, tiffWriteParam);
+                writer.write(streamMetadata, oimage, tiffWriteParam);
                 ios.close();
                 tempImageFiles.add(tempFile);
             }
-        } else {
-//            BufferedImage bi = reader.read(index);
-//            IIOImage image = new IIOImage(bi, null, reader.getImageMetadata(index));
-            IIOImage image = reader.readAll(index, reader.getDefaultReadParam());
-            File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
-            ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
-            writer.setOutput(ios);
-            writer.write(streamMetadata, image, tiffWriteParam);
-            ios.close();
-            tempImageFiles.add(tempFile);
         }
         writer.dispose();
         reader.dispose();
@@ -96,6 +87,10 @@ public class ImageIOHelper {
     }
 
     public static List<File> createImageFiles(List<IIOImage> imageList, int index) throws Exception {
+        return createImageFiles(imageList, index, 0, 0);
+    }
+
+    public static List<File> createImageFiles(List<IIOImage> imageList, int index, int dpiX, int dpiY) throws Exception {
         List<File> tempImageFiles = new ArrayList<File>();
 
         //Set up the writeParam
@@ -113,27 +108,53 @@ public class ImageIOHelper {
         //Get the stream metadata
         IIOMetadata streamMetadata = writer.getDefaultStreamMetadata(tiffWriteParam);
 
-        if (index == -1) {
-            for (IIOImage image : imageList) {
-                File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
-                ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
-                writer.setOutput(ios);
-                writer.write(streamMetadata, image, tiffWriteParam);
-                ios.close();
-                tempImageFiles.add(tempFile);
+        // all if index == -1; otherwise, only index-th
+        for (IIOImage oimage : (index == -1 ? imageList : imageList.subList(index, index + 1))) {
+            if (dpiX != 0 && dpiY != 0) {
+                // Get the default image metadata.
+                ImageTypeSpecifier imageType = ImageTypeSpecifier.createFromRenderedImage(oimage.getRenderedImage());
+                IIOMetadata imageMetadata = writer.getDefaultImageMetadata(imageType, null);
+                imageMetadata = setDPIViaAPI(imageMetadata, dpiX, dpiY);
+                oimage.setMetadata(imageMetadata);
             }
-        } else {
-            IIOImage image = imageList.get(index);
+
             File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
             ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
             writer.setOutput(ios);
-            writer.write(streamMetadata, image, tiffWriteParam);
+            writer.write(streamMetadata, oimage, tiffWriteParam);
             ios.close();
             tempImageFiles.add(tempFile);
         }
         writer.dispose();
 
         return tempImageFiles;
+    }
+
+    /**
+     * Set DPI using API.
+     */
+    private static IIOMetadata setDPIViaAPI(IIOMetadata imageMetadata, int dpiX, int dpiY)
+            throws IIOInvalidTreeException {
+        // Derive the TIFFDirectory from the metadata.
+        TIFFDirectory dir = TIFFDirectory.createFromMetadata(imageMetadata);
+
+        // Get {X,Y}Resolution tags.
+        BaselineTIFFTagSet base = BaselineTIFFTagSet.getInstance();
+        TIFFTag tagXRes = base.getTag(BaselineTIFFTagSet.TAG_X_RESOLUTION);
+        TIFFTag tagYRes = base.getTag(BaselineTIFFTagSet.TAG_Y_RESOLUTION);
+
+        // Create {X,Y}Resolution fields.
+        TIFFField fieldXRes = new TIFFField(tagXRes, TIFFTag.TIFF_RATIONAL,
+                1, new long[][]{{dpiX, 1}});
+        TIFFField fieldYRes = new TIFFField(tagYRes, TIFFTag.TIFF_RATIONAL,
+                1, new long[][]{{dpiY, 1}});
+
+        // Append {X,Y}Resolution fields to directory.
+        dir.addTIFFField(fieldXRes);
+        dir.addTIFFField(fieldYRes);
+
+        // Convert to metadata object and return.
+        return dir.getAsMetadata();
     }
 
     public static List<IIOImage> getIIOImageList(File imageFile) throws Exception {
@@ -171,9 +192,9 @@ public class ImageIOHelper {
             int imageTotal = reader.getNumImages(true);
 
             for (int i = 0; i < imageTotal; i++) {
-//                IIOImage image = new IIOImage(reader.read(i), null, reader.getImageMetadata(i));
-                IIOImage image = reader.readAll(i, reader.getDefaultReadParam());
-                iioImageList.add(image);
+//                IIOImage oimage = new IIOImage(reader.read(i), null, reader.getImageMetadata(i));
+                IIOImage oimage = reader.readAll(i, reader.getDefaultReadParam());
+                iioImageList.add(oimage);
             }
 
             return iioImageList;
@@ -207,7 +228,7 @@ public class ImageIOHelper {
             imageList.addAll(getIIOImageList(inputImages[i]));
         }
 
-        if (imageList.size() == 0) {
+        if (imageList.isEmpty()) {
             // if no image
             return;
         }

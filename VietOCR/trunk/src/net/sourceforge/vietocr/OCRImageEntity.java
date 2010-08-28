@@ -25,6 +25,11 @@ public class OCRImageEntity {
     private File originalImageFile;
     private int index;
 
+    /** Horizontal Resolution */
+    private int dpiX;
+    /** Vertical Resolution */
+    private int dpiY;
+
     public OCRImageEntity(List<IIOImage> originalImages, int index) {
         this.originalImages = originalImages;
         this.index = index;
@@ -54,7 +59,11 @@ public class OCRImageEntity {
      */
     public List<File> getClonedImageFiles() throws Exception {
         if (originalImages != null) {
-            return ImageIOHelper.createImageFiles(originalImages, index);
+            if (dpiX != 0 && dpiY != 0) {
+                return ImageIOHelper.createImageFiles(originalImages, index, dpiX, dpiY);
+            } else {
+                return ImageIOHelper.createImageFiles(originalImages, index);
+            }
         } else {
             return ImageIOHelper.createImageFiles(originalImageFile, index);
         }
@@ -65,5 +74,15 @@ public class OCRImageEntity {
      */
     public int getIndex() {
         return index;
+    }
+
+    public void setScreenshotMode(boolean mode) {
+        dpiX = mode? 300 : 0;
+        dpiY = mode? 300 : 0;
+    }
+
+    public void setResolution(int dpiX, int dpiY) {
+        this.dpiX = dpiX;
+        this.dpiY = dpiY;
     }
 }
