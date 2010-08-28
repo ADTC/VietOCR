@@ -66,15 +66,7 @@ public class GuiWithSettings extends GuiWithFormat {
                         return;
                     }
 
-                    OCRImageEntity entity = new OCRImageEntity(imageFile, -1);
-                    final List<File> tempImageFiles;
-
-                    try {
-                        tempImageFiles = entity.getClonedImageFiles();
-                    } catch (Exception exc) {
-                        statusFrame.getTextArea().append("    **  " + bundle.getString("Cannotprocess") + " " + imageFile.getName() + "  **\n");
-                        return;
-                    }
+                    final OCRImageEntity entity = new OCRImageEntity(imageFile, -1, curLangCode);
 
                     SwingUtilities.invokeLater(new Runnable() {
 
@@ -82,10 +74,10 @@ public class GuiWithSettings extends GuiWithFormat {
                         public void run() {
                             try {
                                 OCR ocrEngine = new OCR(tessPath);
-                                String result = ocrEngine.recognizeText(tempImageFiles, curLangCode);
+                                String result = ocrEngine.recognizeText(entity.getClonedImageFiles(), entity.getLanguage());
 
                                 // postprocess to correct common OCR errors
-                                result = Processor.postProcess(result, curLangCode);
+                                result = Processor.postProcess(result, entity.getLanguage());
 
                                 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(outputFolder, imageFile.getName() + ".txt")), UTF8));
                                 out.write(result);

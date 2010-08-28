@@ -168,7 +168,7 @@ public class GuiWithCommand extends Gui {
         this.jMenuItemOCR.setEnabled(false);
         this.jMenuItemOCRAll.setEnabled(false);
 
-        OCRImageEntity entity = new OCRImageEntity(iioImageList, index);
+        OCRImageEntity entity = new OCRImageEntity(iioImageList, index, curLangCode);
 //        entity.setScreenshotMode(true);
 
         // instantiate SwingWorker for OCR
@@ -203,7 +203,7 @@ public class GuiWithCommand extends Gui {
 
             for (int i = 0; i < workingFiles.size(); i++) {
                 if (!isCancelled()) {
-                    String result = ocrEngine.recognizeText(workingFiles.subList(i, i + 1), curLangCode);
+                    String result = ocrEngine.recognizeText(workingFiles.subList(i, i + 1), entity.getLanguage());
                     publish(result); // interim result
                 }
             }

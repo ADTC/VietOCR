@@ -24,20 +24,35 @@ public class OCRImageEntity {
     private List<IIOImage> originalImages;
     private File originalImageFile;
     private int index;
-
+    /** Language code, which follows ISO 639-3 standard */
+    private String lang;
     /** Horizontal Resolution */
     private int dpiX;
     /** Vertical Resolution */
     private int dpiY;
 
-    public OCRImageEntity(List<IIOImage> originalImages, int index) {
+    /**
+     * Constructor.
+     * @param originalImages a list of <code>IIOImage</code> objects
+     * @param index
+     * @param lang language code, which follows ISO 639-3 standard
+     */
+    public OCRImageEntity(List<IIOImage> originalImages, int index, String lang) {
         this.originalImages = originalImages;
         this.index = index;
+        this.lang = lang;
     }
 
-    public OCRImageEntity(File originalImageFile, int index) {
+    /**
+     * Constructor.
+     * @param originalImages an image file
+     * @param index
+     * @param lang language code, which follows ISO 639-3 standard
+     */
+    public OCRImageEntity(File originalImageFile, int index, String lang) {
         this.originalImageFile = originalImageFile;
         this.index = index;
+        this.lang = lang;
     }
 
     /**
@@ -76,13 +91,29 @@ public class OCRImageEntity {
         return index;
     }
 
+    /**
+     * Sets screenshot mode
+     * @param mode true for resampling the input image; false for no manipulation of the image
+     */
     public void setScreenshotMode(boolean mode) {
-        dpiX = mode? 300 : 0;
-        dpiY = mode? 300 : 0;
+        dpiX = mode ? 300 : 0;
+        dpiY = mode ? 300 : 0;
     }
 
+    /**
+     * Sets resolution
+     * @param dpiX horizontal resolution
+     * @param dpiY vertical resolution
+     */
     public void setResolution(int dpiX, int dpiY) {
         this.dpiX = dpiX;
         this.dpiY = dpiY;
+    }
+
+    /**
+     * @return the language code
+     */
+    public String getLanguage() {
+        return lang;
     }
 }
