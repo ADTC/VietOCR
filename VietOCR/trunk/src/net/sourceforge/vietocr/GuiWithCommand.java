@@ -52,7 +52,7 @@ public class GuiWithCommand extends Gui {
                 IIOImage iioImage = new IIOImage(bi, null, null);
                 ArrayList<IIOImage> tempList = new ArrayList<IIOImage>();
                 tempList.add(iioImage);
-                performOCR(tempList, 0);
+                performOCR(tempList, 0, rect);
             } catch (RasterFormatException rfe) {
                 JOptionPane.showMessageDialog(this, rfe.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
 //                rfe.printStackTrace();
@@ -60,7 +60,7 @@ public class GuiWithCommand extends Gui {
                 e.printStackTrace();
             }
         } else {
-            performOCR(iioImageList, imageIndex);
+            performOCR(iioImageList, imageIndex, null);
         }
     }
 
@@ -74,7 +74,7 @@ public class GuiWithCommand extends Gui {
         this.jButtonOCR.setVisible(false);
         this.jButtonCancelOCR.setVisible(true);
         this.jButtonCancelOCR.setEnabled(true);
-        performOCR(iioImageList, -1);
+        performOCR(iioImageList, -1, null);
     }
 
     @Override
@@ -152,7 +152,7 @@ public class GuiWithCommand extends Gui {
      * @param list List of IIOImage
      * @param index Index of page to be OCRed: -1 for all pages
      */
-    void performOCR(final List<IIOImage> iioImageList, final int index) {
+    void performOCR(final List<IIOImage> iioImageList, final int index, Rectangle rect) {
         if (this.jComboBoxLang.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_select_a_language."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -168,7 +168,7 @@ public class GuiWithCommand extends Gui {
         this.jMenuItemOCR.setEnabled(false);
         this.jMenuItemOCRAll.setEnabled(false);
 
-        OCRImageEntity entity = new OCRImageEntity(iioImageList, index, curLangCode);
+        OCRImageEntity entity = new OCRImageEntity(iioImageList, index, curLangCode, rect);
 //        entity.setScreenshotMode(true);
 
         // instantiate SwingWorker for OCR

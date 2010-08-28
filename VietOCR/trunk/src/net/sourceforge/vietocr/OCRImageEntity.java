@@ -15,15 +15,20 @@
  */
 package net.sourceforge.vietocr;
 
+import java.awt.Rectangle;
 import java.io.File;
 import java.util.List;
 import javax.imageio.IIOImage;
 
 public class OCRImageEntity {
-
+    /** input images */
     private List<IIOImage> oimages;
+    /** input image File */
     private File imageFile;
+    /** index of pages, such as in multi-page TIFF image */
     private int index;
+    /** bounding rectangle */
+    private Rectangle rect;
     /** Language code, which follows ISO 639-3 standard */
     private String lang;
     /** Horizontal Resolution */
@@ -33,39 +38,43 @@ public class OCRImageEntity {
 
     /**
      * Constructor.
-     * @param originalImages a list of <code>IIOImage</code> objects
+     * @param oimages a list of <code>IIOImage</code> objects
      * @param index
+     * @param the bounding rectangle defines the region of the image to be recognized. A rectangle of zero dimension or <code>null</code> indicates the whole image.
      * @param lang language code, which follows ISO 639-3 standard
      */
-    public OCRImageEntity(List<IIOImage> oimages, int index, String lang) {
+    public OCRImageEntity(List<IIOImage> oimages, int index, String lang, Rectangle rect) {
         this.oimages = oimages;
         this.index = index;
+        this.rect = rect;
         this.lang = lang;
     }
 
     /**
      * Constructor.
-     * @param originalImages an image file
+     * @param imageFile an image file
      * @param index
+     * @param the bounding rectangle defines the region of the image to be recognized. A rectangle of zero dimension or <code>null</code> indicates the whole image.
      * @param lang language code, which follows ISO 639-3 standard
      */
-    public OCRImageEntity(File imageFile, int index, String lang) {
+    public OCRImageEntity(File imageFile, int index, String lang, Rectangle rect) {
         this.imageFile = imageFile;
         this.index = index;
+        this.rect = rect;
         this.lang = lang;
     }
 
     /**
-     * @return the originalImages
+     * @return the list of oimages
      */
-    public List<IIOImage> getOriginalImages() {
+    public List<IIOImage> getOimages() {
         return oimages;
     }
 
     /**
-     * @return the originalImageFile
+     * @return the imageFile
      */
-    public File getOriginalImageFile() {
+    public File getImageFile() {
         return imageFile;
     }
 
@@ -92,7 +101,14 @@ public class OCRImageEntity {
     }
 
     /**
-     * Sets screenshot mode
+     * @return the bounding rectangle
+     */
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    /**
+     * Sets screenshot mode.
      * @param mode true for resampling the input image; false for no manipulation of the image
      */
     public void setScreenshotMode(boolean mode) {
@@ -101,7 +117,7 @@ public class OCRImageEntity {
     }
 
     /**
-     * Sets resolution
+     * Sets resolution (DPI).
      * @param dpiX horizontal resolution
      * @param dpiY vertical resolution
      */
