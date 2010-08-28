@@ -59,6 +59,11 @@ namespace VietOCR.NET
             set { lang = value; }
         }
 
+        /** Horizontal Resolution */
+        private int dpiX;
+        /** Vertical Resolution */
+        private int dpiY;
+
         public OCRImageEntity(IList<Image> originalImages, int index, Rectangle rect, String lang)
         {
             this.originalImages = originalImages;
@@ -76,19 +81,40 @@ namespace VietOCR.NET
         {
             IList<Image> images = new List<Image>();
 
-            if (index == -1)
+            foreach (Image image in (index == -1 ? originalImages : ((List<Image>)originalImages).GetRange(index, 1)))
             {
-                foreach (Image image in originalImages)
+                if (dpiX != 0 && dpiY != 0)
+                {
+                    Image im = ImageIOHelper.Resample(image, dpiX, dpiY);
+                    images.Add(im);
+
+                    rect.X *= im.Width / image.Width;
+                    rect.Width *= im.Width / image.Width;
+                    rect.Y *= im.Height / image.Height;
+                    rect.Height *= im.Height / image.Height;
+                }
+                else
                 {
                     images.Add(image);
                 }
             }
-            else
-            {
-                images.Add(originalImages[index]);
-            }
 
             return images;
+        }
+
+        public bool ScreenshotMode
+        {
+            set
+            {
+                dpiX = value ? 300 : 0;
+                dpiY = value ? 300 : 0;
+            }
+        }
+
+        public void SetResolution(int dpiX, int dpiY)
+        {
+            this.dpiX = dpiX;
+            this.dpiY = dpiY;
         }
 
         /// <summary>
@@ -98,49 +124,49 @@ namespace VietOCR.NET
         /// <returns></returns>
         //private Image Clone(Image source)
         //{
-            //PixelFormat pxf = source.PixelFormat;
-            //Bitmap bmp = (Bitmap)source;
-            //Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+        //PixelFormat pxf = source.PixelFormat;
+        //Bitmap bmp = (Bitmap)source;
+        //Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
 
-            //BitmapData bData = bmp.LockBits(rect, ImageLockMode.ReadOnly, pxf);
-            //// number of bytes in the bitmap
-            //int byteCount = bData.Stride * bmp.Height;
-            //byte[] bmpBytes = new byte[byteCount];
+        //BitmapData bData = bmp.LockBits(rect, ImageLockMode.ReadOnly, pxf);
+        //// number of bytes in the bitmap
+        //int byteCount = bData.Stride * bmp.Height;
+        //byte[] bmpBytes = new byte[byteCount];
 
-            //// Copy the locked bytes from memory
-            //Marshal.Copy(bData.Scan0, bmpBytes, 0, byteCount);
-            //bmp.UnlockBits(bData);
+        //// Copy the locked bytes from memory
+        //Marshal.Copy(bData.Scan0, bmpBytes, 0, byteCount);
+        //bmp.UnlockBits(bData);
 
-            //Bitmap bmpTarget = new Bitmap(source.Width, source.Height, pxf);
-            //bmpTarget.SetResolution(source.HorizontalResolution, source.VerticalResolution);
-            //BitmapData bDataTarget = bmpTarget.LockBits(rect, ImageLockMode.WriteOnly, pxf);
-            //// Copy the bytes to the bitmap object
-            //Marshal.Copy(bmpBytes, 0, bDataTarget.Scan0, bmpBytes.Length);
-            //bmpTarget.UnlockBits(bDataTarget);
-            //return bmpTarget;
+        //Bitmap bmpTarget = new Bitmap(source.Width, source.Height, pxf);
+        //bmpTarget.SetResolution(source.HorizontalResolution, source.VerticalResolution);
+        //BitmapData bDataTarget = bmpTarget.LockBits(rect, ImageLockMode.WriteOnly, pxf);
+        //// Copy the bytes to the bitmap object
+        //Marshal.Copy(bmpBytes, 0, bDataTarget.Scan0, bmpBytes.Length);
+        //bmpTarget.UnlockBits(bDataTarget);
+        //return bmpTarget;
 
 
-            ////create temporary
-            //Image temp = new Bitmap(source.Width, source.Height);
-            //((Bitmap)temp).SetResolution(source.HorizontalResolution, source.VerticalResolution);
+        ////create temporary
+        //Image temp = new Bitmap(source.Width, source.Height);
+        //((Bitmap)temp).SetResolution(source.HorizontalResolution, source.VerticalResolution);
 
-            ////get graphics
-            //Graphics g = Graphics.FromImage(temp);
+        ////get graphics
+        //Graphics g = Graphics.FromImage(temp);
 
-            ////copy original
-            //g.DrawImage(source, 0, 0);
-            //g.Dispose();
+        ////copy original
+        //g.DrawImage(source, 0, 0);
+        //g.Dispose();
 
-            ////return temp;
-            //using (MemoryStream ms = new MemoryStream())
-            //{
-            //    bmp.Save(ms, ImageFormat.Png);
-            //    //byte[] bmpBytes = ms.GetBuffer();
-            //    //using (MemoryStream ms1 = new MemoryStream(bmpBytes))
-            //    //{
-            //        return Image.FromStream(ms);
-            //    //}
-            //}
+        ////return temp;
+        //using (MemoryStream ms = new MemoryStream())
+        //{
+        //    bmp.Save(ms, ImageFormat.Png);
+        //    //byte[] bmpBytes = ms.GetBuffer();
+        //    //using (MemoryStream ms1 = new MemoryStream(bmpBytes))
+        //    //{
+        //        return Image.FromStream(ms);
+        //    //}
+        //}
         //}
     }
 }
