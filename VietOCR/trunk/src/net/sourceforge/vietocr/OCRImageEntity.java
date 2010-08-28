@@ -21,6 +21,7 @@ import java.util.List;
 import javax.imageio.IIOImage;
 
 public class OCRImageEntity {
+
     /** input images */
     private List<IIOImage> oimages;
     /** input image File */
@@ -83,10 +84,10 @@ public class OCRImageEntity {
      */
     public List<File> getClonedImageFiles() throws Exception {
         if (oimages != null) {
-            if (dpiX != 0 && dpiY != 0) {
-                return ImageIOHelper.createTiffFiles(oimages, index, dpiX, dpiY);
-            } else {
+            if (dpiX == 0 || dpiY == 0) {
                 return ImageIOHelper.createTiffFiles(oimages, index);
+            } else {
+                return ImageIOHelper.createTiffFiles(oimages, index, dpiX, dpiY);
             }
         } else {
             return ImageIOHelper.createTiffFiles(imageFile, index);
