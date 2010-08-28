@@ -43,8 +43,8 @@ public class ImageIOHelper {
      * @return a list of TIFF image files
      * @throws Exception
      */
-    public static List<File> createImageFiles(File imageFile, int index) throws IOException {
-        List<File> tempImageFiles = new ArrayList<File>();
+    public static List<File> createTiffFiles(File imageFile, int index) throws IOException {
+        List<File> tiffFiles = new ArrayList<File>();
 
         String imageFileName = imageFile.getName();
         String imageFormat = imageFileName.substring(imageFileName.lastIndexOf('.') + 1);
@@ -80,18 +80,18 @@ public class ImageIOHelper {
 //                BufferedImage bi = reader.read(i);
 //                IIOImage oimage = new IIOImage(bi, null, reader.getImageMetadata(i));
                 IIOImage oimage = reader.readAll(i, reader.getDefaultReadParam());
-                File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
-                ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
+                File tiffFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
+                ImageOutputStream ios = ImageIO.createImageOutputStream(tiffFile);
                 writer.setOutput(ios);
                 writer.write(streamMetadata, oimage, tiffWriteParam);
                 ios.close();
-                tempImageFiles.add(tempFile);
+                tiffFiles.add(tiffFile);
             }
         }
         writer.dispose();
         reader.dispose();
 
-        return tempImageFiles;
+        return tiffFiles;
     }
 
     /**
@@ -102,12 +102,12 @@ public class ImageIOHelper {
      * @return a list of TIFF image files
      * @throws Exception
      */
-    public static List<File> createImageFiles(List<IIOImage> imageList, int index) throws IOException {
-        return createImageFiles(imageList, index, 0, 0);
+    public static List<File> createTiffFiles(List<IIOImage> imageList, int index) throws IOException {
+        return createTiffFiles(imageList, index, 0, 0);
     }
 
-    public static List<File> createImageFiles(List<IIOImage> imageList, int index, int dpiX, int dpiY) throws IOException {
-        List<File> tempImageFiles = new ArrayList<File>();
+    public static List<File> createTiffFiles(List<IIOImage> imageList, int index, int dpiX, int dpiY) throws IOException {
+        List<File> tiffFiles = new ArrayList<File>();
 
         //Set up the writeParam
         TIFFImageWriteParam tiffWriteParam = new TIFFImageWriteParam(Locale.US);
@@ -134,16 +134,16 @@ public class ImageIOHelper {
                 oimage.setMetadata(imageMetadata);
             }
 
-            File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
-            ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
+            File tiffFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
+            ImageOutputStream ios = ImageIO.createImageOutputStream(tiffFile);
             writer.setOutput(ios);
             writer.write(streamMetadata, oimage, tiffWriteParam);
             ios.close();
-            tempImageFiles.add(tempFile);
+            tiffFiles.add(tiffFile);
         }
         writer.dispose();
 
-        return tempImageFiles;
+        return tiffFiles;
     }
     
     /**
@@ -174,7 +174,7 @@ public class ImageIOHelper {
     }
 
     /**
-     * Gets a buffer of bytes of an <code>IIOImage</code> object.
+     * Gets pixel data of an <code>IIOImage</code> object.
      * 
      * @param image an <code>IIOImage</code> object
      * @return a byte buffer of pixel data
