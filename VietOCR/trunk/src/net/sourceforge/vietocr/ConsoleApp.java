@@ -54,9 +54,6 @@ public class ConsoleApp {
                 curLangCode = args[3];
             }
 
-            List<IIOImage> iioImageList = ImageIOHelper.getIIOImageList(imageFile);
-            tempTiffFiles = ImageIOHelper.createTiffFiles(iioImageList, -1);
-
             String tessPath;
 
             File baseDir = Utilities.getBaseDir(this);
@@ -68,6 +65,8 @@ public class ConsoleApp {
             }
 
             OCR ocrEngine = new OCR(tessPath);
+            List<IIOImage> iioImageList = ImageIOHelper.getIIOImageList(imageFile);
+            tempTiffFiles = ImageIOHelper.createTiffFiles(iioImageList, -1);
             String result = ocrEngine.recognizeText(tempTiffFiles, curLangCode);
 
             // postprocess to correct common OCR errors

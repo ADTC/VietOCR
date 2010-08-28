@@ -18,6 +18,7 @@ package net.sourceforge.vietocr;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
+import javax.imageio.IIOImage;
 import javax.swing.*;
 import javax.swing.Timer;
 import net.sourceforge.vietocr.postprocessing.Processor;
@@ -66,18 +67,20 @@ public class GuiWithSettings extends GuiWithFormat {
                         return;
                     }
 
-                    final OCRImageEntity entity = new OCRImageEntity(imageFile, -1, curLangCode);
-
                     SwingUtilities.invokeLater(new Runnable() {
 
                         @Override
                         public void run() {
+                            List<File> tempTiffFiles = null;
+
                             try {
                                 OCR ocrEngine = new OCR(tessPath);
-                                String result = ocrEngine.recognizeText(entity.getClonedImageFiles(), entity.getLanguage());
+                                List<IIOImage> iioImageList = ImageIOHelper.getIIOImageList(imageFile);
+                                tempTiffFiles = ImageIOHelper.createTiffFiles(iioImageList, -1);
+                                String result = ocrEngine.recognizeText(tempTiffFiles, curLangCode);
 
                                 // postprocess to correct common OCR errors
-                                result = Processor.postProcess(result, entity.getLanguage());
+                                result = Processor.postProcess(result, curLangCode);
 
                                 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(outputFolder, imageFile.getName() + ".txt")), UTF8));
                                 out.write(result);
@@ -85,6 +88,13 @@ public class GuiWithSettings extends GuiWithFormat {
                             } catch (Exception e) {
                                 statusFrame.getTextArea().append("    **  " + bundle.getString("Cannotprocess") + " " + imageFile.getName() + "  **\n");
                                 e.printStackTrace();
+                            } finally {
+                                //clean up working files
+                                if (tempTiffFiles != null) {
+                                    for (File f : tempTiffFiles) {
+                                        f.delete();
+                                    }
+                                }
                             }
                         }
                     });
