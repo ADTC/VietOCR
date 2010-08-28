@@ -103,7 +103,8 @@ namespace VietOCR.NET
             Bitmap bm = new Bitmap((int) (image.Width * dpiX / image.HorizontalResolution), (int) (image.Height * dpiY / image.VerticalResolution));
             bm.SetResolution(dpiX, dpiY);
             Graphics g = Graphics.FromImage(bm);
-            g.DrawImageUnscaled(image, 0, 0);
+            g.DrawImage(image, 0, 0);
+            g.Dispose();
 
             return bm;
         }

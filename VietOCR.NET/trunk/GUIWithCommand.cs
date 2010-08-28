@@ -132,7 +132,7 @@ namespace VietOCR.NET
                     break;
                 }
 
-                string result = ocrEngine.RecognizeText(((List<Image>)images).GetRange(i, 1), entity.Lang, entity.Rect, worker, e);
+                string result = ocrEngine.RecognizeText(((List<Image>)images).GetRange(i, 1), entity.Language, entity.Rect, worker, e);
                 worker.ReportProgress(i, result); // i is not really percentage
             }
         }

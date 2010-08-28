@@ -53,7 +53,7 @@ namespace VietOCR.NET
 
         String lang;
 
-        public String Lang
+        public String Language
         {
             get { return lang; }
             set { lang = value; }
