@@ -49,6 +49,10 @@ public class GuiWithCommand extends Gui {
                     offsetY = (this.jScrollPane2.getViewport().getHeight() - ii.getIconHeight()) / 2;
                 }
                 BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) ((rect.x - offsetX) * scaleX), (int) ((rect.y - offsetY) * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
+                
+//                // a new rectangle with scale factors and offets factored in
+//                rect = new Rectangle((int) ((rect.x - offsetX) * scaleX), (int) ((rect.y - offsetY) * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
+
                 IIOImage iioImage = new IIOImage(bi, null, null);
                 ArrayList<IIOImage> tempList = new ArrayList<IIOImage>();
                 tempList.add(iioImage);
