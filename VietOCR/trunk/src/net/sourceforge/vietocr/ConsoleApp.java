@@ -53,9 +53,7 @@ public class ConsoleApp {
             }
 
             List<IIOImage> iioImageList = ImageIOHelper.getIIOImageList(imageFile);
-
-            OCRImageEntity entity = new OCRImageEntity(iioImageList, -1);
-            final List<File> tempImageFiles = entity.getClonedImageFiles();
+            OCRImageEntity entity = new OCRImageEntity(iioImageList, -1, curLangCode);
 
             String tessPath;
 
@@ -68,10 +66,10 @@ public class ConsoleApp {
             }
 
             OCR ocrEngine = new OCR(tessPath);
-            String result = ocrEngine.recognizeText(tempImageFiles, curLangCode);
+            String result = ocrEngine.recognizeText(entity.getClonedImageFiles(), entity.getLanguage());
 
             // postprocess to correct common OCR errors
-            result = Processor.postProcess(result, curLangCode);
+            result = Processor.postProcess(result, entity.getLanguage());
 
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile.getPath() + ".txt"), Gui.UTF8));
             out.write(result);
