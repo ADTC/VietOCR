@@ -22,17 +22,17 @@ namespace VietOCR.NET
 {
     class OCRImageEntity
     {
-        IList<Image> originalImages;
+        IList<Image> images;
 
-        public IList<Image> OriginalImages
+        public IList<Image> Images
         {
-            get { return originalImages; }
-            set { originalImages = value; }
+            get { return images; }
+            set { images = value; }
         }
 
         public IList<Image> ClonedImages
         {
-            get { return Clone(originalImages); }
+            get { return Clone(images); }
         }
 
         int index;
@@ -64,34 +64,35 @@ namespace VietOCR.NET
         /** Vertical Resolution */
         private int dpiY;
 
-        public OCRImageEntity(IList<Image> originalImages, int index, Rectangle rect, String lang)
+        public OCRImageEntity(IList<Image> images, int index, Rectangle rect, String lang)
         {
-            this.originalImages = originalImages;
+            this.images = images;
             this.index = index;
             this.rect = rect;
             this.lang = lang;
         }
 
         /// <summary>
-        /// Clone a list of images.
+        /// Clone a list of images. Resample if a resolution is specified.
         /// </summary>
-        /// <param name="originalImages">List of original images.</param>
+        /// <param name="images">List of original images.</param>
         /// <returns>All or one cloned image.</returns>
-        private IList<Image> Clone(IList<Image> originalImages)
+        private IList<Image> Clone(IList<Image> images)
         {
-            IList<Image> images = new List<Image>();
+            IList<Image> clonedImages = new List<Image>();
 
-            foreach (Image image in (index == -1 ? originalImages : ((List<Image>)originalImages).GetRange(index, 1)))
+            foreach (Image image in (index == -1 ? images : ((List<Image>)images).GetRange(index, 1)))
             {
                 if (dpiX == 0 || dpiY == 0)
                 {
-                    images.Add(image);
+                    clonedImages.Add(image);
                 }
                 else
                 {
                     Image im = ImageIOHelper.Resample(image, dpiX, dpiY);
-                    images.Add(im);
+                    clonedImages.Add(im);
 
+                    //this should be done only once
                     rect.X *= im.Width / image.Width;
                     rect.Width *= im.Width / image.Width;
                     rect.Y *= im.Height / image.Height;
@@ -99,7 +100,7 @@ namespace VietOCR.NET
                 }
             }
 
-            return images;
+            return clonedImages;
         }
 
         public bool ScreenshotMode
