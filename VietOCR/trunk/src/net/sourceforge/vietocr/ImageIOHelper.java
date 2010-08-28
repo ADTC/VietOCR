@@ -24,18 +24,26 @@ import com.sun.media.imageio.plugins.tiff.*;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.datatransfer.*;
+import java.awt.image.*;
+import java.nio.ByteBuffer;
 
-/**
- *
- * @author Quan Nguyen (nguyenq@users.sf.net)
- */
 public class ImageIOHelper {
 
-    final static String OUTPUT_FILE_NAME = "TessTmp";
+    final static String OUTPUT_FILE_NAME = "Tesstmp";
     final static String TIFF_EXT = ".tif";
     final static String TIFF_FORMAT = "tiff";
 
-    public static List<File> createImageFiles(File imageFile, int index) throws Exception {
+    /**
+     * Creates a list of TIFF image files from an image file. 
+     * It basically converts images of other formats to TIFF format,
+     * or a multi-page TIFF image to multiple TIFF image files.
+     * 
+     * @param imageFile input image file
+     * @param index an index of the page; -1 means all pages, as in a multi-page TIFF image
+     * @return a list of TIFF image files
+     * @throws Exception
+     */
+    public static List<File> createImageFiles(File imageFile, int index) throws IOException {
         List<File> tempImageFiles = new ArrayList<File>();
 
         String imageFileName = imageFile.getName();
@@ -86,11 +94,19 @@ public class ImageIOHelper {
         return tempImageFiles;
     }
 
-    public static List<File> createImageFiles(List<IIOImage> imageList, int index) throws Exception {
+    /**
+     * Creates a list of TIFF image files from a list of <code>IIOImage</code> objects.
+     * 
+     * @param imageList a list of <code>IIOImage</code> objects
+     * @param index an index of the page; -1 means all pages
+     * @return a list of TIFF image files
+     * @throws Exception
+     */
+    public static List<File> createImageFiles(List<IIOImage> imageList, int index) throws IOException {
         return createImageFiles(imageList, index, 0, 0);
     }
 
-    public static List<File> createImageFiles(List<IIOImage> imageList, int index, int dpiX, int dpiY) throws Exception {
+    public static List<File> createImageFiles(List<IIOImage> imageList, int index, int dpiX, int dpiY) throws IOException {
         List<File> tempImageFiles = new ArrayList<File>();
 
         //Set up the writeParam
@@ -129,7 +145,7 @@ public class ImageIOHelper {
 
         return tempImageFiles;
     }
-
+    
     /**
      * Set DPI using API.
      */
@@ -157,7 +173,50 @@ public class ImageIOHelper {
         return dir.getAsMetadata();
     }
 
-    public static List<IIOImage> getIIOImageList(File imageFile) throws Exception {
+    /**
+     * Gets a buffer of bytes of an <code>IIOImage</code> object.
+     * 
+     * @param image an <code>IIOImage</code> object
+     * @return a byte buffer of pixel data
+     * @throws Exception
+     */
+    public static ByteBuffer getImageByteBuffer(IIOImage image) throws IOException {
+        //Set up the writeParam
+        TIFFImageWriteParam tiffWriteParam = new TIFFImageWriteParam(Locale.US);
+        tiffWriteParam.setCompressionMode(ImageWriteParam.MODE_DISABLED);
+
+        //Get tif writer and set output to file
+        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(TIFF_FORMAT);
+        ImageWriter writer = writers.next();
+
+        if (writer == null) {
+            throw new RuntimeException("Need to install JAI Image I/O package.\nhttps://jai-imageio.dev.java.net");
+        }
+
+        //Get the stream metadata
+        IIOMetadata streamMetadata = writer.getDefaultStreamMetadata(tiffWriteParam);
+        
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ImageOutputStream ios = ImageIO.createImageOutputStream(outputStream);
+        writer.setOutput(ios);
+        writer.write(streamMetadata, new IIOImage(image.getRenderedImage(), null, null), tiffWriteParam);
+//        writer.write(image.getRenderedImage());
+        writer.dispose();
+//        ImageIO.write(image.getRenderedImage(), "tiff", ios); // this can be used in lieu of writer
+        ios.seek(0);
+        BufferedImage bi = ImageIO.read(ios);
+        byte[] pixelData= ((DataBufferByte) bi.getRaster().getDataBuffer()).getData();
+        return ByteBuffer.wrap(pixelData);
+    }
+
+    /**
+     * Gets a list of <code>IIOImage</code> objects for an image file.
+     *
+     * @param imageFile input image file. It can be any of the supported formats, including TIFF, JPEG, GIF, PNG, BMP, JPEG, and PDF if GPL Ghostscript is installed
+     * @return a list of <code>IIOImage</code> objects
+     * @throws Exception
+     */
+    public static List<IIOImage> getIIOImageList(File imageFile) throws IOException {
         File workingTiffFile = null;
 
         ImageReader reader = null;
@@ -216,12 +275,13 @@ public class ImageIOHelper {
     }
 
     /**
-     * Merge multiple images into one TIFF image.
-     * @param inputImages
-     * @param outputTiff
+     * Merges multiple images into one TIFF image.
+     * 
+     * @param inputImages an array of image files
+     * @param outputTiff the output TIFF file
      * @throws Exception
      */
-    public static void mergeTiff(File[] inputImages, File outputTiff) throws Exception {
+    public static void mergeTiff(File[] inputImages, File outputTiff) throws IOException {
         List<IIOImage> imageList = new ArrayList<IIOImage>();
 
         for (int i = 0; i < inputImages.length; i++) {
@@ -259,8 +319,9 @@ public class ImageIOHelper {
     }
 
     /**
-     * Get an Image from Clipboard.
-     * @return
+     * Gets an image from Clipboard.
+     * 
+     * @return image
      */
     public static Image getClipboardImage() {
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
