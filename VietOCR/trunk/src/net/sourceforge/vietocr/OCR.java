@@ -52,7 +52,7 @@ public class OCR {
         pb.directory(new File(System.getProperty("user.home")));
         pb.redirectErrorStream(true);
 
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
 
         for (File tempImageFile : tempImageFiles) {
             cmd.set(1, tempImageFile.getPath());
