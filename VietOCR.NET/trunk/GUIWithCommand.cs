@@ -93,6 +93,8 @@ namespace VietOCR.NET
                 this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
 
                 OCRImageEntity entity = new OCRImageEntity(imageList, index, rect, curLangCode);
+                //entity.ScreenshotMode = true;
+
                 // Start the asynchronous operation.
                 backgroundWorkerOcr.RunWorkerAsync(entity);
             }
@@ -120,8 +122,9 @@ namespace VietOCR.NET
             // Assign the result of the computation to the Result property of the DoWorkEventArgs
             // object. This is will be available to the RunWorkerCompleted eventhandler.
             //e.Result = ocrEngine.RecognizeText(entity.ClonedImages, entity.Lang, entity.Rect, worker, e);
+            IList<Image> images = entity.ClonedImages;
 
-            for (int i = 0; i < entity.ClonedImages.Count; i++)
+            for (int i = 0; i < images.Count; i++)
             {
                 if (worker.CancellationPending)
                 {
@@ -129,7 +132,7 @@ namespace VietOCR.NET
                     break;
                 }
 
-                string result = ocrEngine.RecognizeText(((List<Image>)entity.ClonedImages).GetRange(i, 1), entity.Lang, entity.Rect, worker, e);
+                string result = ocrEngine.RecognizeText(((List<Image>)images).GetRange(i, 1), entity.Lang, entity.Rect, worker, e);
                 worker.ReportProgress(i, result); // i is not really percentage
             }
         }

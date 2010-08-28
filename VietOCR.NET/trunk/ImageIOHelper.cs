@@ -50,17 +50,17 @@ namespace VietOCR.NET
                 image = Image.FromFile(imageFile.FullName);
 
                 IList<Image> images = new List<Image>();
-                
+
                 int count;
                 if (image.RawFormat.Equals(ImageFormat.Gif))
                 {
                     count = image.GetFrameCount(FrameDimension.Time);
                 }
-                else 
+                else
                 {
                     count = image.GetFrameCount(FrameDimension.Page);
                 }
-                
+
                 for (int i = 0; i < count; i++)
                 {
                     // save each frame to a bytestream
@@ -96,6 +96,16 @@ namespace VietOCR.NET
                     File.Delete(workingTiffFileName);
                 }
             }
+        }
+
+        public static Image Resample(Image image, int dpiX, int dpiY)
+        {
+            Bitmap bm = new Bitmap((int) (image.Width * dpiX / image.HorizontalResolution), (int) (image.Height * dpiY / image.VerticalResolution));
+            bm.SetResolution(dpiX, dpiY);
+            Graphics g = Graphics.FromImage(bm);
+            g.DrawImageUnscaled(image, 0, 0);
+
+            return bm;
         }
 
         /// <summary>
