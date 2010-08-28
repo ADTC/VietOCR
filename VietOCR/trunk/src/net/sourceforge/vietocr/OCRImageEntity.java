@@ -21,8 +21,8 @@ import javax.imageio.IIOImage;
 
 public class OCRImageEntity {
 
-    private List<IIOImage> originalImages;
-    private File originalImageFile;
+    private List<IIOImage> oimages;
+    private File imageFile;
     private int index;
     /** Language code, which follows ISO 639-3 standard */
     private String lang;
@@ -37,8 +37,8 @@ public class OCRImageEntity {
      * @param index
      * @param lang language code, which follows ISO 639-3 standard
      */
-    public OCRImageEntity(List<IIOImage> originalImages, int index, String lang) {
-        this.originalImages = originalImages;
+    public OCRImageEntity(List<IIOImage> oimages, int index, String lang) {
+        this.oimages = oimages;
         this.index = index;
         this.lang = lang;
     }
@@ -49,8 +49,8 @@ public class OCRImageEntity {
      * @param index
      * @param lang language code, which follows ISO 639-3 standard
      */
-    public OCRImageEntity(File originalImageFile, int index, String lang) {
-        this.originalImageFile = originalImageFile;
+    public OCRImageEntity(File imageFile, int index, String lang) {
+        this.imageFile = imageFile;
         this.index = index;
         this.lang = lang;
     }
@@ -59,28 +59,28 @@ public class OCRImageEntity {
      * @return the originalImages
      */
     public List<IIOImage> getOriginalImages() {
-        return originalImages;
+        return oimages;
     }
 
     /**
      * @return the originalImageFile
      */
     public File getOriginalImageFile() {
-        return originalImageFile;
+        return imageFile;
     }
 
     /**
      * @return the ClonedImageFiles
      */
     public List<File> getClonedImageFiles() throws Exception {
-        if (originalImages != null) {
+        if (oimages != null) {
             if (dpiX != 0 && dpiY != 0) {
-                return ImageIOHelper.createImageFiles(originalImages, index, dpiX, dpiY);
+                return ImageIOHelper.createTiffFiles(oimages, index, dpiX, dpiY);
             } else {
-                return ImageIOHelper.createImageFiles(originalImages, index);
+                return ImageIOHelper.createTiffFiles(oimages, index);
             }
         } else {
-            return ImageIOHelper.createImageFiles(originalImageFile, index);
+            return ImageIOHelper.createTiffFiles(imageFile, index);
         }
     }
 

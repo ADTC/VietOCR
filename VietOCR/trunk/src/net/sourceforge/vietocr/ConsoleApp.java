@@ -27,12 +27,14 @@ public class ConsoleApp {
     }
 
     private void performOCR(String[] args) {
+        List<File> tempTiffFiles = null;
+
         try {
             if (args[0].equals("-?") || args[0].equals("-help") || args.length == 1 || args.length == 3) {
-                System.err.println("Usage: java -jar VietOCR.jar\n" +
-                        "       (to launch the program in GUI mode)\n\n" +
-                        "   or  java -jar VietOCR.jar imagefile outputfile [-l langcode]\n" +
-                        "       (to execute the program in command-line mode)");
+                System.err.println("Usage: java -jar VietOCR.jar\n"
+                        + "       (to launch the program in GUI mode)\n\n"
+                        + "   or  java -jar VietOCR.jar imagefile outputfile [-l langcode]\n"
+                        + "       (to execute the program in command-line mode)");
                 return;
             }
 
@@ -53,7 +55,7 @@ public class ConsoleApp {
             }
 
             List<IIOImage> iioImageList = ImageIOHelper.getIIOImageList(imageFile);
-            OCRImageEntity entity = new OCRImageEntity(iioImageList, -1, curLangCode);
+            tempTiffFiles = ImageIOHelper.createTiffFiles(iioImageList, -1);
 
             String tessPath;
 
@@ -66,16 +68,23 @@ public class ConsoleApp {
             }
 
             OCR ocrEngine = new OCR(tessPath);
-            String result = ocrEngine.recognizeText(entity.getClonedImageFiles(), entity.getLanguage());
+            String result = ocrEngine.recognizeText(tempTiffFiles, curLangCode);
 
             // postprocess to correct common OCR errors
-            result = Processor.postProcess(result, entity.getLanguage());
+            result = Processor.postProcess(result, curLangCode);
 
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile.getPath() + ".txt"), Gui.UTF8));
             out.write(result);
             out.close();
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
+        } finally {
+            //clean up working files
+            if (tempTiffFiles != null) {
+                for (File f : tempTiffFiles) {
+                    f.delete();
+                }
+            }
         }
     }
 }
