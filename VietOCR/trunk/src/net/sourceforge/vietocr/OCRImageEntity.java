@@ -17,6 +17,7 @@ package net.sourceforge.vietocr;
 
 import java.awt.Rectangle;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import javax.imageio.IIOImage;
 
@@ -44,7 +45,7 @@ public class OCRImageEntity {
      * @param the bounding rectangle defines the region of the image to be recognized. A rectangle of zero dimension or <code>null</code> indicates the whole image.
      * @param lang language code, which follows ISO 639-3 standard
      */
-    public OCRImageEntity(List<IIOImage> oimages, int index, String lang, Rectangle rect) {
+    public OCRImageEntity(List<IIOImage> oimages, int index, Rectangle rect, String lang) {
         this.oimages = oimages;
         this.index = index;
         this.rect = rect;
@@ -58,7 +59,7 @@ public class OCRImageEntity {
      * @param the bounding rectangle defines the region of the image to be recognized. A rectangle of zero dimension or <code>null</code> indicates the whole image.
      * @param lang language code, which follows ISO 639-3 standard
      */
-    public OCRImageEntity(File imageFile, int index, String lang, Rectangle rect) {
+    public OCRImageEntity(File imageFile, int index, Rectangle rect, String lang) {
         this.imageFile = imageFile;
         this.index = index;
         this.rect = rect;
@@ -82,7 +83,7 @@ public class OCRImageEntity {
     /**
      * @return the ClonedImageFiles
      */
-    public List<File> getClonedImageFiles() throws Exception {
+    public List<File> getClonedImageFiles() throws IOException {
         if (oimages != null) {
             if (dpiX == 0 || dpiY == 0) {
                 return ImageIOHelper.createTiffFiles(oimages, index);
