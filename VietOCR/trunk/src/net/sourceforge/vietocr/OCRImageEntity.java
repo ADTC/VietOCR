@@ -16,13 +16,16 @@
 package net.sourceforge.vietocr;
 
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.IIOImage;
 
 public class OCRImageEntity {
 
+    private final static Rectangle EMPTY_RECTANGLE = new Rectangle();
     /** input images */
     private List<IIOImage> oimages;
     /** input image File */
@@ -86,7 +89,15 @@ public class OCRImageEntity {
     public List<File> getClonedImageFiles() throws IOException {
         if (oimages != null) {
             if (dpiX == 0 || dpiY == 0) {
-                return ImageIOHelper.createTiffFiles(oimages, index);
+                if (rect == null || rect.equals(EMPTY_RECTANGLE)) {
+                    return ImageIOHelper.createTiffFiles(oimages, index);
+                } else {
+                    BufferedImage bi = ((BufferedImage) oimages.get(index).getRenderedImage()).getSubimage(rect.x, rect.y, rect.width, rect.height);
+                    IIOImage iioImage = new IIOImage(bi, null, null);
+                    List<IIOImage> tempList = new ArrayList<IIOImage>();
+                    tempList.add(iioImage);
+                    return ImageIOHelper.createTiffFiles(tempList, 0);
+                }
             } else {
                 return ImageIOHelper.createTiffFiles(oimages, index, dpiX, dpiY);
             }
