@@ -21,9 +21,6 @@ import javax.imageio.*;
 import javax.imageio.stream.*;
 import javax.imageio.metadata.*;
 import com.sun.media.imageio.plugins.tiff.*;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.datatransfer.*;
 import java.awt.image.*;
 import java.nio.ByteBuffer;
 
@@ -145,7 +142,7 @@ public class ImageIOHelper {
 
         return tiffFiles;
     }
-    
+
     /**
      * Set DPI using API.
      */
@@ -195,7 +192,7 @@ public class ImageIOHelper {
 
         //Get the stream metadata
         IIOMetadata streamMetadata = writer.getDefaultStreamMetadata(tiffWriteParam);
-        
+
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ImageOutputStream ios = ImageIO.createImageOutputStream(outputStream);
         writer.setOutput(ios);
@@ -205,7 +202,7 @@ public class ImageIOHelper {
 //        ImageIO.write(image.getRenderedImage(), "tiff", ios); // this can be used in lieu of writer
         ios.seek(0);
         BufferedImage bi = ImageIO.read(ios);
-        byte[] pixelData= ((DataBufferByte) bi.getRaster().getDataBuffer()).getData();
+        byte[] pixelData = ((DataBufferByte) bi.getRaster().getDataBuffer()).getData();
         return ByteBuffer.wrap(pixelData);
     }
 
@@ -316,19 +313,5 @@ public class ImageIOHelper {
         ios.close();
 
         writer.dispose();
-    }
-
-    /**
-     * Gets an image from Clipboard.
-     * 
-     * @return image
-     */
-    public static Image getClipboardImage() {
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        try {
-            return (Image) clipboard.getData(DataFlavor.imageFlavor);
-        } catch (Exception e) {
-            return null;
-        }
     }
 }

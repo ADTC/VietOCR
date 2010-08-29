@@ -261,7 +261,7 @@ public class Gui extends javax.swing.JFrame {
             public boolean dispatchKeyEvent(KeyEvent e) {
                 if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_V && e.getID() == KeyEvent.KEY_PRESSED) {
                     try {
-                        Image image = ImageIOHelper.getClipboardImage();
+                        Image image = ImageHelper.getClipboardImage();
                         if (image != null) {
                             File tempFile = File.createTempFile("tmp", ".png");
                             ImageIO.write((BufferedImage) image, "png", tempFile);
