@@ -32,6 +32,10 @@ namespace VietOCR.NET
             }
         }
 
-
+        protected override void screenshotModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem mi = (ToolStripMenuItem)sender;
+            mi.Checked ^= true;
+        }
     }
 }
