@@ -11,7 +11,7 @@ namespace VietOCR.NET
 {
     public partial class GUIWithImage : VietOCR.NET.GUIWithCommand
     {
-        const string strScreenshot = "Screenshot";
+        const string strScreenshotMode = "ScreenshotMode";
 
         public GUIWithImage()
         {
@@ -46,14 +46,14 @@ namespace VietOCR.NET
             base.LoadRegistryInfo(regkey);
 
             this.screenshotModeToolStripMenuItem.Checked = Convert.ToBoolean(
-                (int)regkey.GetValue(strScreenshot, Convert.ToInt32(false)));
+                (int)regkey.GetValue(strScreenshotMode, Convert.ToInt32(false)));
         }
 
         protected override void SaveRegistryInfo(RegistryKey regkey)
         {
             base.SaveRegistryInfo(regkey);
 
-            regkey.SetValue(strScreenshot, Convert.ToInt32(this.screenshotModeToolStripMenuItem.Checked));
+            regkey.SetValue(strScreenshotMode, Convert.ToInt32(this.screenshotModeToolStripMenuItem.Checked));
         }
     }
 }
