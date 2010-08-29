@@ -134,7 +134,7 @@ namespace VietOCR.NET
 
             if (args.Pages)
             {
-                ImageHelper.SplitPdf(args.InputFilename, args.OutputFilename, args.FromPage, args.ToPage);
+                PdfUtilities.SplitPdf(args.InputFilename, args.OutputFilename, args.FromPage, args.ToPage);
             }
             else
             {
@@ -145,7 +145,7 @@ namespace VietOCR.NET
                     outputFilename = args.OutputFilename.Substring(0, args.OutputFilename.LastIndexOf(".pdf"));
                 }
 
-                int pageCount = ImageHelper.GetPdfPageCount(args.InputFilename);
+                int pageCount = PdfUtilities.GetPdfPageCount(args.InputFilename);
                 if (pageCount == 0)
                 {
                     throw new ApplicationException("Split PDF failed.");
@@ -158,7 +158,7 @@ namespace VietOCR.NET
                 {
                     int endPage = startPage + pageRange - 1;
                     string outputFile = outputFilename + startPage + ".pdf";
-                    ImageHelper.SplitPdf(args.InputFilename, outputFile, startPage.ToString(), endPage.ToString());
+                    PdfUtilities.SplitPdf(args.InputFilename, outputFile, startPage.ToString(), endPage.ToString());
                     startPage = endPage + 1;
                 }
             }
@@ -244,7 +244,7 @@ namespace VietOCR.NET
             ArrayList args = (ArrayList)e.Argument;
             string[] inputFiles = (string[])args[0];
             string outputFile = (string)args[1];
-            ImageHelper.MergePdf(inputFiles, outputFile);
+            PdfUtilities.MergePdf(inputFiles, outputFile);
             e.Result = outputFile;
         }
 

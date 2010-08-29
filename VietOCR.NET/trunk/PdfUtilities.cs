@@ -6,7 +6,7 @@ using ConvertPDF;
 
 namespace VietOCR.NET
 {
-    class ImageHelper
+    class PdfUtilities
     {
         /// <summary>
         /// Convert PDF to TIFF format.
