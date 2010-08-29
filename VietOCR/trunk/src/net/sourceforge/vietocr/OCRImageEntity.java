@@ -105,14 +105,17 @@ public class OCRImageEntity {
                 if (rect == null || rect.equals(EMPTY_RECTANGLE)) {
                     for (IIOImage oimage : (index == -1 ? oimages : oimages.subList(index, index + 1))) {
                         BufferedImage bi = (BufferedImage) oimage.getRenderedImage();
-                        bi = ImageHelper.getScaledInstance(bi, bi.getWidth() * 3, bi.getHeight() * 3, RenderingHints.VALUE_INTERPOLATION_BICUBIC, true);
+                        float scale = 3; // dpiX / current horizontal resolution
+                        bi = ImageHelper.getScaledInstance(bi, (int)(bi.getWidth() * scale), (int)(bi.getHeight() * scale), RenderingHints.VALUE_INTERPOLATION_BICUBIC, true);
                         oimage.setRenderedImage(bi);
                     }
                     return ImageIOHelper.createTiffFiles(oimages, index, dpiX, dpiY);
                 } else {
                     // rectangular region
+                    //Cut out the subimage first and rescale that
                     BufferedImage bi = ((BufferedImage) oimages.get(index).getRenderedImage()).getSubimage(rect.x, rect.y, rect.width, rect.height);
-                    bi = ImageHelper.getScaledInstance(bi, bi.getWidth() * 3, bi.getHeight() * 3, RenderingHints.VALUE_INTERPOLATION_BICUBIC, true);
+                    float scale = 3;
+                    bi = ImageHelper.getScaledInstance(bi, (int)(bi.getWidth() * scale), (int)(bi.getHeight() * scale), RenderingHints.VALUE_INTERPOLATION_BICUBIC, true);
                     List<IIOImage> tempList = new ArrayList<IIOImage>();
                     tempList.add(new IIOImage(bi, null, null));
                     return ImageIOHelper.createTiffFiles(tempList, 0, dpiX, dpiY);

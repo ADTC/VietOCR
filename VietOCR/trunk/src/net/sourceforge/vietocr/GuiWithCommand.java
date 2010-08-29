@@ -48,14 +48,15 @@ public class GuiWithCommand extends Gui {
                 if (ii.getIconHeight() < this.jScrollPane2.getHeight()) {
                     offsetY = (this.jScrollPane2.getViewport().getHeight() - ii.getIconHeight()) / 2;
                 }
-                BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) ((rect.x - offsetX) * scaleX), (int) ((rect.y - offsetY) * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
-                
-//                // a new rectangle with scale factors and offets factored in
-//                rect = new Rectangle((int) ((rect.x - offsetX) * scaleX), (int) ((rect.y - offsetY) * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
+//                BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) ((rect.x - offsetX) * scaleX), (int) ((rect.y - offsetY) * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
 
-                ArrayList<IIOImage> tempList = new ArrayList<IIOImage>();
-                tempList.add(new IIOImage(bi, null, null));
-                performOCR(tempList, 0, rect);
+//                // create a new rectangle with scale factors and offets factored in
+                rect = new Rectangle((int) ((rect.x - offsetX) * scaleX), (int) ((rect.y - offsetY) * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
+
+                //move this part to the image entity
+//                ArrayList<IIOImage> tempList = new ArrayList<IIOImage>();
+//                tempList.add(new IIOImage(bi, null, null));
+                performOCR(iioImageList, imageIndex, rect);
             } catch (RasterFormatException rfe) {
                 JOptionPane.showMessageDialog(this, rfe.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
 //                rfe.printStackTrace();
@@ -266,8 +267,10 @@ public class GuiWithCommand extends Gui {
                 jButtonCancelOCR.setVisible(false);
 
                 // clean up temporary image files
-                for (File tempImageFile : workingFiles) {
-                    tempImageFile.delete();
+                if (workingFiles != null) {
+                    for (File tempImageFile : workingFiles) {
+                        tempImageFile.delete();
+                    }
                 }
             }
         }
