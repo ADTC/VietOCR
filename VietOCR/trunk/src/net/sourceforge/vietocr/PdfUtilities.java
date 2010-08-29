@@ -19,7 +19,7 @@ import java.io.*;
 import java.util.*;
 import net.sf.ghost4j.*;
 
-public class ImageHelper {
+public class PdfUtilities {
 
     public static final String GS_INSTALL = "\nPlease download, install GPL Ghostscript from http://sourceforge.net/projects/ghostscript/files\nand/or set the appropriate environment variable.";
 
