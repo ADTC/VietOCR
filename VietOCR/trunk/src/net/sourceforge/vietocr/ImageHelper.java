@@ -50,7 +50,7 @@ public class ImageHelper {
      *    the {@code BILINEAR} hint is specified)
      * @return a scaled version of the original {@code BufferedImage}
      */
-    public BufferedImage getScaledInstance(BufferedImage img,
+    public static BufferedImage getScaledInstance(BufferedImage img,
             int targetWidth,
             int targetHeight,
             Object hint,
@@ -59,7 +59,7 @@ public class ImageHelper {
                 ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
         BufferedImage ret = (BufferedImage) img;
         int w, h;
-        if (higherQuality) {
+        if (higherQuality && (img.getWidth() > targetWidth && img.getHeight() > targetHeight)) {
             // Use multi-step technique: start with original size, then
             // scale down in multiple passes with drawImage()
             // until the target size is reached
