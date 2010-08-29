@@ -225,7 +225,7 @@ public class ImageIOHelper {
         try {
             // convert PDF to TIFF
             if (imageFile.getName().toLowerCase().endsWith(".pdf")) {
-                workingTiffFile = ImageHelper.convertPdf2Tiff(imageFile);
+                workingTiffFile = PdfUtilities.convertPdf2Tiff(imageFile);
                 imageFile = workingTiffFile;
             }
 
