@@ -172,7 +172,7 @@ public class GuiWithCommand extends Gui {
         this.jMenuItemOCRAll.setEnabled(false);
 
         OCRImageEntity entity = new OCRImageEntity(iioImageList, index, rect, curLangCode);
-//        entity.setScreenshotMode(true);
+        entity.setScreenshotMode(this.jCheckBoxMenuItemScreenshotMode.isSelected());
 
         // instantiate SwingWorker for OCR
         ocrWorker = new OcrWorker(entity);

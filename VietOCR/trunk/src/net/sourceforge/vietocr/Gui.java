@@ -588,6 +588,8 @@ public class Gui extends javax.swing.JFrame {
         jMenuItemPostProcess = new javax.swing.JMenuItem();
         jMenuImage = new javax.swing.JMenu();
         jMenuItemMetadata = new javax.swing.JMenuItem();
+        jSeparator11 = new javax.swing.JPopupMenu.Separator();
+        jCheckBoxMenuItemScreenshotMode = new javax.swing.JCheckBoxMenuItem();
         jMenuFormat = new javax.swing.JMenu();
         jCheckBoxMenuWordWrap = new javax.swing.JCheckBoxMenuItem();
         jMenuItemFont = new javax.swing.JMenuItem();
@@ -952,6 +954,11 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jMenuImage.add(jMenuItemMetadata);
+        jMenuImage.add(jSeparator11);
+
+        jCheckBoxMenuItemScreenshotMode.setSelected(true);
+        jCheckBoxMenuItemScreenshotMode.setText("Screenshot Mode");
+        jMenuImage.add(jCheckBoxMenuItemScreenshotMode);
 
         jMenuBar2.add(jMenuImage);
 
@@ -1923,6 +1930,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton jButtonScan;
     private javax.swing.JButton jButtonZoomIn;
     private javax.swing.JButton jButtonZoomOut;
+    protected javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemScreenshotMode;
     protected javax.swing.JCheckBoxMenuItem jCheckBoxMenuWordWrap;
     protected javax.swing.JComboBox jComboBoxLang;
     protected javax.swing.JLabel jImageLabel;
@@ -1968,6 +1976,7 @@ public class Gui extends javax.swing.JFrame {
     protected javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
+    private javax.swing.JPopupMenu.Separator jSeparator11;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
