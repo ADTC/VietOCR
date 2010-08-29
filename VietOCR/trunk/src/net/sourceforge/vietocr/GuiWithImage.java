@@ -13,12 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package net.sourceforge.vietocr;
 
 import javax.swing.JOptionPane;
 
 public class GuiWithImage extends GuiWithCommand {
+
+    GuiWithImage() {
+        this.jCheckBoxMenuItemScreenshotMode.setSelected(prefs.getBoolean("ScreenshotMode", false));
+    }
 
     @Override
     void readImageMetadata() {
@@ -26,9 +29,16 @@ public class GuiWithImage extends GuiWithCommand {
             JOptionPane.showMessageDialog(this, "Please load an image.");
             return;
         }
-        
+
         ImageInfoDialog dialog = new ImageInfoDialog(this, true);
         dialog.setImage(iioImageList.get(imageIndex));
         dialog.setVisible(true);
+    }
+
+    @Override
+    void quit() {
+        prefs.putBoolean("ScreenshotMode", this.jCheckBoxMenuItemScreenshotMode.isSelected());
+
+        super.quit();
     }
 }
