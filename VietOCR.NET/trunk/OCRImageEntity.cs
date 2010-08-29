@@ -89,7 +89,7 @@ namespace VietOCR.NET
                 }
                 else
                 {
-                    Image im = ImageIOHelper.Resample(image, dpiX, dpiY);
+                    Image im = ImageHelper.Rescale(image, dpiX, dpiY);
                     clonedImages.Add(im);
 
                     //this should be done only once
