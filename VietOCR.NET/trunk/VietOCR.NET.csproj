@@ -166,6 +166,7 @@
       <DependentUpon>HtmlHelpForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageHelper.cs" />
+    <Compile Include="PdfUtilities.cs" />
     <Compile Include="ImageInfoDialog.cs">
       <SubType>Form</SubType>
     </Compile>

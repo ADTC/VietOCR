@@ -1097,7 +1097,7 @@ namespace VietOCR.NET
         {
             if (e.Control && e.KeyCode == Keys.V)
             {
-                Image image = ImageIOHelper.GetClipboardImage();
+                Image image = ImageHelper.GetClipboardImage();
                 if (image != null)
                 {
                     string tempFileName = Path.GetTempFileName();
