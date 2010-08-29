@@ -93,10 +93,10 @@ namespace VietOCR.NET
                     clonedImages.Add(im);
 
                     //this should be done only once for each image
-                    rect.X = (int)Math.Round((float)rect.X * im.Width / image.Width);
-                    rect.Width = (int)Math.Round((float)rect.Width * im.Width / image.Width);
-                    rect.Y = (int)Math.Round((float)rect.Y * im.Height / image.Height);
-                    rect.Height = (int)Math.Round((float)rect.Height * im.Height / image.Height);
+                    rect.X = (int)((float)rect.X * im.Width / image.Width);
+                    rect.Width = (int)((float)rect.Width * im.Width / image.Width);
+                    rect.Y = (int)((float)rect.Y * im.Height / image.Height);
+                    rect.Height = (int)((float)rect.Height * im.Height / image.Height);
                 }
             }
 
