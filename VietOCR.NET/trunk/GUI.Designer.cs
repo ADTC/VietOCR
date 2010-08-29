@@ -64,6 +64,8 @@ namespace VietOCR.NET
             this.postprocessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metadataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.screenshotModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.formatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordWrapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -363,7 +365,9 @@ namespace VietOCR.NET
             // imageToolStripMenuItem
             // 
             this.imageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.metadataToolStripMenuItem});
+            this.metadataToolStripMenuItem,
+            this.toolStripMenuItem6,
+            this.screenshotModeToolStripMenuItem});
             this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
             resources.ApplyResources(this.imageToolStripMenuItem, "imageToolStripMenuItem");
             // 
@@ -372,6 +376,17 @@ namespace VietOCR.NET
             this.metadataToolStripMenuItem.Name = "metadataToolStripMenuItem";
             resources.ApplyResources(this.metadataToolStripMenuItem, "metadataToolStripMenuItem");
             this.metadataToolStripMenuItem.Click += new System.EventHandler(this.metadataToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            resources.ApplyResources(this.toolStripMenuItem6, "toolStripMenuItem6");
+            // 
+            // screenshotModeToolStripMenuItem
+            // 
+            this.screenshotModeToolStripMenuItem.Name = "screenshotModeToolStripMenuItem";
+            resources.ApplyResources(this.screenshotModeToolStripMenuItem, "screenshotModeToolStripMenuItem");
+            this.screenshotModeToolStripMenuItem.Click += new System.EventHandler(this.screenshotModeToolStripMenuItem_Click);
             // 
             // formatToolStripMenuItem
             // 
@@ -683,5 +698,7 @@ namespace VietOCR.NET
         private System.Windows.Forms.ToolStripButton toolStripBtnSave;
         private System.Windows.Forms.ToolStripMenuItem imageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem metadataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem screenshotModeToolStripMenuItem;
     }
 }
