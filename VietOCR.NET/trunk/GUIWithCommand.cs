@@ -93,7 +93,7 @@ namespace VietOCR.NET
                 this.toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
 
                 OCRImageEntity entity = new OCRImageEntity(imageList, index, rect, curLangCode);
-                //entity.ScreenshotMode = true;
+                entity.ScreenshotMode = this.screenshotModeToolStripMenuItem.Checked;
 
                 // Start the asynchronous operation.
                 backgroundWorkerOcr.RunWorkerAsync(entity);
