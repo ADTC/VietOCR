@@ -92,11 +92,11 @@ namespace VietOCR.NET
                     Image im = ImageHelper.Rescale(image, dpiX, dpiY);
                     clonedImages.Add(im);
 
-                    //this should be done only once
-                    rect.X *= im.Width / image.Width;
-                    rect.Width *= im.Width / image.Width;
-                    rect.Y *= im.Height / image.Height;
-                    rect.Height *= im.Height / image.Height;
+                    //this should be done only once for each image
+                    rect.X = (int)Math.Round((float)rect.X * im.Width / image.Width);
+                    rect.Width = (int)Math.Round((float)rect.Width * im.Width / image.Width);
+                    rect.Y = (int)Math.Round((float)rect.Y * im.Height / image.Height);
+                    rect.Height = (int)Math.Round((float)rect.Height * im.Height / image.Height);
                 }
             }
 
