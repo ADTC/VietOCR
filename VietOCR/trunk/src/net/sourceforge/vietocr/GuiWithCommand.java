@@ -53,9 +53,8 @@ public class GuiWithCommand extends Gui {
 //                // a new rectangle with scale factors and offets factored in
 //                rect = new Rectangle((int) ((rect.x - offsetX) * scaleX), (int) ((rect.y - offsetY) * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
 
-                IIOImage iioImage = new IIOImage(bi, null, null);
                 ArrayList<IIOImage> tempList = new ArrayList<IIOImage>();
-                tempList.add(iioImage);
+                tempList.add(new IIOImage(bi, null, null));
                 performOCR(tempList, 0, rect);
             } catch (RasterFormatException rfe) {
                 JOptionPane.showMessageDialog(this, rfe.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);

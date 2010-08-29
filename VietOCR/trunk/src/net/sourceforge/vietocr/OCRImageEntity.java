@@ -92,14 +92,23 @@ public class OCRImageEntity {
                 if (rect == null || rect.equals(EMPTY_RECTANGLE)) {
                     return ImageIOHelper.createTiffFiles(oimages, index);
                 } else {
+                    // rectangular region
                     BufferedImage bi = ((BufferedImage) oimages.get(index).getRenderedImage()).getSubimage(rect.x, rect.y, rect.width, rect.height);
-                    IIOImage iioImage = new IIOImage(bi, null, null);
                     List<IIOImage> tempList = new ArrayList<IIOImage>();
-                    tempList.add(iioImage);
+                    tempList.add(new IIOImage(bi, null, null));
                     return ImageIOHelper.createTiffFiles(tempList, 0);
                 }
             } else {
-                return ImageIOHelper.createTiffFiles(oimages, index, dpiX, dpiY);
+                // scaling
+                if (rect == null || rect.equals(EMPTY_RECTANGLE)) {
+                    return ImageIOHelper.createTiffFiles(oimages, index, dpiX, dpiY);
+                } else {
+                    // rectangular region
+                    BufferedImage bi = ((BufferedImage) oimages.get(index).getRenderedImage()).getSubimage(rect.x, rect.y, rect.width, rect.height);
+                    List<IIOImage> tempList = new ArrayList<IIOImage>();
+                    tempList.add(new IIOImage(bi, null, null));
+                    return ImageIOHelper.createTiffFiles(tempList, 0, dpiX, dpiY);
+                }
             }
         } else {
             return ImageIOHelper.createTiffFiles(imageFile, index);

@@ -168,7 +168,7 @@ public class GuiWithTools extends GuiWithSettings {
 
                     @Override
                     protected File doInBackground() throws Exception {
-                        ImageHelper.mergePdf(inputPdfs, outputPdf);
+                        PdfUtilities.mergePdf(inputPdfs, outputPdf);
                         return outputPdf;
                     }
 
@@ -231,13 +231,13 @@ public class GuiWithTools extends GuiWithSettings {
                     String outputFilename = args.getOutputFilename();
 
                     if (args.isPages()) {
-                        ImageHelper.splitPdf(inputFilename, outputFilename, args.getFromPage(), args.getToPage());
+                        PdfUtilities.splitPdf(inputFilename, outputFilename, args.getFromPage(), args.getToPage());
                     } else {
                         if (outputFilename.endsWith(".pdf")) {
                             outputFilename = outputFilename.substring(0, outputFilename.lastIndexOf(".pdf"));
                         }
 
-                        int pageCount = ImageHelper.getPdfPageCount(inputFilename);
+                        int pageCount = PdfUtilities.getPdfPageCount(inputFilename);
                         if (pageCount == 0) {
                             throw new RuntimeException("Split PDF failed.");
                         }
@@ -248,7 +248,7 @@ public class GuiWithTools extends GuiWithSettings {
                         while (startPage <= pageCount) {
                             int endPage = startPage + pageRange - 1;
                             String outputFile = outputFilename + startPage + ".pdf";
-                            ImageHelper.splitPdf(inputFilename, outputFile, String.valueOf(startPage), String.valueOf(endPage));
+                            PdfUtilities.splitPdf(inputFilename, outputFile, String.valueOf(startPage), String.valueOf(endPage));
                             startPage = endPage + 1;
                         }
                     }
