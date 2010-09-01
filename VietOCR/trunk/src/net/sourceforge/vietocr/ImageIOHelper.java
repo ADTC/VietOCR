@@ -21,8 +21,10 @@ import javax.imageio.*;
 import javax.imageio.stream.*;
 import javax.imageio.metadata.*;
 import com.sun.media.imageio.plugins.tiff.*;
+import java.awt.Toolkit;
 import java.awt.image.*;
 import java.nio.ByteBuffer;
+import org.w3c.dom.NodeList;
 
 public class ImageIOHelper {
 
@@ -313,5 +315,51 @@ public class ImageIOHelper {
         ios.close();
 
         writer.dispose();
+    }
+
+    /**
+     * Reads image meta data.
+     * 
+     * @param oimage
+     * @return
+     */
+    public static Map<String, String> readImageData(IIOImage oimage) {
+        Map<String, String> dict = new HashMap<String, String>();
+        
+        IIOMetadata imageMetadata = oimage.getMetadata();
+        if (imageMetadata != null) {
+            IIOMetadataNode dimNode = (IIOMetadataNode) imageMetadata.getAsTree("javax_imageio_1.0");
+            NodeList nodes = dimNode.getElementsByTagName("HorizontalPixelSize");
+            int dpiX;
+            if (nodes.getLength() > 0) {
+                float dpcWidth = Float.parseFloat(nodes.item(0).getAttributes().item(0).getNodeValue());
+                dpiX = (int) Math.round(25.4f / dpcWidth);
+            } else {
+                dpiX = Toolkit.getDefaultToolkit().getScreenResolution();
+            }
+            dict.put("dpiX", String.valueOf(dpiX));
+
+            nodes = dimNode.getElementsByTagName("VerticalPixelSize");
+            int dpiY;
+            if (nodes.getLength() > 0) {
+                float dpcHeight = Float.parseFloat(nodes.item(0).getAttributes().item(0).getNodeValue());
+                dpiY = (int) Math.round(25.4f / dpcHeight);
+            } else {
+                dpiY = Toolkit.getDefaultToolkit().getScreenResolution();
+            }
+            dict.put("dpiY", String.valueOf(dpiY));
+
+            String[] metadataFormatNames = imageMetadata.getMetadataFormatNames();
+            if (metadataFormatNames != null) {
+                for (int j = 0; j < metadataFormatNames.length; j++) {
+                    System.out.println("\n--- Image metadata --- "
+                            + metadataFormatNames[j]
+                            + "\n");
+                    IIOExampleUtils.printMetadata(imageMetadata, metadataFormatNames[j]);
+                }
+            }
+        }
+
+        return dict;
     }
 }

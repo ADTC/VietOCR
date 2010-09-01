@@ -2,6 +2,7 @@ package net.sourceforge.vietocr;
 
 import java.awt.Toolkit;
 import java.awt.event.*;
+import java.util.Map;
 import javax.imageio.IIOImage;
 import javax.imageio.metadata.IIOMetadata;
 import javax.imageio.metadata.IIOMetadataNode;
@@ -10,7 +11,7 @@ import org.w3c.dom.NodeList;
 
 public class ImageInfoDialog extends javax.swing.JDialog {
 
-    IIOImage iimage;
+    IIOImage oimage;
 
     /** Creates new form ImageInfoDialog */
     public ImageInfoDialog(java.awt.Frame parent, boolean modal) {
@@ -205,8 +206,8 @@ public class ImageInfoDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void convertUnits(int unit) {
-        int width = iimage.getRenderedImage().getWidth();
-        int height = iimage.getRenderedImage().getHeight();
+        int width = oimage.getRenderedImage().getWidth();
+        int height = oimage.getRenderedImage().getHeight();
 
         switch (unit) {
             case 1: //"inches"
@@ -226,49 +227,17 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         }
     }
 
-    public void setImage(IIOImage iimage) {
-        this.iimage = iimage;
+    public void setImage(IIOImage oimage) {
+        this.oimage = oimage;
         readImageData();
     }
 
     void readImageData() {
-        IIOMetadata imageMetadata = iimage.getMetadata();
-
-        if (imageMetadata != null) {
-            this.jTextFieldWidth.setText(String.valueOf(iimage.getRenderedImage().getWidth()));
-            this.jTextFieldHeight.setText(String.valueOf(iimage.getRenderedImage().getHeight()));
-
-            IIOMetadataNode dimNode = (IIOMetadataNode) imageMetadata.getAsTree("javax_imageio_1.0");
-            NodeList nodes = dimNode.getElementsByTagName("HorizontalPixelSize");
-            if (nodes.getLength() > 0) {
-                float dpcWidth = Float.parseFloat(nodes.item(0).getAttributes().item(0).getNodeValue());
-                int resX = (int) Math.round(25.4f / dpcWidth);
-                this.jTextFieldXRes.setText(String.valueOf(resX));
-            } else {
-                int dpi = Toolkit.getDefaultToolkit().getScreenResolution();
-                this.jTextFieldXRes.setText(String.valueOf(dpi));
-            }
-
-            nodes = dimNode.getElementsByTagName("VerticalPixelSize");
-            if (nodes.getLength() > 0) {
-                float dpcHeight = Float.parseFloat(nodes.item(0).getAttributes().item(0).getNodeValue());
-                int resY = (int) Math.round(25.4f / dpcHeight);
-                this.jTextFieldYRes.setText(String.valueOf(resY));
-            } else {
-                int dpi = Toolkit.getDefaultToolkit().getScreenResolution();
-                this.jTextFieldYRes.setText(String.valueOf(dpi));
-            }
-
-            String[] metadataFormatNames = imageMetadata.getMetadataFormatNames();
-            if (metadataFormatNames != null) {
-                for (int j = 0; j < metadataFormatNames.length; j++) {
-                    System.out.println("\n--- Image metadata --- "
-                            + metadataFormatNames[j]
-                            + "\n");
-                    IIOExampleUtils.printMetadata(imageMetadata, metadataFormatNames[j]);
-                }
-            }
-        }
+        this.jTextFieldWidth.setText(String.valueOf(oimage.getRenderedImage().getWidth()));
+        this.jTextFieldHeight.setText(String.valueOf(oimage.getRenderedImage().getHeight()));
+        Map<String, String> metadata = ImageIOHelper.readImageData(oimage);
+        this.jTextFieldXRes.setText(metadata.get("dpiX"));
+        this.jTextFieldYRes.setText(metadata.get("dpiY"));
     }
 
     /**
