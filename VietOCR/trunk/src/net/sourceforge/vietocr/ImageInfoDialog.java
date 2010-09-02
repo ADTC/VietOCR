@@ -195,7 +195,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         if (!isProgrammatic) {
             isProgrammatic = true;
-            this.jComboBox2.setSelectedIndex(this.jComboBox1.getSelectedIndex());
+            this.jComboBox2.setSelectedItem(this.jComboBox1.getSelectedItem());
             convertUnits(this.jComboBox1.getSelectedIndex());
             isProgrammatic = false;
         }
@@ -204,7 +204,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         if (!isProgrammatic) {
             isProgrammatic = true;
-            this.jComboBox1.setSelectedIndex(this.jComboBox2.getSelectedIndex());
+            this.jComboBox1.setSelectedItem(this.jComboBox2.getSelectedItem());
             convertUnits(this.jComboBox2.getSelectedIndex());
             isProgrammatic = false;
         }
