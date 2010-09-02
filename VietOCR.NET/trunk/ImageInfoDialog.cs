@@ -31,6 +31,8 @@ namespace VietOCR.NET
             this.textBoxYRes.Text = Math.Round(this.image.VerticalResolution).ToString();
             this.textBoxWidth.Text = this.image.Width.ToString();
             this.textBoxHeight.Text = this.image.Height.ToString();
+            this.comboBox3.SelectedIndex = 0;
+            this.comboBox4.SelectedIndex = 0;
         }
 
         protected override void OnClosed(EventArgs ea)
