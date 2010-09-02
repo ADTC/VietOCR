@@ -8,6 +8,7 @@ import javax.swing.*;
 public class ImageInfoDialog extends javax.swing.JDialog {
 
     IIOImage oimage;
+    boolean isProgrammatic;
 
     /** Creates new form ImageInfoDialog */
     public ImageInfoDialog(java.awt.Frame parent, boolean modal) {
@@ -192,13 +193,21 @@ public class ImageInfoDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        this.jComboBox2.setSelectedItem(this.jComboBox1.getSelectedItem());
-        convertUnits(this.jComboBox1.getSelectedIndex());
+        if (!isProgrammatic) {
+            isProgrammatic = true;
+            this.jComboBox2.setSelectedIndex(this.jComboBox1.getSelectedIndex());
+            convertUnits(this.jComboBox1.getSelectedIndex());
+            isProgrammatic = false;
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        this.jComboBox1.setSelectedItem(this.jComboBox2.getSelectedItem());
-        convertUnits(this.jComboBox2.getSelectedIndex());
+        if (!isProgrammatic) {
+            isProgrammatic = true;
+            this.jComboBox1.setSelectedIndex(this.jComboBox2.getSelectedIndex());
+            convertUnits(this.jComboBox2.getSelectedIndex());
+            isProgrammatic = false;
+        }
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void convertUnits(int unit) {
@@ -206,7 +215,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         int height = oimage.getRenderedImage().getHeight();
 
         switch (unit) {
-            case 1: //"inches"
+            case 1: // "inches"
                 this.jTextFieldWidth.setText(String.valueOf(width / Float.parseFloat(this.jTextFieldXRes.getText())));
                 this.jTextFieldHeight.setText(String.valueOf(height / Float.parseFloat(this.jTextFieldYRes.getText())));
                 break;
@@ -216,7 +225,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
                 this.jTextFieldHeight.setText(String.valueOf(height / Float.parseFloat(this.jTextFieldYRes.getText()) * 2.54));
                 break;
 
-            default:
+            default: // "pixel"
                 this.jTextFieldWidth.setText(String.valueOf(width));
                 this.jTextFieldHeight.setText(String.valueOf(height));
                 break;
