@@ -11,6 +11,7 @@ namespace VietOCR.NET
     public partial class ImageInfoDialog : Form
     {
         Image image;
+        bool isProgrammatic;
 
         public Image Image
         {
@@ -42,17 +43,27 @@ namespace VietOCR.NET
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.comboBox4.SelectedItem = this.comboBox3.SelectedItem;
-            ConvertUnits(this.comboBox3.SelectedItem.ToString());
+            if (!isProgrammatic)
+            {
+                isProgrammatic = true;
+                this.comboBox4.SelectedItem = this.comboBox3.SelectedItem;
+                ConvertUnits(this.comboBox3.SelectedItem.ToString());
+                isProgrammatic = false;
+            }
         }
 
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.comboBox3.SelectedItem = this.comboBox4.SelectedItem;
-            ConvertUnits(this.comboBox4.SelectedItem.ToString());
+            if (!isProgrammatic)
+            {
+                isProgrammatic = true;
+                this.comboBox3.SelectedItem = this.comboBox4.SelectedItem;
+                ConvertUnits(this.comboBox4.SelectedItem.ToString());
+                isProgrammatic = false;
+            }
         }
 
-        private void ConvertUnits(string unit) 
+        private void ConvertUnits(string unit)
         {
             switch (unit)
             {
@@ -66,11 +77,11 @@ namespace VietOCR.NET
                     this.textBoxHeight.Text = Math.Round(this.image.Height / this.image.VerticalResolution * 2.54, 2).ToString();
                     break;
 
-                default:
+                default: // "pixel"
                     this.textBoxWidth.Text = this.image.Width.ToString();
                     this.textBoxHeight.Text = this.image.Height.ToString();
                     break;
-            }        
+            }
         }
     }
 }
