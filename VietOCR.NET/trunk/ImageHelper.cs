@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace VietOCR.NET
 {
@@ -13,6 +14,7 @@ namespace VietOCR.NET
             Bitmap bm = new Bitmap((int)(image.Width * dpiX / image.HorizontalResolution), (int)(image.Height * dpiY / image.VerticalResolution));
             bm.SetResolution(dpiX, dpiY);
             Graphics g = Graphics.FromImage(bm);
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.DrawImage(image, 0, 0);
             g.Dispose();
 
