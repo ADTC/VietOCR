@@ -18,11 +18,11 @@ package net.sourceforge.vietocr;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.imageio.IIOImage;
 
 public class OCRImageEntity {
@@ -105,7 +105,8 @@ public class OCRImageEntity {
                 if (rect == null || rect.equals(EMPTY_RECTANGLE)) {
                     for (IIOImage oimage : (index == -1 ? oimages : oimages.subList(index, index + 1))) {
                         BufferedImage bi = (BufferedImage) oimage.getRenderedImage();
-                        float scale = 3; // dpiX / current horizontal resolution
+                        Map<String, String> metadata = ImageIOHelper.readImageData(oimage);
+                        float scale = dpiX / Float.parseFloat(metadata.get("dpiX"));
                         bi = ImageHelper.getScaledInstance(bi, (int)(bi.getWidth() * scale), (int)(bi.getHeight() * scale), RenderingHints.VALUE_INTERPOLATION_BICUBIC, true);
                         oimage.setRenderedImage(bi);
                     }
@@ -114,7 +115,8 @@ public class OCRImageEntity {
                     // rectangular region
                     //Cut out the subimage first and rescale that
                     BufferedImage bi = ((BufferedImage) oimages.get(index).getRenderedImage()).getSubimage(rect.x, rect.y, rect.width, rect.height);
-                    float scale = 3;
+                    Map<String, String> metadata = ImageIOHelper.readImageData(oimages.get(index));
+                    float scale = dpiX / Float.parseFloat(metadata.get("dpiX"));
                     bi = ImageHelper.getScaledInstance(bi, (int)(bi.getWidth() * scale), (int)(bi.getHeight() * scale), RenderingHints.VALUE_INTERPOLATION_BICUBIC, true);
                     List<IIOImage> tempList = new ArrayList<IIOImage>();
                     tempList.add(new IIOImage(bi, null, null));

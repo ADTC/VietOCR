@@ -99,7 +99,7 @@ public class ImageHelper {
         return ret;
     }
 
-        /**
+    /**
      * Gets an image from Clipboard.
      *
      * @return image

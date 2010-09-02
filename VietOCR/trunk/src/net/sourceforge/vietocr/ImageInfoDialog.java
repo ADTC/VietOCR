@@ -1,13 +1,9 @@
 package net.sourceforge.vietocr;
 
-import java.awt.Toolkit;
 import java.awt.event.*;
 import java.util.Map;
 import javax.imageio.IIOImage;
-import javax.imageio.metadata.IIOMetadata;
-import javax.imageio.metadata.IIOMetadataNode;
 import javax.swing.*;
-import org.w3c.dom.NodeList;
 
 public class ImageInfoDialog extends javax.swing.JDialog {
 
