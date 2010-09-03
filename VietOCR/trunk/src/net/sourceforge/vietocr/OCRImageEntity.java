@@ -16,7 +16,6 @@
 package net.sourceforge.vietocr;
 
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -103,14 +102,15 @@ public class OCRImageEntity {
             } else {
                 // scaling
                 if (rect == null || rect.equals(EMPTY_RECTANGLE)) {
+                    List<IIOImage> tempList = new ArrayList<IIOImage>();
                     for (IIOImage oimage : (index == -1 ? oimages : oimages.subList(index, index + 1))) {
                         BufferedImage bi = (BufferedImage) oimage.getRenderedImage();
                         Map<String, String> metadata = ImageIOHelper.readImageData(oimage);
                         float scale = dpiX / Float.parseFloat(metadata.get("dpiX"));
                         bi = ImageHelper.getScaledInstance(bi, (int)(bi.getWidth() * scale), (int)(bi.getHeight() * scale));
-                        oimage.setRenderedImage(bi);
+                        tempList.add(new IIOImage(bi, null, null));
                     }
-                    return ImageIOHelper.createTiffFiles(oimages, index, dpiX, dpiY);
+                    return ImageIOHelper.createTiffFiles(tempList, index, dpiX, dpiY);
                 } else {
                     // rectangular region
                     //Cut out the subimage first and rescale that
