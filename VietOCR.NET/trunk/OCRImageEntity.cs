@@ -97,6 +97,7 @@ namespace VietOCR.NET
                 }
                 else
                 {
+                    // rescaling
                     if (rect == null || rect == Rectangle.Empty)
                     {
                         clonedImages.Add(ImageHelper.Rescale(image, dpiX, dpiY));
@@ -106,11 +107,6 @@ namespace VietOCR.NET
                         clonedImages.Add(ImageHelper.Rescale(ImageHelper.Crop(image, rect), dpiX, dpiY));
                         rect = Rectangle.Empty; // no rectangle is needed for processing a subimage (smaller, more efficient)
                     }
-                    //this should be done only once for each image
-                    //rect.X = (int)((float)rect.X * im.Width / image.Width);
-                    //rect.Width = (int)((float)rect.Width * im.Width / image.Width);
-                    //rect.Y = (int)((float)rect.Y * im.Height / image.Height);
-                    //rect.Height = (int)((float)rect.Height * im.Height / image.Height);
                 }
             }
 

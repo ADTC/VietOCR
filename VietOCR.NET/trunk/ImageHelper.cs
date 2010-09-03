@@ -15,6 +15,7 @@ namespace VietOCR.NET
             bm.SetResolution(dpiX, dpiY);
             Graphics g = Graphics.FromImage(bm);
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
             g.DrawImage(image, 0, 0);
             g.Dispose();
 
