@@ -85,18 +85,32 @@ namespace VietOCR.NET
             {
                 if (dpiX == 0 || dpiY == 0)
                 {
-                    clonedImages.Add(image);
+                    if (rect == null || rect == Rectangle.Empty)
+                    {
+                        clonedImages.Add(image);
+                    }
+                    else
+                    {
+                        clonedImages.Add(ImageHelper.Crop(image, rect));
+                        rect = Rectangle.Empty; // no rectangle is needed for processing a subimage (smaller, more efficient)
+                    }
                 }
                 else
                 {
-                    Image im = ImageHelper.Rescale(image, dpiX, dpiY);
-                    clonedImages.Add(im);
-
+                    if (rect == null || rect == Rectangle.Empty)
+                    {
+                        clonedImages.Add(ImageHelper.Rescale(image, dpiX, dpiY));
+                    }
+                    else
+                    {
+                        clonedImages.Add(ImageHelper.Rescale(ImageHelper.Crop(image, rect), dpiX, dpiY));
+                        rect = Rectangle.Empty; // no rectangle is needed for processing a subimage (smaller, more efficient)
+                    }
                     //this should be done only once for each image
-                    rect.X = (int)((float)rect.X * im.Width / image.Width);
-                    rect.Width = (int)((float)rect.Width * im.Width / image.Width);
-                    rect.Y = (int)((float)rect.Y * im.Height / image.Height);
-                    rect.Height = (int)((float)rect.Height * im.Height / image.Height);
+                    //rect.X = (int)((float)rect.X * im.Width / image.Width);
+                    //rect.Width = (int)((float)rect.Width * im.Width / image.Width);
+                    //rect.Y = (int)((float)rect.Y * im.Height / image.Height);
+                    //rect.Height = (int)((float)rect.Height * im.Height / image.Height);
                 }
             }
 

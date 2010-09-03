@@ -69,13 +69,11 @@ namespace VietOCR.NET
         /// <param name="image"></param>
         /// <param name="cropArea"></param>
         /// <returns></returns>
-        //public static Image Crop2(Image image, Rectangle cropArea)
-        //{
-        //    Bitmap bitmap = new Bitmap(image);
-        //    bitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
-        //    return bitmap.Clone(cropArea, bitmap.PixelFormat);
-        //}
-
-
+        public static Image Crop(Image image, Rectangle cropArea)
+        {
+            Bitmap bitmap = new Bitmap(image);
+            bitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+            return bitmap.Clone(cropArea, image.PixelFormat);
+        }
     }
 }
