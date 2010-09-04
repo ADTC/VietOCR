@@ -99,3 +99,7 @@ Version 1.7 (14 April 2010)
 - Fix scale factor issues in image manipulation
 - Improve postprocessing for Vietnamese
 - Add support for VNI-Centur, VNI-Goudy, VNI-Oxford, VNI-Zap fonts to Vietnamese language data
+
+Version 1.8 (4 September 2010)
+- Display image information
+- Add Screenshot Mode, which will rescale low-resolution images to 300 DPI to be more suitable for OCR operations
