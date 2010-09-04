@@ -22,7 +22,7 @@ namespace VietOCR.NET
         {
             if (imageList == null)
             {
-                MessageBox.Show("Please load an image.");
+                MessageBox.Show(this, Properties.Resources.LoadImage, strProgName);
                 return;
             }
 
