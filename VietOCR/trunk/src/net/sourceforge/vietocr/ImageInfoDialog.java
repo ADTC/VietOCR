@@ -59,19 +59,20 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Image Properties");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/ImageInfoDialog"); // NOI18N
+        setTitle(bundle.getString("IMAGE PROPERTIES")); // NOI18N
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 30, 10, 30));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("Width");
+        jLabel1.setText(bundle.getString("WIDTH")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 2, 0);
         jPanel1.add(jLabel1, gridBagConstraints);
 
-        jLabel2.setText("Height");
+        jLabel2.setText(bundle.getString("HEIGHT")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -79,7 +80,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 2, 0);
         jPanel1.add(jLabel2, gridBagConstraints);
 
-        jLabel3.setText("X-Resolution");
+        jLabel3.setText(bundle.getString("X-RESOLUTION")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -87,7 +88,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 2, 0);
         jPanel1.add(jLabel3, gridBagConstraints);
 
-        jLabel4.setText("Y-Resolution");
+        jLabel4.setText(bundle.getString("Y-RESOLUTION")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -125,7 +126,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         jPanel1.add(jTextFieldYRes, gridBagConstraints);
 
-        jLabel7.setText("DPI");
+        jLabel7.setText(bundle.getString("DPI")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -133,7 +134,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 2, 0);
         jPanel1.add(jLabel7, gridBagConstraints);
 
-        jLabel8.setText("DPI");
+        jLabel8.setText(bundle.getString("DPI")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -163,7 +164,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 10, 1));
 
-        jButtonOK.setText("OK");
+        jButtonOK.setText(bundle.getString("OK")); // NOI18N
         jButtonOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonOKActionPerformed(evt);
@@ -171,7 +172,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         });
         jPanel2.add(jButtonOK);
 
-        jButtonCancel.setText("Cancel");
+        jButtonCancel.setText(bundle.getString("CANCEL")); // NOI18N
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelActionPerformed(evt);
