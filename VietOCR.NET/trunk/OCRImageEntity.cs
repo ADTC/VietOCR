@@ -92,7 +92,7 @@ namespace VietOCR.NET
                     else
                     {
                         clonedImages.Add(ImageHelper.Crop(image, rect));
-                        rect = Rectangle.Empty; // no rectangle is needed for processing a subimage (smaller, more efficient)
+                        rect = Rectangle.Empty; // no rectangle is needed for processing a subimage
                     }
                 }
                 else
@@ -105,7 +105,7 @@ namespace VietOCR.NET
                     else
                     {
                         clonedImages.Add(ImageHelper.Rescale(ImageHelper.Crop(image, rect), dpiX, dpiY));
-                        rect = Rectangle.Empty; // no rectangle is needed for processing a subimage (smaller, more efficient)
+                        rect = Rectangle.Empty; // no rectangle is needed for processing a subimage
                     }
                 }
             }
