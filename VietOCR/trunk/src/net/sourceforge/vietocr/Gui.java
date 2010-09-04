@@ -945,9 +945,9 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuCommand);
 
-        jMenuImage.setText("Image");
+        jMenuImage.setText(bundle.getString("jMenuImage.Text")); // NOI18N
 
-        jMenuItemMetadata.setText("Properties");
+        jMenuItemMetadata.setText(bundle.getString("jMenuItemMetadata.Text")); // NOI18N
         jMenuItemMetadata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemMetadataActionPerformed(evt);
