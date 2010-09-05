@@ -217,13 +217,13 @@ public class ImageInfoDialog extends javax.swing.JDialog {
 
         switch (unit) {
             case 1: // "inches"
-                this.jTextFieldWidth.setText(String.valueOf(width / Float.parseFloat(this.jTextFieldXRes.getText())));
-                this.jTextFieldHeight.setText(String.valueOf(height / Float.parseFloat(this.jTextFieldYRes.getText())));
+                this.jTextFieldWidth.setText(String.valueOf(round(width / Float.parseFloat(this.jTextFieldXRes.getText()), 1)));
+                this.jTextFieldHeight.setText(String.valueOf(round(height / Float.parseFloat(this.jTextFieldYRes.getText()), 1)));
                 break;
 
             case 2: // "cm"
-                this.jTextFieldWidth.setText(String.valueOf(width / Float.parseFloat(this.jTextFieldXRes.getText()) * 2.54));
-                this.jTextFieldHeight.setText(String.valueOf(height / Float.parseFloat(this.jTextFieldYRes.getText()) * 2.54));
+                this.jTextFieldWidth.setText(String.valueOf(round(width / Float.parseFloat(this.jTextFieldXRes.getText()) * 2.54, 2)));
+                this.jTextFieldHeight.setText(String.valueOf(round(height / Float.parseFloat(this.jTextFieldYRes.getText()) * 2.54, 2)));
                 break;
 
             default: // "pixel"
@@ -244,6 +244,14 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         Map<String, String> metadata = ImageIOHelper.readImageData(oimage);
         this.jTextFieldXRes.setText(metadata.get("dpiX"));
         this.jTextFieldYRes.setText(metadata.get("dpiY"));
+    }
+
+    public static double round(double d, int decimalPlace) {
+//        BigDecimal bd = new BigDecimal(Double.toString(d));
+//        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+//        return bd.doubleValue();
+        int temp = (int) (d * Math.pow(10, decimalPlace));
+        return ((double) temp) / Math.pow(10, decimalPlace);
     }
 
     /**
