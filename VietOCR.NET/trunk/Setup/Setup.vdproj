@@ -75,12 +75,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_611AF3B68F164B58B7D4A2104354C948"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_620620AC38E8454FAA8226315454E15E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -207,12 +201,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CA8788CEDC4C484880857C9BA911F84E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_CB534E76A5FB447DA3761CDC90D7690E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -292,13 +280,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1B642B25FC7D23D5624FAC8B0E7C8FC0"
+        "OwnerKey" = "8:_08D18714F4A1DC3745E8B5E7307BAF1E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_08D18714F4A1DC3745E8B5E7307BAF1E"
+        "OwnerKey" = "8:_1B642B25FC7D23D5624FAC8B0E7C8FC0"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -336,7 +324,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:VietOCR.NET-1.7\\Setup.msi"
+        "OutputFilename" = "8:VietOCR.NET-1.8\\Setup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -597,26 +585,6 @@
             {
             "SourcePath" = "8:..\\tessdata\\vie.normproto"
             "TargetName" = "8:vie.normproto"
-            "Tag" = "8:"
-            "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_611AF3B68F164B58B7D4A2104354C948"
-            {
-            "SourcePath" = "8:..\\tessdata\\vie.Microfeat"
-            "TargetName" = "8:vie.Microfeat"
             "Tag" = "8:"
             "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
             "Condition" = "8:"
@@ -1020,6 +988,11 @@
             "AssemblyAsmDisplayName" = "8:Interop.WIA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_C3EDDD34B6DE903B1544C63767D700BA"
+                    {
+                    "Name" = "8:Interop.WIA.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Interop.WIA.dll"
             "TargetName" = "8:"
@@ -1037,26 +1010,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CA8788CEDC4C484880857C9BA911F84E"
-            {
-            "SourcePath" = "8:..\\tessdata\\vie-1.Microfeat"
-            "TargetName" = "8:vie-1.Microfeat"
-            "Tag" = "8:"
-            "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CB534E76A5FB447DA3761CDC90D7690E"
@@ -1401,19 +1354,19 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:VietOCR.NET"
-        "ProductCode" = "8:{95C27F9F-790E-45D2-B899-B6EA05860732}"
-        "PackageCode" = "8:{D5209940-1550-4163-8EEB-F6E6713F4E6D}"
+        "ProductCode" = "8:{DC4F7E43-260D-4919-BC50-58954CA407F0}"
+        "PackageCode" = "8:{A598CB93-7C5C-428C-AB54-BECC2780B37B}"
         "UpgradeCode" = "8:{2EF42973-7837-44E2-9085-FA4B5B40483E}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.7"
+        "ProductVersion" = "8:1.8"
         "Manufacturer" = "8:VietUnicode"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://vietunicode.sf.net/forum"
         "Title" = "8:Setup for VietOCR.NET"
-        "Subject" = "8:Installer for VietOCR.NET v1.7"
+        "Subject" = "8:Installer for VietOCR.NET v1.8"
         "ARPCONTACT" = "8:Quan Nguyen"
         "Keywords" = "8:Vietnamese OCR"
         "ARPCOMMENTS" = "8:http://vietocr.sf.net"
