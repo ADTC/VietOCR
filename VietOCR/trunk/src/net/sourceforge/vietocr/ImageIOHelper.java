@@ -348,16 +348,6 @@ public class ImageIOHelper {
                 dpiY = Toolkit.getDefaultToolkit().getScreenResolution();
             }
             dict.put("dpiY", String.valueOf(dpiY));
-
-            String[] metadataFormatNames = imageMetadata.getMetadataFormatNames();
-            if (metadataFormatNames != null) {
-                for (int j = 0; j < metadataFormatNames.length; j++) {
-                    System.out.println("\n--- Image metadata --- "
-                            + metadataFormatNames[j]
-                            + "\n");
-                    IIOExampleUtils.printMetadata(imageMetadata, metadataFormatNames[j]);
-                }
-            }
         }
 
         return dict;
