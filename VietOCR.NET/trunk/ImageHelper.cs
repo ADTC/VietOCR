@@ -41,28 +41,16 @@ namespace VietOCR.NET
         /// <param name="image"></param>
         /// <param name="cropArea"></param>
         /// <returns></returns>
-        //public static Image Crop(Image image, Rectangle cropArea)
-        //{
-        //    try
-        //    {
-        //        Bitmap bmp = new Bitmap(cropArea.Width, cropArea.Height);
-        //        bmp.SetResolution(300, 300);
+        public static Image Crop(Image image, Rectangle cropArea)
+        {
+            Bitmap bmp = new Bitmap(cropArea.Width, cropArea.Height);
+            bmp.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+            Graphics gfx = Graphics.FromImage(bmp);
+            gfx.DrawImage(image, 0, 0, cropArea, GraphicsUnit.Pixel);
+            gfx.Dispose();
 
-        //        Graphics gfx = Graphics.FromImage(bmp);
-        //        gfx.SmoothingMode = SmoothingMode.AntiAlias;
-        //        gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
-        //        gfx.PixelOffsetMode = PixelOffsetMode.HighQuality;
-        //        gfx.DrawImage(image, 0, 0, cropArea, GraphicsUnit.Pixel);
-        //        gfx.Dispose();
-
-        //        return bmp;
-        //    }
-        //    catch (Exception exc)
-        //    {
-        //        Console.WriteLine(exc.Message);
-        //        return null;
-        //    }
-        //}
+            return bmp;
+        }
 
         /// <summary>
         /// Crop an image (another method).
@@ -70,11 +58,11 @@ namespace VietOCR.NET
         /// <param name="image"></param>
         /// <param name="cropArea"></param>
         /// <returns></returns>
-        public static Image Crop(Image image, Rectangle cropArea)
-        {
-            Bitmap bitmap = new Bitmap(image);
-            bitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
-            return bitmap.Clone(cropArea, image.PixelFormat);
-        }
+        //public static Image Crop(Image image, Rectangle cropArea)
+        //{
+        //    Bitmap bitmap = new Bitmap(image);
+        //    bitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+        //    return bitmap.Clone(cropArea, image.PixelFormat); // this has thrown OutOfMemoryException on WinXP
+        //}
     }
 }
