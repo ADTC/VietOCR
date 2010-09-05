@@ -102,4 +102,4 @@ Version 1.7 (14 April 2010)
 
 Version 1.8 (5 September 2010)
 - Display image information
-- Add Screenshot Mode, which will rescale low-resolution images to 300 DPI to be more suitable for OCR operations
+- Add Screenshot Mode, which rescales low-resolution images to 300 DPI to be more suitable for OCR operations
