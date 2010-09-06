@@ -48,6 +48,17 @@ public class ImageHelper {
         return tmp;
     }
 
+
+    public static BufferedImage getSubImage(BufferedImage image, int x, int y, int width, int height) {
+        int type = (image.getTransparency() == Transparency.OPAQUE)
+                ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
+        BufferedImage tmp = new BufferedImage(width, height, type);
+        Graphics2D g2 = tmp.createGraphics();
+        g2.drawImage(image.getSubimage(x, y, width, height), 0, 0, null);
+        g2.dispose();
+        return tmp;
+    }
+
     /**
      * Gets an image from Clipboard.
      *
