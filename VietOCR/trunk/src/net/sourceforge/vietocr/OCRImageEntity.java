@@ -94,7 +94,9 @@ public class OCRImageEntity {
                     return ImageIOHelper.createTiffFiles(oimages, index);
                 } else {
                     // rectangular region
-                    BufferedImage bi = ((BufferedImage) oimages.get(index).getRenderedImage()).getSubimage(rect.x, rect.y, rect.width, rect.height);
+//                    BufferedImage bi = ((BufferedImage) oimages.get(index).getRenderedImage()).getSubimage(rect.x, rect.y, rect.width, rect.height);
+                    // On Linux, the standard getSubimage method has generated images that Tesseract does not like.
+                    BufferedImage bi = ImageHelper.getSubImage((BufferedImage) oimages.get(index).getRenderedImage(), rect.x, rect.y, rect.width, rect.height);
                     List<IIOImage> tempList = new ArrayList<IIOImage>();
                     tempList.add(new IIOImage(bi, null, null));
                     return ImageIOHelper.createTiffFiles(tempList, 0);
@@ -107,17 +109,17 @@ public class OCRImageEntity {
                         BufferedImage bi = (BufferedImage) oimage.getRenderedImage();
                         Map<String, String> metadata = ImageIOHelper.readImageData(oimage);
                         float scale = dpiX / Float.parseFloat(metadata.get("dpiX"));
-                        bi = ImageHelper.getScaledInstance(bi, (int)(bi.getWidth() * scale), (int)(bi.getHeight() * scale));
+                        bi = ImageHelper.getScaledInstance(bi, (int) (bi.getWidth() * scale), (int) (bi.getHeight() * scale));
                         tempList.add(new IIOImage(bi, null, null));
                     }
-                    return ImageIOHelper.createTiffFiles(tempList, index, dpiX, dpiY);
+                    return ImageIOHelper.createTiffFiles(tempList, (index == -1 ? index : 0), dpiX, dpiY);
                 } else {
                     // rectangular region
                     //Cut out the subimage first and rescale that
                     BufferedImage bi = ((BufferedImage) oimages.get(index).getRenderedImage()).getSubimage(rect.x, rect.y, rect.width, rect.height);
                     Map<String, String> metadata = ImageIOHelper.readImageData(oimages.get(index));
                     float scale = dpiX / Float.parseFloat(metadata.get("dpiX"));
-                    bi = ImageHelper.getScaledInstance(bi, (int)(bi.getWidth() * scale), (int)(bi.getHeight() * scale));
+                    bi = ImageHelper.getScaledInstance(bi, (int) (bi.getWidth() * scale), (int) (bi.getHeight() * scale));
                     List<IIOImage> tempList = new ArrayList<IIOImage>();
                     tempList.add(new IIOImage(bi, null, null));
                     return ImageIOHelper.createTiffFiles(tempList, 0, dpiX, dpiY);
