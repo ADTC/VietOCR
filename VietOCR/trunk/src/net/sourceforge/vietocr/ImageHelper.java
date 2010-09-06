@@ -48,7 +48,16 @@ public class ImageHelper {
         return tmp;
     }
 
-
+    /**
+     * A replacement for the standard <code>BufferedImage.getSubimage</code> method.
+     * 
+     * @param image
+     * @param x the X coordinate of the upper-left corner of the specified rectangular region
+     * @param y the Y coordinate of the upper-left corner of the specified rectangular region
+     * @param width the width of the specified rectangular region
+     * @param height the height of the specified rectangular region
+     * @return a BufferedImage that is the subimage of <code>image</code>.
+     */
     public static BufferedImage getSubImage(BufferedImage image, int x, int y, int width, int height) {
         int type = (image.getTransparency() == Transparency.OPAQUE)
                 ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
