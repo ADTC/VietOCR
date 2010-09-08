@@ -82,7 +82,7 @@ public class Gui extends javax.swing.JFrame {
      * Creates new form Gui
      */
     public Gui() {
-        File baseDir = Utilities.getBaseDir(this);
+        File baseDir = Utilities.getBaseDir(Gui.this);
         if (WINDOWS) {
             tessPath = new File(baseDir, "tesseract").getPath();
         } else {
