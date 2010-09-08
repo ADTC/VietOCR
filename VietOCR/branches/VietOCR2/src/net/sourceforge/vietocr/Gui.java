@@ -259,9 +259,9 @@ public class Gui extends javax.swing.JFrame {
 
             @Override
             public boolean dispatchKeyEvent(KeyEvent e) {
-                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_V) {
+                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_V && e.getID() == KeyEvent.KEY_PRESSED) {
                     try {
-                        Image image = ImageIOHelper.getClipboardImage();
+                        Image image = ImageHelper.getClipboardImage();
                         if (image != null) {
                             File tempFile = File.createTempFile("tmp", ".png");
                             ImageIO.write((BufferedImage) image, "png", tempFile);
@@ -283,7 +283,7 @@ public class Gui extends javax.swing.JFrame {
     /**
      * 
      */
-    void populatePopupMenu() {
+    private void populatePopupMenu() {
         popup.removeAll();
 
         m_undoAction = new AbstractAction(vietpadResources.getString("Undo")) {
@@ -586,6 +586,10 @@ public class Gui extends javax.swing.JFrame {
         jMenuItemOCRAll = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemPostProcess = new javax.swing.JMenuItem();
+        jMenuImage = new javax.swing.JMenu();
+        jMenuItemMetadata = new javax.swing.JMenuItem();
+        jSeparator11 = new javax.swing.JPopupMenu.Separator();
+        jCheckBoxMenuItemScreenshotMode = new javax.swing.JCheckBoxMenuItem();
         jMenuFormat = new javax.swing.JMenu();
         jCheckBoxMenuWordWrap = new javax.swing.JCheckBoxMenuItem();
         jMenuItemFont = new javax.swing.JMenuItem();
@@ -940,6 +944,23 @@ public class Gui extends javax.swing.JFrame {
         jMenuCommand.add(jMenuItemPostProcess);
 
         jMenuBar2.add(jMenuCommand);
+
+        jMenuImage.setText(bundle.getString("jMenuImage.Text")); // NOI18N
+
+        jMenuItemMetadata.setText(bundle.getString("jMenuItemMetadata.Text")); // NOI18N
+        jMenuItemMetadata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMetadataActionPerformed(evt);
+            }
+        });
+        jMenuImage.add(jMenuItemMetadata);
+        jMenuImage.add(jSeparator11);
+
+        jCheckBoxMenuItemScreenshotMode.setSelected(true);
+        jCheckBoxMenuItemScreenshotMode.setText("Screenshot Mode");
+        jMenuImage.add(jCheckBoxMenuItemScreenshotMode);
+
+        jMenuBar2.add(jMenuImage);
 
         jMenuFormat.setText(bundle.getString("jMenuFormat.Text")); // NOI18N
 
@@ -1518,7 +1539,7 @@ public class Gui extends javax.swing.JFrame {
             return saveTextFile();
         }
     }
-    
+
     private void jMenuItemSaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveAsActionPerformed
         saveFileDlg();
     }//GEN-LAST:event_jMenuItemSaveAsActionPerformed
@@ -1827,6 +1848,14 @@ public class Gui extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
 
+    private void jMenuItemMetadataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMetadataActionPerformed
+        readImageMetadata();
+    }//GEN-LAST:event_jMenuItemMetadataActionPerformed
+
+    void readImageMetadata() {
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
+    }
+
     void changeUILanguage(final Locale locale) {
         if (locale.equals(Locale.getDefault())) {
             return; // no change in locale
@@ -1901,6 +1930,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton jButtonScan;
     private javax.swing.JButton jButtonZoomIn;
     private javax.swing.JButton jButtonZoomOut;
+    protected javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemScreenshotMode;
     protected javax.swing.JCheckBoxMenuItem jCheckBoxMenuWordWrap;
     protected javax.swing.JComboBox jComboBoxLang;
     protected javax.swing.JLabel jImageLabel;
@@ -1912,6 +1942,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuFormat;
     private javax.swing.JMenu jMenuHelp;
+    private javax.swing.JMenu jMenuImage;
     private javax.swing.JMenu jMenuInputMethod;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemChangeCase;
@@ -1920,6 +1951,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemHelp;
     private javax.swing.JMenuItem jMenuItemMergePdf;
     private javax.swing.JMenuItem jMenuItemMergeTiff;
+    private javax.swing.JMenuItem jMenuItemMetadata;
     protected javax.swing.JMenuItem jMenuItemOCR;
     protected javax.swing.JMenuItem jMenuItemOCRAll;
     private javax.swing.JMenuItem jMenuItemOpen;
@@ -1944,6 +1976,7 @@ public class Gui extends javax.swing.JFrame {
     protected javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
+    private javax.swing.JPopupMenu.Separator jSeparator11;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;

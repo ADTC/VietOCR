@@ -1,6 +1,6 @@
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>VietOCR - Java GUI Frontend for Tesseract OCR</title>
 </head>
 <body lang="EN-US">
@@ -67,8 +67,9 @@
             PDF support is possible via <a href="http://sourceforge.net/projects/ghostscript/">GPL
                 Ghostscript</a>. After installation of the library, please ensure the shared
             library object (<tt>gsdll32.dll</tt> or <tt>libgs.so</tt>) is in the search path
-            by setting the appropriate environment variable. On Windows, append the following to <tt>Path</tt> value (accessible through Control Panel &gt;
-            System &gt; Advanced tab &gt; Environment Variables button) for GS version 8.71:</p>
+            by setting the appropriate environment variable. On Windows, append the following
+            to <tt>Path</tt> value (accessible through Control Panel &gt; System &gt; Advanced
+            tab &gt; Environment Variables) for GS version 8.71:</p>
         <blockquote>
             <p>
                 <tt>;C:\Program Files\gs\gs8.71\bin</tt></p>
@@ -89,8 +90,8 @@
                 <tt>java -jar VietOCR.jar</tt></p>
         </blockquote>
         <p>
-            <b><u>Note</u></b>: If you encounter out-of-memory exception, run <tt>ocr</tt>
-            script file instead of using the .jar.</p>
+            <b><u>Note</u></b>: If you encounter out-of-memory exception, run <tt>ocr</tt> script
+            file instead of using the .jar.</p>
         <p>
             The Vietnamese language data were generated for Times New Roman, Arial, Verdana,
             and Courier New fonts. Therefore, the recognition would have better success rate
@@ -107,6 +108,9 @@
             it even further. Even so, the actual rates still depend greatly on the quality of
             the scanned image. The typical settings for scanning are 300 DPI and 1 bpp (bit
             per pixel) black&amp;white or 8 bpp grayscale uncompressed TIFF or PNG format.</p>
+        <p>
+            The new <em>Screenshot Mode</em> offers better recognition rates for low-resolution
+            images, such as screen prints, by rescaling them to 300 DPI.</p>
         <p>
             In addition to the built-in text postprocessing algorithm, you can add your own
             custom text replacement scheme via a text file named <tt>x.DangAmbigs.txt</tt>,
@@ -153,7 +157,7 @@
         <p>
             If there is any questions, please post in <a href="http://vietunicode.sourceforge.net/forum/">
                 VietUnicode Forum</a>.</p>
-        <hr>
+        <hr />
     </div>
 </body>
 </html>

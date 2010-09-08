@@ -48,11 +48,15 @@ public class GuiWithCommand extends Gui {
                 if (ii.getIconHeight() < this.jScrollPane2.getHeight()) {
                     offsetY = (this.jScrollPane2.getViewport().getHeight() - ii.getIconHeight()) / 2;
                 }
-                BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) ((rect.x - offsetX) * scaleX), (int) ((rect.y - offsetY) * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
-                IIOImage iioImage = new IIOImage(bi, null, null);
-                ArrayList<IIOImage> tempList = new ArrayList<IIOImage>();
-                tempList.add(iioImage);
-                performOCR(tempList, 0);
+//                BufferedImage bi = ((BufferedImage) ii.getImage()).getSubimage((int) ((rect.x - offsetX) * scaleX), (int) ((rect.y - offsetY) * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
+
+//                // create a new rectangle with scale factors and offets factored in
+                rect = new Rectangle((int) ((rect.x - offsetX) * scaleX), (int) ((rect.y - offsetY) * scaleY), (int) (rect.width * scaleX), (int) (rect.height * scaleY));
+
+                //move this part to the image entity
+//                ArrayList<IIOImage> tempList = new ArrayList<IIOImage>();
+//                tempList.add(new IIOImage(bi, null, null));
+                performOCR(iioImageList, imageIndex, rect);
             } catch (RasterFormatException rfe) {
                 JOptionPane.showMessageDialog(this, rfe.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
 //                rfe.printStackTrace();
@@ -60,7 +64,7 @@ public class GuiWithCommand extends Gui {
                 e.printStackTrace();
             }
         } else {
-            performOCR(iioImageList, imageIndex);
+            performOCR(iioImageList, imageIndex, null);
         }
     }
 
@@ -74,7 +78,7 @@ public class GuiWithCommand extends Gui {
         this.jButtonOCR.setVisible(false);
         this.jButtonCancelOCR.setVisible(true);
         this.jButtonCancelOCR.setEnabled(true);
-        performOCR(iioImageList, -1);
+        performOCR(iioImageList, -1, null);
     }
 
     @Override
@@ -152,7 +156,7 @@ public class GuiWithCommand extends Gui {
      * @param list List of IIOImage
      * @param index Index of page to be OCRed: -1 for all pages
      */
-    void performOCR(final List<IIOImage> iioImageList, final int index) {
+    void performOCR(final List<IIOImage> iioImageList, final int index, Rectangle rect) {
         if (this.jComboBoxLang.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_select_a_language."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -168,8 +172,11 @@ public class GuiWithCommand extends Gui {
         this.jMenuItemOCR.setEnabled(false);
         this.jMenuItemOCRAll.setEnabled(false);
 
+        OCRImageEntity entity = new OCRImageEntity(iioImageList, index, rect, curLangCode);
+        entity.setScreenshotMode(this.jCheckBoxMenuItemScreenshotMode.isSelected());
+
         // instantiate SwingWorker for OCR
-        ocrWorker = new OcrWorker(new OCRImageEntity(iioImageList, index));
+        ocrWorker = new OcrWorker(entity);
         ocrWorker.execute();
     }
 
@@ -200,7 +207,7 @@ public class GuiWithCommand extends Gui {
 
             for (int i = 0; i < workingFiles.size(); i++) {
                 if (!isCancelled()) {
-                    String result = ocrEngine.recognizeText(workingFiles.subList(i, i + 1), curLangCode);
+                    String result = ocrEngine.recognizeText(workingFiles.subList(i, i + 1), entity.getLanguage());
                     publish(result); // interim result
                 }
             }
@@ -235,7 +242,7 @@ public class GuiWithCommand extends Gui {
                     } else if (cause instanceof FileNotFoundException) {
                         why = bundle.getString("An_exception_occurred_in_Tesseract_engine_while_recognizing_this_image.");
                     } else if (cause instanceof OutOfMemoryError) {
-                        why = bundle.getString("_has_run_out_of_memory.\nPlease_restart_");
+                        why = APP_NAME + vietpadResources.getString("_has_run_out_of_memory.\nPlease_restart_") + vietpadResources.getString("_and_try_again.");
                     } else {
                         why = cause.getMessage();
                     }
@@ -260,8 +267,10 @@ public class GuiWithCommand extends Gui {
                 jButtonCancelOCR.setVisible(false);
 
                 // clean up temporary image files
-                for (File tempImageFile : workingFiles) {
-                    tempImageFile.delete();
+                if (workingFiles != null) {
+                    for (File tempImageFile : workingFiles) {
+                        tempImageFile.delete();
+                    }
                 }
             }
         }
