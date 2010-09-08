@@ -21,22 +21,29 @@ import javax.imageio.*;
 import javax.imageio.stream.*;
 import javax.imageio.metadata.*;
 import com.sun.media.imageio.plugins.tiff.*;
-import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.datatransfer.*;
+import java.awt.image.*;
+import java.nio.ByteBuffer;
+import org.w3c.dom.NodeList;
 
-/**
- *
- * @author Quan Nguyen (nguyenq@users.sf.net)
- */
 public class ImageIOHelper {
 
-    final static String OUTPUT_FILE_NAME = "TessTmp";
+    final static String OUTPUT_FILE_NAME = "Tesstmp";
     final static String TIFF_EXT = ".tif";
     final static String TIFF_FORMAT = "tiff";
 
-    public static List<File> createImageFiles(File imageFile, int index) throws Exception {
-        List<File> tempImageFiles = new ArrayList<File>();
+    /**
+     * Creates a list of TIFF image files from an image file. 
+     * It basically converts images of other formats to TIFF format,
+     * or a multi-page TIFF image to multiple TIFF image files.
+     * 
+     * @param imageFile input image file
+     * @param index an index of the page; -1 means all pages, as in a multi-page TIFF image
+     * @return a list of TIFF image files
+     * @throws Exception
+     */
+    public static List<File> createTiffFiles(File imageFile, int index) throws IOException {
+        List<File> tiffFiles = new ArrayList<File>();
 
         String imageFileName = imageFile.getName();
         String imageFormat = imageFileName.substring(imageFileName.lastIndexOf('.') + 1);
@@ -64,39 +71,42 @@ public class ImageIOHelper {
         //Read the stream metadata
         IIOMetadata streamMetadata = writer.getDefaultStreamMetadata(tiffWriteParam);
 
-        if (index == -1) {
-            int imageTotal = reader.getNumImages(true);
+        int imageTotal = reader.getNumImages(true);
 
-            for (int i = 0; i < imageTotal; i++) {
+        for (int i = 0; i < imageTotal; i++) {
+            // all if index == -1; otherwise, only index-th
+            if (index == -1 || i == index) {
 //                BufferedImage bi = reader.read(i);
-//                IIOImage image = new IIOImage(bi, null, reader.getImageMetadata(i));
-                IIOImage image = reader.readAll(i, reader.getDefaultReadParam());
-                File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
-                ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
+//                IIOImage oimage = new IIOImage(bi, null, reader.getImageMetadata(i));
+                IIOImage oimage = reader.readAll(i, reader.getDefaultReadParam());
+                File tiffFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
+                ImageOutputStream ios = ImageIO.createImageOutputStream(tiffFile);
                 writer.setOutput(ios);
-                writer.write(streamMetadata, image, tiffWriteParam);
+                writer.write(streamMetadata, oimage, tiffWriteParam);
                 ios.close();
-                tempImageFiles.add(tempFile);
+                tiffFiles.add(tiffFile);
             }
-        } else {
-//            BufferedImage bi = reader.read(index);
-//            IIOImage image = new IIOImage(bi, null, reader.getImageMetadata(index));
-            IIOImage image = reader.readAll(index, reader.getDefaultReadParam());
-            File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
-            ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
-            writer.setOutput(ios);
-            writer.write(streamMetadata, image, tiffWriteParam);
-            ios.close();
-            tempImageFiles.add(tempFile);
         }
         writer.dispose();
         reader.dispose();
 
-        return tempImageFiles;
+        return tiffFiles;
     }
 
-    public static List<File> createImageFiles(List<IIOImage> imageList, int index) throws Exception {
-        List<File> tempImageFiles = new ArrayList<File>();
+    /**
+     * Creates a list of TIFF image files from a list of <code>IIOImage</code> objects.
+     * 
+     * @param imageList a list of <code>IIOImage</code> objects
+     * @param index an index of the page; -1 means all pages
+     * @return a list of TIFF image files
+     * @throws Exception
+     */
+    public static List<File> createTiffFiles(List<IIOImage> imageList, int index) throws IOException {
+        return createTiffFiles(imageList, index, 0, 0);
+    }
+
+    public static List<File> createTiffFiles(List<IIOImage> imageList, int index, int dpiX, int dpiY) throws IOException {
+        List<File> tiffFiles = new ArrayList<File>();
 
         //Set up the writeParam
         TIFFImageWriteParam tiffWriteParam = new TIFFImageWriteParam(Locale.US);
@@ -113,30 +123,99 @@ public class ImageIOHelper {
         //Get the stream metadata
         IIOMetadata streamMetadata = writer.getDefaultStreamMetadata(tiffWriteParam);
 
-        if (index == -1) {
-            for (IIOImage image : imageList) {
-                File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
-                ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
-                writer.setOutput(ios);
-                writer.write(streamMetadata, image, tiffWriteParam);
-                ios.close();
-                tempImageFiles.add(tempFile);
+        // all if index == -1; otherwise, only index-th
+        for (IIOImage oimage : (index == -1 ? imageList : imageList.subList(index, index + 1))) {
+            if (dpiX != 0 && dpiY != 0) {
+                // Get the default image metadata.
+                ImageTypeSpecifier imageType = ImageTypeSpecifier.createFromRenderedImage(oimage.getRenderedImage());
+                IIOMetadata imageMetadata = writer.getDefaultImageMetadata(imageType, null);
+                imageMetadata = setDPIViaAPI(imageMetadata, dpiX, dpiY);
+                oimage.setMetadata(imageMetadata);
             }
-        } else {
-            IIOImage image = imageList.get(index);
-            File tempFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
-            ImageOutputStream ios = ImageIO.createImageOutputStream(tempFile);
+
+            File tiffFile = File.createTempFile(OUTPUT_FILE_NAME, TIFF_EXT);
+            ImageOutputStream ios = ImageIO.createImageOutputStream(tiffFile);
             writer.setOutput(ios);
-            writer.write(streamMetadata, image, tiffWriteParam);
+            writer.write(streamMetadata, oimage, tiffWriteParam);
             ios.close();
-            tempImageFiles.add(tempFile);
+            tiffFiles.add(tiffFile);
         }
         writer.dispose();
 
-        return tempImageFiles;
+        return tiffFiles;
     }
 
-    public static List<IIOImage> getIIOImageList(File imageFile) throws Exception {
+    /**
+     * Set DPI using API.
+     */
+    private static IIOMetadata setDPIViaAPI(IIOMetadata imageMetadata, int dpiX, int dpiY)
+            throws IIOInvalidTreeException {
+        // Derive the TIFFDirectory from the metadata.
+        TIFFDirectory dir = TIFFDirectory.createFromMetadata(imageMetadata);
+
+        // Get {X,Y}Resolution tags.
+        BaselineTIFFTagSet base = BaselineTIFFTagSet.getInstance();
+        TIFFTag tagXRes = base.getTag(BaselineTIFFTagSet.TAG_X_RESOLUTION);
+        TIFFTag tagYRes = base.getTag(BaselineTIFFTagSet.TAG_Y_RESOLUTION);
+
+        // Create {X,Y}Resolution fields.
+        TIFFField fieldXRes = new TIFFField(tagXRes, TIFFTag.TIFF_RATIONAL,
+                1, new long[][]{{dpiX, 1}});
+        TIFFField fieldYRes = new TIFFField(tagYRes, TIFFTag.TIFF_RATIONAL,
+                1, new long[][]{{dpiY, 1}});
+
+        // Append {X,Y}Resolution fields to directory.
+        dir.addTIFFField(fieldXRes);
+        dir.addTIFFField(fieldYRes);
+
+        // Convert to metadata object and return.
+        return dir.getAsMetadata();
+    }
+
+    /**
+     * Gets pixel data of an <code>IIOImage</code> object.
+     * 
+     * @param image an <code>IIOImage</code> object
+     * @return a byte buffer of pixel data
+     * @throws Exception
+     */
+    public static ByteBuffer getImageByteBuffer(IIOImage image) throws IOException {
+        //Set up the writeParam
+        TIFFImageWriteParam tiffWriteParam = new TIFFImageWriteParam(Locale.US);
+        tiffWriteParam.setCompressionMode(ImageWriteParam.MODE_DISABLED);
+
+        //Get tif writer and set output to file
+        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(TIFF_FORMAT);
+        ImageWriter writer = writers.next();
+
+        if (writer == null) {
+            throw new RuntimeException("Need to install JAI Image I/O package.\nhttps://jai-imageio.dev.java.net");
+        }
+
+        //Get the stream metadata
+        IIOMetadata streamMetadata = writer.getDefaultStreamMetadata(tiffWriteParam);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ImageOutputStream ios = ImageIO.createImageOutputStream(outputStream);
+        writer.setOutput(ios);
+        writer.write(streamMetadata, new IIOImage(image.getRenderedImage(), null, null), tiffWriteParam);
+//        writer.write(image.getRenderedImage());
+        writer.dispose();
+//        ImageIO.write(image.getRenderedImage(), "tiff", ios); // this can be used in lieu of writer
+        ios.seek(0);
+        BufferedImage bi = ImageIO.read(ios);
+        byte[] pixelData = ((DataBufferByte) bi.getRaster().getDataBuffer()).getData();
+        return ByteBuffer.wrap(pixelData);
+    }
+
+    /**
+     * Gets a list of <code>IIOImage</code> objects for an image file.
+     *
+     * @param imageFile input image file. It can be any of the supported formats, including TIFF, JPEG, GIF, PNG, BMP, JPEG, and PDF if GPL Ghostscript is installed
+     * @return a list of <code>IIOImage</code> objects
+     * @throws Exception
+     */
+    public static List<IIOImage> getIIOImageList(File imageFile) throws IOException {
         File workingTiffFile = null;
 
         ImageReader reader = null;
@@ -145,7 +224,7 @@ public class ImageIOHelper {
         try {
             // convert PDF to TIFF
             if (imageFile.getName().toLowerCase().endsWith(".pdf")) {
-                workingTiffFile = ImageHelper.convertPdf2Tiff(imageFile);
+                workingTiffFile = PdfUtilities.convertPdf2Tiff(imageFile);
                 imageFile = workingTiffFile;
             }
 
@@ -171,9 +250,9 @@ public class ImageIOHelper {
             int imageTotal = reader.getNumImages(true);
 
             for (int i = 0; i < imageTotal; i++) {
-//                IIOImage image = new IIOImage(reader.read(i), null, reader.getImageMetadata(i));
-                IIOImage image = reader.readAll(i, reader.getDefaultReadParam());
-                iioImageList.add(image);
+//                IIOImage oimage = new IIOImage(reader.read(i), null, reader.getImageMetadata(i));
+                IIOImage oimage = reader.readAll(i, reader.getDefaultReadParam());
+                iioImageList.add(oimage);
             }
 
             return iioImageList;
@@ -195,19 +274,20 @@ public class ImageIOHelper {
     }
 
     /**
-     * Merge multiple images into one TIFF image.
-     * @param inputImages
-     * @param outputTiff
+     * Merges multiple images into one TIFF image.
+     * 
+     * @param inputImages an array of image files
+     * @param outputTiff the output TIFF file
      * @throws Exception
      */
-    public static void mergeTiff(File[] inputImages, File outputTiff) throws Exception {
+    public static void mergeTiff(File[] inputImages, File outputTiff) throws IOException {
         List<IIOImage> imageList = new ArrayList<IIOImage>();
 
         for (int i = 0; i < inputImages.length; i++) {
             imageList.addAll(getIIOImageList(inputImages[i]));
         }
 
-        if (imageList.size() == 0) {
+        if (imageList.isEmpty()) {
             // if no image
             return;
         }
@@ -238,15 +318,38 @@ public class ImageIOHelper {
     }
 
     /**
-     * Get an Image from Clipboard.
+     * Reads image meta data.
+     * 
+     * @param oimage
      * @return
      */
-    public static Image getClipboardImage() {
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        try {
-            return (Image) clipboard.getData(DataFlavor.imageFlavor);
-        } catch (Exception e) {
-            return null;
+    public static Map<String, String> readImageData(IIOImage oimage) {
+        Map<String, String> dict = new HashMap<String, String>();
+        
+        IIOMetadata imageMetadata = oimage.getMetadata();
+        if (imageMetadata != null) {
+            IIOMetadataNode dimNode = (IIOMetadataNode) imageMetadata.getAsTree("javax_imageio_1.0");
+            NodeList nodes = dimNode.getElementsByTagName("HorizontalPixelSize");
+            int dpiX;
+            if (nodes.getLength() > 0) {
+                float dpcWidth = Float.parseFloat(nodes.item(0).getAttributes().item(0).getNodeValue());
+                dpiX = (int) Math.round(25.4f / dpcWidth);
+            } else {
+                dpiX = Toolkit.getDefaultToolkit().getScreenResolution();
+            }
+            dict.put("dpiX", String.valueOf(dpiX));
+
+            nodes = dimNode.getElementsByTagName("VerticalPixelSize");
+            int dpiY;
+            if (nodes.getLength() > 0) {
+                float dpcHeight = Float.parseFloat(nodes.item(0).getAttributes().item(0).getNodeValue());
+                dpiY = (int) Math.round(25.4f / dpcHeight);
+            } else {
+                dpiY = Toolkit.getDefaultToolkit().getScreenResolution();
+            }
+            dict.put("dpiY", String.valueOf(dpiY));
         }
+
+        return dict;
     }
 }
