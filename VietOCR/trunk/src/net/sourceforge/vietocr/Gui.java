@@ -33,8 +33,8 @@ import javax.swing.filechooser.FileFilter;
 import net.sourceforge.vietpad.*;
 import net.sourceforge.vietpad.inputmethod.*;
 import net.sourceforge.vietocr.wia.*;
-import uk.org.jsane.JSane_Base.JSane_Base_Frame;
-import uk.org.jsane.JSane_Gui.Swing.JSane_Scan_Dialog;
+//import uk.org.jsane.JSane_Base.JSane_Base_Frame;
+//import uk.org.jsane.JSane_Gui.Swing.JSane_Scan_Dialog;
 
 public class Gui extends javax.swing.JFrame {
 
@@ -84,7 +84,7 @@ public class Gui extends javax.swing.JFrame {
      * Creates new form Gui
      */
     public Gui() {
-        File baseDir = Utilities.getBaseDir(this);
+        File baseDir = Utilities.getBaseDir(Gui.this);
         if (WINDOWS) {
             tessPath = new File(baseDir, "tesseract").getPath();
         } else {
@@ -122,9 +122,9 @@ public class Gui extends javax.swing.JFrame {
             prop.loadFromXML(new FileInputStream(xmlFile));
         } catch (IOException ioe) {
             JOptionPane.showMessageDialog(null, "Missing ISO639-3.xml file. Cannot find it in " + new File(baseDir, "data").getPath() + " directory.", APP_NAME, JOptionPane.ERROR_MESSAGE);
-            ioe.printStackTrace();
+//            ioe.printStackTrace();
         } catch (Exception exc) {
-            exc.printStackTrace();
+//            exc.printStackTrace();
         } finally {
             if (langCodes == null) {
                 langs = new String[0];
@@ -144,7 +144,7 @@ public class Gui extends javax.swing.JFrame {
             UIManager.setLookAndFeel(prefs.get("lookAndFeel", UIManager.getSystemLookAndFeelClassName()));
             config.loadFromXML(getClass().getResourceAsStream("config.xml"));
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             // keep default LAF
         }
 
@@ -157,8 +157,8 @@ public class Gui extends javax.swing.JFrame {
             this.jMenuFile.remove(this.jMenuItemScan);
         }
 
-        new DropTarget(this.jImageLabel, new FileDropTargetListener(this));
-        new DropTarget(this.jTextArea1, new FileDropTargetListener(this));
+        new DropTarget(this.jImageLabel, new FileDropTargetListener(Gui.this));
+        new DropTarget(this.jTextArea1, new FileDropTargetListener(Gui.this));
 
         addWindowListener(
                 new WindowAdapter() {
@@ -236,7 +236,7 @@ public class Gui extends javax.swing.JFrame {
                 screen.y, screen.y + screen.height - getHeight()));
 
         if (langCodes == null) {
-            JOptionPane.showMessageDialog(this, bundle.getString("Tesseract_is_not_found._Please_specify_its_path_in_Settings_menu."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(Gui.this, bundle.getString("Tesseract_is_not_found._Please_specify_its_path_in_Settings_menu."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
         }
 
         populatePopupMenu();
@@ -384,7 +384,7 @@ public class Gui extends javax.swing.JFrame {
     private void updateMRUMenu() {
         this.jMenuRecentFiles.removeAll();
 
-        if (mruList.size() == 0) {
+        if (mruList.isEmpty()) {
             this.jMenuRecentFiles.add(bundle.getString("No_Recent_Files"));
         } else {
             Action mruAction = new AbstractAction() {
@@ -498,7 +498,7 @@ public class Gui extends javax.swing.JFrame {
                 actionPaste.setEnabled(clipData.isDataFlavorSupported(DataFlavor.stringFlavor));
             }
         } catch (OutOfMemoryError oome) {
-            oome.printStackTrace();
+//            oome.printStackTrace();
             JOptionPane.showMessageDialog(this, APP_NAME + vietpadResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + vietpadResources.getString("_and_try_again."), vietpadResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -1342,7 +1342,7 @@ public class Gui extends javax.swing.JFrame {
         prefs.putBoolean("wordWrap", wordWrapOn);
         prefs.putBoolean("dangAmbigs", dangAmbigsOn);
 
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (int i = 0; i < this.mruList.size(); i++) {
             buf.append(this.mruList.get(i)).append(File.pathSeparatorChar);
         }
@@ -1440,7 +1440,7 @@ public class Gui extends javax.swing.JFrame {
                     jProgressBar1.setString(bundle.getString("Loading_completed"));
                     updateMRUList(selectedFile.getPath());
                 } catch (InterruptedException ignore) {
-                    ignore.printStackTrace();
+//                    ignore.printStackTrace();
                     jLabelStatus.setText("Loading canceled.");
                     jProgressBar1.setString("Loading canceled.");
                 } catch (java.util.concurrent.ExecutionException e) {
@@ -1592,7 +1592,7 @@ public class Gui extends javax.swing.JFrame {
             updateMRUList(textFile.getPath());
             updateSave(false);
         } catch (OutOfMemoryError oome) {
-            oome.printStackTrace();
+//            oome.printStackTrace();
             JOptionPane.showMessageDialog(this, APP_NAME + vietpadResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + vietpadResources.getString("_and_try_again."), vietpadResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
         } catch (FileNotFoundException fnfe) {
             showError(fnfe, vietpadResources.getString("Error_saving_file_") + textFile + vietpadResources.getString(".\nFile_is_inaccessible."));
@@ -1673,7 +1673,7 @@ public class Gui extends javax.swing.JFrame {
             UIManager.setLookAndFeel(laf);
         } catch (Exception exc) {
             // do nothing
-            exc.printStackTrace();
+//            exc.printStackTrace();
         }
 
         for (Window win : Window.getWindows()) {
@@ -1746,9 +1746,9 @@ public class Gui extends javax.swing.JFrame {
                         WiaScannerAdapter adapter = new WiaScannerAdapter(); // with MS WIA
                         // The reason for not using PNG format is that jai-imageio library would throw an "I/O error reading PNG header" error.
                         tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
-                    } else {
-                        JSane_Base_Frame frame = JSane_Scan_Dialog.getScan("localhost", 6566); // with SANE
-                        ImageIO.write(frame.getImage(false), "bmp", tempImageFile);
+//                    } else {
+//                        JSane_Base_Frame frame = JSane_Scan_Dialog.getScan("localhost", 6566); // with SANE
+//                        ImageIO.write(frame.getImage(false), "bmp", tempImageFile);
                     }
                     openFile(tempImageFile);
                     tempImageFile.deleteOnExit();
@@ -1794,7 +1794,7 @@ public class Gui extends javax.swing.JFrame {
             iioImageList.get(imageIndex).setRenderedImage((BufferedImage) imageIcon.getImage());
             displayImage();
         } catch (OutOfMemoryError oome) {
-            oome.printStackTrace();
+//            oome.printStackTrace();
             JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
         }
     }
