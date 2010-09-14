@@ -532,6 +532,25 @@
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jToolBar2.add(Box.createHorizontalGlue());&#xd;&#xa;"/>
           </AuxValues>
         </Component>
+        <Component class="javax.swing.JToggleButton" name="jToggleButtonSpellCheck">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/net/sourceforge/vietocr/icons/spellcheck.png"/>
+            </Property>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="jToggleButtonSpellCheck"/>
+          </AccessibilityProperties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButtonSpellCheckActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jToolBar2.add(Box.createHorizontalStrut(20));"/>
+          </AuxValues>
+        </Component>
         <Component class="javax.swing.JLabel" name="jLabelLanguage">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
