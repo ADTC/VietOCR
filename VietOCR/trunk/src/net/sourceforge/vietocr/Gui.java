@@ -520,6 +520,7 @@ public class Gui extends javax.swing.JFrame {
         jButtonCancelOCR = new javax.swing.JButton();
         jButtonCancelOCR.setVisible(false);
         jButtonClear = new javax.swing.JButton();
+        jToggleButtonSpellCheck = new javax.swing.JToggleButton();
         jLabelLanguage = new javax.swing.JLabel();
         jComboBoxLang = new JComboBox(langs);
         jComboBoxLang.setSelectedItem(prefs.get("langCode", null));
@@ -722,6 +723,19 @@ public class Gui extends javax.swing.JFrame {
         });
         jToolBar2.add(jButtonClear);
         jToolBar2.add(Box.createHorizontalGlue());
+
+        jToggleButtonSpellCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/spellcheck.png"))); // NOI18N
+        jToggleButtonSpellCheck.setFocusable(false);
+        jToggleButtonSpellCheck.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jToggleButtonSpellCheck.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToggleButtonSpellCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButtonSpellCheckActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jToggleButtonSpellCheck);
+        jToolBar2.add(Box.createHorizontalStrut(20));
+        jToggleButtonSpellCheck.getAccessibleContext().setAccessibleName("jToggleButtonSpellCheck");
 
         jLabelLanguage.setText(bundle.getString("jLabelLanguage.Text")); // NOI18N
         jToolBar2.add(jLabelLanguage);
@@ -1858,6 +1872,15 @@ public class Gui extends javax.swing.JFrame {
         readImageMetadata();
     }//GEN-LAST:event_jMenuItemMetadataActionPerformed
 
+    private void jToggleButtonSpellCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonSpellCheckActionPerformed
+        if (this.jToggleButtonSpellCheck.isSelected()) {
+            SpellChecker sp = new SpellChecker(this.jTextArea1);
+            sp.spellCheck();
+        } else {
+            this.jTextArea1.getHighlighter().removeAllHighlights();
+        }
+    }//GEN-LAST:event_jToggleButtonSpellCheckActionPerformed
+
     void readImageMetadata() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
@@ -1993,6 +2016,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator9;
     private javax.swing.JSplitPane jSplitPane1;
     protected javax.swing.JTextArea jTextArea1;
+    private javax.swing.JToggleButton jToggleButtonSpellCheck;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JPopupMenu popup;
