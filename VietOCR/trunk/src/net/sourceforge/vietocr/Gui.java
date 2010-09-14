@@ -33,6 +33,8 @@ import javax.swing.filechooser.FileFilter;
 import net.sourceforge.vietpad.*;
 import net.sourceforge.vietpad.inputmethod.*;
 import net.sourceforge.vietocr.wia.*;
+import uk.org.jsane.JSane_Base.JSane_Base_Frame;
+import uk.org.jsane.JSane_Gui.Swing.JSane_Scan_Dialog;
 
 public class Gui extends javax.swing.JFrame {
 
@@ -1735,15 +1737,19 @@ public class Gui extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    WiaScannerAdapter adapter = new WiaScannerAdapter();
                     File tempImageFile = File.createTempFile("tmp", ".bmp");
 
                     if (tempImageFile.exists()) {
                         tempImageFile.delete();
                     }
-
-                    // The reason for not using PNG format is that jai-imageio library would throw an "I/O error reading PNG header" error.
-                    tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
+                    if (WINDOWS) {
+                        WiaScannerAdapter adapter = new WiaScannerAdapter(); // with MS WIA
+                        // The reason for not using PNG format is that jai-imageio library would throw an "I/O error reading PNG header" error.
+                        tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
+                    } else {
+                        JSane_Base_Frame frame = JSane_Scan_Dialog.getScan("localhost", 6566); // with SANE
+                        ImageIO.write(frame.getImage(false), "bmp", tempImageFile);
+                    }
                     openFile(tempImageFile);
                     tempImageFile.deleteOnExit();
                 } catch (IOException ioe) {
