@@ -44,7 +44,7 @@ public class SpellChecker {
             sb.append(word).append("|");
         }
         sb.setLength(sb.length() - 1); //remove last |
-        
+
         // build regex
         String patternStr = "\\b(" + sb.toString() + ")\\b";
 
@@ -85,11 +85,10 @@ public class SpellChecker {
         boundary.setText(text);
         int start = boundary.first();
         for (int end = boundary.next(); end != BreakIterator.DONE; start = end, end = boundary.next()) {
-            String str = text.substring(start, end);
-            if (!Character.isLetter(str.charAt(0))) {
+            if (!Character.isLetter(text.charAt(start))) {
                 continue;
             }
-            words.add(str);
+            words.add(text.substring(start, end));
         }
 
         return words;
