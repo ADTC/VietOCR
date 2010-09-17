@@ -17,6 +17,9 @@ package net.sourceforge.vietocr;
 
 import java.awt.Color;
 //import java.util.logging.*;
+import java.text.BreakIterator;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.*;
 import javax.swing.JTextArea;
 import javax.swing.text.*;
@@ -30,20 +33,26 @@ public class SpellChecker {
     }
 
     void spellCheck() {
-        Highlighter hi = ta.getHighlighter();
-        hi.removeAllHighlights();
-
-        String[] incorrectWords = {"tunn", "doh", "emm"}; // results of a spellchecker to be implemented
+        List<String> words = parseText(ta.getText());
+        List<String> misspelledWords = spellcheck(words); // results of a spellchecker to be implemented
+        if (misspelledWords.isEmpty()) {
+            return; // perfect world!
+        }
 
         StringBuilder sb = new StringBuilder();
-        for (String word : incorrectWords) {
+        for (String word : misspelledWords) {
             sb.append(word).append("|");
         }
         sb.setLength(sb.length() - 1); //remove last |
+        
+        // build regex
         String patternStr = "\\b(" + sb.toString() + ")\\b";
 
         Pattern pattern = Pattern.compile(patternStr, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(ta.getText());
+
+        Highlighter hi = ta.getHighlighter();
+        hi.removeAllHighlights();
 
         // define the highlighter
         Highlighter.HighlightPainter myPainter = new WavyLineHighlighter(Color.red);
@@ -55,5 +64,34 @@ public class SpellChecker {
 //                Logger.getLogger(Gui.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    List<String> spellcheck(List<String> words) {
+        List<String> misspelled = new ArrayList<String>();
+        // Create an Hunspell instance
+        // to be implemented
+
+        for (String word : words) {
+            if (true) { // hunspell.check(word)
+                misspelled.add(word);
+            }
+        }
+        return misspelled;
+    }
+
+    List<String> parseText(String text) {
+        List<String> words = new ArrayList<String>();
+        BreakIterator boundary = BreakIterator.getWordInstance();
+        boundary.setText(text);
+        int start = boundary.first();
+        for (int end = boundary.next(); end != BreakIterator.DONE; start = end, end = boundary.next()) {
+            String str = text.substring(start, end);
+            if (!Character.isLetter(str.charAt(0))) {
+                continue;
+            }
+            words.add(str);
+        }
+
+        return words;
     }
 }
