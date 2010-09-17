@@ -1879,6 +1879,7 @@ public class Gui extends javax.swing.JFrame {
         } else {
             this.jTextArea1.getHighlighter().removeAllHighlights();
         }
+        this.jTextArea1.repaint();
     }//GEN-LAST:event_jToggleButtonSpellCheckActionPerformed
 
     void readImageMetadata() {

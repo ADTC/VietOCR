@@ -46,7 +46,7 @@ public class SpellChecker {
         Matcher matcher = pattern.matcher(ta.getText());
 
         // define the highlighter
-        Highlighter.HighlightPainter myPainter = new DefaultHighlighter.DefaultHighlightPainter(Color.decode("#f0e0d0"));
+        Highlighter.HighlightPainter myPainter = new WavyLineHighlighter(Color.red);
 
         while (matcher.find()) {
             try {
