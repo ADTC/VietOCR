@@ -22,19 +22,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.*;
 import javax.swing.JTextArea;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.*;
 
 public class SpellChecker {
 
     JTextArea ta;
+    SpellcheckDocumentListener docLisener = new SpellcheckDocumentListener();
+    // define the highlighter
+    Highlighter.HighlightPainter myPainter = new WavyLineHighlighter(Color.red);
 
-    SpellChecker(JTextArea ta) {
+    public SpellChecker(JTextArea ta) {
         this.ta = ta;
+        this.ta.getDocument().addDocumentListener(docLisener);
     }
 
-    void spellCheck() {
+    public void spellCheck() {
         List<String> words = parseText(ta.getText());
-        List<String> misspelledWords = spellcheck(words); // results of a spellchecker to be implemented
+        List<String> misspelledWords = spellCheck(words); // results of a spellchecker to be implemented
         if (misspelledWords.isEmpty()) {
             return; // perfect world!
         }
@@ -54,9 +60,6 @@ public class SpellChecker {
         Highlighter hi = ta.getHighlighter();
         hi.removeAllHighlights();
 
-        // define the highlighter
-        Highlighter.HighlightPainter myPainter = new WavyLineHighlighter(Color.red);
-
         while (matcher.find()) {
             try {
                 hi.addHighlight(matcher.start(), matcher.end(), myPainter);
@@ -66,13 +69,13 @@ public class SpellChecker {
         }
     }
 
-    List<String> spellcheck(List<String> words) {
+    List<String> spellCheck(List<String> words) {
         List<String> misspelled = new ArrayList<String>();
         // Create an Hunspell instance
         // to be implemented
 
         for (String word : words) {
-            if (true) { // hunspell.check(word)
+            if (true) { // hunspell.spell(word)
                 misspelled.add(word);
             }
         }
@@ -92,5 +95,27 @@ public class SpellChecker {
         }
 
         return words;
+    }
+
+    public void disableCheck() {
+         this.ta.getHighlighter().removeAllHighlights();
+         this.ta.getDocument().removeDocumentListener(docLisener);
+    }
+
+    class SpellcheckDocumentListener implements DocumentListener {
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            spellCheck();
+        }
+
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            spellCheck();
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+        }
     }
 }
