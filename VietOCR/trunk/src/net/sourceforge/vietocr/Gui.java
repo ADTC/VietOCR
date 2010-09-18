@@ -1873,11 +1873,11 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemMetadataActionPerformed
 
     private void jToggleButtonSpellCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonSpellCheckActionPerformed
+        SpellChecker sp = new SpellChecker(this.jTextArea1);
         if (this.jToggleButtonSpellCheck.isSelected()) {
-            SpellChecker sp = new SpellChecker(this.jTextArea1);
             sp.spellCheck();
         } else {
-            this.jTextArea1.getHighlighter().removeAllHighlights();
+            sp.disableCheck();
         }
         this.jTextArea1.repaint();
     }//GEN-LAST:event_jToggleButtonSpellCheckActionPerformed
