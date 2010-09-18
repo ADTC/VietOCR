@@ -46,7 +46,7 @@ public class WavyLineHighlighter extends DefaultHighlighter.DefaultHighlightPain
             } else {
                 alloc = bounds.getBounds();
             }
-            drawWaveLine(g, alloc.x, alloc.y + alloc.height - 1, alloc.x + alloc.width - 1, alloc.y + alloc.height - 1);
+            drawWaveLine(g, alloc.x, alloc.y + alloc.height - 2, alloc.x + alloc.width - 1, alloc.y + alloc.height - 2);
             return alloc;
         } else {
             // Should only render part of View.
@@ -54,7 +54,7 @@ public class WavyLineHighlighter extends DefaultHighlighter.DefaultHighlightPain
                 // --- determine locations ---
                 Shape shape = view.modelToView(offs0, Position.Bias.Forward, offs1, Position.Bias.Backward, bounds);
                 Rectangle rect = (shape instanceof Rectangle)? (Rectangle) shape : shape.getBounds();
-                drawWaveLine(g, rect.x, rect.y + rect.height - 1, rect.x + rect.width - 1, rect.y + rect.height - 1);
+                drawWaveLine(g, rect.x, rect.y + rect.height - 2, rect.x + rect.width - 1, rect.y + rect.height - 2);
                 return rect;
             } catch (BadLocationException e) {
                 // can't render
