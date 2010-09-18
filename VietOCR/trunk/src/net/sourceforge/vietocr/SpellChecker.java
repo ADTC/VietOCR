@@ -35,14 +35,18 @@ public class SpellChecker {
 
     public SpellChecker(JTextArea ta) {
         this.ta = ta;
-        this.ta.getDocument().addDocumentListener(docLisener);
     }
 
-    public void spellCheck() {
+    public void enableSpellCheck() {
+        this.ta.getDocument().addDocumentListener(docLisener);
+        spellCheck();
+    }
+
+    void spellCheck() {
         List<String> words = parseText(ta.getText());
         List<String> misspelledWords = spellCheck(words); // results of a spellchecker to be implemented
         if (misspelledWords.isEmpty()) {
-            return; // perfect world!
+            return; // perfect writer!
         }
 
         StringBuilder sb = new StringBuilder();
@@ -97,9 +101,9 @@ public class SpellChecker {
         return words;
     }
 
-    public void disableCheck() {
-         this.ta.getHighlighter().removeAllHighlights();
+    public void disableSpellCheck() {
          this.ta.getDocument().removeDocumentListener(docLisener);
+         this.ta.getHighlighter().removeAllHighlights();
     }
 
     class SpellcheckDocumentListener implements DocumentListener {
@@ -116,6 +120,7 @@ public class SpellChecker {
 
         @Override
         public void changedUpdate(DocumentEvent e) {
+//            spellCheck();
         }
     }
 }
