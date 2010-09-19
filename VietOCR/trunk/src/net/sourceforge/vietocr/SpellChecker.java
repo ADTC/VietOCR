@@ -35,7 +35,7 @@ public class SpellChecker {
     JTextArea ta;
     // define the highlighter
     Highlighter.HighlightPainter myPainter = new WavyLineHighlighter(Color.red);
-    String locale;
+    String localeId;
     File baseDir;
     static Properties prop;
     static List<DocumentListener> lstList = new ArrayList<DocumentListener>();
@@ -51,10 +51,10 @@ public class SpellChecker {
                 prop = new Properties();
                 prop.loadFromXML(new FileInputStream(xmlFile));
             }
-            locale = prop.getProperty(langCode);
-            if (locale == null) {
-                locale = prop.getProperty(langCode.substring(0, 3));
-                if (locale == null) {
+            localeId = prop.getProperty(langCode);
+            if (localeId == null) {
+                localeId = prop.getProperty(langCode.substring(0, 3));
+                if (localeId == null) {
                     JOptionPane.showMessageDialog(null, "Need to add an entry in data/ISO639-1.xml file.", Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -64,7 +64,7 @@ public class SpellChecker {
     }
 
     public void enableSpellCheck() {
-        if (locale == null) {
+        if (localeId == null) {
             return;
         }
         SpellcheckDocumentListener docListener = new SpellcheckDocumentListener();
@@ -107,7 +107,7 @@ public class SpellChecker {
     List<String> spellCheck(List<String> words) {
         List<String> misspelled = new ArrayList<String>();
         try {
-            Hunspell.Dictionary spellDict = Hunspell.getInstance().getDictionary(baseDir.getPath() + "/dict/" + locale);
+            Hunspell.Dictionary spellDict = Hunspell.getInstance().getDictionary(baseDir.getPath() + "/dict/" + localeId);
 
             for (String word : words) {
                 if (spellDict.misspelled(word)) {
@@ -136,7 +136,7 @@ public class SpellChecker {
     }
 
     public void disableSpellCheck() {
-        if (locale == null) {
+        if (localeId == null) {
             return;
         }
         this.ta.getDocument().removeDocumentListener(lstList.remove(0));
