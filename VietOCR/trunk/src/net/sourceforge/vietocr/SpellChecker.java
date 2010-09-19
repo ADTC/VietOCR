@@ -15,12 +15,15 @@
  */
 package net.sourceforge.vietocr;
 
+import com.stibocatalog.hunspell.Hunspell;
 import java.awt.Color;
 //import java.util.logging.*;
+import java.io.File;
 import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.*;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -32,9 +35,11 @@ public class SpellChecker {
     SpellcheckDocumentListener docLisener = new SpellcheckDocumentListener();
     // define the highlighter
     Highlighter.HighlightPainter myPainter = new WavyLineHighlighter(Color.red);
+    String locale;
 
-    public SpellChecker(JTextArea ta) {
+    public SpellChecker(JTextArea ta, String locale) {
         this.ta = ta;
+        this.locale = locale;
     }
 
     public void enableSpellCheck() {
@@ -75,13 +80,18 @@ public class SpellChecker {
 
     List<String> spellCheck(List<String> words) {
         List<String> misspelled = new ArrayList<String>();
-        // Create an Hunspell instance
-        // to be implemented
+        File baseDir = Utilities.getBaseDir(SpellChecker.this);
+        try {
+            Hunspell.Dictionary spellDict = Hunspell.getInstance().getDictionary(baseDir.getPath() + "/dict/" + locale);
 
-        for (String word : words) {
-            if (true) { // hunspell.spell(word)
-                misspelled.add(word);
+            for (String word : words) {
+                if (spellDict.misspelled(word)) {
+                    misspelled.add(word);
+                }
             }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "The appropriate dictionary files were not found in " + new File(baseDir, "dict").getPath() + " directory.", Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
         }
         return misspelled;
     }
@@ -102,8 +112,8 @@ public class SpellChecker {
     }
 
     public void disableSpellCheck() {
-         this.ta.getDocument().removeDocumentListener(docLisener);
-         this.ta.getHighlighter().removeAllHighlights();
+        this.ta.getDocument().removeDocumentListener(docLisener);
+        this.ta.getHighlighter().removeAllHighlights();
     }
 
     class SpellcheckDocumentListener implements DocumentListener {
@@ -120,7 +130,6 @@ public class SpellChecker {
 
         @Override
         public void changedUpdate(DocumentEvent e) {
-//            spellCheck();
         }
     }
 }
