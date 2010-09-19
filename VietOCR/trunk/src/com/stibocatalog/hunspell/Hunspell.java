@@ -154,7 +154,7 @@ public class Hunspell {
 
         if (os.startsWith("windows")) {
             if (x86) {
-                return "hunspell-win-x86-32";
+                return "libhunspell";
             }
             //if (amd64) {
             // Note: No bindings exist for this yet (no JNA support).
@@ -171,10 +171,10 @@ public class Hunspell {
 
         } else if (os.startsWith("linux")) {
             if (x86) {
-                return "hunspell-linux-x86-32";
+                return "hunspell-1.2";
             }
             if (amd64) {
-                return "hunspell-linux-x86-64";
+                return "hunspell-1.2";
             }
 
         } else if (os.startsWith("sunos")) {
