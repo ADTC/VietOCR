@@ -250,7 +250,7 @@ public class Hunspell {
             if (!dic.canRead() || !aff.canRead()) {
                 throw new FileNotFoundException("The dictionary files "
                         + baseFileName
-                        + "(.aff|.dic) could not be read");
+                        + "(.aff|.dic) could not be read.");
             }
 
             hunspellDict = hsl.Hunspell_create(aff.toString(), dic.toString());

@@ -18,10 +18,11 @@ package net.sourceforge.vietocr;
 import com.stibocatalog.hunspell.Hunspell;
 import java.awt.Color;
 //import java.util.logging.*;
-import java.io.File;
+import java.io.*;
 import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.regex.*;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -32,24 +33,49 @@ import javax.swing.text.*;
 public class SpellChecker {
 
     JTextArea ta;
-    SpellcheckDocumentListener docLisener = new SpellcheckDocumentListener();
     // define the highlighter
     Highlighter.HighlightPainter myPainter = new WavyLineHighlighter(Color.red);
     String locale;
+    File baseDir;
+    static Properties prop;
+    static List<DocumentListener> lstList = new ArrayList<DocumentListener>();
 
-    public SpellChecker(JTextArea ta, String locale) {
+    public SpellChecker(JTextArea ta, String langCode) {
         this.ta = ta;
-        this.locale = locale;
+        baseDir = Utilities.getBaseDir(SpellChecker.this);
+
+        File xmlFile = new File(baseDir, "data/ISO639-1.xml");
+
+        try {
+            if (prop == null) {
+                prop = new Properties();
+                prop.loadFromXML(new FileInputStream(xmlFile));
+            }
+            locale = prop.getProperty(langCode);
+            if (locale == null) {
+                locale = prop.getProperty(langCode.substring(0, 3));
+                if (locale == null) {
+                    JOptionPane.showMessageDialog(null, "Need to add an entry in data/ISO639-1.xml file.", Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (IOException ioe) {
+            JOptionPane.showMessageDialog(null, "Missing ISO639-1.xml file. Cannot find it in " + new File(baseDir, "data").getPath() + " directory.", Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void enableSpellCheck() {
-        this.ta.getDocument().addDocumentListener(docLisener);
+        if (locale == null) {
+            return;
+        }
+        SpellcheckDocumentListener docListener = new SpellcheckDocumentListener();
+        lstList.add(docListener);
+        this.ta.getDocument().addDocumentListener(docListener);
         spellCheck();
     }
 
     void spellCheck() {
         List<String> words = parseText(ta.getText());
-        List<String> misspelledWords = spellCheck(words); // results of a spellchecker to be implemented
+        List<String> misspelledWords = spellCheck(words);
         if (misspelledWords.isEmpty()) {
             return; // perfect writer!
         }
@@ -80,7 +106,6 @@ public class SpellChecker {
 
     List<String> spellCheck(List<String> words) {
         List<String> misspelled = new ArrayList<String>();
-        File baseDir = Utilities.getBaseDir(SpellChecker.this);
         try {
             Hunspell.Dictionary spellDict = Hunspell.getInstance().getDictionary(baseDir.getPath() + "/dict/" + locale);
 
@@ -90,8 +115,7 @@ public class SpellChecker {
                 }
             }
         } catch (Exception e) {
-            System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(null, "The appropriate dictionary files were not found in " + new File(baseDir, "dict").getPath() + " directory.", Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
         }
         return misspelled;
     }
@@ -112,7 +136,10 @@ public class SpellChecker {
     }
 
     public void disableSpellCheck() {
-        this.ta.getDocument().removeDocumentListener(docLisener);
+        if (locale == null) {
+            return;
+        }
+        this.ta.getDocument().removeDocumentListener(lstList.remove(0));
         this.ta.getHighlighter().removeAllHighlights();
     }
 

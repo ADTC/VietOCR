@@ -1873,8 +1873,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemMetadataActionPerformed
 
     private void jToggleButtonSpellCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonSpellCheckActionPerformed
-        String locale = "vi_VN"; // getLocale(lang)
-        SpellChecker sp = new SpellChecker(this.jTextArea1, locale);
+        SpellChecker sp = new SpellChecker(this.jTextArea1, curLangCode);
         if (this.jToggleButtonSpellCheck.isSelected()) {
             sp.enableSpellCheck();
         } else {
