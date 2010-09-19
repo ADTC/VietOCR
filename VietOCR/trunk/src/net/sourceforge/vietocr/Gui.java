@@ -1145,6 +1145,10 @@ public class Gui extends javax.swing.JFrame {
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             curLangCode = langCodes[jComboBoxLang.getSelectedIndex()];
             VietKeyListener.setVietModeEnabled(curLangCode.contains("vie"));
+            if (this.jToggleButtonSpellCheck.isSelected()) {
+                this.jToggleButtonSpellCheck.doClick();
+                this.jToggleButtonSpellCheck.doClick();
+            }
         }
     }//GEN-LAST:event_jComboBoxLangItemStateChanged
 
