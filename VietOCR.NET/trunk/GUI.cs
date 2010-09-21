@@ -1144,5 +1144,36 @@ namespace VietOCR.NET
         {
             MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
+
+        protected virtual void toolStripButtonSpellCheck_Click(object sender, EventArgs e)
+        {
+            SpellChecker sp = new SpellChecker(this.textBox1, curLangCode);
+            if (this.toolStripButtonSpellCheck.Selected)
+            {
+                sp.enableSpellCheck();
+            }
+            else
+            {
+                sp.disableSpellCheck();
+            }
+            this.textBox1.Refresh();
+
+            
+            //NHunspellExtender.NHunspellTextBoxExtender myNhunspellExtender = new NHunspellExtender.NHunspellTextBoxExtender();
+            ////myNhunspellExtender.AddNewLanguage();
+            //myNhunspellExtender.SetLanguage("vi_VN");
+
+            //if (this.toolStripButtonSpellCheck.Checked)
+            //{
+            //    myNhunspellExtender.EnableTextBoxBase(this.textBox1);
+            //}
+            //else
+            //{
+            //    //myNhunspellExtender.DisableTextBoxBase(this.textBox1);
+            //    myNhunspellExtender.Dispose();
+            //    myNhunspellExtender = null;
+            //    this.textBox1.Refresh();
+            //}
+        }
     }
 }
