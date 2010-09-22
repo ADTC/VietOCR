@@ -38,6 +38,7 @@ public class SpellChecker {
     File baseDir;
     static Properties prop;
     static List<DocumentListener> lstList = new ArrayList<DocumentListener>();
+    Hunspell.Dictionary spellDict;
 
     public SpellChecker(JTextComponent textComp, String langCode) {
         this.textComp = textComp;
@@ -66,10 +67,16 @@ public class SpellChecker {
         if (localeId == null) {
             return;
         }
-        SpellcheckDocumentListener docListener = new SpellcheckDocumentListener();
-        lstList.add(docListener);
-        this.textComp.getDocument().addDocumentListener(docListener);
-        spellCheck();
+        try {
+            spellDict = Hunspell.getInstance().getDictionary(baseDir.getPath() + "/dict/" + localeId);
+
+            SpellcheckDocumentListener docListener = new SpellcheckDocumentListener();
+            lstList.add(docListener);
+            this.textComp.getDocument().addDocumentListener(docListener);
+            spellCheck();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     void spellCheck() {
@@ -105,17 +112,12 @@ public class SpellChecker {
 
     List<String> spellCheck(List<String> words) {
         List<String> misspelled = new ArrayList<String>();
-        try {
-            Hunspell.Dictionary spellDict = Hunspell.getInstance().getDictionary(baseDir.getPath() + "/dict/" + localeId);
-
-            for (String word : words) {
-                if (spellDict.misspelled(word)) {
-                    misspelled.add(word);
-                }
+        for (String word : words) {
+            if (spellDict.misspelled(word)) {
+                misspelled.add(word);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
         }
+
         return misspelled;
     }
 
