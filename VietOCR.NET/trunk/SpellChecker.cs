@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using NHunspell;
 using System.Text.RegularExpressions;
+using System.Collections;
 
 namespace VietOCR.NET
 {
@@ -15,6 +16,15 @@ namespace VietOCR.NET
         TextBoxBase textbox;
         string localeId;
         String workingDir;
+        ArrayList listeners = new ArrayList();
+        List<CharacterRange> spellingErrorRanges = new List<CharacterRange>();
+        Hunspell spellDict;
+
+        public CharacterRange[] GetSpellingErrorRanges()
+        {
+            return spellingErrorRanges.ToArray();
+        }
+
 
         public SpellChecker(TextBoxBase textbox, string langCode)
         {
@@ -35,7 +45,6 @@ namespace VietOCR.NET
             }
 
             localeId = ht[langCode];
-
         }
 
         public void enableSpellCheck()
@@ -44,7 +53,20 @@ namespace VietOCR.NET
             {
                 return;
             }
-            spellCheck();
+            try
+            {
+                string dictPath = workingDir + "/dict/" + localeId;
+                spellDict = new Hunspell(dictPath + ".aff", dictPath + ".dic");
+
+                listeners.Add(new System.EventHandler(this.textbox_TextChanged));
+
+                this.textbox.TextChanged += (System.EventHandler)listeners[0];
+                spellCheck();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         void spellCheck()
@@ -63,42 +85,32 @@ namespace VietOCR.NET
             }
             sb.Length -= 1; //remove last |
 
-            List<CharacterRange> spellingErrorRanges = new List<CharacterRange>(); 
-
             // build regex
-            String patternStr = "\\b(" + sb.ToString() + ")\\b";       
+            String patternStr = "\\b(" + sb.ToString() + ")\\b";
             Regex regex = new Regex(patternStr, RegexOptions.IgnoreCase);
             MatchCollection mc = regex.Matches(textbox.Text);
-            
+
             // Loop through  the match collection to retrieve all 
             // matches and positions.
             for (int i = 0; i < mc.Count; i++)
             {
                 spellingErrorRanges.Add(new CharacterRange(mc[i].Index, mc[i].Length));
             }
-            new CustomPaintTextBox(textbox, spellingErrorRanges.ToArray());
+            new CustomPaintTextBox(textbox, this);
         }
 
         List<String> spellCheck(List<String> words)
         {
             List<String> misspelled = new List<String>();
-            try
+            
+            foreach (String word in words)
             {
-                string dictPath = workingDir + "/dict/" + localeId;
-                Hunspell spellDict = new Hunspell(dictPath + ".aff", dictPath + ".dic");
-
-                foreach (String word in words)
+                if (!spellDict.Spell(word))
                 {
-                    if (!spellDict.Spell(word))
-                    {
-                        misspelled.Add(word);
-                    }
+                    misspelled.Add(word);
                 }
             }
-            catch (Exception e)
-            {
-                 MessageBox.Show(e.Message);
-            }
+
             return misspelled;
         }
 
@@ -126,8 +138,14 @@ namespace VietOCR.NET
             {
                 return;
             }
-            //this.textComp.getDocument().removeDocumentListener(lstList.remove(0));
+            this.textbox.TextChanged -= (System.EventHandler)listeners[0];
+            listeners.RemoveAt(0);
             //this.textComp.getHighlighter().removeAllHighlights();
+        }
+        
+        private void textbox_TextChanged(object sender, EventArgs e)
+        {
+            spellCheck();
         }
     }
 }
