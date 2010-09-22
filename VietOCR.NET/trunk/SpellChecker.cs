@@ -1,10 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.IO;
 using System.Windows.Forms;
+using System.Drawing;
 using NHunspell;
+using System.Text.RegularExpressions;
 
 namespace VietOCR.NET
 {
@@ -61,22 +63,20 @@ namespace VietOCR.NET
             }
             sb.Length -= 1; //remove last |
 
+            List<CharacterRange> spellingErrorRanges = new List<CharacterRange>(); 
+
             // build regex
-            String patternStr = "\\b(" + sb.ToString() + ")\\b";
-
-            //        Pattern pattern = Pattern.compile(patternStr, Pattern.CASE_INSENSITIVE);
-            //        Matcher matcher = pattern.matcher(textComp.getText());
-
-            //        Highlighter hi = textComp.getHighlighter();
-            //        hi.removeAllHighlights();
-
-            //        while (matcher.find()) {
-            //            try {
-            //                hi.addHighlight(matcher.start(), matcher.end(), myPainter);
-            //            } catch (BadLocationException ex) {
-            ////                Logger.getLogger(Gui.class.getName()).log(Level.SEVERE, null, ex);
-            //            }
-            //        }
+            String patternStr = "\\b(" + sb.ToString() + ")\\b";       
+            Regex regex = new Regex(patternStr, RegexOptions.IgnoreCase);
+            MatchCollection mc = regex.Matches(textbox.Text);
+            
+            // Loop through  the match collection to retrieve all 
+            // matches and positions.
+            for (int i = 0; i < mc.Count; i++)
+            {
+                spellingErrorRanges.Add(new CharacterRange(mc[i].Index, mc[i].Length));
+            }
+            new CustomPaintTextBox(textbox, spellingErrorRanges.ToArray());
         }
 
         List<String> spellCheck(List<String> words)

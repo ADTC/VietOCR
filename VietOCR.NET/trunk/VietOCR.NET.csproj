@@ -124,6 +124,7 @@
     <Compile Include="Controls\ToolStripRadioButtonMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomPaintTextBox.cs" />
     <Compile Include="FormLocalizer.cs" />
     <Compile Include="GUIWithCommand.cs">
       <SubType>Form</SubType>

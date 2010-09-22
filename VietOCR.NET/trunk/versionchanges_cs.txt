@@ -103,3 +103,6 @@ Version 1.7 (14 April 2010)
 Version 1.8 (6 September 2010)
 - Display image information
 - Add Screenshot Mode, which rescales low-resolution images to 300 DPI to be more suitable for OCR operations
+
+Version 1.9 Beta (21 September 2010)
+- Integrate Hunspell library to provide spellchecking and spellcheck-as-you-type functionality
