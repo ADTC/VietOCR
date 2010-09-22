@@ -1148,7 +1148,7 @@ namespace VietOCR.NET
         protected virtual void toolStripButtonSpellCheck_Click(object sender, EventArgs e)
         {
             SpellChecker sp = new SpellChecker(this.textBox1, curLangCode);
-            if (this.toolStripButtonSpellCheck.Selected)
+            if (this.toolStripButtonSpellCheck.Checked)
             {
                 sp.enableSpellCheck();
             }

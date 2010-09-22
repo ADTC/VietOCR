@@ -16,7 +16,7 @@ namespace VietOCR.NET
         TextBoxBase textbox;
         string localeId;
         String workingDir;
-        ArrayList listeners = new ArrayList();
+        static ArrayList listeners = new ArrayList();
         List<CharacterRange> spellingErrorRanges = new List<CharacterRange>();
         Hunspell spellDict;
 
@@ -95,8 +95,9 @@ namespace VietOCR.NET
             for (int i = 0; i < mc.Count; i++)
             {
                 spellingErrorRanges.Add(new CharacterRange(mc[i].Index, mc[i].Length));
+                //textbox.Select(mc[i].Index, mc[i].Length);
             }
-            new CustomPaintTextBox(textbox, this);
+            //new CustomPaintTextBox(textbox, this);
         }
 
         List<String> spellCheck(List<String> words)
