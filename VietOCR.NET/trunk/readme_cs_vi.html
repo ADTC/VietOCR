@@ -61,13 +61,17 @@
             Hỗ trợ cho PDF được khả thi qua <a href="http://sourceforge.net/projects/ghostscript/">
                 GPL Ghostscript</a>. Sau khi cài đặt thư viện, hãy bảo đảm dynamic load library
             <tt>gsdll32.dll</tt> nằm trong search path bằng cách chỉnh biến môi trường <tt>Path</tt>,
-            có thể truy cập được qua Windows&#39; Control
-            Panel &gt; System &gt; Advanced tab &gt; Environment Variables. Ví dụ, tiếp
-            đuôi (append) đoạn sau đây vào giá trị hiện tại của biến <tt>Path</tt> cho GS version 8.71:</p>
+            có thể truy cập được qua Windows&#39; Control Panel &gt; System &gt; Advanced tab
+            &gt; Environment Variables. Ví dụ, tiếp đuôi (append) đoạn sau đây vào giá trị hiện
+            tại của biến <tt>Path</tt> cho GS version 8.71:</p>
         <blockquote>
             <p>
                 <tt>;C:\Program Files\gs\gs8.71\bin</tt></p>
         </blockquote>
+        <p>
+            Tính năng Duyệt chính tả (spellcheck) có được qua Hunspell, mà các <a href="http://wiki.services.openoffice.org/wiki/Dictionaries">
+                dictionary</a> files trực thuộc (<tt>.aff</tt>, <tt>.dic</tt>) nên được đặt trong
+            <tt>dict</tt> folder của VietOCR.</p>
         <h3>
             HƯỚNG DẪN</h3>
         <p>
@@ -93,9 +97,9 @@
             chất của ảnh quét. Thông số tiêu biểu cho quét ảnh là 300 DPI và 1 bpp (bit per
             pixel) trắng đen hoặc 8 bpp grayscale dạng uncompressed TIFF hay PNG.</p>
         <p>
-            Chế độ mới <em>Screenshot Mode</em> cung cấp độ nhận dạng tốt hơn cho những hình ảnh có 
-            độ phân giải thấp, chẳng hạn như ảnh in màn hình, bằng cách rescaling chúng tới 
-            300 DPI.</p>
+            Chế độ mới <em>Screenshot Mode</em> cung cấp độ nhận dạng tốt hơn cho những hình
+            ảnh có độ phân giải thấp, chẳng hạn như ảnh in màn hình, bằng cách rescaling chúng
+            tới 300 DPI.</p>
         <p>
             Ngoài thuật toán hậu xử lý xây trong chương trình, bạn có thể thêm cách thức thay
             thế từ ngữ đặc riêng của bạn qua một tập tin text có tên <tt>x.DangAmbigs.txt</tt>,

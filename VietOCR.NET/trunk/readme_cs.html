@@ -62,13 +62,17 @@
             PDF support is possible via <a href="http://sourceforge.net/projects/ghostscript/">GPL
                 Ghostscript</a>. After installation of the library, please ensure the dynamic
             load library <tt>gsdll32.dll</tt> is in the search path by setting the <tt>Path</tt>
-            environment variable, which is accessible through Windows&#39; Control Panel &gt; 
-            System &gt; Advanced tab &gt; Environment Variables. For instance, append the 
-            following to <tt>Path</tt> variable value for GS version 8.71:</p>
+            environment variable, which is accessible through Windows&#39; Control Panel &gt;
+            System &gt; Advanced tab &gt; Environment Variables. For instance, append the following
+            to <tt>Path</tt> variable value for GS version 8.71:</p>
         <blockquote>
             <p>
                 <tt>;C:\Program Files\gs\gs8.71\bin</tt></p>
         </blockquote>
+        <p>
+            Spellcheck functionality is available through Hunspell, whose <a href="http://wiki.services.openoffice.org/wiki/Dictionaries">
+                dictionary</a> files (<tt>.aff</tt>, <tt>.dic</tt>) should be placed in
+            <tt>dict</tt> folder of VietOCR.</p>
         <h3>
             INSTRUCTIONS</h3>
         <p>
@@ -94,7 +98,7 @@
             the scanned image. The typical settings for scanning are 300 DPI and 1 bpp (bit
             per pixel) black&amp;white or 8 bpp grayscale uncompressed TIFF or PNG format.</p>
         <p>
-            The new <em>Screenshot Mode</em> offers better recognition rates for low-resolution 
+            The new <em>Screenshot Mode</em> offers better recognition rates for low-resolution
             images, such as screen prints, by rescaling them to 300 DPI.</p>
         <p>
             In addition to the built-in text postprocessing algorithm, you can add your own
