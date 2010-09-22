@@ -25,14 +25,13 @@ import java.util.List;
 import java.util.Properties;
 import java.util.regex.*;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.*;
 
 public class SpellChecker {
 
-    JTextArea ta;
+    JTextComponent textComp;
     // define the highlighter
     Highlighter.HighlightPainter myPainter = new WavyLineHighlighter(Color.red);
     String localeId;
@@ -40,8 +39,8 @@ public class SpellChecker {
     static Properties prop;
     static List<DocumentListener> lstList = new ArrayList<DocumentListener>();
 
-    public SpellChecker(JTextArea ta, String langCode) {
-        this.ta = ta;
+    public SpellChecker(JTextComponent textComp, String langCode) {
+        this.textComp = textComp;
         baseDir = Utilities.getBaseDir(SpellChecker.this);
 
         File xmlFile = new File(baseDir, "data/ISO639-1.xml");
@@ -69,12 +68,12 @@ public class SpellChecker {
         }
         SpellcheckDocumentListener docListener = new SpellcheckDocumentListener();
         lstList.add(docListener);
-        this.ta.getDocument().addDocumentListener(docListener);
+        this.textComp.getDocument().addDocumentListener(docListener);
         spellCheck();
     }
 
     void spellCheck() {
-        List<String> words = parseText(ta.getText());
+        List<String> words = parseText(textComp.getText());
         List<String> misspelledWords = spellCheck(words);
         if (misspelledWords.isEmpty()) {
             return; // perfect writer!
@@ -90,9 +89,9 @@ public class SpellChecker {
         String patternStr = "\\b(" + sb.toString() + ")\\b";
 
         Pattern pattern = Pattern.compile(patternStr, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(ta.getText());
+        Matcher matcher = pattern.matcher(textComp.getText());
 
-        Highlighter hi = ta.getHighlighter();
+        Highlighter hi = textComp.getHighlighter();
         hi.removeAllHighlights();
 
         while (matcher.find()) {
@@ -139,8 +138,8 @@ public class SpellChecker {
         if (localeId == null) {
             return;
         }
-        this.ta.getDocument().removeDocumentListener(lstList.remove(0));
-        this.ta.getHighlighter().removeAllHighlights();
+        this.textComp.getDocument().removeDocumentListener(lstList.remove(0));
+        this.textComp.getHighlighter().removeAllHighlights();
     }
 
     class SpellcheckDocumentListener implements DocumentListener {
