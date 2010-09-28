@@ -67,6 +67,7 @@ namespace VietOCR.NET
             {
                 // find working files
                 string[] workingFiles = Directory.GetFiles(Path.GetDirectoryName(inputPdfFile), "workingimage???.png");
+                Array.Sort(workingFiles);
                 return workingFiles;
             }
             else
