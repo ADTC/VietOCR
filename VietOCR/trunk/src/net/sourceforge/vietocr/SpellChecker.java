@@ -68,7 +68,7 @@ public class SpellChecker {
             return;
         }
         try {
-            spellDict = Hunspell.getInstance().getDictionary(baseDir.getPath() + "/dict/" + localeId);
+            spellDict = Hunspell.getInstance().getDictionary(new File(baseDir, "dict/" + localeId).getPath());
 
             SpellcheckDocumentListener docListener = new SpellcheckDocumentListener();
             lstList.add(docListener);
