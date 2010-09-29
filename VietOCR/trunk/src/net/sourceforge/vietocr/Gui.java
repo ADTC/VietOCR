@@ -88,9 +88,8 @@ public class Gui extends javax.swing.JFrame {
         if (WINDOWS) {
             tessPath = new File(baseDir, "tesseract").getPath();
         } else {
-            tessPath = prefs.get("TesseractDirectory", new File(baseDir, "tesseract").getPath());
+            tessPath = prefs.get("TesseractDirectory", "/usr/bin");
         }
-
 
         prop = new Properties();
 
@@ -99,10 +98,10 @@ public class Gui extends javax.swing.JFrame {
             if (!tessdataDir.exists()) {
                 String TESSDATA_PREFIX = System.getenv("TESSDATA_PREFIX");
                 if (TESSDATA_PREFIX == null && !WINDOWS) { // if TESSDATA_PREFIX env var not set
-                    TESSDATA_PREFIX = "/usr/local/share/"; // default path of tessdata on Linux after make install
+                    TESSDATA_PREFIX = "/usr/share/tesseract-ocr/"; // default install path of tessdata on Linux
                     tessdataDir = new File(TESSDATA_PREFIX, "tessdata");
                     if (!tessdataDir.exists()) {
-                        TESSDATA_PREFIX = "/usr/share/tesseract-ocr/"; // other possible path of tessdata
+                        TESSDATA_PREFIX = "/usr/local/share/"; // default make install path of tessdata on Linux
                         tessdataDir = new File(TESSDATA_PREFIX, "tessdata");
                     }
                 } else {
@@ -1766,7 +1765,7 @@ public class Gui extends javax.swing.JFrame {
                         tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
 //                    } else {
 //                        JSane_Base_Frame frame = JSane_Scan_Dialog.getScan("localhost", 6566); // with SANE
-//                        ImageIO.write(frame.getImage(false), "bmp", tempImageFile);
+//                        ImageIO.write(frame.getImage(false), "png", tempImageFile);
                     }
                     openFile(tempImageFile);
                     tempImageFile.deleteOnExit();
