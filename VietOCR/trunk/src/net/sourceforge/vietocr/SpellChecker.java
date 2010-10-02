@@ -118,7 +118,7 @@ public class SpellChecker {
         for (String word : words) {
             if (spellDict.misspelled(word)) {
                 // is mispelled word in user.dic?
-                if (!userWordList.contains(word)) {
+                if (!userWordList.contains(word.toLowerCase())) {
                     misspelled.add(word);
                 }
             }
@@ -166,7 +166,7 @@ public class SpellChecker {
             BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(userDict), "UTF8"));
             String str;
             while ((str = in.readLine()) != null) {
-                userWordList.add(str);
+                userWordList.add(str.toLowerCase());
             }
             in.close();
         } catch (IOException e) {
