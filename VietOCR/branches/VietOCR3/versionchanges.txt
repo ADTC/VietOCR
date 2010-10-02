@@ -159,3 +159,8 @@ Version 1.8 (6 September 2010)
 Version 1.9 Beta (28 September 2010)
 - Integrate Hunspell library to provide spellchecking and spellcheck-as-you-type functionality
 - List in correct order files generated from PDF conversion
+
+Version 3.0 (2 October 2010)
+- Upgrade Tesseract OCR engine to 3.0
+- Replace old format (2.0x) language data with new format (3.0) language data
+- Change datafile suffix from .inttemp to .traineddata
