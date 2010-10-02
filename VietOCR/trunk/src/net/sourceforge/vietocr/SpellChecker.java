@@ -39,7 +39,8 @@ public class SpellChecker {
     static Properties prop;
     static List<DocumentListener> lstList = new ArrayList<DocumentListener>();
     Hunspell.Dictionary spellDict;
-    static List<String> userWordList;
+    static List<String> userWordList = new ArrayList<String>();
+    static long mapLastModified = Long.MIN_VALUE;
 
     public SpellChecker(JTextComponent textComp, String langCode) {
         this.textComp = textComp;
@@ -153,22 +154,23 @@ public class SpellChecker {
      * Loads user dictionary only once.
      */
     void loadUserDictionary() {
-        if (userWordList == null) {
-            userWordList = new ArrayList<String>();
+        try {
+            File userDict = new File(baseDir, "dict/user.dic");
+            long fileLastModified = userDict.lastModified();
 
-            try {
-                File userDict = new File(baseDir, "dict/user.dic");
-                if (!userDict.exists()) {
-                    return;
-                }
-                BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(userDict), "UTF8"));
-                String str;
-                while ((str = in.readLine()) != null) {
-                    userWordList.add(str);
-                }
-                in.close();
-            } catch (IOException e) {
+            if (fileLastModified <= mapLastModified) {
+                return;// no need to reload dictionary
             }
+
+            mapLastModified = fileLastModified;
+            BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(userDict), "UTF8"));
+            String str;
+            while ((str = in.readLine()) != null) {
+                userWordList.add(str);
+            }
+            in.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Cannot find \"user.dic\" in " + new File(baseDir, "dict").getPath() + " directory.", Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
         }
     }
 
