@@ -78,7 +78,7 @@ public class Gui extends javax.swing.JFrame {
     private String strClearRecentFiles;
     private boolean textChanged = true;
     private RawListener rawListener;
-    private final String DATAFILE_SUFFIX = ".inttemp";
+    private final String DATAFILE_SUFFIX = ".traineddata";
 
     /**
      * Creates new form Gui
@@ -1315,7 +1315,7 @@ public class Gui extends javax.swing.JFrame {
             Date releaseDate = sdf.parse(config.getProperty("ReleaseDate"));
 
             JOptionPane.showMessageDialog(this, APP_NAME + ", " + version + " \u00a9 2007\n"
-                    + "Java GUI Frontend for Tesseract OCR Engine\n"
+                    + "Java GUI Frontend for Tesseract 3.0 OCR Engine\n"
                     + DateFormat.getDateInstance(DateFormat.LONG).format(releaseDate)
                     + "\nhttp://vietocr.sourceforge.net", APP_NAME, JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
