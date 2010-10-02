@@ -47,17 +47,15 @@
                 href="http://code.google.com/p/tesseract-ocr/wiki/TesseractSvnInstallation">source</a>,
             they will be placed in <tt>/usr/local/bin</tt> and <tt>/usr/local/share/tessdata</tt>.
             You may need to specify the directory of Tesseract executable from VietOCR&#39;s
-            <tt>Settings</tt> menu. If the data is in a non-standard location, you may also
-            need to make a soft link to <tt>tessdata</tt>.</p>
-        <p>
-            In addition, you can also let VietOCR know the location of <tt>tessdata</tt> via
+            <tt>Settings</tt> menu. If the data is in a non-standard location, a soft link to <tt>tessdata</tt> 
+            may be required. You can also let VietOCR know the location of <tt>tessdata</tt> via
             the environment variable <tt>TESSDATA_PREFIX</tt>:</p>
         <blockquote>
             <p>
                 <tt>export TESSDATA_PREFIX=/usr/local/share/</tt></p>
         </blockquote>
         <p>
-            &nbsp;For other platforms, please consult <a href="http://code.google.com/p/tesseract-ocr/wiki/ReadMe">
+            For other platforms, please consult <a href="http://code.google.com/p/tesseract-ocr/wiki/ReadMe">
                 Tesseract Wiki</a> page.</p>
         <p>
             Scanning support is provided via the Windows Image Acquisition Library v2.0, which
