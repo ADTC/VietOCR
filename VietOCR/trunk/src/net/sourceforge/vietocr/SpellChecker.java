@@ -39,6 +39,7 @@ public class SpellChecker {
     static Properties prop;
     static List<DocumentListener> lstList = new ArrayList<DocumentListener>();
     Hunspell.Dictionary spellDict;
+    static List<String> userWordList;
 
     public SpellChecker(JTextComponent textComp, String langCode) {
         this.textComp = textComp;
@@ -69,6 +70,7 @@ public class SpellChecker {
         }
         try {
             spellDict = Hunspell.getInstance().getDictionary(new File(baseDir, "dict/" + localeId).getPath());
+            loadUserDictionary();
 
             SpellcheckDocumentListener docListener = new SpellcheckDocumentListener();
             lstList.add(docListener);
@@ -114,7 +116,10 @@ public class SpellChecker {
         List<String> misspelled = new ArrayList<String>();
         for (String word : words) {
             if (spellDict.misspelled(word)) {
-                misspelled.add(word);
+                // is mispelled word in user.dic?
+                if (!userWordList.contains(word)) {
+                    misspelled.add(word);
+                }
             }
         }
 
@@ -142,6 +147,29 @@ public class SpellChecker {
         }
         this.textComp.getDocument().removeDocumentListener(lstList.remove(0));
         this.textComp.getHighlighter().removeAllHighlights();
+    }
+
+    /**
+     * Loads user dictionary only once.
+     */
+    void loadUserDictionary() {
+        if (userWordList == null) {
+            userWordList = new ArrayList<String>();
+
+            try {
+                File userDict = new File(baseDir, "dict/user.dic");
+                if (!userDict.exists()) {
+                    return;
+                }
+                BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(userDict), "UTF8"));
+                String str;
+                while ((str = in.readLine()) != null) {
+                    userWordList.add(str);
+                }
+                in.close();
+            } catch (IOException e) {
+            }
+        }
     }
 
     class SpellcheckDocumentListener implements DocumentListener {
