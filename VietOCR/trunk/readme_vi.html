@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>VietOCR - Java GUI Frontend cho Tesseract OCR</title>
@@ -30,23 +30,24 @@
         <h3>
             CÀI ĐẶT</h3>
         <p>
-            Tesseract&#39;s Windows executable đã được gói sẵn với chương trình. Cho nền tảng
-            khác, xin tham khảo trang <a href="http://code.google.com/p/tesseract-ocr/wiki/ReadMe">
-                Tesseract Wiki</a>.</p>
+            Tesseract 2.04 Windows executable đã được gói sẵn với chương trình. Các gói data
+            ngôn ngữ (<a href="http://code.google.com/p/tesseract-ocr/downloads/list">language data
+                packs</a>) cho Tesseract, có tên bắt đầu với mã ISO639-3, nên được đặt vào <tt>tessdata</tt>
+            subdirectory.</p>
         <p>
-            Các gói data ngôn ngữ (<a href="http://code.google.com/p/tesseract-ocr/downloads/list">language
-                data packs</a>) cho Tesseract nên được giải nén vào <tt>tesseract</tt> installation
-            folder; các data files, có tên bắt đầu với mã ISO639-3, sẽ được đặt vào <tt>tessdata</tt>
-            subdirectory. Trên Linux, điều này có khác biệt vì make install Tesseract sẽ đặt
-            executable binary được tạo và language data trong các directory khác nhau, <tt>/usr/local/bin</tt>
-            và <tt>/usr/local/share/tessdata</tt>, trong tuần tự đó. VietOCR giả định rằng chúng
-            trong cùng directory; do đó, để cho chương trình hoạt động đúng, bạn có thể cần
-            tạo một soft link tới <tt>tessdata</tt> trong cùng directory mà tesseract executable
-            nằm trong, như sau:</p>
+            Cho Linux, Tesseract và language data packages nằm trong Graphics (universe) repository.
+            Chúng có thể được cài qua Synaptic hoặc từ lệnh sau:</p>
         <blockquote>
             <p>
-                <tt>ln -s /usr/local/share/tessdata /usr/local/bin/tessdata</tt></p>
+                <tt>sudo apt-get install tesseract-ocr tesseract-ocr-vie</tt></p>
         </blockquote>
+        <p>
+            Files sẽ được đặt trong <tt>/usr/bin</tt> và <tt>/usr/share/tesseract-ocr/tessdata</tt>,
+            trong thứ tự đó. Mặt khác, nếu Tesseract được xây dựng và cài từ <a href="http://code.google.com/p/tesseract-ocr/wiki/TesseractSvnInstallation">
+                mã nguồn</a>, chúng sẽ được đặt trong <tt>/usr/local/bin</tt> và <tt>/usr/local/share/tessdata</tt>.
+            Bạn có thể cần chỉ định directory của Tesseract executable từ <tt>Settings</tt>
+            menu của VietOCR. Nếu data nằm trong directory khác tiêu chuẩn, bạn có thể cũng
+            cần tạo một soft link tới <tt>tessdata</tt>.</p>
         <p>
             Ngoài ra, bạn cũng có thể cho VietOCR biết địa điểm của <tt>tessdata</tt> qua environment
             variable <tt>TESSDATA_PREFIX</tt>:</p>
@@ -55,10 +56,14 @@
                 <tt>export TESSDATA_PREFIX=/usr/local/share/</tt></p>
         </blockquote>
         <p>
+            Cho nền tảng khác, xin tham khảo trang <a href="http://code.google.com/p/tesseract-ocr/wiki/ReadMe">
+                Tesseract Wiki</a>.</p>
+        <p>
             Hỗ trợ quét văn bản được cung cấp qua Windows Image Acquisition Library v2.0, thư
-            viện này đòi hỏi Windows XP Service Pack 1 (SP1) hoặc mới hơn. Để cài đặt WIA Library,
-            copy file <tt>wiaaut.dll</tt> vào <tt>System32</tt> directory (thường đặt ở <tt>C:\Windows\System32</tt>)
-            và chạy lệnh từ command line:</p>
+            viện này đòi hỏi Windows XP Service Pack 1 (SP1) hoặc mới hơn. Thư viện này đến
+            tiêu chuẩn với Windows 7. Để cài đặt WIA Library trên Windows XP, copy file <tt>wiaaut.dll</tt>
+            vào <tt>System32</tt> directory (thường đặt ở <tt>C:\Windows\System32</tt>) và chạy
+            lệnh từ command line:</p>
         <blockquote>
             <p>
                 <tt>regsvr32 C:\Windows\System32\wiaaut.dll</tt></p>
@@ -83,10 +88,9 @@
             được đặt.</p>
         <p>
             Tính năng Duyệt chính tả (spellcheck) có được qua Hunspell, mà các <a href="http://wiki.services.openoffice.org/wiki/Dictionaries">
-                dictionary</a> files trực thuộc (<tt>.aff</tt>, <tt>.dic</tt>) nên được đặt trong
-            <tt>dict</tt> folder của VietOCR. Trên Linux, Hunspell và tự điển của nó có thể 
-            được cài đặt bởi
-            Synaptic hoặc <tt>apt</tt>, như sau:</p>
+                dictionary</a> files trực thuộc (<tt>.aff</tt>, <tt>.dic</tt>) nên được đặt
+            trong <tt>dict</tt> folder của VietOCR. Trên Linux, Hunspell và tự điển của nó có
+            thể được cài đặt bởi Synaptic hoặc <tt>apt</tt>, như sau:</p>
         <blockquote>
             <tt>sudo apt-get install hunspell hunspell-en-us</tt>
         </blockquote>
