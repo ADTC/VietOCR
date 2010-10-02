@@ -1754,7 +1754,7 @@ public class Gui extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    File tempImageFile = File.createTempFile("tmp", ".bmp");
+                    File tempImageFile = File.createTempFile("tmp", WINDOWS ? ".bmp" : ".png");
 
                     if (tempImageFile.exists()) {
                         tempImageFile.delete();
@@ -1763,7 +1763,7 @@ public class Gui extends javax.swing.JFrame {
                         WiaScannerAdapter adapter = new WiaScannerAdapter(); // with MS WIA
                         // The reason for not using PNG format is that jai-imageio library would throw an "I/O error reading PNG header" error.
                         tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
-//                    } else {
+                    } else {
 //                        JSane_Base_Frame frame = JSane_Scan_Dialog.getScan("localhost", 6566); // with SANE
 //                        ImageIO.write(frame.getImage(false), "png", tempImageFile);
                     }
