@@ -45,7 +45,7 @@ public class Gui extends javax.swing.JFrame {
     static final Locale VIETNAM = new Locale("vi", "VN");
     static final String UTF8 = "UTF-8";
     ResourceBundle vietpadResources, bundle;
-    static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
+    static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr3");
     private int filterIndex;
     private FileFilter[] fileFilters;
     protected Font font;
