@@ -163,6 +163,7 @@ public class SpellChecker {
             }
 
             mapLastModified = fileLastModified;
+            userWordList.clear();
             BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(userDict), "UTF8"));
             String str;
             while ((str = in.readLine()) != null) {
