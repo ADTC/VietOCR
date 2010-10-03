@@ -156,11 +156,14 @@ Version 1.8 (6 September 2010)
 - Display image information
 - Add Screenshot Mode, which rescales low-resolution images to 300 DPI to be more suitable for OCR operations
 
-Version 1.9 Beta (28 September 2010)
-- Integrate Hunspell library to provide spellchecking and spellcheck-as-you-type functionality
+Version 1.9 (2 October 2010)
+- Integrate a Java binding for Hunspell library to provide spellchecking and spellcheck-as-you-type functionality. Include English and Vietnamese dictionaries
+- Add support for a custom dictionary
 - List in correct order files generated from PDF conversion
+- Upgrade JACOB library to version 1.15-M3
+- Preset Tesseract path on Linux to /usr/bin, the default install location of Tesseract
 
-Version 3.0 (2 October 2010)
+Version 3.0 (3 October 2010)
 - Upgrade Tesseract OCR engine to 3.0
 - Replace old format (2.0x) language data with new format (3.0) language data
 - Change datafile suffix from .inttemp to .traineddata
