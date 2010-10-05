@@ -158,7 +158,7 @@ Version 1.8 (6 September 2010)
 
 Version 1.9 (2 October 2010)
 - Integrate a Java binding for Hunspell library to provide spellchecking and spellcheck-as-you-type functionality. Include English and Vietnamese dictionaries
-- Add support for a custom dictionary user.dic
+- Add support for a custom dictionary
 - List in correct order files generated from PDF conversion
 - Upgrade JACOB library to version 1.15-M3
 - Preset Tesseract path on Linux to /usr/bin, the default install location of Tesseract
