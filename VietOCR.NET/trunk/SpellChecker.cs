@@ -165,7 +165,7 @@ namespace VietOCR.NET
         void LoadUserDictionary()
         {
             String baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            string strUserDictFile = Path.Combine(baseDir, "dict/user.dic");
+            string strUserDictFile = Path.Combine(baseDir, @"dict\user.dic");
 
             try
             {
@@ -193,7 +193,7 @@ namespace VietOCR.NET
             }
             catch (IOException e)
             {
-                MessageBox.Show("Cannot find \"user.dic\" in " + strUserDictFile + " directory.");
+                MessageBox.Show(e.Message);
             }
         }
     }
