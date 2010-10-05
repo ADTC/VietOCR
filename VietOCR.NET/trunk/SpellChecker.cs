@@ -164,11 +164,10 @@ namespace VietOCR.NET
 
         void LoadUserDictionary()
         {
-            String baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            string strUserDictFile = Path.Combine(baseDir, @"dict\user.dic");
-
             try
             {
+                String baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                string strUserDictFile = Path.Combine(baseDir, @"dict\user.dic");
                 FileInfo userDict = new FileInfo(strUserDictFile);
                 DateTime fileLastModified = userDict.LastWriteTime;
 
