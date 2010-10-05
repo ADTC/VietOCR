@@ -17,8 +17,11 @@ namespace VietOCR.NET
         string localeId;
         String workingDir;
         static ArrayList listeners = new ArrayList();
-        List<CharacterRange> spellingErrorRanges = new List<CharacterRange>();
+        static List<CharacterRange> spellingErrorRanges = new List<CharacterRange>();
+        static List<String> userWordList = new List<String>();
+        static DateTime mapLastModified = DateTime.MinValue;
         Hunspell spellDict;
+        CustomPaintTextBox cntl;
 
         public CharacterRange[] GetSpellingErrorRanges()
         {
@@ -57,10 +60,13 @@ namespace VietOCR.NET
             {
                 string dictPath = workingDir + "/dict/" + localeId;
                 spellDict = new Hunspell(dictPath + ".aff", dictPath + ".dic");
+                LoadUserDictionary();
 
                 listeners.Add(new System.EventHandler(this.textbox_TextChanged));
 
                 this.textbox.TextChanged += (System.EventHandler)listeners[0];
+                cntl = new CustomPaintTextBox(this.textbox, this);
+
                 spellCheck();
             }
             catch (Exception e)
@@ -77,6 +83,7 @@ namespace VietOCR.NET
             {
                 return; // perfect writer!
             }
+            spellingErrorRanges.Clear();
 
             StringBuilder sb = new StringBuilder();
             foreach (String word in misspelledWords)
@@ -103,12 +110,17 @@ namespace VietOCR.NET
         List<String> spellCheck(List<String> words)
         {
             List<String> misspelled = new List<String>();
-            
+
             foreach (String word in words)
             {
                 if (!spellDict.Spell(word))
                 {
-                    misspelled.Add(word);
+                    // is mispelled word in user.dic?
+                    if (!userWordList.Contains(word.ToLower()))
+                    {
+                        misspelled.Add(word);
+                    }
+
                 }
             }
 
@@ -141,12 +153,48 @@ namespace VietOCR.NET
             }
             this.textbox.TextChanged -= (System.EventHandler)listeners[0];
             listeners.RemoveAt(0);
+            spellingErrorRanges.Clear();
             //this.textComp.getHighlighter().removeAllHighlights();
         }
-        
+
         private void textbox_TextChanged(object sender, EventArgs e)
         {
             spellCheck();
+        }
+
+        void LoadUserDictionary()
+        {
+            String baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string strUserDictFile = Path.Combine(baseDir, "dict/user.dic");
+
+            try
+            {
+                FileInfo userDict = new FileInfo(strUserDictFile);
+                DateTime fileLastModified = userDict.LastWriteTime;
+
+                if (fileLastModified <= mapLastModified)
+                {
+                    return; // no need to reload dictionary
+                }
+
+                mapLastModified = fileLastModified;
+                userWordList.Clear();
+
+                using (StreamReader sr = new StreamReader(strUserDictFile, Encoding.UTF8))
+                {
+                    string str;
+
+                    while ((str = sr.ReadLine()) != null)
+                    {
+                        userWordList.Add(str.ToLower());
+                    }
+                    //sr.Close();
+                }
+            }
+            catch (IOException e)
+            {
+                MessageBox.Show("Cannot find \"user.dic\" in " + strUserDictFile + " directory.");
+            }
         }
     }
 }
