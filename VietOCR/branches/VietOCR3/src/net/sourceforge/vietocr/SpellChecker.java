@@ -146,8 +146,11 @@ public class SpellChecker {
         if (localeId == null) {
             return;
         }
-        this.textComp.getDocument().removeDocumentListener(lstList.remove(0));
-        this.textComp.getHighlighter().removeAllHighlights();
+
+        if (lstList.size() > 0) {
+            this.textComp.getDocument().removeDocumentListener(lstList.remove(0));
+            this.textComp.getHighlighter().removeAllHighlights();
+        }
     }
 
     /**
