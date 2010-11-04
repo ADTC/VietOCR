@@ -149,6 +149,12 @@ namespace VietOCR.NET
             localizer.ApplyCulture(new CultureInfo(locale));
         }
 
+        protected override void SetVisibleInputMethodMenuitem(bool visible)
+        {
+            this.vietInputMethodToolStripMenuItem.Visible = visible;
+            this.toolStripMenuItem1.Visible = visible;
+        }
+
         protected override void LoadRegistryInfo(RegistryKey regkey)
         {
             base.LoadRegistryInfo(regkey);
