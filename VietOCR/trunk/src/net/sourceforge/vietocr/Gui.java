@@ -1143,7 +1143,11 @@ public class Gui extends javax.swing.JFrame {
     private void jComboBoxLangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxLangItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             curLangCode = langCodes[jComboBoxLang.getSelectedIndex()];
-            VietKeyListener.setVietModeEnabled(curLangCode.contains("vie"));
+            boolean vie = curLangCode.contains("vie");
+            VietKeyListener.setVietModeEnabled(vie);
+            this.jMenuInputMethod.setVisible(vie);
+            this.jSeparator6.setVisible(vie);
+
             if (this.jToggleButtonSpellCheck.isSelected()) {
                 this.jToggleButtonSpellCheck.doClick();
                 this.jToggleButtonSpellCheck.doClick();
