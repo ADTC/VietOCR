@@ -45,7 +45,14 @@ public class BreakIterator
         //			System.Console.WriteLine("Found '{0}' at position {1}", mc[i].Value, mc[i].Index);
         //		}
         index = 0;
-        return mc[0].Index;
+        if (mc.Count > 0)
+        {
+            return mc[0].Index;
+        }
+        else
+        {
+            return index;
+        }
     }
     public int Last()
     {

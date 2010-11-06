@@ -175,6 +175,7 @@
       <DependentUpon>HtmlHelpForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageHelper.cs" />
+    <Compile Include="NativeMethods.cs" />
     <Compile Include="PdfUtilities.cs" />
     <Compile Include="ImageInfoDialog.cs">
       <SubType>Form</SubType>
@@ -212,6 +213,7 @@
     <Compile Include="StatusForm.Designer.cs">
       <DependentUpon>StatusForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TextBoxAPIHelper.cs" />
     <Compile Include="Utilities\BreakIterator.cs" />
     <Compile Include="Utilities\TextUtilities.cs" />
     <Compile Include="Watcher.cs" />
