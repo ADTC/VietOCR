@@ -415,6 +415,13 @@ namespace VietOCR.NET
             bool vie = curLangCode.Contains("vie");
             VietKeyHandler.VietModeEnabled = vie;
             SetVisibleInputMethodMenuitem(vie);
+
+            if (this.toolStripButtonSpellCheck.Checked)
+            {
+                //this.toolStripButtonSpellCheck.PerformClick();
+                //this.toolStripButtonSpellCheck.PerformClick();
+                this.toolStripButtonSpellCheck_Click(null, null);
+            }
         }
 
         protected virtual void SetVisibleInputMethodMenuitem(bool visible)

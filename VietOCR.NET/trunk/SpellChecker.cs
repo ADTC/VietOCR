@@ -47,7 +47,7 @@ namespace VietOCR.NET
                 ht.Add(node.Attributes[0].Value, node.InnerText);
             }
 
-            localeId = ht[langCode];
+            localeId = ht[langCode.Substring(0, 3)];
         }
 
         public void enableSpellCheck()
@@ -160,6 +160,7 @@ namespace VietOCR.NET
         private void textbox_TextChanged(object sender, EventArgs e)
         {
             spellCheck();
+            this.textbox.Invalidate();
         }
 
         void LoadUserDictionary()
