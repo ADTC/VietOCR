@@ -77,13 +77,14 @@ namespace VietOCR.NET
 
         void spellCheck()
         {
+            spellingErrorRanges.Clear();
             List<String> words = parseText(textbox.Text);
             List<String> misspelledWords = spellCheck(words);
             if (misspelledWords.Count == 0)
             {
                 return; // perfect writer!
             }
-            spellingErrorRanges.Clear();
+
 
             StringBuilder sb = new StringBuilder();
             foreach (String word in misspelledWords)
