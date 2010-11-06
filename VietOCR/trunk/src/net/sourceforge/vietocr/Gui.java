@@ -1149,8 +1149,9 @@ public class Gui extends javax.swing.JFrame {
             this.jSeparator6.setVisible(vie);
 
             if (this.jToggleButtonSpellCheck.isSelected()) {
-                this.jToggleButtonSpellCheck.doClick();
-                this.jToggleButtonSpellCheck.doClick();
+//                this.jToggleButtonSpellCheck.doClick();
+//                this.jToggleButtonSpellCheck.doClick();
+                this.jToggleButtonSpellCheckActionPerformed(null);
             }
         }
     }//GEN-LAST:event_jComboBoxLangItemStateChanged
