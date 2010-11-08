@@ -90,148 +90,220 @@ namespace VietOCR.NET
         }
 
 
-        ///// <summary>
-        ///// Gets the ranges of chars that represent the spelling errors and then draw a wavy red line underneath
-        ///// them.
-        ///// </summary>
-        ///// <remarks></remarks>
-        ////ByVal sender As Object, ByVal e As DoWorkEventArgs)
-        //private void CustomPaint()
-        //{
-        //    //Determine if we need to draw anything
-        //    //if (!mySpellChecker.HasSpellingErrors)
-        //    //    return;
-        //    //if (!myParent.IsEnabled(parentTextBox))
-        //    //    return;
+        /// <summary>
+        /// Gets the ranges of chars that represent the spelling errors and then draw a wavy red line underneath
+        /// them.
+        /// </summary>
+        /// <remarks></remarks>
+        //ByVal sender As Object, ByVal e As DoWorkEventArgs)
+        private void CustomPaint1()
+        {
+            //Determine if we need to draw anything
+            //if (!mySpellChecker.HasSpellingErrors)
+            //    return;
+            //if (!myParent.IsEnabled(parentTextBox))
+            //    return;
 
-        //    RichTextBox tempRTB = null;
+            RichTextBox tempRTB = null;
 
-        //    if (clientTextBox is RichTextBox)
-        //    {
-        //        tempRTB = new RichTextBox();
-        //        tempRTB.Rtf = ((RichTextBox)clientTextBox).Rtf;
-        //    }
+            if (clientTextBox is RichTextBox)
+            {
+                tempRTB = new RichTextBox();
+                tempRTB.Rtf = ((RichTextBox)clientTextBox).Rtf;
+            }
 
-        //    //Clear the graphics buffer
-        //    bufferGraphics.Clear(Color.Transparent);
+            //Clear the graphics buffer
+            bufferGraphics.Clear(Color.Transparent);
 
-        //    //Now, find out if any of the spelling errors are within the visible part of the textbox
-        //    CharacterRange[] spellingErrorRanges = mySpellChecker.GetSpellingErrorRanges();
-        //    //First get the ranges of characters visible in the textbox
-        //    Point startPoint = new Point(0, 0);
-        //    Point endPoint = new Point(clientTextBox.ClientRectangle.Width, clientTextBox.ClientRectangle.Height);
-        //    long startIndex = clientTextBox.GetCharIndexFromPosition(startPoint);
-        //    long endIndex = clientTextBox.GetCharIndexFromPosition(endPoint);
+            //Now, find out if any of the spelling errors are within the visible part of the textbox
+            CharacterRange[] spellingErrorRanges = mySpellChecker.GetSpellingErrorRanges();
+            //First get the ranges of characters visible in the textbox
+            Point startPoint = new Point(0, 0);
+            Point endPoint = new Point(clientTextBox.ClientRectangle.Width, clientTextBox.ClientRectangle.Height);
+            long startIndex = clientTextBox.GetCharIndexFromPosition(startPoint);
+            long endIndex = clientTextBox.GetCharIndexFromPosition(endPoint);
 
-        //    foreach (CharacterRange currentRange in spellingErrorRanges)
-        //    {
-        //        //Get the X, Y of the start and end characters
-        //        startPoint = clientTextBox.GetPositionFromCharIndex(currentRange.First);
-        //        endPoint = clientTextBox.GetPositionFromCharIndex(currentRange.First + currentRange.Length - 1);
+            foreach (CharacterRange currentRange in spellingErrorRanges)
+            {
+                //Get the X, Y of the start and end characters
+                startPoint = clientTextBox.GetPositionFromCharIndex(currentRange.First);
+                endPoint = clientTextBox.GetPositionFromCharIndex(currentRange.First + currentRange.Length - 1);
 
-        //        if (startPoint.Y != endPoint.Y)
-        //        {
-        //            //We have a word on multiple lines
-        //            int curIndex = 0;
-        //            int startingIndex = 0;
-        //            curIndex = currentRange.First;
-        //            startingIndex = curIndex;
-        //        GetNextLine:
+                if (startPoint.Y != endPoint.Y)
+                {
+                    //We have a word on multiple lines
+                    int curIndex = 0;
+                    int startingIndex = 0;
+                    curIndex = currentRange.First;
+                    startingIndex = curIndex;
+                GetNextLine:
 
-        //            //Determine the first line of waves to draw
-        //            while ((clientTextBox.GetPositionFromCharIndex(curIndex).Y == startPoint.Y) & (curIndex <= (currentRange.First + currentRange.Length - 1)))
-        //            {
-        //                curIndex += 1;
-        //            }
+                    //Determine the first line of waves to draw
+                    while ((clientTextBox.GetPositionFromCharIndex(curIndex).Y == startPoint.Y) & (curIndex <= (currentRange.First + currentRange.Length - 1)))
+                    {
+                        curIndex += 1;
+                    }
 
-        //            //Go back to the previous character
-        //            curIndex -= 1;
+                    //Go back to the previous character
+                    curIndex -= 1;
 
-        //            endPoint = clientTextBox.GetPositionFromCharIndex(curIndex);
-        //            Point offsets = GetOffsets(ref clientTextBox, startingIndex, curIndex, tempRTB);
+                    endPoint = clientTextBox.GetPositionFromCharIndex(curIndex);
+                    Point offsets = GetOffsets(ref clientTextBox, startingIndex, curIndex, tempRTB);
 
-        //            //Dim offsetsDiff As TimeSpan = Now.Subtract(startTime)
-        //            //Debug.Print("Get Offsets: " & offsetsDiff.TotalMilliseconds & " Milliseconds")
+                    //Dim offsetsDiff As TimeSpan = Now.Subtract(startTime)
+                    //Debug.Print("Get Offsets: " & offsetsDiff.TotalMilliseconds & " Milliseconds")
 
-        //            //If we're using a RichTextBox, we have to account for the zoom factor
-        //            if (clientTextBox is RichTextBox)
-        //                offsets.Y = (int)(offsets.Y * ((RichTextBox)clientTextBox).ZoomFactor);
+                    //If we're using a RichTextBox, we have to account for the zoom factor
+                    if (clientTextBox is RichTextBox)
+                        offsets.Y = (int)(offsets.Y * ((RichTextBox)clientTextBox).ZoomFactor);
 
-        //            //Reset the starting and ending points to make sure we're underneath the word
-        //            //(The measurestring adds some margin, so remove them)
-        //            startPoint.Y += offsets.Y - 2;
-        //            endPoint.Y += offsets.Y - 2;
-        //            endPoint.X += offsets.X - 0;
+                    //Reset the starting and ending points to make sure we're underneath the word
+                    //(The measurestring adds some margin, so remove them)
+                    startPoint.Y += offsets.Y - 2;
+                    endPoint.Y += offsets.Y - 2;
+                    endPoint.X += offsets.X - 0;
 
-        //            //Add a new wavy line using the starting and ending point
-        //            DrawWave(startPoint, endPoint);
+                    //Add a new wavy line using the starting and ending point
+                    DrawWave(startPoint, endPoint);
 
-        //            //Dim drawWaveDiff As TimeSpan = Now.Subtract(startTime)
-        //            //Debug.Print("DrawWave: " & drawWaveDiff.TotalMilliseconds & " Milliseconds")
+                    startingIndex = curIndex + 1;
+                    curIndex += 1;
+                    startPoint = clientTextBox.GetPositionFromCharIndex(curIndex);
 
-        //            startingIndex = curIndex + 1;
-        //            curIndex += 1;
-        //            startPoint = clientTextBox.GetPositionFromCharIndex(curIndex);
+                    if (curIndex <= (currentRange.First + currentRange.Length - 1))
+                    {
+                        goto GetNextLine;
+                    }
+                }
+                else
+                {
+                    Point offsets = GetOffsets(ref clientTextBox, currentRange.First, (currentRange.First + currentRange.Length - 1), tempRTB);
 
-        //            if (curIndex <= (currentRange.First + currentRange.Length - 1))
-        //            {
-        //                goto GetNextLine;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            Point offsets = GetOffsets(ref clientTextBox, currentRange.First, (currentRange.First + currentRange.Length - 1), tempRTB);
+                    //If we're using a RichTextBox, we have to account for the zoom factor
+                    if (clientTextBox is RichTextBox)
+                        offsets.Y = (int)(offsets.Y * ((RichTextBox)clientTextBox).ZoomFactor);
 
-        //            //Dim offsetsDiff As TimeSpan = Now.Subtract(startTime)
-        //            //Debug.Print("Get Offsets: " & offsetsDiff.TotalMilliseconds & " Milliseconds")
+                    //Reset the starting and ending points to make sure we're underneath the word
+                    //(The measurestring adds some margin, so remove them)
+                    startPoint.Y += offsets.Y - 2;
+                    endPoint.Y += offsets.Y - 2;
+                    endPoint.X += offsets.X - 4;
 
-        //            //If we're using a RichTextBox, we have to account for the zoom factor
-        //            if (clientTextBox is RichTextBox)
-        //                offsets.Y = (int)(offsets.Y * ((RichTextBox)clientTextBox).ZoomFactor);
+                    //Add a new wavy line using the starting and ending point
+                    //If e.Cancel Then Return
+                    DrawWave(startPoint, endPoint);
 
-        //            //Reset the starting and ending points to make sure we're underneath the word
-        //            //(The measurestring adds some margin, so remove them)
-        //            startPoint.Y += offsets.Y - 2;
-        //            endPoint.Y += offsets.Y - 2;
-        //            endPoint.X += offsets.X - 4;
+                    //Dim drawWaveDiff As TimeSpan = Now.Subtract(startTime)
+                    //Debug.Print("DrawWave: " & drawWaveDiff.TotalMilliseconds & " Milliseconds")
+                }
+            }
 
-        //            //Add a new wavy line using the starting and ending point
-        //            //If e.Cancel Then Return
-        //            DrawWave(startPoint, endPoint);
-
-        //            //Dim drawWaveDiff As TimeSpan = Now.Subtract(startTime)
-        //            //Debug.Print("DrawWave: " & drawWaveDiff.TotalMilliseconds & " Milliseconds")
-        //        }
-        //    }
-
-        //    //We've drawn all of the wavy lines, so draw that image over the textbox
-        //    textBoxGraphics.DrawImageUnscaled(myBitmap, 0, 0);
-        //}
+            //We've drawn all of the wavy lines, so draw that image over the textbox
+            textBoxGraphics.DrawImageUnscaled(myBitmap, 0, 0);
+        }
 
         private void CustomPaint()
         {
             // clear the graphics buffer
             bufferGraphics.Clear(Color.Transparent);
 
+            Point startPoint = new Point(0, 0);
+            Point endPoint = new Point(clientTextBox.ClientRectangle.Width, clientTextBox.ClientRectangle.Height);
+            long startIndex = clientTextBox.GetCharIndexFromPosition(startPoint);
+            long endIndex = clientTextBox.GetCharIndexFromPosition(endPoint);
+
+            RichTextBox tempRTB = null;
+
+            if (clientTextBox is RichTextBox)
+            {
+                tempRTB = new RichTextBox();
+                tempRTB.Rtf = ((RichTextBox)clientTextBox).Rtf;
+            }
 
             CharacterRange[] spellingErrorRanges = mySpellChecker.GetSpellingErrorRanges();
 
-            foreach (CharacterRange rng in spellingErrorRanges)
+            foreach (CharacterRange currentRange in spellingErrorRanges)
             {
-                // get the index of the first visible line in the TextBox
-                int curPos = TextBoxAPIHelper.GetFirstVisibleLine(clientTextBox);
-                curPos = TextBoxAPIHelper.GetLineIndex(clientTextBox, curPos);
+                //Get the X, Y of the start and end characters
+                startPoint = clientTextBox.GetPositionFromCharIndex(currentRange.First);
+                endPoint = clientTextBox.GetPositionFromCharIndex(currentRange.First + currentRange.Length - 1);
 
-                Point start = TextBoxAPIHelper.PosFromChar(clientTextBox, rng.First);
-                Point end = TextBoxAPIHelper.PosFromChar(clientTextBox, rng.First + rng.Length);
-                // The position above now points to the top left corner of the character.
-                // We need to account for the character height so the underlines go
-                // to the right place.
-                end.X += 1;
-                start.Y += TextBoxAPIHelper.GetBaselineOffsetAtCharIndex(clientTextBox, rng.First) - 1;
-                end.Y += TextBoxAPIHelper.GetBaselineOffsetAtCharIndex(clientTextBox, rng.First + rng.Length) - 1;
-                // Draw the wavy underline.
-                DrawWave(start, end);
+                if (startPoint.Y != endPoint.Y)
+                {
+                    //We have a word on multiple lines
+                    int curIndex = 0;
+                    int startingIndex = 0;
+                    curIndex = currentRange.First;
+                    startingIndex = curIndex;
+                GetNextLine:
+
+                    //Determine the first line of waves to draw
+                    while ((clientTextBox.GetPositionFromCharIndex(curIndex).Y == startPoint.Y) & (curIndex <= (currentRange.First + currentRange.Length - 1)))
+                    {
+                        curIndex += 1;
+                    }
+
+                    //Go back to the previous character
+                    curIndex -= 1;
+
+                    endPoint = clientTextBox.GetPositionFromCharIndex(curIndex);
+                    Point offsets = GetOffsets(ref clientTextBox, startingIndex, curIndex, tempRTB);
+
+                    //If we're using a RichTextBox, we have to account for the zoom factor
+                    if (clientTextBox is RichTextBox)
+                        offsets.Y = (int)(offsets.Y * ((RichTextBox)clientTextBox).ZoomFactor);
+
+                    //Reset the starting and ending points to make sure we're underneath the word
+                    //(The measurestring adds some margin, so remove them)
+                    startPoint.Y += offsets.Y - 2;
+                    endPoint.Y += offsets.Y - 2;
+                    endPoint.X += offsets.X - 0;
+
+                    //Add a new wavy line using the starting and ending point
+                    DrawWave(startPoint, endPoint);
+
+                    startingIndex = curIndex + 1;
+                    curIndex += 1;
+                    startPoint = clientTextBox.GetPositionFromCharIndex(curIndex);
+
+                    if (curIndex <= (currentRange.First + currentRange.Length - 1))
+                    {
+                        goto GetNextLine;
+                    }
+                }
+                else
+                {
+                    Point offsets = GetOffsets(ref clientTextBox, currentRange.First, (currentRange.First + currentRange.Length - 1), tempRTB);
+
+                    //If we're using a RichTextBox, we have to account for the zoom factor
+                    if (clientTextBox is RichTextBox)
+                        offsets.Y = (int)(offsets.Y * ((RichTextBox)clientTextBox).ZoomFactor);
+
+                    //Reset the starting and ending points to make sure we're underneath the word
+                    //(The measurestring adds some margin, so remove them)
+                    startPoint.Y += offsets.Y - 2;
+                    endPoint.Y += offsets.Y - 2;
+                    endPoint.X += offsets.X - 4;
+
+                    //Add a new wavy line using the starting and ending point
+                    //If e.Cancel Then Return
+                    DrawWave(startPoint, endPoint);
+                }
+
+                //// get the index of the first visible line in the TextBox
+                //int curPos = TextBoxAPIHelper.GetFirstVisibleLine(clientTextBox);
+                //curPos = TextBoxAPIHelper.GetLineIndex(clientTextBox, curPos);
+
+                //Point start = TextBoxAPIHelper.PosFromChar(clientTextBox, rng.First);
+                //Point end = TextBoxAPIHelper.PosFromChar(clientTextBox, rng.First + rng.Length);
+                //// The position above now points to the top left corner of the character.
+                //// We need to account for the character height so the underlines go
+                //// to the right place.
+                //end.X += 1;
+                //start.Y += TextBoxAPIHelper.GetBaselineOffsetAtCharIndex(clientTextBox, rng.First) - 1;
+                //end.Y += TextBoxAPIHelper.GetBaselineOffsetAtCharIndex(clientTextBox, rng.First + rng.Length) - 1;
+                //// Draw the wavy underline.
+                //DrawWave(start, end);
             }
 
 
