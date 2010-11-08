@@ -418,9 +418,8 @@ namespace VietOCR.NET
 
             if (this.toolStripButtonSpellCheck.Checked)
             {
-                //this.toolStripButtonSpellCheck.PerformClick();
-                //this.toolStripButtonSpellCheck.PerformClick();
-                this.toolStripButtonSpellCheck_Click(null, null);
+                this.toolStripButtonSpellCheck.PerformClick();
+                this.toolStripButtonSpellCheck.PerformClick();
             }
         }
 
