@@ -6,7 +6,6 @@ using System;
 using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
-using TachyonLabs.SharpSpell.UI;
 
 namespace VietOCR.NET
 {
@@ -312,37 +311,37 @@ namespace VietOCR.NET
             textBoxGraphics.DrawImageUnscaled(myBitmap, 0, 0);
         }
 
-        private void CustomPaint2()
-        {
-            // clear the graphics buffer
-            bufferGraphics.Clear(Color.Transparent);
+        //private void CustomPaint2()
+        //{
+        //    // clear the graphics buffer
+        //    bufferGraphics.Clear(Color.Transparent);
 
 
-            CharacterRange[] spellingErrorRanges = mySpellChecker.GetSpellingErrorRanges();
+        //    CharacterRange[] spellingErrorRanges = mySpellChecker.GetSpellingErrorRanges();
 
-            foreach (CharacterRange rng in spellingErrorRanges)
-            {
-                // get the index of the first visible line in the TextBox
-                int curPos = TextBoxAPIHelper.GetFirstVisibleLine(clientTextBox);
-                curPos = TextBoxAPIHelper.GetLineIndex(clientTextBox, curPos);
+        //    foreach (CharacterRange rng in spellingErrorRanges)
+        //    {
+        //        // get the index of the first visible line in the TextBox
+        //        int curPos = TextBoxAPIHelper.GetFirstVisibleLine(clientTextBox);
+        //        curPos = TextBoxAPIHelper.GetLineIndex(clientTextBox, curPos);
 
-                Point start = clientTextBox.GetPositionFromCharIndex(rng.First);
-                Point end = clientTextBox.GetPositionFromCharIndex(rng.First + rng.Length);
-                // The position above now points to the top left corner of the character.
-                // We need to account for the character height so the underlines go
-                // to the right place.
-                end.X += 1;
-                start.Y += TextBoxAPIHelper.GetBaselineOffsetAtCharIndex(clientTextBox, rng.First) - 1;
-                end.Y += TextBoxAPIHelper.GetBaselineOffsetAtCharIndex(clientTextBox, rng.First + rng.Length) - 1;
-                // Draw the wavy underline.
-                DrawWave(start, end);
-            }
+        //        Point start = clientTextBox.GetPositionFromCharIndex(rng.First);
+        //        Point end = clientTextBox.GetPositionFromCharIndex(rng.First + rng.Length);
+        //        // The position above now points to the top left corner of the character.
+        //        // We need to account for the character height so the underlines go
+        //        // to the right place.
+        //        end.X += 1;
+        //        start.Y += TextBoxAPIHelper.GetBaselineOffsetAtCharIndex(clientTextBox, rng.First) - 1;
+        //        end.Y += TextBoxAPIHelper.GetBaselineOffsetAtCharIndex(clientTextBox, rng.First + rng.Length) - 1;
+        //        // Draw the wavy underline.
+        //        DrawWave(start, end);
+        //    }
 
 
-            // Now we just draw our internal buffer on top of the TextBox.
-            // Everything should be at the right place.
-            textBoxGraphics.DrawImageUnscaled(myBitmap, 0, 0);
-        }
+        //    // Now we just draw our internal buffer on top of the TextBox.
+        //    // Everything should be at the right place.
+        //    textBoxGraphics.DrawImageUnscaled(myBitmap, 0, 0);
+        //}
 
         ///// <summary>
         ///// Determines the X and Y offsets to use based on font height last letter width
