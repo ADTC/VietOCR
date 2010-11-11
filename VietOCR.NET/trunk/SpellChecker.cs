@@ -152,10 +152,13 @@ namespace VietOCR.NET
             {
                 return;
             }
-            this.textbox.TextChanged -= (System.EventHandler)listeners[0];
-            listeners.RemoveAt(0);
+
+            if (listeners.Count > 0)
+            {
+                this.textbox.TextChanged -= (System.EventHandler)listeners[0];
+                listeners.RemoveAt(0);
+            }
             spellingErrorRanges.Clear();
-            //this.textComp.getHighlighter().removeAllHighlights();
         }
 
         private void textbox_TextChanged(object sender, EventArgs e)
