@@ -42,7 +42,7 @@ public final class WiaScannerAdapter {
                 _wiaManager = new ActiveXComponent("WIA.CommonDialog");
             }
 
-            imageObject = Dispatch.callN(_wiaManager, "ShowAcquireImage", new Variant[] {
+            imageObject = Dispatch.callN(_wiaManager, "ShowAcquireImage", (Object[]) new Variant[] {
                 new Variant(WiaDeviceType.ScannerDeviceType.getValue()), new Variant(WiaImageIntent.GrayscaleIntent.getValue()),
                 new Variant(WiaImageBias.MaximizeQuality.getValue()), new Variant(outputFormat.getValue()),
                 False, True, True} ).getDispatch();
