@@ -430,7 +430,7 @@ namespace VietOCR.NET
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if (e.ClickedItem is ToolStripSeparator || e.ClickedItem is ToolStripLabel) return;
+            if (!(e.ClickedItem is ToolStripButton)) return;
 
             ToolStripButton tsb = (ToolStripButton)e.ClickedItem;
             ToolStripMenuItem mi = (ToolStripMenuItem)tsb.Tag;
