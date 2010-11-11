@@ -39,7 +39,6 @@ namespace VietOCR.NET
             String xmlFilePath = Path.Combine(workingDir, "Data/ISO639-1.xml");
             Dictionary<string, string> ht = new Dictionary<string, string>();
             doc.Load(xmlFilePath);
-            //doc.Load(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("VietOCR.NET.Data.ISO639-3.xml"));
 
             XmlNodeList list = doc.GetElementsByTagName("entry");
             foreach (XmlNode node in list)
@@ -82,7 +81,7 @@ namespace VietOCR.NET
             List<String> misspelledWords = spellCheck(words);
             if (misspelledWords.Count == 0)
             {
-                return; // perfect writer!
+                return;
             }
 
 
@@ -103,7 +102,6 @@ namespace VietOCR.NET
             for (int i = 0; i < mc.Count; i++)
             {
                 spellingErrorRanges.Add(new CharacterRange(mc[i].Index, mc[i].Length));
-                //textbox.Select(mc[i].Index, mc[i].Length);
             }
             //new CustomPaintTextBox(textbox, this);
         }
