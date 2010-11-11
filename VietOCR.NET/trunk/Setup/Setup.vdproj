@@ -40,7 +40,7 @@
         "Entry"
         {
         "MsmKey" = "8:_1B642B25FC7D23D5624FAC8B0E7C8FC0"
-        "OwnerKey" = "8:_9E057C2EB4AD457E8400FF49592A0AFD"
+        "OwnerKey" = "8:_98ED661F5D7D48DEBF225C47F21B5694"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -172,7 +172,13 @@
         "Entry"
         {
         "MsmKey" = "8:_9305C06EB21AD40577B72DC9A6F45EE3"
-        "OwnerKey" = "8:_9E057C2EB4AD457E8400FF49592A0AFD"
+        "OwnerKey" = "8:_98ED661F5D7D48DEBF225C47F21B5694"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_98ED661F5D7D48DEBF225C47F21B5694"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -184,12 +190,6 @@
         "Entry"
         {
         "MsmKey" = "8:_9B27517C9C2E4081A338E06B8C14E5B2"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9E057C2EB4AD457E8400FF49592A0AFD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -238,24 +238,12 @@
         "Entry"
         {
         "MsmKey" = "8:_C3EDDD34B6DE903B1544C63767D700BA"
-        "OwnerKey" = "8:_9E057C2EB4AD457E8400FF49592A0AFD"
+        "OwnerKey" = "8:_98ED661F5D7D48DEBF225C47F21B5694"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_CB534E76A5FB447DA3761CDC90D7690E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CB861DA27D1D145443BF6980A7843920"
-        "OwnerKey" = "8:_9E057C2EB4AD457E8400FF49592A0AFD"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CB861DA27D1D145443BF6980A7843920"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -322,7 +310,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9E057C2EB4AD457E8400FF49592A0AFD"
+        "OwnerKey" = "8:_98ED661F5D7D48DEBF225C47F21B5694"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CB861DA27D1D145443BF6980A7843920"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_98ED661F5D7D48DEBF225C47F21B5694"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -341,12 +341,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_9305C06EB21AD40577B72DC9A6F45EE3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CB861DA27D1D145443BF6980A7843920"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -1188,11 +1182,6 @@
             "AssemblyAsmDisplayName" = "8:Interop.WIA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C3EDDD34B6DE903B1544C63767D700BA"
-                    {
-                    "Name" = "8:Interop.WIA.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Interop.WIA.dll"
             "TargetName" = "8:"
@@ -1716,7 +1705,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_0400010C4ACF4E069807CA833485EF40"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6FC33ED2B167441496C0448762B8E136"
             {
             "Name" = "8:VietOCR.NET"
             "Arguments" = "8:"
@@ -1724,13 +1713,13 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_9E057C2EB4AD457E8400FF49592A0AFD"
+            "Target" = "8:_98ED661F5D7D48DEBF225C47F21B5694"
             "Folder" = "8:_AB8C3C1D1F284FDCAE8AA3B0EED1928C"
             "WorkingFolder" = "8:_62E5121B93304E73845F4D594BA48305"
             "Icon" = "8:"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_BF6B339E676B4EE6BBA8E33CE7799296"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D27758C6C0614EF0BB9A826BD84C77A5"
             {
             "Name" = "8:VietOCR.NET"
             "Arguments" = "8:"
@@ -1738,7 +1727,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_9E057C2EB4AD457E8400FF49592A0AFD"
+            "Target" = "8:_98ED661F5D7D48DEBF225C47F21B5694"
             "Folder" = "8:_D2A32DEAB3954E8B988426259F3671FE"
             "WorkingFolder" = "8:_62E5121B93304E73845F4D594BA48305"
             "Icon" = "8:"
@@ -2143,35 +2132,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2207BB46F78348958F7BE718E86388A6"
-            {
-            "SourcePath" = "8:"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:LocalizedResourceDlls"
-            "OutputProjectGuid" = "8:{24669862-3162-44AE-A050-E5205A683828}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9E057C2EB4AD457E8400FF49592A0AFD"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_98ED661F5D7D48DEBF225C47F21B5694"
             {
             "SourcePath" = "8:..\\obj\\Release\\VietOCR.exe"
             "TargetName" = "8:"
