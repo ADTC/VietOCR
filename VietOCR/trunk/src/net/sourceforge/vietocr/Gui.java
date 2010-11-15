@@ -534,7 +534,8 @@ public class Gui extends javax.swing.JFrame {
         VietKeyListener.setInputMethod(InputMethods.valueOf(selectedInputMethod));
         VietKeyListener.setSmartMark(true);
         VietKeyListener.consumeRepeatKey(true);
-        VietKeyListener.setVietModeEnabled(curLangCode.contains("vie"));
+        boolean vie = curLangCode.contains("vie");
+        VietKeyListener.setVietModeEnabled(vie);
         jTextArea1.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 if (e.isPopupTrigger()) {
@@ -616,8 +617,9 @@ public class Gui extends javax.swing.JFrame {
             jMenuInputMethod.add(radioItem);
             groupInputMethod.add(radioItem);
         }
-
+        jMenuInputMethod.setVisible(vie);
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        jSeparator6.setVisible(vie);
         jMenuUILang = new javax.swing.JMenu();
         ButtonGroup group = new ButtonGroup();
         jRadioButtonMenuItemEng = new javax.swing.JRadioButtonMenuItem();
