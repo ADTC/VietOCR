@@ -79,6 +79,7 @@ public class Gui extends javax.swing.JFrame {
     private RawListener rawListener;
     private final String DATAFILE_SUFFIX = ".inttemp";
     private String curMisspelled;
+    private int start, end;
 
     /**
      * Creates new form Gui
@@ -282,11 +283,25 @@ public class Gui extends javax.swing.JFrame {
     }
 
     void getSuggestions(String misspelled) {
-        if (misspelled == null || misspelled.trim().length() == 0) return;
-        
+        if (misspelled == null || misspelled.trim().length() == 0) {
+            return;
+        }
+
+        ActionListener correctLst = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                String word = ae.getActionCommand();
+                jTextArea1.select(start, end);
+                jTextArea1.replaceSelection(word);
+            }
+        };
+
         String[] sug = {"suggest1", "suggest2", misspelled};
         for (String word : sug) {
             JMenuItem item = new JMenuItem(word);
+            item.setActionCommand(word);
+            item.addActionListener(correctLst);
             popup.add(item);
         }
         popup.addSeparator();
@@ -556,8 +571,8 @@ public class Gui extends javax.swing.JFrame {
                 if (e.isPopupTrigger()) {
                     try {
                         int offset = jTextArea1.viewToModel(e.getPoint());
-                        int start = javax.swing.text.Utilities.getWordStart(jTextArea1, offset);
-                        int end = javax.swing.text.Utilities.getWordEnd(jTextArea1, offset);
+                        start = javax.swing.text.Utilities.getWordStart(jTextArea1, offset);
+                        end = javax.swing.text.Utilities.getWordEnd(jTextArea1, offset);
                         curMisspelled = jTextArea1.getDocument().getText(start, end-start);
                         final MouseEvent me = e;
                         SwingUtilities.invokeLater(new Runnable() {
@@ -1343,7 +1358,7 @@ public class Gui extends javax.swing.JFrame {
     protected static Locale getLocale(String selectedUILang) {
         return new Locale(selectedUILang);
     }
-    
+
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         try {
             String version = config.getProperty("Version");
