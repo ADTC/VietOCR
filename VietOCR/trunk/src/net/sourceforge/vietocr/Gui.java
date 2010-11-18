@@ -79,6 +79,7 @@ public class Gui extends javax.swing.JFrame {
     private boolean textChanged = true;
     private RawListener rawListener;
     private final String DATAFILE_SUFFIX = ".inttemp";
+    private String curMisspelled;
 
     /**
      * Creates new form Gui
@@ -281,12 +282,24 @@ public class Gui extends javax.swing.JFrame {
         DefaultKeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(dispatcher);
     }
 
+    void getSuggestions(String misspelled) {
+        if (misspelled == null || misspelled.trim().length() == 0) return;
+        
+        String[] sug = {"Test", "Test1", misspelled};
+        for (String word : sug) {
+            JMenuItem item = new JMenuItem(word);
+            popup.add(item);
+        }
+        popup.addSeparator();
+    }
+
     /**
      * 
      */
     private void populatePopupMenu() {
         popup.removeAll();
 
+        getSuggestions(curMisspelled);
         m_undoAction = new AbstractAction(vietpadResources.getString("Undo")) {
 
             @Override
@@ -539,7 +552,19 @@ public class Gui extends javax.swing.JFrame {
         jTextArea1.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 if (e.isPopupTrigger()) {
-                    popup.show(e.getComponent(), e.getX(), e.getY());
+                    try {
+                        int offset = jTextArea1.viewToModel(e.getPoint());
+                        int start = javax.swing.text.Utilities.getWordStart(jTextArea1, offset);
+                        int end = javax.swing.text.Utilities.getWordEnd(jTextArea1, offset);
+                        curMisspelled = jTextArea1.getDocument().getText(start, end-start);
+                        final MouseEvent me = e;
+                        SwingUtilities.invokeLater(new Runnable() {
+                            public void run() {
+                                populatePopupMenu();
+                                popup.show(me.getComponent(), me.getX(), me.getY());
+                            }
+                        });
+                    } catch (javax.swing.text.BadLocationException ble) {}
                 }
             }
 
