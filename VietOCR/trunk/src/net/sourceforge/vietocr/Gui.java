@@ -1336,6 +1336,10 @@ public class Gui extends javax.swing.JFrame {
         String[] locales = {"en", "vi", "lt"};
         return locales;
     }
+
+    protected static Locale getLocale(String selectedUILang) {
+        return new Locale(selectedUILang);
+    }
     
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         try {
@@ -1747,10 +1751,6 @@ public class Gui extends javax.swing.JFrame {
             });
         }
     }//GEN-LAST:event_formComponentResized
-
-    protected static Locale getLocale(String selectedUILang) {
-        return new Locale(selectedUILang);
-    }
 
     private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemScanActionPerformed
         scaleX = scaleY = 1f;
