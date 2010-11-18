@@ -284,11 +284,14 @@ public class Gui extends javax.swing.JFrame {
     void getSuggestions(String misspelled) {
         if (misspelled == null || misspelled.trim().length() == 0) return;
         
-        String[] sug = {"Test", "Test1", misspelled};
+        String[] sug = {"suggest1", "suggest2", misspelled};
         for (String word : sug) {
             JMenuItem item = new JMenuItem(word);
             popup.add(item);
         }
+        popup.addSeparator();
+        JMenuItem item = new JMenuItem("Add to Dictionary");
+        popup.add(item);
         popup.addSeparator();
     }
 
