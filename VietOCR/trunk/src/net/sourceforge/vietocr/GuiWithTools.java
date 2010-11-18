@@ -22,7 +22,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import net.sourceforge.vietpad.SimpleFilter;
 
-public class GuiWithTools extends GuiWithSettings {
+public class GuiWithTools extends GuiWithSpellcheck {
 
     File imageFolder;
     FileFilter selectedFilter;

@@ -78,9 +78,8 @@ public class Gui extends javax.swing.JFrame {
     private boolean textChanged = true;
     private RawListener rawListener;
     private final String DATAFILE_SUFFIX = ".inttemp";
-    private SpellChecker sp;
     private String curMisspelled;
-    private int start, end;
+    protected int start, end;
 
     /**
      * Creates new form Gui
@@ -283,49 +282,8 @@ public class Gui extends javax.swing.JFrame {
         DefaultKeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(dispatcher);
     }
 
-    void getSuggestions(final String misspelled) {
-        if (sp == null || misspelled == null || misspelled.trim().length() == 0) {
-            return;
-        }
-
-        List<String> suggests = sp.suggest(misspelled);
-        if (suggests == null || suggests.isEmpty()) {
-            return;
-        }
-
-        ActionListener correctLst = new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                String word = ae.getActionCommand();
-                if (word.equals("ignore")) {
-                    sp.ignoreWord(misspelled);
-                } else if (word.equals("add")) {
-                    sp.addWord(misspelled);
-                } else {
-                    jTextArea1.select(start, end);
-                    jTextArea1.replaceSelection(word);
-                }
-                sp.spellCheck();
-            }
-        };
-
-        for (String word : suggests) {
-            JMenuItem item = new JMenuItem(word);
-            item.setActionCommand(word);
-            item.addActionListener(correctLst);
-            popup.add(item);
-        }
-        popup.addSeparator();
-        JMenuItem item = new JMenuItem(bundle.getString("Ignore_All"));
-        item.setActionCommand("ignore");
-        item.addActionListener(correctLst);
-        popup.add(item);
-        item = new JMenuItem(bundle.getString("Add_to_Dictionary"));
-        item.setActionCommand("add");
-        item.addActionListener(correctLst);
-        popup.add(item);
-        popup.addSeparator();
+    void getSuggestions(String misspelled) {
+        // to be implemented in subclass
     }
 
     /**
@@ -1934,14 +1892,12 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemMetadataActionPerformed
 
     private void jToggleButtonSpellCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonSpellCheckActionPerformed
-        sp = new SpellChecker(this.jTextArea1, curLangCode);
-        if (this.jToggleButtonSpellCheck.isSelected()) {
-            sp.enableSpellCheck();
-        } else {
-            sp.disableSpellCheck();
-        }
-        this.jTextArea1.repaint();
+        SpellCheckActionPerformed();
     }//GEN-LAST:event_jToggleButtonSpellCheckActionPerformed
+
+    void SpellCheckActionPerformed() {
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
+    }
 
     void readImageMetadata() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
@@ -2076,10 +2032,10 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator9;
     private javax.swing.JSplitPane jSplitPane1;
     protected javax.swing.JTextArea jTextArea1;
-    private javax.swing.JToggleButton jToggleButtonSpellCheck;
+    protected javax.swing.JToggleButton jToggleButtonSpellCheck;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
-    private javax.swing.JPopupMenu popup;
+    protected javax.swing.JPopupMenu popup;
     // End of variables declaration//GEN-END:variables
     private final UndoManager m_undo = new UndoManager();
     protected final UndoableEditSupport undoSupport = new UndoableEditSupport();
