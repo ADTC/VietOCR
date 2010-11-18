@@ -78,6 +78,7 @@ public class Gui extends javax.swing.JFrame {
     private boolean textChanged = true;
     private RawListener rawListener;
     private final String DATAFILE_SUFFIX = ".inttemp";
+    private SpellChecker sp;
     private String curMisspelled;
     private int start, end;
 
@@ -282,8 +283,13 @@ public class Gui extends javax.swing.JFrame {
         DefaultKeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(dispatcher);
     }
 
-    void getSuggestions(String misspelled) {
-        if (misspelled == null || misspelled.trim().length() == 0) {
+    void getSuggestions(final String misspelled) {
+        if (sp == null || misspelled == null || misspelled.trim().length() == 0) {
+            return;
+        }
+
+        List<String> suggests = sp.suggest(misspelled);
+        if (suggests == null || suggests.isEmpty()) {
             return;
         }
 
@@ -292,20 +298,32 @@ public class Gui extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 String word = ae.getActionCommand();
-                jTextArea1.select(start, end);
-                jTextArea1.replaceSelection(word);
+                if (word.equals("ignore")) {
+                    sp.ignoreWord(misspelled);
+                } else if (word.equals("add")) {
+                    sp.addWord(misspelled);
+                } else {
+                    jTextArea1.select(start, end);
+                    jTextArea1.replaceSelection(word);
+                }
+                sp.spellCheck();
             }
         };
 
-        String[] sug = {"suggest1", "suggest2", misspelled};
-        for (String word : sug) {
+        for (String word : suggests) {
             JMenuItem item = new JMenuItem(word);
             item.setActionCommand(word);
             item.addActionListener(correctLst);
             popup.add(item);
         }
         popup.addSeparator();
-        JMenuItem item = new JMenuItem("Add to Dictionary");
+        JMenuItem item = new JMenuItem("Ignore All");
+        item.setActionCommand("ignore");
+        item.addActionListener(correctLst);
+        popup.add(item);
+        item = new JMenuItem("Add to Dictionary");
+        item.setActionCommand("add");
+        item.addActionListener(correctLst);
         popup.add(item);
         popup.addSeparator();
     }
@@ -1916,7 +1934,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemMetadataActionPerformed
 
     private void jToggleButtonSpellCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonSpellCheckActionPerformed
-        SpellChecker sp = new SpellChecker(this.jTextArea1, curLangCode);
+        sp = new SpellChecker(this.jTextArea1, curLangCode);
         if (this.jToggleButtonSpellCheck.isSelected()) {
             sp.enableSpellCheck();
         } else {

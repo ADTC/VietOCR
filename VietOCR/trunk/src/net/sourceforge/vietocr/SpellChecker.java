@@ -83,6 +83,9 @@ public class SpellChecker {
     }
 
     void spellCheck() {
+        Highlighter hi = textComp.getHighlighter();
+        hi.removeAllHighlights();
+
         List<String> words = parseText(textComp.getText());
         List<String> misspelledWords = spellCheck(words);
         if (misspelledWords.isEmpty()) {
@@ -100,9 +103,6 @@ public class SpellChecker {
 
         Pattern pattern = Pattern.compile(patternStr, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(textComp.getText());
-
-        Highlighter hi = textComp.getHighlighter();
-        hi.removeAllHighlights();
 
         while (matcher.find()) {
             try {
@@ -150,6 +150,37 @@ public class SpellChecker {
         if (lstList.size() > 0) {
             this.textComp.getDocument().removeDocumentListener(lstList.remove(0));
             this.textComp.getHighlighter().removeAllHighlights();
+        }
+    }
+
+    public List<String> suggest(String misspelled) {
+        List<String> list = new ArrayList<String>();
+        list.add(misspelled);
+        if (spellCheck(list).isEmpty()) {
+            return null;
+        } else {
+            return spellDict.suggest(misspelled);
+        }
+    }
+
+    public void ignoreWord(String word) {
+        if (!userWordList.contains(word.toLowerCase())) {
+            userWordList.add(word.toLowerCase());
+        }
+    }
+
+    public void addWord(String word) {
+        if (!userWordList.contains(word.toLowerCase())) {
+            userWordList.add(word.toLowerCase());
+            try {
+                File userDict = new File(baseDir, "dict/user.dic");
+                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(userDict, true), "UTF8"));
+                out.newLine();
+                out.write(word);
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
