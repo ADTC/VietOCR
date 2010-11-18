@@ -317,11 +317,11 @@ public class Gui extends javax.swing.JFrame {
             popup.add(item);
         }
         popup.addSeparator();
-        JMenuItem item = new JMenuItem("Ignore All");
+        JMenuItem item = new JMenuItem(bundle.getString("Ignore_All"));
         item.setActionCommand("ignore");
         item.addActionListener(correctLst);
         popup.add(item);
-        item = new JMenuItem("Add to Dictionary");
+        item = new JMenuItem(bundle.getString("Add_to_Dictionary"));
         item.setActionCommand("add");
         item.addActionListener(correctLst);
         popup.add(item);

@@ -159,7 +159,11 @@ public class SpellChecker {
         if (spellCheck(list).isEmpty()) {
             return null;
         } else {
-            return spellDict.suggest(misspelled);
+            try {
+                return spellDict.suggest(misspelled); // TODO: exception thrown here.
+            } catch (Exception e) {
+                return null;
+            }
         }
     }
 
