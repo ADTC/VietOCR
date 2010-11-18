@@ -266,46 +266,9 @@
                   <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuUILang.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="jRadioButtonMenuItemEng">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="group" type="code"/>
-                    </Property>
-                    <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="selectedUILang.equals(&quot;en&quot;)" type="code"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jRadioButtonMenuItemEng.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
-                    </Property>
-                    <Property name="actionCommand" type="java.lang.String" value="en"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonMenuItemEngActionPerformed"/>
-                  </Events>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ButtonGroup group = new ButtonGroup();"/>
-                    <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Gui_jRadioButtonMenuItemEng"/>
-                  </AuxValues>
-                </MenuItem>
-                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="jRadioButtonMenuItemViet">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="group" type="code"/>
-                    </Property>
-                    <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="selectedUILang.equals(&quot;vi&quot;)" type="code"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jRadioButtonMenuItemViet.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
-                    </Property>
-                    <Property name="actionCommand" type="java.lang.String" value="vi"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonMenuItemVietActionPerformed"/>
-                  </Events>
-                </MenuItem>
-              </SubComponents>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="            &#xa;            ActionListener uiLangLst = new ActionListener() {&#xa;                public void actionPerformed(ActionEvent ae) {&#xa;                    if (!selectedUILang.equals(ae.getActionCommand())) {&#xa;                        selectedUILang = ae.getActionCommand();&#xa;                        changeUILanguage(getLocale(selectedUILang));&#xa;                    }&#xa;                }&#xa;            };&#xa;&#xa;            ButtonGroup groupUILang = new ButtonGroup();&#xa;        String[] uiLangs = getInstalledUILangs();&#xa;        for (int i = 0; i &lt; uiLangs.length; i++) {&#xa;            Locale locale = new Locale(uiLangs[i]);&#xa;            JRadioButtonMenuItem uiLangButton = new JRadioButtonMenuItem(locale.getDisplayLanguage(), selectedUILang.equals(locale.getLanguage()));&#xa;            uiLangButton.setActionCommand(locale.getLanguage());&#xa;            uiLangButton.addActionListener(uiLangLst);&#xa;            groupUILang.add(uiLangButton);&#xa;            jMenuUILang.add(uiLangButton);&#xa;        }"/>
+              </AuxValues>
             </Menu>
             <Menu class="javax.swing.JMenu" name="jMenuLookAndFeel">
               <Properties>

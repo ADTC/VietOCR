@@ -42,7 +42,6 @@ public class Gui extends javax.swing.JFrame {
     public static final String TO_BE_IMPLEMENTED = "To be implemented in subclass";
     static final boolean MAC_OS_X = System.getProperty("os.name").startsWith("Mac");
     static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
-    static final Locale VIETNAM = new Locale("vi", "VN");
     static final String UTF8 = "UTF-8";
     ResourceBundle vietpadResources, bundle;
     static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
@@ -646,9 +645,26 @@ public class Gui extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
         jSeparator6.setVisible(vie);
         jMenuUILang = new javax.swing.JMenu();
-        ButtonGroup group = new ButtonGroup();
-        jRadioButtonMenuItemEng = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItemViet = new javax.swing.JRadioButtonMenuItem();
+
+        ActionListener uiLangLst = new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                if (!selectedUILang.equals(ae.getActionCommand())) {
+                    selectedUILang = ae.getActionCommand();
+                    changeUILanguage(getLocale(selectedUILang));
+                }
+            }
+        };
+
+        ButtonGroup groupUILang = new ButtonGroup();
+        String[] uiLangs = getInstalledUILangs();
+        for (int i = 0; i < uiLangs.length; i++) {
+            Locale locale = new Locale(uiLangs[i]);
+            JRadioButtonMenuItem uiLangButton = new JRadioButtonMenuItem(locale.getDisplayLanguage(), selectedUILang.equals(locale.getLanguage()));
+            uiLangButton.setActionCommand(locale.getLanguage());
+            uiLangButton.addActionListener(uiLangLst);
+            groupUILang.add(uiLangButton);
+            jMenuUILang.add(uiLangButton);
+        }
         jMenuLookAndFeel = new javax.swing.JMenu();
         ActionListener lafLst = new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
@@ -1051,29 +1067,6 @@ public class Gui extends javax.swing.JFrame {
         jMenuSettings.add(jSeparator6);
 
         jMenuUILang.setText(bundle.getString("jMenuUILang.Text")); // NOI18N
-
-        group.add(jRadioButtonMenuItemEng);
-        jRadioButtonMenuItemEng.setSelected(selectedUILang.equals("en"));
-        jRadioButtonMenuItemEng.setText(bundle.getString("jRadioButtonMenuItemEng.Text")); // NOI18N
-        jRadioButtonMenuItemEng.setActionCommand("en");
-        jRadioButtonMenuItemEng.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItemEngActionPerformed(evt);
-            }
-        });
-        jMenuUILang.add(jRadioButtonMenuItemEng);
-
-        group.add(jRadioButtonMenuItemViet);
-        jRadioButtonMenuItemViet.setSelected(selectedUILang.equals("vi"));
-        jRadioButtonMenuItemViet.setText(bundle.getString("jRadioButtonMenuItemViet.Text")); // NOI18N
-        jRadioButtonMenuItemViet.setActionCommand("vi");
-        jRadioButtonMenuItemViet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItemVietActionPerformed(evt);
-            }
-        });
-        jMenuUILang.add(jRadioButtonMenuItemViet);
-
         jMenuSettings.add(jMenuUILang);
 
         jMenuLookAndFeel.setText(bundle.getString("jMenuLookAndFeel.Text")); // NOI18N
@@ -1339,6 +1332,11 @@ public class Gui extends javax.swing.JFrame {
         // to be implemented in subclass
     }
 
+    private String[] getInstalledUILangs() {
+        String[] locales = {"en", "vi", "lt"};
+        return locales;
+    }
+    
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         try {
             String version = config.getProperty("Version");
@@ -1750,16 +1748,9 @@ public class Gui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formComponentResized
 
-    private void jRadioButtonMenuItemEngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemEngActionPerformed
-        if (!selectedUILang.equals(evt.getActionCommand())) {
-            selectedUILang = evt.getActionCommand();
-            changeUILanguage(selectedUILang.equals("vi") ? VIETNAM : Locale.US);
-        }
-    }//GEN-LAST:event_jRadioButtonMenuItemEngActionPerformed
-
-    private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemVietActionPerformed
-        jRadioButtonMenuItemEngActionPerformed(evt);
-    }//GEN-LAST:event_jRadioButtonMenuItemVietActionPerformed
+    protected static Locale getLocale(String selectedUILang) {
+        return new Locale(selectedUILang);
+    }
 
     private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemScanActionPerformed
         scaleX = scaleY = 1f;
@@ -1969,7 +1960,7 @@ public class Gui extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         selectedUILang = prefs.get("UILanguage", "en");
-        Locale.setDefault(selectedUILang.equals("vi") ? VIETNAM : Locale.US);
+        Locale.setDefault(getLocale(selectedUILang));
 
         java.awt.EventQueue.invokeLater(new Runnable() {
 
@@ -2034,8 +2025,6 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelStatus;
     protected javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemEng;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemViet;
     private javax.swing.JScrollPane jScrollPane1;
     protected javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
