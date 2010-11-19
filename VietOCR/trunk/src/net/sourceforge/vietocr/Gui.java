@@ -78,8 +78,7 @@ public class Gui extends javax.swing.JFrame {
     private boolean textChanged = true;
     private RawListener rawListener;
     private final String DATAFILE_SUFFIX = ".inttemp";
-    private String curMisspelled;
-    protected int start, end;
+    protected Point pointClicked;
 
     /**
      * Creates new form Gui
@@ -282,17 +281,10 @@ public class Gui extends javax.swing.JFrame {
         DefaultKeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(dispatcher);
     }
 
-    void getSuggestions(String misspelled) {
-        // to be implemented in subclass
-    }
-
     /**
-     * 
+     * Builds context menu for textarea.
      */
-    private void populatePopupMenu() {
-        popup.removeAll();
-
-        getSuggestions(curMisspelled);
+    void populatePopupMenu() {
         m_undoAction = new AbstractAction(vietpadResources.getString("Undo")) {
 
             @Override
@@ -543,21 +535,15 @@ public class Gui extends javax.swing.JFrame {
         boolean vie = curLangCode.contains("vie");
         VietKeyListener.setVietModeEnabled(vie);
         jTextArea1.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 if (e.isPopupTrigger()) {
-                    try {
-                        int offset = jTextArea1.viewToModel(e.getPoint());
-                        start = javax.swing.text.Utilities.getWordStart(jTextArea1, offset);
-                        end = javax.swing.text.Utilities.getWordEnd(jTextArea1, offset);
-                        curMisspelled = jTextArea1.getDocument().getText(start, end-start);
-                        final MouseEvent me = e;
-                        SwingUtilities.invokeLater(new Runnable() {
-                            public void run() {
-                                populatePopupMenu();
-                                popup.show(me.getComponent(), me.getX(), me.getY());
-                            }
-                        });
-                    } catch (javax.swing.text.BadLocationException ble) {}
+                    pointClicked = e.getPoint();
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            populatePopupMenu();
+                            popup.show(e.getComponent(), e.getX(), e.getY());
+                        }
+                    });
                 }
             }
 
@@ -1926,6 +1912,7 @@ public class Gui extends javax.swing.JFrame {
                     helptopicsFrame.setTitle(jMenuItemHelp.getText());
                 }
                 filechooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
+                popup.removeAll();
                 populatePopupMenu();
             }
         });
