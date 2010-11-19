@@ -712,6 +712,6 @@ namespace VietOCR.NET
         private System.Windows.Forms.ToolStripMenuItem metadataToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
         protected System.Windows.Forms.ToolStripMenuItem screenshotModeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton toolStripButtonSpellCheck;
+        protected System.Windows.Forms.ToolStripButton toolStripButtonSpellCheck;
     }
 }

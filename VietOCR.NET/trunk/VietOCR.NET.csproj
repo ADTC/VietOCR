@@ -158,6 +158,12 @@
     <Compile Include="GUIWithSettings.Designer.cs">
       <DependentUpon>GUIWithSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUIWithSpellcheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIWithSpellcheck.Designer.cs">
+      <DependentUpon>GUIWithSpellcheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUIWithTools.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -343,6 +349,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUIWithSettings.resx">
       <DependentUpon>GUIWithSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIWithSpellcheck.resx">
+      <DependentUpon>GUIWithSpellcheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIWithTools.resx">
       <DependentUpon>GUIWithTools.cs</DependentUpon>
