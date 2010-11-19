@@ -71,6 +71,7 @@ namespace VietOCR.NET
         private bool IsFitForZoomIn = false;
         private const float ZOOM_FACTOR = 1.25f;
         private Point curScrollPos;
+        protected Point pointClicked;
 
         System.CodeDom.Compiler.TempFileCollection tempFileCollection = new System.CodeDom.Compiler.TempFileCollection();
 
@@ -1161,6 +1162,23 @@ namespace VietOCR.NET
         protected virtual void toolStripButtonSpellCheck_Click(object sender, EventArgs e)
         {
             MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
+        }
+
+        protected virtual void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            string[] sug = { "Undo", "Redo" };
+            foreach (string word in sug)
+            {
+                this.contextMenuStrip1.Items.Add(word);
+            }
+        }
+
+        private void textBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                pointClicked = e.Location;
+            }
         }
     }
 }
