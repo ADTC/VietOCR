@@ -28,7 +28,6 @@ namespace VietOCR.NET
             return spellingErrorRanges.ToArray();
         }
 
-
         public SpellChecker(TextBoxBase textbox, string langCode)
         {
             this.textbox = textbox;
@@ -49,7 +48,7 @@ namespace VietOCR.NET
             localeId = ht[langCode.Substring(0, 3)];
         }
 
-        public void enableSpellCheck()
+        public void EnableSpellCheck()
         {
             if (localeId == null)
             {
@@ -66,7 +65,7 @@ namespace VietOCR.NET
                 this.textbox.TextChanged += (System.EventHandler)listeners[0];
                 cntl = new CustomPaintTextBox(this.textbox, this);
 
-                spellCheck();
+                SpellCheck();
             }
             catch (Exception e)
             {
@@ -74,11 +73,11 @@ namespace VietOCR.NET
             }
         }
 
-        void spellCheck()
+        public void SpellCheck()
         {
             spellingErrorRanges.Clear();
-            List<String> words = parseText(textbox.Text);
-            List<String> misspelledWords = spellCheck(words);
+            List<String> words = ParseText(textbox.Text);
+            List<String> misspelledWords = SpellCheck(words);
             if (misspelledWords.Count == 0)
             {
                 return;
@@ -106,7 +105,7 @@ namespace VietOCR.NET
             //new CustomPaintTextBox(textbox, this);
         }
 
-        List<String> spellCheck(List<String> words)
+        List<String> SpellCheck(List<String> words)
         {
             List<String> misspelled = new List<String>();
 
@@ -126,7 +125,7 @@ namespace VietOCR.NET
             return misspelled;
         }
 
-        List<String> parseText(String text)
+        List<String> ParseText(String text)
         {
             List<String> words = new List<String>();
             BreakIterator boundary = BreakIterator.GetWordInstance();
@@ -144,7 +143,7 @@ namespace VietOCR.NET
             return words;
         }
 
-        public void disableSpellCheck()
+        public void DisableSpellCheck()
         {
             if (localeId == null)
             {
@@ -161,10 +160,48 @@ namespace VietOCR.NET
 
         private void textbox_TextChanged(object sender, EventArgs e)
         {
-            spellCheck();
+            SpellCheck();
             this.textbox.Invalidate();
         }
 
+        public List<String> Suggest(string misspelled)
+        {
+            List<String> list = new List<String>();
+            list.Add(misspelled);
+
+            if (SpellCheck(list).Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                return spellDict.Suggest(misspelled); // TODO: exception thrown here.
+            }
+        }
+
+        public void IgnoreWord(string word)
+        {
+            if (!userWordList.Contains(word.ToLower()))
+            {
+                userWordList.Add(word.ToLower());
+            }
+        }
+
+        public void AddWord(string word)
+        {
+            if (!userWordList.Contains(word.ToLower()))
+            {
+                userWordList.Add(word.ToLower());
+                String baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                string strUserDictFile = Path.Combine(baseDir, @"dict\user.dic");
+
+                using (StreamWriter sw = new StreamWriter(strUserDictFile, true, Encoding.UTF8))
+                {
+                    sw.WriteLine(word);
+                    sw.Close();
+                }
+            }
+        }
         void LoadUserDictionary()
         {
             try

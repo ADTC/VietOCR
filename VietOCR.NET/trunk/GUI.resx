@@ -526,6 +526,18 @@
   <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>116, 544</value>
+  </metadata>
+  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
+    <value>contextMenuStrip1</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="textBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -590,7 +602,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
@@ -827,7 +839,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 544</value>
@@ -863,7 +875,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 24</value>
@@ -937,15 +949,15 @@
   <data name="toolStripButtonSpellCheck.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHUSURBVDhPY2AYFMCp12qm7xSXkyDH2HZbx7tPcrxm1Ww6
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHTSURBVDhPY2AYFMCp12qm7xSXkyDH2HZbx7tPcrxm1Ww6
         07LZdBdITC9Xs0Q7Q3W1YoLiTMVYxZkYjgZp9pjosMu208LIusMi3gKoGaTIutXkmkaBhqRxpd41nD51
         7rOOtwe6wLbLssSq1XSmRYNRvHWX5TXTasNd2jlqM1WTleKx2SofP5+DIe0MK4P7RPtddj1Wq0GaHSfa
         PzKqMIg3KNQEu0A1SWm1UpS8p14Omgvizxoz1N+8wRBxfhqDywQ7sN9BwLhMbybIvyZAJ4P8q5OlcVIu
-        Wk5SIUqhXS1RbZdKvMIV3+rYD+Id1/4w1998w2B/UoL4SAwFKq65ed192ZP/3PU3vzBYHVFG1VxzM4Gh
-        7JYrVhODz/iIt137E7jiyX/m2uvvGCyOSWOqK76lJbT48Q+G6muLGQqPcYIV1P9nYog6M9ly3qP/AUuf
+        Wk5SIUqhXS1RbZdKvMIVn+rYD+KNV/4w1998w2B/UoL4SAwFKq65ed192ZP/3PU3vzBYHVFG1VxzM4Gh
+        7JYrVhODz/iI11/5E7jiyX/m2uvvGCyOSWOqK76lJbT48Q+G6muLGQqPcYIV1P9nYog6M9ly3qP/AUuf
         /Gcovf6cwXQ/HmenXq72Xf/8P3Pn7WcMQFsZiq+edF8E1LwEqDn33CMGLXyaQTba72dhqLl+Pmzti/+W
-        cx78z9j44n/Awsf/GTIu3yOsGeYp9+MKwvVX/lTuePXfb/7D/wyp528zyBOyGT1ETA8UOU27/58h4cw9
-        0jXDDNPc20G+ZuJTBwMArQK5aOMLvAcAAAAASUVORK5CYII=
+        cx78z9j44n/Awsf/GTIu3yOsGeYp9+MKwkD/Vu549d9v/sP/DKnnbzPIE7IZPURMDxQ5Tbv/nyHhzD3S
+        NcMM09zbQb5m4lMHAwCE67lV9GIkKwAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="toolStripButtonSpellCheck.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -976,7 +988,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <metadata name="backgroundWorkerScan.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
