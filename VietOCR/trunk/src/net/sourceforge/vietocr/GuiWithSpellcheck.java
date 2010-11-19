@@ -15,6 +15,7 @@
  */
 package net.sourceforge.vietocr;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -73,6 +74,7 @@ public class GuiWithSpellcheck extends GuiWithSettings {
 
         for (String word : suggests) {
             JMenuItem item = new JMenuItem(word);
+            item.setFont(item.getFont().deriveFont(Font.BOLD));
             item.setActionCommand(word);
             item.addActionListener(correctLst);
             popup.add(item);
