@@ -1094,7 +1094,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuHelp.setMnemonic('a');
         jMenuHelp.setText(bundle.getString("jMenuHelp.Text")); // NOI18N
 
-        jMenuItemHelp.setText(APP_NAME + " " + bundle.getString("jMenuItemHelp.Text"));
+        jMenuItemHelp.setText(bundle.getString("jMenuItemHelp.Text")); // NOI18N
         jMenuItemHelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemHelpActionPerformed(evt);
@@ -1103,7 +1103,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuHelp.add(jMenuItemHelp);
         jMenuHelp.add(jSeparator5);
 
-        jMenuItemAbout.setText(bundle.getString("jMenuItemAbout.Text") + " " + APP_NAME);
+        jMenuItemAbout.setText(bundle.getString("jMenuItemAbout.Text")); // NOI18N
         jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemAboutActionPerformed(evt);
@@ -1906,8 +1906,6 @@ public class Gui extends javax.swing.JFrame {
                 if (imageTotal > 0) {
                     jLabelCurIndex.setText(bundle.getString("Page_") + (imageIndex + 1) + " " + bundle.getString("of_") + imageTotal);
                 }
-                jMenuItemHelp.setText(APP_NAME + " " + jMenuItemHelp.getText());
-                jMenuItemAbout.setText(jMenuItemAbout.getText() + " " + APP_NAME);
                 if (helptopicsFrame != null) {
                     helptopicsFrame.setTitle(jMenuItemHelp.getText());
                 }
