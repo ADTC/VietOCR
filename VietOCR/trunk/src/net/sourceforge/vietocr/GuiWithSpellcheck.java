@@ -19,11 +19,31 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JMenuItem;
+import javax.swing.text.BadLocationException;
 
 public class GuiWithSpellcheck extends GuiWithSettings {
+
+    private int start, end;
     private SpellChecker sp;
 
     @Override
+    void populatePopupMenu() {
+        popup.removeAll();
+
+        try {
+            if (pointClicked != null) {
+                int offset = jTextArea1.viewToModel(pointClicked);
+                start = javax.swing.text.Utilities.getWordStart(jTextArea1, offset);
+                end = javax.swing.text.Utilities.getWordEnd(jTextArea1, offset);
+                String curMisspelled = jTextArea1.getDocument().getText(start, end - start);
+                getSuggestions(curMisspelled);
+            }
+        } catch (BadLocationException e) {
+        }
+
+        super.populatePopupMenu();
+    }
+
     void getSuggestions(final String misspelled) {
         if (sp == null || misspelled == null || misspelled.trim().length() == 0) {
             return;
