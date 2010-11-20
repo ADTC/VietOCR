@@ -16,6 +16,7 @@
 package net.sourceforge.vietocr;
 
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -28,32 +29,28 @@ public class GuiWithSpellcheck extends GuiWithSettings {
     private SpellChecker sp;
 
     @Override
-    void populatePopupMenu() {
-        popup.removeAll();
-
+    void populatePopupMenuWithSuggestions(Point pointClicked) {
         try {
-            if (pointClicked != null) {
-                int offset = jTextArea1.viewToModel(pointClicked);
-                start = javax.swing.text.Utilities.getWordStart(jTextArea1, offset);
-                end = javax.swing.text.Utilities.getWordEnd(jTextArea1, offset);
-                String curMisspelled = jTextArea1.getDocument().getText(start, end - start);
-                getSuggestions(curMisspelled);
-            }
+            int offset = jTextArea1.viewToModel(pointClicked);
+            start = javax.swing.text.Utilities.getWordStart(jTextArea1, offset);
+            end = javax.swing.text.Utilities.getWordEnd(jTextArea1, offset);
+            String curWord = jTextArea1.getDocument().getText(start, end - start);
+            getSuggestions(curWord);
         } catch (BadLocationException e) {
         }
-
-        super.populatePopupMenu();
     }
 
-    void getSuggestions(final String misspelled) {
-        if (sp == null || misspelled == null || misspelled.trim().length() == 0) {
+    void getSuggestions(final String curWord) {
+        if (sp == null || curWord == null || curWord.trim().length() == 0) {
             return;
         }
 
-        List<String> suggests = sp.suggest(misspelled);
+        List<String> suggests = sp.suggest(curWord);
         if (suggests == null || suggests.isEmpty()) {
             return;
         }
+
+        popup.removeAll();
 
         ActionListener correctLst = new ActionListener() {
 
@@ -61,9 +58,9 @@ public class GuiWithSpellcheck extends GuiWithSettings {
             public void actionPerformed(ActionEvent ae) {
                 String word = ae.getActionCommand();
                 if (word.equals("ignore")) {
-                    sp.ignoreWord(misspelled);
+                    sp.ignoreWord(curWord);
                 } else if (word.equals("add")) {
-                    sp.addWord(misspelled);
+                    sp.addWord(curWord);
                 } else {
                     jTextArea1.select(start, end);
                     jTextArea1.replaceSelection(word);
@@ -79,6 +76,7 @@ public class GuiWithSpellcheck extends GuiWithSettings {
             item.addActionListener(correctLst);
             popup.add(item);
         }
+
         popup.addSeparator();
         JMenuItem item = new JMenuItem(bundle.getString("Ignore_All"));
         item.setActionCommand("ignore");
@@ -89,6 +87,9 @@ public class GuiWithSpellcheck extends GuiWithSettings {
         item.addActionListener(correctLst);
         popup.add(item);
         popup.addSeparator();
+
+        // load standard menu items
+        populatePopupMenu();
     }
 
     @Override
