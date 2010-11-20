@@ -42,8 +42,11 @@ namespace VietOCR.NET
             BreakIterator boundary = BreakIterator.GetWordInstance();
             boundary.Text = this.textBox1.Text;
             end = boundary.Following(offset);
-            start = boundary.Previous();
-            misspelled = this.textBox1.Text.Substring(start, end - start);
+            if (end != BreakIterator.DONE)
+            {
+                start = boundary.Previous();
+                misspelled = this.textBox1.Text.Substring(start, end - start);
+            }
 
             List<String> sug = GetSuggestions(misspelled);
 
@@ -93,7 +96,7 @@ namespace VietOCR.NET
             ToolStripItem item = (ToolStripItem)sender;
             object command = item.Tag;
 
-            if (command == null)          
+            if (command == null)
             {
                 this.textBox1.Select(start, end - start);
                 this.textBox1.SelectedText = item.Text;
