@@ -1912,6 +1912,12 @@ public class Gui extends javax.swing.JFrame {
                 filechooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
                 popup.removeAll();
                 populatePopupMenu();
+                
+                for (Component comp : jMenuUILang.getMenuComponents()) {
+                    JMenuItem item = (JMenuItem) comp;
+                    Locale locale = new Locale(item.getActionCommand());
+                    item.setText(locale.getDisplayLanguage());
+                }
             }
         });
     }
