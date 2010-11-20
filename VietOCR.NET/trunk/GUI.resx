@@ -527,16 +527,16 @@
     <value>0</value>
   </data>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>116, 544</value>
+    <value>771, 17</value>
   </metadata>
   <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 4</value>
+    <value>153, 170</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
     <value>contextMenuStrip1</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>VietOCR.NET.Controls.StandardTextBoxContextMenuStrip, VietOCR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="textBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -949,15 +949,15 @@
   <data name="toolStripButtonSpellCheck.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHTSURBVDhPY2AYFMCp12qm7xSXkyDH2HZbx7tPcrxm1Ww6
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHRSURBVDhPY2AYFMCp12qm7xSXkyDH2HZbx7tPcrxm1Ww6
         07LZdBdITC9Xs0Q7Q3W1YoLiTMVYxZkYjgZp9pjosMu208LIusMi3gKoGaTIutXkmkaBhqRxpd41nD51
         7rOOtwe6wLbLssSq1XSmRYNRvHWX5TXTasNd2jlqM1WTleKx2SofP5+DIe0MK4P7RPtddj1Wq0GaHSfa
         PzKqMIg3KNQEu0A1SWm1UpS8p14Omgvizxoz1N+8wRBxfhqDywQ7sN9BwLhMbybIvyZAJ4P8q5OlcVIu
-        Wk5SIUqhXS1RbZdKvMIVn+rYD+KNV/4w1998w2B/UoL4SAwFKq65ed192ZP/3PU3vzBYHVFG1VxzM4Gh
-        7JYrVhODz/iI11/5E7jiyX/m2uvvGCyOSWOqK76lJbT48Q+G6muLGQqPcYIV1P9nYog6M9ly3qP/AUuf
-        /Gcovf6cwXQ/HmenXq72Xf/8P3Pn7WcMQFsZiq+edF8E1LwEqDn33CMGLXyaQTba72dhqLl+Pmzti/+W
-        cx78z9j44n/Awsf/GTIu3yOsGeYp9+MKwkD/Vu549d9v/sP/DKnnbzPIE7IZPURMDxQ5Tbv/nyHhzD3S
-        NcMM09zbQb5m4lMHAwCE67lV9GIkKwAAAABJRU5ErkJggg==
+        Wk5SIUqhXS1RbZdKvMIVn+rYD+L1V/4w1998w2B/UoL4SAwFKq65ed192ZP/3PU3vzBYHVFG1VxzM4Gh
+        7JYrVhODz/iAbA1c8eQ/c+31dwwWx6Qx1RXf0hJa/PgHQ/W1xQyFxzjBCur/MzFEnZlsOe/R/4ClT/4z
+        lF5/zmC6H4+zUy9X+65//p+58/YzBqCtDMVXT7ovAmpeAtSce+4RgxY+zSAb7fezMNRcPx+29sV/yzkP
+        /mdsfPE/YOHj/wwZl+8R1gzzlPtxBWGgfyt3vPrvN//hf4bU87cZ5AnZjB4ipgeKnKbd/8+QcOYe6Zph
+        hmnu7SBfM/GpgwEAgEO5U7JB15UAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="toolStripButtonSpellCheck.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">

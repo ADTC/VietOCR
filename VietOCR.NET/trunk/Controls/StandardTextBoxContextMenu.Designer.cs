@@ -91,6 +91,20 @@ namespace VietOCR.NET.Controls
             this.Opening += new System.ComponentModel.CancelEventHandler(StandardTextBoxContextMenuStrip_Opening);
         }
 
+        public void RepopulateMenu()
+        {
+            this.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+                this.miUndo,
+                this.miSeparator,
+                this.miCut,
+                this.miCopy,
+                this.miPaste,
+                this.miDelete,
+                this.miSeparator2,
+                this.miSelectAll
+            });
+        }
+
         void StandardTextBoxContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Get the text box that the context menu was popped on
