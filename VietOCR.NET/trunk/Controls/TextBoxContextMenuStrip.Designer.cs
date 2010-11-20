@@ -1,9 +1,8 @@
 ﻿//
-// Adapted from http://bytes.com/topic/c-sharp/answers/265836-custom-paste-context-menu-fvor-text-boxes
+// Adapted from VietPad.NET and http://bytes.com/topic/c-sharp/answers/265836-custom-paste-context-menu-fvor-text-boxes
 //
 
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace VietOCR.NET.Controls
 {
@@ -177,10 +176,6 @@ namespace VietOCR.NET.Controls
             }
         }
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern int SendMessage(System.IntPtr hWnd, int msg, int lParam, int wParam);
-        private const int WM_CLEAR = 0x0303;
-
         private void miDelete_Click(object sender, System.EventArgs e)
         {
             // Get the text box that the context menu was popped on
@@ -190,7 +185,7 @@ namespace VietOCR.NET.Controls
 
                 if (clickedBox.SelectionLength > 0)
                 {
-                    SendMessage(clickedBox.Handle, WM_CLEAR, 0, 0);
+                    clickedBox.SelectedText = string.Empty;
                 }
             }
         }
