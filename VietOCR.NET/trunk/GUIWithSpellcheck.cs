@@ -37,6 +37,8 @@ namespace VietOCR.NET
 
         protected override void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
+            this.contextMenuStrip1.Items.Clear();
+
             int offset = this.textBox1.GetCharIndexFromPosition(pointClicked);
             BreakIterator boundary = BreakIterator.GetWordInstance();
             boundary.Text = this.textBox1.Text;
@@ -52,10 +54,9 @@ namespace VietOCR.NET
 
             if (sug == null || sug.Count == 0)
             {
+                this.contextMenuStrip1.RepopulateContextMenu();
                 return;
             }
-
-            this.contextMenuStrip1.Items.Clear();
 
             foreach (string word in sug)
             {
@@ -75,10 +76,10 @@ namespace VietOCR.NET
             item1.Tag = "add";
             item1.Click += new EventHandler(item_Click);
             this.contextMenuStrip1.Items.Add(item1);
-
             this.contextMenuStrip1.Items.Add("-");
 
-            this.contextMenuStrip1.RepopulateMenu();
+            // load standard menu items
+            this.contextMenuStrip1.RepopulateContextMenu();
         }
 
         List<String> GetSuggestions(string curWord)
