@@ -48,7 +48,7 @@ namespace VietOCR.NET
             this.toolStripBtnRotateCCW = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnRotateCW = new System.Windows.Forms.ToolStripButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.contextMenuStrip1 = new VietOCR.NET.Controls.StandardTextBoxContextMenuStrip(this.components);
+            this.contextMenuStrip1 = new VietOCR.NET.Controls.TextBoxContextMenuStrip(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -723,6 +723,6 @@ namespace VietOCR.NET
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
         protected System.Windows.Forms.ToolStripMenuItem screenshotModeToolStripMenuItem;
         protected System.Windows.Forms.ToolStripButton toolStripButtonSpellCheck;
-        protected VietOCR.NET.Controls.StandardTextBoxContextMenuStrip contextMenuStrip1;
+        protected VietOCR.NET.Controls.TextBoxContextMenuStrip contextMenuStrip1;
     }
 }
