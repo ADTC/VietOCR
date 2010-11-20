@@ -76,13 +76,13 @@ namespace VietOCR.NET
                 ToolStripRadioButtonMenuItem miuil = new ToolStripRadioButtonMenuItem();
                 CultureInfo ci = new CultureInfo(uiLang);
                 miuil.Tag = ci.Name;
-                miuil.Text = ci.Parent.DisplayName;
+                miuil.Text = ci.Parent.DisplayName + " (" + ci.Parent.NativeName + ")";
                 miuil.CheckOnClick = true;
                 miuil.Click += eh1;
                 ar.Add(miuil);
             }
-            this.uILanguageToolStripMenuItem.DropDownItems.AddRange(ar.ToArray());
 
+            this.uILanguageToolStripMenuItem.DropDownItems.AddRange(ar.ToArray());
         }
 
         protected override void OnLoad(EventArgs ea)
