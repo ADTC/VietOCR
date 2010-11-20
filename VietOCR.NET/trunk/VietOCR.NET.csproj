@@ -117,6 +117,12 @@
     <Compile Include="Controls\ScrollablePictureBox.Designer.cs">
       <DependentUpon>ScrollablePictureBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StandardTextBoxContextMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\StandardTextBoxContextMenu.Designer.cs">
+      <DependentUpon>StandardTextBoxContextMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ToolStripRadioButtonMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -327,11 +333,17 @@
     <None Include="tessdata\vie.word-dawg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <EmbeddedResource Include="ChangeCaseDialog.lt-LT.resx">
+      <DependentUpon>ChangeCaseDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChangeCaseDialog.resx">
       <DependentUpon>ChangeCaseDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChangeCaseDialog.vi-VN.resx">
       <DependentUpon>ChangeCaseDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StandardTextBoxContextMenu.resx">
+      <DependentUpon>StandardTextBoxContextMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI.lt-LT.resx">
       <DependentUpon>GUI.cs</DependentUpon>
