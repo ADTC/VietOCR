@@ -41,16 +41,18 @@ public class GuiWithSpellcheck extends GuiWithSettings {
     }
 
     void getSuggestions(final String curWord) {
+        popup.removeAll();
+        
         if (sp == null || curWord == null || curWord.trim().length() == 0) {
+            repopulatePopupMenu();
             return;
         }
 
         List<String> suggests = sp.suggest(curWord);
         if (suggests == null || suggests.isEmpty()) {
+            repopulatePopupMenu();
             return;
         }
-
-        popup.removeAll();
 
         ActionListener correctLst = new ActionListener() {
 
@@ -89,7 +91,7 @@ public class GuiWithSpellcheck extends GuiWithSettings {
         popup.addSeparator();
 
         // load standard menu items
-        populatePopupMenu();
+        repopulatePopupMenu();
     }
 
     @Override

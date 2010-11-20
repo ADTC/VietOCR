@@ -284,6 +284,18 @@ public class Gui extends javax.swing.JFrame {
         // to be implemented in subclass
     }
 
+    void repopulatePopupMenu() {
+        popup.add(m_undoAction);
+        popup.add(m_redoAction);
+        popup.addSeparator();
+        popup.add(actionCut);
+        popup.add(actionCopy);
+        popup.add(actionPaste);
+        popup.add(actionDelete);
+        popup.addSeparator();
+        popup.add(actionSelectAll);
+    }
+
     /**
      * Builds context menu for textarea.
      */
@@ -1329,7 +1341,7 @@ public class Gui extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, APP_NAME + ", " + version + " \u00a9 2007\n"
                     + "Java GUI Frontend for Tesseract 2.0x OCR Engine\n"
                     + DateFormat.getDateInstance(DateFormat.LONG).format(releaseDate)
-                    + "\nhttp://vietocr.sourceforge.net", ((JMenuItem)evt.getSource()).getText(), JOptionPane.INFORMATION_MESSAGE);
+                    + "\nhttp://vietocr.sourceforge.net", ((JMenuItem) evt.getSource()).getText(), JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -1911,7 +1923,7 @@ public class Gui extends javax.swing.JFrame {
                 filechooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
                 popup.removeAll();
                 populatePopupMenu();
-                
+
                 for (Component comp : jMenuUILang.getMenuComponents()) {
                     JMenuItem item = (JMenuItem) comp;
                     Locale locale = new Locale(item.getActionCommand());
