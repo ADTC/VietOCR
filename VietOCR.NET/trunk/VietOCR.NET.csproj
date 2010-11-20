@@ -333,11 +333,17 @@
     <EmbeddedResource Include="ChangeCaseDialog.vi-VN.resx">
       <DependentUpon>ChangeCaseDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI.lt-LT.resx">
+      <DependentUpon>GUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI.vi-VN.resx">
       <DependentUpon>GUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIWithCommand.resx">
       <DependentUpon>GUIWithCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIWithInputMethod.lt-LT.resx">
+      <DependentUpon>GUIWithInputMethod.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIWithInputMethod.resx">
       <SubType>Designer</SubType>
@@ -356,11 +362,17 @@
     <EmbeddedResource Include="GUIWithTools.resx">
       <DependentUpon>GUIWithTools.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ImageInfoDialog.lt-LT.resx">
+      <DependentUpon>ImageInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImageInfoDialog.resx">
       <DependentUpon>ImageInfoDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImageInfoDialog.vi-VN.resx">
       <DependentUpon>ImageInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsDialog.lt-LT.resx">
+      <DependentUpon>OptionsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsDialog.resx">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
@@ -372,6 +384,9 @@
     <EmbeddedResource Include="readme_cs_vi.html" />
     <EmbeddedResource Include="Properties\Resources.vi-VN.resx">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplitPdfDialog.lt-LT.resx">
+      <DependentUpon>SplitPdfDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SplitPdfDialog.resx">
       <DependentUpon>SplitPdfDialog.cs</DependentUpon>

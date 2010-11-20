@@ -70,7 +70,7 @@ namespace VietOCR.NET
 
             ar.Clear();
 
-            String[] uiLangs = { "en-US", "vi-VN" };
+            String[] uiLangs = { "en-US", "lt-LT", "vi-VN" };
             foreach (string uiLang in uiLangs)
             {
                 ToolStripRadioButtonMenuItem miuil = new ToolStripRadioButtonMenuItem();
