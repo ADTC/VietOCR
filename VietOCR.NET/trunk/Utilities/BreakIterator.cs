@@ -35,15 +35,17 @@ public class BreakIterator
 
     public string Text
     {
-        set { text = value; }
+        set { 
+            text = value;
+            mc = regex.Matches(text); // collection of all word boundaries
+            //		for (int i = 0; i < mc.Count; i++)
+            //		{    
+            //			System.Console.WriteLine("Found '{0}' at position {1}", mc[i].Value, mc[i].Index);
+            //		}        
+        }
     }
     public int First()
     {
-        mc = regex.Matches(text); // collection of all word beginnings
-        //		for (int i = 0; i < mc.Count; i++)
-        //		{    
-        //			System.Console.WriteLine("Found '{0}' at position {1}", mc[i].Value, mc[i].Index);
-        //		}
         index = 0;
         if (mc.Count > 0)
         {
@@ -94,6 +96,32 @@ public class BreakIterator
         }
 
         index = 0;
+        return DONE;
+    }
+
+    public int Following(int offset)
+    {
+        int start = First();
+        for (int end = Next(); end != BreakIterator.DONE; start = end, end = Next())
+        {
+            if (end > offset)
+            {
+                return end;
+            }
+        }
+        return DONE;
+    }
+
+    public int Preceding(int offset)
+    {
+        int start = First();
+        for (int end = Next(); end != BreakIterator.DONE; start = end, end = Next())
+        {
+            if (end > offset)
+            {
+                return Previous();
+            }
+        }
         return DONE;
     }
 }
