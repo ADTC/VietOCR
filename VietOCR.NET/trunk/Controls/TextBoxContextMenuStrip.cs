@@ -7,14 +7,14 @@ using System.Windows.Forms;
 
 namespace VietOCR.NET.Controls
 {
-    public partial class StandardTextBoxContextMenuStrip : ContextMenuStrip
+    public partial class TextBoxContextMenuStrip : ContextMenuStrip
     {
-        public StandardTextBoxContextMenuStrip()
+        public TextBoxContextMenuStrip()
         {
             InitializeComponent();
         }
 
-        public StandardTextBoxContextMenuStrip(IContainer container)
+        public TextBoxContextMenuStrip(IContainer container)
         {
             container.Add(this);
 

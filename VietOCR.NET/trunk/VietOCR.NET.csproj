@@ -117,11 +117,11 @@
     <Compile Include="Controls\ScrollablePictureBox.Designer.cs">
       <DependentUpon>ScrollablePictureBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\StandardTextBoxContextMenu.cs">
+    <Compile Include="Controls\TextBoxContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\StandardTextBoxContextMenu.Designer.cs">
-      <DependentUpon>StandardTextBoxContextMenu.cs</DependentUpon>
+    <Compile Include="Controls\TextBoxContextMenu.Designer.cs">
+      <DependentUpon>TextBoxContextMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ToolStripRadioButtonMenuItem.cs">
       <SubType>Component</SubType>
@@ -342,8 +342,8 @@
     <EmbeddedResource Include="ChangeCaseDialog.vi-VN.resx">
       <DependentUpon>ChangeCaseDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\StandardTextBoxContextMenu.resx">
-      <DependentUpon>StandardTextBoxContextMenu.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\TextBoxContextMenu.resx">
+      <DependentUpon>TextBoxContextMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI.lt-LT.resx">
       <DependentUpon>GUI.cs</DependentUpon>

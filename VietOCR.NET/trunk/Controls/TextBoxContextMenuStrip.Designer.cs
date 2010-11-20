@@ -10,7 +10,7 @@ namespace VietOCR.NET.Controls
     /// <summary>
     /// 
     /// </summary>
-    partial class StandardTextBoxContextMenuStrip
+    partial class TextBoxContextMenuStrip
     {
         /// <summary>
         /// Required designer variable.
