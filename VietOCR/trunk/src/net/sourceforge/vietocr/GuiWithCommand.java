@@ -18,7 +18,6 @@ package net.sourceforge.vietocr;
 import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
-import java.util.*;
 import java.util.List;
 import javax.imageio.IIOImage;
 import javax.swing.*;

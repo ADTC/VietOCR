@@ -78,7 +78,6 @@ public class Gui extends javax.swing.JFrame {
     private boolean textChanged = true;
     private RawListener rawListener;
     private final String DATAFILE_SUFFIX = ".inttemp";
-    protected Point pointClicked;
 
     /**
      * Creates new form Gui
@@ -281,6 +280,10 @@ public class Gui extends javax.swing.JFrame {
         DefaultKeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(dispatcher);
     }
 
+    void populatePopupMenuWithSuggestions(Point p) {
+        // to be implemented in subclass
+    }
+
     /**
      * Builds context menu for textarea.
      */
@@ -298,7 +301,6 @@ public class Gui extends javax.swing.JFrame {
             }
         };
 
-
         popup.add(m_undoAction);
 
         m_redoAction = new AbstractAction(vietpadResources.getString("Redo")) {
@@ -313,7 +315,6 @@ public class Gui extends javax.swing.JFrame {
                 updateUndoRedo();
             }
         };
-
 
         popup.add(m_redoAction);
         popup.addSeparator();
@@ -337,7 +338,6 @@ public class Gui extends javax.swing.JFrame {
                 updatePaste();
             }
         };
-
 
         popup.add(actionCopy);
 
@@ -537,10 +537,9 @@ public class Gui extends javax.swing.JFrame {
         jTextArea1.addMouseListener(new MouseAdapter() {
             public void mousePressed(final MouseEvent e) {
                 if (e.isPopupTrigger()) {
-                    pointClicked = e.getPoint();
                     SwingUtilities.invokeLater(new Runnable() {
                         public void run() {
-                            populatePopupMenu();
+                            populatePopupMenuWithSuggestions(e.getPoint());
                             popup.show(e.getComponent(), e.getX(), e.getY());
                         }
                     });
