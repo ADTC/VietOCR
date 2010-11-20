@@ -179,8 +179,8 @@ public class SpellChecker {
             try {
                 File userDict = new File(baseDir, "dict/user.dic");
                 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(userDict, true), "UTF8"));
-                out.newLine();
                 out.write(word);
+                out.newLine();
                 out.close();
             } catch (IOException e) {
                 e.printStackTrace();
