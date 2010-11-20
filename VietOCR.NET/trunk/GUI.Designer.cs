@@ -48,7 +48,7 @@ namespace VietOCR.NET
             this.toolStripBtnRotateCCW = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnRotateCW = new System.Windows.Forms.ToolStripButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStrip1 = new VietOCR.NET.Controls.StandardTextBoxContextMenuStrip(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,7 +99,6 @@ namespace VietOCR.NET
             this.toolStripButtonSpellCheck = new System.Windows.Forms.ToolStripButton();
             this.backgroundWorkerScan = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerLoad = new System.ComponentModel.BackgroundWorker();
-            this.standardTextBoxContextMenuStrip1 = new VietOCR.NET.Controls.StandardTextBoxContextMenuStrip(this.components);
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -254,7 +253,7 @@ namespace VietOCR.NET
             // textBox1
             // 
             this.textBox1.AllowDrop = true;
-            this.textBox1.ContextMenuStrip = this.standardTextBoxContextMenuStrip1;
+            this.textBox1.ContextMenuStrip = this.contextMenuStrip1;
             resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
             this.textBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.splitContainer2_Panel2_DragDrop);
@@ -265,7 +264,7 @@ namespace VietOCR.NET
             // 
             // contextMenuStrip1
             // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Name = "standardTextBoxContextMenuStrip1";
             resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
@@ -621,11 +620,6 @@ namespace VietOCR.NET
             this.backgroundWorkerLoad.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerLoad_DoWork);
             this.backgroundWorkerLoad.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerLoad_RunWorkerCompleted);
             // 
-            // standardTextBoxContextMenuStrip1
-            // 
-            this.standardTextBoxContextMenuStrip1.Name = "standardTextBoxContextMenuStrip1";
-            resources.ApplyResources(this.standardTextBoxContextMenuStrip1, "standardTextBoxContextMenuStrip1");
-            // 
             // GUI
             // 
             resources.ApplyResources(this, "$this");
@@ -729,7 +723,6 @@ namespace VietOCR.NET
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
         protected System.Windows.Forms.ToolStripMenuItem screenshotModeToolStripMenuItem;
         protected System.Windows.Forms.ToolStripButton toolStripButtonSpellCheck;
-        protected System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        protected VietOCR.NET.Controls.StandardTextBoxContextMenuStrip standardTextBoxContextMenuStrip1;
+        protected VietOCR.NET.Controls.StandardTextBoxContextMenuStrip contextMenuStrip1;
     }
 }

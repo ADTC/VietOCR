@@ -1164,21 +1164,17 @@ namespace VietOCR.NET
             MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
 
-        protected virtual void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
-        {
-            string[] sug = { "Undo", "Redo" };
-            foreach (string word in sug)
-            {
-                this.contextMenuStrip1.Items.Add(word);
-            }
-        }
-
         private void textBox1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
                 pointClicked = e.Location;
             }
+        }
+
+        protected virtual void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            // To be implemented in subclass.
         }
     }
 }

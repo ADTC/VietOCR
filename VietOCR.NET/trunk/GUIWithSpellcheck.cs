@@ -28,7 +28,7 @@ namespace VietOCR.NET
     {
         private int start, end;
         private SpellChecker sp;
-        private string misspelled;
+        private string curWord;
 
         public GUIWithSpellcheck()
         {
@@ -37,20 +37,25 @@ namespace VietOCR.NET
 
         protected override void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            this.contextMenuStrip1.Items.Clear();
             int offset = this.textBox1.GetCharIndexFromPosition(pointClicked);
             BreakIterator boundary = BreakIterator.GetWordInstance();
             boundary.Text = this.textBox1.Text;
             end = boundary.Following(offset);
+
             if (end != BreakIterator.DONE)
             {
                 start = boundary.Previous();
-                misspelled = this.textBox1.Text.Substring(start, end - start);
+                curWord = this.textBox1.Text.Substring(start, end - start);
             }
 
-            List<String> sug = GetSuggestions(misspelled);
+            List<String> sug = GetSuggestions(curWord);
 
-            if (sug == null) return;
+            if (sug == null || sug.Count == 0)
+            {
+                return;
+            }
+
+            this.contextMenuStrip1.Items.Clear();
 
             foreach (string word in sug)
             {
@@ -73,18 +78,17 @@ namespace VietOCR.NET
 
             this.contextMenuStrip1.Items.Add("-");
 
-            base.contextMenuStrip1_Opening(sender, e);
+            this.contextMenuStrip1.RepopulateMenu();
         }
 
-        List<String> GetSuggestions(string misspelled)
+        List<String> GetSuggestions(string curWord)
         {
-
-            if (sp == null || misspelled == null || misspelled.Trim().Length == 0)
+            if (sp == null || curWord == null || curWord.Trim().Length == 0)
             {
                 return null;
             }
 
-            List<String> suggests = sp.Suggest(misspelled);
+            List<String> suggests = sp.Suggest(curWord);
             if (suggests == null || suggests.Count == 0)
             {
                 return null;
@@ -104,11 +108,11 @@ namespace VietOCR.NET
             }
             else if (command.ToString() == "ignore")
             {
-                sp.IgnoreWord(misspelled);
+                sp.IgnoreWord(curWord);
             }
             else if (command.ToString() == "add")
             {
-                sp.AddWord(misspelled);
+                sp.AddWord(curWord);
             }
 
             sp.SpellCheck();
