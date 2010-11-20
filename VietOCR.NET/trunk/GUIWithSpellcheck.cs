@@ -55,6 +55,7 @@ namespace VietOCR.NET
             foreach (string word in sug)
             {
                 ToolStripMenuItem item = new ToolStripMenuItem(word);
+                item.Font = new Font(item.Font, FontStyle.Bold);
                 item.Click += new EventHandler(item_Click);
                 this.contextMenuStrip1.Items.Add(item);
             }
