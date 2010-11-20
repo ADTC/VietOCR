@@ -1313,7 +1313,7 @@ public class Gui extends javax.swing.JFrame {
     }
 
     private String[] getInstalledUILangs() {
-        String[] locales = {"en", "vi", "lt"};
+        String[] locales = {"en", "lt", "vi"};
         return locales;
     }
 
@@ -1330,7 +1330,7 @@ public class Gui extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, APP_NAME + ", " + version + " \u00a9 2007\n"
                     + "Java GUI Frontend for Tesseract 2.0x OCR Engine\n"
                     + DateFormat.getDateInstance(DateFormat.LONG).format(releaseDate)
-                    + "\nhttp://vietocr.sourceforge.net", APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+                    + "\nhttp://vietocr.sourceforge.net", ((JMenuItem)evt.getSource()).getText(), JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
