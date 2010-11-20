@@ -91,7 +91,7 @@ namespace VietOCR.NET.Controls
             this.Opening += new System.ComponentModel.CancelEventHandler(StandardTextBoxContextMenuStrip_Opening);
         }
 
-        public void RepopulateMenu()
+        public void RepopulateContextMenu()
         {
             this.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
                 this.miUndo,
