@@ -99,6 +99,7 @@ namespace VietOCR.NET
             this.toolStripButtonSpellCheck = new System.Windows.Forms.ToolStripButton();
             this.backgroundWorkerScan = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerLoad = new System.ComponentModel.BackgroundWorker();
+            this.standardTextBoxContextMenuStrip1 = new VietOCR.NET.Controls.StandardTextBoxContextMenuStrip(this.components);
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -253,7 +254,7 @@ namespace VietOCR.NET
             // textBox1
             // 
             this.textBox1.AllowDrop = true;
-            this.textBox1.ContextMenuStrip = this.contextMenuStrip1;
+            this.textBox1.ContextMenuStrip = this.standardTextBoxContextMenuStrip1;
             resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
             this.textBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.splitContainer2_Panel2_DragDrop);
@@ -620,6 +621,11 @@ namespace VietOCR.NET
             this.backgroundWorkerLoad.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerLoad_DoWork);
             this.backgroundWorkerLoad.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerLoad_RunWorkerCompleted);
             // 
+            // standardTextBoxContextMenuStrip1
+            // 
+            this.standardTextBoxContextMenuStrip1.Name = "standardTextBoxContextMenuStrip1";
+            resources.ApplyResources(this.standardTextBoxContextMenuStrip1, "standardTextBoxContextMenuStrip1");
+            // 
             // GUI
             // 
             resources.ApplyResources(this, "$this");
@@ -724,5 +730,6 @@ namespace VietOCR.NET
         protected System.Windows.Forms.ToolStripMenuItem screenshotModeToolStripMenuItem;
         protected System.Windows.Forms.ToolStripButton toolStripButtonSpellCheck;
         protected System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        protected VietOCR.NET.Controls.StandardTextBoxContextMenuStrip standardTextBoxContextMenuStrip1;
     }
 }
