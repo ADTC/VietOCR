@@ -240,7 +240,7 @@ namespace VietOCR.NET
                     }
                 }
             }
-            HtmlHelpForm helpForm = new HtmlHelpForm(Properties.Resources.readme, strProgName + Properties.Resources._Help);
+            HtmlHelpForm helpForm = new HtmlHelpForm(Properties.Resources.readme, ((ToolStripMenuItem)sender).Text);
             helpForm.Owner = this;
             helpForm.Show();
         }
@@ -251,10 +251,10 @@ namespace VietOCR.NET
             string version = System.Configuration.ConfigurationManager.AppSettings["Version"];
 
             MessageBox.Show(this, strProgName + " " + version + " © 2008\n" +
-                ".NET GUI Frontend for Tesseract OCR\n" +
+                ".NET GUI Frontend for Tesseract 2.04 OCR Engine\n" +
                 DateTime.Parse(releaseDate).ToString("D", System.Threading.Thread.CurrentThread.CurrentUICulture).Normalize() + "\n" +
                 "http://vietocr.sourceforge.net",
-                Properties.Resources.About_ + strProgName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ((ToolStripMenuItem)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
