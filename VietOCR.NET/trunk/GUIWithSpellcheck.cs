@@ -26,6 +26,7 @@ namespace VietOCR.NET
 {
     public partial class GUIWithSpellcheck : VietOCR.NET.GUIWithSettings
     {
+        private int start, end;
         private SpellChecker sp;
         private string misspelled;
 
@@ -37,8 +38,17 @@ namespace VietOCR.NET
         protected override void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             this.contextMenuStrip1.Items.Clear();
+            int offset = this.textBox1.GetCharIndexFromPosition(pointClicked);
+            BreakIterator boundary = BreakIterator.GetWordInstance();
+            boundary.Text = this.textBox1.Text;
+            end = boundary.Following(offset);
+            start = boundary.Previous();
+            misspelled = this.textBox1.Text.Substring(start, end - start);
 
-            string[] sug = { "test", "test2" };
+            List<String> sug = GetSuggestions(misspelled);
+
+            if (sug == null) return;
+
             foreach (string word in sug)
             {
                 ToolStripMenuItem item = new ToolStripMenuItem(word);
@@ -62,25 +72,41 @@ namespace VietOCR.NET
             base.contextMenuStrip1_Opening(sender, e);
         }
 
+        List<String> GetSuggestions(string misspelled)
+        {
+
+            if (sp == null || misspelled == null || misspelled.Trim().Length == 0)
+            {
+                return null;
+            }
+
+            List<String> suggests = sp.Suggest(misspelled);
+            if (suggests == null || suggests.Count == 0)
+            {
+                return null;
+            }
+            return suggests;
+        }
+
         void item_Click(object sender, EventArgs e)
         {
             ToolStripItem item = (ToolStripItem)sender;
-            string command = item.Tag.ToString();
-            if (command == "ignore")
+            object command = item.Tag;
+
+            if (command == null)          
+            {
+                this.textBox1.Select(start, end - start);
+                this.textBox1.SelectedText = item.Text;
+            }
+            else if (command.ToString() == "ignore")
             {
                 sp.IgnoreWord(misspelled);
             }
-            else if (command == "add")
+            else if (command.ToString() == "add")
             {
                 sp.AddWord(misspelled);
             }
-            else
-            {
-                int index = this.textBox1.GetCharIndexFromPosition(pointClicked);
-                
-                this.textBox1.Select(0, 0);
-                this.textBox1.SelectedText = item.Text;
-            }
+
             sp.SpellCheck();
         }
 
