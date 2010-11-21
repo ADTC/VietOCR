@@ -758,6 +758,7 @@ public class Gui extends javax.swing.JFrame {
         jToolBar2.add(Box.createHorizontalGlue());
 
         jToggleButtonSpellCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/spellcheck.png"))); // NOI18N
+        jToggleButtonSpellCheck.setToolTipText(bundle.getString("jToggleButtonSpellCheck.ToolTipText")); // NOI18N
         jToggleButtonSpellCheck.setFocusable(false);
         jToggleButtonSpellCheck.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jToggleButtonSpellCheck.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -771,6 +772,7 @@ public class Gui extends javax.swing.JFrame {
         jToggleButtonSpellCheck.getAccessibleContext().setAccessibleName("jToggleButtonSpellCheck");
 
         jLabelLanguage.setText(bundle.getString("jLabelLanguage.Text")); // NOI18N
+        jLabelLanguage.setToolTipText(bundle.getString("jLabelLanguage.ToolTipText")); // NOI18N
         jToolBar2.add(jLabelLanguage);
 
         jComboBoxLang.setMaximumSize(new java.awt.Dimension(100, 32767));
@@ -1006,7 +1008,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuImage.add(jSeparator11);
 
         jCheckBoxMenuItemScreenshotMode.setSelected(true);
-        jCheckBoxMenuItemScreenshotMode.setText("Screenshot Mode");
+        jCheckBoxMenuItemScreenshotMode.setText(bundle.getString("jCheckBoxMenuItemScreenshotMode.Text")); // NOI18N
         jMenuImage.add(jCheckBoxMenuItemScreenshotMode);
 
         jMenuBar2.add(jMenuImage);
