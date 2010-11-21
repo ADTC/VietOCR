@@ -94,7 +94,7 @@ public class GuiWithSpellcheck extends GuiWithSettings {
     }
 
     @Override
-    void SpellCheckActionPerformed() {
+    void spellCheckActionPerformed() {
         sp = new SpellChecker(this.jTextArea1, curLangCode);
         if (this.jToggleButtonSpellCheck.isSelected()) {
             sp.enableSpellCheck();
