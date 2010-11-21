@@ -68,7 +68,7 @@ public class FormLocalizer {
             Class fieldType = fieldInfo.getType();
             try {
                 // apply only to non-text Swing components
-                if (!FormLocalizer.isSubclass(fieldType, Class.forName("javax.swing.JComponent")) || FormLocalizer.isSubclass(fieldType, Class.forName("javax.swing.text.JTextComponent"))) {
+                if (!isSubclass(fieldType, Class.forName("javax.swing.JComponent")) || isSubclass(fieldType, Class.forName("javax.swing.text.JTextComponent"))) {
                     continue;
                 }
             } catch (Exception e) {
@@ -90,9 +90,9 @@ public class FormLocalizer {
                     e.printStackTrace();
                 }
 
-                // setToolTipText for JComponent
+                // setToolTipText for JButton, JToggleButton, JLabel
                 try {
-                    if (FormLocalizer.isSubclass(fieldType, Class.forName("javax.swing.JComponent")) && method.getName().equals("setToolTipText") && method.getReturnType() == void.class) {
+                    if ((isSubclass(fieldType, Class.forName("javax.swing.JButton")) || isSubclass(fieldType, Class.forName("javax.swing.JToggleButton")) || isSubclass(fieldType, Class.forName("javax.swing.JLabel"))) && method.getName().equals("setToolTipText") && method.getReturnType() == void.class) {
                         propertyName = fieldInfo.getName() + ".ToolTipText";
                         if (resources.containsKey(propertyName)) {
                             text = resources.getString(propertyName);
