@@ -59,9 +59,9 @@ public class GuiWithSpellcheck extends GuiWithSettings {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 String word = ae.getActionCommand();
-                if (word.equals("ignore")) {
+                if (word.equals("ignore.word")) {
                     sp.ignoreWord(curWord);
-                } else if (word.equals("add")) {
+                } else if (word.equals("add.word")) {
                     sp.addWord(curWord);
                 } else {
                     jTextArea1.select(start, end);
@@ -74,18 +74,17 @@ public class GuiWithSpellcheck extends GuiWithSettings {
         for (String word : suggests) {
             JMenuItem item = new JMenuItem(word);
             item.setFont(item.getFont().deriveFont(Font.BOLD));
-            item.setActionCommand(word);
             item.addActionListener(correctLst);
             popup.add(item);
         }
 
         popup.addSeparator();
         JMenuItem item = new JMenuItem(bundle.getString("Ignore_All"));
-        item.setActionCommand("ignore");
+        item.setActionCommand("ignore.word");
         item.addActionListener(correctLst);
         popup.add(item);
         item = new JMenuItem(bundle.getString("Add_to_Dictionary"));
-        item.setActionCommand("add");
+        item.setActionCommand("add.word");
         item.addActionListener(correctLst);
         popup.add(item);
         popup.addSeparator();
