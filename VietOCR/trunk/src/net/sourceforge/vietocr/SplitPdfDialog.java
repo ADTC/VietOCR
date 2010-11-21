@@ -93,14 +93,14 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 10, 20));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jLabelInput.setText("Input:");
+        jLabelInput.setText(bundle.getString("jLabelInput.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel1.add(jLabelInput, gridBagConstraints);
 
-        jLabelOutput.setText("Output:");
+        jLabelOutput.setText(bundle.getString("jLabelOutput.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -124,7 +124,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         jPanel1.add(jTextFieldOutputFile, gridBagConstraints);
 
         jButtonInput.setText("...");
-        jButtonInput.setToolTipText("Browse");
+        jButtonInput.setToolTipText(bundle.getString("jButtonInput.ToolTipText")); // NOI18N
         jButtonInput.setPreferredSize(new java.awt.Dimension(30, 23));
         jButtonInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,7 +139,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         jPanel1.add(jButtonInput, gridBagConstraints);
 
         jButtonOutput.setText("...");
-        jButtonOutput.setToolTipText("Browse");
+        jButtonOutput.setToolTipText(bundle.getString("jButtonOutput.ToolTipText")); // NOI18N
         jButtonOutput.setPreferredSize(new java.awt.Dimension(30, 23));
         jButtonOutput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
