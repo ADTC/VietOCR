@@ -90,9 +90,9 @@ public class FormLocalizer {
                     e.printStackTrace();
                 }
 
-                // setToolTipText for JButton
+                // setToolTipText for JComponent
                 try {
-                    if (FormLocalizer.isSubclass(fieldType, Class.forName("javax.swing.JButton")) && method.getName().equals("setToolTipText") && method.getReturnType() == void.class) {
+                    if (FormLocalizer.isSubclass(fieldType, Class.forName("javax.swing.JComponent")) && method.getName().equals("setToolTipText") && method.getReturnType() == void.class) {
                         propertyName = fieldInfo.getName() + ".ToolTipText";
                         if (resources.containsKey(propertyName)) {
                             text = resources.getString(propertyName);
