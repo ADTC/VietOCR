@@ -115,9 +115,10 @@ public class SpellChecker {
 
     List<String> spellCheck(List<String> words) {
         List<String> misspelled = new ArrayList<String>();
+        
         for (String word : words) {
             if (spellDict.misspelled(word)) {
-                // is mispelled word in user.dic?
+                // is misspelled word in user.dic?
                 if (!userWordList.contains(word.toLowerCase())) {
                     misspelled.add(word);
                 }
@@ -160,7 +161,7 @@ public class SpellChecker {
             return null;
         } else {
             try {
-                return spellDict.suggest(misspelled); // TODO: exception thrown here.
+                return spellDict.suggest(misspelled);
             } catch (Exception e) {
                 return null;
             }
