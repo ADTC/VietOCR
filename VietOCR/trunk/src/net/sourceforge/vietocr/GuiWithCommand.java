@@ -28,7 +28,7 @@ public class GuiWithCommand extends Gui {
     private OcrWorker ocrWorker;
 
     @Override
-    void OCRActionPerformed() {
+    void ocrActionPerformed() {
         if (jImageLabel.getIcon() == null) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -68,7 +68,7 @@ public class GuiWithCommand extends Gui {
     }
 
     @Override
-    void OCRAllActionPerformed() {
+    void ocrAllActionPerformed() {
         if (this.jImageLabel.getIcon() == null) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -81,7 +81,7 @@ public class GuiWithCommand extends Gui {
     }
 
     @Override
-    void PostProcessActionPerformed() {
+    void postProcessActionPerformed() {
         if (curLangCode == null) {
             return;
         }
@@ -180,7 +180,7 @@ public class GuiWithCommand extends Gui {
     }
 
     @Override
-    void CancelOCRActionPerformed() {
+    void cancelOCRActionPerformed() {
         if (ocrWorker != null && !ocrWorker.isDone()) {
             // Cancel current OCR op to begin a new one. You want only one OCR op at a time.
             ocrWorker.cancel(true);

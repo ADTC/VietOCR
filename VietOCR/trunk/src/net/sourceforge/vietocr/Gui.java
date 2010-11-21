@@ -1169,26 +1169,26 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxLangItemStateChanged
 
     private void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRActionPerformed
-        OCRActionPerformed();
+        ocrActionPerformed();
     }//GEN-LAST:event_jMenuItemOCRActionPerformed
 
-    void OCRActionPerformed() {
+    void ocrActionPerformed() {
         // to be implemented in subclas
     }
 
     private void jMenuItemOCRAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRAllActionPerformed
-        OCRAllActionPerformed();
+        ocrAllActionPerformed();
     }//GEN-LAST:event_jMenuItemOCRAllActionPerformed
 
-    void OCRAllActionPerformed() {
+    void ocrAllActionPerformed() {
         // to be implemented in subclass
     }
 
     private void jMenuItemPostProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPostProcessActionPerformed
-        PostProcessActionPerformed();
+        postProcessActionPerformed();
     }//GEN-LAST:event_jMenuItemPostProcessActionPerformed
 
-    void PostProcessActionPerformed() {
+    void postProcessActionPerformed() {
         // to be implemented in subclass
     }
 
@@ -1872,10 +1872,10 @@ public class Gui extends javax.swing.JFrame {
     }
 
     private void jButtonCancelOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelOCRActionPerformed
-        CancelOCRActionPerformed();
+        cancelOCRActionPerformed();
     }//GEN-LAST:event_jButtonCancelOCRActionPerformed
 
-    void CancelOCRActionPerformed() {
+    void cancelOCRActionPerformed() {
         // to be implemented in subclass
     }
     private void jMenuItemMergePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMergePdfActionPerformed
@@ -1891,10 +1891,10 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemMetadataActionPerformed
 
     private void jToggleButtonSpellCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonSpellCheckActionPerformed
-        SpellCheckActionPerformed();
+        spellCheckActionPerformed();
     }//GEN-LAST:event_jToggleButtonSpellCheckActionPerformed
 
-    void SpellCheckActionPerformed() {
+    void spellCheckActionPerformed() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
 
