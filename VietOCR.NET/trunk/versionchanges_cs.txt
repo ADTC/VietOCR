@@ -108,3 +108,7 @@ Version 1.9 (11 November 2010)
 - Integrate Hunspell library to provide spellchecking and spellcheck-as-you-type functionality
 - Add support for a custom dictionary
 - List in correct order files generated from PDF conversion
+
+Version 2.0 Beta (21 November 2010)
+- Add spellcheck suggestion support
+- Add localization for Lithuanian

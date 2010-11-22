@@ -75,6 +75,7 @@ namespace VietOCR.NET
 
         public void SpellCheck()
         {
+            this.textbox.Invalidate();
             spellingErrorRanges.Clear();
             List<String> words = ParseText(textbox.Text);
             List<String> misspelledWords = SpellCheck(words);
@@ -102,6 +103,7 @@ namespace VietOCR.NET
             {
                 spellingErrorRanges.Add(new CharacterRange(mc[i].Index, mc[i].Length));
             }
+            
             //new CustomPaintTextBox(textbox, this);
         }
 
@@ -161,7 +163,6 @@ namespace VietOCR.NET
         private void textbox_TextChanged(object sender, EventArgs e)
         {
             SpellCheck();
-            this.textbox.Invalidate();
         }
 
         public List<String> Suggest(string misspelled)
