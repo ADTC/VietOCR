@@ -31,26 +31,30 @@ public class GuiWithSpellcheck extends GuiWithSettings {
     @Override
     void populatePopupMenuWithSuggestions(Point pointClicked) {
         try {
+            popup.removeAll();
             int offset = jTextArea1.viewToModel(pointClicked);
             start = javax.swing.text.Utilities.getWordStart(jTextArea1, offset);
             end = javax.swing.text.Utilities.getWordEnd(jTextArea1, offset);
             String curWord = jTextArea1.getDocument().getText(start, end - start);
-            getSuggestions(curWord);
+            makeSuggestions(curWord);
         } catch (BadLocationException e) {
+        } finally {
+            // load standard menu items
+            repopulatePopupMenu();
         }
     }
 
-    void getSuggestions(final String curWord) {
-        popup.removeAll();
-        
+    /**
+     * Populates suggestions at top of context menu.
+     * @param curWord
+     */
+    void makeSuggestions(final String curWord) {
         if (sp == null || curWord == null || curWord.trim().length() == 0) {
-            repopulatePopupMenu();
             return;
         }
 
         List<String> suggests = sp.suggest(curWord);
         if (suggests == null || suggests.isEmpty()) {
-            repopulatePopupMenu();
             return;
         }
 
@@ -88,9 +92,6 @@ public class GuiWithSpellcheck extends GuiWithSettings {
         item.addActionListener(correctLst);
         popup.add(item);
         popup.addSeparator();
-
-        // load standard menu items
-        repopulatePopupMenu();
     }
 
     @Override
