@@ -996,6 +996,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuCommand);
 
+        jMenuImage.setMnemonic('i');
         jMenuImage.setText(bundle.getString("jMenuImage.Text")); // NOI18N
 
         jMenuItemMetadata.setText(bundle.getString("jMenuItemMetadata.Text")); // NOI18N
@@ -1013,6 +1014,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuImage);
 
+        jMenuFormat.setMnemonic('a');
         jMenuFormat.setText(bundle.getString("jMenuFormat.Text")); // NOI18N
 
         jCheckBoxMenuWordWrap.setText(bundle.getString("jCheckBoxMenuWordWrap.Text")); // NOI18N
@@ -1076,6 +1078,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuSettings);
 
+        jMenuTools.setMnemonic('t');
         jMenuTools.setText(bundle.getString("jMenuTools.Text")); // NOI18N
 
         jMenuItemMergeTiff.setText(bundle.getString("jMenuItemMergeTiff.Text")); // NOI18N
@@ -1104,7 +1107,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuTools);
 
-        jMenuHelp.setMnemonic('a');
+        jMenuHelp.setMnemonic('h');
         jMenuHelp.setText(bundle.getString("jMenuHelp.Text")); // NOI18N
 
         jMenuItemHelp.setText(bundle.getString("jMenuItemHelp.Text")); // NOI18N
