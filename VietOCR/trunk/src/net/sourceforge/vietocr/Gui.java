@@ -911,7 +911,7 @@ public class Gui extends javax.swing.JFrame {
 
         getContentPane().add(jPanelStatus, java.awt.BorderLayout.SOUTH);
 
-        jMenuFile.setMnemonic('f');
+        jMenuFile.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuFile.Mnemonic").charAt(0));
         jMenuFile.setText(bundle.getString("jMenuFile.Text")); // NOI18N
 
         jMenuItemOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
@@ -964,7 +964,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuFile);
 
-        jMenuCommand.setMnemonic('c');
+        jMenuCommand.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuCommand.Mnemonic").charAt(0));
         jMenuCommand.setText(bundle.getString("jMenuCommand.Text")); // NOI18N
 
         jMenuItemOCR.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
@@ -996,7 +996,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuCommand);
 
-        jMenuImage.setMnemonic('i');
+        jMenuImage.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuImage.Mnemonic").charAt(0));
         jMenuImage.setText(bundle.getString("jMenuImage.Text")); // NOI18N
 
         jMenuItemMetadata.setText(bundle.getString("jMenuItemMetadata.Text")); // NOI18N
