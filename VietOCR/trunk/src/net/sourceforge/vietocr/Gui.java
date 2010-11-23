@@ -1014,7 +1014,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuImage);
 
-        jMenuFormat.setMnemonic('a');
+        jMenuFormat.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuFormat.Mnemonic").charAt(0));
         jMenuFormat.setText(bundle.getString("jMenuFormat.Text")); // NOI18N
 
         jCheckBoxMenuWordWrap.setText(bundle.getString("jCheckBoxMenuWordWrap.Text")); // NOI18N
@@ -1054,8 +1054,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuFormat);
 
-        jMenuSettings.setMnemonic('s');
-        jMenuSettings.setText(bundle.getString("jMenuSettings.Text")); // NOI18N
+        jMenuSettings.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuSettings.Mnemonic").charAt(0));
 
         jMenuInputMethod.setText(bundle.getString("jMenuInputMethod.Text")); // NOI18N
         jMenuSettings.add(jMenuInputMethod);
@@ -1078,7 +1077,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuSettings);
 
-        jMenuTools.setMnemonic('t');
+        jMenuTools.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuTools.Mnemonic").charAt(0));
         jMenuTools.setText(bundle.getString("jMenuTools.Text")); // NOI18N
 
         jMenuItemMergeTiff.setText(bundle.getString("jMenuItemMergeTiff.Text")); // NOI18N
@@ -1107,7 +1106,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuTools);
 
-        jMenuHelp.setMnemonic('h');
+        jMenuHelp.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuHelp.Mnemonic").charAt(0));
         jMenuHelp.setText(bundle.getString("jMenuHelp.Text")); // NOI18N
 
         jMenuItemHelp.setText(bundle.getString("jMenuItemHelp.Text")); // NOI18N
