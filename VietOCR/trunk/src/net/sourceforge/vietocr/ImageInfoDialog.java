@@ -66,12 +66,14 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 30, 10, 30));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
+        jLabelWidth.setLabelFor(jTextFieldWidth);
         jLabelWidth.setText(bundle.getString("jLabelWidth.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 2, 0);
         jPanel1.add(jLabelWidth, gridBagConstraints);
 
+        jLabelHeight.setLabelFor(jTextFieldHeight);
         jLabelHeight.setText(bundle.getString("jLabelHeight.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -80,6 +82,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 2, 0);
         jPanel1.add(jLabelHeight, gridBagConstraints);
 
+        jLabelXRes.setLabelFor(jTextFieldXRes);
         jLabelXRes.setText(bundle.getString("jLabelXRes.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -88,6 +91,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 2, 0);
         jPanel1.add(jLabelXRes, gridBagConstraints);
 
+        jLabelYRes.setLabelFor(jTextFieldYRes);
         jLabelYRes.setText(bundle.getString("jLabelYRes.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

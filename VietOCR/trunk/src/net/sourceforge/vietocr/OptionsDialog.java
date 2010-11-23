@@ -138,6 +138,7 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jPanelWatchFolder.setLayout(new java.awt.GridBagLayout());
 
+        jLabelWatch.setLabelFor(jTextFieldWatch);
         jLabelWatch.setText(bundle.getString("jLabelWatch.Text")); // NOI18N
         jPanelWatchFolder.add(jLabelWatch, new java.awt.GridBagConstraints());
 
@@ -151,6 +152,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
         jPanelWatchFolder.add(jTextFieldWatch, gridBagConstraints);
 
+        jLabelOutput.setLabelFor(jTextFieldOutput);
         jLabelOutput.setText(bundle.getString("jLabelOutput.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -200,6 +202,7 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Watch", jPanelWatchFolder);
 
+        jLabelTess.setLabelFor(jTextFieldTess);
         jLabelTess.setText(bundle.getString("jLabelTess.Text")); // NOI18N
         jPanelTessPath.add(jLabelTess);
 
@@ -221,6 +224,7 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jPanelDangAmbigsPath.setLayout(new java.awt.GridBagLayout());
 
+        jLabelDangAmbigs.setLabelFor(jTextFieldDangAmbigs);
         jLabelDangAmbigs.setText(bundle.getString("jLabelDangAmbigs.Text")); // NOI18N
         jPanelDangAmbigsPath.add(jLabelDangAmbigs, new java.awt.GridBagConstraints());
 
