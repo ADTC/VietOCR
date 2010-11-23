@@ -1055,6 +1055,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuBar2.add(jMenuFormat);
 
         jMenuSettings.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuSettings.Mnemonic").charAt(0));
+        jMenuSettings.setText(bundle.getString("jMenuSettings.Text")); // NOI18N
 
         jMenuInputMethod.setText(bundle.getString("jMenuInputMethod.Text")); // NOI18N
         jMenuSettings.add(jMenuInputMethod);
