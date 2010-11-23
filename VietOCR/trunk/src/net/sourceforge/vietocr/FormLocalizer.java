@@ -76,30 +76,25 @@ public class FormLocalizer {
             }
 
             for (Method method : fieldType.getMethods()) {
-                // setText
                 try {
+                    // setText
                     if (method.getName().equals("setText") && method.getReturnType() == void.class) {
                         propertyName = fieldInfo.getName() + ".Text";
-                        if (resources.containsKey(propertyName)) {
-                            text = resources.getString(propertyName);
-                            fieldInfo.setAccessible(true);
-                            method.invoke(fieldInfo.get(window), new Object[]{text});
-                        }
+                        setFieldValue(resources, propertyName, fieldInfo, method);
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
-                // setToolTipText for JButton, JToggleButton, JLabel
-                try {
+                    // setToolTipText for JButton, JToggleButton, JLabel
                     if ((isSubclass(fieldType, Class.forName("javax.swing.JButton")) || isSubclass(fieldType, Class.forName("javax.swing.JToggleButton")) || isSubclass(fieldType, Class.forName("javax.swing.JLabel"))) && method.getName().equals("setToolTipText") && method.getReturnType() == void.class) {
                         propertyName = fieldInfo.getName() + ".ToolTipText";
-                        if (resources.containsKey(propertyName)) {
-                            text = resources.getString(propertyName);
-                            fieldInfo.setAccessible(true);
-                            method.invoke(fieldInfo.get(window), new Object[]{text});
-                        }
+                        setFieldValue(resources, propertyName, fieldInfo, method);
                     }
+
+                    // setMnemonic for AbstractButton
+                    if (isSubclass(fieldType, Class.forName("javax.swing.AbstractButton")) && method.getName().equals("setMnemonic") && method.getReturnType() == void.class) {
+                        propertyName = fieldInfo.getName() + ".Mnemonic";
+                        setFieldValue(resources, propertyName, fieldInfo, method);
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -107,6 +102,18 @@ public class FormLocalizer {
         }
 
         window.validate();
+    }
+
+    void setFieldValue(ResourceBundle resources, String propertyName, Field fieldInfo, Method method) throws Exception {
+        if (resources.containsKey(propertyName)) {
+            String text = resources.getString(propertyName);
+            fieldInfo.setAccessible(true);
+            if (propertyName.endsWith(".Mnemonic")) {
+                method.invoke(fieldInfo.get(window), new Object[]{text.charAt(0)});
+            } else {
+                 method.invoke(fieldInfo.get(window), new Object[]{text});
+            }
+        }
     }
 
     /**
