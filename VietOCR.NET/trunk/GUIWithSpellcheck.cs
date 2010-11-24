@@ -37,28 +37,47 @@ namespace VietOCR.NET
 
         protected override void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            this.contextMenuStrip1.Items.Clear();
-
-            int offset = this.textBox1.GetCharIndexFromPosition(pointClicked);
-            BreakIterator boundary = BreakIterator.GetWordInstance();
-            boundary.Text = this.textBox1.Text;
-            end = boundary.Following(offset);
-
-            if (end != BreakIterator.DONE)
+            try
             {
-                start = boundary.Previous();
+                this.contextMenuStrip1.Items.Clear();
+                int offset = this.textBox1.GetCharIndexFromPosition(pointClicked);
+                BreakIterator boundary = BreakIterator.GetWordInstance();
+                boundary.Text = this.textBox1.Text;
+                end = boundary.Following(offset);
+
+                if (end != BreakIterator.DONE)
+                {
+                    start = boundary.Previous();
+                }
+                    
                 curWord = this.textBox1.Text.Substring(start, end - start);
+                makeSuggestions(curWord);
             }
-
-            List<String> sug = GetSuggestions(curWord);
-
-            if (sug == null || sug.Count == 0)
+            finally
             {
+                // load standard menu items
                 this.contextMenuStrip1.RepopulateContextMenu();
+            }
+        }
+
+        /// <summary>
+        /// Populates suggestions at top of context menu.
+        /// </summary>
+        /// <param name="curWord"></param>
+        void makeSuggestions(string curWord)
+        {
+            if (sp == null || curWord == null || curWord.Trim().Length == 0)
+            {
                 return;
             }
 
-            foreach (string word in sug)
+            List<String> suggests = sp.Suggest(curWord);
+            if (suggests == null || suggests.Count == 0)
+            {
+                return;
+            }
+
+            foreach (string word in suggests)
             {
                 ToolStripMenuItem item = new ToolStripMenuItem(word);
                 item.Font = new Font(item.Font, FontStyle.Bold);
@@ -68,33 +87,15 @@ namespace VietOCR.NET
             this.contextMenuStrip1.Items.Add("-");
 
             ToolStripMenuItem item1 = new ToolStripMenuItem("Ignore All");
-            item1.Tag = "ignore";
+            item1.Tag = "ignore.word";
             item1.Click += new EventHandler(item_Click);
             this.contextMenuStrip1.Items.Add(item1);
 
             item1 = new ToolStripMenuItem("Add to Dictionary");
-            item1.Tag = "add";
+            item1.Tag = "add.word";
             item1.Click += new EventHandler(item_Click);
             this.contextMenuStrip1.Items.Add(item1);
             this.contextMenuStrip1.Items.Add("-");
-
-            // load standard menu items
-            this.contextMenuStrip1.RepopulateContextMenu();
-        }
-
-        List<String> GetSuggestions(string curWord)
-        {
-            if (sp == null || curWord == null || curWord.Trim().Length == 0)
-            {
-                return null;
-            }
-
-            List<String> suggests = sp.Suggest(curWord);
-            if (suggests == null || suggests.Count == 0)
-            {
-                return null;
-            }
-            return suggests;
         }
 
         void item_Click(object sender, EventArgs e)
@@ -107,11 +108,11 @@ namespace VietOCR.NET
                 this.textBox1.Select(start, end - start);
                 this.textBox1.SelectedText = item.Text;
             }
-            else if (command.ToString() == "ignore")
+            else if (command.ToString() == "ignore.word")
             {
                 sp.IgnoreWord(curWord);
             }
-            else if (command.ToString() == "add")
+            else if (command.ToString() == "add.word")
             {
                 sp.AddWord(curWord);
             }
@@ -132,23 +133,6 @@ namespace VietOCR.NET
                 sp.DisableSpellCheck();
             }
             this.textBox1.Refresh();
-
-
-            //NHunspellExtender.NHunspellTextBoxExtender myNhunspellExtender = new NHunspellExtender.NHunspellTextBoxExtender();
-            ////myNhunspellExtender.AddNewLanguage();
-            //myNhunspellExtender.SetLanguage("vi_VN");
-
-            //if (this.toolStripButtonSpellCheck.Checked)
-            //{
-            //    myNhunspellExtender.EnableTextBoxBase(this.textBox1);
-            //}
-            //else
-            //{
-            //    //myNhunspellExtender.DisableTextBoxBase(this.textBox1);
-            //    myNhunspellExtender.Dispose();
-            //    myNhunspellExtender = null;
-            //    this.textBox1.Refresh();
-            //}
         }
     }
 }
