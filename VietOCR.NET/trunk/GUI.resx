@@ -761,7 +761,7 @@
     <value>Form&amp;at</value>
   </data>
   <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Options...</value>
@@ -773,19 +773,19 @@
     <value>&amp;Settings</value>
   </data>
   <data name="mergeTiffToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>133, 22</value>
   </data>
   <data name="mergeTiffToolStripMenuItem.Text" xml:space="preserve">
     <value>Merge TIFF</value>
   </data>
   <data name="mergePdfToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>133, 22</value>
   </data>
   <data name="mergePdfToolStripMenuItem.Text" xml:space="preserve">
     <value>Merge PDF</value>
   </data>
   <data name="splitPdfToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>133, 22</value>
   </data>
   <data name="splitPdfToolStripMenuItem.Text" xml:space="preserve">
     <value>Split PDF</value>
