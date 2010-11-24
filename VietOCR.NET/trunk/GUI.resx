@@ -530,13 +530,13 @@
     <value>771, 17</value>
   </metadata>
   <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 170</value>
+    <value>123, 148</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
     <value>contextMenuStrip1</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
-    <value>VietOCR.NET.Controls.StandardTextBoxContextMenuStrip, VietOCR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>VietOCR.NET.Controls.TextBoxContextMenuStrip, VietOCR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="textBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -940,10 +940,13 @@
   <data name="toolStripCbLang.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 25</value>
   </data>
-  <data name="toolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripLabelLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 22</value>
   </data>
-  <data name="toolStripLabel1.Text" xml:space="preserve">
+  <data name="toolStripLabelLanguage.Text" xml:space="preserve">
+    <value>OCR Language</value>
+  </data>
+  <data name="toolStripLabelLanguage.ToolTipText" xml:space="preserve">
     <value>OCR Language</value>
   </data>
   <data name="toolStripButtonSpellCheck.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -965,6 +968,9 @@
   </data>
   <data name="toolStripButtonSpellCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
+  </data>
+  <data name="toolStripButtonSpellCheck.ToolTipText" xml:space="preserve">
+    <value>Spell Check</value>
   </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
@@ -1332,10 +1338,10 @@
   <data name="&gt;&gt;toolStripCbLang.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripLabel1.Name" xml:space="preserve">
-    <value>toolStripLabel1</value>
+  <data name="&gt;&gt;toolStripLabelLanguage.Name" xml:space="preserve">
+    <value>toolStripLabelLanguage</value>
   </data>
-  <data name="&gt;&gt;toolStripLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripLabelLanguage.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonSpellCheck.Name" xml:space="preserve">
