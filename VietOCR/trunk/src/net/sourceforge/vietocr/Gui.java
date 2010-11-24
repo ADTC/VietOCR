@@ -278,6 +278,16 @@ public class Gui extends javax.swing.JFrame {
         };
 
         DefaultKeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(dispatcher);
+
+        // assign F7 key to spellcheck
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "spellcheck");
+        getRootPane().getActionMap().put("spellcheck", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jToggleButtonSpellCheck.doClick();
+            }
+        });
     }
 
     void populatePopupMenuWithSuggestions(Point p) {
@@ -565,15 +575,6 @@ public class Gui extends javax.swing.JFrame {
         jTextArea1.addCaretListener(new CaretListener() {
             public void caretUpdate(CaretEvent e) {
                 updateCutCopyDelete(e.getDot() != e.getMark());
-            }
-        });
-
-        jTextArea1.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "spellcheck");
-        jTextArea1.getActionMap().put("spellcheck", new AbstractAction() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jToggleButtonSpellCheck.doClick();
             }
         });
         jPanel1 = new javax.swing.JPanel();
