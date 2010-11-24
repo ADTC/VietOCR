@@ -567,6 +567,15 @@ public class Gui extends javax.swing.JFrame {
                 updateCutCopyDelete(e.getDot() != e.getMark());
             }
         });
+
+        jTextArea1.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "spellcheck");
+        jTextArea1.getActionMap().put("spellcheck", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jToggleButtonSpellCheck.doClick();
+            }
+        });
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(20);
@@ -758,7 +767,6 @@ public class Gui extends javax.swing.JFrame {
         jToolBar2.add(Box.createHorizontalGlue());
 
         jToggleButtonSpellCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/spellcheck.png"))); // NOI18N
-        jToggleButtonSpellCheck.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jToggleButtonSpellCheck.Mnemonic").charAt(0));
         jToggleButtonSpellCheck.setToolTipText(bundle.getString("jToggleButtonSpellCheck.ToolTipText")); // NOI18N
         jToggleButtonSpellCheck.setFocusable(false);
         jToggleButtonSpellCheck.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
