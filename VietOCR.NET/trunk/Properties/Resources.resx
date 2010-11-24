@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About_" xml:space="preserve">
-    <value>About </value>
+  <data name="About_VietOCR" xml:space="preserve">
+    <value>About VietOCR.NET</value>
   </data>
   <data name="canceled" xml:space="preserve">
     <value>canceled.</value>
@@ -159,8 +159,8 @@
   <data name="selectLanguage" xml:space="preserve">
     <value>Please select a language.</value>
   </data>
-  <data name="_Help" xml:space="preserve">
-    <value> Help</value>
+  <data name="VietOCR_Help" xml:space="preserve">
+    <value>VietOCR.NET Help</value>
   </data>
   <data name="_of_" xml:space="preserve">
     <value> of </value>
@@ -242,5 +242,11 @@
   </data>
   <data name="Untitled" xml:space="preserve">
     <value>Untitled</value>
+  </data>
+  <data name="Add_to_Dictionary" xml:space="preserve">
+    <value>Add to Dictionary</value>
+  </data>
+  <data name="Ignore_All" xml:space="preserve">
+    <value>Ignore All</value>
   </data>
 </root>

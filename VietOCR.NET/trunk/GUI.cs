@@ -1019,7 +1019,7 @@ namespace VietOCR.NET
                 HtmlHelpForm helpForm = form as HtmlHelpForm;
                 if (helpForm != null)
                 {
-                    helpForm.Text = strProgName + Properties.Resources._Help;
+                    helpForm.Text = Properties.Resources.VietOCR_Help;
                 }
             }
         }

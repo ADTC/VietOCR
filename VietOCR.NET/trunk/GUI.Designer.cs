@@ -95,7 +95,7 @@ namespace VietOCR.NET
             this.toolStripButtonCancelOCR = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnClear = new System.Windows.Forms.ToolStripButton();
             this.toolStripCbLang = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabelLanguage = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButtonSpellCheck = new System.Windows.Forms.ToolStripButton();
             this.backgroundWorkerScan = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerLoad = new System.ComponentModel.BackgroundWorker();
@@ -534,7 +534,7 @@ namespace VietOCR.NET
             this.toolStripButtonCancelOCR,
             this.toolStripBtnClear,
             this.toolStripCbLang,
-            this.toolStripLabel1,
+            this.toolStripLabelLanguage,
             this.toolStripButtonSpellCheck});
             resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Name = "toolStrip1";
@@ -590,11 +590,11 @@ namespace VietOCR.NET
             resources.ApplyResources(this.toolStripCbLang, "toolStripCbLang");
             this.toolStripCbLang.SelectedIndexChanged += new System.EventHandler(this.toolStripCbLang_SelectedIndexChanged);
             // 
-            // toolStripLabel1
+            // toolStripLabelLanguage
             // 
-            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            resources.ApplyResources(this.toolStripLabel1, "toolStripLabel1");
+            this.toolStripLabelLanguage.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabelLanguage.Name = "toolStripLabelLanguage";
+            resources.ApplyResources(this.toolStripLabelLanguage, "toolStripLabelLanguage");
             // 
             // toolStripButtonSpellCheck
             // 
@@ -678,7 +678,7 @@ namespace VietOCR.NET
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripLabel toolStripLabelLanguage;
         protected System.Windows.Forms.ToolStripComboBox toolStripCbLang;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripBtnPrev;

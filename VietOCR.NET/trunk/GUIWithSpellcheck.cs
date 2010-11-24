@@ -86,12 +86,12 @@ namespace VietOCR.NET
             }
             this.contextMenuStrip1.Items.Add("-");
 
-            ToolStripMenuItem item1 = new ToolStripMenuItem("Ignore All");
+            ToolStripMenuItem item1 = new ToolStripMenuItem(Properties.Resources.Ignore_All);
             item1.Tag = "ignore.word";
             item1.Click += new EventHandler(item_Click);
             this.contextMenuStrip1.Items.Add(item1);
 
-            item1 = new ToolStripMenuItem("Add to Dictionary");
+            item1 = new ToolStripMenuItem(Properties.Resources.Add_to_Dictionary);
             item1.Tag = "add.word";
             item1.Click += new EventHandler(item_Click);
             this.contextMenuStrip1.Items.Add(item1);
