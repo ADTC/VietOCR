@@ -62,14 +62,14 @@ public class GuiWithSpellcheck extends GuiWithSettings {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                String word = ae.getActionCommand();
-                if (word.equals("ignore.word")) {
+                String selectedWord = ae.getActionCommand();
+                if (selectedWord.equals("ignore.word")) {
                     sp.ignoreWord(curWord);
-                } else if (word.equals("add.word")) {
+                } else if (selectedWord.equals("add.word")) {
                     sp.addWord(curWord);
                 } else {
                     jTextArea1.select(start, end);
-                    jTextArea1.replaceSelection(word);
+                    jTextArea1.replaceSelection(selectedWord);
                 }
                 sp.spellCheck();
             }
