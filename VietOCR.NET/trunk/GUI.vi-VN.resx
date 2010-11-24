@@ -218,6 +218,12 @@
   <data name="toolStripBtnRotateCW.ToolTipText" xml:space="preserve">
     <value>Quay theo chiều đồng hồ</value>
   </data>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Tập tin</value>
+  </data>
   <data name="openToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 22</value>
   </data>
@@ -260,11 +266,8 @@
   <data name="quitToolStripMenuItem.Text" xml:space="preserve">
     <value>Thoát</value>
   </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 20</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>Tập tin</value>
+  <data name="commandToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Mệnh lệnh</value>
   </data>
   <data name="oCRToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
@@ -284,17 +287,20 @@
   <data name="postprocessToolStripMenuItem.Text" xml:space="preserve">
     <value>Hậu xử lý</value>
   </data>
-  <data name="commandToolStripMenuItem.Text" xml:space="preserve">
-    <value>Mệnh lệnh</value>
-  </data>
-  <data name="metadataToolStripMenuItem.Text" xml:space="preserve">
-    <value>Thuộc tính...</value>
-  </data>
   <data name="imageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 20</value>
   </data>
   <data name="imageToolStripMenuItem.Text" xml:space="preserve">
-    <value>Hình ảnh</value>
+    <value>&amp;Hình ảnh</value>
+  </data>
+  <data name="metadataToolStripMenuItem.Text" xml:space="preserve">
+    <value>Thuộc tính...</value>
+  </data>
+  <data name="formatToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 20</value>
+  </data>
+  <data name="formatToolStripMenuItem.Text" xml:space="preserve">
+    <value>Định &amp;dạng</value>
   </data>
   <data name="wordWrapToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 22</value>
@@ -323,47 +329,47 @@
   <data name="removeLineBreaksToolStripMenuItem.Text" xml:space="preserve">
     <value>Nối dòng</value>
   </data>
-  <data name="formatToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 20</value>
-  </data>
-  <data name="formatToolStripMenuItem.Text" xml:space="preserve">
-    <value>Định dạng</value>
-  </data>
-  <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 22</value>
-  </data>
-  <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Tùy chọn...</value>
-  </data>
   <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 20</value>
   </data>
   <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Điều chỉnh</value>
+    <value>Điề&amp;u chỉnh</value>
   </data>
-  <data name="mergeTiffToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 22</value>
+  <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
   </data>
-  <data name="mergeTiffToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nối TIFF</value>
-  </data>
-  <data name="mergePdfToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 22</value>
-  </data>
-  <data name="mergePdfToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nối PDF</value>
-  </data>
-  <data name="splitPdfToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 22</value>
-  </data>
-  <data name="splitPdfToolStripMenuItem.Text" xml:space="preserve">
-    <value>Tách PDF</value>
+  <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Tùy chọn...</value>
   </data>
   <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 20</value>
   </data>
   <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Công cụ</value>
+    <value>&amp;Công cụ</value>
+  </data>
+  <data name="mergeTiffToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="mergeTiffToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nối TIFF</value>
+  </data>
+  <data name="mergePdfToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="mergePdfToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nối PDF</value>
+  </data>
+  <data name="splitPdfToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="splitPdfToolStripMenuItem.Text" xml:space="preserve">
+    <value>Tách PDF</value>
+  </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 20</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>Trợ &amp;giúp</value>
   </data>
   <data name="helpToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 22</value>
@@ -379,12 +385,6 @@
   </data>
   <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
     <value>Về VietOCR.NET</value>
-  </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 20</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Trợ giúp</value>
   </data>
   <data name="toolStripBtnOpen.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -494,10 +494,30 @@
   <data name="toolStripBtnClear.ToolTipText" xml:space="preserve">
     <value>Xóa textbox</value>
   </data>
-  <data name="toolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripLabelLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 22</value>
   </data>
-  <data name="toolStripLabel1.Text" xml:space="preserve">
+  <data name="toolStripLabelLanguage.Text" xml:space="preserve">
     <value>Ngôn ngữ OCR</value>
+  </data>
+  <data name="toolStripLabelLanguage.ToolTipText" xml:space="preserve">
+    <value>Ngôn ngữ OCR</value>
+  </data>
+  <data name="toolStripButtonSpellCheck.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHRSURBVDhPY2AYFMCp12qm7xSXkyDH2HZbx7tPcrxm1Ww6
+        07LZdBdITC9Xs0Q7Q3W1YoLiTMVYxZkYjgZp9pjosMu208LIusMi3gKoGaTIutXkmkaBhqRxpd41nD51
+        7rOOtwe6wLbLssSq1XSmRYNRvHWX5TXTasNd2jlqM1WTleKx2SofP5+DIe0MK4P7RPtddj1Wq0GaHSfa
+        PzKqMIg3KNQEu0A1SWm1UpS8p14Omgvizxoz1N+8wRBxfhqDywQ7sN9BwLhMbybIvyZAJ4P8q5OlcVIu
+        Wk5SIUqhXS1RbZdKvMIVn+rYD+L1V/4w1998w2B/UoL4SAwFKq65ed192ZP/3PU3vzBYHVFG1VxzM4Gh
+        7JYrVhODz/iAbA1c8eQ/c+31dwwWx6Qx1RXf0hJa/PgHQ/W1xQyFxzjBCur/MzFEnZlsOe/R/4ClT/4z
+        lF5/zmC6H4+zUy9X+65//p+58/YzBqCtDMVXT7ovAmpeAtSce+4RgxY+zSAb7fezMNRcPx+29sV/yzkP
+        /mdsfPE/YOHj/wwZl+8R1gzzlPtxBWGgfyt3vPrvN//hf4bU87cZ5AnZjB4ipgeKnKbd/8+QcOYe6Zph
+        hmnu7SBfM/GpgwEAgEO5U7JB15UAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="toolStripButtonSpellCheck.ToolTipText" xml:space="preserve">
+    <value>Duyệt chính tả</value>
   </data>
 </root>
