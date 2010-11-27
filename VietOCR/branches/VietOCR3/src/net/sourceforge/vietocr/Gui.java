@@ -42,7 +42,6 @@ public class Gui extends javax.swing.JFrame {
     public static final String TO_BE_IMPLEMENTED = "To be implemented in subclass";
     static final boolean MAC_OS_X = System.getProperty("os.name").startsWith("Mac");
     static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
-    static final Locale VIETNAM = new Locale("vi", "VN");
     static final String UTF8 = "UTF-8";
     ResourceBundle vietpadResources, bundle;
     static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr3");
@@ -279,14 +278,38 @@ public class Gui extends javax.swing.JFrame {
         };
 
         DefaultKeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(dispatcher);
+
+        // assign F7 key to spellcheck
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "spellcheck");
+        getRootPane().getActionMap().put("spellcheck", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jToggleButtonSpellCheck.doClick();
+            }
+        });
+    }
+
+    void populatePopupMenuWithSuggestions(Point p) {
+        // to be implemented in subclass
+    }
+
+    void repopulatePopupMenu() {
+        popup.add(m_undoAction);
+        popup.add(m_redoAction);
+        popup.addSeparator();
+        popup.add(actionCut);
+        popup.add(actionCopy);
+        popup.add(actionPaste);
+        popup.add(actionDelete);
+        popup.addSeparator();
+        popup.add(actionSelectAll);
     }
 
     /**
-     * 
+     * Builds context menu for textarea.
      */
-    private void populatePopupMenu() {
-        popup.removeAll();
-
+    void populatePopupMenu() {
         m_undoAction = new AbstractAction(vietpadResources.getString("Undo")) {
 
             @Override
@@ -299,7 +322,6 @@ public class Gui extends javax.swing.JFrame {
                 updateUndoRedo();
             }
         };
-
 
         popup.add(m_undoAction);
 
@@ -315,7 +337,6 @@ public class Gui extends javax.swing.JFrame {
                 updateUndoRedo();
             }
         };
-
 
         popup.add(m_redoAction);
         popup.addSeparator();
@@ -339,7 +360,6 @@ public class Gui extends javax.swing.JFrame {
                 updatePaste();
             }
         };
-
 
         popup.add(actionCopy);
 
@@ -534,11 +554,17 @@ public class Gui extends javax.swing.JFrame {
         VietKeyListener.setInputMethod(InputMethods.valueOf(selectedInputMethod));
         VietKeyListener.setSmartMark(true);
         VietKeyListener.consumeRepeatKey(true);
-        VietKeyListener.setVietModeEnabled(curLangCode.contains("vie"));
+        boolean vie = curLangCode.contains("vie");
+        VietKeyListener.setVietModeEnabled(vie);
         jTextArea1.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 if (e.isPopupTrigger()) {
-                    popup.show(e.getComponent(), e.getX(), e.getY());
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            populatePopupMenuWithSuggestions(e.getPoint());
+                            popup.show(e.getComponent(), e.getX(), e.getY());
+                        }
+                    });
                 }
             }
 
@@ -616,12 +642,30 @@ public class Gui extends javax.swing.JFrame {
             jMenuInputMethod.add(radioItem);
             groupInputMethod.add(radioItem);
         }
-
+        jMenuInputMethod.setVisible(vie);
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        jSeparator6.setVisible(vie);
         jMenuUILang = new javax.swing.JMenu();
-        ButtonGroup group = new ButtonGroup();
-        jRadioButtonMenuItemEng = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItemViet = new javax.swing.JRadioButtonMenuItem();
+
+        ActionListener uiLangLst = new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                if (!selectedUILang.equals(ae.getActionCommand())) {
+                    selectedUILang = ae.getActionCommand();
+                    changeUILanguage(getLocale(selectedUILang));
+                }
+            }
+        };
+
+        ButtonGroup groupUILang = new ButtonGroup();
+        String[] uiLangs = getInstalledUILangs();
+        for (int i = 0; i < uiLangs.length; i++) {
+            Locale locale = new Locale(uiLangs[i]);
+            JRadioButtonMenuItem uiLangButton = new JRadioButtonMenuItem(locale.getDisplayLanguage(), selectedUILang.equals(locale.getLanguage()));
+            uiLangButton.setActionCommand(locale.getLanguage());
+            uiLangButton.addActionListener(uiLangLst);
+            groupUILang.add(uiLangButton);
+            jMenuUILang.add(uiLangButton);
+        }
         jMenuLookAndFeel = new javax.swing.JMenu();
         ActionListener lafLst = new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
@@ -724,6 +768,7 @@ public class Gui extends javax.swing.JFrame {
         jToolBar2.add(Box.createHorizontalGlue());
 
         jToggleButtonSpellCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sourceforge/vietocr/icons/spellcheck.png"))); // NOI18N
+        jToggleButtonSpellCheck.setToolTipText(bundle.getString("jToggleButtonSpellCheck.ToolTipText")); // NOI18N
         jToggleButtonSpellCheck.setFocusable(false);
         jToggleButtonSpellCheck.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jToggleButtonSpellCheck.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -736,7 +781,9 @@ public class Gui extends javax.swing.JFrame {
         jToolBar2.add(Box.createHorizontalStrut(20));
         jToggleButtonSpellCheck.getAccessibleContext().setAccessibleName("jToggleButtonSpellCheck");
 
+        jLabelLanguage.setLabelFor(jComboBoxLang);
         jLabelLanguage.setText(bundle.getString("jLabelLanguage.Text")); // NOI18N
+        jLabelLanguage.setToolTipText(bundle.getString("jLabelLanguage.ToolTipText")); // NOI18N
         jToolBar2.add(jLabelLanguage);
 
         jComboBoxLang.setMaximumSize(new java.awt.Dimension(100, 32767));
@@ -875,7 +922,7 @@ public class Gui extends javax.swing.JFrame {
 
         getContentPane().add(jPanelStatus, java.awt.BorderLayout.SOUTH);
 
-        jMenuFile.setMnemonic('f');
+        jMenuFile.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuFile.Mnemonic").charAt(0));
         jMenuFile.setText(bundle.getString("jMenuFile.Text")); // NOI18N
 
         jMenuItemOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
@@ -928,7 +975,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuFile);
 
-        jMenuCommand.setMnemonic('c');
+        jMenuCommand.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuCommand.Mnemonic").charAt(0));
         jMenuCommand.setText(bundle.getString("jMenuCommand.Text")); // NOI18N
 
         jMenuItemOCR.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
@@ -960,6 +1007,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuCommand);
 
+        jMenuImage.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuImage.Mnemonic").charAt(0));
         jMenuImage.setText(bundle.getString("jMenuImage.Text")); // NOI18N
 
         jMenuItemMetadata.setText(bundle.getString("jMenuItemMetadata.Text")); // NOI18N
@@ -972,11 +1020,12 @@ public class Gui extends javax.swing.JFrame {
         jMenuImage.add(jSeparator11);
 
         jCheckBoxMenuItemScreenshotMode.setSelected(true);
-        jCheckBoxMenuItemScreenshotMode.setText("Screenshot Mode");
+        jCheckBoxMenuItemScreenshotMode.setText(bundle.getString("jCheckBoxMenuItemScreenshotMode.Text")); // NOI18N
         jMenuImage.add(jCheckBoxMenuItemScreenshotMode);
 
         jMenuBar2.add(jMenuImage);
 
+        jMenuFormat.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuFormat.Mnemonic").charAt(0));
         jMenuFormat.setText(bundle.getString("jMenuFormat.Text")); // NOI18N
 
         jCheckBoxMenuWordWrap.setText(bundle.getString("jCheckBoxMenuWordWrap.Text")); // NOI18N
@@ -1016,7 +1065,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuFormat);
 
-        jMenuSettings.setMnemonic('s');
+        jMenuSettings.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuSettings.Mnemonic").charAt(0));
         jMenuSettings.setText(bundle.getString("jMenuSettings.Text")); // NOI18N
 
         jMenuInputMethod.setText(bundle.getString("jMenuInputMethod.Text")); // NOI18N
@@ -1024,29 +1073,6 @@ public class Gui extends javax.swing.JFrame {
         jMenuSettings.add(jSeparator6);
 
         jMenuUILang.setText(bundle.getString("jMenuUILang.Text")); // NOI18N
-
-        group.add(jRadioButtonMenuItemEng);
-        jRadioButtonMenuItemEng.setSelected(selectedUILang.equals("en"));
-        jRadioButtonMenuItemEng.setText(bundle.getString("jRadioButtonMenuItemEng.Text")); // NOI18N
-        jRadioButtonMenuItemEng.setActionCommand("en");
-        jRadioButtonMenuItemEng.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItemEngActionPerformed(evt);
-            }
-        });
-        jMenuUILang.add(jRadioButtonMenuItemEng);
-
-        group.add(jRadioButtonMenuItemViet);
-        jRadioButtonMenuItemViet.setSelected(selectedUILang.equals("vi"));
-        jRadioButtonMenuItemViet.setText(bundle.getString("jRadioButtonMenuItemViet.Text")); // NOI18N
-        jRadioButtonMenuItemViet.setActionCommand("vi");
-        jRadioButtonMenuItemViet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItemVietActionPerformed(evt);
-            }
-        });
-        jMenuUILang.add(jRadioButtonMenuItemViet);
-
         jMenuSettings.add(jMenuUILang);
 
         jMenuLookAndFeel.setText(bundle.getString("jMenuLookAndFeel.Text")); // NOI18N
@@ -1063,6 +1089,7 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuSettings);
 
+        jMenuTools.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuTools.Mnemonic").charAt(0));
         jMenuTools.setText(bundle.getString("jMenuTools.Text")); // NOI18N
 
         jMenuItemMergeTiff.setText(bundle.getString("jMenuItemMergeTiff.Text")); // NOI18N
@@ -1091,10 +1118,10 @@ public class Gui extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenuTools);
 
-        jMenuHelp.setMnemonic('a');
+        jMenuHelp.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuHelp.Mnemonic").charAt(0));
         jMenuHelp.setText(bundle.getString("jMenuHelp.Text")); // NOI18N
 
-        jMenuItemHelp.setText(APP_NAME + " " + bundle.getString("jMenuItemHelp.Text"));
+        jMenuItemHelp.setText(bundle.getString("jMenuItemHelp.Text")); // NOI18N
         jMenuItemHelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemHelpActionPerformed(evt);
@@ -1103,7 +1130,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuHelp.add(jMenuItemHelp);
         jMenuHelp.add(jSeparator5);
 
-        jMenuItemAbout.setText(bundle.getString("jMenuItemAbout.Text") + " " + APP_NAME);
+        jMenuItemAbout.setText(bundle.getString("jMenuItemAbout.Text")); // NOI18N
         jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemAboutActionPerformed(evt);
@@ -1143,7 +1170,11 @@ public class Gui extends javax.swing.JFrame {
     private void jComboBoxLangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxLangItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             curLangCode = langCodes[jComboBoxLang.getSelectedIndex()];
-            VietKeyListener.setVietModeEnabled(curLangCode.contains("vie"));
+            boolean vie = curLangCode.contains("vie");
+            VietKeyListener.setVietModeEnabled(vie);
+            this.jMenuInputMethod.setVisible(vie);
+            this.jSeparator6.setVisible(vie);
+
             if (this.jToggleButtonSpellCheck.isSelected()) {
                 this.jToggleButtonSpellCheck.doClick();
                 this.jToggleButtonSpellCheck.doClick();
@@ -1152,26 +1183,26 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxLangItemStateChanged
 
     private void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRActionPerformed
-        OCRActionPerformed();
+        ocrActionPerformed();
     }//GEN-LAST:event_jMenuItemOCRActionPerformed
 
-    void OCRActionPerformed() {
+    void ocrActionPerformed() {
         // to be implemented in subclas
     }
 
     private void jMenuItemOCRAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRAllActionPerformed
-        OCRAllActionPerformed();
+        ocrAllActionPerformed();
     }//GEN-LAST:event_jMenuItemOCRAllActionPerformed
 
-    void OCRAllActionPerformed() {
+    void ocrAllActionPerformed() {
         // to be implemented in subclass
     }
 
     private void jMenuItemPostProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPostProcessActionPerformed
-        PostProcessActionPerformed();
+        postProcessActionPerformed();
     }//GEN-LAST:event_jMenuItemPostProcessActionPerformed
 
-    void PostProcessActionPerformed() {
+    void postProcessActionPerformed() {
         // to be implemented in subclass
     }
 
@@ -1308,6 +1339,15 @@ public class Gui extends javax.swing.JFrame {
         // to be implemented in subclass
     }
 
+    private String[] getInstalledUILangs() {
+        String[] locales = {"en", "lt", "vi"};
+        return locales;
+    }
+
+    protected static Locale getLocale(String selectedUILang) {
+        return new Locale(selectedUILang);
+    }
+
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         try {
             String version = config.getProperty("Version");
@@ -1317,7 +1357,7 @@ public class Gui extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, APP_NAME + ", " + version + " \u00a9 2007\n"
                     + "Java GUI Frontend for Tesseract 3.0 OCR Engine\n"
                     + DateFormat.getDateInstance(DateFormat.LONG).format(releaseDate)
-                    + "\nhttp://vietocr.sourceforge.net", APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+                    + "\nhttp://vietocr.sourceforge.net", ((JMenuItem) evt.getSource()).getText(), JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -1719,17 +1759,6 @@ public class Gui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formComponentResized
 
-    private void jRadioButtonMenuItemEngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemEngActionPerformed
-        if (!selectedUILang.equals(evt.getActionCommand())) {
-            selectedUILang = evt.getActionCommand();
-            changeUILanguage(selectedUILang.equals("vi") ? VIETNAM : Locale.US);
-        }
-    }//GEN-LAST:event_jRadioButtonMenuItemEngActionPerformed
-
-    private void jRadioButtonMenuItemVietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemVietActionPerformed
-        jRadioButtonMenuItemEngActionPerformed(evt);
-    }//GEN-LAST:event_jRadioButtonMenuItemVietActionPerformed
-
     private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemScanActionPerformed
         scaleX = scaleY = 1f;
         performScan();
@@ -1857,10 +1886,10 @@ public class Gui extends javax.swing.JFrame {
     }
 
     private void jButtonCancelOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelOCRActionPerformed
-        CancelOCRActionPerformed();
+        cancelOCRActionPerformed();
     }//GEN-LAST:event_jButtonCancelOCRActionPerformed
 
-    void CancelOCRActionPerformed() {
+    void cancelOCRActionPerformed() {
         // to be implemented in subclass
     }
     private void jMenuItemMergePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMergePdfActionPerformed
@@ -1876,14 +1905,12 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemMetadataActionPerformed
 
     private void jToggleButtonSpellCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonSpellCheckActionPerformed
-        SpellChecker sp = new SpellChecker(this.jTextArea1, curLangCode);
-        if (this.jToggleButtonSpellCheck.isSelected()) {
-            sp.enableSpellCheck();
-        } else {
-            sp.disableSpellCheck();
-        }
-        this.jTextArea1.repaint();
+        spellCheckActionPerformed();
     }//GEN-LAST:event_jToggleButtonSpellCheckActionPerformed
+
+    void spellCheckActionPerformed() {
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
+    }
 
     void readImageMetadata() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
@@ -1906,13 +1933,18 @@ public class Gui extends javax.swing.JFrame {
                 if (imageTotal > 0) {
                     jLabelCurIndex.setText(bundle.getString("Page_") + (imageIndex + 1) + " " + bundle.getString("of_") + imageTotal);
                 }
-                jMenuItemHelp.setText(APP_NAME + " " + jMenuItemHelp.getText());
-                jMenuItemAbout.setText(jMenuItemAbout.getText() + " " + APP_NAME);
                 if (helptopicsFrame != null) {
                     helptopicsFrame.setTitle(jMenuItemHelp.getText());
                 }
                 filechooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
+                popup.removeAll();
                 populatePopupMenu();
+
+                for (Component comp : jMenuUILang.getMenuComponents()) {
+                    JMenuItem item = (JMenuItem) comp;
+                    Locale locale = new Locale(item.getActionCommand());
+                    item.setText(locale.getDisplayLanguage());
+                }
             }
         });
     }
@@ -1938,7 +1970,7 @@ public class Gui extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         selectedUILang = prefs.get("UILanguage", "en");
-        Locale.setDefault(selectedUILang.equals("vi") ? VIETNAM : Locale.US);
+        Locale.setDefault(getLocale(selectedUILang));
 
         java.awt.EventQueue.invokeLater(new Runnable() {
 
@@ -2003,8 +2035,6 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelStatus;
     protected javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemEng;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemViet;
     private javax.swing.JScrollPane jScrollPane1;
     protected javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
@@ -2020,10 +2050,10 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator9;
     private javax.swing.JSplitPane jSplitPane1;
     protected javax.swing.JTextArea jTextArea1;
-    private javax.swing.JToggleButton jToggleButtonSpellCheck;
+    protected javax.swing.JToggleButton jToggleButtonSpellCheck;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
-    private javax.swing.JPopupMenu popup;
+    protected javax.swing.JPopupMenu popup;
     // End of variables declaration//GEN-END:variables
     private final UndoManager m_undo = new UndoManager();
     protected final UndoableEditSupport undoSupport = new UndoableEditSupport();

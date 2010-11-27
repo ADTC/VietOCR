@@ -22,7 +22,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import net.sourceforge.vietpad.SimpleFilter;
 
-public class GuiWithTools extends GuiWithSettings {
+public class GuiWithTools extends GuiWithSpellcheck {
 
     File imageFolder;
     FileFilter selectedFilter;
@@ -304,7 +304,7 @@ public class GuiWithTools extends GuiWithSettings {
      */
     public static void main(String[] args) {
         selectedUILang = prefs.get("UILanguage", "en");
-        Locale.setDefault(selectedUILang.equals("vi") ? VIETNAM : Locale.US);
+        Locale.setDefault(getLocale(selectedUILang));
 
         java.awt.EventQueue.invokeLater(new Runnable() {
 

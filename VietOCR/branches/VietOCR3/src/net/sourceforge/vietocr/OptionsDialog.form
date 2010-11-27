@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
@@ -101,6 +101,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelWatch">
               <Properties>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="jTextFieldWatch"/>
+                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="net/sourceforge/vietocr/OptionsDialog.properties" key="jLabelWatch.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -126,6 +129,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelOutput">
               <Properties>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="jTextFieldOutput"/>
+                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="net/sourceforge/vietocr/OptionsDialog.properties" key="jLabelOutput.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -164,7 +170,9 @@
             <Component class="javax.swing.JButton" name="jButtonWatch">
               <Properties>
                 <Property name="text" type="java.lang.String" value="..."/>
-                <Property name="toolTipText" type="java.lang.String" value="Browse"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="net/sourceforge/vietocr/OptionsDialog.properties" key="jButtonWatch.ToolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[30, 23]"/>
                 </Property>
@@ -181,7 +189,9 @@
             <Component class="javax.swing.JButton" name="jButtonOutput">
               <Properties>
                 <Property name="text" type="java.lang.String" value="..."/>
-                <Property name="toolTipText" type="java.lang.String" value="Browse"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="net/sourceforge/vietocr/OptionsDialog.properties" key="jButtonOutput.ToolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[30, 23]"/>
                 </Property>
@@ -210,6 +220,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelTess">
               <Properties>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="jTextFieldTess"/>
+                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="net/sourceforge/vietocr/OptionsDialog.properties" key="jLabelTess.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -226,7 +239,9 @@
             <Component class="javax.swing.JButton" name="jButtonTess">
               <Properties>
                 <Property name="text" type="java.lang.String" value="..."/>
-                <Property name="toolTipText" type="java.lang.String" value="Browse"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="net/sourceforge/vietocr/OptionsDialog.properties" key="jButtonTess.ToolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[30, 23]"/>
                 </Property>
@@ -250,6 +265,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelDangAmbigs">
               <Properties>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="jTextFieldDangAmbigs"/>
+                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="net/sourceforge/vietocr/OptionsDialog.properties" key="jLabelDangAmbigs.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -263,7 +281,9 @@
             <Component class="javax.swing.JButton" name="jButtonDangAmbigs">
               <Properties>
                 <Property name="text" type="java.lang.String" value="..."/>
-                <Property name="toolTipText" type="java.lang.String" value="Browse"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="net/sourceforge/vietocr/OptionsDialog.properties" key="jButtonDangAmbigs.ToolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[30, 23]"/>
                 </Property>
