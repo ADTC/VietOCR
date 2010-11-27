@@ -127,7 +127,7 @@
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 13</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
+  <data name="labelXRes.Text" xml:space="preserve">
     <value>Độ phân giải X</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
@@ -136,19 +136,19 @@
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 13</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
+  <data name="labelYRes.Text" xml:space="preserve">
     <value>Độ phân giải Y</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
+  <data name="labelWidth.Text" xml:space="preserve">
     <value>Chiều rộng</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
+  <data name="labelHeight.Text" xml:space="preserve">
     <value>Chiều cao</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">

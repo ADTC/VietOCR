@@ -155,7 +155,7 @@
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
+  <data name="labelXRes.Text" xml:space="preserve">
     <value>Horizontalioji raiška</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
@@ -224,7 +224,7 @@
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
+  <data name="labelYRes.Text" xml:space="preserve">
     <value>Vertikalioji raiška</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
@@ -272,7 +272,7 @@
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
+  <data name="labelWidth.Text" xml:space="preserve">
     <value>Plotis</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
@@ -320,7 +320,7 @@
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
+  <data name="labelHeight.Text" xml:space="preserve">
     <value>Aukštis</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
