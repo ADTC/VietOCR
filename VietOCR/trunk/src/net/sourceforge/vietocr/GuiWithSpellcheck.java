@@ -32,11 +32,13 @@ public class GuiWithSpellcheck extends GuiWithSettings {
     void populatePopupMenuWithSuggestions(Point pointClicked) {
         try {
             popup.removeAll();
-            int offset = jTextArea1.viewToModel(pointClicked);
-            start = javax.swing.text.Utilities.getWordStart(jTextArea1, offset);
-            end = javax.swing.text.Utilities.getWordEnd(jTextArea1, offset);
-            String curWord = jTextArea1.getDocument().getText(start, end - start);
-            makeSuggestions(curWord);
+            if (this.jToggleButtonSpellCheck.isSelected()) {
+                int offset = jTextArea1.viewToModel(pointClicked);
+                start = javax.swing.text.Utilities.getWordStart(jTextArea1, offset);
+                end = javax.swing.text.Utilities.getWordEnd(jTextArea1, offset);
+                String curWord = jTextArea1.getDocument().getText(start, end - start);
+                makeSuggestions(curWord);
+            }
         } catch (BadLocationException e) {
         } finally {
             // load standard menu items
