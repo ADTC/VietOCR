@@ -145,7 +145,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel1.add(jLabel8, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "pixels", "inches", "cm" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { bundle.getString("pixels"), bundle.getString("inches"), bundle.getString("cm") }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -153,7 +153,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
         });
         jPanel1.add(jComboBox1, new java.awt.GridBagConstraints());
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "pixels", "inches", "cm" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { bundle.getString("pixels"), bundle.getString("inches"), bundle.getString("cm") }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -200,7 +200,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         if (!isProgrammatic) {
             isProgrammatic = true;
-            this.jComboBox2.setSelectedItem(this.jComboBox1.getSelectedItem());
+            this.jComboBox2.setSelectedIndex(this.jComboBox1.getSelectedIndex());
             convertUnits(this.jComboBox1.getSelectedIndex());
             isProgrammatic = false;
         }
@@ -209,7 +209,7 @@ public class ImageInfoDialog extends javax.swing.JDialog {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         if (!isProgrammatic) {
             isProgrammatic = true;
-            this.jComboBox1.setSelectedItem(this.jComboBox2.getSelectedItem());
+            this.jComboBox1.setSelectedIndex(this.jComboBox2.getSelectedIndex());
             convertUnits(this.jComboBox2.getSelectedIndex());
             isProgrammatic = false;
         }
