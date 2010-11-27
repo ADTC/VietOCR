@@ -30,14 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImageInfoDialog));
             this.buttonOK = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelXRes = new System.Windows.Forms.Label();
             this.textBoxXRes = new System.Windows.Forms.TextBox();
             this.textBoxYRes = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelYRes = new System.Windows.Forms.Label();
             this.textBoxWidth = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelWidth = new System.Windows.Forms.Label();
             this.textBoxHeight = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelHeight = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -52,10 +52,10 @@
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // labelXRes
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.labelXRes, "labelXRes");
+            this.labelXRes.Name = "labelXRes";
             // 
             // textBoxXRes
             // 
@@ -69,10 +69,10 @@
             this.textBoxYRes.Name = "textBoxYRes";
             this.textBoxYRes.ReadOnly = true;
             // 
-            // label2
+            // labelYRes
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.labelYRes, "labelYRes");
+            this.labelYRes.Name = "labelYRes";
             // 
             // textBoxWidth
             // 
@@ -80,10 +80,10 @@
             this.textBoxWidth.Name = "textBoxWidth";
             this.textBoxWidth.ReadOnly = true;
             // 
-            // label3
+            // labelWidth
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.labelWidth, "labelWidth");
+            this.labelWidth.Name = "labelWidth";
             // 
             // textBoxHeight
             // 
@@ -91,10 +91,10 @@
             this.textBoxHeight.Name = "textBoxHeight";
             this.textBoxHeight.ReadOnly = true;
             // 
-            // label4
+            // labelHeight
             // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
+            resources.ApplyResources(this.labelHeight, "labelHeight");
+            this.labelHeight.Name = "labelHeight";
             // 
             // buttonCancel
             // 
@@ -147,13 +147,13 @@
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.textBoxHeight);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.labelHeight);
             this.Controls.Add(this.textBoxWidth);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.labelWidth);
             this.Controls.Add(this.textBoxYRes);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelYRes);
             this.Controls.Add(this.textBoxXRes);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelXRes);
             this.Controls.Add(this.buttonOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -167,14 +167,14 @@
         #endregion
 
         private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelXRes;
         private System.Windows.Forms.TextBox textBoxXRes;
         private System.Windows.Forms.TextBox textBoxYRes;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelYRes;
         private System.Windows.Forms.TextBox textBoxWidth;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelWidth;
         private System.Windows.Forms.TextBox textBoxHeight;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelHeight;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
