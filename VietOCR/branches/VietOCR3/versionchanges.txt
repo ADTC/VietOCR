@@ -167,3 +167,6 @@ Version 3.0 (3 October 2010)
 - Upgrade Tesseract OCR engine to 3.0
 - Replace old format (2.0x) language data with new format (3.0) language data
 - Change datafile suffix from .inttemp to .traineddata
+
+Version 3.1 Beta (3 October 2010)
+- Port/merge changes from Version 2.0
