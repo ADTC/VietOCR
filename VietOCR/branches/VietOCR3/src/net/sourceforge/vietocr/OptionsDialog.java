@@ -138,6 +138,7 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jPanelWatchFolder.setLayout(new java.awt.GridBagLayout());
 
+        jLabelWatch.setLabelFor(jTextFieldWatch);
         jLabelWatch.setText(bundle.getString("jLabelWatch.Text")); // NOI18N
         jPanelWatchFolder.add(jLabelWatch, new java.awt.GridBagConstraints());
 
@@ -151,6 +152,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
         jPanelWatchFolder.add(jTextFieldWatch, gridBagConstraints);
 
+        jLabelOutput.setLabelFor(jTextFieldOutput);
         jLabelOutput.setText(bundle.getString("jLabelOutput.Text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -176,7 +178,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         jPanelWatchFolder.add(jCheckBoxWatch, gridBagConstraints);
 
         jButtonWatch.setText("...");
-        jButtonWatch.setToolTipText("Browse");
+        jButtonWatch.setToolTipText(bundle.getString("jButtonWatch.ToolTipText")); // NOI18N
         jButtonWatch.setPreferredSize(new java.awt.Dimension(30, 23));
         jButtonWatch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,7 +188,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         jPanelWatchFolder.add(jButtonWatch, new java.awt.GridBagConstraints());
 
         jButtonOutput.setText("...");
-        jButtonOutput.setToolTipText("Browse");
+        jButtonOutput.setToolTipText(bundle.getString("jButtonOutput.ToolTipText")); // NOI18N
         jButtonOutput.setPreferredSize(new java.awt.Dimension(30, 23));
         jButtonOutput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,6 +202,7 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Watch", jPanelWatchFolder);
 
+        jLabelTess.setLabelFor(jTextFieldTess);
         jLabelTess.setText(bundle.getString("jLabelTess.Text")); // NOI18N
         jPanelTessPath.add(jLabelTess);
 
@@ -208,7 +211,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         jPanelTessPath.add(jTextFieldTess);
 
         jButtonTess.setText("...");
-        jButtonTess.setToolTipText("Browse");
+        jButtonTess.setToolTipText(bundle.getString("jButtonTess.ToolTipText")); // NOI18N
         jButtonTess.setPreferredSize(new java.awt.Dimension(30, 23));
         jButtonTess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,11 +224,12 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jPanelDangAmbigsPath.setLayout(new java.awt.GridBagLayout());
 
+        jLabelDangAmbigs.setLabelFor(jTextFieldDangAmbigs);
         jLabelDangAmbigs.setText(bundle.getString("jLabelDangAmbigs.Text")); // NOI18N
         jPanelDangAmbigsPath.add(jLabelDangAmbigs, new java.awt.GridBagConstraints());
 
         jButtonDangAmbigs.setText("...");
-        jButtonDangAmbigs.setToolTipText("Browse");
+        jButtonDangAmbigs.setToolTipText(bundle.getString("jButtonDangAmbigs.ToolTipText")); // NOI18N
         jButtonDangAmbigs.setPreferredSize(new java.awt.Dimension(30, 23));
         jButtonDangAmbigs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -361,6 +365,7 @@ public class OptionsDialog extends javax.swing.JDialog {
             public void run() {
                 FormLocalizer localizer = new FormLocalizer(OptionsDialog.this, OptionsDialog.class);
                 localizer.ApplyCulture(bundle);
+                jTabbedPane1.setTitleAt(0, bundle.getString("Watch"));
             }
         });
     }

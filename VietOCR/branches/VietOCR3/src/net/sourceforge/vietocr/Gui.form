@@ -3,6 +3,9 @@
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Container class="javax.swing.JPopupMenu" name="popup">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+      </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
         <Property name="useNullLayout" type="boolean" value="true"/>
@@ -12,7 +15,9 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenuFile">
           <Properties>
-            <Property name="mnemonic" type="int" value="102"/>
+            <Property name="mnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
+              <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuFile.Mnemonic" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuFile.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
@@ -92,7 +97,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuCommand">
           <Properties>
-            <Property name="mnemonic" type="int" value="99"/>
+            <Property name="mnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
+              <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuCommand.Mnemonic" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuCommand.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
@@ -149,6 +156,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuImage">
           <Properties>
+            <Property name="mnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
+              <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuImage.Mnemonic" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuImage.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
@@ -169,7 +179,9 @@
             <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItemScreenshotMode">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="Screenshot Mode"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jCheckBoxMenuItemScreenshotMode.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
@@ -179,6 +191,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuFormat">
           <Properties>
+            <Property name="mnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
+              <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuFormat.Mnemonic" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuFormat.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
@@ -239,7 +254,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuSettings">
           <Properties>
-            <Property name="mnemonic" type="int" value="115"/>
+            <Property name="mnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
+              <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuSettings.Mnemonic" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuSettings.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
@@ -252,10 +269,13 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="        ActionListener imlst = new ActionListener() {&#xa;                public void actionPerformed(ActionEvent ae) {&#xa;                    selectedInputMethod = ae.getActionCommand();&#xa;                    VietKeyListener.setInputMethod(InputMethods.valueOf(selectedInputMethod));&#xa;                }&#xa;            };&#xa;&#xa;        ButtonGroup groupInputMethod = new ButtonGroup();&#xa;        &#xa;        for (InputMethods im : InputMethods.values()) {&#xa;            String inputMethod = im.name();&#xa;            JRadioButtonMenuItem radioItem = new JRadioButtonMenuItem(inputMethod, selectedInputMethod.equals(inputMethod));&#xa;            radioItem.addActionListener(imlst);&#xa;            jMenuInputMethod.add(radioItem);&#xa;            groupInputMethod.add(radioItem);            &#xa;        }&#xa;        "/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="        ActionListener imlst = new ActionListener() {&#xa;                public void actionPerformed(ActionEvent ae) {&#xa;                    selectedInputMethod = ae.getActionCommand();&#xa;                    VietKeyListener.setInputMethod(InputMethods.valueOf(selectedInputMethod));&#xa;                }&#xa;            };&#xa;&#xa;        ButtonGroup groupInputMethod = new ButtonGroup();&#xa;        &#xa;        for (InputMethods im : InputMethods.values()) {&#xa;            String inputMethod = im.name();&#xa;            JRadioButtonMenuItem radioItem = new JRadioButtonMenuItem(inputMethod, selectedInputMethod.equals(inputMethod));&#xa;            radioItem.addActionListener(imlst);&#xa;            jMenuInputMethod.add(radioItem);&#xa;            groupInputMethod.add(radioItem);            &#xa;        }&#xa;        jMenuInputMethod.setVisible(vie);"/>
               </AuxValues>
             </Menu>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator6">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jSeparator6.setVisible(vie);"/>
+              </AuxValues>
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="jMenuUILang">
               <Properties>
@@ -263,46 +283,9 @@
                   <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuUILang.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="jRadioButtonMenuItemEng">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="group" type="code"/>
-                    </Property>
-                    <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="selectedUILang.equals(&quot;en&quot;)" type="code"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jRadioButtonMenuItemEng.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
-                    </Property>
-                    <Property name="actionCommand" type="java.lang.String" value="en"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonMenuItemEngActionPerformed"/>
-                  </Events>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ButtonGroup group = new ButtonGroup();"/>
-                    <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Gui_jRadioButtonMenuItemEng"/>
-                  </AuxValues>
-                </MenuItem>
-                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="jRadioButtonMenuItemViet">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="group" type="code"/>
-                    </Property>
-                    <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="selectedUILang.equals(&quot;vi&quot;)" type="code"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jRadioButtonMenuItemViet.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
-                    </Property>
-                    <Property name="actionCommand" type="java.lang.String" value="vi"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonMenuItemVietActionPerformed"/>
-                  </Events>
-                </MenuItem>
-              </SubComponents>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="            &#xa;            ActionListener uiLangLst = new ActionListener() {&#xa;                public void actionPerformed(ActionEvent ae) {&#xa;                    if (!selectedUILang.equals(ae.getActionCommand())) {&#xa;                        selectedUILang = ae.getActionCommand();&#xa;                        changeUILanguage(getLocale(selectedUILang));&#xa;                    }&#xa;                }&#xa;            };&#xa;&#xa;            ButtonGroup groupUILang = new ButtonGroup();&#xa;        String[] uiLangs = getInstalledUILangs();&#xa;        for (int i = 0; i &lt; uiLangs.length; i++) {&#xa;            Locale locale = new Locale(uiLangs[i]);&#xa;            JRadioButtonMenuItem uiLangButton = new JRadioButtonMenuItem(locale.getDisplayLanguage(), selectedUILang.equals(locale.getLanguage()));&#xa;            uiLangButton.setActionCommand(locale.getLanguage());&#xa;            uiLangButton.addActionListener(uiLangLst);&#xa;            groupUILang.add(uiLangButton);&#xa;            jMenuUILang.add(uiLangButton);&#xa;        }"/>
+              </AuxValues>
             </Menu>
             <Menu class="javax.swing.JMenu" name="jMenuLookAndFeel">
               <Properties>
@@ -330,6 +313,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuTools">
           <Properties>
+            <Property name="mnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
+              <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuTools.Mnemonic" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuTools.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
@@ -369,7 +355,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuHelp">
           <Properties>
-            <Property name="mnemonic" type="int" value="97"/>
+            <Property name="mnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
+              <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuHelp.Mnemonic" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuHelp.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
@@ -377,8 +365,8 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemHelp">
               <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="APP_NAME + &quot; &quot; + bundle.getString(&quot;jMenuItemHelp.Text&quot;)" type="code"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuItemHelp.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -389,8 +377,8 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAbout">
               <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="bundle.getString(&quot;jMenuItemAbout.Text&quot;) + &quot; &quot; + APP_NAME" type="code"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuItemAbout.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -537,6 +525,9 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/net/sourceforge/vietocr/icons/spellcheck.png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jToggleButtonSpellCheck.ToolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -549,12 +540,19 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jToolBar2.add(Box.createHorizontalStrut(20));"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelLanguage">
           <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="jComboBoxLang"/>
+            </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jLabelLanguage.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jLabelLanguage.ToolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
@@ -615,7 +613,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="     VietKeyListener keyLst = new VietKeyListener(jTextArea1);&#xa;     jTextArea1.addKeyListener(keyLst);&#xa;     VietKeyListener.setInputMethod(InputMethods.valueOf(selectedInputMethod));&#xa;     VietKeyListener.setSmartMark(true);&#xa;     VietKeyListener.consumeRepeatKey(true);&#xa;     VietKeyListener.setVietModeEnabled(curLangCode.contains(&quot;vie&quot;));&#xa;     jTextArea1.addMouseListener(new MouseAdapter() {&#xa;        public void mousePressed(MouseEvent e) {&#xa;            if (e.isPopupTrigger()) {&#xa;                popup.show(e.getComponent(), e.getX(), e.getY());&#xa;            }&#xa;        }&#xa;&#xa;        public void mouseReleased(MouseEvent e) {&#xa;            mousePressed(e);&#xa;        }&#xa;    });&#xa;    jTextArea1.addCaretListener(new CaretListener() {&#xa;                public void caretUpdate(CaretEvent e) {&#xa;                    updateCutCopyDelete(e.getDot() != e.getMark());&#xa;                }&#xa;            });"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="     VietKeyListener keyLst = new VietKeyListener(jTextArea1);&#xa;     jTextArea1.addKeyListener(keyLst);&#xa;     VietKeyListener.setInputMethod(InputMethods.valueOf(selectedInputMethod));&#xa;     VietKeyListener.setSmartMark(true);&#xa;     VietKeyListener.consumeRepeatKey(true);&#xa;     boolean vie = curLangCode.contains(&quot;vie&quot;);&#xa;     VietKeyListener.setVietModeEnabled(vie);&#xa;     jTextArea1.addMouseListener(new MouseAdapter() {&#xa;        public void mousePressed(final MouseEvent e) {&#xa;            if (e.isPopupTrigger()) {&#xa;                SwingUtilities.invokeLater(new Runnable() {&#xa;                    public void run() {&#xa;                        populatePopupMenuWithSuggestions(e.getPoint());&#xa;                        popup.show(e.getComponent(), e.getX(), e.getY());&#xa;                    }&#xa;                });&#xa;            }&#xa;        }&#xa;&#xa;        public void mouseReleased(MouseEvent e) {&#xa;            mousePressed(e);&#xa;        }&#xa;    });&#xa;    jTextArea1.addCaretListener(new CaretListener() {&#xa;                public void caretUpdate(CaretEvent e) {&#xa;                    updateCutCopyDelete(e.getDot() != e.getMark());&#xa;                }&#xa;            });&#xa;"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
               </AuxValues>
             </Component>
