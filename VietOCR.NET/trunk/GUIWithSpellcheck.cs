@@ -40,18 +40,21 @@ namespace VietOCR.NET
             try
             {
                 this.contextMenuStrip1.Items.Clear();
-                int offset = this.textBox1.GetCharIndexFromPosition(pointClicked);
-                BreakIterator boundary = BreakIterator.GetWordInstance();
-                boundary.Text = this.textBox1.Text;
-                end = boundary.Following(offset);
-
-                if (end != BreakIterator.DONE)
+                if (this.toolStripButtonSpellCheck.Checked)
                 {
-                    start = boundary.Previous();
+                    int offset = this.textBox1.GetCharIndexFromPosition(pointClicked);
+                    BreakIterator boundary = BreakIterator.GetWordInstance();
+                    boundary.Text = this.textBox1.Text;
+                    end = boundary.Following(offset);
+
+                    if (end != BreakIterator.DONE)
+                    {
+                        start = boundary.Previous();
+                    }
+
+                    curWord = this.textBox1.Text.Substring(start, end - start);
+                    makeSuggestions(curWord);
                 }
-                    
-                curWord = this.textBox1.Text.Substring(start, end - start);
-                makeSuggestions(curWord);
             }
             finally
             {
