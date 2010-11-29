@@ -316,13 +316,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CB861DA27D1D145443BF6980A7843920"
+        "OwnerKey" = "8:_1AE33DD3BC5E45C5BAFCBE03FA080309"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1AE33DD3BC5E45C5BAFCBE03FA080309"
+        "OwnerKey" = "8:_9305C06EB21AD40577B72DC9A6F45EE3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -340,7 +340,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9305C06EB21AD40577B72DC9A6F45EE3"
+        "OwnerKey" = "8:_CB861DA27D1D145443BF6980A7843920"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -378,7 +378,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:VietOCR.NET-1.9\\Setup.msi"
+        "OutputFilename" = "8:VietOCR.NET-2.0-Beta\\Setup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -1590,19 +1590,19 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:VietOCR.NET"
-        "ProductCode" = "8:{6A96AAFA-73DA-4D71-AC4A-B82A6C7D4E23}"
-        "PackageCode" = "8:{FDAD04B9-8E16-4092-B5FC-979DF993013A}"
+        "ProductCode" = "8:{085C08BC-0366-4AB1-B15C-50249F6CCB02}"
+        "PackageCode" = "8:{75ABC92F-DEC5-4F5D-965D-880D9BBED0A3}"
         "UpgradeCode" = "8:{2EF42973-7837-44E2-9085-FA4B5B40483E}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.9"
+        "ProductVersion" = "8:2.0"
         "Manufacturer" = "8:VietUnicode"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://vietunicode.sf.net/forum"
         "Title" = "8:Setup for VietOCR.NET"
-        "Subject" = "8:Installer for VietOCR.NET v1.9"
+        "Subject" = "8:Installer for VietOCR.NET v2.0"
         "ARPCONTACT" = "8:Quan Nguyen"
         "Keywords" = "8:Vietnamese OCR"
         "ARPCOMMENTS" = "8:http://vietocr.sf.net"
