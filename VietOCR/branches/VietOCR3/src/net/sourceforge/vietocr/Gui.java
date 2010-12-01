@@ -1340,7 +1340,7 @@ public class Gui extends javax.swing.JFrame {
     }
 
     private String[] getInstalledUILangs() {
-        String[] locales = {"en", "lt", "vi"};
+        String[] locales = {"en", "lt", "sk", "vi"};
         return locales;
     }
 
