@@ -117,23 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="_Help" xml:space="preserve">
-    <value> žinynas</value>
-  </data>
   <data name="_of_" xml:space="preserve">
     <value> iš </value>
   </data>
   <data name="Page_" xml:space="preserve">
     <value>Puslapis </value>
   </data>
-  <data name="About_" xml:space="preserve">
-    <value>Apie </value>
-  </data>
   <data name="Cannotloadimage" xml:space="preserve">
     <value>Nepavyko įkelti vaizdo.</value>
   </data>
   <data name="LoadImage" xml:space="preserve">
-    <value>Prašom įkelti vaizdo failą.</value>
+    <value>Prašom įkelti vaizdo failą</value>
   </data>
   <data name="OCRcompleted" xml:space="preserve">
     <value>Optinis ženklų atpažinimas baigtas.</value>
@@ -143,9 +137,6 @@
   </data>
   <data name="OpenImageFile" xml:space="preserve">
     <value>Atverti vaizdo failą</value>
-  </data>
-  <data name="readme" xml:space="preserve">
-    <value>readme_cs.html</value>
   </data>
   <data name="selectLanguage" xml:space="preserve">
     <value>Pasirinkite kalbą.</value>
@@ -186,9 +177,6 @@
   <data name="MergeTIFFcompleted" xml:space="preserve">
     <value>TIFF sujungimas baigtas. </value>
   </data>
-  <data name="Hãy kiểm output file(s) trong " xml:space="preserve">
-    <value>Patikrinkite išvesties failus, esančius aplanke </value>
-  </data>
   <data name="MergeTIFF_running" xml:space="preserve">
     <value>Vyksta TIFF sujungimas…</value>
   </data>
@@ -199,7 +187,7 @@
     <value>Vyksta PDF skaidymas…</value>
   </data>
   <data name="suggest_split" xml:space="preserve">
-    <value>Prieš apdorojant, PDF failą Jums gali tekti padalinti į mažesnes dalis.</value>
+    <value>Prieš apdorojant, PDF failą Jums gali tekti suskaidyti į mažesnes dalis.</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Klaida</value>
@@ -242,5 +230,20 @@
   </data>
   <data name="Untitled" xml:space="preserve">
     <value>Be pavadinimo</value>
+  </data>
+  <data name="VietOCR_Help" xml:space="preserve">
+    <value>„VietOCR.NET“ žinynas</value>
+  </data>
+  <data name="About_VietOCR" xml:space="preserve">
+    <value>Apie „VietOCR.NET“</value>
+  </data>
+  <data name="check_output_in" xml:space="preserve">
+    <value>Patikrinkite išvesties failus, esančius aplanke </value>
+  </data>
+  <data name="Add_to_Dictionary" xml:space="preserve">
+    <value>Įtraukti į žodyną</value>
+  </data>
+  <data name="Ignore_All" xml:space="preserve">
+    <value>Nepaisyti visų pasikartojimų</value>
   </data>
 </root>
