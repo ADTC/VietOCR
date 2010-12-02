@@ -121,32 +121,32 @@
     <value>Gerai</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 74</value>
+  <data name="labelXRes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 74</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 13</value>
+  <data name="labelXRes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 13</value>
   </data>
   <data name="labelXRes.Text" xml:space="preserve">
     <value>Horizontalioji raiška</value>
   </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 100</value>
+  <data name="labelYRes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 100</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 13</value>
+  <data name="labelYRes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 13</value>
   </data>
   <data name="labelYRes.Text" xml:space="preserve">
     <value>Vertikalioji raiška</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
+  <data name="labelWidth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 13</value>
   </data>
   <data name="labelWidth.Text" xml:space="preserve">
     <value>Plotis</value>
   </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
+  <data name="labelHeight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 13</value>
   </data>
   <data name="labelHeight.Text" xml:space="preserve">
     <value>Aukštis</value>
@@ -154,8 +154,14 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Atsisakyti</value>
   </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
+  </data>
   <data name="label5.Text" xml:space="preserve">
     <value>tašk./colyje</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>tašk./colyje</value>
@@ -166,21 +172,11 @@
   <data name="comboBox4.Items1" xml:space="preserve">
     <value>col.</value>
   </data>
-  <data name="comboBox4.Items2" xml:space="preserve">
-    <value>cm</value>
-  </data>
   <data name="comboBox3.Items" xml:space="preserve">
     <value>tašk.</value>
   </data>
   <data name="comboBox3.Items1" xml:space="preserve">
     <value>col.</value>
-  </data>
-  <data name="comboBox3.Items2" xml:space="preserve">
-    <value>cm</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Vaizdo savybės</value>

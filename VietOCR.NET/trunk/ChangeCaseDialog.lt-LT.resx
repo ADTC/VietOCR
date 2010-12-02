@@ -119,37 +119,37 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="radioButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 17</value>
+    <value>88, 17</value>
   </data>
   <data name="radioButton1.Text" xml:space="preserve">
     <value>Sakinio stilius</value>
   </data>
   <data name="radioButton2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 17</value>
+    <value>99, 17</value>
   </data>
   <data name="radioButton2.Text" xml:space="preserve">
     <value>mažosios raidės</value>
   </data>
   <data name="radioButton3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 17</value>
+    <value>130, 17</value>
   </data>
   <data name="radioButton3.Text" xml:space="preserve">
     <value>DIDŽIOSIOS RAIDĖS</value>
   </data>
   <data name="radioButton4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 17</value>
+    <value>166, 17</value>
   </data>
   <data name="radioButton4.Text" xml:space="preserve">
     <value>Visus Žodžius Pradėti Didžiąja</value>
   </data>
   <data name="buttonChange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 132</value>
+    <value>24, 132</value>
   </data>
   <data name="buttonChange.Text" xml:space="preserve">
     <value>Keisti</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>86, 132</value>
+    <value>103, 132</value>
   </data>
   <data name="buttonClose.Text" xml:space="preserve">
     <value>Užverti</value>
@@ -158,10 +158,10 @@
     <value>7, 1</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 118</value>
+    <value>188, 118</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>169, 169</value>
+    <value>202, 169</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Raidžių registro keitimas</value>

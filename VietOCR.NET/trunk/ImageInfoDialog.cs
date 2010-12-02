@@ -47,7 +47,7 @@ namespace VietOCR.NET
             {
                 isProgrammatic = true;
                 this.comboBox4.SelectedItem = this.comboBox3.SelectedItem;
-                ConvertUnits(this.comboBox3.SelectedItem.ToString());
+                ConvertUnits(this.comboBox3.SelectedIndex);
                 isProgrammatic = false;
             }
         }
@@ -58,21 +58,21 @@ namespace VietOCR.NET
             {
                 isProgrammatic = true;
                 this.comboBox3.SelectedItem = this.comboBox4.SelectedItem;
-                ConvertUnits(this.comboBox4.SelectedItem.ToString());
+                ConvertUnits(this.comboBox4.SelectedIndex);
                 isProgrammatic = false;
             }
         }
 
-        private void ConvertUnits(string unit)
+        private void ConvertUnits(int unit)
         {
             switch (unit)
             {
-                case "inches":
+                case 1: // "inches"
                     this.textBoxWidth.Text = Math.Round(this.image.Width / this.image.HorizontalResolution, 1).ToString();
                     this.textBoxHeight.Text = Math.Round(this.image.Height / this.image.VerticalResolution, 1).ToString();
                     break;
 
-                case "cm":
+                case 2: //"cm"
                     this.textBoxWidth.Text = Math.Round(this.image.Width / this.image.HorizontalResolution * 2.54, 2).ToString();
                     this.textBoxHeight.Text = Math.Round(this.image.Height / this.image.VerticalResolution * 2.54, 2).ToString();
                     break;

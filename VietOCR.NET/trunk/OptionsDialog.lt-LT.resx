@@ -118,47 +118,80 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="checkBoxWatch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>114, 74</value>
+  </data>
   <data name="checkBoxWatch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 17</value>
+    <value>56, 17</value>
   </data>
   <data name="checkBoxWatch.Text" xml:space="preserve">
     <value>Į&amp;galinti</value>
   </data>
   <data name="labelOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
+    <value>97, 13</value>
   </data>
   <data name="labelOutput.Text" xml:space="preserve">
     <value>Iš&amp;vesties aplankas:</value>
   </data>
   <data name="labelWatch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
+    <value>106, 13</value>
   </data>
   <data name="labelWatch.Text" xml:space="preserve">
     <value>S&amp;tebimasis aplankas:</value>
+  </data>
+  <data name="btnOutput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>302, 37</value>
+  </data>
+  <data name="btnWatch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>302, 11</value>
+  </data>
+  <data name="textBoxOutput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>114, 39</value>
+  </data>
+  <data name="textBoxWatch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>114, 13</value>
+  </data>
+  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>338, 102</value>
   </data>
   <data name="tabPage1.Text" xml:space="preserve">
     <value>&amp;Stebimasis aplankas</value>
   </data>
   <data name="checkBoxDangAmbigs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 17</value>
+    <value>56, 17</value>
   </data>
   <data name="checkBoxDangAmbigs.Text" xml:space="preserve">
     <value>Į&amp;galinti</value>
   </data>
   <data name="labelPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 13</value>
+    <value>38, 13</value>
   </data>
   <data name="labelPath.Text" xml:space="preserve">
-    <value>&amp;Kelias</value>
+    <value>&amp;Kelias:</value>
+  </data>
+  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>338, 102</value>
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
     <value>&amp;DangAmbigs.txt</value>
   </data>
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>346, 128</value>
+  </data>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 134</value>
+  </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Gerai</value>
   </data>
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>261, 134</value>
+  </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Atsisakyti</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>346, 168</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Parinktys</value>
