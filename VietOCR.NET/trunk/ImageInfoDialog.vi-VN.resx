@@ -121,31 +121,31 @@
     <value>Được</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelXRes.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 74</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelXRes.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 13</value>
   </data>
   <data name="labelXRes.Text" xml:space="preserve">
     <value>Độ phân giải X</value>
   </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelYRes.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 100</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelYRes.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 13</value>
   </data>
   <data name="labelYRes.Text" xml:space="preserve">
     <value>Độ phân giải Y</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelWidth.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
   </data>
   <data name="labelWidth.Text" xml:space="preserve">
     <value>Chiều rộng</value>
   </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelHeight.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
   </data>
   <data name="labelHeight.Text" xml:space="preserve">
@@ -153,10 +153,6 @@
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Bãi</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Thuộc tính ảnh</value>

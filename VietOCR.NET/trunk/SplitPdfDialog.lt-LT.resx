@@ -117,57 +117,105 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonSplit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>118, 135</value>
+  </data>
   <data name="buttonSplit.Text" xml:space="preserve">
     <value>Išskaidyti</value>
+  </data>
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>199, 135</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Atsisakyti</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="textBoxFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 77</value>
+  </data>
+  <data name="textBoxTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>236, 77</value>
+  </data>
+  <data name="radioButtonPages.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 80</value>
+  </data>
   <data name="radioButtonPages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 17</value>
+    <value>101, 17</value>
   </data>
   <data name="radioButtonPages.Text" xml:space="preserve">
     <value>Išskirti puslapius</value>
   </data>
   <data name="labelFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 82</value>
+    <value>146, 82</value>
   </data>
   <data name="labelFrom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>19, 13</value>
+    <value>28, 13</value>
   </data>
   <data name="labelFrom.Text" xml:space="preserve">
     <value>nuo:</value>
   </data>
   <data name="labelTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 82</value>
+    <value>214, 82</value>
   </data>
   <data name="labelTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 13</value>
+    <value>20, 13</value>
   </data>
   <data name="labelTo.Text" xml:space="preserve">
     <value>iki:</value>
   </data>
+  <data name="radioButtonFiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 103</value>
+  </data>
   <data name="radioButtonFiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 17</value>
+    <value>91, 17</value>
   </data>
   <data name="radioButtonFiles.Text" xml:space="preserve">
     <value>Skaidyti failais</value>
   </data>
+  <data name="textBoxNumOfPages.Location" type="System.Drawing.Point, System.Drawing">
+    <value>236, 100</value>
+  </data>
   <data name="labelNumOfPages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 105</value>
+    <value>122, 105</value>
   </data>
   <data name="labelNumOfPages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 13</value>
+    <value>112, 13</value>
   </data>
   <data name="labelNumOfPages.Text" xml:space="preserve">
     <value>puslapių skaičius faile:</value>
   </data>
+  <data name="textBoxInput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 21</value>
+  </data>
+  <data name="textBoxOutput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 47</value>
+  </data>
+  <data name="buttonBrowseInput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 19</value>
+  </data>
+  <data name="buttonBrowseOutput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 45</value>
+  </data>
+  <data name="labelInput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 24</value>
+  </data>
+  <data name="labelInput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
   <data name="labelInput.Text" xml:space="preserve">
     <value>Įvesties failas:</value>
   </data>
+  <data name="labelOutput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 50</value>
+  </data>
+  <data name="labelOutput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 13</value>
+  </data>
   <data name="labelOutput.Text" xml:space="preserve">
     <value>Išvesties failas:</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>287, 178</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>PDF failo skaidymas</value>
