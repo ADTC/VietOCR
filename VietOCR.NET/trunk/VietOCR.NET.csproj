@@ -392,6 +392,7 @@
     <EmbeddedResource Include="OptionsDialog.vi-VN.resx">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.lt-LT.resx" />
     <EmbeddedResource Include="readme_cs.html" />
     <EmbeddedResource Include="readme_cs_vi.html" />
     <EmbeddedResource Include="Properties\Resources.vi-VN.resx">
