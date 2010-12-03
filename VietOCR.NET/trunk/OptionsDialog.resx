@@ -128,6 +128,12 @@
   <data name="textBoxDangAmbigs.Location" type="System.Drawing.Point, System.Drawing">
     <value>78, 15</value>
   </data>
+  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>304, 102</value>
+  </data>
   <data name="checkBoxDangAmbigs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -136,6 +142,9 @@
   </data>
   <data name="btnDangAmbigs.Text" xml:space="preserve">
     <value>...</value>
+  </data>
+  <data name="&gt;&gt;labelOutput.Parent" xml:space="preserve">
+    <value>tabPage1</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
@@ -157,6 +166,9 @@
   </data>
   <data name="textBoxWatch.Location" type="System.Drawing.Point, System.Drawing">
     <value>78, 13</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
   <data name="&gt;&gt;textBoxDangAmbigs.Parent" xml:space="preserve">
     <value>tabPage2</value>
@@ -219,8 +231,8 @@
   <data name="labelOutput.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="buttonOK.Text" xml:space="preserve">
-    <value>OK</value>
+  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="textBoxOutput.Location" type="System.Drawing.Point, System.Drawing">
     <value>78, 39</value>
@@ -234,6 +246,9 @@
   <data name="&gt;&gt;btnOutput.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
   <data name="&gt;&gt;textBoxDangAmbigs.Name" xml:space="preserve">
     <value>textBoxDangAmbigs</value>
   </data>
@@ -242,6 +257,9 @@
   </data>
   <data name="&gt;&gt;btnWatch.Name" xml:space="preserve">
     <value>btnWatch</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;btnDangAmbigs.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -285,8 +303,8 @@
   <data name="&gt;&gt;labelWatch.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="btnOutput.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <data name="btnOutput.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -300,20 +318,17 @@
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>225, 136</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="checkBoxDangAmbigs.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="textBoxOutput.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 20</value>
   </data>
-  <data name="labelWatch.Text" xml:space="preserve">
-    <value>Watch Folder:</value>
-  </data>
   <data name="&gt;&gt;checkBoxWatch.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+  <data name="&gt;&gt;btnWatch.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;btnWatch.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -321,8 +336,8 @@
   <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="checkBoxDangAmbigs.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;textBoxWatch.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -336,11 +351,11 @@
   <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
     <value>tabPage2</value>
   </data>
-  <data name="&gt;&gt;btnWatch.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="labelPath.Text" xml:space="preserve">
     <value>Path:</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -372,8 +387,8 @@
   <data name="&gt;&gt;labelPath.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxOutput.Name" xml:space="preserve">
-    <value>textBoxOutput</value>
+  <data name="checkBoxWatch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>78, 74</value>
   </data>
   <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -426,8 +441,8 @@
   <data name="&gt;&gt;labelPath.Parent" xml:space="preserve">
     <value>tabPage2</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>312, 168</value>
+  <data name="btnWatch.Text" xml:space="preserve">
+    <value>...</value>
   </data>
   <data name="&gt;&gt;btnDangAmbigs.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -441,9 +456,6 @@
   <data name="checkBoxDangAmbigs.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
-  <data name="btnOutput.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
   <data name="checkBoxWatch.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 17</value>
   </data>
@@ -453,8 +465,8 @@
   <data name="&gt;&gt;labelOutput.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 102</value>
+  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="labelOutput.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 42</value>
@@ -465,8 +477,11 @@
   <data name="&gt;&gt;labelWatch.Parent" xml:space="preserve">
     <value>tabPage1</value>
   </data>
-  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
+  </data>
+  <data name="checkBoxDangAmbigs.Text" xml:space="preserve">
+    <value>Enable</value>
   </data>
   <data name="&gt;&gt;openFileDialog1.Type" xml:space="preserve">
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -477,14 +492,8 @@
   <data name="textBoxDangAmbigs.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="&gt;&gt;textBoxWatch.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
   <data name="&gt;&gt;checkBoxWatch.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;textBoxDangAmbigs.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="textBoxOutput.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -501,11 +510,8 @@
   <data name="&gt;&gt;btnWatch.Parent" xml:space="preserve">
     <value>tabPage1</value>
   </data>
-  <data name="&gt;&gt;textBoxDangAmbigs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="checkBoxDangAmbigs.Text" xml:space="preserve">
-    <value>Enable</value>
+  <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -516,8 +522,8 @@
   <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="labelWatch.Text" xml:space="preserve">
+    <value>Watch Folder:</value>
   </data>
   <data name="&gt;&gt;textBoxOutput.Parent" xml:space="preserve">
     <value>tabPage1</value>
@@ -525,14 +531,11 @@
   <data name="&gt;&gt;btnOutput.Parent" xml:space="preserve">
     <value>tabPage1</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="&gt;&gt;textBoxOutput.Name" xml:space="preserve">
+    <value>textBoxOutput</value>
   </data>
-  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="btnWatch.Text" xml:space="preserve">
-    <value>...</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>312, 168</value>
   </data>
   <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -552,20 +555,17 @@
   <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelOutput.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+  <data name="&gt;&gt;textBoxDangAmbigs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="labelWatch.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="checkBoxWatch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 74</value>
+  <data name="&gt;&gt;textBoxDangAmbigs.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;textBoxOutput.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
   </data>
   <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
