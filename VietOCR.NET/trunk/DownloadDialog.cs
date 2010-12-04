@@ -17,10 +17,10 @@ namespace VietOCR.NET
     {
         const string url = "http://tesseract-ocr.googlecode.com/files/tesseract-2.00.{0}.tar.gz";
         string filePath;
-        
-        string[] availableCodes;
 
-        public string[] AvailableCodes
+        Dictionary<string, string> availableCodes;
+
+        public Dictionary<string, string> AvailableCodes
         {
             set { availableCodes = value; }
         }
@@ -41,7 +41,10 @@ namespace VietOCR.NET
         {
             base.OnLoad(ea);
 
-            this.listBox1.Items.AddRange(availableCodes);
+            string[] available = new string[availableCodes.Count];
+            availableCodes.Values.CopyTo(available, 0);
+
+            this.listBox1.Items.AddRange(available);
         }
 
         private void buttonDownload_Click(object sender, EventArgs e)
