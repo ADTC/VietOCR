@@ -75,6 +75,7 @@ namespace VietOCR.NET
             this.changeCaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeLineBreaksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downloadLangDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mergeTiffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -443,9 +444,16 @@ namespace VietOCR.NET
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.downloadLangDataToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
+            // 
+            // downloadLangDataToolStripMenuItem
+            // 
+            this.downloadLangDataToolStripMenuItem.Name = "downloadLangDataToolStripMenuItem";
+            resources.ApplyResources(this.downloadLangDataToolStripMenuItem, "downloadLangDataToolStripMenuItem");
+            this.downloadLangDataToolStripMenuItem.Click += new System.EventHandler(this.downloadLangDataToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 
@@ -725,5 +733,6 @@ namespace VietOCR.NET
         protected System.Windows.Forms.ToolStripMenuItem screenshotModeToolStripMenuItem;
         protected System.Windows.Forms.ToolStripButton toolStripButtonSpellCheck;
         protected VietOCR.NET.Controls.TextBoxContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem downloadLangDataToolStripMenuItem;
     }
 }

@@ -41,11 +41,12 @@ namespace VietOCR.NET
         private bool watchEnabled;
 
         private OptionsDialog optionsDialog;
+        private DownloadDialog downloadDialog;
         private Watcher watcher;
 
         private StatusForm statusForm;
 
-        delegate void UpdateStatusEvent(string fileName); 
+        delegate void UpdateStatusEvent(string fileName);
 
         public GUIWithSettings()
         {
@@ -98,7 +99,7 @@ namespace VietOCR.NET
             {
                 return;
             }
-            
+
             this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { imageFile.FullName });
 
             if (curLangCode == null)
@@ -114,7 +115,7 @@ namespace VietOCR.NET
                 this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { "    **  " + Properties.Resources.Cannotprocess + imageFile.Name + "  **" });
                 return;
             }
-            
+
             try
             {
                 OCR ocrEngine = new OCR();
@@ -133,7 +134,7 @@ namespace VietOCR.NET
                 // Sets the UI culture to the selected language.
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(selectedUILanguage);
 
-                this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { "    **  " + Properties.Resources.Cannotprocess + imageFile.Name + "  **"});
+                this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { "    **  " + Properties.Resources.Cannotprocess + imageFile.Name + "  **" });
                 Console.WriteLine(e.StackTrace);
             }
         }
@@ -167,6 +168,25 @@ namespace VietOCR.NET
                 dangAmbigsPath = optionsDialog.DangAmbigsPath;
                 dangAmbigsOn = optionsDialog.DangAmbigsEnabled;
                 curLangCode = optionsDialog.CurLangCode;
+            }
+        }
+
+        protected override void downloadLangDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (downloadDialog == null)
+            {
+                downloadDialog = new DownloadDialog();
+            }
+
+            string[] available = new string[ht.Count];
+            ht.Values.CopyTo(available, 0);
+
+            downloadDialog.AvailableCodes = available;
+            downloadDialog.InstalledCodes = langs;
+
+            if (downloadDialog.ShowDialog() == DialogResult.OK)
+            {
+
             }
         }
 

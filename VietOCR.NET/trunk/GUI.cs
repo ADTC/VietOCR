@@ -36,8 +36,10 @@ namespace VietOCR.NET
         public const string TO_BE_IMPLEMENTED = "To be implemented";
 
         protected string curLangCode;
-        string[] langCodes;
-        string[] langs;
+        protected string[] langCodes;
+        protected string[] langs;
+
+        protected Dictionary<string, string> ht;
 
         protected int imageIndex;
         private int imageTotal;
@@ -134,7 +136,7 @@ namespace VietOCR.NET
 
             String workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             String xmlFilePath = Path.Combine(workingDir, "Data/ISO639-3.xml");
-            Dictionary<string, string> ht = new Dictionary<string, string>();
+            ht = new Dictionary<string, string>();
 
             try
             {
@@ -1183,6 +1185,11 @@ namespace VietOCR.NET
             {
                 this.toolStripButtonSpellCheck.PerformClick();
             }
+        }
+
+        protected virtual void downloadLangDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
     }
 }
