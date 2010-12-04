@@ -26,6 +26,7 @@ using System.IO;
 using Microsoft.Win32;
 using VietOCR.NET.Postprocessing;
 using System.Globalization;
+using VietOCR.NET.Utilities;
 
 namespace VietOCR.NET
 {

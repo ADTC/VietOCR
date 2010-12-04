@@ -24,6 +24,7 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using System.IO;
 using System.Collections;
+using VietOCR.NET.Utilities;
 
 namespace VietOCR.NET
 {

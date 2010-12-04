@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
+using VietOCR.NET.Utilities;
 
 namespace VietOCR.NET
 {

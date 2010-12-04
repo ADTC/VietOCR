@@ -27,7 +27,7 @@ using System.Threading;
 using Net.SourceForge.Vietpad.InputMethod;
 
 using Vietpad.NET.Controls;
-using VietOCR.NET.Controls;
+using VietOCR.NET.Utilities;
 
 namespace VietOCR.NET
 {

@@ -27,6 +27,7 @@ using System.Threading;
 using System.Drawing.Imaging;
 using Net.SourceForge.Vietpad.InputMethod;
 using VietOCR.NET.WIA;
+using VietOCR.NET.Utilities;
 
 namespace VietOCR.NET
 {

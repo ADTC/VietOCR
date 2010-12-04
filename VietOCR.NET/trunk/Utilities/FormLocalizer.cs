@@ -22,7 +22,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Globalization;
 
-namespace VietOCR.NET
+namespace VietOCR.NET.Utilities
 {
     class FormLocalizer
     {

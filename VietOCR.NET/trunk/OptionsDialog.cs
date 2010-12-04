@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
+using VietOCR.NET.Utilities;
 
 namespace VietOCR.NET
 {

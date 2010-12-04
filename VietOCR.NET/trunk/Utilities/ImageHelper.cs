@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 
-namespace VietOCR.NET
+namespace VietOCR.NET.Utilities
 {
     class ImageHelper
     {
