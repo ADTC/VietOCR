@@ -44,23 +44,71 @@ namespace VietOCR.NET
             string[] available = new string[availableCodes.Count];
             availableCodes.Values.CopyTo(available, 0);
 
+            this.listBox1.Items.Clear();
             this.listBox1.Items.AddRange(available);
+            this.ActiveControl = this.listBox1;
+
+            foreach (string installed in installedCodes)
+            {
+                for (int i = 0; i < available.Length; ++i)
+                {
+                    if (installed == available[i])
+                    {
+                        this.listBox1.DisableItem(i);
+                        break;
+                    }
+                }
+            }
         }
 
         private void buttonDownload_Click(object sender, EventArgs e)
         {
+            if (this.listBox1.SelectedIndex == -1)
+            {
+                return;
+            }
+
             WebClient client = new WebClient();
             client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
             client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
 
             // Starts the download
-            Uri uri = new Uri(string.Format(url, this.listBox1.SelectedItem.ToString()));
-            filePath = Path.Combine(Path.GetTempPath(), Path.GetFileName(uri.AbsolutePath));
-            client.DownloadFileAsync(uri, filePath);
+            string value = FindKey(availableCodes, this.listBox1.SelectedItem.ToString());
+            if (value != null)
+            {
+                try
+                {
+                    Uri uri = new Uri(string.Format(url, value));
+                    WebRequest request = WebRequest.Create(uri);
+                    request.Timeout = 15000;
+                    WebResponse response = request.GetResponse();
 
-            this.buttonDownload.Text = "Download In Process";
-            this.buttonDownload.Enabled = false;
+                    filePath = Path.Combine(Path.GetTempPath(), Path.GetFileName(uri.AbsolutePath));
+                    client.DownloadFileAsync(uri, filePath);
+                    this.progressBar1.Visible = true;
+                    this.buttonDownload.Text = "Download In Process";
+                    this.buttonDownload.Enabled = false;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Resource does not exist."); //url does not exist
+                    this.listBox1.SelectedIndex = -1;
+                }
+            }
         }
+
+        public string FindKey(IDictionary<string, string> lookup, string value)
+        {
+            foreach (var pair in lookup)
+            {
+                if (pair.Value == value)
+                {
+                    return pair.Key;
+                }
+            }
+            return null;
+        }
+
 
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
@@ -80,6 +128,8 @@ namespace VietOCR.NET
             this.buttonDownload.Enabled = true;
             String workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             ExtractTGZ(filePath, workingDir);
+            this.progressBar1.Visible = false;
+            this.listBox1.SelectedIndex = -1;
         }
 
         public void ExtractTGZ(String gzArchiveName, String destFolder)
@@ -94,6 +144,5 @@ namespace VietOCR.NET
             gzipStream.Close();
             inStream.Close();
         }
-
     }
 }
