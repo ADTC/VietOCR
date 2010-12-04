@@ -115,6 +115,9 @@
     <Compile Include="Controls\ClonableToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\ListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ScrollablePictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
