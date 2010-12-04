@@ -8,6 +8,7 @@ using System.Drawing;
 using NHunspell;
 using System.Text.RegularExpressions;
 using System.Collections;
+using VietOCR.NET.Controls;
 
 namespace VietOCR.NET
 {

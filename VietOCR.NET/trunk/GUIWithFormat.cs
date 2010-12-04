@@ -24,6 +24,7 @@ using System.Text.RegularExpressions;
 using Microsoft.Win32;
 using System.Globalization;
 using Net.SourceForge.Vietpad.Utilities;
+using VietOCR.NET.Utilities;
 
 namespace VietOCR.NET
 {

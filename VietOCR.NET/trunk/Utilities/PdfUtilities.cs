@@ -4,7 +4,7 @@ using System.Text;
 using System.IO;
 using ConvertPDF;
 
-namespace VietOCR.NET
+namespace VietOCR.NET.Utilities
 {
     class PdfUtilities
     {

@@ -4,7 +4,7 @@ using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace VietOCR.NET
+namespace VietOCR.NET.Utilities
 {
     public class Watcher
     {

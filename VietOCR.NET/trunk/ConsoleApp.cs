@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using System.Drawing;
 using VietOCR.NET.Postprocessing;
+using VietOCR.NET.Utilities;
 
 namespace VietOCR.NET
 {

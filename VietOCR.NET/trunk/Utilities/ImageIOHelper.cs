@@ -19,7 +19,7 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace VietOCR.NET
+namespace VietOCR.NET.Utilities
 {
     class ImageIOHelper
     {
