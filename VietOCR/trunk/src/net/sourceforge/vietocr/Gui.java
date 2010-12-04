@@ -57,10 +57,11 @@ public class Gui extends javax.swing.JFrame {
     private String currentDirectory;
     private String outputDirectory;
     protected String tessPath, dangAmbigsPath;
-    private Properties prop, config;
+    private Properties config;
+    Properties prop;
     protected String curLangCode = "eng";
     protected String[] langCodes;
-    private String[] langs;
+    protected String[] langs;
     private ImageIconScalable imageIcon;
     private boolean isFitImageSelected;
     private JFileChooser filechooser;
@@ -686,6 +687,8 @@ public class Gui extends javax.swing.JFrame {
             jMenuLookAndFeel.add(lafButton);
         }
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemDownloadLangData = new javax.swing.JMenuItem();
+        jSeparator12 = new javax.swing.JPopupMenu.Separator();
         jMenuItemOptions = new javax.swing.JMenuItem();
         jMenuTools = new javax.swing.JMenu();
         jMenuItemMergeTiff = new javax.swing.JMenuItem();
@@ -1078,6 +1081,15 @@ public class Gui extends javax.swing.JFrame {
         jMenuLookAndFeel.setText(bundle.getString("jMenuLookAndFeel.Text")); // NOI18N
         jMenuSettings.add(jMenuLookAndFeel);
         jMenuSettings.add(jSeparator3);
+
+        jMenuItemDownloadLangData.setText("Download Language Data");
+        jMenuItemDownloadLangData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDownloadLangDataActionPerformed(evt);
+            }
+        });
+        jMenuSettings.add(jMenuItemDownloadLangData);
+        jMenuSettings.add(jSeparator12);
 
         jMenuItemOptions.setText(bundle.getString("jMenuItemOptions.Text")); // NOI18N
         jMenuItemOptions.addActionListener(new java.awt.event.ActionListener() {
@@ -1912,6 +1924,14 @@ public class Gui extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
 
+    private void jMenuItemDownloadLangDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDownloadLangDataActionPerformed
+        downloadLangDataActionPerformed();
+    }//GEN-LAST:event_jMenuItemDownloadLangDataActionPerformed
+
+    void downloadLangDataActionPerformed() {
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
+    }
+
     void readImageMetadata() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
@@ -2011,6 +2031,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuInputMethod;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemChangeCase;
+    private javax.swing.JMenuItem jMenuItemDownloadLangData;
     private javax.swing.JMenuItem jMenuItemExit;
     private javax.swing.JMenuItem jMenuItemFont;
     private javax.swing.JMenuItem jMenuItemHelp;
@@ -2040,6 +2061,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator11;
+    private javax.swing.JPopupMenu.Separator jSeparator12;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
