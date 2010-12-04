@@ -16,6 +16,22 @@ namespace VietOCR.NET.Utilities
 {
     class FileExtractor
     {
+        public static void ExtractCompressedFile(String compressedArchiveName, String destFolder) 
+        {
+            if (compressedArchiveName.ToLower().EndsWith(".zip"))
+            {
+                ExtractZipFile(compressedArchiveName, null, destFolder);
+            }
+            else if (compressedArchiveName.ToLower().EndsWith(".tar.gz"))
+            {
+                ExtractTGZ(compressedArchiveName, destFolder);
+            }
+            else if (compressedArchiveName.ToLower().EndsWith(".gz"))
+            {
+                ExtractGZip(compressedArchiveName, destFolder);
+            }
+        }
+        
         public static void ExtractTGZ(String gzArchiveName, String destFolder)
         {
             Stream inStream = File.OpenRead(gzArchiveName);

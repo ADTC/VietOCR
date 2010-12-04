@@ -122,7 +122,7 @@ namespace VietOCR.NET
 
             this.buttonDownload.Enabled = true;
             String workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            FileExtractor.ExtractTGZ(filePath, workingDir);
+            FileExtractor.ExtractCompressedFile(filePath, workingDir);
             this.toolStripProgressBar1.Visible = false;
             this.listBox1.SelectedIndex = -1;
         }
