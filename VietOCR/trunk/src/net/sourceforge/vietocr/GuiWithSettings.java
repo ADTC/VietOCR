@@ -15,6 +15,7 @@
  */
 package net.sourceforge.vietocr;
 
+import net.sourceforge.vietocr.utilities.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;

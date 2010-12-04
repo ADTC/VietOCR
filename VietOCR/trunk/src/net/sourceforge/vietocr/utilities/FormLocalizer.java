@@ -13,17 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.sourceforge.vietocr;
+package net.sourceforge.vietocr.utilities;
 
 import java.lang.reflect.*;
 import java.util.ResourceBundle;
 import java.awt.Window;
 import javax.swing.*;
 
-/**
- *
- * @author Quan Nguyen
- */
 public class FormLocalizer {
 
     private Window window;

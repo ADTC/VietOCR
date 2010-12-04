@@ -73,14 +73,17 @@ public class DownloadDialog extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
         jPanel1 = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
         jPanel2 = new javax.swing.JPanel();
         jButtonDownload = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
         jButtonClose = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Download Language Data");
@@ -94,12 +97,13 @@ public class DownloadDialog extends javax.swing.JDialog {
             }
         });
 
-        jScrollPane1.setViewportView(jList1);
-
-        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
-
-        jPanel1.setLayout(new java.awt.GridLayout(2, 0));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
         jPanel1.add(jProgressBar1);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 20));
+        jPanel2.setLayout(new java.awt.GridBagLayout());
 
         jButtonDownload.setText("Download");
         jButtonDownload.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +111,19 @@ public class DownloadDialog extends javax.swing.JDialog {
                 jButtonDownloadActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonDownload);
+        jPanel2.add(jButtonDownload, new java.awt.GridBagConstraints());
+
+        jButtonCancel.setText("Cancel");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel2.add(jButtonCancel, gridBagConstraints);
 
         jButtonClose.setText("Close");
         jButtonClose.addActionListener(new java.awt.event.ActionListener() {
@@ -115,11 +131,25 @@ public class DownloadDialog extends javax.swing.JDialog {
                 jButtonCloseActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonClose);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel2.add(jButtonClose, gridBagConstraints);
 
-        jPanel1.add(jPanel2);
+        getContentPane().add(jPanel2, java.awt.BorderLayout.EAST);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 20));
+        jPanel3.setPreferredSize(new java.awt.Dimension(200, 175));
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Available Languages"));
+
+        jScrollPane1.setViewportView(jList1);
+
+        jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -205,6 +235,10 @@ public class DownloadDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowActivated
 
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCancelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -226,11 +260,13 @@ public class DownloadDialog extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonDownload;
     private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

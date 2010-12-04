@@ -10,6 +10,7 @@
  */
 package net.sourceforge.vietocr;
 
+import net.sourceforge.vietocr.utilities.FormLocalizer;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
