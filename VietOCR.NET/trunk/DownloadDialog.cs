@@ -7,8 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.IO;
-using ICSharpCode.SharpZipLib.GZip;
-using ICSharpCode.SharpZipLib.Tar;
+using VietOCR.NET.Utilities;
 
 
 namespace VietOCR.NET
@@ -85,8 +84,7 @@ namespace VietOCR.NET
 
                     filePath = Path.Combine(Path.GetTempPath(), Path.GetFileName(uri.AbsolutePath));
                     client.DownloadFileAsync(uri, filePath);
-                    this.progressBar1.Visible = true;
-                    this.buttonDownload.Text = "Download In Process";
+                    this.toolStripProgressBar1.Visible = true;
                     this.buttonDownload.Enabled = false;
                 }
                 catch (Exception)
@@ -109,40 +107,29 @@ namespace VietOCR.NET
             return null;
         }
 
-
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             double bytesIn = double.Parse(e.BytesReceived.ToString());
             double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
             double percentage = bytesIn / totalBytes * 100;
 
-            this.progressBar1.Value = int.Parse(Math.Truncate(percentage).ToString());
+            this.toolStripProgressBar1.Value = int.Parse(Math.Truncate(percentage).ToString());
         }
-
 
         void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             MessageBox.Show("Download Completed");
 
-            this.buttonDownload.Text = "Start Download";
             this.buttonDownload.Enabled = true;
             String workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            ExtractTGZ(filePath, workingDir);
-            this.progressBar1.Visible = false;
+            FileExtractor.ExtractTGZ(filePath, workingDir);
+            this.toolStripProgressBar1.Visible = false;
             this.listBox1.SelectedIndex = -1;
         }
 
-        public void ExtractTGZ(String gzArchiveName, String destFolder)
+        private void buttonCancel_Click(object sender, EventArgs e)
         {
-            Stream inStream = File.OpenRead(gzArchiveName);
-            Stream gzipStream = new GZipInputStream(inStream);
 
-            TarArchive tarArchive = TarArchive.CreateInputTarArchive(gzipStream);
-            tarArchive.ExtractContents(destFolder);
-            tarArchive.Close();
-
-            gzipStream.Close();
-            inStream.Close();
         }
     }
 }
