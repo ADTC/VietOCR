@@ -234,6 +234,7 @@
       <DependentUpon>StatusForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\BreakIterator.cs" />
+    <Compile Include="Utilities\FileExtractor.cs" />
     <Compile Include="Utilities\TextUtilities.cs" />
     <Compile Include="Watcher.cs" />
     <Compile Include="WIA\WiaOperationException.cs" />
