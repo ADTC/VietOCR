@@ -178,10 +178,8 @@ namespace VietOCR.NET
                 downloadDialog = new DownloadDialog();
             }
 
-            string[] available = new string[ht.Count];
-            ht.Values.CopyTo(available, 0);
 
-            downloadDialog.AvailableCodes = available;
+            downloadDialog.AvailableCodes = ht;
             downloadDialog.InstalledCodes = langs;
 
             if (downloadDialog.ShowDialog() == DialogResult.OK)
