@@ -18,25 +18,15 @@ package net.sourceforge.vietocr;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Properties;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.DefaultListModel;
-import javax.swing.JComponent;
-import javax.swing.JList;
-import javax.swing.KeyStroke;
+import javax.swing.*;
+import net.sourceforge.vietocr.utilities.FileExtractor;
+import net.sourceforge.vietocr.utilities.Utilities;
 
 public class DownloadDialog extends javax.swing.JDialog {
 
@@ -77,6 +67,7 @@ public class DownloadDialog extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
+        this.jProgressBar1.setVisible(false);
         jPanel2 = new javax.swing.JPanel();
         jButtonDownload = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
@@ -111,7 +102,9 @@ public class DownloadDialog extends javax.swing.JDialog {
                 jButtonDownloadActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonDownload, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel2.add(jButtonDownload, gridBagConstraints);
 
         jButtonCancel.setText("Cancel");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -123,6 +116,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 25, 0);
         jPanel2.add(jButtonCancel, gridBagConstraints);
 
         jButtonClose.setText("Close");
@@ -159,11 +153,14 @@ public class DownloadDialog extends javax.swing.JDialog {
             return;
         }
 
+        this.jProgressBar1.setVisible(true);
         try {
             String key = FindKey(availableCodes, this.jList1.getSelectedValue().toString());
             URL urll = new URL(String.format(url, key));
             File out = loadFile(urll);
             System.out.println(out.getPath());
+            File baseDir = Utilities.getBaseDir(DownloadDialog.this);
+            FileExtractor.extractCompressedFile(out.getPath(), baseDir.getPath());
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonDownloadActionPerformed
@@ -216,6 +213,7 @@ public class DownloadDialog extends javax.swing.JDialog {
 
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
         this.setVisible(false);
+        this.jProgressBar1.setVisible(false);
     }//GEN-LAST:event_jButtonCloseActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
