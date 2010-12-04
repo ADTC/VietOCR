@@ -19,6 +19,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Arrays;
@@ -161,6 +162,7 @@ public class DownloadDialog extends javax.swing.JDialog {
             File baseDir = Utilities.getBaseDir(DownloadDialog.this);
             FileExtractor.extractCompressedFile(out.getPath(), baseDir.getPath() + "/tesseract");
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Resource does not exist:\n" + e.getMessage(), this.getTitle(), JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonDownloadActionPerformed
 
@@ -175,14 +177,16 @@ public class DownloadDialog extends javax.swing.JDialog {
     }
 
     public File loadFile(URL remoteFile) throws Exception {
-        URLConnection connection = remoteFile.openConnection(); //connect to remote file
-        InputStream inputStream = connection.getInputStream(); //get stream to read file
+        URLConnection connection = remoteFile.openConnection();
+        connection.setReadTimeout(15000);
+        connection.connect();
+        int length = connection.getContentLength(); // filesize
+        InputStream inputStream = connection.getInputStream();
 
-        int length = connection.getContentLength(); //find out how long the file is, any good webserver should provide this info
         int current = 0;
 
-//        jProgressBar1.setMaximum(length); //we're going to get this many bytes
-//        jProgressBar1.setValue(0); //we've gotten 0 bytes so far
+//        jProgressBar1.setMaximum(length);
+//        jProgressBar1.setValue(0);
 
         String tmpdir = System.getProperty("java.io.tmpdir");
 
@@ -192,21 +196,14 @@ public class DownloadDialog extends javax.swing.JDialog {
 
         byte[] buffer = new byte[1024];
         int bytesRead = 0;
-//
-//        while ((bytesRead = inputStream.read(buffer)) != -1) //keep filling the buffer until we get to the end of the file
-//        {
-//            out.write(buffer, current, bytesRead); //write the buffer to the file offset = current, length = bytesRead
-//            current += bytesRead; //we've progressed a little so update current
-////            jProgressBar1.setValue(current); //tell progress how far we are
-//        }
-
         while ((bytesRead = inputStream.read(buffer, 0, 1024)) > -1) {
             bout.write(buffer, 0, bytesRead);
+            //            current += bytesRead; //we've progressed a little so update current
+//            jProgressBar1.setValue(current); //tell progress how far we are
         }
 
         bout.close();
-        inputStream.close(); //close our stream
-        bout.close();
+        inputStream.close();
         return file;
     }
 
