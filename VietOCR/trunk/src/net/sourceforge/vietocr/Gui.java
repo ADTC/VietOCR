@@ -15,6 +15,7 @@
  */
 package net.sourceforge.vietocr;
 
+import net.sourceforge.vietocr.utilities.*;
 import java.io.*;
 import javax.swing.*;
 import javax.imageio.*;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.sourceforge.vietocr;
+package net.sourceforge.vietocr.utilities;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class Watcher implements Runnable {
     private boolean firstTimeEntered = true;
     private volatile boolean watchEnabled;
 
-    Watcher(Queue<File> q, File folder) {
+    public Watcher(Queue<File> q, File folder) {
         queue = q;
         watchFolder = folder;
     }

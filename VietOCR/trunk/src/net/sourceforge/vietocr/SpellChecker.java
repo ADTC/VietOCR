@@ -15,6 +15,8 @@
  */
 package net.sourceforge.vietocr;
 
+import net.sourceforge.vietocr.utilities.WavyLineHighlighter;
+import net.sourceforge.vietocr.utilities.Utilities;
 import com.stibocatalog.hunspell.Hunspell;
 import java.awt.Color;
 //import java.util.logging.*;

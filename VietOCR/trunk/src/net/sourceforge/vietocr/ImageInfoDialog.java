@@ -1,5 +1,6 @@
 package net.sourceforge.vietocr;
 
+import net.sourceforge.vietocr.utilities.ImageIOHelper;
 import java.awt.event.*;
 import java.util.Map;
 import javax.imageio.IIOImage;
