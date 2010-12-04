@@ -13,7 +13,7 @@ public class FileExtractor {
         if (compressedArchiveName.toLowerCase().endsWith(".zip")) {
             extractZipFile(compressedArchiveName, destFolder);
         } else if (compressedArchiveName.toLowerCase().endsWith(".tar.gz")) {
-//            extractTGZ(compressedArchiveName, destFolder);
+            extractTGZ(compressedArchiveName, destFolder);
         } else if (compressedArchiveName.toLowerCase().endsWith(".gz")) {
             extractGZip(compressedArchiveName, destFolder);
         }
@@ -61,7 +61,7 @@ public class FileExtractor {
         }
     }
 
-       public static void extractTarFile(String filename, String destinationname) {
+    public static void extractTarFile(String filename, String destFolder) {
         try {
             TarInputStream tarinputstream = new TarInputStream(new FileInputStream(filename));
             TarEntry tarEntry;
@@ -71,7 +71,7 @@ public class FileExtractor {
                 if (tarEntry.isDirectory()) {
                     continue;
                 }
-                FileOutputStream fos = new FileOutputStream(new File(destinationname, tarEntry.getName()));
+                FileOutputStream fos = new FileOutputStream(new File(destFolder, tarEntry.getName()));
                 byte[] buf = new byte[BUFFER];
                 int bytesRead;
                 while ((bytesRead = tarinputstream.read(buf, 0, BUFFER)) > -1) {
@@ -83,5 +83,10 @@ public class FileExtractor {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void extractTGZ(String filename, String destFolder) {
+        extractGZip(filename, ".");
+        extractTarFile(filename.substring(0, filename.length() - ".gz".length()), destFolder);
     }
 }
