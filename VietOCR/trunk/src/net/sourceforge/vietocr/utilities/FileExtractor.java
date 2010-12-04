@@ -19,17 +19,17 @@ public class FileExtractor {
         }
     }
 
-    public static void extractZipFile(String filename, String destinationname) {
+    public static void extractZipFile(String filename, String destFolder) {
         try {
             ZipInputStream zipinputstream = new ZipInputStream(new FileInputStream(filename));
-            ZipEntry zipentry;
+            ZipEntry zipEntry;
 
-            while ((zipentry = zipinputstream.getNextEntry()) != null) {
+            while ((zipEntry = zipinputstream.getNextEntry()) != null) {
                 //for each entry to be extracted
-                if (zipentry.isDirectory()) {
+                if (zipEntry.isDirectory()) {
                     continue;
                 }
-                FileOutputStream fos = new FileOutputStream(new File(destinationname, zipentry.getName()));
+                FileOutputStream fos = new FileOutputStream(new File(destFolder, zipEntry.getName()));
                 byte[] buf = new byte[BUFFER];
                 int bytesRead;
                 while ((bytesRead = zipinputstream.read(buf, 0, BUFFER)) > -1) {
@@ -44,11 +44,11 @@ public class FileExtractor {
         }
     }
 
-    public static void extractGZip(String filename, String destinationname) {
+    public static void extractGZip(String filename, String destFolder) {
         try {
             File file = new File(filename);
             GZIPInputStream gzipinputstream = new GZIPInputStream(new FileInputStream(file));
-            FileOutputStream fos = new FileOutputStream(new File(destinationname, file.getName().substring(0, file.getName().length() - ".gz".length())));
+            FileOutputStream fos = new FileOutputStream(new File(destFolder, file.getName().substring(0, file.getName().length() - ".gz".length())));
             byte[] buf = new byte[BUFFER];
             int bytesRead;
             while ((bytesRead = gzipinputstream.read(buf, 0, BUFFER)) > -1) {
@@ -64,14 +64,14 @@ public class FileExtractor {
        public static void extractTarFile(String filename, String destinationname) {
         try {
             TarInputStream tarinputstream = new TarInputStream(new FileInputStream(filename));
-            TarEntry tarentry;
+            TarEntry tarEntry;
 
-            while ((tarentry = tarinputstream.getNextEntry()) != null) {
+            while ((tarEntry = tarinputstream.getNextEntry()) != null) {
                 //for each entry to be extracted
-                if (tarentry.isDirectory()) {
+                if (tarEntry.isDirectory()) {
                     continue;
                 }
-                FileOutputStream fos = new FileOutputStream(new File(destinationname, tarentry.getName()));
+                FileOutputStream fos = new FileOutputStream(new File(destinationname, tarEntry.getName()));
                 byte[] buf = new byte[BUFFER];
                 int bytesRead;
                 while ((bytesRead = tarinputstream.read(buf, 0, BUFFER)) > -1) {
