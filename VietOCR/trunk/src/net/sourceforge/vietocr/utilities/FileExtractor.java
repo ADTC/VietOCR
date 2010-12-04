@@ -7,7 +7,7 @@ import java.util.zip.*;
 
 public class FileExtractor {
 
-    final static int BUFFER = 1024;
+    final static int BUFFER_SIZE = 1024;
 
     public static void extractCompressedFile(String compressedArchiveName, String destFolder) {
         if (compressedArchiveName.toLowerCase().endsWith(".zip")) {
@@ -25,14 +25,18 @@ public class FileExtractor {
             ZipEntry zipEntry;
 
             while ((zipEntry = zipinputstream.getNextEntry()) != null) {
-                //for each entry to be extracted
                 if (zipEntry.isDirectory()) {
+                    new File(zipEntry.getName()).mkdirs();
                     continue;
                 }
-                FileOutputStream fos = new FileOutputStream(new File(destFolder, zipEntry.getName()));
-                byte[] buf = new byte[BUFFER];
+                File outputFile = new File(destFolder, zipEntry.getName());
+                if (!outputFile.getParentFile().exists()) {
+                    outputFile.getParentFile().mkdirs();
+                }
+                FileOutputStream fos = new FileOutputStream(outputFile);
+                byte[] buf = new byte[BUFFER_SIZE];
                 int bytesRead;
-                while ((bytesRead = zipinputstream.read(buf, 0, BUFFER)) > -1) {
+                while ((bytesRead = zipinputstream.read(buf, 0, BUFFER_SIZE)) > -1) {
                     fos.write(buf, 0, bytesRead);
                 }
                 fos.close();
@@ -46,12 +50,13 @@ public class FileExtractor {
 
     public static void extractGZip(String filename, String destFolder) {
         try {
-            File file = new File(filename);
-            GZIPInputStream gzipinputstream = new GZIPInputStream(new FileInputStream(file));
-            FileOutputStream fos = new FileOutputStream(new File(destFolder, file.getName().substring(0, file.getName().length() - ".gz".length())));
-            byte[] buf = new byte[BUFFER];
+            File inputFile = new File(filename);
+            GZIPInputStream gzipinputstream = new GZIPInputStream(new FileInputStream(inputFile));
+            File outputFile = new File(destFolder, inputFile.getName().substring(0, inputFile.getName().length() - ".gz".length()));
+            FileOutputStream fos = new FileOutputStream(outputFile);
+            byte[] buf = new byte[BUFFER_SIZE];
             int bytesRead;
-            while ((bytesRead = gzipinputstream.read(buf, 0, BUFFER)) > -1) {
+            while ((bytesRead = gzipinputstream.read(buf, 0, BUFFER_SIZE)) > -1) {
                 fos.write(buf, 0, bytesRead);
             }
             fos.close();
@@ -67,14 +72,18 @@ public class FileExtractor {
             TarEntry tarEntry;
 
             while ((tarEntry = tarinputstream.getNextEntry()) != null) {
-                //for each entry to be extracted
                 if (tarEntry.isDirectory()) {
+                    new File(tarEntry.getName()).mkdirs();
                     continue;
                 }
-                FileOutputStream fos = new FileOutputStream(new File(destFolder, tarEntry.getName()));
-                byte[] buf = new byte[BUFFER];
+                File outputFile = new File(destFolder, tarEntry.getName());
+                if (!outputFile.getParentFile().exists()) {
+                    outputFile.getParentFile().mkdirs();
+                }
+                FileOutputStream fos = new FileOutputStream(outputFile);
+                byte[] buf = new byte[BUFFER_SIZE];
                 int bytesRead;
-                while ((bytesRead = tarinputstream.read(buf, 0, BUFFER)) > -1) {
+                while ((bytesRead = tarinputstream.read(buf, 0, BUFFER_SIZE)) > -1) {
                     fos.write(buf, 0, bytesRead);
                 }
                 fos.close();
@@ -86,7 +95,7 @@ public class FileExtractor {
     }
 
     public static void extractTGZ(String filename, String destFolder) {
-        extractGZip(filename, ".");
+        extractGZip(filename, new File(filename).getParent()); // to the same folder
         extractTarFile(filename.substring(0, filename.length() - ".gz".length()), destFolder);
     }
 }

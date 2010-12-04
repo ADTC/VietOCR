@@ -30,7 +30,7 @@ import net.sourceforge.vietocr.utilities.Utilities;
 
 public class DownloadDialog extends javax.swing.JDialog {
 
-    final String url = "http://tesseract-ocr.googlecode.com/files/tesseract-2.00.%1$s.tar.gz";
+    final String urlAddress = "http://tesseract-ocr.googlecode.com/files/tesseract-2.00.%1$s.tar.gz";
     private Properties availableCodes;
     private String[] installedCodes;
 
@@ -156,11 +156,10 @@ public class DownloadDialog extends javax.swing.JDialog {
         this.jProgressBar1.setVisible(true);
         try {
             String key = FindKey(availableCodes, this.jList1.getSelectedValue().toString());
-            URL urll = new URL(String.format(url, key));
-            File out = loadFile(urll);
-            System.out.println(out.getPath());
+            URL url = new URL(String.format(urlAddress, key));
+            File out = loadFile(url);
             File baseDir = Utilities.getBaseDir(DownloadDialog.this);
-            FileExtractor.extractCompressedFile(out.getPath(), baseDir.getPath());
+            FileExtractor.extractCompressedFile(out.getPath(), baseDir.getPath() + "/tesseract");
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonDownloadActionPerformed
