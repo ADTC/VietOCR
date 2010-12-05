@@ -1101,18 +1101,22 @@ public class Gui extends javax.swing.JFrame {
         jMenuSettings.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuSettings.Mnemonic").charAt(0));
         jMenuSettings.setText(bundle.getString("jMenuSettings.Text")); // NOI18N
 
+        jMenuInputMethod.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuInputMethod.Mnemonic").charAt(0));
         jMenuInputMethod.setText(bundle.getString("jMenuInputMethod.Text")); // NOI18N
         jMenuSettings.add(jMenuInputMethod);
         jMenuSettings.add(jSeparator6);
 
+        jMenuUILang.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuUILang.Mnemonic").charAt(0));
         jMenuUILang.setText(bundle.getString("jMenuUILang.Text")); // NOI18N
         jMenuSettings.add(jMenuUILang);
 
+        jMenuLookAndFeel.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuLookAndFeel.Mnemonic").charAt(0));
         jMenuLookAndFeel.setText(bundle.getString("jMenuLookAndFeel.Text")); // NOI18N
         jMenuSettings.add(jMenuLookAndFeel);
         jMenuSettings.add(jSeparator3);
 
-        jMenuItemDownloadLangData.setText("Download Language Data");
+        jMenuItemDownloadLangData.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemDownloadLangData.Mnemonic").charAt(0));
+        jMenuItemDownloadLangData.setText(bundle.getString("jMenuItemDownloadLangData.Text")); // NOI18N
         jMenuItemDownloadLangData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemDownloadLangDataActionPerformed(evt);
@@ -1121,6 +1125,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuSettings.add(jMenuItemDownloadLangData);
         jMenuSettings.add(jSeparator12);
 
+        jMenuItemOptions.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemOptions.Mnemonic").charAt(0));
         jMenuItemOptions.setText(bundle.getString("jMenuItemOptions.Text")); // NOI18N
         jMenuItemOptions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1134,6 +1139,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuTools.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuTools.Mnemonic").charAt(0));
         jMenuTools.setText(bundle.getString("jMenuTools.Text")); // NOI18N
 
+        jMenuItemMergeTiff.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemMergeTiff.Mnemonic").charAt(0));
         jMenuItemMergeTiff.setText(bundle.getString("jMenuItemMergeTiff.Text")); // NOI18N
         jMenuItemMergeTiff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1142,6 +1148,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jMenuTools.add(jMenuItemMergeTiff);
 
+        jMenuItemMergePdf.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemMergePdf.Mnemonic").charAt(0));
         jMenuItemMergePdf.setText(bundle.getString("jMenuItemMergePdf.Text")); // NOI18N
         jMenuItemMergePdf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1150,6 +1157,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jMenuTools.add(jMenuItemMergePdf);
 
+        jMenuItemSplitPdf.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemSplitPdf.Mnemonic").charAt(0));
         jMenuItemSplitPdf.setText(bundle.getString("jMenuItemSplitPdf.Text")); // NOI18N
         jMenuItemSplitPdf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1163,6 +1171,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuHelp.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuHelp.Mnemonic").charAt(0));
         jMenuHelp.setText(bundle.getString("jMenuHelp.Text")); // NOI18N
 
+        jMenuItemHelp.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemHelp.Mnemonic").charAt(0));
         jMenuItemHelp.setText(bundle.getString("jMenuItemHelp.Text")); // NOI18N
         jMenuItemHelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1172,6 +1181,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuHelp.add(jMenuItemHelp);
         jMenuHelp.add(jSeparator5);
 
+        jMenuItemAbout.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemAbout.Mnemonic").charAt(0));
         jMenuItemAbout.setText(bundle.getString("jMenuItemAbout.Text")); // NOI18N
         jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
