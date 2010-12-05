@@ -1037,6 +1037,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuImage.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuImage.Mnemonic").charAt(0));
         jMenuImage.setText(bundle.getString("jMenuImage.Text")); // NOI18N
 
+        jMenuItemMetadata.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemMetadata.Mnemonic").charAt(0));
         jMenuItemMetadata.setText(bundle.getString("jMenuItemMetadata.Text")); // NOI18N
         jMenuItemMetadata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1046,6 +1047,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuImage.add(jMenuItemMetadata);
         jMenuImage.add(jSeparator11);
 
+        jCheckBoxMenuItemScreenshotMode.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jCheckBoxMenuItemScreenshotMode.Mnemonic").charAt(0));
         jCheckBoxMenuItemScreenshotMode.setSelected(true);
         jCheckBoxMenuItemScreenshotMode.setText(bundle.getString("jCheckBoxMenuItemScreenshotMode.Text")); // NOI18N
         jMenuImage.add(jCheckBoxMenuItemScreenshotMode);
@@ -1055,6 +1057,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuFormat.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuFormat.Mnemonic").charAt(0));
         jMenuFormat.setText(bundle.getString("jMenuFormat.Text")); // NOI18N
 
+        jCheckBoxMenuWordWrap.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jCheckBoxMenuWordWrap.Mnemonic").charAt(0));
         jCheckBoxMenuWordWrap.setText(bundle.getString("jCheckBoxMenuWordWrap.Text")); // NOI18N
         jCheckBoxMenuWordWrap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1064,6 +1067,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuFormat.add(jCheckBoxMenuWordWrap);
 
         jMenuItemFont.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemFont.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemFont.Mnemonic").charAt(0));
         jMenuItemFont.setText(bundle.getString("jMenuItemFont.Text")); // NOI18N
         jMenuItemFont.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1073,6 +1077,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuFormat.add(jMenuItemFont);
         jMenuFormat.add(jSeparator10);
 
+        jMenuItemChangeCase.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemChangeCase.Mnemonic").charAt(0));
         jMenuItemChangeCase.setText(bundle.getString("jMenuItemChangeCase.Text")); // NOI18N
         jMenuItemChangeCase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1082,6 +1087,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuFormat.add(jMenuItemChangeCase);
 
         jMenuItemRemoveLineBreaks.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemRemoveLineBreaks.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemRemoveLineBreaks.Mnemonic").charAt(0));
         jMenuItemRemoveLineBreaks.setText(bundle.getString("jMenuItemRemoveLineBreaks.Text")); // NOI18N
         jMenuItemRemoveLineBreaks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
