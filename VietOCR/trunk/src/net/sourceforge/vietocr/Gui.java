@@ -59,7 +59,7 @@ public class Gui extends javax.swing.JFrame {
     private String outputDirectory;
     protected String tessPath, dangAmbigsPath;
     private Properties config;
-    private Properties propISO639;
+    private Properties lookupISO639;
     protected String curLangCode = "eng";
     private String[] installedLanguageCodes;
     private String[] installedLanguages;
@@ -92,7 +92,7 @@ public class Gui extends javax.swing.JFrame {
             tessPath = prefs.get("TesseractDirectory", "/usr/bin");
         }
 
-        propISO639 = new Properties();
+        lookupISO639 = new Properties();
 
         try {
             File tessdataDir = new File(tessPath, "tessdata");
@@ -119,7 +119,7 @@ public class Gui extends javax.swing.JFrame {
             });
 
             File xmlFile = new File(baseDir, "data/ISO639-3.xml");
-            propISO639.loadFromXML(new FileInputStream(xmlFile));
+            lookupISO639.loadFromXML(new FileInputStream(xmlFile));
         } catch (IOException ioe) {
             JOptionPane.showMessageDialog(null, "Missing ISO639-3.xml file. Cannot find it in " + new File(baseDir, "data").getPath() + " directory.", APP_NAME, JOptionPane.ERROR_MESSAGE);
 //            ioe.printStackTrace();
@@ -133,7 +133,7 @@ public class Gui extends javax.swing.JFrame {
             }
             for (int i = 0; i < installedLanguages.length; i++) {
                 installedLanguageCodes[i] = installedLanguageCodes[i].replace(DATAFILE_SUFFIX, "");
-                installedLanguages[i] = propISO639.getProperty(installedLanguageCodes[i], installedLanguageCodes[i]);
+                installedLanguages[i] = lookupISO639.getProperty(installedLanguageCodes[i], installedLanguageCodes[i]);
             }
         }
 
@@ -476,8 +476,8 @@ public class Gui extends javax.swing.JFrame {
     /**
      * @return the propISO639
      */
-    public Properties getPropISO639() {
-        return propISO639;
+    public Properties getLookupISO639() {
+        return lookupISO639;
     }
 
     /**
