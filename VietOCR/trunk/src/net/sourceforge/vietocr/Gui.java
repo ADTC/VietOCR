@@ -59,10 +59,10 @@ public class Gui extends javax.swing.JFrame {
     private String outputDirectory;
     protected String tessPath, dangAmbigsPath;
     private Properties config;
-    Properties prop;
+    private Properties propISO639;
     protected String curLangCode = "eng";
-    protected String[] langCodes;
-    protected String[] langs;
+    private String[] installedLanguageCodes;
+    private String[] installedLanguages;
     private ImageIconScalable imageIcon;
     private boolean isFitImageSelected;
     private JFileChooser filechooser;
@@ -92,7 +92,7 @@ public class Gui extends javax.swing.JFrame {
             tessPath = prefs.get("TesseractDirectory", "/usr/bin");
         }
 
-        prop = new Properties();
+        propISO639 = new Properties();
 
         try {
             File tessdataDir = new File(tessPath, "tessdata");
@@ -110,7 +110,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             }
 
-            langCodes = tessdataDir.list(new FilenameFilter() {
+            installedLanguageCodes = tessdataDir.list(new FilenameFilter() {
 
                 @Override
                 public boolean accept(File dir, String name) {
@@ -119,21 +119,21 @@ public class Gui extends javax.swing.JFrame {
             });
 
             File xmlFile = new File(baseDir, "data/ISO639-3.xml");
-            prop.loadFromXML(new FileInputStream(xmlFile));
+            propISO639.loadFromXML(new FileInputStream(xmlFile));
         } catch (IOException ioe) {
             JOptionPane.showMessageDialog(null, "Missing ISO639-3.xml file. Cannot find it in " + new File(baseDir, "data").getPath() + " directory.", APP_NAME, JOptionPane.ERROR_MESSAGE);
 //            ioe.printStackTrace();
         } catch (Exception exc) {
 //            exc.printStackTrace();
         } finally {
-            if (langCodes == null) {
-                langs = new String[0];
+            if (installedLanguageCodes == null) {
+                installedLanguages = new String[0];
             } else {
-                langs = new String[langCodes.length];
+                installedLanguages = new String[installedLanguageCodes.length];
             }
-            for (int i = 0; i < langs.length; i++) {
-                langCodes[i] = langCodes[i].replace(DATAFILE_SUFFIX, "");
-                langs[i] = prop.getProperty(langCodes[i], langCodes[i]);
+            for (int i = 0; i < installedLanguages.length; i++) {
+                installedLanguageCodes[i] = installedLanguageCodes[i].replace(DATAFILE_SUFFIX, "");
+                installedLanguages[i] = propISO639.getProperty(installedLanguageCodes[i], installedLanguageCodes[i]);
             }
         }
 
@@ -235,7 +235,7 @@ public class Gui extends javax.swing.JFrame {
                 prefs.getInt("frameY", screen.y + (screen.height - getHeight()) / 3),
                 screen.y, screen.y + screen.height - getHeight()));
 
-        if (langCodes == null) {
+        if (installedLanguageCodes == null) {
             JOptionPane.showMessageDialog(Gui.this, bundle.getString("Tesseract_is_not_found._Please_specify_its_path_in_Settings_menu."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
         }
 
@@ -474,6 +474,20 @@ public class Gui extends javax.swing.JFrame {
     }
 
     /**
+     * @return the propISO639
+     */
+    public Properties getPropISO639() {
+        return propISO639;
+    }
+
+    /**
+     * @return the installedLanguages
+     */
+    public String[] getInstalledLanguages() {
+        return installedLanguages;
+    }
+
+    /**
      *  Listens to raw undoable edits
      *
      */
@@ -543,10 +557,10 @@ public class Gui extends javax.swing.JFrame {
         jButtonClear = new javax.swing.JButton();
         jToggleButtonSpellCheck = new javax.swing.JToggleButton();
         jLabelLanguage = new javax.swing.JLabel();
-        jComboBoxLang = new JComboBox(langs);
+        jComboBoxLang = new JComboBox(installedLanguages);
         jComboBoxLang.setSelectedItem(prefs.get("langCode", null));
-        if (langCodes != null && jComboBoxLang.getSelectedIndex() != -1) {
-            curLangCode = langCodes[jComboBoxLang.getSelectedIndex()];
+        if (installedLanguageCodes != null && jComboBoxLang.getSelectedIndex() != -1) {
+            curLangCode = installedLanguageCodes[jComboBoxLang.getSelectedIndex()];
         }
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -1182,7 +1196,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void jComboBoxLangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxLangItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
-            curLangCode = langCodes[jComboBoxLang.getSelectedIndex()];
+            curLangCode = installedLanguageCodes[jComboBoxLang.getSelectedIndex()];
             boolean vie = curLangCode.contains("vie");
             VietKeyListener.setVietModeEnabled(vie);
             this.jMenuInputMethod.setVisible(vie);

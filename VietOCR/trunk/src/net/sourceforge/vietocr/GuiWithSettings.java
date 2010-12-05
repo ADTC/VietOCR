@@ -140,9 +140,6 @@ public class GuiWithSettings extends GuiWithFormat {
     @Override
     void downloadLangDataActionPerformed() {
         DownloadDialog dialog = new DownloadDialog(this, true);
-        dialog.setAvailableCodes(prop);
-        dialog.setInstalledCodes(langs);
-
         dialog.setVisible(true);
     }
 
