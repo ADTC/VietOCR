@@ -247,7 +247,7 @@
     <None Include="Data\ISO639-1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Data\ISO639-3-URL.xml">
+    <None Include="Data\Tess2DataURL.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="Hunspellx64.dll">

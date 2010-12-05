@@ -37,10 +37,21 @@ namespace VietOCR.NET
         public const string TO_BE_IMPLEMENTED = "To be implemented";
 
         protected string curLangCode;
-        protected string[] langCodes;
-        protected string[] langs;
+        private string[] installedLanguageCodes;
+        private string[] installedLanguages;
 
-        protected Dictionary<string, string> ht;
+        public string[] InstalledLanguages
+        {
+            get { return installedLanguages; }
+            set { installedLanguages = value; }
+        }
+
+        private Dictionary<string, string> lookupISO639;
+
+        public Dictionary<string, string> LookupISO639
+        {
+            get { return lookupISO639; }
+        }
 
         protected int imageIndex;
         private int imageTotal;
@@ -101,7 +112,7 @@ namespace VietOCR.NET
             //rectNormal = DesktopBounds;
 
             LoadLang();
-            this.toolStripCbLang.Items.AddRange(langs);
+            this.toolStripCbLang.Items.AddRange(installedLanguages);
 
             //// Set system event.
             SystemEvents.SessionEnding += new SessionEndingEventHandler(OnSessionEnding);
@@ -137,7 +148,7 @@ namespace VietOCR.NET
 
             String workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             String xmlFilePath = Path.Combine(workingDir, "Data/ISO639-3.xml");
-            ht = new Dictionary<string, string>();
+            lookupISO639 = new Dictionary<string, string>();
 
             try
             {
@@ -153,7 +164,7 @@ namespace VietOCR.NET
                 //    tessdataDir = TESSDATA_PREFIX;
                 //}
 
-                langCodes = Directory.GetFiles(tessdataDir, "*.inttemp");
+                installedLanguageCodes = Directory.GetFiles(tessdataDir, "*.inttemp");
 
                 doc.Load(xmlFilePath);
                 //doc.Load(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("VietOCR.NET.Data.ISO639-3.xml"));
@@ -161,7 +172,7 @@ namespace VietOCR.NET
                 XmlNodeList list = doc.GetElementsByTagName("entry");
                 foreach (XmlNode node in list)
                 {
-                    ht.Add(node.Attributes[0].Value, node.InnerText);
+                    lookupISO639.Add(node.Attributes[0].Value, node.InnerText);
                 }
             }
             catch (Exception ex)
@@ -172,27 +183,27 @@ namespace VietOCR.NET
             }
             finally
             {
-                if (langCodes == null)
+                if (installedLanguageCodes == null)
                 {
-                    langs = new String[0];
+                    installedLanguages = new String[0];
                 }
                 else
                 {
-                    langs = new String[langCodes.Length];
+                    installedLanguages = new String[installedLanguageCodes.Length];
                 }
 
-                for (int i = 0; i < langs.Length; i++)
+                for (int i = 0; i < installedLanguages.Length; i++)
                 {
-                    langCodes[i] = Path.GetFileNameWithoutExtension(langCodes[i]);
+                    installedLanguageCodes[i] = Path.GetFileNameWithoutExtension(installedLanguageCodes[i]);
                     // translate ISO codes to full English names for user-friendliness
 
-                    if (ht.ContainsKey(langCodes[i]))
+                    if (lookupISO639.ContainsKey(installedLanguageCodes[i]))
                     {
-                        langs[i] = ht[langCodes[i]];
+                        installedLanguages[i] = lookupISO639[installedLanguageCodes[i]];
                     }
                     else
                     {
-                        langs[i] = langCodes[i];
+                        installedLanguages[i] = installedLanguageCodes[i];
                     }
                 }
             }
@@ -415,7 +426,7 @@ namespace VietOCR.NET
 
         private void toolStripCbLang_SelectedIndexChanged(object sender, EventArgs e)
         {
-            curLangCode = langCodes[this.toolStripCbLang.SelectedIndex];
+            curLangCode = installedLanguageCodes[this.toolStripCbLang.SelectedIndex];
             bool vie = curLangCode.Contains("vie");
             VietKeyHandler.VietModeEnabled = vie;
             SetVisibleInputMethodMenuitem(vie);

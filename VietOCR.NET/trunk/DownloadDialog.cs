@@ -1,35 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.IO;
 using VietOCR.NET.Utilities;
+using System.Xml;
 
 
 namespace VietOCR.NET
 {
     public partial class DownloadDialog : Form
     {
-        const string url = "http://tesseract-ocr.googlecode.com/files/tesseract-2.00.{0}.tar.gz";
         string filePath;
-
-        Dictionary<string, string> availableCodes;
-
-        public Dictionary<string, string> AvailableCodes
-        {
-            set { availableCodes = value; }
-        }
-
-        string[] installedCodes;
-
-        public string[] InstalledCodes
-        {
-            set { installedCodes = value; }
-        }
+        Dictionary<string, string> availableLanguageCodes;
+        string[] installedLanguages;
+        Dictionary<string, string> lookupISO639;
 
         public DownloadDialog()
         {
@@ -40,24 +26,45 @@ namespace VietOCR.NET
         {
             base.OnLoad(ea);
 
-            string[] available = new string[availableCodes.Count];
-            availableCodes.Values.CopyTo(available, 0);
+            installedLanguages = ((GUI)this.Owner).InstalledLanguages;
+            lookupISO639 = ((GUI)this.Owner).LookupISO639;
+            availableLanguageCodes = new Dictionary<string, string>();
+            XmlDocument doc = new XmlDocument();
+
+            String workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            String xmlFilePath = Path.Combine(workingDir, "Data/Tess2DataURL.xml");
+            doc.Load(xmlFilePath);
+
+            XmlNodeList list = doc.GetElementsByTagName("entry");
+            foreach (XmlNode node in list)
+            {
+                availableLanguageCodes.Add(node.Attributes[0].Value, node.InnerText);
+            }
+
+            string[] available = new string[availableLanguageCodes.Count];
+            availableLanguageCodes.Keys.CopyTo(available, 0);
+            List<String> names = new List<String>();
+            foreach (String key in available)
+            {
+                names.Add(this.lookupISO639[key]);
+            }
+            names.Sort();
 
             this.listBox1.Items.Clear();
-            this.listBox1.Items.AddRange(available);
-            this.ActiveControl = this.listBox1;
+            this.listBox1.Items.AddRange(names.ToArray());
 
-            foreach (string installed in installedCodes)
+            foreach (string installed in installedLanguages)
             {
-                for (int i = 0; i < available.Length; ++i)
+                for (int i = 0; i < names.Count; ++i)
                 {
-                    if (installed == available[i])
+                    if (installed == names[i])
                     {
                         this.listBox1.DisableItem(i);
                         break;
                     }
                 }
             }
+            this.ActiveControl = this.listBox1;
         }
 
         private void buttonDownload_Click(object sender, EventArgs e)
@@ -72,12 +79,13 @@ namespace VietOCR.NET
             client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
 
             // Starts the download
-            string value = FindKey(availableCodes, this.listBox1.SelectedItem.ToString());
+            string value = FindKey(lookupISO639, this.listBox1.SelectedItem.ToString());
+
             if (value != null)
             {
                 try
                 {
-                    Uri uri = new Uri(string.Format(url, value));
+                    Uri uri = new Uri(availableLanguageCodes[value]);
                     WebRequest request = WebRequest.Create(uri);
                     request.Timeout = 15000;
                     WebResponse response = request.GetResponse();

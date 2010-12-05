@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <properties>
   <comment>ISO 639-3 Standard</comment>
+  <entry key="ban">Bangla</entry>
   <entry key="ben">Bengali</entry>
   <entry key="bul">Bulgarian</entry>
   <entry key="cat">Catalan</entry>
@@ -32,6 +33,7 @@
   <entry key="por">Portuguese</entry>
   <entry key="ron">Romanian</entry>
   <entry key="rus">Russian</entry>
+  <entry key="sic">Quechua</entry>
   <entry key="slk">Slovak</entry>
   <entry key="slv">Slovenian</entry>
   <entry key="spa">Spanish</entry>
