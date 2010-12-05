@@ -25,7 +25,7 @@ public class TextUtilities {
         } else if (typeOfCase.equals("lowercase")) {
             result = text.toLowerCase();
         } else if (typeOfCase.equals("Title_Case")) {
-            StringBuffer strB = new StringBuffer(text.toLowerCase());
+            StringBuilder strB = new StringBuilder(text.toLowerCase());
             Pattern pattern = Pattern.compile("(?<!\\p{InCombiningDiacriticalMarks}|\\p{L})\\p{L}");
             // word boundary
             Matcher matcher = pattern.matcher(text);
@@ -35,7 +35,7 @@ public class TextUtilities {
             }
             result = strB.toString();
         } else if (typeOfCase.equals("Sentence_case")) {
-            StringBuffer strB = new StringBuffer(text.toUpperCase().equals(text) ? text.toLowerCase() : text);
+            StringBuilder strB = new StringBuilder(text.toUpperCase().equals(text) ? text.toLowerCase() : text);
             Matcher matcher = Pattern.compile("\\p{L}(\\p{L}+)").matcher(text);
             while (matcher.find()) {
                 if (!(matcher.group(0).toUpperCase().equals(matcher.group(0))

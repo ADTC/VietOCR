@@ -15,6 +15,7 @@
  */
 package net.sourceforge.vietocr;
 
+import net.sourceforge.vietocr.utilities.*;
 import java.awt.Cursor;
 import java.io.File;
 import java.util.Locale;

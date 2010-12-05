@@ -15,6 +15,8 @@
  */
 package net.sourceforge.vietocr;
 
+import net.sourceforge.vietocr.utilities.ImageHelper;
+import net.sourceforge.vietocr.utilities.ImageIOHelper;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;

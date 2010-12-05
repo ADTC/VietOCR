@@ -15,6 +15,8 @@
  */
 package net.sourceforge.vietocr;
 
+import net.sourceforge.vietocr.utilities.ImageIOHelper;
+import net.sourceforge.vietocr.utilities.Utilities;
 import java.io.*;
 import java.util.List;
 import javax.imageio.IIOImage;

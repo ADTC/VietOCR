@@ -1,9 +1,10 @@
-package net.sourceforge.vietocr;
+package net.sourceforge.vietocr.utilities;
 
 import java.awt.datatransfer.*;
 import java.awt.dnd.*;
 import java.io.*;
 import java.net.URI;
+import net.sourceforge.vietocr.Gui;
 
 /**
  *  File Drop Target Listener
@@ -12,7 +13,7 @@ import java.net.URI;
  *@version    1.1, 23 December 2007
  *@see        http://vietpad.sourceforge.net
  */
-class FileDropTargetListener extends DropTargetAdapter {
+public class FileDropTargetListener extends DropTargetAdapter {
     private Gui holder;
     private File droppedFile;
     
