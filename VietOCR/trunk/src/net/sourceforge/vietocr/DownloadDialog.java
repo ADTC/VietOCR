@@ -16,10 +16,12 @@
 package net.sourceforge.vietocr;
 
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Arrays;
@@ -31,9 +33,13 @@ import net.sourceforge.vietocr.utilities.Utilities;
 
 public class DownloadDialog extends javax.swing.JDialog {
 
+    final static int BUFFER_SIZE = 1024;
     final String urlAddress = "http://tesseract-ocr.googlecode.com/files/tesseract-2.00.%1$s.tar.gz";
     private Properties availableCodes;
     private String[] installedCodes;
+    String tmpdir = System.getProperty("java.io.tmpdir");
+    File baseDir = Utilities.getBaseDir(DownloadDialog.this);
+    SwingWorker<File, Integer> downloadWorker;
 
     /** Creates new form DownloadDialog */
     public DownloadDialog(java.awt.Frame parent, boolean modal) {
@@ -67,6 +73,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
+        jLabelStatus = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
         this.jProgressBar1.setVisible(false);
         jPanel2 = new javax.swing.JPanel();
@@ -90,6 +97,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         });
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel1.add(jLabelStatus);
         jPanel1.add(jProgressBar1);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
@@ -154,15 +162,13 @@ public class DownloadDialog extends javax.swing.JDialog {
             return;
         }
 
-        this.jProgressBar1.setVisible(true);
         try {
             String key = FindKey(availableCodes, this.jList1.getSelectedValue().toString());
             URL url = new URL(String.format(urlAddress, key));
-            File out = loadFile(url);
-            File baseDir = Utilities.getBaseDir(DownloadDialog.this);
-            FileExtractor.extractCompressedFile(out.getPath(), baseDir.getPath() + "/tesseract");
+//            File testFile = new File("C:/Temp/tesseract-2.00.fra.tar.gz");
+//            url = testFile.toURI().toURL();
+            loadLanguageDataFile(url);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Resource does not exist:\n" + e.getMessage(), this.getTitle(), JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonDownloadActionPerformed
 
@@ -176,40 +182,94 @@ public class DownloadDialog extends javax.swing.JDialog {
         return null;
     }
 
-    public File loadFile(URL remoteFile) throws Exception {
-        URLConnection connection = remoteFile.openConnection();
+    public void loadLanguageDataFile(final URL remoteFile) throws Exception {
+        final URLConnection connection = remoteFile.openConnection();
         connection.setReadTimeout(15000);
         connection.connect();
-        int length = connection.getContentLength(); // filesize
-        InputStream inputStream = connection.getInputStream();
 
-        int current = 0;
+        final int length = connection.getContentLength(); // filesize
+        this.jLabelStatus.setText("Downloading file...");
+        this.jProgressBar1.setMaximum(100);
+        this.jProgressBar1.setValue(0);
+        this.jProgressBar1.setVisible(true);
+        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        getGlassPane().setVisible(true);
 
-//        jProgressBar1.setMaximum(length);
-//        jProgressBar1.setValue(0);
+        downloadWorker = new SwingWorker<File, Integer>() {
 
-        String tmpdir = System.getProperty("java.io.tmpdir");
+            @Override
+            public File doInBackground() throws Exception {
+                InputStream inputStream = connection.getInputStream();
+                File outputFile = new File(tmpdir, new File(remoteFile.getFile()).getName());
+                FileOutputStream fos = new FileOutputStream(outputFile);
+                BufferedOutputStream bout = new BufferedOutputStream(fos);
 
-        File file = new File(tmpdir, new File(remoteFile.getFile()).getName());
-        FileOutputStream fos = new FileOutputStream(file);
-        BufferedOutputStream bout = new BufferedOutputStream(fos); //create our output steam to build the file here
+                byte[] buffer = new byte[BUFFER_SIZE];
+                int count = 0;
+                int bytesRead = 0;
+                while ((bytesRead = inputStream.read(buffer, 0, BUFFER_SIZE)) > -1) {
+                    bout.write(buffer, 0, bytesRead);
+                    count += bytesRead;
+                    setProgress(100 * count / length);
+                }
 
-        byte[] buffer = new byte[1024];
-        int bytesRead = 0;
-        while ((bytesRead = inputStream.read(buffer, 0, 1024)) > -1) {
-            bout.write(buffer, 0, bytesRead);
-            //            current += bytesRead; //we've progressed a little so update current
-//            jProgressBar1.setValue(current); //tell progress how far we are
-        }
+                bout.close();
+                inputStream.close();
+                return outputFile;
+            }
 
-        bout.close();
-        inputStream.close();
-        return file;
+            @Override
+            public void done() {
+                try {
+                    File file = get();
+                    jLabelStatus.setText("Downloading completed.");
+
+                    FileExtractor.extractCompressedFile(file.getPath(), baseDir.getPath() + "/tesseract");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (java.util.concurrent.ExecutionException e) {
+                    String why = null;
+                    Throwable cause = e.getCause();
+                    if (cause != null) {
+                        if (cause instanceof UnsupportedOperationException) {
+                            why = "";
+                        } else if (cause instanceof RuntimeException) {
+                            why = cause.getMessage();
+                        } else if (cause instanceof FileNotFoundException) {
+                            why = "Resource does not exist:\n" + cause.getMessage();
+                        } else {
+                            why = cause.getMessage();
+                        }
+                    } else {
+                        why = e.getMessage();
+                    }
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, why, "Download", JOptionPane.ERROR_MESSAGE);
+                    jProgressBar1.setVisible(false);
+                    jLabelStatus.setText(null);
+                } finally {
+                    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                    getGlassPane().setVisible(false);
+                }
+            }
+        };
+
+        downloadWorker.addPropertyChangeListener(new PropertyChangeListener() {
+
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if ("progress".equals(evt.getPropertyName())) {
+                    jProgressBar1.setValue((Integer) evt.getNewValue());
+                }
+            }
+        });
+        downloadWorker.execute();
     }
 
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
         this.setVisible(false);
         this.jProgressBar1.setVisible(false);
+        this.jLabelStatus.setText(null);
     }//GEN-LAST:event_jButtonCloseActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -230,7 +290,13 @@ public class DownloadDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-        // TODO add your handling code here:
+        if (downloadWorker != null && !downloadWorker.isDone()) {
+            // Cancel current OCR op to begin a new one. You want only one OCR op at a time.
+            downloadWorker.cancel(true);
+            downloadWorker = null;
+        }
+
+        this.jButtonCancel.setEnabled(false);
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
@@ -257,6 +323,7 @@ public class DownloadDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonDownload;
+    private javax.swing.JLabel jLabelStatus;
     private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
