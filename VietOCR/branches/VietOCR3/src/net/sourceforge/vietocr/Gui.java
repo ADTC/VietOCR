@@ -15,6 +15,7 @@
  */
 package net.sourceforge.vietocr;
 
+import net.sourceforge.vietocr.utilities.*;
 import java.io.*;
 import javax.swing.*;
 import javax.imageio.*;
@@ -57,10 +58,11 @@ public class Gui extends javax.swing.JFrame {
     private String currentDirectory;
     private String outputDirectory;
     protected String tessPath, dangAmbigsPath;
-    private Properties prop, config;
+    private Properties config;
+    private Properties propISO639;
     protected String curLangCode = "eng";
-    protected String[] langCodes;
-    private String[] langs;
+    private String[] installedLanguageCodes;
+    private String[] installedLanguages;
     private ImageIconScalable imageIcon;
     private boolean isFitImageSelected;
     private JFileChooser filechooser;
@@ -90,7 +92,7 @@ public class Gui extends javax.swing.JFrame {
             tessPath = prefs.get("TesseractDirectory", "/usr/bin");
         }
 
-        prop = new Properties();
+        propISO639 = new Properties();
 
         try {
             File tessdataDir = new File(tessPath, "tessdata");
@@ -108,7 +110,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             }
 
-            langCodes = tessdataDir.list(new FilenameFilter() {
+            installedLanguageCodes = tessdataDir.list(new FilenameFilter() {
 
                 @Override
                 public boolean accept(File dir, String name) {
@@ -117,21 +119,21 @@ public class Gui extends javax.swing.JFrame {
             });
 
             File xmlFile = new File(baseDir, "data/ISO639-3.xml");
-            prop.loadFromXML(new FileInputStream(xmlFile));
+            propISO639.loadFromXML(new FileInputStream(xmlFile));
         } catch (IOException ioe) {
             JOptionPane.showMessageDialog(null, "Missing ISO639-3.xml file. Cannot find it in " + new File(baseDir, "data").getPath() + " directory.", APP_NAME, JOptionPane.ERROR_MESSAGE);
 //            ioe.printStackTrace();
         } catch (Exception exc) {
 //            exc.printStackTrace();
         } finally {
-            if (langCodes == null) {
-                langs = new String[0];
+            if (installedLanguageCodes == null) {
+                installedLanguages = new String[0];
             } else {
-                langs = new String[langCodes.length];
+                installedLanguages = new String[installedLanguageCodes.length];
             }
-            for (int i = 0; i < langs.length; i++) {
-                langCodes[i] = langCodes[i].replace(DATAFILE_SUFFIX, "");
-                langs[i] = prop.getProperty(langCodes[i], langCodes[i]);
+            for (int i = 0; i < installedLanguages.length; i++) {
+                installedLanguageCodes[i] = installedLanguageCodes[i].replace(DATAFILE_SUFFIX, "");
+                installedLanguages[i] = propISO639.getProperty(installedLanguageCodes[i], installedLanguageCodes[i]);
             }
         }
 
@@ -233,7 +235,7 @@ public class Gui extends javax.swing.JFrame {
                 prefs.getInt("frameY", screen.y + (screen.height - getHeight()) / 3),
                 screen.y, screen.y + screen.height - getHeight()));
 
-        if (langCodes == null) {
+        if (installedLanguageCodes == null) {
             JOptionPane.showMessageDialog(Gui.this, bundle.getString("Tesseract_is_not_found._Please_specify_its_path_in_Settings_menu."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
         }
 
@@ -472,6 +474,20 @@ public class Gui extends javax.swing.JFrame {
     }
 
     /**
+     * @return the propISO639
+     */
+    public Properties getPropISO639() {
+        return propISO639;
+    }
+
+    /**
+     * @return the installedLanguages
+     */
+    public String[] getInstalledLanguages() {
+        return installedLanguages;
+    }
+
+    /**
      *  Listens to raw undoable edits
      *
      */
@@ -541,10 +557,10 @@ public class Gui extends javax.swing.JFrame {
         jButtonClear = new javax.swing.JButton();
         jToggleButtonSpellCheck = new javax.swing.JToggleButton();
         jLabelLanguage = new javax.swing.JLabel();
-        jComboBoxLang = new JComboBox(langs);
+        jComboBoxLang = new JComboBox(installedLanguages);
         jComboBoxLang.setSelectedItem(prefs.get("langCode", null));
-        if (langCodes != null && jComboBoxLang.getSelectedIndex() != -1) {
-            curLangCode = langCodes[jComboBoxLang.getSelectedIndex()];
+        if (installedLanguageCodes != null && jComboBoxLang.getSelectedIndex() != -1) {
+            curLangCode = installedLanguageCodes[jComboBoxLang.getSelectedIndex()];
         }
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -686,6 +702,8 @@ public class Gui extends javax.swing.JFrame {
             jMenuLookAndFeel.add(lafButton);
         }
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemDownloadLangData = new javax.swing.JMenuItem();
+        jSeparator12 = new javax.swing.JPopupMenu.Separator();
         jMenuItemOptions = new javax.swing.JMenuItem();
         jMenuTools = new javax.swing.JMenu();
         jMenuItemMergeTiff = new javax.swing.JMenuItem();
@@ -926,6 +944,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuFile.setText(bundle.getString("jMenuFile.Text")); // NOI18N
 
         jMenuItemOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemOpen.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemOpen.Mnemonic").charAt(0));
         jMenuItemOpen.setText(bundle.getString("jMenuItemOpen.Text")); // NOI18N
         jMenuItemOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -934,6 +953,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jMenuFile.add(jMenuItemOpen);
 
+        jMenuItemScan.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemScan.Mnemonic").charAt(0));
         jMenuItemScan.setText(bundle.getString("jMenuItemScan.Text")); // NOI18N
         jMenuItemScan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -943,6 +963,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuFile.add(jMenuItemScan);
 
         jMenuItemSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemSave.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemSave.Mnemonic").charAt(0));
         jMenuItemSave.setText(bundle.getString("jMenuItemSave.Text")); // NOI18N
         jMenuItemSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -952,6 +973,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuFile.add(jMenuItemSave);
 
         jMenuItemSaveAs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemSaveAs.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemSaveAs.Mnemonic").charAt(0));
         jMenuItemSaveAs.setText(bundle.getString("jMenuItemSaveAs.Text")); // NOI18N
         jMenuItemSaveAs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -961,10 +983,12 @@ public class Gui extends javax.swing.JFrame {
         jMenuFile.add(jMenuItemSaveAs);
         jMenuFile.add(jSeparator4);
 
+        jMenuRecentFiles.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuRecentFiles.Mnemonic").charAt(0));
         jMenuRecentFiles.setText(bundle.getString("jMenuRecentFiles.Text")); // NOI18N
         jMenuFile.add(jMenuRecentFiles);
         jMenuFile.add(jSeparator2);
 
+        jMenuItemExit.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemExit.Mnemonic").charAt(0));
         jMenuItemExit.setText(bundle.getString("jMenuItemExit.Text")); // NOI18N
         jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -979,6 +1003,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuCommand.setText(bundle.getString("jMenuCommand.Text")); // NOI18N
 
         jMenuItemOCR.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemOCR.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemOCR.Mnemonic").charAt(0));
         jMenuItemOCR.setText(bundle.getString("jMenuItemOCR.Text")); // NOI18N
         jMenuItemOCR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -987,6 +1012,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jMenuCommand.add(jMenuItemOCR);
 
+        jMenuItemOCRAll.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemOCRAll.Mnemonic").charAt(0));
         jMenuItemOCRAll.setText(bundle.getString("jMenuItemOCRAll.Text")); // NOI18N
         jMenuItemOCRAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -997,6 +1023,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuCommand.add(jSeparator1);
 
         jMenuItemPostProcess.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemPostProcess.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemPostProcess.Mnemonic").charAt(0));
         jMenuItemPostProcess.setText(bundle.getString("jMenuItemPostProcess.Text")); // NOI18N
         jMenuItemPostProcess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1010,6 +1037,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuImage.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuImage.Mnemonic").charAt(0));
         jMenuImage.setText(bundle.getString("jMenuImage.Text")); // NOI18N
 
+        jMenuItemMetadata.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemMetadata.Mnemonic").charAt(0));
         jMenuItemMetadata.setText(bundle.getString("jMenuItemMetadata.Text")); // NOI18N
         jMenuItemMetadata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1019,6 +1047,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuImage.add(jMenuItemMetadata);
         jMenuImage.add(jSeparator11);
 
+        jCheckBoxMenuItemScreenshotMode.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jCheckBoxMenuItemScreenshotMode.Mnemonic").charAt(0));
         jCheckBoxMenuItemScreenshotMode.setSelected(true);
         jCheckBoxMenuItemScreenshotMode.setText(bundle.getString("jCheckBoxMenuItemScreenshotMode.Text")); // NOI18N
         jMenuImage.add(jCheckBoxMenuItemScreenshotMode);
@@ -1028,6 +1057,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuFormat.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuFormat.Mnemonic").charAt(0));
         jMenuFormat.setText(bundle.getString("jMenuFormat.Text")); // NOI18N
 
+        jCheckBoxMenuWordWrap.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jCheckBoxMenuWordWrap.Mnemonic").charAt(0));
         jCheckBoxMenuWordWrap.setText(bundle.getString("jCheckBoxMenuWordWrap.Text")); // NOI18N
         jCheckBoxMenuWordWrap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1037,6 +1067,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuFormat.add(jCheckBoxMenuWordWrap);
 
         jMenuItemFont.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemFont.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemFont.Mnemonic").charAt(0));
         jMenuItemFont.setText(bundle.getString("jMenuItemFont.Text")); // NOI18N
         jMenuItemFont.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1046,6 +1077,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuFormat.add(jMenuItemFont);
         jMenuFormat.add(jSeparator10);
 
+        jMenuItemChangeCase.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemChangeCase.Mnemonic").charAt(0));
         jMenuItemChangeCase.setText(bundle.getString("jMenuItemChangeCase.Text")); // NOI18N
         jMenuItemChangeCase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1055,6 +1087,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuFormat.add(jMenuItemChangeCase);
 
         jMenuItemRemoveLineBreaks.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemRemoveLineBreaks.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemRemoveLineBreaks.Mnemonic").charAt(0));
         jMenuItemRemoveLineBreaks.setText(bundle.getString("jMenuItemRemoveLineBreaks.Text")); // NOI18N
         jMenuItemRemoveLineBreaks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1068,17 +1101,31 @@ public class Gui extends javax.swing.JFrame {
         jMenuSettings.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuSettings.Mnemonic").charAt(0));
         jMenuSettings.setText(bundle.getString("jMenuSettings.Text")); // NOI18N
 
+        jMenuInputMethod.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuInputMethod.Mnemonic").charAt(0));
         jMenuInputMethod.setText(bundle.getString("jMenuInputMethod.Text")); // NOI18N
         jMenuSettings.add(jMenuInputMethod);
         jMenuSettings.add(jSeparator6);
 
+        jMenuUILang.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuUILang.Mnemonic").charAt(0));
         jMenuUILang.setText(bundle.getString("jMenuUILang.Text")); // NOI18N
         jMenuSettings.add(jMenuUILang);
 
+        jMenuLookAndFeel.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuLookAndFeel.Mnemonic").charAt(0));
         jMenuLookAndFeel.setText(bundle.getString("jMenuLookAndFeel.Text")); // NOI18N
         jMenuSettings.add(jMenuLookAndFeel);
         jMenuSettings.add(jSeparator3);
 
+        jMenuItemDownloadLangData.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemDownloadLangData.Mnemonic").charAt(0));
+        jMenuItemDownloadLangData.setText(bundle.getString("jMenuItemDownloadLangData.Text")); // NOI18N
+        jMenuItemDownloadLangData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDownloadLangDataActionPerformed(evt);
+            }
+        });
+        jMenuSettings.add(jMenuItemDownloadLangData);
+        jMenuSettings.add(jSeparator12);
+
+        jMenuItemOptions.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemOptions.Mnemonic").charAt(0));
         jMenuItemOptions.setText(bundle.getString("jMenuItemOptions.Text")); // NOI18N
         jMenuItemOptions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1092,6 +1139,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuTools.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuTools.Mnemonic").charAt(0));
         jMenuTools.setText(bundle.getString("jMenuTools.Text")); // NOI18N
 
+        jMenuItemMergeTiff.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemMergeTiff.Mnemonic").charAt(0));
         jMenuItemMergeTiff.setText(bundle.getString("jMenuItemMergeTiff.Text")); // NOI18N
         jMenuItemMergeTiff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1100,6 +1148,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jMenuTools.add(jMenuItemMergeTiff);
 
+        jMenuItemMergePdf.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemMergePdf.Mnemonic").charAt(0));
         jMenuItemMergePdf.setText(bundle.getString("jMenuItemMergePdf.Text")); // NOI18N
         jMenuItemMergePdf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1108,6 +1157,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jMenuTools.add(jMenuItemMergePdf);
 
+        jMenuItemSplitPdf.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemSplitPdf.Mnemonic").charAt(0));
         jMenuItemSplitPdf.setText(bundle.getString("jMenuItemSplitPdf.Text")); // NOI18N
         jMenuItemSplitPdf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1121,6 +1171,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuHelp.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuHelp.Mnemonic").charAt(0));
         jMenuHelp.setText(bundle.getString("jMenuHelp.Text")); // NOI18N
 
+        jMenuItemHelp.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemHelp.Mnemonic").charAt(0));
         jMenuItemHelp.setText(bundle.getString("jMenuItemHelp.Text")); // NOI18N
         jMenuItemHelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1130,6 +1181,7 @@ public class Gui extends javax.swing.JFrame {
         jMenuHelp.add(jMenuItemHelp);
         jMenuHelp.add(jSeparator5);
 
+        jMenuItemAbout.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemAbout.Mnemonic").charAt(0));
         jMenuItemAbout.setText(bundle.getString("jMenuItemAbout.Text")); // NOI18N
         jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1169,7 +1221,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void jComboBoxLangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxLangItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
-            curLangCode = langCodes[jComboBoxLang.getSelectedIndex()];
+            curLangCode = installedLanguageCodes[jComboBoxLang.getSelectedIndex()];
             boolean vie = curLangCode.contains("vie");
             VietKeyListener.setVietModeEnabled(vie);
             this.jMenuInputMethod.setVisible(vie);
@@ -1912,6 +1964,14 @@ public class Gui extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
 
+    private void jMenuItemDownloadLangDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDownloadLangDataActionPerformed
+        downloadLangDataActionPerformed();
+    }//GEN-LAST:event_jMenuItemDownloadLangDataActionPerformed
+
+    void downloadLangDataActionPerformed() {
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
+    }
+
     void readImageMetadata() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }
@@ -2011,6 +2071,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuInputMethod;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemChangeCase;
+    private javax.swing.JMenuItem jMenuItemDownloadLangData;
     private javax.swing.JMenuItem jMenuItemExit;
     private javax.swing.JMenuItem jMenuItemFont;
     private javax.swing.JMenuItem jMenuItemHelp;
@@ -2040,6 +2101,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator11;
+    private javax.swing.JPopupMenu.Separator jSeparator12;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
