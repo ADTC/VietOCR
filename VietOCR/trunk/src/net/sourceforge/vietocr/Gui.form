@@ -193,6 +193,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMetadata">
               <Properties>
+                <Property name="mnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
+                  <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuItemMetadata.Mnemonic" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuItemMetadata.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -205,6 +208,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItemScreenshotMode">
               <Properties>
+                <Property name="mnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
+                  <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jCheckBoxMenuItemScreenshotMode.Mnemonic" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jCheckBoxMenuItemScreenshotMode.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
@@ -228,6 +234,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuWordWrap">
               <Properties>
+                <Property name="mnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
+                  <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jCheckBoxMenuWordWrap.Mnemonic" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jCheckBoxMenuWordWrap.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -244,6 +253,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+T"/>
                 </Property>
+                <Property name="mnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
+                  <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuItemFont.Mnemonic" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuItemFont.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -256,6 +268,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemChangeCase">
               <Properties>
+                <Property name="mnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
+                  <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuItemChangeCase.Mnemonic" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuItemChangeCase.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -268,6 +283,9 @@
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+R"/>
+                </Property>
+                <Property name="mnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
+                  <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuItemRemoveLineBreaks.Mnemonic" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jMenuItemRemoveLineBreaks.Text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
