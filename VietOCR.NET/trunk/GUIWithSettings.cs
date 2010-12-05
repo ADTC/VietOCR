@@ -177,11 +177,8 @@ namespace VietOCR.NET
             if (downloadDialog == null)
             {
                 downloadDialog = new DownloadDialog();
+                downloadDialog.Owner = this;
             }
-
-
-            downloadDialog.AvailableCodes = ht;
-            downloadDialog.InstalledCodes = langs;
 
             if (downloadDialog.ShowDialog() == DialogResult.OK)
             {
