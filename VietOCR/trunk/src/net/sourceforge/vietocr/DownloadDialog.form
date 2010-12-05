@@ -39,6 +39,8 @@
         <Property name="alignment" type="int" value="0"/>
       </Layout>
       <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabelStatus">
+        </Component>
         <Component class="javax.swing.JProgressBar" name="jProgressBar1">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="this.jProgressBar1.setVisible(false);"/>
