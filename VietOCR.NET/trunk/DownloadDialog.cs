@@ -74,6 +74,9 @@ namespace VietOCR.NET
                 return;
             }
 
+            this.buttonDownload.Enabled = false;
+            this.buttonCancel.Enabled = true;
+
             WebClient client = new WebClient();
             client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
             client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
@@ -129,6 +132,7 @@ namespace VietOCR.NET
             MessageBox.Show("Download Completed");
 
             this.buttonDownload.Enabled = true;
+            this.buttonCancel.Enabled = false;
             String workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             FileExtractor.ExtractCompressedFile(filePath, workingDir);
             this.toolStripProgressBar1.Visible = false;
