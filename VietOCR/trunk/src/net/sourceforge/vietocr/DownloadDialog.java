@@ -24,8 +24,11 @@ import java.beans.PropertyChangeListener;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Arrays;
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Properties;
 import javax.swing.*;
 import net.sourceforge.vietocr.utilities.FileExtractor;
@@ -34,17 +37,28 @@ import net.sourceforge.vietocr.utilities.Utilities;
 public class DownloadDialog extends javax.swing.JDialog {
 
     final static int BUFFER_SIZE = 1024;
+    final String tmpdir = System.getProperty("java.io.tmpdir");
     final String urlAddress = "http://tesseract-ocr.googlecode.com/files/tesseract-2.00.%1$s.tar.gz";
-    private Properties availableCodes;
-    private String[] installedCodes;
-    String tmpdir = System.getProperty("java.io.tmpdir");
-    File baseDir = Utilities.getBaseDir(DownloadDialog.this);
+    private Properties availableLanguageCodes;
+    private Properties propISO639;
+    private String[] installedLanguages;
+    File baseDir;
     SwingWorker<File, Integer> downloadWorker;
 
     /** Creates new form DownloadDialog */
     public DownloadDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        baseDir = Utilities.getBaseDir(DownloadDialog.this);
+        installedLanguages = ((Gui) parent).getInstalledLanguages();
+        propISO639 = ((Gui) parent).getPropISO639();
+        availableLanguageCodes = new Properties();
+        try {
+            File xmlFile = new File(baseDir, "data/ISO639-3-URL.xml");
+            availableLanguageCodes.loadFromXML(new FileInputStream(xmlFile));
+        } catch (Exception e) {
+        }
 
         setLocationRelativeTo(getOwner());
 
@@ -163,10 +177,8 @@ public class DownloadDialog extends javax.swing.JDialog {
         }
 
         try {
-            String key = FindKey(availableCodes, this.jList1.getSelectedValue().toString());
+            String key = FindKey(availableLanguageCodes, this.jList1.getSelectedValue().toString());
             URL url = new URL(String.format(urlAddress, key));
-//            File testFile = new File("C:/Temp/tesseract-2.00.fra.tar.gz");
-//            url = testFile.toURI().toURL();
             loadLanguageDataFile(url);
         } catch (Exception e) {
         }
@@ -273,16 +285,19 @@ public class DownloadDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCloseActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        Object[] available = availableCodes.values().toArray();
-        Arrays.sort(available);
-        this.jList1.removeAll();
+        String[] available = availableLanguageCodes.keySet().toArray(new String[0]);
+        List<String> names = new ArrayList<String>();
+        for (String key : available) {
+            names.add(this.propISO639.getProperty(key, key));
+        }
+        Collections.sort(names, Collator.getInstance());
         DefaultListModel model = new DefaultListModel();
-        for (Object str : available) {
-            model.addElement(str);
+        for (String name : names) {
+            model.addElement(name);
         }
 
         this.jList1.setModel(model);
-        this.jList1.setCellRenderer(new CustomCellRenderer(installedCodes));
+        this.jList1.setCellRenderer(new CustomCellRenderer(installedLanguages));
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -331,20 +346,6 @@ public class DownloadDialog extends javax.swing.JDialog {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-
-    /**
-     * @param availableCodes the availableCodes to set
-     */
-    public void setAvailableCodes(Properties availableCodes) {
-        this.availableCodes = availableCodes;
-    }
-
-    /**
-     * @param installedCodes the installedCodes to set
-     */
-    public void setInstalledCodes(String[] installedCodes) {
-        this.installedCodes = installedCodes;
-    }
 
     class CustomCellRenderer extends DefaultListCellRenderer {
 
