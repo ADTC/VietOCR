@@ -38,12 +38,12 @@ public class DownloadDialog extends javax.swing.JDialog {
 
     final static int BUFFER_SIZE = 1024;
     final String tmpdir = System.getProperty("java.io.tmpdir");
-    final String urlAddress = "http://tesseract-ocr.googlecode.com/files/tesseract-2.00.%1$s.tar.gz";
     private Properties availableLanguageCodes;
     private Properties propISO639;
     private String[] installedLanguages;
     File baseDir;
     SwingWorker<File, Integer> downloadWorker;
+    int length, byteCount, numberOfDownloads, numOfConcurrentTasks;
 
     /** Creates new form DownloadDialog */
     public DownloadDialog(java.awt.Frame parent, boolean modal) {
@@ -93,6 +93,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jButtonDownload = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
+        jButtonCancel.setEnabled(false);
         jButtonClose = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -177,9 +178,22 @@ public class DownloadDialog extends javax.swing.JDialog {
         }
 
         try {
-            String key = FindKey(availableLanguageCodes, this.jList1.getSelectedValue().toString());
-            URL url = new URL(String.format(urlAddress, key));
-            loadLanguageDataFile(url);
+            length = byteCount = 0;
+            numOfConcurrentTasks = this.jList1.getSelectedIndices().length;
+            this.jButtonDownload.setEnabled(false);
+            this.jButtonCancel.setEnabled(true);
+            this.jLabelStatus.setText("Downloading...");
+            this.jProgressBar1.setMaximum(100);
+            this.jProgressBar1.setValue(0);
+            this.jProgressBar1.setVisible(true);
+            getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            getGlassPane().setVisible(true);
+
+            for (Object value : this.jList1.getSelectedValues()) {
+                String key = FindKey(propISO639, value.toString());
+                URL url = new URL(availableLanguageCodes.getProperty(key));
+                loadLanguageDataFile(url);
+            }
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonDownloadActionPerformed
@@ -198,15 +212,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         final URLConnection connection = remoteFile.openConnection();
         connection.setReadTimeout(15000);
         connection.connect();
-
-        final int length = connection.getContentLength(); // filesize
-        this.jLabelStatus.setText("Downloading file...");
-        this.jProgressBar1.setMaximum(100);
-        this.jProgressBar1.setValue(0);
-        this.jProgressBar1.setVisible(true);
-        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        getGlassPane().setVisible(true);
-
+        length += connection.getContentLength(); // filesize
         downloadWorker = new SwingWorker<File, Integer>() {
 
             @Override
@@ -215,14 +221,16 @@ public class DownloadDialog extends javax.swing.JDialog {
                 File outputFile = new File(tmpdir, new File(remoteFile.getFile()).getName());
                 FileOutputStream fos = new FileOutputStream(outputFile);
                 BufferedOutputStream bout = new BufferedOutputStream(fos);
-
                 byte[] buffer = new byte[BUFFER_SIZE];
-                int count = 0;
                 int bytesRead = 0;
+                
                 while ((bytesRead = inputStream.read(buffer, 0, BUFFER_SIZE)) > -1) {
+                    if (isCancelled()) {
+                        break;
+                    }
                     bout.write(buffer, 0, bytesRead);
-                    count += bytesRead;
-                    setProgress(100 * count / length);
+                    byteCount += bytesRead;
+                    setProgress(100 * byteCount / length);
                 }
 
                 bout.close();
@@ -234,11 +242,14 @@ public class DownloadDialog extends javax.swing.JDialog {
             public void done() {
                 try {
                     File file = get();
-                    jLabelStatus.setText("Downloading completed.");
-
                     FileExtractor.extractCompressedFile(file.getPath(), baseDir.getPath() + "/tesseract");
+                    numberOfDownloads++;
+                    if (--numOfConcurrentTasks <= 0) {
+                        jLabelStatus.setText("Download completed.");
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    numOfConcurrentTasks = 0;
                 } catch (java.util.concurrent.ExecutionException e) {
                     String why = null;
                     Throwable cause = e.getCause();
@@ -259,9 +270,17 @@ public class DownloadDialog extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, why, "Download", JOptionPane.ERROR_MESSAGE);
                     jProgressBar1.setVisible(false);
                     jLabelStatus.setText(null);
+                    numOfConcurrentTasks = 0;
+                } catch (java.util.concurrent.CancellationException e) {
+                    jLabelStatus.setText("Download canceled");
+                    numOfConcurrentTasks = 0;
                 } finally {
-                    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-                    getGlassPane().setVisible(false);
+                    if (numOfConcurrentTasks <= 0) {
+                        jButtonDownload.setEnabled(true);
+                        jButtonCancel.setEnabled(false);
+                        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                        getGlassPane().setVisible(false);
+                    }
                 }
             }
         };
@@ -282,6 +301,10 @@ public class DownloadDialog extends javax.swing.JDialog {
         this.setVisible(false);
         this.jProgressBar1.setVisible(false);
         this.jLabelStatus.setText(null);
+
+        if (numberOfDownloads > 0) {
+            JOptionPane.showMessageDialog(DownloadDialog.this, "Please restart the program so that it could register the new language pack(s).", Gui.APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonCloseActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
