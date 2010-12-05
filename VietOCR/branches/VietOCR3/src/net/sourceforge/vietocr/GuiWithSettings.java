@@ -15,6 +15,7 @@
  */
 package net.sourceforge.vietocr;
 
+import net.sourceforge.vietocr.utilities.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
@@ -134,6 +135,12 @@ public class GuiWithSettings extends GuiWithFormat {
             watcher.setPath(new File(watchFolder));
             watcher.setEnabled(watchEnabled);
         }
+    }
+
+    @Override
+    void downloadLangDataActionPerformed() {
+        DownloadDialog dialog = new DownloadDialog(this, true);
+        dialog.setVisible(true);
     }
 
     @Override
