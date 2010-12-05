@@ -39,7 +39,7 @@ public class DownloadDialog extends javax.swing.JDialog {
     final static int BUFFER_SIZE = 1024;
     final String tmpdir = System.getProperty("java.io.tmpdir");
     private Properties availableLanguageCodes;
-    private Properties propISO639;
+    private Properties lookupISO639;
     private String[] installedLanguages;
     File baseDir;
     SwingWorker<File, Integer> downloadWorker;
@@ -52,7 +52,7 @@ public class DownloadDialog extends javax.swing.JDialog {
 
         baseDir = Utilities.getBaseDir(DownloadDialog.this);
         installedLanguages = ((Gui) parent).getInstalledLanguages();
-        propISO639 = ((Gui) parent).getPropISO639();
+        lookupISO639 = ((Gui) parent).getLookupISO639();
         availableLanguageCodes = new Properties();
         try {
             File xmlFile = new File(baseDir, "data/Tess2DataURL.xml");
@@ -190,7 +190,7 @@ public class DownloadDialog extends javax.swing.JDialog {
             getGlassPane().setVisible(true);
 
             for (Object value : this.jList1.getSelectedValues()) {
-                String key = FindKey(propISO639, value.toString());
+                String key = FindKey(lookupISO639, value.toString());
                 URL url = new URL(availableLanguageCodes.getProperty(key));
                 loadLanguageDataFile(url);
             }
@@ -311,7 +311,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         String[] available = availableLanguageCodes.keySet().toArray(new String[0]);
         List<String> names = new ArrayList<String>();
         for (String key : available) {
-            names.add(this.propISO639.getProperty(key, key));
+            names.add(this.lookupISO639.getProperty(key, key));
         }
         Collections.sort(names, Collator.getInstance());
         DefaultListModel model = new DefaultListModel();
