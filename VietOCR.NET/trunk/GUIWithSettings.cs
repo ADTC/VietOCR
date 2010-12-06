@@ -42,7 +42,6 @@ namespace VietOCR.NET
         private bool watchEnabled;
 
         private OptionsDialog optionsDialog;
-        private DownloadDialog downloadDialog;
         private Watcher watcher;
 
         private StatusForm statusForm;
@@ -174,16 +173,9 @@ namespace VietOCR.NET
 
         protected override void downloadLangDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (downloadDialog == null)
-            {
-                downloadDialog = new DownloadDialog();
-                downloadDialog.Owner = this;
-            }
-
-            if (downloadDialog.ShowDialog() == DialogResult.OK)
-            {
-
-            }
+            DownloadDialog downloadDialog = new DownloadDialog();
+            downloadDialog.Owner = this;
+            downloadDialog.ShowDialog();
         }
 
         /// <summary>
