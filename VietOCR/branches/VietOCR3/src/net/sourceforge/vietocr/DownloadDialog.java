@@ -30,6 +30,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
+import java.util.ResourceBundle;
 import javax.swing.*;
 import net.sourceforge.vietocr.utilities.FileExtractor;
 import net.sourceforge.vietocr.utilities.Utilities;
@@ -39,20 +40,20 @@ public class DownloadDialog extends javax.swing.JDialog {
     final static int BUFFER_SIZE = 1024;
     final String tmpdir = System.getProperty("java.io.tmpdir");
     private Properties availableLanguageCodes;
-    private Properties propISO639;
-    private String[] installedLanguages;
+    private Properties lookupISO639;
     File baseDir;
     SwingWorker<File, Integer> downloadWorker;
     int length, byteCount, numberOfDownloads, numOfConcurrentTasks;
+    ResourceBundle bundle;
 
     /** Creates new form DownloadDialog */
     public DownloadDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        bundle = ResourceBundle.getBundle("net/sourceforge/vietocr/DownloadDialog");
 
         baseDir = Utilities.getBaseDir(DownloadDialog.this);
-        installedLanguages = ((Gui) parent).getInstalledLanguages();
-        propISO639 = ((Gui) parent).getPropISO639();
+        lookupISO639 = ((Gui) parent).getLookupISO639();
         availableLanguageCodes = new Properties();
         try {
             File xmlFile = new File(baseDir, "data/Tess2DataURL.xml");
@@ -100,12 +101,10 @@ public class DownloadDialog extends javax.swing.JDialog {
         jList1 = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Download Language Data");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/DownloadDialog"); // NOI18N
+        setTitle(bundle.getString("Download_Language_Data")); // NOI18N
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -120,7 +119,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 20));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        jButtonDownload.setText("Download");
+        jButtonDownload.setText(bundle.getString("Download")); // NOI18N
         jButtonDownload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDownloadActionPerformed(evt);
@@ -130,7 +129,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         jPanel2.add(jButtonDownload, gridBagConstraints);
 
-        jButtonCancel.setText("Cancel");
+        jButtonCancel.setText(bundle.getString("Cancel")); // NOI18N
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelActionPerformed(evt);
@@ -143,7 +142,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 25, 0);
         jPanel2.add(jButtonCancel, gridBagConstraints);
 
-        jButtonClose.setText("Close");
+        jButtonClose.setText(bundle.getString("Close")); // NOI18N
         jButtonClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCloseActionPerformed(evt);
@@ -161,7 +160,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         jPanel3.setPreferredSize(new java.awt.Dimension(200, 175));
         jPanel3.setLayout(new java.awt.BorderLayout());
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Available Languages"));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("Available_Languages"))); // NOI18N
 
         jScrollPane1.setViewportView(jList1);
 
@@ -182,7 +181,7 @@ public class DownloadDialog extends javax.swing.JDialog {
             numOfConcurrentTasks = this.jList1.getSelectedIndices().length;
             this.jButtonDownload.setEnabled(false);
             this.jButtonCancel.setEnabled(true);
-            this.jLabelStatus.setText("Downloading...");
+            this.jLabelStatus.setText(bundle.getString("Downloading..."));
             this.jProgressBar1.setMaximum(100);
             this.jProgressBar1.setValue(0);
             this.jProgressBar1.setVisible(true);
@@ -190,7 +189,7 @@ public class DownloadDialog extends javax.swing.JDialog {
             getGlassPane().setVisible(true);
 
             for (Object value : this.jList1.getSelectedValues()) {
-                String key = FindKey(propISO639, value.toString());
+                String key = FindKey(lookupISO639, value.toString());
                 URL url = new URL(availableLanguageCodes.getProperty(key));
                 loadLanguageDataFile(url);
             }
@@ -245,7 +244,7 @@ public class DownloadDialog extends javax.swing.JDialog {
                     FileExtractor.extractCompressedFile(file.getPath(), baseDir.getPath() + "/tesseract");
                     numberOfDownloads++;
                     if (--numOfConcurrentTasks <= 0) {
-                        jLabelStatus.setText("Download completed.");
+                        jLabelStatus.setText(bundle.getString("Download_completed"));
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -255,11 +254,11 @@ public class DownloadDialog extends javax.swing.JDialog {
                     Throwable cause = e.getCause();
                     if (cause != null) {
                         if (cause instanceof UnsupportedOperationException) {
-                            why = "";
+                            why = cause.getMessage();
                         } else if (cause instanceof RuntimeException) {
                             why = cause.getMessage();
                         } else if (cause instanceof FileNotFoundException) {
-                            why = "Resource does not exist:\n" + cause.getMessage();
+                            why = bundle.getString("Resource_does_not_exist") + cause.getMessage();
                         } else {
                             why = cause.getMessage();
                         }
@@ -267,12 +266,12 @@ public class DownloadDialog extends javax.swing.JDialog {
                         why = e.getMessage();
                     }
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, why, "Download", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, why, Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
                     jProgressBar1.setVisible(false);
                     jLabelStatus.setText(null);
                     numOfConcurrentTasks = 0;
                 } catch (java.util.concurrent.CancellationException e) {
-                    jLabelStatus.setText("Download canceled");
+                    jLabelStatus.setText(bundle.getString("Download_cancelled"));
                     numOfConcurrentTasks = 0;
                 } finally {
                     if (numOfConcurrentTasks <= 0) {
@@ -299,33 +298,32 @@ public class DownloadDialog extends javax.swing.JDialog {
 
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
         this.setVisible(false);
-        this.jProgressBar1.setVisible(false);
-        this.jLabelStatus.setText(null);
 
         if (numberOfDownloads > 0) {
-            JOptionPane.showMessageDialog(DownloadDialog.this, "Please restart the program so that it could register the new language pack(s).", Gui.APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(DownloadDialog.this, bundle.getString("Please_restart"), Gui.APP_NAME, JOptionPane.INFORMATION_MESSAGE);
         }
+        this.dispose();
     }//GEN-LAST:event_jButtonCloseActionPerformed
 
+    /**
+     * Populates the list upon window opening.
+     * @param evt
+     */
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         String[] available = availableLanguageCodes.keySet().toArray(new String[0]);
-        List<String> names = new ArrayList<String>();
+        List<String> languageNames = new ArrayList<String>();
         for (String key : available) {
-            names.add(this.propISO639.getProperty(key, key));
+            languageNames.add(this.lookupISO639.getProperty(key, key));
         }
-        Collections.sort(names, Collator.getInstance());
+        Collections.sort(languageNames, Collator.getInstance());
         DefaultListModel model = new DefaultListModel();
-        for (String name : names) {
+        for (String name : languageNames) {
             model.addElement(name);
         }
 
         this.jList1.setModel(model);
-        this.jList1.setCellRenderer(new CustomCellRenderer(installedLanguages));
+        this.jList1.setCellRenderer(new CustomCellRenderer(((Gui) this.getParent()).getInstalledLanguages()));
     }//GEN-LAST:event_formWindowOpened
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowActivated
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         if (downloadWorker != null && !downloadWorker.isDone()) {
@@ -370,6 +368,9 @@ public class DownloadDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * A custom renderer which disables certain elements in list.
+     */
     class CustomCellRenderer extends DefaultListCellRenderer {
 
         Object[] disabledElements;
