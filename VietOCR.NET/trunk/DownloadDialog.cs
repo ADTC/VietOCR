@@ -12,7 +12,6 @@ namespace VietOCR.NET
 {
     public partial class DownloadDialog : Form
     {
-        string filePath;
         Dictionary<string, string> availableLanguageCodes;
         Dictionary<string, string> lookupISO639;
         List<WebClient> clients;
@@ -106,8 +105,8 @@ namespace VietOCR.NET
                         request.Timeout = 15000;
                         WebResponse response = request.GetResponse();
 
-                        filePath = Path.Combine(Path.GetTempPath(), Path.GetFileName(uri.AbsolutePath));
-                        client.DownloadFileAsync(uri, filePath, key);
+                        string filePath = Path.Combine(Path.GetTempPath(), Path.GetFileName(uri.AbsolutePath));
+                        client.DownloadFileAsync(uri, filePath, filePath);
                         this.toolStripProgressBar1.Visible = true;
                         this.buttonDownload.Enabled = false;
                         this.toolStripStatusLabel1.Text = "Downloading...";
@@ -160,7 +159,7 @@ namespace VietOCR.NET
             }
             else
             {
-                FileExtractor.ExtractCompressedFile(filePath, workingDir);
+                FileExtractor.ExtractCompressedFile(e.UserState.ToString(), workingDir);
 
                 numberOfDownloads++;
                 if (--numOfConcurrentTasks <= 0)
