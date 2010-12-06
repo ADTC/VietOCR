@@ -33,7 +33,7 @@ namespace VietOCR.NET
 {
     public partial class GUI : GUIWithRegistry
     {
-        protected const string strProgName = "VietOCR.NET";
+        public const string strProgName = "VietOCR.NET";
         public const string TO_BE_IMPLEMENTED = "To be implemented";
 
         protected string curLangCode;
