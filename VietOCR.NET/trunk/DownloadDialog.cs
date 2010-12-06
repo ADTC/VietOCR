@@ -14,8 +14,8 @@ namespace VietOCR.NET
     {
         string filePath;
         Dictionary<string, string> availableLanguageCodes;
-        string[] installedLanguages;
         Dictionary<string, string> lookupISO639;
+        WebClient client;
 
         public DownloadDialog()
         {
@@ -26,7 +26,6 @@ namespace VietOCR.NET
         {
             base.OnLoad(ea);
 
-            installedLanguages = ((GUI)this.Owner).InstalledLanguages;
             lookupISO639 = ((GUI)this.Owner).LookupISO639;
             availableLanguageCodes = new Dictionary<string, string>();
             XmlDocument doc = new XmlDocument();
@@ -53,7 +52,7 @@ namespace VietOCR.NET
             this.listBox1.Items.Clear();
             this.listBox1.Items.AddRange(names.ToArray());
 
-            foreach (string installed in installedLanguages)
+            foreach (string installed in ((GUI)this.Owner).InstalledLanguages)
             {
                 for (int i = 0; i < names.Count; ++i)
                 {
@@ -77,7 +76,7 @@ namespace VietOCR.NET
             this.buttonDownload.Enabled = false;
             this.buttonCancel.Enabled = true;
 
-            WebClient client = new WebClient();
+            client = new WebClient();
             client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
             client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
 
@@ -129,7 +128,13 @@ namespace VietOCR.NET
 
         void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            MessageBox.Show("Download Completed");
+            if (e.Cancelled)
+            {
+                MessageBox.Show("Download cancelled.");
+                return;
+            }
+
+            MessageBox.Show("Download completed.");
 
             this.buttonDownload.Enabled = true;
             this.buttonCancel.Enabled = false;
@@ -141,7 +146,18 @@ namespace VietOCR.NET
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
+            if (client != null && client.IsBusy)
+            {
+                client.CancelAsync();
+                client.Dispose();
+                client = null;
+            }
+        }
 
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            base.Close();
+            this.Dispose();
         }
     }
 }
