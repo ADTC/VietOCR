@@ -40,7 +40,6 @@ public class DownloadDialog extends javax.swing.JDialog {
     final String tmpdir = System.getProperty("java.io.tmpdir");
     private Properties availableLanguageCodes;
     private Properties lookupISO639;
-    private String[] installedLanguages;
     File baseDir;
     SwingWorker<File, Integer> downloadWorker;
     int length, byteCount, numberOfDownloads, numOfConcurrentTasks;
@@ -51,7 +50,6 @@ public class DownloadDialog extends javax.swing.JDialog {
         initComponents();
 
         baseDir = Utilities.getBaseDir(DownloadDialog.this);
-        installedLanguages = ((Gui) parent).getInstalledLanguages();
         lookupISO639 = ((Gui) parent).getLookupISO639();
         availableLanguageCodes = new Properties();
         try {
@@ -103,9 +101,6 @@ public class DownloadDialog extends javax.swing.JDialog {
         setTitle("Download Language Data");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -272,7 +267,7 @@ public class DownloadDialog extends javax.swing.JDialog {
                     jLabelStatus.setText(null);
                     numOfConcurrentTasks = 0;
                 } catch (java.util.concurrent.CancellationException e) {
-                    jLabelStatus.setText("Download canceled");
+                    jLabelStatus.setText("Download cancelled");
                     numOfConcurrentTasks = 0;
                 } finally {
                     if (numOfConcurrentTasks <= 0) {
@@ -299,33 +294,32 @@ public class DownloadDialog extends javax.swing.JDialog {
 
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
         this.setVisible(false);
-        this.jProgressBar1.setVisible(false);
-        this.jLabelStatus.setText(null);
 
         if (numberOfDownloads > 0) {
             JOptionPane.showMessageDialog(DownloadDialog.this, "Please restart the program so that it could register the new language pack(s).", Gui.APP_NAME, JOptionPane.INFORMATION_MESSAGE);
         }
+        this.dispose();
     }//GEN-LAST:event_jButtonCloseActionPerformed
 
+    /**
+     * Populates the list upon window opening.
+     * @param evt
+     */
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         String[] available = availableLanguageCodes.keySet().toArray(new String[0]);
-        List<String> names = new ArrayList<String>();
+        List<String> languageNames = new ArrayList<String>();
         for (String key : available) {
-            names.add(this.lookupISO639.getProperty(key, key));
+            languageNames.add(this.lookupISO639.getProperty(key, key));
         }
-        Collections.sort(names, Collator.getInstance());
+        Collections.sort(languageNames, Collator.getInstance());
         DefaultListModel model = new DefaultListModel();
-        for (String name : names) {
+        for (String name : languageNames) {
             model.addElement(name);
         }
 
         this.jList1.setModel(model);
-        this.jList1.setCellRenderer(new CustomCellRenderer(installedLanguages));
+        this.jList1.setCellRenderer(new CustomCellRenderer(((Gui) this.getParent()).getInstalledLanguages()));
     }//GEN-LAST:event_formWindowOpened
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowActivated
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         if (downloadWorker != null && !downloadWorker.isDone()) {
@@ -370,6 +364,9 @@ public class DownloadDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * A custom renderer which disables certain elements in list.
+     */
     class CustomCellRenderer extends DefaultListCellRenderer {
 
         Object[] disabledElements;
