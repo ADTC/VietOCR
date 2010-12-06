@@ -15,13 +15,16 @@ namespace VietOCR.NET
         string filePath;
         Dictionary<string, string> availableLanguageCodes;
         Dictionary<string, string> lookupISO639;
-        WebClient client;
+        List<WebClient> clients;
         double bytesIn, totalBytes;
         int numberOfDownloads, numOfConcurrentTasks;
+        String workingDir;
 
         public DownloadDialog()
         {
             InitializeComponent();
+
+            workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         }
 
         protected override void OnLoad(EventArgs ea)
@@ -74,39 +77,46 @@ namespace VietOCR.NET
             {
                 return;
             }
+            clients = new List<WebClient>();
 
             bytesIn = totalBytes = 0;
             numOfConcurrentTasks = this.listBox1.SelectedIndices.Count;
             this.buttonDownload.Enabled = false;
             this.buttonCancel.Enabled = true;
+            this.toolStripProgressBar1.Value = 0;
             this.Cursor = Cursors.WaitCursor;
 
-            client = new WebClient();
-            client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
-            client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
-
-            // Starts the download
-            string value = FindKey(lookupISO639, this.listBox1.SelectedItem.ToString());
-
-            if (value != null)
+            foreach (object obj in this.listBox1.SelectedItems)
             {
-                try
-                {
-                    Uri uri = new Uri(availableLanguageCodes[value]);
-                    WebRequest request = WebRequest.Create(uri);
-                    request.Timeout = 15000;
-                    WebResponse response = request.GetResponse();
+                // WebClient can only handle one download at a time.
+                WebClient client = new WebClient();
+                client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(Client_DownloadProgressChanged);
+                client.DownloadFileCompleted += new AsyncCompletedEventHandler(Client_DownloadFileCompleted);
+                clients.Add(client);
 
-                    filePath = Path.Combine(Path.GetTempPath(), Path.GetFileName(uri.AbsolutePath));
-                    client.DownloadFileAsync(uri, filePath);
-                    this.toolStripProgressBar1.Visible = true;
-                    this.buttonDownload.Enabled = false;
-                    this.toolStripStatusLabel1.Text = "Downloading...";
-                }
-                catch (Exception)
+                // Starts the download
+                string key = FindKey(lookupISO639, obj.ToString());
+
+                if (key != null)
                 {
-                    MessageBox.Show("Resource does not exist."); //url does not exist
-                    this.listBox1.SelectedIndex = -1;
+                    try
+                    {
+                        Uri uri = new Uri(availableLanguageCodes[key]);
+                        WebRequest request = WebRequest.Create(uri);
+                        request.Timeout = 15000;
+                        WebResponse response = request.GetResponse();
+
+                        filePath = Path.Combine(Path.GetTempPath(), Path.GetFileName(uri.AbsolutePath));
+                        client.DownloadFileAsync(uri, filePath, key);
+                        this.toolStripProgressBar1.Visible = true;
+                        this.buttonDownload.Enabled = false;
+                        this.toolStripStatusLabel1.Text = "Downloading...";
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Resource does not exist."); //url does not exist
+                        //this.listBox1.SelectedIndex = -1;
+                    }
                 }
             }
         }
@@ -123,16 +133,17 @@ namespace VietOCR.NET
             return null;
         }
 
-        void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            bytesIn = double.Parse(e.BytesReceived.ToString());
-            totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
-            double percentage = 100 * bytesIn / totalBytes;
+            //bytesIn = double.Parse(e.BytesReceived.ToString());
+            //totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
+            //double percentage = 100 * bytesIn / totalBytes;
 
-            this.toolStripProgressBar1.Value = int.Parse(Math.Truncate(percentage).ToString());
+            //this.toolStripProgressBar1.Value = int.Parse(Math.Truncate(percentage).ToString());
+            this.toolStripProgressBar1.Value = e.ProgressPercentage;
         }
 
-        void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             this.buttonDownload.Enabled = true;
             this.buttonCancel.Enabled = false;
@@ -142,32 +153,40 @@ namespace VietOCR.NET
             {
                 this.toolStripStatusLabel1.Text = "Download cancelled.";
                 //this.toolStripProgressBar1.Visible = false;
-                return;
             }
+            else if (e.Error != null)
+            {
+                this.toolStripStatusLabel1.Text = "Download error.";
+            }
+            else
+            {
+                FileExtractor.ExtractCompressedFile(filePath, workingDir);
 
-            this.toolStripStatusLabel1.Text = "Download completed.";
-
-            String workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            FileExtractor.ExtractCompressedFile(filePath, workingDir);
-            numberOfDownloads++;
-            this.toolStripProgressBar1.Visible = false;
-            //this.listBox1.SelectedIndex = -1;
+                numberOfDownloads++;
+                if (--numOfConcurrentTasks <= 0)
+                {
+                    this.toolStripStatusLabel1.Text = "Download completed.";
+                    this.toolStripProgressBar1.Visible = false;
+                }
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            if (client != null && client.IsBusy)
+            if (clients != null)
             {
-                client.CancelAsync();
-                client.Dispose();
-                client = null;
+                foreach (WebClient client in clients)
+                {
+                    client.CancelAsync();
+                    client.Dispose();
+                }
             }
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            
+
             if (numberOfDownloads > 0)
             {
                 MessageBox.Show(this, "Please restart the program so that it could register the new language pack(s).", GUI.strProgName);
