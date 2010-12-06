@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <properties>
   <comment>ISO 639-3 Standard</comment>
-  <entry key="ban">http://tesseract-ocr.googlecode.com/files/tessdata.ban.tar.gz</entry>
   <entry key="deu">http://tesseract-ocr.googlecode.com/files/tesseract-2.00.deu.tar.gz</entry>
   <entry key="eng">http://tesseract-ocr.googlecode.com/files/tesseract-2.00.eng.tar.gz</entry>
   <entry key="fra">http://tesseract-ocr.googlecode.com/files/tesseract-2.00.fra.tar.gz</entry>
