@@ -245,6 +245,7 @@ public class DownloadDialog extends javax.swing.JDialog {
                     numberOfDownloads++;
                     if (--numOfConcurrentTasks <= 0) {
                         jLabelStatus.setText(bundle.getString("Download_completed"));
+                        jProgressBar1.setVisible(false);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -272,6 +273,7 @@ public class DownloadDialog extends javax.swing.JDialog {
                     numOfConcurrentTasks = 0;
                 } catch (java.util.concurrent.CancellationException e) {
                     jLabelStatus.setText(bundle.getString("Download_cancelled"));
+//                    jProgressBar1.setVisible(false);
                     numOfConcurrentTasks = 0;
                 } finally {
                     if (numOfConcurrentTasks <= 0) {
