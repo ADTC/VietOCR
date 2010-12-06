@@ -241,7 +241,7 @@ public class DownloadDialog extends javax.swing.JDialog {
             public void done() {
                 try {
                     File file = get();
-                    FileExtractor.extractCompressedFile(file.getPath(), baseDir.getPath() + "/tesseract");
+                    FileExtractor.extractCompressedFile(file.getPath(), baseDir.getPath() + "/tesseract/tessdata"); // In Tesseract 3.0, data is packaged not under a directory
                     numberOfDownloads++;
                     if (--numOfConcurrentTasks <= 0) {
                         jLabelStatus.setText(bundle.getString("Download_completed"));
