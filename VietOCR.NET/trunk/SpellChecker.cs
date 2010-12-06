@@ -9,6 +9,7 @@ using NHunspell;
 using System.Text.RegularExpressions;
 using System.Collections;
 using VietOCR.NET.Controls;
+using Net.SourceForge.Vietpad.Utilities;
 
 namespace VietOCR.NET
 {
