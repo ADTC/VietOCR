@@ -35,6 +35,7 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBox1 = new Netdev.Windows.Forms.ListBox();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +64,7 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
             this.toolStripProgressBar1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 158);
             this.statusStrip1.Name = "statusStrip1";
@@ -107,6 +109,11 @@
             this.listBox1.Size = new System.Drawing.Size(152, 121);
             this.listBox1.TabIndex = 0;
             // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+            // 
             // DownloadDialog
             // 
             this.AcceptButton = this.buttonDownload;
@@ -142,5 +149,6 @@
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
