@@ -56,7 +56,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         lookupISO639 = ((Gui) parent).getLookupISO639();
         availableLanguageCodes = new Properties();
         try {
-            File xmlFile = new File(baseDir, "data/Tess2DataURL.xml");
+            File xmlFile = new File(baseDir, "data/Tess3DataURL.xml");
             availableLanguageCodes.loadFromXML(new FileInputStream(xmlFile));
         } catch (Exception e) {
         }
