@@ -15,7 +15,7 @@ namespace VietOCR.NET
         Dictionary<string, string> availableLanguageCodes;
         Dictionary<string, string> lookupISO639;
         List<WebClient> clients;
-        double bytesIn, totalBytes;
+        Dictionary<string, int> downloadTracker;
         int numberOfDownloads, numOfConcurrentTasks;
         String workingDir;
 
@@ -76,14 +76,18 @@ namespace VietOCR.NET
             {
                 return;
             }
-            clients = new List<WebClient>();
-
-            bytesIn = totalBytes = 0;
-            numOfConcurrentTasks = this.listBox1.SelectedIndices.Count;
             this.buttonDownload.Enabled = false;
             this.buttonCancel.Enabled = true;
             this.toolStripProgressBar1.Value = 0;
+            this.toolStripProgressBar1.Visible = true;
+            this.buttonDownload.Enabled = false;
+            this.toolStripStatusLabel1.Text = "Downloading...";
             this.Cursor = Cursors.WaitCursor;
+
+            clients = new List<WebClient>();
+            downloadTracker = new Dictionary<string, int>();
+
+            numOfConcurrentTasks = this.listBox1.SelectedIndices.Count;
 
             foreach (object obj in this.listBox1.SelectedItems)
             {
@@ -107,9 +111,6 @@ namespace VietOCR.NET
 
                         string filePath = Path.Combine(Path.GetTempPath(), Path.GetFileName(uri.AbsolutePath));
                         client.DownloadFileAsync(uri, filePath, filePath);
-                        this.toolStripProgressBar1.Visible = true;
-                        this.buttonDownload.Enabled = false;
-                        this.toolStripStatusLabel1.Text = "Downloading...";
                     }
                     catch (Exception)
                     {
@@ -134,28 +135,37 @@ namespace VietOCR.NET
 
         void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            //bytesIn = double.Parse(e.BytesReceived.ToString());
-            //totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
-            //double percentage = 100 * bytesIn / totalBytes;
+            string filePath = e.UserState.ToString();
+            if (!downloadTracker.ContainsKey(filePath))
+            {
+                downloadTracker.Add(filePath, e.ProgressPercentage);
+            }
+            else
+            {
+                downloadTracker[filePath] = e.ProgressPercentage;
+            }
 
-            //this.toolStripProgressBar1.Value = int.Parse(Math.Truncate(percentage).ToString());
-            this.toolStripProgressBar1.Value = e.ProgressPercentage;
+            int progressPercentageTotal = 0;
+            foreach (int progressPercentage in downloadTracker.Values)
+            {
+                progressPercentageTotal += progressPercentage;
+            }
+
+            this.toolStripProgressBar1.Value = progressPercentageTotal / downloadTracker.Count;
         }
 
         void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            this.buttonDownload.Enabled = true;
-            this.buttonCancel.Enabled = false;
-            this.Cursor = Cursors.Default;
-
             if (e.Cancelled)
             {
                 this.toolStripStatusLabel1.Text = "Download cancelled.";
+                resetUI();
                 //this.toolStripProgressBar1.Visible = false;
             }
             else if (e.Error != null)
             {
                 this.toolStripStatusLabel1.Text = "Download error.";
+                resetUI();
             }
             else
             {
@@ -166,8 +176,16 @@ namespace VietOCR.NET
                 {
                     this.toolStripStatusLabel1.Text = "Download completed.";
                     this.toolStripProgressBar1.Visible = false;
+                    resetUI();
                 }
             }
+        }
+
+        void resetUI()
+        {
+            this.buttonDownload.Enabled = true;
+            this.buttonCancel.Enabled = false;
+            this.Cursor = Cursors.Default;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
