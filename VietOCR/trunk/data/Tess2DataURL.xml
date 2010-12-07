@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-  <comment>ISO 639-3 Standard</comment>
+  <comment>Tesseract 2.0x language data packs</comment>
   <entry key="deu">http://tesseract-ocr.googlecode.com/files/tesseract-2.00.deu.tar.gz</entry>
   <entry key="eng">http://tesseract-ocr.googlecode.com/files/tesseract-2.00.eng.tar.gz</entry>
   <entry key="fra">http://tesseract-ocr.googlecode.com/files/tesseract-2.00.fra.tar.gz</entry>
