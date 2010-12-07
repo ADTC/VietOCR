@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<comment>ISO 639-3 Standard</comment>
+<comment>Tesseract 3.0 language data packs</comment>
 <entry key="bul">http://tesseract-ocr.googlecode.com/files/bul.traineddata.gz</entry>
 <entry key="cat">http://tesseract-ocr.googlecode.com/files/cat.traineddata.gz</entry>
 <entry key="ces">http://tesseract-ocr.googlecode.com/files/ces.traineddata.gz</entry>
