@@ -13,6 +13,8 @@ namespace VietOCR.NET
     public partial class DownloadDialog : Form
     {
         Dictionary<string, string> availableLanguageCodes;
+        Dictionary<string, string> availableDictionaries;
+        Dictionary<string, string> iso_3_1_Codes;
         Dictionary<string, string> lookupISO639;
         List<WebClient> clients;
         Dictionary<string, int> downloadTracker;
@@ -33,18 +35,18 @@ namespace VietOCR.NET
             base.OnLoad(ea);
 
             lookupISO639 = ((GUI)this.Owner).LookupISO639;
-            availableLanguageCodes = new Dictionary<string, string>();
-            XmlDocument doc = new XmlDocument();
 
-            String workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             String xmlFilePath = Path.Combine(workingDir, "Data/Tess2DataURL.xml");
-            doc.Load(xmlFilePath);
+            availableLanguageCodes = new Dictionary<string, string>();
+            loadFromXML(availableLanguageCodes, xmlFilePath);
 
-            XmlNodeList list = doc.GetElementsByTagName("entry");
-            foreach (XmlNode node in list)
-            {
-                availableLanguageCodes.Add(node.Attributes[0].Value, node.InnerText);
-            }
+            xmlFilePath = Path.Combine(workingDir, "Data/OO-SpellDictionaries.xml");
+            availableDictionaries = new Dictionary<string, string>();
+            loadFromXML(availableDictionaries, xmlFilePath);
+
+            xmlFilePath = Path.Combine(workingDir, "Data/ISO639-1.xml");
+            iso_3_1_Codes = new Dictionary<string, string>();
+            loadFromXML(iso_3_1_Codes, xmlFilePath);
 
             string[] available = new string[availableLanguageCodes.Count];
             availableLanguageCodes.Keys.CopyTo(available, 0);
@@ -70,6 +72,18 @@ namespace VietOCR.NET
                 }
             }
             this.ActiveControl = this.listBox1;
+        }
+
+        void loadFromXML(Dictionary<string, string> table, string xmlFilePath)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(xmlFilePath);
+
+            XmlNodeList list = doc.GetElementsByTagName("entry");
+            foreach (XmlNode node in list)
+            {
+                table.Add(node.Attributes[0].Value, node.InnerText);
+            }
         }
 
         private void buttonDownload_Click(object sender, EventArgs e)
