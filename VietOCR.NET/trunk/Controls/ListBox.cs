@@ -27,10 +27,8 @@ namespace Netdev.Windows.Forms
         }
         public ListBox()
         {
-
             DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             disabledIndices = new DisabledIndexCollection(this);
-
         }
 
         private int originalHeight = 0;
@@ -43,7 +41,6 @@ namespace Netdev.Windows.Forms
             this.ItemHeight = FontHeight;
             this.Height = GetPreferredHeight();
             fontChanged = false;
-
         }
 
         protected override void OnResize(EventArgs e)
@@ -62,8 +59,6 @@ namespace Netdev.Windows.Forms
         {
             disabledIndices.Remove(index);
         }
-
-
 
         private int GetPreferredHeight()
         {
@@ -86,8 +81,6 @@ namespace Netdev.Windows.Forms
                         preferredHeight += ItemHeight;
                     }
                     preferredHeight += (SystemInformation.BorderSize.Height * 4) + 3;
-
-
                 }
                 else
                 {
@@ -98,7 +91,6 @@ namespace Netdev.Windows.Forms
                 preferredHeight = currentHeight;
 
             return preferredHeight;
-
         }
 
         protected override void OnSelectedIndexChanged(EventArgs e)
@@ -136,9 +128,10 @@ namespace Netdev.Windows.Forms
                 object item = this.Items[e.Index];
                 if (disabledIndices.Contains(e.Index))
                 {
-                    e.Graphics.FillRectangle(SystemBrushes.InactiveBorder, e.Bounds);
+                    e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds); // SystemBrushes.InactiveBorder
                     if (item != null)
                     {
+                        
                         e.Graphics.DrawString(item.ToString(), e.Font, SystemBrushes.GrayText, e.Bounds);
                     }
                 }
@@ -176,8 +169,6 @@ namespace Netdev.Windows.Forms
             }
         }
 
-
-
         private DisabledIndexCollection disabledIndices;
 
         public DisabledIndexCollection DisabledIndices
@@ -185,13 +176,11 @@ namespace Netdev.Windows.Forms
             get { return disabledIndices; }
         }
 
-
         public class DisabledIndexCollection : IList, ICollection, IEnumerable
         {
             // Fields
             private ListBox owner;
             private List<int> innerList = new List<int>();
-
 
             // Methods
             public DisabledIndexCollection(ListBox owner)
@@ -403,7 +392,6 @@ namespace Netdev.Windows.Forms
             }
         }
 
-
         public new void SetSelected(int index, bool value)
         {
             int num = (this.Items == null) ? 0 : this.Items.Count;
@@ -442,7 +430,6 @@ namespace Netdev.Windows.Forms
         }
     }
 
-
     public class IndexEventArgs : EventArgs
     {
         private int index;
@@ -455,7 +442,7 @@ namespace Netdev.Windows.Forms
 
             set
             {
-                index = value ;
+                index = value;
             }
         }
         public IndexEventArgs(int index)
