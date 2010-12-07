@@ -24,6 +24,8 @@ namespace VietOCR.NET
             InitializeComponent();
 
             workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            clients = new List<WebClient>();
+            downloadTracker = new Dictionary<string, int>();
         }
 
         protected override void OnLoad(EventArgs ea)
@@ -84,8 +86,8 @@ namespace VietOCR.NET
             this.toolStripStatusLabel1.Text = "Downloading...";
             this.Cursor = Cursors.WaitCursor;
 
-            clients = new List<WebClient>();
-            downloadTracker = new Dictionary<string, int>();
+            clients.Clear();
+            downloadTracker.Clear();
 
             numOfConcurrentTasks = this.listBox1.SelectedIndices.Count;
 
