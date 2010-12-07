@@ -168,12 +168,12 @@ Version 3.0 (3 October 2010)
 - Replace old format (2.0x) language data with new format (3.0) language data
 - Change datafile suffix from .inttemp to .traineddata
 
-Version 2.0 Beta (5 December 2010)
+Version 2.0 Beta (6 December 2010)
 
 - Upgrade JACOB library to version 1.15-M4
 - Add spellcheck suggestion support
 - Improve accessibility and usability
-- Add support for downloading and installing language data packs
+- Add support for downloading and installing language data packs and pertinent spell dictionaries
 - Add UI localization for Lithuanian and Slovak
 
 Note: If you would like to include localization for your language, please translate the .properties files and send them to the project owner. Thank you.
