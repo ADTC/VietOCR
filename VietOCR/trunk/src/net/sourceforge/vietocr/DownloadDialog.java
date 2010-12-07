@@ -40,6 +40,8 @@ public class DownloadDialog extends javax.swing.JDialog {
     final static int BUFFER_SIZE = 1024;
     final String tmpdir = System.getProperty("java.io.tmpdir");
     private Properties availableLanguageCodes;
+    private Properties availableDictionaries;
+    private Properties iso_3_1_Codes;
     private Properties lookupISO639;
     File baseDir;
     SwingWorker<File, Integer> downloadWorker;
@@ -55,9 +57,16 @@ public class DownloadDialog extends javax.swing.JDialog {
         baseDir = Utilities.getBaseDir(DownloadDialog.this);
         lookupISO639 = ((Gui) parent).getLookupISO639();
         availableLanguageCodes = new Properties();
+        availableDictionaries = new Properties();
+        iso_3_1_Codes = new Properties();
+
         try {
             File xmlFile = new File(baseDir, "data/Tess2DataURL.xml");
             availableLanguageCodes.loadFromXML(new FileInputStream(xmlFile));
+            xmlFile = new File(baseDir, "data/OO-SpellDictionaries.xml");
+            availableDictionaries.loadFromXML(new FileInputStream(xmlFile));
+            xmlFile = new File(baseDir, "data/ISO639-1.xml");
+            iso_3_1_Codes.loadFromXML(new FileInputStream(xmlFile));
         } catch (Exception e) {
         }
 
@@ -191,7 +200,15 @@ public class DownloadDialog extends javax.swing.JDialog {
             for (Object value : this.jList1.getSelectedValues()) {
                 String key = FindKey(lookupISO639, value.toString());
                 URL url = new URL(availableLanguageCodes.getProperty(key));
-                loadLanguageDataFile(url);
+                downloadDataFile(url, "tesseract"); // download language data pack
+                String iso_3_1_Code = iso_3_1_Codes.getProperty(key);
+                if (iso_3_1_Code != null) {
+                    url = new URL(availableDictionaries.getProperty(iso_3_1_Code));
+                    if (url != null) {
+                        ++numOfConcurrentTasks;
+                        downloadDataFile(url, "dict"); // download dictionary
+                    }
+                }
             }
         } catch (Exception e) {
         }
@@ -207,7 +224,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         return null;
     }
 
-    public void loadLanguageDataFile(final URL remoteFile) throws Exception {
+    public void downloadDataFile(final URL remoteFile, final String destFolder) throws Exception {
         final URLConnection connection = remoteFile.openConnection();
         connection.setReadTimeout(15000);
         connection.connect();
@@ -222,7 +239,7 @@ public class DownloadDialog extends javax.swing.JDialog {
                 BufferedOutputStream bout = new BufferedOutputStream(fos);
                 byte[] buffer = new byte[BUFFER_SIZE];
                 int bytesRead = 0;
-                
+
                 while ((bytesRead = inputStream.read(buffer, 0, BUFFER_SIZE)) > -1) {
                     if (isCancelled()) {
                         break;
@@ -241,7 +258,7 @@ public class DownloadDialog extends javax.swing.JDialog {
             public void done() {
                 try {
                     File file = get();
-                    FileExtractor.extractCompressedFile(file.getPath(), baseDir.getPath() + "/tesseract");
+                    FileExtractor.extractCompressedFile(file.getPath(), baseDir.getPath() + "/" + destFolder);
                     numberOfDownloads++;
                     if (--numOfConcurrentTasks <= 0) {
                         jLabelStatus.setText(bundle.getString("Download_completed"));
