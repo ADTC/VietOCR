@@ -118,9 +118,9 @@ namespace VietOCR.NET
                         Uri uri = new Uri(availableLanguageCodes[key]);
                         DownloadDataFile(uri, string.Empty);  // download language data pack
 
-                        String iso_3_1_Code = iso_3_1_Codes[key];
-                        if (iso_3_1_Code != null)
+                        if (iso_3_1_Codes.ContainsKey(key))
                         {
+                            String iso_3_1_Code = iso_3_1_Codes[key];
                             uri = new Uri(availableDictionaries[iso_3_1_Code]);
                             if (uri != null)
                             {
@@ -187,7 +187,7 @@ namespace VietOCR.NET
         void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             string filePath = e.UserState.ToString();
-           
+
             if (!downloadTracker.ContainsKey(filePath))
             {
                 downloadTracker.Add(filePath, e.BytesReceived);
@@ -223,7 +223,7 @@ namespace VietOCR.NET
             {
                 string fileName = e.UserState.ToString();
                 string key = Path.GetFileNameWithoutExtension(fileName);
-                FileExtractor.ExtractCompressedFile(fileName, availableDictionaries.ContainsKey(key)? workingDir + "/dict" : workingDir);
+                FileExtractor.ExtractCompressedFile(fileName, availableDictionaries.ContainsKey(key) ? workingDir + "/dict" : workingDir);
 
                 numberOfDownloads++;
                 if (--numOfConcurrentTasks <= 0)
