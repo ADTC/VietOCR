@@ -185,36 +185,40 @@ public class DownloadDialog extends javax.swing.JDialog {
             return;
         }
 
-        try {
-            length = byteCount = 0;
-            numOfConcurrentTasks = this.jList1.getSelectedIndices().length;
-            this.jButtonDownload.setEnabled(false);
-            this.jButtonCancel.setEnabled(true);
-            this.jLabelStatus.setText(bundle.getString("Downloading..."));
-            this.jProgressBar1.setMaximum(100);
-            this.jProgressBar1.setValue(0);
-            this.jProgressBar1.setVisible(true);
-            getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            getGlassPane().setVisible(true);
+        this.jButtonDownload.setEnabled(false);
+        this.jButtonCancel.setEnabled(true);
+        this.jLabelStatus.setText(bundle.getString("Downloading..."));
+        this.jProgressBar1.setMaximum(100);
+        this.jProgressBar1.setValue(0);
+        this.jProgressBar1.setVisible(true);
+        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        getGlassPane().setVisible(true);
 
-            for (Object value : this.jList1.getSelectedValues()) {
-                String key = FindKey(lookupISO639, value.toString());
-                URL url = new URL(availableLanguageCodes.getProperty(key));
-                downloadDataFile(url, "tesseract"); // download language data pack
-                String iso_3_1_Code = iso_3_1_Codes.getProperty(key);
-                if (iso_3_1_Code != null) {
-                    url = new URL(availableDictionaries.getProperty(iso_3_1_Code));
-                    if (url != null) {
-                        ++numOfConcurrentTasks;
-                        downloadDataFile(url, "dict"); // download dictionary
+        length = byteCount = 0;
+        numOfConcurrentTasks = this.jList1.getSelectedIndices().length;
+
+        for (Object value : this.jList1.getSelectedValues()) {
+            String key = FindKey(lookupISO639, value.toString());
+            if (key != null) {
+                try {
+                    URL url = new URL(availableLanguageCodes.getProperty(key));
+                    downloadDataFile(url, "tesseract"); // download language data pack
+                    if (iso_3_1_Codes.containsKey(key)) {
+                        String iso_3_1_Code = iso_3_1_Codes.getProperty(key);
+                        url = new URL(availableDictionaries.getProperty(iso_3_1_Code));
+                        if (url != null) {
+                            ++numOfConcurrentTasks;
+                            downloadDataFile(url, "dict"); // download dictionary
+                        }
                     }
+                } catch (Exception e) {
                 }
             }
-        } catch (Exception e) {
         }
+
     }//GEN-LAST:event_jButtonDownloadActionPerformed
 
-    public String FindKey(Properties lookup, String value) {
+    String FindKey(Properties lookup, String value) {
         for (Enumeration e = lookup.keys(); e.hasMoreElements();) {
             String key = (String) e.nextElement();
             if (lookup.get(key).equals(value)) {
@@ -224,7 +228,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         return null;
     }
 
-    public void downloadDataFile(final URL remoteFile, final String destFolder) throws Exception {
+    void downloadDataFile(final URL remoteFile, final String destFolder) throws Exception {
         final URLConnection connection = remoteFile.openConnection();
         connection.setReadTimeout(15000);
         connection.connect();
