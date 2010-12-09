@@ -203,8 +203,8 @@ public class DownloadDialog extends javax.swing.JDialog {
                     downloadDataFile(url, "tesseract"); // download language data pack
                     if (lookupISO_3_1_Codes.containsKey(key)) {
                         String iso_3_1_Code = lookupISO_3_1_Codes.getProperty(key); // vie -> vi_VN
-                        url = new URL(availableDictionaries.getProperty(iso_3_1_Code));
-                        if (url != null) {
+                        if (availableDictionaries.containsKey(iso_3_1_Code)) {
+                            url = new URL(availableDictionaries.getProperty(iso_3_1_Code));
                             ++numOfConcurrentTasks;
                             downloadDataFile(url, "dict"); // download dictionary
                         }
@@ -260,7 +260,10 @@ public class DownloadDialog extends javax.swing.JDialog {
                 try {
                     File file = get();
                     FileExtractor.extractCompressedFile(file.getPath(), baseDir.getPath() + "/" + destFolder);
-                    numberOfDownloads++;
+                    if (destFolder.equals("tesseract")) {
+                        numberOfDownloads++;
+                    }
+                    
                     if (--numOfConcurrentTasks <= 0) {
                         jLabelStatus.setText(bundle.getString("Download_completed"));
                         jProgressBar1.setVisible(false);
@@ -288,7 +291,7 @@ public class DownloadDialog extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, why, Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
                     jProgressBar1.setVisible(false);
                     jLabelStatus.setText(null);
-                    numOfConcurrentTasks = 0;
+                    --numOfConcurrentTasks;
                 } catch (java.util.concurrent.CancellationException e) {
                     jLabelStatus.setText(bundle.getString("Download_cancelled"));
 //                    jProgressBar1.setVisible(false);
