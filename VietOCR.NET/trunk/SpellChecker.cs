@@ -33,9 +33,9 @@ namespace VietOCR.NET
         public SpellChecker(TextBoxBase textbox, string localeId)
         {
             this.textbox = textbox;
+            this.localeId = localeId;
 
             workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            this.localeId = localeId;
         }
 
         public void EnableSpellCheck()
