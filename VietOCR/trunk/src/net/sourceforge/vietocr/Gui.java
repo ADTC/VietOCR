@@ -125,7 +125,7 @@ public class Gui extends javax.swing.JFrame {
             xmlFile = new File(baseDir, "data/ISO639-1.xml");
             iso_3_1_Codes.loadFromXML(new FileInputStream(xmlFile));
         } catch (IOException ioe) {
-            JOptionPane.showMessageDialog(null, "Missing ISO639-3.xml file. Cannot find it in " + new File(baseDir, "data").getPath() + " directory.", APP_NAME, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ioe.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
 //            ioe.printStackTrace();
         } catch (Exception exc) {
 //            exc.printStackTrace();
