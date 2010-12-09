@@ -53,11 +53,11 @@ namespace VietOCR.NET
             get { return lookupISO639; }
         }
 
-        private Dictionary<string, string> iso_3_1_Codes;
+        private Dictionary<string, string> lookupISO_3_1_Codes;
 
-        public Dictionary<string, string> ISO_3_1_Codes
+        public Dictionary<string, string> LookupISO_3_1_Codes
         {
-            get { return iso_3_1_Codes; }
+            get { return lookupISO_3_1_Codes; }
         }
 
         protected int imageIndex;
@@ -118,7 +118,7 @@ namespace VietOCR.NET
 
             //rectNormal = DesktopBounds;
             lookupISO639 = new Dictionary<string, string>();
-            iso_3_1_Codes = new Dictionary<string, string>();
+            lookupISO_3_1_Codes = new Dictionary<string, string>();
             LoadLang();
             this.toolStripCbLang.Items.AddRange(installedLanguages);
 
@@ -162,13 +162,13 @@ namespace VietOCR.NET
                 xmlFilePath = Path.Combine(baseDir, "Data/ISO639-3.xml");
                 Utilities.Utilities.LoadFromXML(lookupISO639, xmlFilePath);
                 xmlFilePath = Path.Combine(baseDir, "Data/ISO639-1.xml");
-                Utilities.Utilities.LoadFromXML(iso_3_1_Codes, xmlFilePath);
+                Utilities.Utilities.LoadFromXML(lookupISO_3_1_Codes, xmlFilePath);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                MessageBox.Show(this, "Missing ISO639-3.xml file. Cannot find it in " + Path.GetDirectoryName(xmlFilePath) + " directory.", strProgName);
+                MessageBox.Show(this, e.Message, strProgName);
                 // this also applies to missing language data files in tessdata directory
-                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine(e.StackTrace);
             }
             finally
             {

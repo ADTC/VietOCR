@@ -126,7 +126,22 @@ namespace VietOCR.NET
 
         protected override void toolStripButtonSpellCheck_Click(object sender, EventArgs e)
         {
-            string localeId = ISO_3_1_Codes[curLangCode.Substring(0, 3)];
+            string localeId = null;
+
+            if (LookupISO_3_1_Codes.ContainsKey(curLangCode))
+            {
+                localeId = LookupISO_3_1_Codes[curLangCode];
+            }
+            else if (LookupISO_3_1_Codes.ContainsKey(curLangCode.Substring(0, 3)))
+            {
+                localeId = LookupISO_3_1_Codes[curLangCode.Substring(0, 3)];
+            }
+
+            if (localeId == null)
+            {
+                MessageBox.Show("Need to add an entry in data/ISO639-1.xml file.");
+                return;
+            }
 
             sp = new SpellChecker(this.textBox1, localeId);
 
