@@ -188,7 +188,10 @@ namespace VietOCR.NET
                 totalBytesReceived += bytesReceived;
             }
 
-            this.toolStripProgressBar1.Value = (int)(100 * totalBytesReceived / contentLength);
+            if (contentLength != 0)
+            {
+                this.toolStripProgressBar1.Value = (int)(100 * totalBytesReceived / contentLength);
+            }
         }
 
         void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
@@ -235,9 +238,9 @@ namespace VietOCR.NET
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            if (clients != null)
+            foreach (WebClient client in clients)
             {
-                foreach (WebClient client in clients)
+                if (client != null && client.IsBusy)
                 {
                     client.CancelAsync();
                     client.Dispose();
