@@ -236,6 +236,7 @@
     <Compile Include="Utilities\BreakIterator.cs" />
     <Compile Include="Utilities\FileExtractor.cs" />
     <Compile Include="Utilities\TextUtilities.cs" />
+    <Compile Include="Utilities\Utilities.cs" />
     <Compile Include="Utilities\Watcher.cs" />
     <Compile Include="WIA\WiaOperationException.cs" />
     <Compile Include="WIA\WiaScannerAdapter.cs" />

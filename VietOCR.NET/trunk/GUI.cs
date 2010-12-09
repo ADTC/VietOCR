@@ -53,6 +53,13 @@ namespace VietOCR.NET
             get { return lookupISO639; }
         }
 
+        private Dictionary<string, string> iso_3_1_Codes;
+
+        public Dictionary<string, string> ISO_3_1_Codes
+        {
+            get { return iso_3_1_Codes; }
+        }
+
         protected int imageIndex;
         private int imageTotal;
         protected IList<Image> imageList;
@@ -110,7 +117,8 @@ namespace VietOCR.NET
             InitializeComponent();
 
             //rectNormal = DesktopBounds;
-
+            lookupISO639 = new Dictionary<string, string>();
+            iso_3_1_Codes = new Dictionary<string, string>();
             LoadLang();
             this.toolStripCbLang.Items.AddRange(installedLanguages);
 
@@ -144,36 +152,17 @@ namespace VietOCR.NET
 
         void LoadLang()
         {
-            XmlDocument doc = new XmlDocument();
-
-            String workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            String xmlFilePath = Path.Combine(workingDir, "Data/ISO639-3.xml");
-            lookupISO639 = new Dictionary<string, string>();
+            string workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string xmlFilePath = null;
 
             try
             {
                 string tessdataDir = Path.Combine(workingDir, "tessdata");
-
-                //if (!Directory.Exists(tessdataDir))
-                //{
-                //    string TESSDATA_PREFIX = Environment.GetEnvironmentVariable("TESSDATA_PREFIX");
-                //    if (String.IsNullOrEmpty(TESSDATA_PREFIX))
-                //    {
-                //        TESSDATA_PREFIX = "/usr/local/share/tessdata"; // default path of tessdata on Linux (for Mono)
-                //    }
-                //    tessdataDir = TESSDATA_PREFIX;
-                //}
-
                 installedLanguageCodes = Directory.GetFiles(tessdataDir, "*.inttemp");
-
-                doc.Load(xmlFilePath);
-                //doc.Load(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("VietOCR.NET.Data.ISO639-3.xml"));
-
-                XmlNodeList list = doc.GetElementsByTagName("entry");
-                foreach (XmlNode node in list)
-                {
-                    lookupISO639.Add(node.Attributes[0].Value, node.InnerText);
-                }
+                xmlFilePath = Path.Combine(workingDir, "Data/ISO639-3.xml");
+                Utilities.Utilities.LoadFromXML(lookupISO639, xmlFilePath);
+                xmlFilePath = Path.Combine(workingDir, "Data/ISO639-1.xml");
+                Utilities.Utilities.LoadFromXML(iso_3_1_Codes, xmlFilePath);
             }
             catch (Exception ex)
             {

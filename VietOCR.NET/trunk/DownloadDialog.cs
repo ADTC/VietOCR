@@ -37,18 +37,15 @@ namespace VietOCR.NET
             base.OnLoad(ea);
 
             lookupISO639 = ((GUI)this.Owner).LookupISO639;
+            iso_3_1_Codes = ((GUI)this.Owner).ISO_3_1_Codes;
 
             String xmlFilePath = Path.Combine(workingDir, "Data/Tess2DataURL.xml");
             availableLanguageCodes = new Dictionary<string, string>();
-            loadFromXML(availableLanguageCodes, xmlFilePath);
+            Utilities.Utilities.LoadFromXML(availableLanguageCodes, xmlFilePath);
 
             xmlFilePath = Path.Combine(workingDir, "Data/OO-SpellDictionaries.xml");
             availableDictionaries = new Dictionary<string, string>();
-            loadFromXML(availableDictionaries, xmlFilePath);
-
-            xmlFilePath = Path.Combine(workingDir, "Data/ISO639-1.xml");
-            iso_3_1_Codes = new Dictionary<string, string>();
-            loadFromXML(iso_3_1_Codes, xmlFilePath);
+            Utilities.Utilities.LoadFromXML(availableDictionaries, xmlFilePath);
 
             string[] available = new string[availableLanguageCodes.Count];
             availableLanguageCodes.Keys.CopyTo(available, 0);
@@ -76,18 +73,6 @@ namespace VietOCR.NET
             this.ActiveControl = this.listBox1;
         }
 
-        void loadFromXML(Dictionary<string, string> table, string xmlFilePath)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(xmlFilePath);
-
-            XmlNodeList list = doc.GetElementsByTagName("entry");
-            foreach (XmlNode node in list)
-            {
-                table.Add(node.Attributes[0].Value, node.InnerText);
-            }
-        }
-
         private void buttonDownload_Click(object sender, EventArgs e)
         {
             if (this.listBox1.SelectedIndex == -1)
@@ -109,8 +94,7 @@ namespace VietOCR.NET
 
             foreach (object obj in this.listBox1.SelectedItems)
             {
-                string key = FindKey(lookupISO639, obj.ToString());
-
+                string key = FindKey(lookupISO639, obj.ToString()); // Vietnamese -> vie
                 if (key != null)
                 {
                     try
@@ -120,7 +104,7 @@ namespace VietOCR.NET
 
                         if (iso_3_1_Codes.ContainsKey(key))
                         {
-                            String iso_3_1_Code = iso_3_1_Codes[key];
+                            String iso_3_1_Code = iso_3_1_Codes[key]; // vie -> vi_VN
                             uri = new Uri(availableDictionaries[iso_3_1_Code]);
                             if (uri != null)
                             {

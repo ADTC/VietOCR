@@ -126,7 +126,9 @@ namespace VietOCR.NET
 
         protected override void toolStripButtonSpellCheck_Click(object sender, EventArgs e)
         {
-            sp = new SpellChecker(this.textBox1, curLangCode);
+            string localeId = ISO_3_1_Codes[curLangCode.Substring(0, 3)];
+
+            sp = new SpellChecker(this.textBox1, localeId);
 
             if (this.toolStripButtonSpellCheck.Checked)
             {
