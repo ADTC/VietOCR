@@ -24,7 +24,6 @@ import java.io.*;
 import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.regex.*;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -38,33 +37,15 @@ public class SpellChecker {
     Highlighter.HighlightPainter myPainter = new WavyLineHighlighter(Color.red);
     String localeId;
     File baseDir;
-    static Properties prop;
     static List<DocumentListener> lstList = new ArrayList<DocumentListener>();
     Hunspell.Dictionary spellDict;
     static List<String> userWordList = new ArrayList<String>();
     static long mapLastModified = Long.MIN_VALUE;
 
-    public SpellChecker(JTextComponent textComp, String langCode) {
+    public SpellChecker(JTextComponent textComp, String localeId) {
         this.textComp = textComp;
+        this.localeId = localeId;
         baseDir = Utilities.getBaseDir(SpellChecker.this);
-
-        File xmlFile = new File(baseDir, "data/ISO639-1.xml");
-
-        try {
-            if (prop == null) {
-                prop = new Properties();
-                prop.loadFromXML(new FileInputStream(xmlFile));
-            }
-            localeId = prop.getProperty(langCode);
-            if (localeId == null) {
-                localeId = prop.getProperty(langCode.substring(0, 3));
-                if (localeId == null) {
-                    JOptionPane.showMessageDialog(null, "Need to add an entry in data/ISO639-1.xml file.", Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        } catch (IOException ioe) {
-            JOptionPane.showMessageDialog(null, "Missing ISO639-1.xml file. Cannot find it in " + new File(baseDir, "data").getPath() + " directory.", Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     public void enableSpellCheck() {
@@ -211,8 +192,8 @@ public class SpellChecker {
                 userWordList.add(str.toLowerCase());
             }
             in.close();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Cannot find \"user.dic\" in " + new File(baseDir, "dict").getPath() + " directory.", Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ioe) {
+            JOptionPane.showMessageDialog(null, ioe.getMessage(), Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
         }
     }
 

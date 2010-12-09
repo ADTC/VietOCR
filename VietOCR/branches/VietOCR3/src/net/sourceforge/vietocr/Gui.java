@@ -60,6 +60,7 @@ public class Gui extends javax.swing.JFrame {
     protected String tessPath, dangAmbigsPath;
     private Properties config;
     private Properties lookupISO639;
+    private Properties lookupISO_3_1_Codes;
     protected String curLangCode = "eng";
     private String[] installedLanguageCodes;
     private String[] installedLanguages;
@@ -80,12 +81,12 @@ public class Gui extends javax.swing.JFrame {
     private boolean textChanged = true;
     private RawListener rawListener;
     private final String DATAFILE_SUFFIX = ".traineddata";
+    protected final File baseDir = Utilities.getBaseDir(Gui.this);
 
     /**
      * Creates new form Gui
      */
     public Gui() {
-        File baseDir = Utilities.getBaseDir(Gui.this);
         if (WINDOWS) {
             tessPath = new File(baseDir, "tesseract").getPath();
         } else {
@@ -93,6 +94,7 @@ public class Gui extends javax.swing.JFrame {
         }
 
         lookupISO639 = new Properties();
+        lookupISO_3_1_Codes = new Properties();
 
         try {
             File tessdataDir = new File(tessPath, "tessdata");
@@ -120,8 +122,10 @@ public class Gui extends javax.swing.JFrame {
 
             File xmlFile = new File(baseDir, "data/ISO639-3.xml");
             lookupISO639.loadFromXML(new FileInputStream(xmlFile));
+            xmlFile = new File(baseDir, "data/ISO639-1.xml");
+            lookupISO_3_1_Codes.loadFromXML(new FileInputStream(xmlFile));
         } catch (IOException ioe) {
-            JOptionPane.showMessageDialog(null, "Missing ISO639-3.xml file. Cannot find it in " + new File(baseDir, "data").getPath() + " directory.", APP_NAME, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ioe.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
 //            ioe.printStackTrace();
         } catch (Exception exc) {
 //            exc.printStackTrace();
@@ -474,7 +478,7 @@ public class Gui extends javax.swing.JFrame {
     }
 
     /**
-     * @return the propISO639
+     * @return the lookupISO639
      */
     public Properties getLookupISO639() {
         return lookupISO639;
@@ -485,6 +489,13 @@ public class Gui extends javax.swing.JFrame {
      */
     public String[] getInstalledLanguages() {
         return installedLanguages;
+    }
+
+    /**
+     * @return the lookupISO_3_1_Codes
+     */
+    public Properties getLookupISO_3_1_Codes() {
+        return lookupISO_3_1_Codes;
     }
 
     /**
