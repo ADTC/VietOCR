@@ -131,7 +131,7 @@
     <value>171, 22</value>
   </data>
   <data name="vietInputMethodToolStripMenuItem.Text" xml:space="preserve">
-    <value>Viet Input Method</value>
+    <value>Viet Input &amp;Method</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>168, 6</value>
@@ -146,7 +146,7 @@
     <value>171, 22</value>
   </data>
   <data name="uILanguageToolStripMenuItem.Text" xml:space="preserve">
-    <value>User Interface Language</value>
+    <value>&amp;User Interface Language</value>
   </data>
   <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
     <value>168, 6</value>

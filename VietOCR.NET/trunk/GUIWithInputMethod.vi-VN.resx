@@ -125,12 +125,12 @@
     <value>149, 6</value>
   </data>
   <data name="uILanguageToolStripMenuItem.Text" xml:space="preserve">
-    <value>Ngôn ngữ giao diện</value>
+    <value>Ngôn ngữ giao &amp;diện</value>
   </data>
   <data name="vietInputMethodToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
   <data name="vietInputMethodToolStripMenuItem.Text" xml:space="preserve">
-    <value>Kiểu gõ</value>
+    <value>&amp;Kiểu gõ</value>
   </data>
 </root>
