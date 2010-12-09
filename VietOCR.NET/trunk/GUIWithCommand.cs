@@ -262,8 +262,8 @@ namespace VietOCR.NET
         {
             base.LoadRegistryInfo(regkey);
 
-            String workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            dangAmbigsPath = (string)regkey.GetValue(strDangAmbigsPath, Path.Combine(workingDir, "Data"));
+            String baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            dangAmbigsPath = (string)regkey.GetValue(strDangAmbigsPath, Path.Combine(baseDir, "Data"));
             dangAmbigsOn = Convert.ToBoolean(
                 (int)regkey.GetValue(strDangAmbigsOn, Convert.ToInt32(true)));
         }
