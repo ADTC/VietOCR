@@ -100,14 +100,17 @@ public class GuiWithSpellcheck extends GuiWithSettings {
 
     @Override
     void spellCheckActionPerformed() {
-        Properties iso_3_1_Codes = getISO_3_1_Codes();
-        String localeId = iso_3_1_Codes.getProperty(curLangCode);
+        Properties lookupISO_3_1_Codes = getLookupISO_3_1_Codes();
+        String localeId = null;
+
+        if (lookupISO_3_1_Codes.containsKey(curLangCode)) {
+            localeId = lookupISO_3_1_Codes.getProperty(curLangCode);
+        } else if (lookupISO_3_1_Codes.containsKey(curLangCode.substring(0, 3))) {
+            localeId = lookupISO_3_1_Codes.getProperty(curLangCode.substring(0, 3));
+        }
         if (localeId == null) {
-            localeId = iso_3_1_Codes.getProperty(curLangCode.substring(0, 3));
-            if (localeId == null) {
-                JOptionPane.showMessageDialog(null, "Need to add an entry in data/ISO639-1.xml file.", Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+            JOptionPane.showMessageDialog(null, "Need to add an entry in data/ISO639-1.xml file.", Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
+            return;
         }
         
         sp = new SpellChecker(this.jTextArea1, localeId);
