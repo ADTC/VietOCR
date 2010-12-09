@@ -109,6 +109,10 @@ Version 1.9 (11 November 2010)
 - Add support for a custom dictionary
 - List in correct order files generated from PDF conversion
 
-Version 2.0 Beta (21 November 2010)
+Version 2.0 Beta (8 December 2010)
 - Add spellcheck suggestion support
 - Add localization for Lithuanian
+- Improve accessibility and usability
+- Add support for downloading and installing language data packs and pertinent spell dictionaries
+
+Note: If you would like to include localization for your language, please translate the .resx files and send them to the project owner. Thank you.
