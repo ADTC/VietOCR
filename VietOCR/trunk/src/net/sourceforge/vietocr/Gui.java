@@ -60,6 +60,7 @@ public class Gui extends javax.swing.JFrame {
     protected String tessPath, dangAmbigsPath;
     private Properties config;
     private Properties lookupISO639;
+    private Properties iso_3_1_Codes;
     protected String curLangCode = "eng";
     private String[] installedLanguageCodes;
     private String[] installedLanguages;
@@ -93,6 +94,7 @@ public class Gui extends javax.swing.JFrame {
         }
 
         lookupISO639 = new Properties();
+        iso_3_1_Codes = new Properties();
 
         try {
             File tessdataDir = new File(tessPath, "tessdata");
@@ -120,6 +122,8 @@ public class Gui extends javax.swing.JFrame {
 
             File xmlFile = new File(baseDir, "data/ISO639-3.xml");
             lookupISO639.loadFromXML(new FileInputStream(xmlFile));
+            xmlFile = new File(baseDir, "data/ISO639-1.xml");
+            iso_3_1_Codes.loadFromXML(new FileInputStream(xmlFile));
         } catch (IOException ioe) {
             JOptionPane.showMessageDialog(null, "Missing ISO639-3.xml file. Cannot find it in " + new File(baseDir, "data").getPath() + " directory.", APP_NAME, JOptionPane.ERROR_MESSAGE);
 //            ioe.printStackTrace();
@@ -485,6 +489,13 @@ public class Gui extends javax.swing.JFrame {
      */
     public String[] getInstalledLanguages() {
         return installedLanguages;
+    }
+
+    /**
+     * @return the iso_3_1_Codes
+     */
+    public Properties getISO_3_1_Codes() {
+        return iso_3_1_Codes;
     }
 
     /**

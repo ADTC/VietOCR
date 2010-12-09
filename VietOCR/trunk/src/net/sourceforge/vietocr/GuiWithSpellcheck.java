@@ -20,7 +20,9 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Properties;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 
 public class GuiWithSpellcheck extends GuiWithSettings {
@@ -98,7 +100,17 @@ public class GuiWithSpellcheck extends GuiWithSettings {
 
     @Override
     void spellCheckActionPerformed() {
-        sp = new SpellChecker(this.jTextArea1, curLangCode);
+        Properties iso_3_1_Codes = getISO_3_1_Codes();
+        String localeId = iso_3_1_Codes.getProperty(curLangCode);
+        if (localeId == null) {
+            localeId = iso_3_1_Codes.getProperty(curLangCode.substring(0, 3));
+            if (localeId == null) {
+                JOptionPane.showMessageDialog(null, "Need to add an entry in data/ISO639-1.xml file.", Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        
+        sp = new SpellChecker(this.jTextArea1, localeId);
         if (this.jToggleButtonSpellCheck.isSelected()) {
             sp.enableSpellCheck();
         } else {
