@@ -51,7 +51,6 @@ public class GuiWithFormat extends GuiWithImage {
         FontDialog dlg = new FontDialog(this);
         dlg.setAttributes(font);
 
-        File baseDir = Utilities.getBaseDir(this);
         Properties prop = new Properties();
 
         try {

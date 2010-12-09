@@ -81,12 +81,12 @@ public class Gui extends javax.swing.JFrame {
     private boolean textChanged = true;
     private RawListener rawListener;
     private final String DATAFILE_SUFFIX = ".inttemp";
+    protected final File baseDir = Utilities.getBaseDir(Gui.this);
 
     /**
      * Creates new form Gui
      */
     public Gui() {
-        File baseDir = Utilities.getBaseDir(Gui.this);
         if (WINDOWS) {
             tessPath = new File(baseDir, "tesseract").getPath();
         } else {
