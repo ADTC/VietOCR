@@ -178,6 +178,42 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download canceled..
+        /// </summary>
+        internal static string Downloadcanceled {
+            get {
+                return ResourceManager.GetString("Downloadcanceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download completed..
+        /// </summary>
+        internal static string Downloadcompleted {
+            get {
+                return ResourceManager.GetString("Downloadcompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download error..
+        /// </summary>
+        internal static string Downloaderror {
+            get {
+                return ResourceManager.GetString("Downloaderror", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading....
+        /// </summary>
+        internal static string Downloading {
+            get {
+                return ResourceManager.GetString("Downloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
@@ -340,11 +376,29 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please restart the program so that it could register the new language pack(s)..
+        /// </summary>
+        internal static string Please_restart {
+            get {
+                return ResourceManager.GetString("Please_restart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to readme_cs.html.
         /// </summary>
         internal static string readme {
             get {
                 return ResourceManager.GetString("readme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resource does not exist..
+        /// </summary>
+        internal static string Resource_not_exist {
+            get {
+                return ResourceManager.GetString("Resource_not_exist", resourceCulture);
             }
         }
         

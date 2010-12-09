@@ -85,7 +85,7 @@ namespace VietOCR.NET
             this.toolStripProgressBar1.Value = 0;
             this.toolStripProgressBar1.Visible = true;
             this.buttonDownload.Enabled = false;
-            this.toolStripStatusLabel1.Text = "Downloading...";
+            this.toolStripStatusLabel1.Text = Properties.Resources.Downloading;
             this.Cursor = Cursors.WaitCursor;
 
             clients.Clear();
@@ -118,7 +118,7 @@ namespace VietOCR.NET
                     {
                         if (--numOfConcurrentTasks <= 0)
                         {
-                            this.toolStripStatusLabel1.Text = "Download error.";
+                            this.toolStripStatusLabel1.Text = Properties.Resources.Downloaderror;
                             this.toolStripProgressBar1.Visible = false;
                             resetUI();
                         }
@@ -159,7 +159,7 @@ namespace VietOCR.NET
             {
                 if (e.Message.Contains("404"))
                 {
-                    MessageBox.Show("Resource does not exist."); //url does not exist
+                    MessageBox.Show(Properties.Resources.Resource_not_exist); //url does not exist
                 }
                 else
                 {
@@ -195,7 +195,7 @@ namespace VietOCR.NET
         {
             if (e.Cancelled)
             {
-                this.toolStripStatusLabel1.Text = "Download cancelled.";
+                this.toolStripStatusLabel1.Text = Properties.Resources.Downloadcanceled;
                 resetUI();
             }
             else if (e.Error != null)
@@ -219,7 +219,7 @@ namespace VietOCR.NET
 
                 if (--numOfConcurrentTasks <= 0)
                 {
-                    this.toolStripStatusLabel1.Text = "Download completed.";
+                    this.toolStripStatusLabel1.Text = Properties.Resources.Downloadcompleted;
                     this.toolStripProgressBar1.Visible = false;
                     resetUI();
                 }
@@ -251,7 +251,7 @@ namespace VietOCR.NET
 
             if (numberOfDownloads > 0)
             {
-                MessageBox.Show(this, "Please restart the program so that it could register the new language pack(s).", GUI.strProgName);
+                MessageBox.Show(this, Properties.Resources.Please_restart, GUI.strProgName);
             }
             base.Close();
         }
