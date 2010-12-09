@@ -345,6 +345,9 @@
     <EmbeddedResource Include="DownloadDialog.resx">
       <DependentUpon>DownloadDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DownloadDialog.vi-VN.resx">
+      <DependentUpon>DownloadDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI.lt-LT.resx">
       <DependentUpon>GUI.cs</DependentUpon>
     </EmbeddedResource>

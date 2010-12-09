@@ -28,110 +28,123 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DownloadDialog));
             this.buttonDownload = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBox1 = new Netdev.Windows.Forms.ListBox();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonDownload
             // 
-            this.buttonDownload.Location = new System.Drawing.Point(176, 25);
+            this.buttonDownload.AccessibleDescription = null;
+            this.buttonDownload.AccessibleName = null;
+            resources.ApplyResources(this.buttonDownload, "buttonDownload");
+            this.buttonDownload.BackgroundImage = null;
+            this.buttonDownload.Font = null;
             this.buttonDownload.Name = "buttonDownload";
-            this.buttonDownload.Size = new System.Drawing.Size(75, 23);
-            this.buttonDownload.TabIndex = 1;
-            this.buttonDownload.Text = "Download";
             this.buttonDownload.UseVisualStyleBackColor = true;
             this.buttonDownload.Click += new System.EventHandler(this.buttonDownload_Click);
             // 
             // buttonClose
             // 
+            this.buttonClose.AccessibleDescription = null;
+            this.buttonClose.AccessibleName = null;
+            resources.ApplyResources(this.buttonClose, "buttonClose");
+            this.buttonClose.BackgroundImage = null;
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonClose.Location = new System.Drawing.Point(176, 109);
+            this.buttonClose.Font = null;
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(75, 23);
-            this.buttonClose.TabIndex = 2;
-            this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // statusStrip1
             // 
+            this.statusStrip1.AccessibleDescription = null;
+            this.statusStrip1.AccessibleName = null;
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
+            this.statusStrip1.BackgroundImage = null;
+            this.statusStrip1.Font = null;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripProgressBar1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 158);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(263, 22);
-            this.statusStrip1.TabIndex = 5;
-            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.AccessibleDescription = null;
+            this.toolStripStatusLabel1.AccessibleName = null;
+            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
+            this.toolStripStatusLabel1.BackgroundImage = null;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             // 
             // toolStripProgressBar1
             // 
+            this.toolStripProgressBar1.AccessibleDescription = null;
+            this.toolStripProgressBar1.AccessibleName = null;
+            resources.ApplyResources(this.toolStripProgressBar1, "toolStripProgressBar1");
             this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
-            this.toolStripProgressBar1.Visible = false;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Enabled = false;
-            this.buttonCancel.Location = new System.Drawing.Point(176, 54);
+            this.buttonCancel.AccessibleDescription = null;
+            this.buttonCancel.AccessibleName = null;
+            resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.BackgroundImage = null;
+            this.buttonCancel.Font = null;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 6;
-            this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.AccessibleDescription = null;
+            this.groupBox1.AccessibleName = null;
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.BackgroundImage = null;
             this.groupBox1.Controls.Add(this.listBox1);
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Font = null;
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(158, 142);
-            this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Available Languages";
             // 
             // listBox1
             // 
+            this.listBox1.AccessibleDescription = null;
+            this.listBox1.AccessibleName = null;
+            resources.ApplyResources(this.listBox1, "listBox1");
+            this.listBox1.BackgroundImage = null;
             this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.listBox1.Font = null;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(3, 18);
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBox1.Size = new System.Drawing.Size(152, 121);
-            this.listBox1.TabIndex = 0;
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
             // DownloadDialog
             // 
             this.AcceptButton = this.buttonDownload;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AccessibleDescription = null;
+            this.AccessibleName = null;
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = null;
             this.CancelButton = this.buttonClose;
-            this.ClientSize = new System.Drawing.Size(263, 180);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonDownload);
+            this.Font = null;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = null;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DownloadDialog";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Download Language Data";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);

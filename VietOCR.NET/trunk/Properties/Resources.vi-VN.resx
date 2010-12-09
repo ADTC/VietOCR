@@ -249,4 +249,22 @@
   <data name="Ignore_All" xml:space="preserve">
     <value>Bỏ qua tất cả</value>
   </data>
+  <data name="Downloadcanceled" xml:space="preserve">
+    <value>Hủy bỏ tải.</value>
+  </data>
+  <data name="Downloadcompleted" xml:space="preserve">
+    <value>Tải xong.</value>
+  </data>
+  <data name="Downloaderror" xml:space="preserve">
+    <value>Lỗi tải.</value>
+  </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>Đang tải...</value>
+  </data>
+  <data name="Please_restart" xml:space="preserve">
+    <value>Hãy khởi động lại để chương trình có thể ghi nhận những gói dữ liệu ngôn ngữ mới tải.</value>
+  </data>
+  <data name="Resource_not_exist" xml:space="preserve">
+    <value>Tài nguyên không tồn tại.</value>
+  </data>
 </root>
