@@ -24,7 +24,6 @@ import java.io.*;
 import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.regex.*;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -193,8 +192,8 @@ public class SpellChecker {
                 userWordList.add(str.toLowerCase());
             }
             in.close();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Cannot find \"user.dic\" in " + new File(baseDir, "dict").getPath() + " directory.", Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ioe) {
+            JOptionPane.showMessageDialog(null, ioe.getMessage(), Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
         }
     }
 

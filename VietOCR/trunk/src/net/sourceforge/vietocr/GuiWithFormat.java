@@ -59,7 +59,7 @@ public class GuiWithFormat extends GuiWithImage {
             prop.loadFromXML(new FileInputStream(xmlFile));
             dlg.setPreviewText(prop.getProperty(langCode));
         } catch (IOException ioe) {
-            JOptionPane.showMessageDialog(null, "Missing pangram.xml file. Cannot find it in " + new File(baseDir, "data").getPath() + " directory.", APP_NAME, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ioe.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
             ioe.printStackTrace();
         } catch (Exception exc) {
             exc.printStackTrace();
