@@ -41,7 +41,7 @@ public class DownloadDialog extends javax.swing.JDialog {
     final String tmpdir = System.getProperty("java.io.tmpdir");
     private Properties availableLanguageCodes;
     private Properties availableDictionaries;
-    private Properties iso_3_1_Codes;
+    private Properties lookupISO_3_1_Codes;
     private Properties lookupISO639;
     File baseDir;
     SwingWorker<File, Integer> downloadWorker;
@@ -56,7 +56,7 @@ public class DownloadDialog extends javax.swing.JDialog {
 
         baseDir = Utilities.getBaseDir(DownloadDialog.this);
         lookupISO639 = ((Gui) parent).getLookupISO639();
-        iso_3_1_Codes= ((Gui) parent).getISO_3_1_Codes();
+        lookupISO_3_1_Codes = ((Gui) parent).getLookupISO_3_1_Codes();
         availableLanguageCodes = new Properties();
         availableDictionaries = new Properties();
 
@@ -201,8 +201,8 @@ public class DownloadDialog extends javax.swing.JDialog {
                 try {
                     URL url = new URL(availableLanguageCodes.getProperty(key));
                     downloadDataFile(url, "tesseract"); // download language data pack
-                    if (iso_3_1_Codes.containsKey(key)) {
-                        String iso_3_1_Code = iso_3_1_Codes.getProperty(key); // vie -> vi_VN
+                    if (lookupISO_3_1_Codes.containsKey(key)) {
+                        String iso_3_1_Code = lookupISO_3_1_Codes.getProperty(key); // vie -> vi_VN
                         url = new URL(availableDictionaries.getProperty(iso_3_1_Code));
                         if (url != null) {
                             ++numOfConcurrentTasks;
