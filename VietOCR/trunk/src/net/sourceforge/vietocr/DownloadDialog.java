@@ -56,17 +56,15 @@ public class DownloadDialog extends javax.swing.JDialog {
 
         baseDir = Utilities.getBaseDir(DownloadDialog.this);
         lookupISO639 = ((Gui) parent).getLookupISO639();
+        iso_3_1_Codes= ((Gui) parent).getISO_3_1_Codes();
         availableLanguageCodes = new Properties();
         availableDictionaries = new Properties();
-        iso_3_1_Codes = new Properties();
 
         try {
             File xmlFile = new File(baseDir, "data/Tess2DataURL.xml");
             availableLanguageCodes.loadFromXML(new FileInputStream(xmlFile));
             xmlFile = new File(baseDir, "data/OO-SpellDictionaries.xml");
             availableDictionaries.loadFromXML(new FileInputStream(xmlFile));
-            xmlFile = new File(baseDir, "data/ISO639-1.xml");
-            iso_3_1_Codes.loadFromXML(new FileInputStream(xmlFile));
         } catch (Exception e) {
         }
 
@@ -198,13 +196,13 @@ public class DownloadDialog extends javax.swing.JDialog {
         numOfConcurrentTasks = this.jList1.getSelectedIndices().length;
 
         for (Object value : this.jList1.getSelectedValues()) {
-            String key = FindKey(lookupISO639, value.toString());
+            String key = FindKey(lookupISO639, value.toString()); // Vietnamese -> vie
             if (key != null) {
                 try {
                     URL url = new URL(availableLanguageCodes.getProperty(key));
                     downloadDataFile(url, "tesseract"); // download language data pack
                     if (iso_3_1_Codes.containsKey(key)) {
-                        String iso_3_1_Code = iso_3_1_Codes.getProperty(key);
+                        String iso_3_1_Code = iso_3_1_Codes.getProperty(key); // vie -> vi_VN
                         url = new URL(availableDictionaries.getProperty(iso_3_1_Code));
                         if (url != null) {
                             ++numOfConcurrentTasks;
@@ -215,7 +213,6 @@ public class DownloadDialog extends javax.swing.JDialog {
                 }
             }
         }
-
     }//GEN-LAST:event_jButtonDownloadActionPerformed
 
     String FindKey(Properties lookup, String value) {
