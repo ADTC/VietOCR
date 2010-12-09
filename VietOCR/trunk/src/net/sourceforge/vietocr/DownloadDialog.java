@@ -44,8 +44,8 @@ public class DownloadDialog extends javax.swing.JDialog {
     private Properties lookupISO_3_1_Codes;
     private Properties lookupISO639;
     File baseDir;
-    SwingWorker<File, Integer> downloadWorker;
-    int length, byteCount, numberOfDownloads, numOfConcurrentTasks;
+    List<SwingWorker<File, Integer>> downloadTracker;
+    int contentLength, byteCount, numberOfDownloads, numOfConcurrentTasks;
     ResourceBundle bundle;
 
     /** Creates new form DownloadDialog */
@@ -55,6 +55,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         bundle = ResourceBundle.getBundle("net/sourceforge/vietocr/DownloadDialog");
 
         baseDir = Utilities.getBaseDir(DownloadDialog.this);
+        downloadTracker = new ArrayList<SwingWorker<File, Integer>>();
         lookupISO639 = ((Gui) parent).getLookupISO639();
         lookupISO_3_1_Codes = ((Gui) parent).getLookupISO_3_1_Codes();
         availableLanguageCodes = new Properties();
@@ -192,7 +193,8 @@ public class DownloadDialog extends javax.swing.JDialog {
         getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         getGlassPane().setVisible(true);
 
-        length = byteCount = 0;
+        downloadTracker.clear();
+        contentLength = byteCount = 0;
         numOfConcurrentTasks = this.jList1.getSelectedIndices().length;
 
         for (Object value : this.jList1.getSelectedValues()) {
@@ -229,8 +231,8 @@ public class DownloadDialog extends javax.swing.JDialog {
         final URLConnection connection = remoteFile.openConnection();
         connection.setReadTimeout(15000);
         connection.connect();
-        length += connection.getContentLength(); // filesize
-        downloadWorker = new SwingWorker<File, Integer>() {
+        contentLength += connection.getContentLength(); // filesize
+        SwingWorker<File, Integer> downloadWorker = new SwingWorker<File, Integer>() {
 
             @Override
             public File doInBackground() throws Exception {
@@ -247,7 +249,9 @@ public class DownloadDialog extends javax.swing.JDialog {
                     }
                     bout.write(buffer, 0, bytesRead);
                     byteCount += bytesRead;
-                    setProgress(100 * byteCount / length);
+                    if (contentLength != 0) {
+                        setProgress(100 * byteCount / contentLength);
+                    }
                 }
 
                 bout.close();
@@ -263,7 +267,7 @@ public class DownloadDialog extends javax.swing.JDialog {
                     if (destFolder.equals("tesseract")) {
                         numberOfDownloads++;
                     }
-                    
+
                     if (--numOfConcurrentTasks <= 0) {
                         jLabelStatus.setText(bundle.getString("Download_completed"));
                         jProgressBar1.setVisible(false);
@@ -316,6 +320,7 @@ public class DownloadDialog extends javax.swing.JDialog {
                 }
             }
         });
+        downloadTracker.add(downloadWorker);
         downloadWorker.execute();
     }
 
@@ -349,12 +354,12 @@ public class DownloadDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-        if (downloadWorker != null && !downloadWorker.isDone()) {
-            // Cancel current OCR op to begin a new one. You want only one OCR op at a time.
-            downloadWorker.cancel(true);
-            downloadWorker = null;
+        for (SwingWorker<File, Integer> downloadWorker : downloadTracker) {
+            if (downloadWorker != null && !downloadWorker.isDone()) {
+                downloadWorker.cancel(true);
+                downloadWorker = null;
+            }
         }
-
         this.jButtonCancel.setEnabled(false);
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
