@@ -93,6 +93,7 @@ namespace VietOCR.NET
         private const float ZOOM_FACTOR = 1.25f;
         private Point curScrollPos;
         protected Point pointClicked;
+        protected readonly string baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
         System.CodeDom.Compiler.TempFileCollection tempFileCollection = new System.CodeDom.Compiler.TempFileCollection();
 
@@ -152,7 +153,6 @@ namespace VietOCR.NET
 
         void LoadLang()
         {
-            string baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             string xmlFilePath = null;
 
             try
