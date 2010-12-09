@@ -21,7 +21,8 @@ namespace VietOCR.NET
         Dictionary<string, long> downloadTracker;
         int numberOfDownloads, numOfConcurrentTasks;
         long contentLength;
-        String baseDir;
+        string baseDir;
+        const string DICTIONARY_FOLDER = "dict";
 
         public DownloadDialog()
         {
@@ -104,12 +105,12 @@ namespace VietOCR.NET
 
                         if (lookupISO_3_1_Codes.ContainsKey(key))
                         {
-                            String iso_3_1_Code = lookupISO_3_1_Codes[key]; // vie -> vi_VN
-                            uri = new Uri(availableDictionaries[iso_3_1_Code]);
-                            if (uri != null)
+                            string iso_3_1_Code = lookupISO_3_1_Codes[key]; // vie -> vi_VN
+                            if (availableDictionaries.ContainsKey(iso_3_1_Code))
                             {
+                                uri = new Uri(availableDictionaries[iso_3_1_Code]);
                                 ++numOfConcurrentTasks;
-                                DownloadDataFile(uri, "dict"); // download dictionary
+                                DownloadDataFile(uri, DICTIONARY_FOLDER); // download dictionary
                             }
                         }
                     }
@@ -152,7 +153,7 @@ namespace VietOCR.NET
                 WebResponse response = request.GetResponse();
                 contentLength += response.ContentLength;
                 string filePath = Path.Combine(Path.GetTempPath(), Path.GetFileName(uri.AbsolutePath));
-                client.DownloadFileAsync(uri, filePath, filePath);
+                client.DownloadFileAsync(uri, filePath, destFolder + filePath);
             }
             catch (Exception e)
             {
@@ -206,10 +207,16 @@ namespace VietOCR.NET
             else
             {
                 string fileName = e.UserState.ToString();
-                string key = Path.GetFileNameWithoutExtension(fileName);
-                FileExtractor.ExtractCompressedFile(fileName, availableDictionaries.ContainsKey(key) ? baseDir + "/dict" : baseDir);
+                if (fileName.StartsWith(DICTIONARY_FOLDER))
+                {
+                    FileExtractor.ExtractCompressedFile(fileName.Substring(DICTIONARY_FOLDER.Length), Path.Combine(baseDir, DICTIONARY_FOLDER));
+                }
+                else
+                {
+                    FileExtractor.ExtractCompressedFile(fileName, baseDir);
+                    numberOfDownloads++;
+                }
 
-                numberOfDownloads++;
                 if (--numOfConcurrentTasks <= 0)
                 {
                     this.toolStripStatusLabel1.Text = "Download completed.";
