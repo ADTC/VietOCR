@@ -163,13 +163,7 @@ Version 1.9 (2 October 2010)
 - Upgrade JACOB library to version 1.15-M3
 - Preset Tesseract path on Linux to /usr/bin, the default install location of Tesseract
 
-Version 3.0 (3 October 2010)
-- Upgrade Tesseract OCR engine to 3.0
-- Replace old format (2.0x) language data with new format (3.0) language data
-- Change datafile suffix from .inttemp to .traineddata
-
-Version 2.0 Beta (6 December 2010)
-
+Version 2.0 Beta (8 December 2010)
 - Upgrade JACOB library to version 1.15-M4
 - Add spellcheck suggestion support
 - Improve accessibility and usability
@@ -178,6 +172,6 @@ Version 2.0 Beta (6 December 2010)
 
 Note: If you would like to include localization for your language, please translate the .properties files and send them to the project owner. Thank you.
 
-Version 3.1 Beta (5 December 2010)
+Version 3.1 Beta (8 December 2010)
 - Port/merge changes from Version 2.0
 - Update Tesseract OCR engine to r527

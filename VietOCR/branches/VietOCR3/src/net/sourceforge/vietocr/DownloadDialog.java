@@ -41,11 +41,11 @@ public class DownloadDialog extends javax.swing.JDialog {
     final String tmpdir = System.getProperty("java.io.tmpdir");
     private Properties availableLanguageCodes;
     private Properties availableDictionaries;
-    private Properties iso_3_1_Codes;
+    private Properties lookupISO_3_1_Codes;
     private Properties lookupISO639;
     File baseDir;
-    SwingWorker<File, Integer> downloadWorker;
-    int length, byteCount, numberOfDownloads, numOfConcurrentTasks;
+    List<SwingWorker<File, Integer>> downloadTracker;
+    int contentLength, byteCount, numberOfDownloads, numOfConcurrentTasks;
     ResourceBundle bundle;
 
     /** Creates new form DownloadDialog */
@@ -55,18 +55,17 @@ public class DownloadDialog extends javax.swing.JDialog {
         bundle = ResourceBundle.getBundle("net/sourceforge/vietocr/DownloadDialog");
 
         baseDir = Utilities.getBaseDir(DownloadDialog.this);
+        downloadTracker = new ArrayList<SwingWorker<File, Integer>>();
         lookupISO639 = ((Gui) parent).getLookupISO639();
+        lookupISO_3_1_Codes = ((Gui) parent).getLookupISO_3_1_Codes();
         availableLanguageCodes = new Properties();
         availableDictionaries = new Properties();
-        iso_3_1_Codes = new Properties();
 
         try {
             File xmlFile = new File(baseDir, "data/Tess3DataURL.xml");
             availableLanguageCodes.loadFromXML(new FileInputStream(xmlFile));
             xmlFile = new File(baseDir, "data/OO-SpellDictionaries.xml");
             availableDictionaries.loadFromXML(new FileInputStream(xmlFile));
-            xmlFile = new File(baseDir, "data/ISO639-1.xml");
-            iso_3_1_Codes.loadFromXML(new FileInputStream(xmlFile));
         } catch (Exception e) {
         }
 
@@ -185,36 +184,40 @@ public class DownloadDialog extends javax.swing.JDialog {
             return;
         }
 
-        try {
-            length = byteCount = 0;
-            numOfConcurrentTasks = this.jList1.getSelectedIndices().length;
-            this.jButtonDownload.setEnabled(false);
-            this.jButtonCancel.setEnabled(true);
-            this.jLabelStatus.setText(bundle.getString("Downloading..."));
-            this.jProgressBar1.setMaximum(100);
-            this.jProgressBar1.setValue(0);
-            this.jProgressBar1.setVisible(true);
-            getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            getGlassPane().setVisible(true);
+        this.jButtonDownload.setEnabled(false);
+        this.jButtonCancel.setEnabled(true);
+        this.jLabelStatus.setText(bundle.getString("Downloading..."));
+        this.jProgressBar1.setMaximum(100);
+        this.jProgressBar1.setValue(0);
+        this.jProgressBar1.setVisible(true);
+        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        getGlassPane().setVisible(true);
 
-            for (Object value : this.jList1.getSelectedValues()) {
-                String key = FindKey(lookupISO639, value.toString());
-                URL url = new URL(availableLanguageCodes.getProperty(key));
-                downloadDataFile(url, "tesseract/tessdata"); // download language data pack. In Tesseract 3.0, data is packaged not under a directory
-                String iso_3_1_Code = iso_3_1_Codes.getProperty(key);
-                if (iso_3_1_Code != null) {
-                    url = new URL(availableDictionaries.getProperty(iso_3_1_Code));
-                    if (url != null) {
-                        ++numOfConcurrentTasks;
-                        downloadDataFile(url, "dict"); // download dictionary
+        downloadTracker.clear();
+        contentLength = byteCount = 0;
+        numOfConcurrentTasks = this.jList1.getSelectedIndices().length;
+
+        for (Object value : this.jList1.getSelectedValues()) {
+            String key = FindKey(lookupISO639, value.toString()); // Vietnamese -> vie
+            if (key != null) {
+                try {
+                    URL url = new URL(availableLanguageCodes.getProperty(key));
+                    downloadDataFile(url, "tesseract"); // download language data pack
+                    if (lookupISO_3_1_Codes.containsKey(key)) {
+                        String iso_3_1_Code = lookupISO_3_1_Codes.getProperty(key); // vie -> vi_VN
+                        if (availableDictionaries.containsKey(iso_3_1_Code)) {
+                            url = new URL(availableDictionaries.getProperty(iso_3_1_Code));
+                            ++numOfConcurrentTasks;
+                            downloadDataFile(url, "dict"); // download dictionary
+                        }
                     }
+                } catch (Exception e) {
                 }
             }
-        } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonDownloadActionPerformed
 
-    public String FindKey(Properties lookup, String value) {
+    String FindKey(Properties lookup, String value) {
         for (Enumeration e = lookup.keys(); e.hasMoreElements();) {
             String key = (String) e.nextElement();
             if (lookup.get(key).equals(value)) {
@@ -224,12 +227,12 @@ public class DownloadDialog extends javax.swing.JDialog {
         return null;
     }
 
-    public void downloadDataFile(final URL remoteFile, final String destFolder) throws Exception {
+    void downloadDataFile(final URL remoteFile, final String destFolder) throws Exception {
         final URLConnection connection = remoteFile.openConnection();
         connection.setReadTimeout(15000);
         connection.connect();
-        length += connection.getContentLength(); // filesize
-        downloadWorker = new SwingWorker<File, Integer>() {
+        contentLength += connection.getContentLength(); // filesize
+        SwingWorker<File, Integer> downloadWorker = new SwingWorker<File, Integer>() {
 
             @Override
             public File doInBackground() throws Exception {
@@ -246,7 +249,9 @@ public class DownloadDialog extends javax.swing.JDialog {
                     }
                     bout.write(buffer, 0, bytesRead);
                     byteCount += bytesRead;
-                    setProgress(100 * byteCount / length);
+                    if (contentLength != 0) {
+                        setProgress(100 * byteCount / contentLength);
+                    }
                 }
 
                 bout.close();
@@ -259,9 +264,13 @@ public class DownloadDialog extends javax.swing.JDialog {
                 try {
                     File file = get();
                     FileExtractor.extractCompressedFile(file.getPath(), baseDir.getPath() + "/" + destFolder);
-                    numberOfDownloads++;
+                    if (destFolder.equals("tesseract")) {
+                        numberOfDownloads++;
+                    }
+
                     if (--numOfConcurrentTasks <= 0) {
                         jLabelStatus.setText(bundle.getString("Download_completed"));
+                        jProgressBar1.setVisible(false);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -286,9 +295,10 @@ public class DownloadDialog extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, why, Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
                     jProgressBar1.setVisible(false);
                     jLabelStatus.setText(null);
-                    numOfConcurrentTasks = 0;
+                    --numOfConcurrentTasks;
                 } catch (java.util.concurrent.CancellationException e) {
                     jLabelStatus.setText(bundle.getString("Download_cancelled"));
+//                    jProgressBar1.setVisible(false);
                     numOfConcurrentTasks = 0;
                 } finally {
                     if (numOfConcurrentTasks <= 0) {
@@ -310,6 +320,7 @@ public class DownloadDialog extends javax.swing.JDialog {
                 }
             }
         });
+        downloadTracker.add(downloadWorker);
         downloadWorker.execute();
     }
 
@@ -343,12 +354,12 @@ public class DownloadDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-        if (downloadWorker != null && !downloadWorker.isDone()) {
-            // Cancel current OCR op to begin a new one. You want only one OCR op at a time.
-            downloadWorker.cancel(true);
-            downloadWorker = null;
+        for (SwingWorker<File, Integer> downloadWorker : downloadTracker) {
+            if (downloadWorker != null && !downloadWorker.isDone()) {
+                downloadWorker.cancel(true);
+                downloadWorker = null;
+            }
         }
-
         this.jButtonCancel.setEnabled(false);
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
