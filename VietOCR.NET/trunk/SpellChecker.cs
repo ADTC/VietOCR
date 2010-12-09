@@ -30,24 +30,12 @@ namespace VietOCR.NET
             return spellingErrorRanges.ToArray();
         }
 
-        public SpellChecker(TextBoxBase textbox, string langCode)
+        public SpellChecker(TextBoxBase textbox, string localeId)
         {
             this.textbox = textbox;
 
-            XmlDocument doc = new XmlDocument();
-
             workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            String xmlFilePath = Path.Combine(workingDir, "Data/ISO639-1.xml");
-            Dictionary<string, string> ht = new Dictionary<string, string>();
-            doc.Load(xmlFilePath);
-
-            XmlNodeList list = doc.GetElementsByTagName("entry");
-            foreach (XmlNode node in list)
-            {
-                ht.Add(node.Attributes[0].Value, node.InnerText);
-            }
-
-            localeId = ht[langCode.Substring(0, 3)];
+            this.localeId = localeId;
         }
 
         public void EnableSpellCheck()
