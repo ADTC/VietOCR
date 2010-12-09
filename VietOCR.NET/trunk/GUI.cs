@@ -152,16 +152,16 @@ namespace VietOCR.NET
 
         void LoadLang()
         {
-            string workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             string xmlFilePath = null;
 
             try
             {
-                string tessdataDir = Path.Combine(workingDir, "tessdata");
+                string tessdataDir = Path.Combine(baseDir, "tessdata");
                 installedLanguageCodes = Directory.GetFiles(tessdataDir, "*.inttemp");
-                xmlFilePath = Path.Combine(workingDir, "Data/ISO639-3.xml");
+                xmlFilePath = Path.Combine(baseDir, "Data/ISO639-3.xml");
                 Utilities.Utilities.LoadFromXML(lookupISO639, xmlFilePath);
-                xmlFilePath = Path.Combine(workingDir, "Data/ISO639-1.xml");
+                xmlFilePath = Path.Combine(baseDir, "Data/ISO639-1.xml");
                 Utilities.Utilities.LoadFromXML(iso_3_1_Codes, xmlFilePath);
             }
             catch (Exception ex)

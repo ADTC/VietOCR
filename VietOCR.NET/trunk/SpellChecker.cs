@@ -17,7 +17,7 @@ namespace VietOCR.NET
     {
         TextBoxBase textbox;
         string localeId;
-        String workingDir;
+        String baseDir;
         static ArrayList listeners = new ArrayList();
         static List<CharacterRange> spellingErrorRanges = new List<CharacterRange>();
         static List<String> userWordList = new List<String>();
@@ -35,7 +35,7 @@ namespace VietOCR.NET
             this.textbox = textbox;
             this.localeId = localeId;
 
-            workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         }
 
         public void EnableSpellCheck()
@@ -46,7 +46,7 @@ namespace VietOCR.NET
             }
             try
             {
-                string dictPath = workingDir + "/dict/" + localeId;
+                string dictPath = baseDir + "/dict/" + localeId;
                 spellDict = new Hunspell(dictPath + ".aff", dictPath + ".dic");
                 LoadUserDictionary();
 

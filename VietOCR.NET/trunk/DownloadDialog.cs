@@ -21,13 +21,13 @@ namespace VietOCR.NET
         Dictionary<string, long> downloadTracker;
         int numberOfDownloads, numOfConcurrentTasks;
         long contentLength;
-        String workingDir;
+        String baseDir;
 
         public DownloadDialog()
         {
             InitializeComponent();
 
-            workingDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             clients = new List<WebClient>();
             downloadTracker = new Dictionary<string, long>();
         }
@@ -39,11 +39,11 @@ namespace VietOCR.NET
             lookupISO639 = ((GUI)this.Owner).LookupISO639;
             iso_3_1_Codes = ((GUI)this.Owner).ISO_3_1_Codes;
 
-            String xmlFilePath = Path.Combine(workingDir, "Data/Tess2DataURL.xml");
+            String xmlFilePath = Path.Combine(baseDir, "Data/Tess2DataURL.xml");
             availableLanguageCodes = new Dictionary<string, string>();
             Utilities.Utilities.LoadFromXML(availableLanguageCodes, xmlFilePath);
 
-            xmlFilePath = Path.Combine(workingDir, "Data/OO-SpellDictionaries.xml");
+            xmlFilePath = Path.Combine(baseDir, "Data/OO-SpellDictionaries.xml");
             availableDictionaries = new Dictionary<string, string>();
             Utilities.Utilities.LoadFromXML(availableDictionaries, xmlFilePath);
 
@@ -207,7 +207,7 @@ namespace VietOCR.NET
             {
                 string fileName = e.UserState.ToString();
                 string key = Path.GetFileNameWithoutExtension(fileName);
-                FileExtractor.ExtractCompressedFile(fileName, availableDictionaries.ContainsKey(key) ? workingDir + "/dict" : workingDir);
+                FileExtractor.ExtractCompressedFile(fileName, availableDictionaries.ContainsKey(key) ? baseDir + "/dict" : baseDir);
 
                 numberOfDownloads++;
                 if (--numOfConcurrentTasks <= 0)
