@@ -15,7 +15,7 @@ namespace VietOCR.NET
     {
         Dictionary<string, string> availableLanguageCodes;
         Dictionary<string, string> availableDictionaries;
-        Dictionary<string, string> iso_3_1_Codes;
+        Dictionary<string, string> lookupISO_3_1_Codes;
         Dictionary<string, string> lookupISO639;
         List<WebClient> clients;
         Dictionary<string, long> downloadTracker;
@@ -37,7 +37,7 @@ namespace VietOCR.NET
             base.OnLoad(ea);
 
             lookupISO639 = ((GUI)this.Owner).LookupISO639;
-            iso_3_1_Codes = ((GUI)this.Owner).ISO_3_1_Codes;
+            lookupISO_3_1_Codes = ((GUI)this.Owner).LookupISO_3_1_Codes;
 
             String xmlFilePath = Path.Combine(baseDir, "Data/Tess2DataURL.xml");
             availableLanguageCodes = new Dictionary<string, string>();
@@ -102,9 +102,9 @@ namespace VietOCR.NET
                         Uri uri = new Uri(availableLanguageCodes[key]);
                         DownloadDataFile(uri, string.Empty);  // download language data pack
 
-                        if (iso_3_1_Codes.ContainsKey(key))
+                        if (lookupISO_3_1_Codes.ContainsKey(key))
                         {
-                            String iso_3_1_Code = iso_3_1_Codes[key]; // vie -> vi_VN
+                            String iso_3_1_Code = lookupISO_3_1_Codes[key]; // vie -> vi_VN
                             uri = new Uri(availableDictionaries[iso_3_1_Code]);
                             if (uri != null)
                             {
