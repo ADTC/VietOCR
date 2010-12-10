@@ -357,7 +357,7 @@
     <value>Įrašyti</value>
   </data>
   <data name="mergePdfToolStripMenuItem.Text" xml:space="preserve">
-    <value>Su&amp;jungti PDF</value>
+    <value>Sujungti &amp;PDF</value>
   </data>
   <data name="helpToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 22</value>
@@ -524,7 +524,7 @@
   <data name="toolStripButtonSpellCheck.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAHRSURBVDhPY2AYFMCp12qm7xSXkyDH2HZbx7tPcrxm1Ww6
+        YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAHRSURBVDhPY2AYFMCp12qm7xSXkyDH2HZbx7tPcrxm1Ww6
         07LZdBdITC9Xs0Q7Q3W1YoLiTMVYxZkYjgZp9pjosMu208LIusMi3gKoGaTIutXkmkaBhqRxpd41nD51
         7rOOtwe6wLbLssSq1XSmRYNRvHWX5TXTasNd2jlqM1WTleKx2SofP5+DIe0MK4P7RPtddj1Wq0GaHSfa
         PzKqMIg3KNQEu0A1SWm1UpS8p14Omgvizxoz1N+8wRBxfhqDywQ7sN9BwLhMbybIvyZAJ4P8q5OlcVIu
@@ -540,5 +540,8 @@
   </data>
   <data name="screenshotModeToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Žemos raiškos (ekranvaizdžio) veiksena</value>
+  </data>
+  <data name="downloadLangDataToolStripMenuItem.Text" xml:space="preserve">
+    <value>Parsiųsti kalbinius &amp;duomenis…</value>
   </data>
 </root>

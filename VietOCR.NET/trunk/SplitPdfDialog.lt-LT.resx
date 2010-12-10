@@ -122,13 +122,13 @@
     <value>118, 135</value>
   </data>
   <data name="buttonSplit.Text" xml:space="preserve">
-    <value>Išskaidyti</value>
+    <value>Iš&amp;skaidyti</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>199, 135</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
-    <value>Atsisakyti</value>
+    <value>&amp;Atsisakyti</value>
   </data>
   <data name="textBoxFrom.Location" type="System.Drawing.Point, System.Drawing">
     <value>176, 77</value>
@@ -143,7 +143,7 @@
     <value>101, 17</value>
   </data>
   <data name="radioButtonPages.Text" xml:space="preserve">
-    <value>Išskirti puslapius</value>
+    <value>Išskirti &amp;puslapius</value>
   </data>
   <data name="labelFrom.Location" type="System.Drawing.Point, System.Drawing">
     <value>146, 82</value>
@@ -152,7 +152,7 @@
     <value>28, 13</value>
   </data>
   <data name="labelFrom.Text" xml:space="preserve">
-    <value>nuo:</value>
+    <value>&amp;nuo:</value>
   </data>
   <data name="labelTo.Location" type="System.Drawing.Point, System.Drawing">
     <value>214, 82</value>
@@ -161,7 +161,7 @@
     <value>20, 13</value>
   </data>
   <data name="labelTo.Text" xml:space="preserve">
-    <value>iki:</value>
+    <value>&amp;iki:</value>
   </data>
   <data name="radioButtonFiles.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 103</value>
@@ -170,7 +170,7 @@
     <value>91, 17</value>
   </data>
   <data name="radioButtonFiles.Text" xml:space="preserve">
-    <value>Skaidyti failais</value>
+    <value>Skaidyti &amp;failais</value>
   </data>
   <data name="textBoxNumOfPages.Location" type="System.Drawing.Point, System.Drawing">
     <value>236, 100</value>
@@ -182,7 +182,7 @@
     <value>112, 13</value>
   </data>
   <data name="labelNumOfPages.Text" xml:space="preserve">
-    <value>puslapių skaičius faile:</value>
+    <value>p&amp;uslapių skaičius faile:</value>
   </data>
   <data name="textBoxInput.Location" type="System.Drawing.Point, System.Drawing">
     <value>88, 21</value>
@@ -203,7 +203,7 @@
     <value>73, 13</value>
   </data>
   <data name="labelInput.Text" xml:space="preserve">
-    <value>Įvesties failas:</value>
+    <value>Įvesties &amp;failas:</value>
   </data>
   <data name="labelOutput.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 50</value>
@@ -212,7 +212,7 @@
     <value>78, 13</value>
   </data>
   <data name="labelOutput.Text" xml:space="preserve">
-    <value>Išvesties failas:</value>
+    <value>Iš&amp;vesties failas:</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>287, 178</value>
