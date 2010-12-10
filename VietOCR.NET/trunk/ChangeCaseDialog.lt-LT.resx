@@ -122,37 +122,37 @@
     <value>88, 17</value>
   </data>
   <data name="radioButton1.Text" xml:space="preserve">
-    <value>Sakinio stilius</value>
+    <value>&amp;Sakinio stilius</value>
   </data>
   <data name="radioButton2.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 17</value>
   </data>
   <data name="radioButton2.Text" xml:space="preserve">
-    <value>mažosios raidės</value>
+    <value>&amp;mažosios raidės</value>
   </data>
   <data name="radioButton3.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 17</value>
   </data>
   <data name="radioButton3.Text" xml:space="preserve">
-    <value>DIDŽIOSIOS RAIDĖS</value>
+    <value>&amp;DIDŽIOSIOS RAIDĖS</value>
   </data>
   <data name="radioButton4.Size" type="System.Drawing.Size, System.Drawing">
     <value>166, 17</value>
   </data>
   <data name="radioButton4.Text" xml:space="preserve">
-    <value>Visus Žodžius Pradėti Didžiąja</value>
+    <value>&amp;Visus Žodžius Pradėti Didžiąja</value>
   </data>
   <data name="buttonChange.Location" type="System.Drawing.Point, System.Drawing">
     <value>24, 132</value>
   </data>
   <data name="buttonChange.Text" xml:space="preserve">
-    <value>Keisti</value>
+    <value>&amp;Keisti</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
     <value>103, 132</value>
   </data>
   <data name="buttonClose.Text" xml:space="preserve">
-    <value>Užverti</value>
+    <value>&amp;Užverti</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 1</value>

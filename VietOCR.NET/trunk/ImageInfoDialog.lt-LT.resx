@@ -122,7 +122,7 @@
     <value>53, 140</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
-    <value>Gerai</value>
+    <value>&amp;Gerai</value>
   </data>
   <data name="labelXRes.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 74</value>
@@ -176,7 +176,7 @@
     <value>134, 140</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
-    <value>Atsisakyti</value>
+    <value>&amp;Atsisakyti</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>171, 74</value>

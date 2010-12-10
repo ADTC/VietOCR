@@ -247,21 +247,21 @@
     <value>Nepaisyti visų pasikartojimų</value>
   </data>
   <data name="Downloadcanceled" xml:space="preserve">
-    <value>Download canceled.</value>
+    <value>Parsiuntimo atsisakyta.</value>
   </data>
   <data name="Downloadcompleted" xml:space="preserve">
-    <value>Download completed.</value>
+    <value>Parsiuntimas baigtas</value>
   </data>
   <data name="Downloaderror" xml:space="preserve">
-    <value>Download error.</value>
+    <value>Parsiuntimo klaida</value>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Downloading...</value>
+    <value>Parsiunčiama…</value>
   </data>
   <data name="Please_restart" xml:space="preserve">
-    <value>Please restart the program so that it could register the new language pack(s).</value>
+    <value>Pakartotinai paleiskite programą, kad naujai įdiegti kalbų paketai būtų užregistruoti.</value>
   </data>
   <data name="Resource_not_exist" xml:space="preserve">
-    <value>Resource does not exist.</value>
+    <value>Išteklius nerastas.</value>
   </data>
 </root>

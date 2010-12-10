@@ -179,13 +179,13 @@
     <value>180, 134</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
-    <value>Gerai</value>
+    <value>&amp;Gerai</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>261, 134</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
-    <value>Atsisakyti</value>
+    <value>&amp;Atsisakyti</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>346, 168</value>
