@@ -163,15 +163,16 @@ Version 1.9 (2 October 2010)
 - Upgrade JACOB library to version 1.15-M3
 - Preset Tesseract path on Linux to /usr/bin, the default install location of Tesseract
 
-Version 2.0 Beta (11 December 2010)
+Version 2.0 Beta 2 (11 December 2010)
 - Upgrade JACOB library to version 1.15-M4
 - Add spellcheck suggestion support
 - Improve accessibility and usability
 - Add support for downloading and installing language data packs and pertinent spell dictionaries
 - Add UI localization for Lithuanian and Slovak
 
-Note: If you would like to include localization for your language, please translate the .properties files and send them to the project owner. Thank you.
-
-Version 3.1 Beta (11 December 2010)
+Version 3.1 Beta 2 (11 December 2010)
 - Port/merge changes from Version 2.0
 - Update Tesseract OCR engine to r549
+
+
+Note: If you would like to include localization for your language, please translate the .properties files and send them to the project owner. Thank you.
