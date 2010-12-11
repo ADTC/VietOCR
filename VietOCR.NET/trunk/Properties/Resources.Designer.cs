@@ -133,7 +133,7 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear Recent Files.
+        ///   Looks up a localized string similar to &amp;Clear Recent Files.
         /// </summary>
         internal static string Clear_Recent_Files {
             get {

@@ -220,7 +220,7 @@
     <value>Taisomos atpažinimo klaidos…</value>
   </data>
   <data name="Clear_Recent_Files" xml:space="preserve">
-    <value>Išvalyti paskiausių failų sąrašą</value>
+    <value>Išvalyti paskiausių &amp;failų sąrašą</value>
   </data>
   <data name="No_Recent_Files" xml:space="preserve">
     <value>Paskiausių failų nėra</value>

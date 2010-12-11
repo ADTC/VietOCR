@@ -232,7 +232,7 @@
     <value>Đang sửa lỗi nhận dạng...</value>
   </data>
   <data name="Clear_Recent_Files" xml:space="preserve">
-    <value>Dọn các tập tin mới đây</value>
+    <value>&amp;Dọn các tập tin mới đây</value>
   </data>
   <data name="No_Recent_Files" xml:space="preserve">
     <value>Không có các tập tin mới đây</value>
