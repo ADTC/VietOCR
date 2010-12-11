@@ -267,6 +267,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
 
     private void jButtonInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInputActionPerformed
         JFileChooser filechooser = new JFileChooser();
+        filechooser.setDialogTitle(bundle.getString("Open"));
         FileFilter pdfFilter = new SimpleFilter("pdf", "PDF");
         filechooser.addChoosableFileFilter(pdfFilter);
         filechooser.setAcceptAllFileFilterUsed(false);
@@ -277,6 +278,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
 
     private void jButtonOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOutputActionPerformed
         JFileChooser filechooser = new JFileChooser();
+        filechooser.setDialogTitle(bundle.getString("Save"));
         FileFilter pdfFilter = new SimpleFilter("pdf", "PDF");
         filechooser.addChoosableFileFilter(pdfFilter);
         filechooser.setAcceptAllFileFilterUsed(false);
