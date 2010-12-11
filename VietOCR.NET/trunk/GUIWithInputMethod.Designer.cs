@@ -37,7 +37,7 @@ namespace VietOCR.NET
             // 
             // settingsToolStripMenuItem
             // 
-            System.Windows.Forms.ToolStripMenuItem[] items = new System.Windows.Forms.ToolStripMenuItem[this.settingsToolStripMenuItem.DropDownItems.Count];
+            System.Windows.Forms.ToolStripItem[] items = new System.Windows.Forms.ToolStripItem[this.settingsToolStripMenuItem.DropDownItems.Count];
             this.settingsToolStripMenuItem.DropDownItems.CopyTo(items, 0); // copy Options item
 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
