@@ -25,10 +25,10 @@ public class FileExtractor {
             ZipEntry zipEntry;
 
             while ((zipEntry = zipinputstream.getNextEntry()) != null) {
-//                if (zipEntry.isDirectory()) {
+                if (zipEntry.isDirectory()) {
 //                    new File(zipEntry.getName()).mkdirs();
-//                    continue;
-//                }
+                    continue;
+                }
                 File outputFile = new File(destFolder, zipEntry.getName());
                 if (!outputFile.getParentFile().exists()) {
                     outputFile.getParentFile().mkdirs();
@@ -72,10 +72,10 @@ public class FileExtractor {
             TarEntry tarEntry;
 
             while ((tarEntry = tarinputstream.getNextEntry()) != null) {
-//                if (tarEntry.isDirectory()) {
+                if (tarEntry.isDirectory()) {
 //                    new File(tarEntry.getName()).mkdirs();
-//                    continue;
-//                }
+                    continue;
+                }
                 File outputFile = new File(destFolder, tarEntry.getName());
                 if (!outputFile.getParentFile().exists()) {
                     outputFile.getParentFile().mkdirs();
