@@ -276,4 +276,7 @@
   <data name="Select_Input_PDFs" xml:space="preserve">
     <value>Select Input PDFs</value>
   </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
 </root>
