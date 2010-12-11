@@ -358,6 +358,15 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        internal static string Open {
+            get {
+                return ResourceManager.GetString("Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open Image File.
         /// </summary>
         internal static string OpenImageFile {
@@ -412,7 +421,7 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save  Merged PDF.
+        ///   Looks up a localized string similar to Save Merged PDF.
         /// </summary>
         internal static string Save_Merged_PDF {
             get {
