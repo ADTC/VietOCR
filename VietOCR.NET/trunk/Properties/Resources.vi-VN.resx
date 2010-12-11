@@ -174,11 +174,11 @@
   <data name="BatchProcessStatus" xml:space="preserve">
     <value>Tình trạng Batch Process</value>
   </data>
-  <data name="Save" xml:space="preserve">
-    <value>Lưu</value>
+  <data name="Save_Merged_PDF" xml:space="preserve">
+    <value>Lưu Merged PDF</value>
   </data>
-  <data name="Select" xml:space="preserve">
-    <value>Chọn</value>
+  <data name="Select_Input_Images" xml:space="preserve">
+    <value>Chọn Input Images</value>
   </data>
   <data name="created" xml:space="preserve">
     <value> đã được tạo.</value>
@@ -266,5 +266,11 @@
   </data>
   <data name="Resource_not_exist" xml:space="preserve">
     <value>Tài nguyên không tồn tại.</value>
+  </data>
+  <data name="Save_Multipage_TIFF_Image" xml:space="preserve">
+    <value>Lưu ảnh TIFF nhiều trang</value>
+  </data>
+  <data name="Select_Input_PDFs" xml:space="preserve">
+    <value>Chọn Input PDFs</value>
   </data>
 </root>
