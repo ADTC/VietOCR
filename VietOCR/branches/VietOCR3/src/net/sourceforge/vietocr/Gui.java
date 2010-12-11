@@ -45,7 +45,7 @@ public class Gui extends javax.swing.JFrame {
     static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
     static final String UTF8 = "UTF-8";
     ResourceBundle vietpadResources, bundle;
-    static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
+    static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr3");
     private int filterIndex;
     private FileFilter[] fileFilters;
     protected Font font;
@@ -80,7 +80,7 @@ public class Gui extends javax.swing.JFrame {
     private String strClearRecentFiles;
     private boolean textChanged = true;
     private RawListener rawListener;
-    private final String DATAFILE_SUFFIX = ".inttemp";
+    private final String DATAFILE_SUFFIX = ".traineddata";
     protected final File baseDir = Utilities.getBaseDir(Gui.this);
 
     /**
@@ -1419,7 +1419,7 @@ public class Gui extends javax.swing.JFrame {
             Date releaseDate = sdf.parse(config.getProperty("ReleaseDate"));
 
             JOptionPane.showMessageDialog(this, APP_NAME + ", " + version + " \u00a9 2007\n"
-                    + "Java GUI Frontend for Tesseract 2.0x OCR Engine\n"
+                    + "Java GUI Frontend for Tesseract 3.0 OCR Engine\n"
                     + DateFormat.getDateInstance(DateFormat.LONG).format(releaseDate)
                     + "\nhttp://vietocr.sourceforge.net", ((JMenuItem) evt.getSource()).getText(), JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {

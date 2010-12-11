@@ -60,6 +60,7 @@ public class ViePP implements IPostProcessor {
                 .replaceAll("(?i)(?<=[uo]" + TONE + ")['\u2018]", "\u031B") // u'+left-single-quote) to u+'
                 .replaceAll("(?i)(?<=" + VOWEL + "\\p{InCombiningDiacriticalMarks}{0,2})l\\b", "t") // vowel+diacritics+l to vowel+diacritics+t
                 .replaceAll("(?i)(?<=" + VOWEL + "\\p{InCombiningDiacriticalMarks}{0,2})ll\\b", "u") // vowel+diacritics+ll to vowel+diacritics+u
+                .replace('\u030A', '\u0309') // ring to hook above
                 ;
 
         return Normalizer.normalize(nfdText, Normalizer.Form.NFC);
