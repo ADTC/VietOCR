@@ -63,7 +63,7 @@ namespace VietOCR.NET
         private void buttonBrowseOutput_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Title = Properties.Resources.Save_As;
+            dialog.Title = Properties.Resources.Save;
             dialog.InitialDirectory = pdfFolder;
             dialog.Filter = "PDF (*.pdf)|*.pdf";
             dialog.RestoreDirectory = true;
