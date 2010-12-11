@@ -62,7 +62,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         availableDictionaries = new Properties();
 
         try {
-            File xmlFile = new File(baseDir, "data/Tess2DataURL.xml");
+            File xmlFile = new File(baseDir, "data/Tess3DataURL.xml");
             availableLanguageCodes.loadFromXML(new FileInputStream(xmlFile));
             xmlFile = new File(baseDir, "data/OO-SpellDictionaries.xml");
             availableDictionaries.loadFromXML(new FileInputStream(xmlFile));
@@ -202,7 +202,7 @@ public class DownloadDialog extends javax.swing.JDialog {
             if (key != null) {
                 try {
                     URL url = new URL(availableLanguageCodes.getProperty(key));
-                    downloadDataFile(url, "tesseract"); // download language data pack
+                    downloadDataFile(url, "tesseract/tessdata"); // download language data pack. In Tesseract 3.0, data is packaged not under a directory
                     if (lookupISO_3_1_Codes.containsKey(key)) {
                         String iso_3_1_Code = lookupISO_3_1_Codes.getProperty(key); // vie -> vi_VN
                         if (availableDictionaries.containsKey(iso_3_1_Code)) {
