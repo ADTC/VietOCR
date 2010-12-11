@@ -201,7 +201,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         gridBagConstraints.gridy = 1;
         jPanelWatchFolder.add(jButtonOutput, gridBagConstraints);
 
-        jTabbedPane1.addTab("Watch", jPanelWatchFolder);
+        jTabbedPane1.addTab(bundle.getString("Watch"), jPanelWatchFolder); // NOI18N
 
         jLabelTess.setLabelFor(jTextFieldTess);
         jLabelTess.setText(bundle.getString("jLabelTess.Text")); // NOI18N
