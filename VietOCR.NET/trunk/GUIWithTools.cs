@@ -45,7 +45,7 @@ namespace VietOCR.NET
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             openFileDialog1.InitialDirectory = imageFolder;
-            openFileDialog1.Title = Properties.Resources.Select + " Input Images";
+            openFileDialog1.Title = Properties.Resources.Select_Input_Images;
             openFileDialog1.Filter = "Image Files (*.tif;*.tiff)|*.tif;*.tiff|Image Files (*.bmp)|*.bmp|Image Files (*.jpg;*.jpeg)|*.jpg;*.jpeg|Image Files (*.png)|*.png|All Image Files|*.tif;*.tiff;*.bmp;*.jpg;*.jpeg;*.png";
             openFileDialog1.FilterIndex = filterIndex;
             openFileDialog1.RestoreDirectory = true;
@@ -57,7 +57,7 @@ namespace VietOCR.NET
                 imageFolder = Path.GetDirectoryName(openFileDialog1.FileName);
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.InitialDirectory = imageFolder;
-                saveFileDialog1.Title = Properties.Resources.Save + " Multi-page TIFF Image";
+                saveFileDialog1.Title = Properties.Resources.Save_Multipage_TIFF_Image;
                 saveFileDialog1.Filter = "Image Files (*.tif;*.tiff)|*.tif;*.tiff";
                 saveFileDialog1.RestoreDirectory = true;
 
@@ -220,7 +220,7 @@ namespace VietOCR.NET
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             openFileDialog1.InitialDirectory = imageFolder;
-            openFileDialog1.Title = Properties.Resources.Select + " Input PDFs";
+            openFileDialog1.Title = Properties.Resources.Select_Input_PDFs;
             openFileDialog1.Filter = "PDF Files (*.pdf)|*.pdf";
             openFileDialog1.FilterIndex = filterIndex;
             openFileDialog1.RestoreDirectory = true;
@@ -232,7 +232,7 @@ namespace VietOCR.NET
                 imageFolder = Path.GetDirectoryName(openFileDialog1.FileName);
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.InitialDirectory = imageFolder;
-                saveFileDialog1.Title = Properties.Resources.Save + " Merged PDF";
+                saveFileDialog1.Title = Properties.Resources.Save_Merged_PDF;
                 saveFileDialog1.Filter = "PDF Files (*.pdf)|*.pdf";
                 saveFileDialog1.RestoreDirectory = true;
 

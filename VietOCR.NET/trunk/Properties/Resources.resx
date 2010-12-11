@@ -174,8 +174,8 @@
   <data name="BatchProcessStatus" xml:space="preserve">
     <value>Batch Process Status</value>
   </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
+  <data name="Save_Merged_PDF" xml:space="preserve">
+    <value>Save Merged PDF</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>Select</value>
@@ -266,5 +266,14 @@
   </data>
   <data name="Resource_not_exist" xml:space="preserve">
     <value>Resource does not exist.</value>
+  </data>
+  <data name="Save_Multipage_TIFF_Image" xml:space="preserve">
+    <value>Save Multi-page TIFF Image</value>
+  </data>
+  <data name="Select_Input_Images" xml:space="preserve">
+    <value>Select Input Images</value>
+  </data>
+  <data name="Select_Input_PDFs" xml:space="preserve">
+    <value>Select Input PDFs</value>
   </data>
 </root>

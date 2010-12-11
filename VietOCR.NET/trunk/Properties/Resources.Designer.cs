@@ -403,20 +403,29 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save.
-        /// </summary>
-        internal static string Save {
-            get {
-                return ResourceManager.GetString("Save", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Save As.
         /// </summary>
         internal static string Save_As {
             get {
                 return ResourceManager.GetString("Save_As", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save  Merged PDF.
+        /// </summary>
+        internal static string Save_Merged_PDF {
+            get {
+                return ResourceManager.GetString("Save_Merged_PDF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Multi-page TIFF Image.
+        /// </summary>
+        internal static string Save_Multipage_TIFF_Image {
+            get {
+                return ResourceManager.GetString("Save_Multipage_TIFF_Image", resourceCulture);
             }
         }
         
@@ -453,6 +462,24 @@ namespace VietOCR.NET.Properties {
         internal static string Select {
             get {
                 return ResourceManager.GetString("Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Input Images.
+        /// </summary>
+        internal static string Select_Input_Images {
+            get {
+                return ResourceManager.GetString("Select_Input_Images", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Input PDFs.
+        /// </summary>
+        internal static string Select_Input_PDFs {
+            get {
+                return ResourceManager.GetString("Select_Input_PDFs", resourceCulture);
             }
         }
         

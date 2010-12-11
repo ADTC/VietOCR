@@ -348,19 +348,19 @@
     <value>Điề&amp;u chỉnh</value>
   </data>
   <data name="mergeTiffToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="mergeTiffToolStripMenuItem.Text" xml:space="preserve">
     <value>Nối &amp;TIFF</value>
   </data>
   <data name="mergePdfToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="mergePdfToolStripMenuItem.Text" xml:space="preserve">
     <value>Nối &amp;PDF</value>
   </data>
   <data name="splitPdfToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="splitPdfToolStripMenuItem.Text" xml:space="preserve">
     <value>Tác&amp;h PDF</value>
