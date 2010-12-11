@@ -35,7 +35,7 @@ public class GuiWithTools extends GuiWithSpellcheck {
     @Override
     void mergeTiffs() {
         JFileChooser jf = new JFileChooser();
-        jf.setDialogTitle(bundle.getString("Select") + " Input Images");
+        jf.setDialogTitle(bundle.getString("Select_Input_Images"));
         jf.setCurrentDirectory(imageFolder);
         jf.setMultiSelectionEnabled(true);
         FileFilter tiffFilter = new SimpleFilter("tif;tiff", "TIFF");
@@ -43,7 +43,7 @@ public class GuiWithTools extends GuiWithSpellcheck {
         FileFilter gifFilter = new SimpleFilter("gif", "GIF");
         FileFilter pngFilter = new SimpleFilter("png", "PNG");
         FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
-        FileFilter allImageFilter = new SimpleFilter("tif;tiff;jpg;jpeg;gif;png;bmp", "All Image Files");
+        FileFilter allImageFilter = new SimpleFilter("tif;tiff;jpg;jpeg;gif;png;bmp", bundle.getString("All_Image_Files"));
 
         jf.addChoosableFileFilter(tiffFilter);
         jf.addChoosableFileFilter(jpegFilter);
@@ -63,7 +63,7 @@ public class GuiWithTools extends GuiWithSpellcheck {
             imageFolder = jf.getCurrentDirectory();
 
             jf = new JFileChooser();
-            jf.setDialogTitle(bundle.getString("Save") + " Multi-page TIFF Image");
+            jf.setDialogTitle(bundle.getString("Save_Multi-page_TIFF_Image"));
             jf.setCurrentDirectory(imageFolder);
             jf.setFileFilter(tiffFilter);
             jf.setAcceptAllFileFilterUsed(false);
@@ -134,7 +134,7 @@ public class GuiWithTools extends GuiWithSpellcheck {
     @Override
     void mergePdf() {
        JFileChooser jf = new JFileChooser();
-        jf.setDialogTitle(bundle.getString("Select") + " Input PDFs");
+        jf.setDialogTitle(bundle.getString("Select_Input_PDFs"));
         jf.setCurrentDirectory(imageFolder);
         jf.setMultiSelectionEnabled(true);
         FileFilter pdfFilter = new SimpleFilter("pdf", "PDF");
@@ -146,7 +146,7 @@ public class GuiWithTools extends GuiWithSpellcheck {
             imageFolder = jf.getCurrentDirectory();
 
             jf = new JFileChooser();
-            jf.setDialogTitle(bundle.getString("Save") + " Merged PDF");
+            jf.setDialogTitle(bundle.getString("Save_Merged_PDF"));
             jf.setCurrentDirectory(imageFolder);
             jf.setFileFilter(pdfFilter);
             jf.setAcceptAllFileFilterUsed(false);
