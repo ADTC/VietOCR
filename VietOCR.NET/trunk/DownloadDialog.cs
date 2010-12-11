@@ -74,6 +74,16 @@ namespace VietOCR.NET
             this.ActiveControl = this.listBox1;
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+
+            if (numberOfDownloads > 0)
+            {
+                MessageBox.Show(this, Properties.Resources.Please_restart, GUI.strProgName);
+            }
+        }
+
         private void buttonDownload_Click(object sender, EventArgs e)
         {
             if (this.listBox1.SelectedIndex == -1)
@@ -246,17 +256,6 @@ namespace VietOCR.NET
                     client.Dispose();
                 }
             }
-        }
-
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            this.Visible = false;
-
-            if (numberOfDownloads > 0)
-            {
-                MessageBox.Show(this, Properties.Resources.Please_restart, GUI.strProgName);
-            }
-            base.Close();
         }
     }
 }
