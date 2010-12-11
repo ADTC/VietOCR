@@ -36,11 +36,6 @@ namespace VietOCR.NET
             this.comboBox4.SelectedIndex = 0;
         }
 
-        protected override void OnClosed(EventArgs ea)
-        {
-            base.OnClosed(ea);
-        }
-
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!isProgrammatic)
