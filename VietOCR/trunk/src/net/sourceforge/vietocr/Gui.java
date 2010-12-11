@@ -184,7 +184,7 @@ public class Gui extends javax.swing.JFrame {
         currentDirectory = prefs.get("currentDirectory", null);
         filechooser = new JFileChooser(currentDirectory);
         filechooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
-        FileFilter allImageFilter = new SimpleFilter("bmp;gif;jpg;jpeg;jp2;png;pnm;pbm;pgm;ppm;tif;tiff;pdf", "All Image Files");
+        FileFilter allImageFilter = new SimpleFilter("bmp;gif;jpg;jpeg;jp2;png;pnm;pbm;pgm;ppm;tif;tiff;pdf", bundle.getString("All_Image_Files"));
         FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
         FileFilter gifFilter = new SimpleFilter("gif", "GIF");
         FileFilter jpegFilter = new SimpleFilter("jpg;jpeg", "JPEG");
@@ -194,7 +194,7 @@ public class Gui extends javax.swing.JFrame {
         FileFilter tiffFilter = new SimpleFilter("tif;tiff", "TIFF");
 
         FileFilter pdfFilter = new SimpleFilter("pdf", "PDF");
-        FileFilter textFilter = new SimpleFilter("txt", "UTF-8 Text");
+        FileFilter textFilter = new SimpleFilter("txt", bundle.getString("UTF-8_Text"));
 
         filechooser.setAcceptAllFileFilterUsed(false);
         filechooser.addChoosableFileFilter(allImageFilter);
@@ -435,8 +435,9 @@ public class Gui extends javax.swing.JFrame {
             }
             this.jMenuRecentFiles.addSeparator();
             strClearRecentFiles = bundle.getString("Clear_Recent_Files");
-            JMenuItem clearItem = this.jMenuRecentFiles.add(strClearRecentFiles);
-            clearItem.addActionListener(mruAction);
+            JMenuItem jMenuItemClear = this.jMenuRecentFiles.add(strClearRecentFiles);
+            jMenuItemClear.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemClear.Mnemonic").charAt(0));
+            jMenuItemClear.addActionListener(mruAction);
         }
     }
 
