@@ -270,7 +270,7 @@ public class DownloadDialog extends javax.swing.JDialog {
                     if (Gui.WINDOWS || destFolder.equals("dict")) {
                         destFolderPath = new File(baseDir, destFolder);
                     } else {
-                        destFolderPath = tessdataDir;
+                        destFolderPath = tessdataDir.getParentFile();
                     }
                     FileExtractor.extractCompressedFile(downloadedFile.getPath(), destFolderPath.getPath());
                     if (destFolder.equals("tesseract")) {
@@ -309,6 +309,12 @@ public class DownloadDialog extends javax.swing.JDialog {
                     jLabelStatus.setText(bundle.getString("Download_cancelled"));
 //                    jProgressBar1.setVisible(false);
                     numOfConcurrentTasks = 0;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, e.getMessage(), Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
+                    jProgressBar1.setVisible(false);
+                    jLabelStatus.setText(bundle.getString("Unable_to_install"));
+                    --numOfConcurrentTasks;
                 } finally {
                     if (numOfConcurrentTasks <= 0) {
                         jButtonDownload.setEnabled(true);
