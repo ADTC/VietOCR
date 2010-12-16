@@ -47,6 +47,7 @@ public class DownloadDialog extends javax.swing.JDialog {
     List<SwingWorker<File, Integer>> downloadTracker;
     int contentLength, byteCount, numberOfDownloads, numOfConcurrentTasks;
     ResourceBundle bundle;
+    private File tessdataDir;
 
     /** Creates new form DownloadDialog */
     public DownloadDialog(java.awt.Frame parent, boolean modal) {
@@ -58,6 +59,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         downloadTracker = new ArrayList<SwingWorker<File, Integer>>();
         lookupISO639 = ((Gui) parent).getLookupISO639();
         lookupISO_3_1_Codes = ((Gui) parent).getLookupISO_3_1_Codes();
+        tessdataDir = ((Gui) parent).getTessdataDir();
         availableLanguageCodes = new Properties();
         availableDictionaries = new Properties();
 
@@ -262,8 +264,15 @@ public class DownloadDialog extends javax.swing.JDialog {
             @Override
             public void done() {
                 try {
-                    File file = get();
-                    FileExtractor.extractCompressedFile(file.getPath(), baseDir.getPath() + "/" + destFolder);
+                    File downloadedFile = get();
+                    
+                    File destFolderPath;
+                    if (Gui.WINDOWS || destFolder.equals("dict")) {
+                        destFolderPath = new File(baseDir, destFolder);
+                    } else {
+                        destFolderPath = tessdataDir;
+                    }
+                    FileExtractor.extractCompressedFile(downloadedFile.getPath(), destFolderPath.getPath());
                     if (destFolder.equals("tesseract")) {
                         numberOfDownloads++;
                     }
@@ -300,6 +309,12 @@ public class DownloadDialog extends javax.swing.JDialog {
                     jLabelStatus.setText(bundle.getString("Download_cancelled"));
 //                    jProgressBar1.setVisible(false);
                     numOfConcurrentTasks = 0;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, e.getMessage(), Gui.APP_NAME, JOptionPane.ERROR_MESSAGE);
+                    jProgressBar1.setVisible(false);
+                    jLabelStatus.setText(bundle.getString("Unable_to_install"));
+                    --numOfConcurrentTasks;
                 } finally {
                     if (numOfConcurrentTasks <= 0) {
                         jButtonDownload.setEnabled(true);

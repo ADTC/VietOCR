@@ -82,6 +82,7 @@ public class Gui extends javax.swing.JFrame {
     private RawListener rawListener;
     private final String DATAFILE_SUFFIX = ".traineddata";
     protected final File baseDir = Utilities.getBaseDir(Gui.this);
+    private File tessdataDir;
 
     /**
      * Creates new form Gui
@@ -97,7 +98,7 @@ public class Gui extends javax.swing.JFrame {
         lookupISO_3_1_Codes = new Properties();
 
         try {
-            File tessdataDir = new File(tessPath, "tessdata");
+            tessdataDir = new File(tessPath, "tessdata");
             if (!tessdataDir.exists()) {
                 String TESSDATA_PREFIX = System.getenv("TESSDATA_PREFIX");
                 if (TESSDATA_PREFIX == null && !WINDOWS) { // if TESSDATA_PREFIX env var not set
@@ -497,6 +498,13 @@ public class Gui extends javax.swing.JFrame {
      */
     public Properties getLookupISO_3_1_Codes() {
         return lookupISO_3_1_Codes;
+    }
+
+    /**
+     * @return the tessdataDir
+     */
+    public File getTessdataDir() {
+        return tessdataDir;
     }
 
     /**
