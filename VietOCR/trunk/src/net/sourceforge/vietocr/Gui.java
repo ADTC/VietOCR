@@ -33,11 +33,8 @@ import javax.swing.event.*;
 import javax.swing.filechooser.FileFilter;
 import net.sourceforge.vietpad.*;
 import net.sourceforge.vietpad.inputmethod.*;
-import net.sourceforge.vietocr.wia.*;
-//import uk.org.jsane.JSane_Base.JSane_Base_Frame;
-//import uk.org.jsane.JSane_Gui.Swing.JSane_Scan_Dialog;
 
-public class Gui extends javax.swing.JFrame {
+public class Gui extends JFrame {
 
     public static final String APP_NAME = "VietOCR";
     public static final String TO_BE_IMPLEMENTED = "To be implemented in subclass";
@@ -85,7 +82,7 @@ public class Gui extends javax.swing.JFrame {
     private File tessdataDir;
 
     /**
-     * Creates new form Gui
+     * Creates new form.
      */
     public Gui() {
         if (WINDOWS) {
@@ -156,7 +153,7 @@ public class Gui extends javax.swing.JFrame {
         initComponents();
         jLabelStatus.setVisible(false); // use jProgressBar instead for (more animation) task status
 
-        // Hide Scan buttons for non-Windows OS because of WIA Automation
+        // Hide Scan buttons for non-Windows OS because WIA Automation is Windows only
         if (!WINDOWS) {
             this.jToolBar2.remove(this.jButtonScan);
             this.jMenuFile.remove(this.jMenuItemScan);
@@ -437,7 +434,7 @@ public class Gui extends javax.swing.JFrame {
             this.jMenuRecentFiles.addSeparator();
             strClearRecentFiles = bundle.getString("Clear_Recent_Files");
             JMenuItem jMenuItemClear = this.jMenuRecentFiles.add(strClearRecentFiles);
-            jMenuItemClear.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemClear.Mnemonic").charAt(0));
+            jMenuItemClear.setMnemonic(bundle.getString("jMenuItemClear.Mnemonic").charAt(0));
             jMenuItemClear.addActionListener(mruAction);
         }
     }
@@ -775,7 +772,7 @@ public class Gui extends javax.swing.JFrame {
         });
         jToolBar2.add(jButtonSave);
 
-        jButtonOCR.setText("OCR");
+        jButtonOCR.setText(bundle.getString("jButtonOCR.Text")); // NOI18N
         jButtonOCR.setToolTipText(bundle.getString("jButtonOCR.ToolTipText")); // NOI18N
         jButtonOCR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1841,56 +1838,7 @@ public class Gui extends javax.swing.JFrame {
      *
      */
     void performScan() {
-        jLabelStatus.setText(bundle.getString("Scanning..."));
-        jProgressBar1.setIndeterminate(true);
-        jProgressBar1.setString(bundle.getString("Scanning..."));
-        jProgressBar1.setVisible(true);
-        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        getGlassPane().setVisible(true);
-        jMenuItemScan.setEnabled(false);
-        jButtonScan.setEnabled(false);
-
-        SwingUtilities.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    File tempImageFile = File.createTempFile("tmp", WINDOWS ? ".bmp" : ".png");
-
-                    if (tempImageFile.exists()) {
-                        tempImageFile.delete();
-                    }
-                    if (WINDOWS) {
-                        WiaScannerAdapter adapter = new WiaScannerAdapter(); // with MS WIA
-                        // The reason for not using PNG format is that jai-imageio library would throw an "I/O error reading PNG header" error.
-                        tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
-                    } else {
-//                        JSane_Base_Frame frame = JSane_Scan_Dialog.getScan("localhost", 6566); // with SANE
-//                        ImageIO.write(frame.getImage(false), "png", tempImageFile);
-                    }
-                    openFile(tempImageFile);
-                    tempImageFile.deleteOnExit();
-                } catch (IOException ioe) {
-                    JOptionPane.showMessageDialog(null, ioe.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
-                } catch (WiaOperationException woe) {
-                    JOptionPane.showMessageDialog(null, woe.getWIAMessage(), woe.getMessage(), JOptionPane.WARNING_MESSAGE);
-                } catch (Exception e) {
-                    String msg = e.getMessage();
-                    if (msg == null || msg.equals("")) {
-                        msg = "Scanner Operation Error.";
-                    }
-                    JOptionPane.showMessageDialog(null, msg, "Scanner Operation Error", JOptionPane.ERROR_MESSAGE);
-                } finally {
-                    jLabelStatus.setText(bundle.getString("Scanning_completed"));
-                    jProgressBar1.setIndeterminate(false);
-                    jProgressBar1.setString(bundle.getString("Scanning_completed"));
-                    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-                    getGlassPane().setVisible(false);
-                    jMenuItemScan.setEnabled(true);
-                    jButtonScan.setEnabled(true);
-                }
-            }
-        });
+        // to be implemented in subclass
     }
 
     private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonScanActionPerformed
@@ -2019,6 +1967,7 @@ public class Gui extends javax.swing.JFrame {
                 filechooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
                 popup.removeAll();
                 populatePopupMenu();
+                updateMRUMenu();
 
                 for (Component comp : jMenuUILang.getMenuComponents()) {
                     JMenuItem item = (JMenuItem) comp;
@@ -2072,7 +2021,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRotateCCW;
     private javax.swing.JButton jButtonRotateCW;
     private javax.swing.JButton jButtonSave;
-    private javax.swing.JButton jButtonScan;
+    protected javax.swing.JButton jButtonScan;
     private javax.swing.JButton jButtonZoomIn;
     private javax.swing.JButton jButtonZoomOut;
     protected javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemScreenshotMode;
@@ -2106,7 +2055,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemRemoveLineBreaks;
     private javax.swing.JMenuItem jMenuItemSave;
     private javax.swing.JMenuItem jMenuItemSaveAs;
-    private javax.swing.JMenuItem jMenuItemScan;
+    protected javax.swing.JMenuItem jMenuItemScan;
     private javax.swing.JMenuItem jMenuItemSplitPdf;
     private javax.swing.JMenu jMenuLookAndFeel;
     private javax.swing.JMenu jMenuRecentFiles;
