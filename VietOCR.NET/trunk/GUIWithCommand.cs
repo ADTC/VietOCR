@@ -10,7 +10,7 @@ using Microsoft.Win32;
 
 namespace VietOCR.NET
 {
-    public partial class GUIWithCommand : VietOCR.NET.GUI
+    public partial class GUIWithCommand : VietOCR.NET.GUIWithScan
     {
         const string strDangAmbigsPath = "DangAmbigsPath";
         const string strDangAmbigsOn = "DangAmbigsOn";

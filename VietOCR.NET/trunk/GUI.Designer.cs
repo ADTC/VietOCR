@@ -76,6 +76,7 @@ namespace VietOCR.NET
             this.removeLineBreaksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadLangDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mergeTiffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,9 +99,7 @@ namespace VietOCR.NET
             this.toolStripCbLang = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabelLanguage = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButtonSpellCheck = new System.Windows.Forms.ToolStripButton();
-            this.backgroundWorkerScan = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerLoad = new System.ComponentModel.BackgroundWorker();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -457,6 +456,11 @@ namespace VietOCR.NET
             resources.ApplyResources(this.downloadLangDataToolStripMenuItem, "downloadLangDataToolStripMenuItem");
             this.downloadLangDataToolStripMenuItem.Click += new System.EventHandler(this.downloadLangDataToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            resources.ApplyResources(this.toolStripMenuItem7, "toolStripMenuItem7");
+            // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
@@ -616,24 +620,12 @@ namespace VietOCR.NET
             this.toolStripButtonSpellCheck.Name = "toolStripButtonSpellCheck";
             this.toolStripButtonSpellCheck.Click += new System.EventHandler(this.toolStripButtonSpellCheck_Click);
             // 
-            // backgroundWorkerScan
-            // 
-            this.backgroundWorkerScan.WorkerReportsProgress = true;
-            this.backgroundWorkerScan.WorkerSupportsCancellation = true;
-            this.backgroundWorkerScan.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerScan_DoWork);
-            this.backgroundWorkerScan.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerScan_RunWorkerCompleted);
-            // 
             // backgroundWorkerLoad
             // 
             this.backgroundWorkerLoad.WorkerReportsProgress = true;
             this.backgroundWorkerLoad.WorkerSupportsCancellation = true;
             this.backgroundWorkerLoad.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerLoad_DoWork);
             this.backgroundWorkerLoad.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerLoad_RunWorkerCompleted);
-            // 
-            // toolStripMenuItem7
-            // 
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            resources.ApplyResources(this.toolStripMenuItem7, "toolStripMenuItem7");
             // 
             // GUI
             // 
@@ -711,9 +703,6 @@ namespace VietOCR.NET
         protected VietOCR.NET.Controls.ScrollablePictureBox pictureBox1;
         private System.Windows.Forms.ToolStripButton toolStripBtnRotateCCW;
         private System.Windows.Forms.ToolStripButton toolStripBtnRotateCW;
-        private System.Windows.Forms.ToolStripMenuItem scanToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton toolStripBtnScan;
-        private System.ComponentModel.BackgroundWorker backgroundWorkerScan;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -742,5 +731,7 @@ namespace VietOCR.NET
         protected VietOCR.NET.Controls.TextBoxContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem downloadLangDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
+        protected System.Windows.Forms.ToolStripMenuItem scanToolStripMenuItem;
+        protected System.Windows.Forms.ToolStripButton toolStripBtnScan;
     }
 }
