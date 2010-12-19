@@ -23,7 +23,7 @@ import javax.imageio.IIOImage;
 import javax.swing.*;
 import net.sourceforge.vietocr.postprocessing.Processor;
 
-public class GuiWithCommand extends Gui {
+public class GuiWithCommand extends GuiWithScan {
 
     private OcrWorker ocrWorker;
 
