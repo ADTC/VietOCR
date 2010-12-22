@@ -416,7 +416,7 @@ namespace VietOCR.NET
         private void toolStripCbLang_SelectedIndexChanged(object sender, EventArgs e)
         {
             curLangCode = installedLanguageCodes[this.toolStripCbLang.SelectedIndex];
-            bool vie = curLangCode.Contains("vie");
+            bool vie = curLangCode.StartsWith("vie");
             VietKeyHandler.VietModeEnabled = vie;
             SetVisibleInputMethodMenuitem(vie);
 
