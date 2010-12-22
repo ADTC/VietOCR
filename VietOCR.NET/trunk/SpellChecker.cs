@@ -74,7 +74,6 @@ namespace VietOCR.NET
                 return;
             }
 
-
             StringBuilder sb = new StringBuilder();
             foreach (String word in misspelledWords)
             {
