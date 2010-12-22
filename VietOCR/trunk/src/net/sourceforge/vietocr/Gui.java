@@ -313,7 +313,7 @@ public class Gui extends JFrame {
     /**
      * Builds context menu for textarea.
      */
-    void populatePopupMenu() {
+    private void populatePopupMenu() {
         m_undoAction = new AbstractAction(vietpadResources.getString("Undo")) {
 
             @Override
@@ -587,7 +587,7 @@ public class Gui extends JFrame {
         VietKeyListener.setInputMethod(InputMethods.valueOf(selectedInputMethod));
         VietKeyListener.setSmartMark(true);
         VietKeyListener.consumeRepeatKey(true);
-        boolean vie = curLangCode.contains("vie");
+        boolean vie = curLangCode.startsWith("vie");
         VietKeyListener.setVietModeEnabled(vie);
         jTextArea1.addMouseListener(new MouseAdapter() {
             public void mousePressed(final MouseEvent e) {
@@ -838,6 +838,11 @@ public class Gui extends JFrame {
         jTextArea1.setRows(5);
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setMargin(new java.awt.Insets(8, 8, 2, 2));
+        jTextArea1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jTextArea1MouseEntered(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextArea1);
 
         jSplitPane1.setRightComponent(jScrollPane1);
@@ -1239,7 +1244,7 @@ public class Gui extends JFrame {
     private void jComboBoxLangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxLangItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             curLangCode = installedLanguageCodes[jComboBoxLang.getSelectedIndex()];
-            boolean vie = curLangCode.contains("vie");
+            boolean vie = curLangCode.startsWith("vie");
             VietKeyListener.setVietModeEnabled(vie);
             this.jMenuInputMethod.setVisible(vie);
             this.jSeparator6.setVisible(vie);
@@ -1935,6 +1940,12 @@ public class Gui extends JFrame {
     private void jMenuItemDownloadLangDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDownloadLangDataActionPerformed
         downloadLangDataActionPerformed();
     }//GEN-LAST:event_jMenuItemDownloadLangDataActionPerformed
+
+    private void jTextArea1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseEntered
+        if (!this.jTextArea1.isFocusOwner()) {
+            this.jTextArea1.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_jTextArea1MouseEntered
 
     void downloadLangDataActionPerformed() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
