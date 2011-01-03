@@ -314,7 +314,7 @@ public class Gui extends JFrame {
      * Builds context menu for textarea.
      */
     private void populatePopupMenu() {
-        m_undoAction = new AbstractAction(vietpadResources.getString("Undo")) {
+        m_undoAction = new AbstractAction(bundle.getString("jMenuItemUndo.Text")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -329,7 +329,7 @@ public class Gui extends JFrame {
 
         popup.add(m_undoAction);
 
-        m_redoAction = new AbstractAction(vietpadResources.getString("Redo")) {
+        m_redoAction = new AbstractAction(bundle.getString("jMenuItemRedo.Text")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -345,7 +345,7 @@ public class Gui extends JFrame {
         popup.add(m_redoAction);
         popup.addSeparator();
 
-        actionCut = new AbstractAction(vietpadResources.getString("Cut")) {
+        actionCut = new AbstractAction(bundle.getString("jMenuItemCut.Text")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -356,7 +356,7 @@ public class Gui extends JFrame {
 
         popup.add(actionCut);
 
-        actionCopy = new AbstractAction(vietpadResources.getString("Copy")) {
+        actionCopy = new AbstractAction(bundle.getString("jMenuItemCopy.Text")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -367,7 +367,7 @@ public class Gui extends JFrame {
 
         popup.add(actionCopy);
 
-        actionPaste = new AbstractAction(vietpadResources.getString("Paste")) {
+        actionPaste = new AbstractAction(bundle.getString("jMenuItemPaste.Text")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -379,7 +379,7 @@ public class Gui extends JFrame {
 
         popup.add(actionPaste);
 
-        actionDelete = new AbstractAction(vietpadResources.getString("Delete")) {
+        actionDelete = new AbstractAction(bundle.getString("jMenuItemDelete.Text")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -390,7 +390,7 @@ public class Gui extends JFrame {
         popup.add(actionDelete);
         popup.addSeparator();
 
-        actionSelectAll = new AbstractAction(vietpadResources.getString("Select_All"), null) {
+        actionSelectAll = new AbstractAction(bundle.getString("jMenuItemSelectAll.Text"), null) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1680,9 +1680,9 @@ public class Gui extends JFrame {
     boolean saveFileDlg() {
         outputDirectory = prefs.get("outputDirectory", null);
         JFileChooser chooser = new JFileChooser(outputDirectory);
-        FileFilter txtFilter = new SimpleFilter("txt", "UTF-8 Text");
-        chooser.addChoosableFileFilter(txtFilter);
-        chooser.setDialogTitle(vietpadResources.getString("Save_As"));
+        FileFilter textFilter = new SimpleFilter("txt", bundle.getString("UTF-8_Text"));
+        chooser.addChoosableFileFilter(textFilter);
+        chooser.setDialogTitle(bundle.getString("Save_As"));
         if (textFile != null) {
             chooser.setSelectedFile(textFile);
         }
@@ -1690,7 +1690,7 @@ public class Gui extends JFrame {
         if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             outputDirectory = chooser.getCurrentDirectory().getPath();
             File f = chooser.getSelectedFile();
-            if (chooser.getFileFilter() == txtFilter) {
+            if (chooser.getFileFilter() == textFilter) {
                 if (!f.getName().endsWith(".txt")) {
                     f = new File(f.getPath() + ".txt");
                 }
