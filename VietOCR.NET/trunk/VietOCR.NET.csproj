@@ -348,6 +348,9 @@
     <EmbeddedResource Include="Controls\TextBoxContextMenuStrip.resx">
       <DependentUpon>TextBoxContextMenuStrip.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TextBoxContextMenuStrip.vi-VN.resx">
+      <DependentUpon>TextBoxContextMenuStrip.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DownloadDialog.lt-LT.resx">
       <DependentUpon>DownloadDialog.cs</DependentUpon>
     </EmbeddedResource>
