@@ -157,6 +157,17 @@ namespace VietOCR.NET.Controls
             });
         }
 
+        public void ChangeUILanguage()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextBoxContextMenuStrip));
+            resources.ApplyResources(this.miUndo, "miUndo");
+            resources.ApplyResources(this.miCut, "miCut");
+            resources.ApplyResources(this.miCopy, "miCopy");
+            resources.ApplyResources(this.miPaste, "miPaste");
+            resources.ApplyResources(this.miDelete, "miDelete");
+            resources.ApplyResources(this.miSelectAll, "miSelectAll");
+        }
+
         void StandardTextBoxContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Get the text box that the context menu was popped on

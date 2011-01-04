@@ -940,6 +940,8 @@ namespace VietOCR.NET
                     helpForm.Text = Properties.Resources.VietOCR_Help;
                 }
             }
+
+            this.contextMenuStrip1.ChangeUILanguage();
         }
 
         protected override void LoadRegistryInfo(RegistryKey regkey)
