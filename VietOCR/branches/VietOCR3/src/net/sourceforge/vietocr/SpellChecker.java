@@ -72,7 +72,7 @@ public class SpellChecker {
         List<String> words = parseText(textComp.getText());
         List<String> misspelledWords = spellCheck(words);
         if (misspelledWords.isEmpty()) {
-            return; // perfect writer!
+            return;
         }
 
         StringBuilder sb = new StringBuilder();
