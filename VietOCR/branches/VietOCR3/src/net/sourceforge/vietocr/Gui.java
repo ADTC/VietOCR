@@ -313,8 +313,8 @@ public class Gui extends JFrame {
     /**
      * Builds context menu for textarea.
      */
-    void populatePopupMenu() {
-        m_undoAction = new AbstractAction(vietpadResources.getString("Undo")) {
+    private void populatePopupMenu() {
+        m_undoAction = new AbstractAction(bundle.getString("jMenuItemUndo.Text")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -329,7 +329,7 @@ public class Gui extends JFrame {
 
         popup.add(m_undoAction);
 
-        m_redoAction = new AbstractAction(vietpadResources.getString("Redo")) {
+        m_redoAction = new AbstractAction(bundle.getString("jMenuItemRedo.Text")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -345,7 +345,7 @@ public class Gui extends JFrame {
         popup.add(m_redoAction);
         popup.addSeparator();
 
-        actionCut = new AbstractAction(vietpadResources.getString("Cut")) {
+        actionCut = new AbstractAction(bundle.getString("jMenuItemCut.Text")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -356,7 +356,7 @@ public class Gui extends JFrame {
 
         popup.add(actionCut);
 
-        actionCopy = new AbstractAction(vietpadResources.getString("Copy")) {
+        actionCopy = new AbstractAction(bundle.getString("jMenuItemCopy.Text")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -367,7 +367,7 @@ public class Gui extends JFrame {
 
         popup.add(actionCopy);
 
-        actionPaste = new AbstractAction(vietpadResources.getString("Paste")) {
+        actionPaste = new AbstractAction(bundle.getString("jMenuItemPaste.Text")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -379,7 +379,7 @@ public class Gui extends JFrame {
 
         popup.add(actionPaste);
 
-        actionDelete = new AbstractAction(vietpadResources.getString("Delete")) {
+        actionDelete = new AbstractAction(bundle.getString("jMenuItemDelete.Text")) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -390,7 +390,7 @@ public class Gui extends JFrame {
         popup.add(actionDelete);
         popup.addSeparator();
 
-        actionSelectAll = new AbstractAction(vietpadResources.getString("Select_All"), null) {
+        actionSelectAll = new AbstractAction(bundle.getString("jMenuItemSelectAll.Text"), null) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -587,7 +587,7 @@ public class Gui extends JFrame {
         VietKeyListener.setInputMethod(InputMethods.valueOf(selectedInputMethod));
         VietKeyListener.setSmartMark(true);
         VietKeyListener.consumeRepeatKey(true);
-        boolean vie = curLangCode.contains("vie");
+        boolean vie = curLangCode.startsWith("vie");
         VietKeyListener.setVietModeEnabled(vie);
         jTextArea1.addMouseListener(new MouseAdapter() {
             public void mousePressed(final MouseEvent e) {
@@ -838,6 +838,11 @@ public class Gui extends JFrame {
         jTextArea1.setRows(5);
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setMargin(new java.awt.Insets(8, 8, 2, 2));
+        jTextArea1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jTextArea1MouseEntered(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextArea1);
 
         jSplitPane1.setRightComponent(jScrollPane1);
@@ -1239,7 +1244,7 @@ public class Gui extends JFrame {
     private void jComboBoxLangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxLangItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             curLangCode = installedLanguageCodes[jComboBoxLang.getSelectedIndex()];
-            boolean vie = curLangCode.contains("vie");
+            boolean vie = curLangCode.startsWith("vie");
             VietKeyListener.setVietModeEnabled(vie);
             this.jMenuInputMethod.setVisible(vie);
             this.jSeparator6.setVisible(vie);
@@ -1675,9 +1680,9 @@ public class Gui extends JFrame {
     boolean saveFileDlg() {
         outputDirectory = prefs.get("outputDirectory", null);
         JFileChooser chooser = new JFileChooser(outputDirectory);
-        FileFilter txtFilter = new SimpleFilter("txt", "UTF-8 Text");
-        chooser.addChoosableFileFilter(txtFilter);
-        chooser.setDialogTitle(vietpadResources.getString("Save_As"));
+        FileFilter textFilter = new SimpleFilter("txt", bundle.getString("UTF-8_Text"));
+        chooser.addChoosableFileFilter(textFilter);
+        chooser.setDialogTitle(bundle.getString("Save_As"));
         if (textFile != null) {
             chooser.setSelectedFile(textFile);
         }
@@ -1685,7 +1690,7 @@ public class Gui extends JFrame {
         if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             outputDirectory = chooser.getCurrentDirectory().getPath();
             File f = chooser.getSelectedFile();
-            if (chooser.getFileFilter() == txtFilter) {
+            if (chooser.getFileFilter() == textFilter) {
                 if (!f.getName().endsWith(".txt")) {
                     f = new File(f.getPath() + ".txt");
                 }
@@ -1935,6 +1940,12 @@ public class Gui extends JFrame {
     private void jMenuItemDownloadLangDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDownloadLangDataActionPerformed
         downloadLangDataActionPerformed();
     }//GEN-LAST:event_jMenuItemDownloadLangDataActionPerformed
+
+    private void jTextArea1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseEntered
+        if (!this.jTextArea1.isFocusOwner()) {
+            this.jTextArea1.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_jTextArea1MouseEntered
 
     void downloadLangDataActionPerformed() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
