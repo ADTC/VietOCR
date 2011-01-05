@@ -659,7 +659,7 @@ namespace VietOCR.NET
                 // Next, handle the case where the user canceled the operation.
                 // Note that due to a race condition in the DoWork event handler, the Cancelled
                 // flag may not have been set, even though CancelAsync was called.
-                this.toolStripStatusLabel1.Text = "Image loading" + Properties.Resources.canceled;
+                this.toolStripStatusLabel1.Text = "Image loading " + Properties.Resources.canceled;
             }
             else
             {

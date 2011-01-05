@@ -231,7 +231,7 @@ namespace VietOCR.NET
                 // the DoWork event handler, the Cancelled
                 // flag may not have been set, even though
                 // CancelAsync was called.
-                this.toolStripStatusLabel1.Text = "Post-OCR correction" + Properties.Resources.canceled;
+                this.toolStripStatusLabel1.Text = "Post-OCR correction " + Properties.Resources.canceled;
             }
             else
             {
