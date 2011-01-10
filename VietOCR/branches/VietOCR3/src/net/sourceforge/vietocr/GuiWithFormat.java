@@ -15,7 +15,6 @@
  */
 package net.sourceforge.vietocr;
 
-import net.sourceforge.vietocr.utilities.Utilities;
 import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
