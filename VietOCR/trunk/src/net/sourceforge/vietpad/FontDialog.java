@@ -25,8 +25,8 @@ import javax.swing.event.ListSelectionListener;
  *@version    1.2, June 20, 2009
  *@see        http://vietpad.sourceforge.net
  */
-public class FontDialog extends JDialog
-{
+public class FontDialog extends JDialog {
+
     private final OpenList m_lstFontName;
     private final OpenList m_lstFontStyle;
     private final OpenList m_lstFontSize;
@@ -35,7 +35,6 @@ public class FontDialog extends JDialog
     private Font curFont;
     private boolean m_succeeded = false;
     final static boolean MAC_OS_X = System.getProperty("os.name").startsWith("Mac");
-
 
     /**
      *  Constructor for the FontDialog object
@@ -81,45 +80,45 @@ public class FontDialog extends JDialog
         // work around Bug ID: 4682565
 
         ListSelectionListener lsel =
-            new ListSelectionListener()
-            {
-            @Override
-                public void valueChanged(ListSelectionEvent e) {
-                    SwingUtilities.invokeLater(
-                        new Runnable()
-                        {
+                new ListSelectionListener() {
+
                     @Override
-                            public void run() {
-                                updatePreview();
-                            }
-                        });
-                }
-            };
+                    public void valueChanged(ListSelectionEvent e) {
+                        SwingUtilities.invokeLater(
+                                new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        updatePreview();
+                                    }
+                                });
+                    }
+                };
         m_lstFontName.addListSelectionListener(lsel);
         m_lstFontStyle.addListSelectionListener(lsel);
         m_lstFontSize.addListSelectionListener(lsel);
 
         m_lstFontSize.addActionListener(
-            new ActionListener()
-            {
-            @Override
-                public void actionPerformed(ActionEvent e) {
-                    SwingUtilities.invokeLater(
-                        new Runnable()
-                        {
+                new ActionListener() {
+
                     @Override
-                            public void run() {
-                                updatePreview();
-                            }
-                        });
-                }
-            });
+                    public void actionPerformed(ActionEvent e) {
+                        SwingUtilities.invokeLater(
+                                new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        updatePreview();
+                                    }
+                                });
+                    }
+                });
 
         p = new JPanel(new BorderLayout());
         p.setBorder(new TitledBorder(new EtchedBorder(), myResources.getString("Preview")));
         m_preview = new JLabel(
                 "The quick brown fox jumps over the lazy dog.",
-//                "T\u00f4i y\u00eau ti\u1ebfng n\u01b0\u1edbc t\u00f4i t\u1eeb khi m\u1edbi ra \u0111\u1eddi.",
+                //                "T\u00f4i y\u00eau ti\u1ebfng n\u01b0\u1edbc t\u00f4i t\u1eeb khi m\u1edbi ra \u0111\u1eddi.",
                 JLabel.CENTER);
         m_preview.setBackground(Color.white);
         m_preview.setForeground(Color.black);
@@ -136,24 +135,24 @@ public class FontDialog extends JDialog
 
         JButton btOK = new JButton(myResources.getString("OK"));
         btOK.addActionListener(
-            new ActionListener()
-            {
-            @Override
-                public void actionPerformed(ActionEvent e) {
-                    m_succeeded = true;
-                    dispose();
-                }
-            });
+                new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        m_succeeded = true;
+                        dispose();
+                    }
+                });
 
         JButton btCancel = new JButton(myResources.getString("Cancel"));
         btCancel.addActionListener(
-            new ActionListener()
-            {
-            @Override
-                public void actionPerformed(ActionEvent e) {
-                    dispose();
-                }
-            });
+                new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        dispose();
+                    }
+                });
 
         if (MAC_OS_X) {
             p.add(btCancel);
@@ -175,17 +174,16 @@ public class FontDialog extends JDialog
         // Handle Escape key to hide the dialog
         KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         Action escapeAction =
-            new AbstractAction()
-            {
-            @Override
-                public void actionPerformed(ActionEvent e) {
-                    dispose();
-                }
-            };
+                new AbstractAction() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        dispose();
+                    }
+                };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escapeKeyStroke, "ESCAPE");
         getRootPane().getActionMap().put("ESCAPE", escapeAction);
     }
-
 
     /**
      *  Sets the attributes attribute of the FontDialog object
@@ -198,23 +196,22 @@ public class FontDialog extends JDialog
 
         String styleName;
         switch (font.getStyle()) {
-                        case Font.BOLD | Font.ITALIC:
-                            styleName = "Bold Italic";
-                            break;
-                        case Font.BOLD:
-                            styleName = "Bold";
-                            break;
-                        case Font.ITALIC:
-                            styleName = "Italic";
-                            break;
-                        default:
-                            styleName = "Regular";
-                            break;
+            case Font.BOLD | Font.ITALIC:
+                styleName = "Bold Italic";
+                break;
+            case Font.BOLD:
+                styleName = "Bold";
+                break;
+            case Font.ITALIC:
+                styleName = "Italic";
+                break;
+            default:
+                styleName = "Regular";
+                break;
         }
         m_lstFontStyle.setSelected(styleName);
         updatePreview();
     }
-
 
     /**
      *  Description of the Method
@@ -225,7 +222,6 @@ public class FontDialog extends JDialog
         return m_succeeded;
     }
 
-
     /**
      *  Gets the font attribute of the FontDialog object
      *
@@ -235,7 +231,6 @@ public class FontDialog extends JDialog
     public Font getFont() {
         return curFont;
     }
-
 
     /**
      *  Updates Font Preview
@@ -252,7 +247,7 @@ public class FontDialog extends JDialog
         m_preview.repaint();
         curFont = fn;
     }
-    
+
     /**
      *  Sets the preview text
      *
