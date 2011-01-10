@@ -1,4 +1,3 @@
-package net.sourceforge.vietpad;
 /*
  *  Copyright 1999-2002 Matthew Robinson and Pavel Vorobiev.
  *  All Rights Reserved.
@@ -9,6 +8,7 @@ package net.sourceforge.vietpad;
  *  http://www.spindoczine.com/sbe
  *  ===================================================
  */
+package net.sourceforge.vietpad;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -23,14 +23,14 @@ import javax.swing.event.ListSelectionListener;
  *
  *@author     Quan Nguyen
  *@version    1.2, June 20, 2009
- *@see        http://vietpad.sourceforge.net
+ *@see        <a href="http://vietpad.sourceforge.net">VietPad</a>
  */
 public class FontDialog extends JDialog {
 
-    private final OpenList m_lstFontName;
-    private final OpenList m_lstFontStyle;
-    private final OpenList m_lstFontSize;
-    private final JLabel m_preview;
+    private OpenList m_lstFontName;
+    private OpenList m_lstFontStyle;
+    private OpenList m_lstFontSize;
+    private JLabel m_preview;
     private final ResourceBundle myResources = ResourceBundle.getBundle("net.sourceforge.vietpad.Resources");
     private Font curFont;
     private boolean m_succeeded = false;
@@ -45,6 +45,26 @@ public class FontDialog extends JDialog {
         super(owner, ResourceBundle.getBundle("net.sourceforge.vietpad.Resources").getString("Font"), true);
         setLocale(owner.getLocale());
         setResizable(false);
+        initComponents();
+
+        // Handle Escape key to hide the dialog
+        KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
+        Action escapeAction =
+                new AbstractAction() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        dispose();
+                    }
+                };
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escapeKeyStroke, "ESCAPE");
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);
+    }
+
+    /**
+     *  Initializes the form
+     */
+    private void initComponents() {
         final JPanel pp = new JPanel();
         pp.setBorder(new EmptyBorder(5, 10, 11, 9));
         pp.setLayout(new BoxLayout(pp, BoxLayout.Y_AXIS));
@@ -118,7 +138,6 @@ public class FontDialog extends JDialog {
         p.setBorder(new TitledBorder(new EtchedBorder(), myResources.getString("Preview")));
         m_preview = new JLabel(
                 "The quick brown fox jumps over the lazy dog.",
-                //                "T\u00f4i y\u00eau ti\u1ebfng n\u01b0\u1edbc t\u00f4i t\u1eeb khi m\u1edbi ra \u0111\u1eddi.",
                 JLabel.CENTER);
         m_preview.setBackground(Color.white);
         m_preview.setForeground(Color.black);
@@ -169,20 +188,7 @@ public class FontDialog extends JDialog {
         getContentPane().add(pp);
         rootPane.setDefaultButton(btOK);
         pack();
-        setLocationRelativeTo(owner);
-
-        // Handle Escape key to hide the dialog
-        KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction =
-                new AbstractAction() {
-
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        dispose();
-                    }
-                };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escapeKeyStroke, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
+        setLocationRelativeTo(getOwner());
     }
 
     /**
