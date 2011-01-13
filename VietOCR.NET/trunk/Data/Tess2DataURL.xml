@@ -5,6 +5,7 @@
   <entry key="eng">http://tesseract-ocr.googlecode.com/files/tesseract-2.00.eng.tar.gz</entry>
   <entry key="fra">http://tesseract-ocr.googlecode.com/files/tesseract-2.00.fra.tar.gz</entry>
   <entry key="ita">http://tesseract-ocr.googlecode.com/files/tesseract-2.00.ita.tar.gz</entry>
+  <entry key="lit">http://ftp.akl.lt/users/dgvirtual/tesseract-ocr-lit_2.03_0.3-unofficial0.zip</entry>
   <entry key="nld">http://tesseract-ocr.googlecode.com/files/tesseract-2.00.nld.tar.gz</entry>
   <entry key="sic">http://tesseract-ocr.googlecode.com/files/tesseract-2.00.que-classic.tar.gz</entry>
   <entry key="spa">http://tesseract-ocr.googlecode.com/files/tesseract-2.00.spa.tar.gz</entry>
