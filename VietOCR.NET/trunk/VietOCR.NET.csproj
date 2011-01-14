@@ -266,6 +266,7 @@
     <Content Include="Hunspellx86.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="readme_cs_lt.html" />
     <Content Include="samples\vietsample1.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -344,6 +345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChangeCaseDialog.vi-VN.resx">
       <DependentUpon>ChangeCaseDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TextBoxContextMenuStrip.lt-LT.resx">
+      <DependentUpon>TextBoxContextMenuStrip.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TextBoxContextMenuStrip.resx">
       <DependentUpon>TextBoxContextMenuStrip.cs</DependentUpon>

@@ -166,10 +166,10 @@
     <value>Paketinio apdorojimo būsena</value>
   </data>
   <data name="Save_Merged_PDF" xml:space="preserve">
-    <value>Įrašyti Merged PDF</value>
+    <value>Sujungto PDF failo įrašymas</value>
   </data>
   <data name="Select_Input_Images" xml:space="preserve">
-    <value>Parinkti Input Images</value>
+    <value>Parinkite sujungtinus grafinius failus</value>
   </data>
   <data name="created" xml:space="preserve">
     <value> buvo sukurtas.</value>
@@ -265,15 +265,21 @@
     <value>Išteklius nerastas.</value>
   </data>
   <data name="Save_Multipage_TIFF_Image" xml:space="preserve">
-    <value>Įrašyti Multi-page TIFF Image</value>
+    <value>Puslapiuoto TIFF failo įrašymas</value>
   </data>
   <data name="Select_Input_PDFs" xml:space="preserve">
-    <value>Parinkti Input PDFs</value>
+    <value>Parinkite sujungtinus PDF failus</value>
   </data>
   <data name="Open" xml:space="preserve">
-    <value>Open</value>
+    <value>Atverti</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Įrašyti</value>
+  </data>
+  <data name="readme" xml:space="preserve">
+    <value>readme_cs_lt.html</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Parinkti</value>
   </data>
 </root>
