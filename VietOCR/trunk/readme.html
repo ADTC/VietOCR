@@ -8,7 +8,8 @@
         <h2 align="center">
             VietOCR</h2>
         <p align="center">
-            English | <a href="readme_lt.html">Lietuviškai</a> | <a href="readme_sk.html">Slovensky</a> | <a href="readme_vi.html">Vietnamese</a></p>
+            English | <a href="readme_lt.html">Lietuviškai</a> | <a href="readme_sk.html">Slovensky</a>
+            | <a href="readme_vi.html">Vietnamese</a></p>
         <h3>
             DESCRIPTION</h3>
         <p>
@@ -47,9 +48,9 @@
                 href="http://code.google.com/p/tesseract-ocr/wiki/TesseractSvnInstallation">source</a>,
             they will be placed in <tt>/usr/local/bin</tt> and <tt>/usr/local/share/tessdata</tt>.
             You may need to specify the directory of Tesseract executable from VietOCR&#39;s
-            <tt>Settings</tt> menu. If the data is in a non-standard location, a soft link to <tt>tessdata</tt> 
-            may be required. You can also let VietOCR know the location of <tt>tessdata</tt> via
-            the environment variable <tt>TESSDATA_PREFIX</tt>:</p>
+            <tt>Settings</tt> menu. If the data is in a non-standard location, a soft link to
+            <tt>tessdata</tt> may be required. You can also let VietOCR know the location of
+            <tt>tessdata</tt> via the environment variable <tt>TESSDATA_PREFIX</tt>:</p>
         <blockquote>
             <p>
                 <tt>export TESSDATA_PREFIX=/usr/local/share/</tt></p>
@@ -57,6 +58,11 @@
         <p>
             For other platforms, please consult <a href="http://code.google.com/p/tesseract-ocr/wiki/ReadMe">
                 Tesseract Wiki</a> page.</p>
+        <p>
+            VietOCR also provides support for downloading and installing selected language packs
+            via <em>Download Language Data</em> menu item. Depending on the location of the
+            <tt>tessdata</tt> folder, you may be required to run the program as root or admin
+            to be able to install the downloaded data into the folder.</p>
         <p>
             Scanning support is provided via the Windows Image Acquisition Library v2.0, which
             requires Windows XP Service Pack 1 (SP1) or later. The library comes standard with
@@ -88,11 +94,11 @@
         <p>
             Spellcheck functionality is available through Hunspell, whose <a href="http://wiki.services.openoffice.org/wiki/Dictionaries">
                 dictionary</a> files (<tt>.aff</tt>, <tt>.dic</tt>) should be placed in <tt>dict</tt>
-            folder of VietOCR. <tt>user.dic</tt> is an UTF-8-encoded file 
-            which contains a list of custom words, one word per line.</p>
+            folder of VietOCR. <tt>user.dic</tt> is an UTF-8-encoded file which contains a list
+            of custom words, one word per line.</p>
         <p>
-            On Linux, Hunspell and its dictionaries can be installed by Synaptic
-            or <tt>apt</tt>, as follows:</p>
+            On Linux, Hunspell and its dictionaries can be installed by Synaptic or <tt>apt</tt>,
+            as follows:</p>
         <blockquote>
             <tt>sudo apt-get install hunspell hunspell-en-us</tt>
         </blockquote>
@@ -152,8 +158,7 @@
             read though and manually correct them according to the original image.</p>
         <p>
             Following are instructions on how to correct the first two categories of OCR errors
-            using <a href="http://vietpad.sourceforge.net/">VietPad</a> text editor. The process
-            can be summarized as follows:</p>
+            using the built-in functionality:</p>
         <ol style='margin-top: 0in' start="1" type="1">
             <li>Group lines. The lines need to be grouped to the paragraph they belong, as being
                 OCRed, each line becomes a separate 1-line paragraph. Use <i>Remove Line Breaks</i>
@@ -162,10 +167,10 @@
             <li>Select <i>Change Case</i>, also under <i>Format</i> menu, and choose <i>Sentence
                 case</i> to correct most of the letter case errors. Locate and fix the rest of remaining
                 letter case errors.</li>
-            <li>Correct the misspelled errors using the <i>Spell Check</i> under <i>Tool</i> menu.</li>
+            <li>Correct the misspelled errors using the <i>Spell Check</i>.</li>
         </ol>
         <p>
-            Through the above steps, most of common errors should be eliminated. The remaining,
+            Through the above process, most of common errors can be eliminated. The remaining,
             semantic errors are few, but it requires a human editor to read though and make
             necessary edits to make the document like the original scanned document, and error-free
             if desired.</p>
