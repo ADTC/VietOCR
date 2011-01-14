@@ -122,7 +122,7 @@
     <value>118, 135</value>
   </data>
   <data name="buttonSplit.Text" xml:space="preserve">
-    <value>Iš&amp;skaidyti</value>
+    <value>&amp;Skaidyti</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>199, 135</value>
@@ -203,7 +203,7 @@
     <value>73, 13</value>
   </data>
   <data name="labelInput.Text" xml:space="preserve">
-    <value>Įvesties &amp;failas:</value>
+    <value>Į&amp;vesties failas:</value>
   </data>
   <data name="labelOutput.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 50</value>
@@ -212,7 +212,7 @@
     <value>78, 13</value>
   </data>
   <data name="labelOutput.Text" xml:space="preserve">
-    <value>Iš&amp;vesties failas:</value>
+    <value>I&amp;švesties failas:</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>287, 178</value>
