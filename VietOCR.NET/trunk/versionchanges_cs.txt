@@ -109,7 +109,7 @@ Version 1.9 (11 November 2010)
 - Add support for a custom dictionary
 - List in correct order files generated from PDF conversion
 
-Version 2.0 Beta 2 (3 January 2011)
+Version 2.0 RC (14 January 2011)
 - Add spellcheck suggestion support
 - Add localization for Lithuanian
 - Improve accessibility and usability
