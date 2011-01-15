@@ -241,7 +241,7 @@ public class GuiWithCommand extends GuiWithScan {
                     } else if (cause instanceof FileNotFoundException) {
                         why = bundle.getString("An_exception_occurred_in_Tesseract_engine_while_recognizing_this_image.");
                     } else if (cause instanceof OutOfMemoryError) {
-                        why = APP_NAME + vietpadResources.getString("_has_run_out_of_memory.\nPlease_restart_") + vietpadResources.getString("_and_try_again.");
+                        why = cause.getMessage();
                     } else {
                         why = cause.getMessage();
                     }
