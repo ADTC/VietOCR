@@ -237,8 +237,8 @@
   <data name="No_Recent_Files" xml:space="preserve">
     <value>No Recent Files</value>
   </data>
-  <data name="Do_you_want_to_save_the_changes_to" xml:space="preserve">
-    <value>Do you want to save the changes to</value>
+  <data name="Do_you_want_to_save_the_changes_to_" xml:space="preserve">
+    <value>Do you want to save the changes to </value>
   </data>
   <data name="Untitled" xml:space="preserve">
     <value>Untitled</value>
