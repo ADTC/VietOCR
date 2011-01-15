@@ -237,11 +237,11 @@
   <data name="No_Recent_Files" xml:space="preserve">
     <value>Không có các tập tin mới đây</value>
   </data>
-  <data name="Do_you_want_to_save_the_changes_to" xml:space="preserve">
-    <value>Bạn có muốn lưu thay đổi vào</value>
+  <data name="Do_you_want_to_save_the_changes_to_" xml:space="preserve">
+    <value>Bạn có muốn lưu thay đổi vào </value>
   </data>
   <data name="Untitled" xml:space="preserve">
-    <value>Không tên</value>
+    <value>Không tựa</value>
   </data>
   <data name="Add_to_Dictionary" xml:space="preserve">
     <value>Cho vào tự điển</value>

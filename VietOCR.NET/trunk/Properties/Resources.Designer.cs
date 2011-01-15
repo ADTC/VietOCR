@@ -169,11 +169,11 @@ namespace VietOCR.NET.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want to save the changes to.
+        ///   Looks up a localized string similar to Do you want to save the changes to .
         /// </summary>
-        internal static string Do_you_want_to_save_the_changes_to {
+        internal static string Do_you_want_to_save_the_changes_to_ {
             get {
-                return ResourceManager.GetString("Do_you_want_to_save_the_changes_to", resourceCulture);
+                return ResourceManager.GetString("Do_you_want_to_save_the_changes_to_", resourceCulture);
             }
         }
         
