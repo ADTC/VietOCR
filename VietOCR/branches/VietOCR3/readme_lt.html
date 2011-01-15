@@ -41,6 +41,8 @@
         <p>
             Jeigu naudojatės čia nepaminėta platforma, išsamesnės informacijos rasite <a href="http://code.google.com/p/tesseract-ocr/wiki/ReadMe">„Tesseract“ vikyje</a>.</p>
         <p>
+            „VietOCR“ geba parsiųsti ir įdiegti kalbinių duomenų paketus kai kurioms kalboms; šia funkcija galite pasinaudoti, iškviesdami meniu „<i>Nuostatos</i>“ punktą „<i>Parsiųsti kalbinius duomenis</i>“. Jeigu <tt>tessdata</tt> aplankas yra sisteminio aplanko (pvz., <tt>/usr</tt> „Linux“ sistemoje ar <tt>C:\Program Files</tt> „Windows“ sistemoje) viduje, kalbiniams duomenims įdiegti programą gali tekti vykdyti administratoriaus teisėmis.</p>
+        <p>
             Skenerio programiniam palaikymui yra naudojama „Windows Image Acquisition Library (WIA) v2.0“ biblioteka, kuriai būtina „Windows XP SP1“ ar naujesnė „Windows“ laida. Su „Windows 7“ WIA biblioteka pateikiama iškart, o į „Windows XP“ ji įdiegiama, nukopijuojant failą <tt>wiaaut.dll</tt> į sistemos <tt>System32</tt> aplanką (dažniausiai jo kelias – <tt>C:\Windows\System32</tt>) ir jį užregistruojant tokia komanda:</p>
         <blockquote>
             <p>
@@ -92,11 +94,11 @@
         <p>
             Trečiosios kategorijos klaidų pašalinimas negali būti automatizuotas ir reikalauja rankinio teksto redaktoriaus darbo. Šios rūšies klaidos susiję su teksto semantinėm problemom. Tokias atvejais tik žmogus, perskaitęs sakinį, supratęs jo kontekstą, gali nuspręsti kuris žodis buvo originaliame dokumente.</p>
         <p>
-            Pateikiame instrukciją, kaip taisyti pirmos ir antros kategorijos teksto ženklų atpažinimo klaidas tiesiogiai „VietOCR.NET“ lange. Siūlome šiuos žingsnius:</p>
+            Pateikiame instrukciją, kaip taisyti pirmos ir antros kategorijos teksto ženklų atpažinimo klaidas tiesiogiai programos lange:</p>
         <ol style="margin-top: 0in" start="1" type="1">
-            <li>Sujunkite teksto eilutes. Po teksto atpažinimo kiekvienos eilutės gale atsiranda po eilutės skirtuką, nurodantį pastraipos pabaigą. Eilutėms sujungti pasinaudokite meniu „<i>Formatas</i>“ punktu „<i>Pašalinti eilučių skirtukus</i>“. Atkreipkite dėmesį, kad, kai tekstas yra eiliuotas (poezija ar pan.) to gali ir nereikėti.</li>
-            <li>Daugumą raidžių registro klaidų pašalinsite, pasirinkę meniu „<i>Formatas</i>“ punktą „<i>Keisti raidžių registrą</i>“, tuomet pasirinkite punktą „<i>Sakinio stilius</i>“.</li>
-            <li>Ištaisykite rašybos klaidas, pasinaudodami meniu „<i>Priemonės</i>“ punktu „<i>Tikrinti rašybą</i>“.</li>
+            <li>sujunkite teksto eilutes. Po teksto atpažinimo kiekvienos eilutės gale atsiranda po eilutės skirtuką, nurodantį pastraipos pabaigą. Eilutėms sujungti pasinaudokite meniu „<i>Formatas</i>“ punktu „<i>Pašalinti eilučių skirtukus</i>“. Atkreipkite dėmesį, kad, kai tekstas yra eiliuotas (poezija ar pan.) to gali ir nereikėti;</li>
+            <li>daugumą raidžių registro klaidų pašalinsite, pasirinkę meniu „<i>Formatas</i>“ punktą „<i>Keisti raidžių registrą</i>“, tuomet pasirinkite punktą „<i>Sakinio stilius</i>“;</li>
+            <li>ištaisykite rašybos klaidas, pasinaudodami mygtuku „<i>Tikrinti rašybą</i>“.</li>
         </ol>
         <p>
             Atlikus šiuos žingsnius, dauguma klaidų bus pašalintos. Likusios klaidos susiję su teksto semantika. Jos reikalauja žmogaus – tekstų redaktoriaus – pastangų. Redaktorius skaitys originalo tekstą ir ištaisys tas vietas, kuriose automatinis klaidų šalinimas negalėjo padėti.</p>
