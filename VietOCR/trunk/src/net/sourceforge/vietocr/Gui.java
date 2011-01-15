@@ -41,7 +41,7 @@ public class Gui extends JFrame {
     static final boolean MAC_OS_X = System.getProperty("os.name").startsWith("Mac");
     static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
     static final String UTF8 = "UTF-8";
-    ResourceBundle vietpadResources, bundle;
+    ResourceBundle bundle;
     static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
     private int filterIndex;
     private FileFilter[] fileFilters;
@@ -211,7 +211,6 @@ public class Gui extends JFrame {
         if (filterIndex < fileFilters.length) {
             filechooser.setFileFilter(fileFilters[filterIndex]);
         }
-        vietpadResources = ResourceBundle.getBundle("net.sourceforge.vietpad.Resources");
 
         wordWrapOn = prefs.getBoolean("wordWrap", false);
 
@@ -551,7 +550,7 @@ public class Gui extends JFrame {
             }
         } catch (OutOfMemoryError oome) {
 //            oome.printStackTrace();
-            JOptionPane.showMessageDialog(this, APP_NAME + vietpadResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + vietpadResources.getString("_and_try_again."), vietpadResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -1724,11 +1723,11 @@ public class Gui extends JFrame {
             updateSave(false);
         } catch (OutOfMemoryError oome) {
 //            oome.printStackTrace();
-            JOptionPane.showMessageDialog(this, APP_NAME + vietpadResources.getString("_has_run_out_of_memory.\nPlease_restart_") + APP_NAME + vietpadResources.getString("_and_try_again."), vietpadResources.getString("Out_of_Memory"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
         } catch (FileNotFoundException fnfe) {
-            showError(fnfe, vietpadResources.getString("Error_saving_file_") + textFile + vietpadResources.getString(".\nFile_is_inaccessible."));
+            showError(fnfe, fnfe.getMessage());
         } catch (Exception ex) {
-            showError(ex, vietpadResources.getString("Error_saving_file_") + textFile);
+            showError(ex, ex.getMessage());
         } finally {
             SwingUtilities.invokeLater(new Runnable() {
 
@@ -1961,7 +1960,6 @@ public class Gui extends JFrame {
         }
         Locale.setDefault(locale);
         bundle = java.util.ResourceBundle.getBundle("net.sourceforge.vietocr.Gui");
-        vietpadResources = ResourceBundle.getBundle("net.sourceforge.vietpad.Resources");
 
         SwingUtilities.invokeLater(new Runnable() {
 
