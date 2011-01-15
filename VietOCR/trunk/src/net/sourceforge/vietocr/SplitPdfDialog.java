@@ -334,7 +334,7 @@ public class SplitPdfDialog extends javax.swing.JDialog {
     private void jRadioButtonFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFilesActionPerformed
         disableBoxes(true);
     }//GEN-LAST:event_jRadioButtonFilesActionPerformed
-    void disableBoxes(boolean enabled) {
+    private void disableBoxes(boolean enabled) {
         this.jTextFieldNumOfPages.setEnabled(enabled);
         this.jTextFieldFrom.setEnabled(!enabled);
         this.jTextFieldTo.setEnabled(!enabled);
