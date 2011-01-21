@@ -73,7 +73,7 @@ public class FontDialog extends JDialog {
         JPanel p = new JPanel();
 //      JPanel p = new JPanel(new GridLayout(1, 3, 10, 2));
         // Caused the fontname list to collapse in Solaris (Bug ID: 4682565)
-        p.setBorder(new TitledBorder(new EtchedBorder(), bundle.getString("Font")));
+//        p.setBorder(new TitledBorder(new EtchedBorder(), bundle.getString("Font")));
 
         final Font[] allFonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
         final Collection<String> fontFamilies = new TreeSet<String>();
