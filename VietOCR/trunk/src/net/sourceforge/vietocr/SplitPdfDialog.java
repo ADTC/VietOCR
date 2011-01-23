@@ -243,7 +243,6 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         jButtonSplit.setText(bundle.getString("jButtonSplit.Text")); // NOI18N
-        jButtonSplit.setToolTipText(bundle.getString("jButtonSplit.ToolTipText")); // NOI18N
         jButtonSplit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSplitActionPerformed(evt);
@@ -252,7 +251,6 @@ public class SplitPdfDialog extends javax.swing.JDialog {
         jPanel2.add(jButtonSplit);
 
         jButtonCancel.setText(bundle.getString("jButtonCancel.Text")); // NOI18N
-        jButtonCancel.setToolTipText(bundle.getString("jButtonCancel.ToolTipText")); // NOI18N
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelActionPerformed(evt);
