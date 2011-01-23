@@ -1,4 +1,3 @@
-// Class SimpleFilter unchanged from chapter 14
 /**
  *  Copyright 1999-2002 Matthew Robinson and Pavel Vorobiev.
  *  All Rights Reserved.

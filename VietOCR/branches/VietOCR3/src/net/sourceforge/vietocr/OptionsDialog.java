@@ -118,7 +118,6 @@ public class OptionsDialog extends javax.swing.JDialog {
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         jButtonOK.setText(bundle.getString("jButtonOK.Text")); // NOI18N
-        jButtonOK.setToolTipText(bundle.getString("jButtonOK.ToolTipText")); // NOI18N
         jButtonOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonOKActionPerformed(evt);
@@ -127,7 +126,6 @@ public class OptionsDialog extends javax.swing.JDialog {
         jPanel1.add(jButtonOK);
 
         jButtonCancel.setText(bundle.getString("jButtonCancel.Text")); // NOI18N
-        jButtonCancel.setToolTipText(bundle.getString("jButtonCancel.ToolTipText")); // NOI18N
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelActionPerformed(evt);
