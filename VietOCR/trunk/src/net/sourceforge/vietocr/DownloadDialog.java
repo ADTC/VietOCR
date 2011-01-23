@@ -112,7 +112,7 @@ public class DownloadDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/DownloadDialog"); // NOI18N
-        setTitle(bundle.getString("Download_Language_Data")); // NOI18N
+        setTitle(bundle.getString("this.Title")); // NOI18N
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -129,7 +129,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 20));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        jButtonDownload.setText(bundle.getString("Download")); // NOI18N
+        jButtonDownload.setText(bundle.getString("jButtonDownload.Text")); // NOI18N
         jButtonDownload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDownloadActionPerformed(evt);
@@ -139,7 +139,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         jPanel2.add(jButtonDownload, gridBagConstraints);
 
-        jButtonCancel.setText(bundle.getString("Cancel")); // NOI18N
+        jButtonCancel.setText(bundle.getString("jButtonCancel.Text")); // NOI18N
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelActionPerformed(evt);
@@ -152,7 +152,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 25, 0);
         jPanel2.add(jButtonCancel, gridBagConstraints);
 
-        jButtonClose.setText(bundle.getString("Close")); // NOI18N
+        jButtonClose.setText(bundle.getString("jButtonClose.Text")); // NOI18N
         jButtonClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCloseActionPerformed(evt);
