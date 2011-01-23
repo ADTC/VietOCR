@@ -81,18 +81,18 @@ public class FontDialog extends JDialog {
             fontFamilies.add(allFonts[i].getFamily());
         }
 
-        m_lstFontName = new OpenList(fontFamilies.toArray(), bundle.getString("Name") + ":");
+        m_lstFontName = new OpenList(fontFamilies.toArray(), bundle.getString("Name"));
         p.add(m_lstFontName);
 
         m_lstFontStyle = new OpenList(
                 new String[]{"Regular", "Bold", "Italic", "Bold Italic"},
-                bundle.getString("Style") + ":",
+                bundle.getString("Style"),
                 11);
         p.add(m_lstFontStyle);
 
         m_lstFontSize = new OpenList(
                 new String[]{"9", "10", "11", "12", "13", "14", "18", "24", "36", "48", "64", "72", "96"},
-                bundle.getString("Size") + ":",
+                bundle.getString("Size"),
                 5);
         p.add(m_lstFontSize);
 
