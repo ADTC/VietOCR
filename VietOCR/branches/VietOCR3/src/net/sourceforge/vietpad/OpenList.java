@@ -1,4 +1,3 @@
-package net.sourceforge.vietpad;
 /*
  *  Copyright 1999-2002 Matthew Robinson and Pavel Vorobiev.
  *  All Rights Reserved.
@@ -9,7 +8,7 @@ package net.sourceforge.vietpad;
  *  http://www.spindoczine.com/sbe
  *  ===================================================
  */
-
+package net.sourceforge.vietpad;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -23,7 +22,7 @@ import javax.swing.event.ListSelectionListener;
  *
  *@author     Quan Nguyen
  *@version    1.0.5, 19 April 2003
- *@see        http://vietpad.sourceforge.net
+ *@see        <a href="http://vietpad.sourceforge.net">VietPad</a>
  */
 class OpenList extends JPanel implements ListSelectionListener, ActionListener {
 
@@ -32,13 +31,23 @@ class OpenList extends JPanel implements ListSelectionListener, ActionListener {
     protected JList m_list;
     protected JScrollPane m_scroll;
 
+    /**
+     * Constructor for the OpenList object.
+     * @param data List items
+     * @param title Title
+     * @param limit Max of characters in entry box
+     */
     public OpenList(String[] data, String title, int limit) {
         this(data, title);
         m_text.setDocument(new LimitedLengthDocument(limit));
         m_text.setColumns(limit);
     }
 
-
+    /**
+     * Constructor for the OpenList object.
+     * @param data List items
+     * @param title Title
+     */
     public OpenList(Object[] data, String title) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         m_title = new JLabel(title);
@@ -58,27 +67,22 @@ class OpenList extends JPanel implements ListSelectionListener, ActionListener {
         add(m_scroll);
     }
 
-
     public void setSelected(String sel) {
         m_list.setSelectedValue(sel, true);
         m_text.setText(sel);
     }
 
-
     public String getSelected() {
         return m_text.getText();
     }
-
 
     public int getSelectedIndex() {
         return m_list.getSelectedIndex();
     }
 
-
     public void setSelectedInt(int value) {
         setSelected(Integer.toString(value));
     }
-
 
     public int getSelectedInt() {
         try {
@@ -87,7 +91,6 @@ class OpenList extends JPanel implements ListSelectionListener, ActionListener {
             return -1;
         }
     }
-
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
@@ -99,7 +102,6 @@ class OpenList extends JPanel implements ListSelectionListener, ActionListener {
             m_text.setText(obj.toString());
         }
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -118,16 +120,13 @@ class OpenList extends JPanel implements ListSelectionListener, ActionListener {
         }
     }
 
-
     public void addListSelectionListener(ListSelectionListener lst) {
         m_list.addListSelectionListener(lst);
     }
 
-
     public void addActionListener(ActionListener lst) {
         m_text.addActionListener(lst);
     }
-
 
     /**
      *  Gets the preferredSizeList attribute of the OpenList object,
@@ -139,7 +138,6 @@ class OpenList extends JPanel implements ListSelectionListener, ActionListener {
         return m_scroll.getPreferredSize();
     }
 
-
     /**
      *  Sets the preferredSizeList attribute of the OpenList object
      *  added to work around Bug ID: 4682565
@@ -149,5 +147,4 @@ class OpenList extends JPanel implements ListSelectionListener, ActionListener {
     public void setPreferredSizeList(Dimension d) {
         m_scroll.setPreferredSize(new Dimension(m_scroll.getPreferredSize().width, d.height));
     }
-    
 }

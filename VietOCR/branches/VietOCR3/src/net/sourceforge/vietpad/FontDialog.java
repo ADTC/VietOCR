@@ -45,7 +45,7 @@ public class FontDialog extends JDialog {
         super(owner, true);
         setLocale(owner.getLocale());
         bundle = ResourceBundle.getBundle("net.sourceforge.vietpad.FontDialog");
-        this.setTitle(bundle.getString("Font"));
+        this.setTitle(bundle.getString("this.Title"));
         setResizable(false);
         initComponents();
 
@@ -154,7 +154,7 @@ public class FontDialog extends JDialog {
         p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
         p.add(Box.createHorizontalGlue());
 
-        JButton btOK = new JButton(bundle.getString("OK"));
+        JButton btOK = new JButton(bundle.getString("btOK.Text"));
         btOK.addActionListener(
                 new ActionListener() {
 
@@ -165,7 +165,7 @@ public class FontDialog extends JDialog {
                     }
                 });
 
-        JButton btCancel = new JButton(bundle.getString("Cancel"));
+        JButton btCancel = new JButton(bundle.getString("btCancel.Text"));
         btCancel.addActionListener(
                 new ActionListener() {
 
