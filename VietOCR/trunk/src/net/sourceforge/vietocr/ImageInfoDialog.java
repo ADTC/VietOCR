@@ -8,6 +8,7 @@ import javax.swing.*;
 
 public class ImageInfoDialog extends javax.swing.JDialog {
 
+    private int actionSelected = -1;
     IIOImage oimage;
     boolean isProgrammatic;
 
@@ -191,12 +192,19 @@ public class ImageInfoDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
+        actionSelected = JOptionPane.OK_OPTION;
         this.setVisible(false);
     }//GEN-LAST:event_jButtonOKActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        actionSelected = JOptionPane.CANCEL_OPTION;
         this.setVisible(false);
     }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    public int showDialog() {
+        setVisible(true);
+        return actionSelected;
+    }
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         if (!isProgrammatic) {
