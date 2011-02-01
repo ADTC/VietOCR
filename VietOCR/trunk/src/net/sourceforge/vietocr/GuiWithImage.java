@@ -32,7 +32,11 @@ public class GuiWithImage extends GuiWithCommand {
 
         ImageInfoDialog dialog = new ImageInfoDialog(this, true);
         dialog.setImage(iioImageList.get(imageIndex));
-        dialog.setVisible(true);
+        if (dialog.showDialog() == JOptionPane.OK_OPTION) {
+            // Do nothing for now.
+            // Initial plan was to implement various image manipulation operations
+            // (rotate, flip, sharpen, brighten, threshold, clean up,...) here.
+        }
     }
 
     @Override
