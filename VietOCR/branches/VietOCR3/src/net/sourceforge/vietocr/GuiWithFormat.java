@@ -128,7 +128,6 @@ public class GuiWithFormat extends GuiWithImage {
             }
         }
         String result = TextUtilities.removeLineBreaks(jTextArea1.getSelectedText());
-//        .replace("\r\n", "\n").replaceAll("(?<=\n|^)[\t ]+|[\t ]+(?=$|\n)", "").replaceAll("(?<=.)\n(?=.)", " ");
 
         undoSupport.beginUpdate();
         int start = jTextArea1.getSelectionStart();
