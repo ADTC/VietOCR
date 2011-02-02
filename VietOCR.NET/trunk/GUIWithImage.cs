@@ -31,7 +31,9 @@ namespace VietOCR.NET
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-
+                // Do nothing for now. 
+                // Initial plan was to implement various image manipulation operations 
+                // (rotate, flip, sharpen, brighten, threshold, clean up,...) here.
             }
         }
 
