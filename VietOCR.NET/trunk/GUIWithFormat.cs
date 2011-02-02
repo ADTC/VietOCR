@@ -155,12 +155,6 @@ namespace VietOCR.NET
             }
 
             int start = textBox1.SelectionStart;
-
-            //Regex regex = new Regex("(?<=\n|^)[\t ]+|[\t ]+(?=$|\n)");
-            //string result = regex.Replace(textBox1.SelectedText.Replace(Environment.NewLine, "\n"), "");
-            //regex = new Regex("(?<=.)\n(?=.)");
-            //result = regex.Replace(result, " ").Replace("\n", Environment.NewLine);
-
             string result = TextUtilities.RemoveLineBreaks(textBox1.SelectedText);
             textBox1.SelectedText = result;
             textBox1.Select(start, result.Length);
