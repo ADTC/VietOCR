@@ -30,7 +30,7 @@ using VietOCR.NET.Utilities;
 
 namespace VietOCR.NET
 {
-    public partial class GUIWithSettings : VietOCR.NET.GUIWithInputMethod
+    public partial class GUIWithSettings : VietOCR.NET.GUIWithUILanguage
     {
         const string strWatchEnable = "WatchEnable";
         const string strWatchFolder = "WatchFolder";
