@@ -146,6 +146,12 @@
     <Compile Include="GUIWithScan.Designer.cs">
       <DependentUpon>GUIWithScan.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUIWithUILanguage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIWithUILanguage.Designer.cs">
+      <DependentUpon>GUIWithUILanguage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\FormLocalizer.cs" />
     <Compile Include="GUIWithCommand.cs">
       <SubType>Form</SubType>

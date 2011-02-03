@@ -34,7 +34,6 @@ namespace VietOCR.NET
     public partial class GUIWithInputMethod : VietOCR.NET.GUIWithFormat
     {
         ToolStripMenuItem miimChecked;
-        ToolStripMenuItem miuilChecked;
 
         private string selectedInputMethod;
         const string strInputMethod = "InputMethod";
@@ -61,28 +60,6 @@ namespace VietOCR.NET
 
             this.vietInputMethodToolStripMenuItem.DropDownItems.AddRange(ar.ToArray());
             this.textBox1.KeyPress += new KeyPressEventHandler(new VietKeyHandler(this.textBox1).OnKeyPress);
-
-
-            //
-            // Settings UI Language submenu
-            //
-            EventHandler eh1 = new EventHandler(MenuKeyboardUILangOnClick);
-
-            ar.Clear();
-
-            String[] uiLangs = { "en-US", "lt-LT", "vi-VN" };
-            foreach (string uiLang in uiLangs)
-            {
-                ToolStripRadioButtonMenuItem miuil = new ToolStripRadioButtonMenuItem();
-                CultureInfo ci = new CultureInfo(uiLang);
-                miuil.Tag = ci.Name;
-                miuil.Text = ci.Parent.DisplayName + " (" + ci.Parent.NativeName + ")";
-                miuil.CheckOnClick = true;
-                miuil.Click += eh1;
-                ar.Add(miuil);
-            }
-
-            this.uiLanguageToolStripMenuItem.DropDownItems.AddRange(ar.ToArray());
         }
 
         protected override void OnLoad(EventArgs ea)
@@ -103,17 +80,6 @@ namespace VietOCR.NET
             VietKeyHandler.InputMethod = (InputMethods)Enum.Parse(typeof(InputMethods), selectedInputMethod);
             VietKeyHandler.SmartMark = true;
             VietKeyHandler.ConsumeRepeatKey = true;
-
-            for (int i = 0; i < this.uiLanguageToolStripMenuItem.DropDownItems.Count; i++)
-            {
-                if (this.uiLanguageToolStripMenuItem.DropDownItems[i].Tag.ToString() == selectedUILanguage)
-                {
-                    // Select UI Language last saved
-                    miuilChecked = (ToolStripMenuItem)uiLanguageToolStripMenuItem.DropDownItems[i];
-                    miuilChecked.Checked = true;
-                    break;
-                }
-            }
         }
 
         void MenuKeyboardInputMethodOnClick(object obj, EventArgs ea)
@@ -124,30 +90,6 @@ namespace VietOCR.NET
             selectedInputMethod = miimChecked.Text;
             VietKeyHandler.InputMethod = (InputMethods)Enum.Parse(typeof(InputMethods), selectedInputMethod);
         }
-
-        void MenuKeyboardUILangOnClick(object obj, EventArgs ea)
-        {
-            miuilChecked.Checked = false;
-            miuilChecked = (ToolStripMenuItem)obj;
-            miuilChecked.Checked = true;
-            if (selectedUILanguage != miuilChecked.Tag.ToString())
-            {
-                selectedUILanguage = miuilChecked.Tag.ToString();
-                ChangeUILanguage(selectedUILanguage);
-            }
-        }
-
-        ///// <summary>
-        ///// Changes localized text and messages
-        ///// </summary>
-        ///// <param name="locale"></param>
-        ///// <param name="firstTime"></param>
-        //protected override void ChangeUILanguage(string locale)
-        //{
-        //    base.ChangeUILanguage(locale);
-        //    FormLocalizer localizer = new FormLocalizer(this, typeof(GUIWithInputMethod));
-        //    localizer.ApplyCulture(new CultureInfo(locale));
-        //}
 
         protected override void SetVisibleInputMethodMenuitem(bool visible)
         {
