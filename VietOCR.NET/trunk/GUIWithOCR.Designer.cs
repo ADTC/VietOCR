@@ -1,6 +1,6 @@
 ﻿namespace VietOCR.NET
 {
-    partial class GUIWithCommand
+    partial class GUIWithOCR
     {
         /// <summary>
         /// Required designer variable.

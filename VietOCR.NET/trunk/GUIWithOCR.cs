@@ -24,9 +24,9 @@ using Microsoft.Win32;
 
 namespace VietOCR.NET
 {
-    public partial class GUIWithCommand : VietOCR.NET.GUIWithScan
+    public partial class GUIWithOCR : VietOCR.NET.GUIWithScan
     {
-        public GUIWithCommand()
+        public GUIWithOCR()
         {
             InitializeComponent();
         }
