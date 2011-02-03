@@ -54,7 +54,7 @@ public class Gui extends JFrame {
     public final String EOL = System.getProperty("line.separator");
     private String currentDirectory;
     private String outputDirectory;
-    protected String tessPath, dangAmbigsPath;
+    protected String tessPath;
     private Properties config;
     private Properties lookupISO639;
     private Properties lookupISO_3_1_Codes;
@@ -64,7 +64,7 @@ public class Gui extends JFrame {
     private ImageIconScalable imageIcon;
     private boolean isFitImageSelected;
     private JFileChooser filechooser;
-    protected boolean wordWrapOn, dangAmbigsOn;
+    protected boolean wordWrapOn;
     private String selectedInputMethod;
     protected float scaleX = 1f;
     protected float scaleY = 1f;
@@ -213,9 +213,6 @@ public class Gui extends JFrame {
         }
 
         wordWrapOn = prefs.getBoolean("wordWrap", false);
-
-        dangAmbigsPath = prefs.get("DangAmbigsPath", new File(baseDir, "data").getPath());
-        dangAmbigsOn = prefs.getBoolean("dangAmbigs", true);
 
         jTextArea1.setLineWrap(wordWrapOn);
         jCheckBoxMenuWordWrap.setSelected(wordWrapOn);
@@ -1457,7 +1454,6 @@ public class Gui extends JFrame {
             prefs.put("TesseractDirectory", tessPath);
         }
 
-        prefs.put("DangAmbigsPath", dangAmbigsPath);
         prefs.put("inputMethod", selectedInputMethod);
         prefs.put("lookAndFeel", UIManager.getLookAndFeel().getClass().getName());
         prefs.put("fontName", font.getName());
@@ -1470,7 +1466,6 @@ public class Gui extends JFrame {
         }
 
         prefs.putBoolean("wordWrap", wordWrapOn);
-        prefs.putBoolean("dangAmbigs", dangAmbigsOn);
 
         StringBuilder buf = new StringBuilder();
         for (int i = 0; i < this.mruList.size(); i++) {
