@@ -672,8 +672,8 @@ public class Gui extends JFrame {
             groupInputMethod.add(radioItem);
         }
         jMenuInputMethod.setVisible(vie);
-        jSeparator6 = new javax.swing.JPopupMenu.Separator();
-        jSeparator6.setVisible(vie);
+        jSeparatorInputMethod = new javax.swing.JPopupMenu.Separator();
+        jSeparatorInputMethod.setVisible(vie);
         jMenuUILang = new javax.swing.JMenu();
 
         ActionListener uiLangLst = new ActionListener() {
@@ -1122,7 +1122,7 @@ public class Gui extends JFrame {
         jMenuInputMethod.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuInputMethod.Mnemonic").charAt(0));
         jMenuInputMethod.setText(bundle.getString("jMenuInputMethod.Text")); // NOI18N
         jMenuSettings.add(jMenuInputMethod);
-        jMenuSettings.add(jSeparator6);
+        jMenuSettings.add(jSeparatorInputMethod);
 
         jMenuUILang.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuUILang.Mnemonic").charAt(0));
         jMenuUILang.setText(bundle.getString("jMenuUILang.Text")); // NOI18N
@@ -1243,7 +1243,7 @@ public class Gui extends JFrame {
             boolean vie = curLangCode.startsWith("vie");
             VietKeyListener.setVietModeEnabled(vie);
             this.jMenuInputMethod.setVisible(vie);
-            this.jSeparator6.setVisible(vie);
+            this.jSeparatorInputMethod.setVisible(vie);
 
             if (this.jToggleButtonSpellCheck.isSelected()) {
                 this.jToggleButtonSpellCheck.doClick();
@@ -2079,10 +2079,10 @@ public class Gui extends JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
-    private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JToolBar.Separator jSeparator9;
+    private javax.swing.JPopupMenu.Separator jSeparatorInputMethod;
     private javax.swing.JSplitPane jSplitPane1;
     protected javax.swing.JTextArea jTextArea1;
     protected javax.swing.JToggleButton jToggleButtonSpellCheck;
