@@ -75,6 +75,10 @@ namespace VietOCR.NET
             this.changeCaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeLineBreaksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vietInputMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemInputMethod = new System.Windows.Forms.ToolStripSeparator();
+            this.uiLanguageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
             this.downloadLangDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,10 +104,6 @@ namespace VietOCR.NET
             this.toolStripLabelLanguage = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButtonSpellCheck = new System.Windows.Forms.ToolStripButton();
             this.backgroundWorkerLoad = new System.ComponentModel.BackgroundWorker();
-            this.vietInputMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
-            this.uiLanguageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -449,7 +449,7 @@ namespace VietOCR.NET
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.vietInputMethodToolStripMenuItem,
-            this.toolStripMenuItem8,
+            this.toolStripMenuItemInputMethod,
             this.uiLanguageToolStripMenuItem,
             this.toolStripMenuItem9,
             this.downloadLangDataToolStripMenuItem,
@@ -457,6 +457,26 @@ namespace VietOCR.NET
             this.optionsToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
+            // 
+            // vietInputMethodToolStripMenuItem
+            // 
+            this.vietInputMethodToolStripMenuItem.Name = "vietInputMethodToolStripMenuItem";
+            resources.ApplyResources(this.vietInputMethodToolStripMenuItem, "vietInputMethodToolStripMenuItem");
+            // 
+            // toolStripMenuItemInputMethod
+            // 
+            this.toolStripMenuItemInputMethod.Name = "toolStripMenuItemInputMethod";
+            resources.ApplyResources(this.toolStripMenuItemInputMethod, "toolStripMenuItemInputMethod");
+            // 
+            // uiLanguageToolStripMenuItem
+            // 
+            this.uiLanguageToolStripMenuItem.Name = "uiLanguageToolStripMenuItem";
+            resources.ApplyResources(this.uiLanguageToolStripMenuItem, "uiLanguageToolStripMenuItem");
+            // 
+            // toolStripMenuItem9
+            // 
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            resources.ApplyResources(this.toolStripMenuItem9, "toolStripMenuItem9");
             // 
             // downloadLangDataToolStripMenuItem
             // 
@@ -635,26 +655,6 @@ namespace VietOCR.NET
             this.backgroundWorkerLoad.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerLoad_DoWork);
             this.backgroundWorkerLoad.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerLoad_RunWorkerCompleted);
             // 
-            // vietInputMethodToolStripMenuItem
-            // 
-            this.vietInputMethodToolStripMenuItem.Name = "vietInputMethodToolStripMenuItem";
-            resources.ApplyResources(this.vietInputMethodToolStripMenuItem, "vietInputMethodToolStripMenuItem");
-            // 
-            // toolStripMenuItem8
-            // 
-            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            resources.ApplyResources(this.toolStripMenuItem8, "toolStripMenuItem8");
-            // 
-            // uiLanguageToolStripMenuItem
-            // 
-            this.uiLanguageToolStripMenuItem.Name = "uiLanguageToolStripMenuItem";
-            resources.ApplyResources(this.uiLanguageToolStripMenuItem, "uiLanguageToolStripMenuItem");
-            // 
-            // toolStripMenuItem9
-            // 
-            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            resources.ApplyResources(this.toolStripMenuItem9, "toolStripMenuItem9");
-            // 
             // GUI
             // 
             resources.ApplyResources(this, "$this");
@@ -762,7 +762,7 @@ namespace VietOCR.NET
         protected System.Windows.Forms.ToolStripMenuItem scanToolStripMenuItem;
         protected System.Windows.Forms.ToolStripButton toolStripBtnScan;
         protected System.Windows.Forms.ToolStripMenuItem vietInputMethodToolStripMenuItem;
-        protected System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
+        protected System.Windows.Forms.ToolStripSeparator toolStripMenuItemInputMethod;
         protected System.Windows.Forms.ToolStripMenuItem uiLanguageToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
     }
