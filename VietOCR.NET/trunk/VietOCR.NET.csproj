@@ -140,6 +140,12 @@
     <Compile Include="DownloadDialog.Designer.cs">
       <DependentUpon>DownloadDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUIWithPostprocess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIWithPostprocess.Designer.cs">
+      <DependentUpon>GUIWithPostprocess.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUIWithScan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -272,6 +278,9 @@
     <Content Include="Hunspellx86.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="GUIWithPostprocess.resx">
+      <DependentUpon>GUIWithPostprocess.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="readme_cs_lt.html" />
     <Content Include="samples\vietsample1.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

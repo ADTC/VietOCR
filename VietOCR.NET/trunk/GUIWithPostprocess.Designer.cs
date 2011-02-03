@@ -1,6 +1,6 @@
 ﻿namespace VietOCR.NET
 {
-    partial class GUIWithCommand
+    partial class GUIWithPostprocess
     {
         /// <summary>
         /// Required designer variable.
@@ -28,23 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.backgroundWorkerOcr = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerCorrect = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // backgroundWorkerOcr
+            // textBox1
             // 
-            this.backgroundWorkerOcr.WorkerReportsProgress = true;
-            this.backgroundWorkerOcr.WorkerSupportsCancellation = true;
-            this.backgroundWorkerOcr.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerOcr_DoWork);
-            this.backgroundWorkerOcr.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerOcr_RunWorkerCompleted);
-            this.backgroundWorkerOcr.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerOcr_ProgressChanged);
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.textBox1.Size = new System.Drawing.Size(351, 427);
             // 
-            // GUIWithCommand
+            // backgroundWorkerCorrect
+            // 
+            this.backgroundWorkerCorrect.WorkerReportsProgress = true;
+            this.backgroundWorkerCorrect.WorkerSupportsCancellation = true;
+            // 
+            // GUIWithPostprocess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(1284, 835);
-            this.Name = "GUIWithCommand";
+            this.ClientSize = new System.Drawing.Size(687, 498);
+            this.Name = "GUIWithPostprocess";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -53,6 +55,6 @@
 
         #endregion
 
-        private System.ComponentModel.BackgroundWorker backgroundWorkerOcr;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerCorrect;
     }
 }
