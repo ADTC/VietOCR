@@ -65,7 +65,6 @@ public class Gui extends JFrame {
     private boolean isFitImageSelected;
     private JFileChooser filechooser;
     protected boolean wordWrapOn;
-    private String selectedInputMethod;
     protected float scaleX = 1f;
     protected float scaleY = 1f;
     protected static String selectedUILang = "en";
@@ -139,7 +138,6 @@ public class Gui extends JFrame {
             }
         }
 
-        selectedInputMethod = prefs.get("inputMethod", "Telex");
         config = new Properties();
 
         try {
@@ -578,13 +576,6 @@ public class Gui extends JFrame {
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        VietKeyListener keyLst = new VietKeyListener(jTextArea1);
-        jTextArea1.addKeyListener(keyLst);
-        VietKeyListener.setInputMethod(InputMethods.valueOf(selectedInputMethod));
-        VietKeyListener.setSmartMark(true);
-        VietKeyListener.consumeRepeatKey(true);
-        boolean vie = curLangCode.startsWith("vie");
-        VietKeyListener.setVietModeEnabled(vie);
         jTextArea1.addMouseListener(new MouseAdapter() {
             public void mousePressed(final MouseEvent e) {
                 if (e.isPopupTrigger()) {
@@ -655,22 +646,7 @@ public class Gui extends JFrame {
         jMenuItemRemoveLineBreaks = new javax.swing.JMenuItem();
         jMenuSettings = new javax.swing.JMenu();
         jMenuInputMethod = new javax.swing.JMenu();
-        ActionListener imlst = new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-                selectedInputMethod = ae.getActionCommand();
-                VietKeyListener.setInputMethod(InputMethods.valueOf(selectedInputMethod));
-            }
-        };
-
-        ButtonGroup groupInputMethod = new ButtonGroup();
-
-        for (InputMethods im : InputMethods.values()) {
-            String inputMethod = im.name();
-            JRadioButtonMenuItem radioItem = new JRadioButtonMenuItem(inputMethod, selectedInputMethod.equals(inputMethod));
-            radioItem.addActionListener(imlst);
-            jMenuInputMethod.add(radioItem);
-            groupInputMethod.add(radioItem);
-        }
+        boolean vie = curLangCode.startsWith("vie");       
         jMenuInputMethod.setVisible(vie);
         jSeparatorInputMethod = new javax.swing.JPopupMenu.Separator();
         jSeparatorInputMethod.setVisible(vie);
@@ -1454,7 +1430,6 @@ public class Gui extends JFrame {
             prefs.put("TesseractDirectory", tessPath);
         }
 
-        prefs.put("inputMethod", selectedInputMethod);
         prefs.put("lookAndFeel", UIManager.getLookAndFeel().getClass().getName());
         prefs.put("fontName", font.getName());
         prefs.putInt("fontSize", font.getSize());
@@ -2041,7 +2016,7 @@ public class Gui extends JFrame {
     private javax.swing.JMenu jMenuFormat;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenu jMenuImage;
-    private javax.swing.JMenu jMenuInputMethod;
+    protected javax.swing.JMenu jMenuInputMethod;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemChangeCase;
     private javax.swing.JMenuItem jMenuItemDownloadLangData;
