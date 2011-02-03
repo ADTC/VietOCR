@@ -24,12 +24,10 @@ import javax.swing.JRadioButtonMenuItem;
 public class GuiWithUILanguage extends GuiWithInputMethod {
 
     public GuiWithUILanguage() {
-
         initComponents();
     }
 
     private void initComponents() {
-
         ActionListener uiLangLst = new ActionListener() {
 
             @Override
@@ -41,6 +39,7 @@ public class GuiWithUILanguage extends GuiWithInputMethod {
             }
         };
 
+        // build UI Language submenu
         ButtonGroup groupUILang = new ButtonGroup();
         String[] uiLangs = getInstalledUILangs();
         for (int i = 0; i < uiLangs.length; i++) {
