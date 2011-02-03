@@ -323,9 +323,9 @@
                 <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="        ActionListener imlst = new ActionListener() {&#xa;                public void actionPerformed(ActionEvent ae) {&#xa;                    selectedInputMethod = ae.getActionCommand();&#xa;                    VietKeyListener.setInputMethod(InputMethods.valueOf(selectedInputMethod));&#xa;                }&#xa;            };&#xa;&#xa;        ButtonGroup groupInputMethod = new ButtonGroup();&#xa;        &#xa;        for (InputMethods im : InputMethods.values()) {&#xa;            String inputMethod = im.name();&#xa;            JRadioButtonMenuItem radioItem = new JRadioButtonMenuItem(inputMethod, selectedInputMethod.equals(inputMethod));&#xa;            radioItem.addActionListener(imlst);&#xa;            jMenuInputMethod.add(radioItem);&#xa;            groupInputMethod.add(radioItem);            &#xa;        }&#xa;        jMenuInputMethod.setVisible(vie);"/>
               </AuxValues>
             </Menu>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator6">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparatorInputMethod">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jSeparator6.setVisible(vie);"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jSeparatorInputMethod.setVisible(vie);"/>
               </AuxValues>
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="jMenuUILang">
