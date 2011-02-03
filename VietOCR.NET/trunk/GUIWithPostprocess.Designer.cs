@@ -41,6 +41,8 @@
             // 
             this.backgroundWorkerCorrect.WorkerReportsProgress = true;
             this.backgroundWorkerCorrect.WorkerSupportsCancellation = true;
+            this.backgroundWorkerCorrect.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerCorrect_DoWork);
+            this.backgroundWorkerCorrect.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerCorrect_RunWorkerCompleted);
             // 
             // GUIWithPostprocess
             // 
