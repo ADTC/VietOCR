@@ -94,7 +94,7 @@ namespace VietOCR.NET
         protected override void SetVisibleInputMethodMenuitem(bool visible)
         {
             this.vietInputMethodToolStripMenuItem.Visible = visible;
-            this.toolStripMenuItem8.Visible = visible;
+            this.toolStripMenuItemInputMethod.Visible = visible;
         }
 
         protected override void LoadRegistryInfo(RegistryKey regkey)
