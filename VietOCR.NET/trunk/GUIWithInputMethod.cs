@@ -82,7 +82,7 @@ namespace VietOCR.NET
                 ar.Add(miuil);
             }
 
-            this.uILanguageToolStripMenuItem.DropDownItems.AddRange(ar.ToArray());
+            this.uiLanguageToolStripMenuItem.DropDownItems.AddRange(ar.ToArray());
         }
 
         protected override void OnLoad(EventArgs ea)
@@ -104,12 +104,12 @@ namespace VietOCR.NET
             VietKeyHandler.SmartMark = true;
             VietKeyHandler.ConsumeRepeatKey = true;
 
-            for (int i = 0; i < this.uILanguageToolStripMenuItem.DropDownItems.Count; i++)
+            for (int i = 0; i < this.uiLanguageToolStripMenuItem.DropDownItems.Count; i++)
             {
-                if (this.uILanguageToolStripMenuItem.DropDownItems[i].Tag.ToString() == selectedUILanguage)
+                if (this.uiLanguageToolStripMenuItem.DropDownItems[i].Tag.ToString() == selectedUILanguage)
                 {
                     // Select UI Language last saved
-                    miuilChecked = (ToolStripMenuItem)uILanguageToolStripMenuItem.DropDownItems[i];
+                    miuilChecked = (ToolStripMenuItem)uiLanguageToolStripMenuItem.DropDownItems[i];
                     miuilChecked.Checked = true;
                     break;
                 }
@@ -137,22 +137,22 @@ namespace VietOCR.NET
             }
         }
 
-        /// <summary>
-        /// Changes localized text and messages
-        /// </summary>
-        /// <param name="locale"></param>
-        /// <param name="firstTime"></param>
-        protected override void ChangeUILanguage(string locale)
-        {
-            base.ChangeUILanguage(locale);
-            FormLocalizer localizer = new FormLocalizer(this, typeof(GUIWithInputMethod));
-            localizer.ApplyCulture(new CultureInfo(locale));
-        }
+        ///// <summary>
+        ///// Changes localized text and messages
+        ///// </summary>
+        ///// <param name="locale"></param>
+        ///// <param name="firstTime"></param>
+        //protected override void ChangeUILanguage(string locale)
+        //{
+        //    base.ChangeUILanguage(locale);
+        //    FormLocalizer localizer = new FormLocalizer(this, typeof(GUIWithInputMethod));
+        //    localizer.ApplyCulture(new CultureInfo(locale));
+        //}
 
         protected override void SetVisibleInputMethodMenuitem(bool visible)
         {
             this.vietInputMethodToolStripMenuItem.Visible = visible;
-            this.toolStripMenuItem1.Visible = visible;
+            this.toolStripMenuItem8.Visible = visible;
         }
 
         protected override void LoadRegistryInfo(RegistryKey regkey)

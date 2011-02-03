@@ -373,17 +373,6 @@
     <EmbeddedResource Include="GUIWithCommand.resx">
       <DependentUpon>GUIWithCommand.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUIWithInputMethod.lt-LT.resx">
-      <DependentUpon>GUIWithInputMethod.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUIWithInputMethod.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>GUIWithInputMethod.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUIWithInputMethod.vi-VN.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>GUIWithInputMethod.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUIWithScan.resx">
       <DependentUpon>GUIWithScan.cs</DependentUpon>
     </EmbeddedResource>

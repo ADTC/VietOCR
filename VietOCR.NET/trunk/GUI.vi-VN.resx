@@ -526,4 +526,10 @@
   <data name="toolStripButtonSpellCheck.ToolTipText" xml:space="preserve">
     <value>Duyệt chính tả</value>
   </data>
+  <data name="uiLanguageToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ngôn ngữ giao &amp;diện</value>
+  </data>
+  <data name="vietInputMethodToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Kiểu gõ</value>
+  </data>
 </root>

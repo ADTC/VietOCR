@@ -544,4 +544,10 @@
   <data name="toolStripBtnClear.Text" xml:space="preserve">
     <value>Valyti</value>
   </data>
+  <data name="uiLanguageToolStripMenuItem.Text" xml:space="preserve">
+    <value>Programos sąsajos &amp;kalba</value>
+  </data>
+  <data name="vietInputMethodToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Vietnamietiško teksto rašymo būdas</value>
+  </data>
 </root>
