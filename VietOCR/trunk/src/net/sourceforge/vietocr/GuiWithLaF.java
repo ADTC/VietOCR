@@ -34,6 +34,7 @@ public class GuiWithLaF extends GuiWithUILanguage {
             }
         };
 
+        // build Look and Feel submenu
         ButtonGroup groupLookAndFeel = new ButtonGroup();
         UIManager.LookAndFeelInfo[] lafs = UIManager.getInstalledLookAndFeels();
         for (int i = 0; i < lafs.length; i++) {
