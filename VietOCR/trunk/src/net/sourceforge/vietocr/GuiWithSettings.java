@@ -24,7 +24,7 @@ import javax.swing.*;
 import javax.swing.Timer;
 import net.sourceforge.vietocr.postprocessing.Processor;
 
-public class GuiWithSettings extends GuiWithInputMethod {
+public class GuiWithSettings extends GuiWithUILanguage {
 
     private String watchFolder;
     private String outputFolder;

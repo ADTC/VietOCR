@@ -651,26 +651,6 @@ public class Gui extends JFrame {
         jSeparatorInputMethod = new javax.swing.JPopupMenu.Separator();
         jSeparatorInputMethod.setVisible(vie);
         jMenuUILang = new javax.swing.JMenu();
-
-        ActionListener uiLangLst = new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-                if (!selectedUILang.equals(ae.getActionCommand())) {
-                    selectedUILang = ae.getActionCommand();
-                    changeUILanguage(getLocale(selectedUILang));
-                }
-            }
-        };
-
-        ButtonGroup groupUILang = new ButtonGroup();
-        String[] uiLangs = getInstalledUILangs();
-        for (int i = 0; i < uiLangs.length; i++) {
-            Locale locale = new Locale(uiLangs[i]);
-            JRadioButtonMenuItem uiLangButton = new JRadioButtonMenuItem(locale.getDisplayLanguage(), selectedUILang.equals(locale.getLanguage()));
-            uiLangButton.setActionCommand(locale.getLanguage());
-            uiLangButton.addActionListener(uiLangLst);
-            groupUILang.add(uiLangButton);
-            jMenuUILang.add(uiLangButton);
-        }
         jMenuLookAndFeel = new javax.swing.JMenu();
         ActionListener lafLst = new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
@@ -1385,11 +1365,6 @@ public class Gui extends JFrame {
         // to be implemented in subclass
     }
 
-    private String[] getInstalledUILangs() {
-        String[] locales = {"en", "lt", "sk", "vi"};
-        return locales;
-    }
-
     protected static Locale getLocale(String selectedUILang) {
         return new Locale(selectedUILang);
     }
@@ -2040,7 +2015,7 @@ public class Gui extends JFrame {
     private javax.swing.JMenu jMenuRecentFiles;
     private javax.swing.JMenu jMenuSettings;
     private javax.swing.JMenu jMenuTools;
-    private javax.swing.JMenu jMenuUILang;
+    protected javax.swing.JMenu jMenuUILang;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelStatus;
     protected javax.swing.JProgressBar jProgressBar1;
