@@ -339,7 +339,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="            &#xa;            ActionListener uiLangLst = new ActionListener() {&#xa;                public void actionPerformed(ActionEvent ae) {&#xa;                    if (!selectedUILang.equals(ae.getActionCommand())) {&#xa;                        selectedUILang = ae.getActionCommand();&#xa;                        changeUILanguage(getLocale(selectedUILang));&#xa;                    }&#xa;                }&#xa;            };&#xa;&#xa;            ButtonGroup groupUILang = new ButtonGroup();&#xa;        String[] uiLangs = getInstalledUILangs();&#xa;        for (int i = 0; i &lt; uiLangs.length; i++) {&#xa;            Locale locale = new Locale(uiLangs[i]);&#xa;            JRadioButtonMenuItem uiLangButton = new JRadioButtonMenuItem(locale.getDisplayLanguage(), selectedUILang.equals(locale.getLanguage()));&#xa;            uiLangButton.setActionCommand(locale.getLanguage());&#xa;            uiLangButton.addActionListener(uiLangLst);&#xa;            groupUILang.add(uiLangButton);&#xa;            jMenuUILang.add(uiLangButton);&#xa;        }"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
               </AuxValues>
             </Menu>
             <Menu class="javax.swing.JMenu" name="jMenuLookAndFeel">
