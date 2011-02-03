@@ -26,7 +26,7 @@ public class GuiWithPostprocess extends GuiWithOCR {
     protected String dangAmbigsPath;
     protected boolean dangAmbigsOn;
 
-    GuiWithPostprocess() {
+    public GuiWithPostprocess() {
         dangAmbigsPath = prefs.get("DangAmbigsPath", new File(baseDir, "data").getPath());
         dangAmbigsOn = prefs.getBoolean("dangAmbigs", true);
     }
