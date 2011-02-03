@@ -17,7 +17,7 @@ package net.sourceforge.vietocr;
 
 import javax.swing.JOptionPane;
 
-public class GuiWithImage extends GuiWithCommand {
+public class GuiWithImage extends GuiWithPostprocess {
 
     GuiWithImage() {
         this.jCheckBoxMenuItemScreenshotMode.setSelected(prefs.getBoolean("ScreenshotMode", false));
