@@ -320,12 +320,13 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="        ActionListener imlst = new ActionListener() {&#xa;                public void actionPerformed(ActionEvent ae) {&#xa;                    selectedInputMethod = ae.getActionCommand();&#xa;                    VietKeyListener.setInputMethod(InputMethods.valueOf(selectedInputMethod));&#xa;                }&#xa;            };&#xa;&#xa;        ButtonGroup groupInputMethod = new ButtonGroup();&#xa;        &#xa;        for (InputMethods im : InputMethods.values()) {&#xa;            String inputMethod = im.name();&#xa;            JRadioButtonMenuItem radioItem = new JRadioButtonMenuItem(inputMethod, selectedInputMethod.equals(inputMethod));&#xa;            radioItem.addActionListener(imlst);&#xa;            jMenuInputMethod.add(radioItem);&#xa;            groupInputMethod.add(radioItem);            &#xa;        }&#xa;        jMenuInputMethod.setVisible(vie);"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="boolean vie = curLangCode.startsWith(&quot;vie&quot;);       &#xd;&#xa;jMenuInputMethod.setVisible(vie);"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
               </AuxValues>
             </Menu>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator6">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparatorInputMethod">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jSeparator6.setVisible(vie);"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jSeparatorInputMethod.setVisible(vie);"/>
               </AuxValues>
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="jMenuUILang">
@@ -338,7 +339,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="            &#xa;            ActionListener uiLangLst = new ActionListener() {&#xa;                public void actionPerformed(ActionEvent ae) {&#xa;                    if (!selectedUILang.equals(ae.getActionCommand())) {&#xa;                        selectedUILang = ae.getActionCommand();&#xa;                        changeUILanguage(getLocale(selectedUILang));&#xa;                    }&#xa;                }&#xa;            };&#xa;&#xa;            ButtonGroup groupUILang = new ButtonGroup();&#xa;        String[] uiLangs = getInstalledUILangs();&#xa;        for (int i = 0; i &lt; uiLangs.length; i++) {&#xa;            Locale locale = new Locale(uiLangs[i]);&#xa;            JRadioButtonMenuItem uiLangButton = new JRadioButtonMenuItem(locale.getDisplayLanguage(), selectedUILang.equals(locale.getLanguage()));&#xa;            uiLangButton.setActionCommand(locale.getLanguage());&#xa;            uiLangButton.addActionListener(uiLangLst);&#xa;            groupUILang.add(uiLangButton);&#xa;            jMenuUILang.add(uiLangButton);&#xa;        }"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
               </AuxValues>
             </Menu>
             <Menu class="javax.swing.JMenu" name="jMenuLookAndFeel">
@@ -351,7 +352,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="ActionListener lafLst = new ActionListener() {&#xa;                public void actionPerformed(ActionEvent ae) {&#xa;                    updateLaF(ae.getActionCommand());&#xa;                }&#xa;            };&#xa;&#xa;        ButtonGroup groupLookAndFeel = new ButtonGroup();&#xa;        UIManager.LookAndFeelInfo[] lafs = UIManager.getInstalledLookAndFeels();&#xa;        for (int i = 0; i &lt; lafs.length; i++) {&#xa;            JRadioButtonMenuItem lafButton = new JRadioButtonMenuItem(lafs[i].getName());&#xa;            lafButton.setActionCommand(lafs[i].getClassName());&#xa;            if (UIManager.getLookAndFeel().getClass().getName().equals(lafButton.getActionCommand())) {&#xa;                lafButton.setSelected(true);&#xa;            }&#xa;            lafButton.addActionListener(lafLst);&#xa;            groupLookAndFeel.add(lafButton);&#xa;            jMenuLookAndFeel.add(lafButton);&#xa;        }&#xa;"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
               </AuxValues>
             </Menu>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
@@ -711,7 +712,7 @@
                 <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextArea1MouseEntered"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="     VietKeyListener keyLst = new VietKeyListener(jTextArea1);&#xa;     jTextArea1.addKeyListener(keyLst);&#xa;     VietKeyListener.setInputMethod(InputMethods.valueOf(selectedInputMethod));&#xa;     VietKeyListener.setSmartMark(true);&#xa;     VietKeyListener.consumeRepeatKey(true);&#xa;     boolean vie = curLangCode.startsWith(&quot;vie&quot;);&#xa;     VietKeyListener.setVietModeEnabled(vie);&#xa;     jTextArea1.addMouseListener(new MouseAdapter() {&#xa;        public void mousePressed(final MouseEvent e) {&#xa;            if (e.isPopupTrigger()) {&#xa;                SwingUtilities.invokeLater(new Runnable() {&#xa;                    public void run() {&#xa;                        populatePopupMenuWithSuggestions(e.getPoint());&#xa;                        popup.show(e.getComponent(), e.getX(), e.getY());&#xa;                    }&#xa;                });&#xa;            }&#xa;        }&#xa;&#xa;        public void mouseReleased(MouseEvent e) {&#xa;            mousePressed(e);&#xa;        }&#xa;    });&#xa;    jTextArea1.addCaretListener(new CaretListener() {&#xa;                public void caretUpdate(CaretEvent e) {&#xa;                    updateCutCopyDelete(e.getDot() != e.getMark());&#xa;                }&#xa;            });&#xa;"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="     jTextArea1.addMouseListener(new MouseAdapter() {&#xa;        public void mousePressed(final MouseEvent e) {&#xa;            if (e.isPopupTrigger()) {&#xa;                SwingUtilities.invokeLater(new Runnable() {&#xa;                    public void run() {&#xa;                        populatePopupMenuWithSuggestions(e.getPoint());&#xa;                        popup.show(e.getComponent(), e.getX(), e.getY());&#xa;                    }&#xa;                });&#xa;            }&#xa;        }&#xa;&#xa;        public void mouseReleased(MouseEvent e) {&#xa;            mousePressed(e);&#xa;        }&#xa;    });&#xa;    jTextArea1.addCaretListener(new CaretListener() {&#xa;                public void caretUpdate(CaretEvent e) {&#xa;                    updateCutCopyDelete(e.getDot() != e.getMark());&#xa;                }&#xa;            });&#xa;"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
               </AuxValues>
             </Component>
