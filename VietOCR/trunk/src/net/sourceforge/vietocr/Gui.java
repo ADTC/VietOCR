@@ -652,24 +652,6 @@ public class Gui extends JFrame {
         jSeparatorInputMethod.setVisible(vie);
         jMenuUILang = new javax.swing.JMenu();
         jMenuLookAndFeel = new javax.swing.JMenu();
-        ActionListener lafLst = new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-                updateLaF(ae.getActionCommand());
-            }
-        };
-
-        ButtonGroup groupLookAndFeel = new ButtonGroup();
-        UIManager.LookAndFeelInfo[] lafs = UIManager.getInstalledLookAndFeels();
-        for (int i = 0; i < lafs.length; i++) {
-            JRadioButtonMenuItem lafButton = new JRadioButtonMenuItem(lafs[i].getName());
-            lafButton.setActionCommand(lafs[i].getClassName());
-            if (UIManager.getLookAndFeel().getClass().getName().equals(lafButton.getActionCommand())) {
-                lafButton.setSelected(true);
-            }
-            lafButton.addActionListener(lafLst);
-            groupLookAndFeel.add(lafButton);
-            jMenuLookAndFeel.add(lafButton);
-        }
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItemDownloadLangData = new javax.swing.JMenuItem();
         jSeparator12 = new javax.swing.JPopupMenu.Separator();
@@ -1744,18 +1726,6 @@ public class Gui extends JFrame {
      *@param  laf  the look and feel class name
      */
     protected void updateLaF(String laf) {
-        try {
-            UIManager.setLookAndFeel(laf);
-        } catch (Exception exc) {
-            // do nothing
-//            exc.printStackTrace();
-        }
-
-        for (Window win : Window.getWindows()) {
-            SwingUtilities.updateComponentTreeUI(win);
-            win.validate();
-        }
-
         SwingUtilities.updateComponentTreeUI(popup);
         SwingUtilities.updateComponentTreeUI(filechooser);
     }
@@ -2011,7 +1981,7 @@ public class Gui extends JFrame {
     private javax.swing.JMenuItem jMenuItemSaveAs;
     protected javax.swing.JMenuItem jMenuItemScan;
     private javax.swing.JMenuItem jMenuItemSplitPdf;
-    private javax.swing.JMenu jMenuLookAndFeel;
+    protected javax.swing.JMenu jMenuLookAndFeel;
     private javax.swing.JMenu jMenuRecentFiles;
     private javax.swing.JMenu jMenuSettings;
     private javax.swing.JMenu jMenuTools;

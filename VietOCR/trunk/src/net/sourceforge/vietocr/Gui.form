@@ -352,7 +352,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="ActionListener lafLst = new ActionListener() {&#xa;                public void actionPerformed(ActionEvent ae) {&#xa;                    updateLaF(ae.getActionCommand());&#xa;                }&#xa;            };&#xa;&#xa;        ButtonGroup groupLookAndFeel = new ButtonGroup();&#xa;        UIManager.LookAndFeelInfo[] lafs = UIManager.getInstalledLookAndFeels();&#xa;        for (int i = 0; i &lt; lafs.length; i++) {&#xa;            JRadioButtonMenuItem lafButton = new JRadioButtonMenuItem(lafs[i].getName());&#xa;            lafButton.setActionCommand(lafs[i].getClassName());&#xa;            if (UIManager.getLookAndFeel().getClass().getName().equals(lafButton.getActionCommand())) {&#xa;                lafButton.setSelected(true);&#xa;            }&#xa;            lafButton.addActionListener(lafLst);&#xa;            groupLookAndFeel.add(lafButton);&#xa;            jMenuLookAndFeel.add(lafButton);&#xa;        }&#xa;"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
               </AuxValues>
             </Menu>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
