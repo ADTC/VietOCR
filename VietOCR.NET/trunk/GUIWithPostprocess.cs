@@ -26,7 +26,7 @@ using Microsoft.Win32;
 
 namespace VietOCR.NET
 {
-    public partial class GUIWithPostprocess : VietOCR.NET.GUIWithCommand
+    public partial class GUIWithPostprocess : VietOCR.NET.GUIWithOCR
     {
         const string strDangAmbigsPath = "DangAmbigsPath";
         const string strDangAmbigsOn = "DangAmbigsOn";

@@ -159,11 +159,11 @@
       <DependentUpon>GUIWithUILanguage.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\FormLocalizer.cs" />
-    <Compile Include="GUIWithCommand.cs">
+    <Compile Include="GUIWithOCR.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUIWithCommand.Designer.cs">
-      <DependentUpon>GUIWithCommand.cs</DependentUpon>
+    <Compile Include="GUIWithOCR.Designer.cs">
+      <DependentUpon>GUIWithOCR.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithFormat.cs">
       <SubType>Form</SubType>
@@ -385,8 +385,8 @@
     <EmbeddedResource Include="GUI.vi-VN.resx">
       <DependentUpon>GUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUIWithCommand.resx">
-      <DependentUpon>GUIWithCommand.cs</DependentUpon>
+    <EmbeddedResource Include="GUIWithOCR.resx">
+      <DependentUpon>GUIWithOCR.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIWithScan.resx">
       <DependentUpon>GUIWithScan.cs</DependentUpon>
