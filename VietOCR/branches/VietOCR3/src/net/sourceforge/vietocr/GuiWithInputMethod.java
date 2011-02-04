@@ -50,9 +50,8 @@ public class GuiWithInputMethod extends GuiWithFormat {
             }
         };
 
-        ButtonGroup groupInputMethod = new ButtonGroup();
-
         // build Input Method submenu
+        ButtonGroup groupInputMethod = new ButtonGroup();
         for (InputMethods im : InputMethods.values()) {
             String inputMethod = im.name();
             JRadioButtonMenuItem radioItem = new JRadioButtonMenuItem(inputMethod, selectedInputMethod.equals(inputMethod));
