@@ -116,7 +116,7 @@ namespace VietOCR.NET
 
             InitializeComponent();
 
-            SetupforTesseract();
+            GetInstalledLanguagePacks();
             PopulateOCRLanguageBox();
 
             //rectNormal = DesktopBounds;
@@ -150,9 +150,9 @@ namespace VietOCR.NET
         }
 
         /// <summary>
-        /// Gets installed language data packs.
+        /// Gets Tesseract's installed language data packs.
         /// </summary>
-        void SetupforTesseract()
+        void GetInstalledLanguagePacks()
         {
             lookupISO639 = new Dictionary<string, string>();
             lookupISO_3_1_Codes = new Dictionary<string, string>();
