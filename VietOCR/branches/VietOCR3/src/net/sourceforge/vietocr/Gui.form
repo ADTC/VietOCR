@@ -11,6 +11,20 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
+    <Component class="javax.swing.JFileChooser" name="jFileChooser">
+      <Properties>
+        <Property name="currentDirectory" type="java.io.File" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="currentDirectory == null ? null : new File(currentDirectory)" type="code"/>
+        </Property>
+        <Property name="dialogTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jButtonOpen.ToolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="        currentDirectory = prefs.get(&quot;currentDirectory&quot;, null);&#xa;        outputDirectory = prefs.get(&quot;outputDirectory&quot;, null);"/>
+        <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="FileFilter allImageFilter = new SimpleFilter(&quot;bmp;gif;jpg;jpeg;jp2;png;pnm;pbm;pgm;ppm;tif;tiff;pdf&quot;, bundle.getString(&quot;All_Image_Files&quot;));&#xa;        FileFilter bmpFilter = new SimpleFilter(&quot;bmp&quot;, &quot;Bitmap&quot;);&#xa;        FileFilter gifFilter = new SimpleFilter(&quot;gif&quot;, &quot;GIF&quot;);&#xa;        FileFilter jpegFilter = new SimpleFilter(&quot;jpg;jpeg&quot;, &quot;JPEG&quot;);&#xa;        FileFilter jpeg2000Filter = new SimpleFilter(&quot;jp2&quot;, &quot;JPEG 2000&quot;);&#xa;        FileFilter pngFilter = new SimpleFilter(&quot;png&quot;, &quot;PNG&quot;);&#xa;        FileFilter pnmFilter = new SimpleFilter(&quot;pnm;pbm;pgm;ppm&quot;, &quot;PNM&quot;);&#xa;        FileFilter tiffFilter = new SimpleFilter(&quot;tif;tiff&quot;, &quot;TIFF&quot;);&#xa;&#xa;        FileFilter pdfFilter = new SimpleFilter(&quot;pdf&quot;, &quot;PDF&quot;);&#xa;        FileFilter textFilter = new SimpleFilter(&quot;txt&quot;, bundle.getString(&quot;UTF-8_Text&quot;));&#xa;&#xa;        jFileChooser.setAcceptAllFileFilterUsed(false);&#xa;        jFileChooser.addChoosableFileFilter(allImageFilter);&#xa;        jFileChooser.addChoosableFileFilter(bmpFilter);&#xa;        jFileChooser.addChoosableFileFilter(gifFilter);&#xa;        jFileChooser.addChoosableFileFilter(jpegFilter);&#xa;        jFileChooser.addChoosableFileFilter(jpeg2000Filter);&#xa;        jFileChooser.addChoosableFileFilter(pngFilter);&#xa;        jFileChooser.addChoosableFileFilter(pnmFilter);&#xa;        jFileChooser.addChoosableFileFilter(tiffFilter);&#xa;        jFileChooser.addChoosableFileFilter(pdfFilter);&#xa;        jFileChooser.addChoosableFileFilter(textFilter);&#xa;&#xa;        filterIndex = prefs.getInt(&quot;filterIndex&quot;, 0);&#xa;        fileFilters = jFileChooser.getChoosableFileFilters();&#xa;        if (filterIndex &lt; fileFilters.length) {&#xa;            jFileChooser.setFileFilter(fileFilters[filterIndex]);&#xa;        }"/>
+      </AuxValues>
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar2">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenuFile">
@@ -320,14 +334,10 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="boolean vie = curLangCode.startsWith(&quot;vie&quot;);       &#xd;&#xa;jMenuInputMethod.setVisible(vie);"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
               </AuxValues>
             </Menu>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparatorInputMethod">
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jSeparatorInputMethod.setVisible(vie);"/>
-              </AuxValues>
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="jMenuUILang">
               <Properties>
@@ -483,6 +493,9 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="0"/>
+    <Property name="title" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+      <Connection code="APP_NAME" type="code"/>
+    </Property>
     <Property name="locationByPlatform" type="boolean" value="true"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[500, 360]"/>
@@ -668,8 +681,6 @@
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxLangItemStateChanged"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JComboBox(installedLanguages);"/>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jComboBoxLang.setSelectedItem(prefs.get(&quot;langCode&quot;, null));&#xa;if (installedLanguageCodes != null &amp;&amp; jComboBoxLang.getSelectedIndex() != -1) {&#xa;curLangCode = installedLanguageCodes[jComboBoxLang.getSelectedIndex()];&#xa;}"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
           </AuxValues>
         </Component>
@@ -714,6 +725,7 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="     jTextArea1.addMouseListener(new MouseAdapter() {&#xa;        public void mousePressed(final MouseEvent e) {&#xa;            if (e.isPopupTrigger()) {&#xa;                SwingUtilities.invokeLater(new Runnable() {&#xa;                    public void run() {&#xa;                        populatePopupMenuWithSuggestions(e.getPoint());&#xa;                        popup.show(e.getComponent(), e.getX(), e.getY());&#xa;                    }&#xa;                });&#xa;            }&#xa;        }&#xa;&#xa;        public void mouseReleased(MouseEvent e) {&#xa;            mousePressed(e);&#xa;        }&#xa;    });&#xa;    jTextArea1.addCaretListener(new CaretListener() {&#xa;                public void caretUpdate(CaretEvent e) {&#xa;                    updateCutCopyDelete(e.getDot() != e.getMark());&#xa;                }&#xa;            });&#xa;"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="        wordWrapOn = prefs.getBoolean(&quot;wordWrap&quot;, false);&#xa;        jTextArea1.setLineWrap(wordWrapOn);&#xa;        jCheckBoxMenuWordWrap.setSelected(wordWrapOn);&#xa;&#xa;        font = new Font(&#xa;                prefs.get(&quot;fontName&quot;, MAC_OS_X ? &quot;Lucida Grande&quot; : &quot;Tahoma&quot;),&#xa;                prefs.getInt(&quot;fontStyle&quot;, Font.PLAIN),&#xa;                prefs.getInt(&quot;fontSize&quot;, 12));&#xa;        jTextArea1.setFont(font);"/>
               </AuxValues>
             </Component>
           </SubComponents>
@@ -916,6 +928,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabelStatus">
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jLabelStatus.setVisible(false); // use jProgressBar instead for (more animation) task status"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
           </AuxValues>
         </Component>
@@ -924,7 +937,7 @@
             <Property name="stringPainted" type="boolean" value="true"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="this.jProgressBar1.setVisible(false);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jProgressBar1.setVisible(false);"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
           </AuxValues>
         </Component>

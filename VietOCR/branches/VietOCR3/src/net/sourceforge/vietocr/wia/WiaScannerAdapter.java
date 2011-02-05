@@ -12,8 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
-
+ */
 package net.sourceforge.vietocr.wia;
 
 import java.io.File;
@@ -34,7 +33,7 @@ public final class WiaScannerAdapter {
         if (outputFormat == null) {
             throw new IllegalArgumentException("outputFormat");
         }
-      
+
         Dispatch imageObject = null; // "WIA.ImageFile"
 
         try {
@@ -42,16 +41,19 @@ public final class WiaScannerAdapter {
                 _wiaManager = new ActiveXComponent("WIA.CommonDialog");
             }
 
-            imageObject = Dispatch.callN(_wiaManager, "ShowAcquireImage", (Object[]) new Variant[] {
-                new Variant(WiaDeviceType.ScannerDeviceType.getValue()), new Variant(WiaImageIntent.GrayscaleIntent.getValue()),
-                new Variant(WiaImageBias.MaximizeQuality.getValue()), new Variant(outputFormat.getValue()),
-                False, True, True} ).getDispatch();
+            imageObject = Dispatch.callN(_wiaManager, "ShowAcquireImage", (Object[]) new Variant[]{
+                        new Variant(WiaDeviceType.ScannerDeviceType.getValue()), new Variant(WiaImageIntent.GrayscaleIntent.getValue()),
+                        new Variant(WiaImageBias.MaximizeQuality.getValue()), new Variant(outputFormat.getValue()),
+                        False, True, True}).getDispatch();
 
             Dispatch.call(imageObject, "SaveFile", fileName);
 
             return new File(fileName);
         } catch (Exception ex) {
             String message = "Error Scanning Image";
+            if (ex.getMessage().toLowerCase().contains("cancelled")) {
+                message = "Scanning Operation";
+            }
             throw new WiaOperationException(message, ex);
         } finally {
             if (imageObject != null) {
