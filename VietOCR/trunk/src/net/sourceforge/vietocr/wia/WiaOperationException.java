@@ -16,10 +16,6 @@
 
 package net.sourceforge.vietocr.wia;
 
-/**
- *
- * @author Quan
- */
 public class WiaOperationException extends Exception {
 
     private WiaScannerError _errorCode;
