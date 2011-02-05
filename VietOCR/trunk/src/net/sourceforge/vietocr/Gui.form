@@ -333,14 +333,10 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="boolean vie = curLangCode.startsWith(&quot;vie&quot;);       &#xd;&#xa;jMenuInputMethod.setVisible(vie);"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
               </AuxValues>
             </Menu>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparatorInputMethod">
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jSeparatorInputMethod.setVisible(vie);"/>
-              </AuxValues>
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="jMenuUILang">
               <Properties>
@@ -684,8 +680,6 @@
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxLangItemStateChanged"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JComboBox(installedLanguages);"/>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jComboBoxLang.setSelectedItem(prefs.get(&quot;langCode&quot;, null));&#xa;if (installedLanguageCodes != null &amp;&amp; jComboBoxLang.getSelectedIndex() != -1) {&#xa;curLangCode = installedLanguageCodes[jComboBoxLang.getSelectedIndex()];&#xa;}"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
           </AuxValues>
         </Component>

@@ -82,8 +82,6 @@ public class Gui extends JFrame {
      * Creates new form.
      */
     public Gui() {
-        setupforTesseract();
-
         try {
             UIManager.setLookAndFeel(prefs.get("lookAndFeel", UIManager.getSystemLookAndFeelClassName()));
         } catch (Exception e) {
@@ -100,12 +98,11 @@ public class Gui extends JFrame {
             this.jToolBar2.remove(this.jButtonScan);
             this.jMenuFile.remove(this.jMenuItemScan);
         }
-        
-        bundle = java.util.ResourceBundle.getBundle("net.sourceforge.vietocr.Gui"); // NOI18N
-        if (installedLanguageCodes == null) {
-            JOptionPane.showMessageDialog(Gui.this, bundle.getString("Tesseract_is_not_found._Please_specify_its_path_in_Settings_menu."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-        }
 
+        setupforTesseract();
+
+        bundle = java.util.ResourceBundle.getBundle("net.sourceforge.vietocr.Gui"); // NOI18N
+        populateLanguageBox();
         populateMRUList();
         populatePopupMenu();
 
@@ -118,7 +115,7 @@ public class Gui extends JFrame {
                 prefs.getInt("fontStyle", Font.PLAIN),
                 prefs.getInt("fontSize", 12));
         jTextArea1.setFont(font);
-        
+
         // Undo support
         rawListener = new RawListener();
         this.jTextArea1.getDocument().addUndoableEditListener(rawListener);
@@ -248,6 +245,23 @@ public class Gui extends JFrame {
                 installedLanguageCodes[i] = installedLanguageCodes[i].replace(DATAFILE_SUFFIX, "");
                 installedLanguages[i] = lookupISO639.getProperty(installedLanguageCodes[i], installedLanguageCodes[i]);
             }
+        }
+    }
+
+    /**
+     * Populates OCR Language box.
+     */
+    private void populateLanguageBox() {
+        if (installedLanguageCodes == null) {
+            JOptionPane.showMessageDialog(Gui.this, bundle.getString("Tesseract_is_not_found._Please_specify_its_path_in_Settings_menu."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        DefaultComboBoxModel model = new DefaultComboBoxModel(installedLanguages);
+        jComboBoxLang.setModel(model);
+        jComboBoxLang.setSelectedItem(prefs.get("langCode", null));
+        if (installedLanguageCodes != null && jComboBoxLang.getSelectedIndex() != -1) {
+            curLangCode = installedLanguageCodes[jComboBoxLang.getSelectedIndex()];
         }
     }
 
@@ -545,11 +559,7 @@ public class Gui extends JFrame {
         jButtonClear = new javax.swing.JButton();
         jToggleButtonSpellCheck = new javax.swing.JToggleButton();
         jLabelLanguage = new javax.swing.JLabel();
-        jComboBoxLang = new JComboBox(installedLanguages);
-        jComboBoxLang.setSelectedItem(prefs.get("langCode", null));
-        if (installedLanguageCodes != null && jComboBoxLang.getSelectedIndex() != -1) {
-            curLangCode = installedLanguageCodes[jComboBoxLang.getSelectedIndex()];
-        }
+        jComboBoxLang = new javax.swing.JComboBox();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -624,10 +634,7 @@ public class Gui extends JFrame {
         jMenuItemRemoveLineBreaks = new javax.swing.JMenuItem();
         jMenuSettings = new javax.swing.JMenu();
         jMenuInputMethod = new javax.swing.JMenu();
-        boolean vie = curLangCode.startsWith("vie");       
-        jMenuInputMethod.setVisible(vie);
         jSeparatorInputMethod = new javax.swing.JPopupMenu.Separator();
-        jSeparatorInputMethod.setVisible(vie);
         jMenuUILang = new javax.swing.JMenu();
         jMenuLookAndFeel = new javax.swing.JMenu();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
@@ -1189,6 +1196,8 @@ public class Gui extends JFrame {
     private void jComboBoxLangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxLangItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             curLangCode = installedLanguageCodes[jComboBoxLang.getSelectedIndex()];
+            
+            // Hide Viet Input Method submenu if selected OCR Language is not Vietnamese
             boolean vie = curLangCode.startsWith("vie");
             VietKeyListener.setVietModeEnabled(vie);
             this.jMenuInputMethod.setVisible(vie);
