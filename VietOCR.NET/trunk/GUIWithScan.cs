@@ -5,9 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using VietOCR.NET.WIA;
 using System.IO;
 using System.Drawing.Imaging;
+using VietOCR.NET.WIA;
 
 namespace VietOCR.NET
 {

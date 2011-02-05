@@ -18,9 +18,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using VietOCR.NET.Controls;
 using System.IO;
 using Microsoft.Win32;
+using VietOCR.NET.Controls;
 
 namespace VietOCR.NET
 {

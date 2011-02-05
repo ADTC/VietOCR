@@ -139,7 +139,7 @@ namespace VietOCR.NET
 
             if (localeId == null)
             {
-                MessageBox.Show("Need to add an entry in data/ISO639-1.xml file.");
+                MessageBox.Show("Need to add an entry in Data/ISO639-1.xml file.");
                 return;
             }
 
