@@ -146,10 +146,11 @@ public class Gui extends JFrame {
 //            e.printStackTrace();
             // keep default LAF
         }
+        
+        currentDirectory = prefs.get("currentDirectory", null);
 
         initComponents();
-        jLabelStatus.setVisible(false); // use jProgressBar instead for (more animation) task status
-
+        
         // Hide Scan buttons for non-Windows OS because WIA Automation is Windows only
         if (!WINDOWS) {
             this.jToolBar2.remove(this.jButtonScan);
@@ -176,9 +177,6 @@ public class Gui extends JFrame {
 
         this.setTitle(APP_NAME);
         bundle = java.util.ResourceBundle.getBundle("net.sourceforge.vietocr.Gui"); // NOI18N
-        currentDirectory = prefs.get("currentDirectory", null);
-        jFileChooser = new JFileChooser(currentDirectory);
-        jFileChooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
         FileFilter allImageFilter = new SimpleFilter("bmp;gif;jpg;jpeg;jp2;png;pnm;pbm;pgm;ppm;tif;tiff;pdf", bundle.getString("All_Image_Files"));
         FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
         FileFilter gifFilter = new SimpleFilter("gif", "GIF");
@@ -617,8 +615,9 @@ public class Gui extends JFrame {
         jButtonRotateCW = new javax.swing.JButton();
         jPanelStatus = new javax.swing.JPanel();
         jLabelStatus = new javax.swing.JLabel();
+        jLabelStatus.setVisible(false); // use jProgressBar instead for (more animation) task status
         jProgressBar1 = new javax.swing.JProgressBar();
-        this.jProgressBar1.setVisible(false);
+        jProgressBar1.setVisible(false);
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemOpen = new javax.swing.JMenuItem();
@@ -665,6 +664,10 @@ public class Gui extends JFrame {
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
         jMenuItemAbout = new javax.swing.JMenuItem();
 
+        jFileChooser.setCurrentDirectory(currentDirectory == null ? null : new File(currentDirectory));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui"); // NOI18N
+        jFileChooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText")); // NOI18N
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(500, 360));
@@ -674,7 +677,6 @@ public class Gui extends JFrame {
             }
         });
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui"); // NOI18N
         jButtonOpen.setText(bundle.getString("jButtonOpen.Text")); // NOI18N
         jButtonOpen.setToolTipText(bundle.getString("jButtonOpen.ToolTipText")); // NOI18N
         jButtonOpen.addActionListener(new java.awt.event.ActionListener() {
