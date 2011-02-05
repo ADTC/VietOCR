@@ -54,8 +54,7 @@ public class GuiWithLaF extends GuiWithUILanguage {
      *
      *@param  laf  the look and feel class name
      */
-    @Override
-    protected void updateLaF(String laf) {
+    void updateLaF(String laf) {
         try {
             UIManager.setLookAndFeel(laf);
         } catch (Exception exc) {
@@ -68,6 +67,7 @@ public class GuiWithLaF extends GuiWithUILanguage {
             win.validate();
         }
 
-        super.updateLaF(laf);
+        SwingUtilities.updateComponentTreeUI(popup);
+        SwingUtilities.updateComponentTreeUI(jFileChooser);
     }
 }
