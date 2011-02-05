@@ -87,48 +87,17 @@ public class Gui extends JFrame {
         } catch (Exception e) {
             // keep default LAF
         }
-
-        currentDirectory = prefs.get("currentDirectory", null);
-        outputDirectory = prefs.get("outputDirectory", null);
-
+        bundle = java.util.ResourceBundle.getBundle("net.sourceforge.vietocr.Gui");
         initComponents();
 
-        // Hide Scan buttons for non-Windows OS because WIA Automation is Windows only
-        if (!WINDOWS) {
-            this.jToolBar2.remove(this.jButtonScan);
-            this.jMenuFile.remove(this.jMenuItemScan);
-        }
-
-        setupforTesseract();
-
-        bundle = java.util.ResourceBundle.getBundle("net.sourceforge.vietocr.Gui"); // NOI18N
-        populateLanguageBox();
-        populateMRUList();
-        populatePopupMenu();
-
-        wordWrapOn = prefs.getBoolean("wordWrap", false);
-        jTextArea1.setLineWrap(wordWrapOn);
-        jCheckBoxMenuWordWrap.setSelected(wordWrapOn);
-
-        font = new Font(
-                prefs.get("fontName", MAC_OS_X ? "Lucida Grande" : "Tahoma"),
-                prefs.getInt("fontStyle", Font.PLAIN),
-                prefs.getInt("fontSize", 12));
-        jTextArea1.setFont(font);
-
-        // Undo support
-        rawListener = new RawListener();
-        this.jTextArea1.getDocument().addUndoableEditListener(rawListener);
-        undoSupport.addUndoableEditListener(new SupportListener());
-        m_undo.discardAllEdits();
-        updateUndoRedo();
-        updateCutCopyDelete(false);
+        getInstalledLanguagePacks();
+        populateOCRLanguageBox();
 
         // DnD support
         new DropTarget(this.jImageLabel, new FileDropTargetListener(Gui.this));
         new DropTarget(this.jTextArea1, new FileDropTargetListener(Gui.this));
 
-        addWindowListener(
+        this.addWindowListener(
                 new WindowAdapter() {
 
                     @Override
@@ -140,6 +109,9 @@ public class Gui extends JFrame {
                     public void windowOpened(WindowEvent e) {
                         updateSave(false);
                         setExtendedState(prefs.getInt("windowState", Frame.NORMAL));
+                        populateMRUList();
+                        populatePopupMenu();
+                        addUndoSupport();
                     }
                 });
 
@@ -190,9 +162,22 @@ public class Gui extends JFrame {
     }
 
     /**
-     * Sets up for Tesseract.
+     * Adds Undo support to textarea via context menu.
      */
-    private void setupforTesseract() {
+    private void addUndoSupport() {
+        // Undo support
+        rawListener = new RawListener();
+        this.jTextArea1.getDocument().addUndoableEditListener(rawListener);
+        undoSupport.addUndoableEditListener(new SupportListener());
+        m_undo.discardAllEdits();
+        updateUndoRedo();
+        updateCutCopyDelete(false);
+    }
+
+    /**
+     * Gets Tesseract's installed language data packs.
+     */
+    private void getInstalledLanguagePacks() {
         if (WINDOWS) {
             tessPath = new File(baseDir, "tesseract").getPath();
         } else {
@@ -251,7 +236,7 @@ public class Gui extends JFrame {
     /**
      * Populates OCR Language box.
      */
-    private void populateLanguageBox() {
+    private void populateOCRLanguageBox() {
         if (installedLanguageCodes == null) {
             JOptionPane.showMessageDialog(Gui.this, bundle.getString("Tesseract_is_not_found._Please_specify_its_path_in_Settings_menu."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -650,6 +635,8 @@ public class Gui extends JFrame {
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
         jMenuItemAbout = new javax.swing.JMenuItem();
 
+        currentDirectory = prefs.get("currentDirectory", null);
+        outputDirectory = prefs.get("outputDirectory", null);
         jFileChooser.setCurrentDirectory(currentDirectory == null ? null : new File(currentDirectory));
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui"); // NOI18N
         jFileChooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText")); // NOI18N
@@ -796,6 +783,15 @@ public class Gui extends JFrame {
             }
         });
         jScrollPane1.setViewportView(jTextArea1);
+        wordWrapOn = prefs.getBoolean("wordWrap", false);
+        jTextArea1.setLineWrap(wordWrapOn);
+        jCheckBoxMenuWordWrap.setSelected(wordWrapOn);
+
+        font = new Font(
+            prefs.get("fontName", MAC_OS_X ? "Lucida Grande" : "Tahoma"),
+            prefs.getInt("fontStyle", Font.PLAIN),
+            prefs.getInt("fontSize", 12));
+        jTextArea1.setFont(font);
 
         jSplitPane1.setRightComponent(jScrollPane1);
 
@@ -1196,7 +1192,7 @@ public class Gui extends JFrame {
     private void jComboBoxLangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxLangItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             curLangCode = installedLanguageCodes[jComboBoxLang.getSelectedIndex()];
-            
+
             // Hide Viet Input Method submenu if selected OCR Language is not Vietnamese
             boolean vie = curLangCode.startsWith("vie");
             VietKeyListener.setVietModeEnabled(vie);
