@@ -12,6 +12,14 @@
       </Layout>
     </Container>
     <Component class="javax.swing.JFileChooser" name="jFileChooser">
+      <Properties>
+        <Property name="currentDirectory" type="java.io.File" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="currentDirectory == null ? null : new File(currentDirectory)" type="code"/>
+        </Property>
+        <Property name="dialogTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="net/sourceforge/vietocr/Gui.properties" key="jButtonOpen.ToolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
     </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar2">
       <SubComponents>
@@ -918,6 +926,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabelStatus">
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jLabelStatus.setVisible(false); // use jProgressBar instead for (more animation) task status"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
           </AuxValues>
         </Component>
@@ -926,7 +935,7 @@
             <Property name="stringPainted" type="boolean" value="true"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="this.jProgressBar1.setVisible(false);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jProgressBar1.setVisible(false);"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
           </AuxValues>
         </Component>
