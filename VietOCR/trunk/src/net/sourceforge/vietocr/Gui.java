@@ -15,7 +15,6 @@
  */
 package net.sourceforge.vietocr;
 
-import net.sourceforge.vietocr.utilities.*;
 import java.io.*;
 import javax.swing.*;
 import javax.imageio.*;
@@ -31,6 +30,7 @@ import javax.swing.undo.*;
 import java.awt.dnd.DropTarget;
 import javax.swing.event.*;
 import javax.swing.filechooser.FileFilter;
+import net.sourceforge.vietocr.utilities.*;
 import net.sourceforge.vietpad.*;
 import net.sourceforge.vietpad.inputmethod.*;
 
@@ -63,7 +63,6 @@ public class Gui extends JFrame {
     private String[] installedLanguages;
     private ImageIconScalable imageIcon;
     private boolean isFitImageSelected;
-    private JFileChooser filechooser;
     protected boolean wordWrapOn;
     protected float scaleX = 1f;
     protected float scaleY = 1f;
@@ -178,8 +177,8 @@ public class Gui extends JFrame {
         this.setTitle(APP_NAME);
         bundle = java.util.ResourceBundle.getBundle("net.sourceforge.vietocr.Gui"); // NOI18N
         currentDirectory = prefs.get("currentDirectory", null);
-        filechooser = new JFileChooser(currentDirectory);
-        filechooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
+        jFileChooser = new JFileChooser(currentDirectory);
+        jFileChooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
         FileFilter allImageFilter = new SimpleFilter("bmp;gif;jpg;jpeg;jp2;png;pnm;pbm;pgm;ppm;tif;tiff;pdf", bundle.getString("All_Image_Files"));
         FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
         FileFilter gifFilter = new SimpleFilter("gif", "GIF");
@@ -192,22 +191,22 @@ public class Gui extends JFrame {
         FileFilter pdfFilter = new SimpleFilter("pdf", "PDF");
         FileFilter textFilter = new SimpleFilter("txt", bundle.getString("UTF-8_Text"));
 
-        filechooser.setAcceptAllFileFilterUsed(false);
-        filechooser.addChoosableFileFilter(allImageFilter);
-        filechooser.addChoosableFileFilter(bmpFilter);
-        filechooser.addChoosableFileFilter(gifFilter);
-        filechooser.addChoosableFileFilter(jpegFilter);
-        filechooser.addChoosableFileFilter(jpeg2000Filter);
-        filechooser.addChoosableFileFilter(pngFilter);
-        filechooser.addChoosableFileFilter(pnmFilter);
-        filechooser.addChoosableFileFilter(tiffFilter);
-        filechooser.addChoosableFileFilter(pdfFilter);
-        filechooser.addChoosableFileFilter(textFilter);
+        jFileChooser.setAcceptAllFileFilterUsed(false);
+        jFileChooser.addChoosableFileFilter(allImageFilter);
+        jFileChooser.addChoosableFileFilter(bmpFilter);
+        jFileChooser.addChoosableFileFilter(gifFilter);
+        jFileChooser.addChoosableFileFilter(jpegFilter);
+        jFileChooser.addChoosableFileFilter(jpeg2000Filter);
+        jFileChooser.addChoosableFileFilter(pngFilter);
+        jFileChooser.addChoosableFileFilter(pnmFilter);
+        jFileChooser.addChoosableFileFilter(tiffFilter);
+        jFileChooser.addChoosableFileFilter(pdfFilter);
+        jFileChooser.addChoosableFileFilter(textFilter);
 
         filterIndex = prefs.getInt("filterIndex", 0);
-        fileFilters = filechooser.getChoosableFileFilters();
+        fileFilters = jFileChooser.getChoosableFileFilters();
         if (filterIndex < fileFilters.length) {
-            filechooser.setFileFilter(fileFilters[filterIndex]);
+            jFileChooser.setFileFilter(fileFilters[filterIndex]);
         }
 
         wordWrapOn = prefs.getBoolean("wordWrap", false);
@@ -558,6 +557,7 @@ public class Gui extends JFrame {
     private void initComponents() {
 
         popup = new javax.swing.JPopupMenu();
+        jFileChooser = new javax.swing.JFileChooser();
         jToolBar2 = new javax.swing.JToolBar();
         jButtonOpen = new javax.swing.JButton();
         jButtonScan = new javax.swing.JButton();
@@ -1426,12 +1426,12 @@ public class Gui extends JFrame {
     }
 
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
-        if (filechooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            currentDirectory = filechooser.getCurrentDirectory().getPath();
-            openFile(filechooser.getSelectedFile());
+        if (jFileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            currentDirectory = jFileChooser.getCurrentDirectory().getPath();
+            openFile(jFileChooser.getSelectedFile());
 
             for (int i = 0; i < fileFilters.length; i++) {
-                if (fileFilters[i] == filechooser.getFileFilter()) {
+                if (fileFilters[i] == jFileChooser.getFileFilter()) {
                     filterIndex = i;
                     break;
                 }
@@ -1605,18 +1605,18 @@ public class Gui extends JFrame {
 
     boolean saveFileDlg() {
         outputDirectory = prefs.get("outputDirectory", null);
-        JFileChooser chooser = new JFileChooser(outputDirectory);
+        JFileChooser saveChooser = new JFileChooser(outputDirectory);
         FileFilter textFilter = new SimpleFilter("txt", bundle.getString("UTF-8_Text"));
-        chooser.addChoosableFileFilter(textFilter);
-        chooser.setDialogTitle(bundle.getString("Save_As"));
+        saveChooser.addChoosableFileFilter(textFilter);
+        saveChooser.setDialogTitle(bundle.getString("Save_As"));
         if (textFile != null) {
-            chooser.setSelectedFile(textFile);
+            saveChooser.setSelectedFile(textFile);
         }
 
-        if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-            outputDirectory = chooser.getCurrentDirectory().getPath();
-            File f = chooser.getSelectedFile();
-            if (chooser.getFileFilter() == textFilter) {
+        if (saveChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            outputDirectory = saveChooser.getCurrentDirectory().getPath();
+            File f = saveChooser.getSelectedFile();
+            if (saveChooser.getFileFilter() == textFilter) {
                 if (!f.getName().endsWith(".txt")) {
                     f = new File(f.getPath() + ".txt");
                 }
@@ -1727,7 +1727,7 @@ public class Gui extends JFrame {
      */
     protected void updateLaF(String laf) {
         SwingUtilities.updateComponentTreeUI(popup);
-        SwingUtilities.updateComponentTreeUI(filechooser);
+        SwingUtilities.updateComponentTreeUI(jFileChooser);
     }
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
@@ -1888,7 +1888,7 @@ public class Gui extends JFrame {
                 if (helptopicsFrame != null) {
                     helptopicsFrame.setTitle(jMenuItemHelp.getText());
                 }
-                filechooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
+                jFileChooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText"));
                 popup.removeAll();
                 populatePopupMenu();
                 updateMRUMenu();
@@ -1951,6 +1951,7 @@ public class Gui extends JFrame {
     protected javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemScreenshotMode;
     protected javax.swing.JCheckBoxMenuItem jCheckBoxMenuWordWrap;
     protected javax.swing.JComboBox jComboBoxLang;
+    private javax.swing.JFileChooser jFileChooser;
     protected javax.swing.JLabel jImageLabel;
     private javax.swing.JLabel jLabelCurIndex;
     private javax.swing.JLabel jLabelLanguage;
