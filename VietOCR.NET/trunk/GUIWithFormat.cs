@@ -42,7 +42,6 @@ namespace VietOCR.NET
         /// Changes localized text and messages
         /// </summary>
         /// <param name="locale"></param>
-        /// <param name="firstTime"></param>
         protected override void ChangeUILanguage(string locale)
         {
             base.ChangeUILanguage(locale);
