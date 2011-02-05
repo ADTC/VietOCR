@@ -1737,16 +1737,6 @@ public class Gui extends JFrame {
         }
     }
 
-    /**
-     *  Updates UI component if changes in LAF
-     *
-     *@param  laf  the look and feel class name
-     */
-    protected void updateLaF(String laf) {
-        SwingUtilities.updateComponentTreeUI(popup);
-        SwingUtilities.updateComponentTreeUI(jFileChooser);
-    }
-
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         jSplitPane1.setDividerLocation(jSplitPane1.getWidth() / 2);
 
@@ -1968,7 +1958,7 @@ public class Gui extends JFrame {
     protected javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemScreenshotMode;
     protected javax.swing.JCheckBoxMenuItem jCheckBoxMenuWordWrap;
     protected javax.swing.JComboBox jComboBoxLang;
-    private javax.swing.JFileChooser jFileChooser;
+    protected javax.swing.JFileChooser jFileChooser;
     protected javax.swing.JLabel jImageLabel;
     private javax.swing.JLabel jLabelCurIndex;
     private javax.swing.JLabel jLabelLanguage;
