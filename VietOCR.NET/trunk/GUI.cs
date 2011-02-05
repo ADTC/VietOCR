@@ -116,9 +116,10 @@ namespace VietOCR.NET
 
             InitializeComponent();
 
-            //rectNormal = DesktopBounds;
             SetupforTesseract();
-            this.toolStripCbLang.Items.AddRange(installedLanguages);
+            PopulateLanguageBox();
+
+            //rectNormal = DesktopBounds;
 
             //// Set system event.
             SystemEvents.SessionEnding += new SessionEndingEventHandler(OnSessionEnding);
@@ -194,6 +195,14 @@ namespace VietOCR.NET
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Populates OCR Language box.
+        /// </summary>
+        void PopulateLanguageBox()
+        {
+            this.toolStripCbLang.Items.AddRange(installedLanguages);
         }
 
         protected virtual void ocrToolStripMenuItem_Click(object sender, EventArgs e)
@@ -292,7 +301,7 @@ namespace VietOCR.NET
                 return SaveTextFile();
             }
         }
-        
+
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDlg();
@@ -342,7 +351,7 @@ namespace VietOCR.NET
             textModified = false;
             this.textBox1.Modified = false;
             this.Cursor = Cursors.Default;
-            
+
             return true;
         }
 
@@ -414,20 +423,18 @@ namespace VietOCR.NET
         private void toolStripCbLang_SelectedIndexChanged(object sender, EventArgs e)
         {
             curLangCode = installedLanguageCodes[this.toolStripCbLang.SelectedIndex];
+
+            // Hide Viet Input Method submenu if selected OCR Language is not Vietnamese
             bool vie = curLangCode.StartsWith("vie");
             VietKeyHandler.VietModeEnabled = vie;
-            SetVisibleInputMethodMenuitem(vie);
+            this.vietInputMethodToolStripMenuItem.Visible = vie;
+            this.toolStripMenuItemInputMethod.Visible = vie;
 
             if (this.toolStripButtonSpellCheck.Checked)
             {
                 this.toolStripButtonSpellCheck.PerformClick();
                 this.toolStripButtonSpellCheck.PerformClick();
             }
-        }
-
-        protected virtual void SetVisibleInputMethodMenuitem(bool visible)
-        {
-            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
