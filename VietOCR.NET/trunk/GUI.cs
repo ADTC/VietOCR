@@ -117,7 +117,7 @@ namespace VietOCR.NET
             InitializeComponent();
 
             SetupforTesseract();
-            PopulateLanguageBox();
+            PopulateOCRLanguageBox();
 
             //rectNormal = DesktopBounds;
 
@@ -149,6 +149,9 @@ namespace VietOCR.NET
             seea.Cancel = !OkToTrash();
         }
 
+        /// <summary>
+        /// Gets installed language data packs.
+        /// </summary>
         void SetupforTesseract()
         {
             lookupISO639 = new Dictionary<string, string>();
@@ -184,7 +187,6 @@ namespace VietOCR.NET
                 {
                     installedLanguageCodes[i] = Path.GetFileNameWithoutExtension(installedLanguageCodes[i]);
                     // translate ISO codes to full English names for user-friendliness
-
                     if (lookupISO639.ContainsKey(installedLanguageCodes[i]))
                     {
                         installedLanguages[i] = lookupISO639[installedLanguageCodes[i]];
@@ -200,7 +202,7 @@ namespace VietOCR.NET
         /// <summary>
         /// Populates OCR Language box.
         /// </summary>
-        void PopulateLanguageBox()
+        void PopulateOCRLanguageBox()
         {
             this.toolStripCbLang.Items.AddRange(installedLanguages);
         }
