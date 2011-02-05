@@ -55,7 +55,6 @@ public class Gui extends JFrame {
     private String currentDirectory;
     private String outputDirectory;
     protected String tessPath;
-    private Properties config;
     private Properties lookupISO639;
     private Properties lookupISO_3_1_Codes;
     protected String curLangCode = "eng";
@@ -83,6 +82,120 @@ public class Gui extends JFrame {
      * Creates new form.
      */
     public Gui() {
+        setupforTesseract();
+
+        try {
+            UIManager.setLookAndFeel(prefs.get("lookAndFeel", UIManager.getSystemLookAndFeelClassName()));
+        } catch (Exception e) {
+            // keep default LAF
+        }
+
+        currentDirectory = prefs.get("currentDirectory", null);
+        outputDirectory = prefs.get("outputDirectory", null);
+
+        initComponents();
+
+        // Hide Scan buttons for non-Windows OS because WIA Automation is Windows only
+        if (!WINDOWS) {
+            this.jToolBar2.remove(this.jButtonScan);
+            this.jMenuFile.remove(this.jMenuItemScan);
+        }
+        
+        bundle = java.util.ResourceBundle.getBundle("net.sourceforge.vietocr.Gui"); // NOI18N
+        if (installedLanguageCodes == null) {
+            JOptionPane.showMessageDialog(Gui.this, bundle.getString("Tesseract_is_not_found._Please_specify_its_path_in_Settings_menu."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        populateMRUList();
+        populatePopupMenu();
+
+        wordWrapOn = prefs.getBoolean("wordWrap", false);
+        jTextArea1.setLineWrap(wordWrapOn);
+        jCheckBoxMenuWordWrap.setSelected(wordWrapOn);
+
+        font = new Font(
+                prefs.get("fontName", MAC_OS_X ? "Lucida Grande" : "Tahoma"),
+                prefs.getInt("fontStyle", Font.PLAIN),
+                prefs.getInt("fontSize", 12));
+        jTextArea1.setFont(font);
+        
+        // Undo support
+        rawListener = new RawListener();
+        this.jTextArea1.getDocument().addUndoableEditListener(rawListener);
+        undoSupport.addUndoableEditListener(new SupportListener());
+        m_undo.discardAllEdits();
+        updateUndoRedo();
+        updateCutCopyDelete(false);
+
+        // DnD support
+        new DropTarget(this.jImageLabel, new FileDropTargetListener(Gui.this));
+        new DropTarget(this.jTextArea1, new FileDropTargetListener(Gui.this));
+
+        addWindowListener(
+                new WindowAdapter() {
+
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        quit();
+                    }
+
+                    @Override
+                    public void windowOpened(WindowEvent e) {
+                        updateSave(false);
+                        setExtendedState(prefs.getInt("windowState", Frame.NORMAL));
+                    }
+                });
+
+        setSize(
+                snap(prefs.getInt("frameWidth", 500), 300, screen.width),
+                snap(prefs.getInt("frameHeight", 360), 150, screen.height));
+        setLocation(
+                snap(
+                prefs.getInt("frameX", (screen.width - getWidth()) / 2),
+                screen.x, screen.x + screen.width - getWidth()),
+                snap(
+                prefs.getInt("frameY", screen.y + (screen.height - getHeight()) / 3),
+                screen.y, screen.y + screen.height - getHeight()));
+
+        // Paste image from clipboard
+        KeyEventDispatcher dispatcher = new KeyEventDispatcher() {
+
+            @Override
+            public boolean dispatchKeyEvent(KeyEvent e) {
+                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_V && e.getID() == KeyEvent.KEY_PRESSED) {
+                    try {
+                        Image image = ImageHelper.getClipboardImage();
+                        if (image != null) {
+                            File tempFile = File.createTempFile("tmp", ".png");
+                            ImageIO.write((BufferedImage) image, "png", tempFile);
+                            openFile(tempFile);
+                            tempFile.deleteOnExit();
+                            e.consume();
+//                            return true; // not dispatch the event to the component, in this case, the textarea
+                        }
+                    } catch (Exception ex) {
+                    }
+                }
+                return false;
+            }
+        };
+        DefaultKeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(dispatcher);
+
+        // Assign F7 key to spellcheck
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "spellcheck");
+        getRootPane().getActionMap().put("spellcheck", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jToggleButtonSpellCheck.doClick();
+            }
+        });
+    }
+
+    /**
+     * Sets up for Tesseract.
+     */
+    private void setupforTesseract() {
         if (WINDOWS) {
             tessPath = new File(baseDir, "tesseract").getPath();
         } else {
@@ -136,111 +249,12 @@ public class Gui extends JFrame {
                 installedLanguages[i] = lookupISO639.getProperty(installedLanguageCodes[i], installedLanguageCodes[i]);
             }
         }
+    }
 
-        config = new Properties();
-
-        try {
-            UIManager.setLookAndFeel(prefs.get("lookAndFeel", UIManager.getSystemLookAndFeelClassName()));
-            config.loadFromXML(getClass().getResourceAsStream("config.xml"));
-        } catch (Exception e) {
-//            e.printStackTrace();
-            // keep default LAF
-        }
-        
-        currentDirectory = prefs.get("currentDirectory", null);
-
-        initComponents();
-        
-        // Hide Scan buttons for non-Windows OS because WIA Automation is Windows only
-        if (!WINDOWS) {
-            this.jToolBar2.remove(this.jButtonScan);
-            this.jMenuFile.remove(this.jMenuItemScan);
-        }
-
-        new DropTarget(this.jImageLabel, new FileDropTargetListener(Gui.this));
-        new DropTarget(this.jTextArea1, new FileDropTargetListener(Gui.this));
-
-        addWindowListener(
-                new WindowAdapter() {
-
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        quit();
-                    }
-
-                    @Override
-                    public void windowOpened(WindowEvent e) {
-                        updateSave(false);
-                        setExtendedState(prefs.getInt("windowState", Frame.NORMAL));
-                    }
-                });
-
-        this.setTitle(APP_NAME);
-        bundle = java.util.ResourceBundle.getBundle("net.sourceforge.vietocr.Gui"); // NOI18N
-        FileFilter allImageFilter = new SimpleFilter("bmp;gif;jpg;jpeg;jp2;png;pnm;pbm;pgm;ppm;tif;tiff;pdf", bundle.getString("All_Image_Files"));
-        FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
-        FileFilter gifFilter = new SimpleFilter("gif", "GIF");
-        FileFilter jpegFilter = new SimpleFilter("jpg;jpeg", "JPEG");
-        FileFilter jpeg2000Filter = new SimpleFilter("jp2", "JPEG 2000");
-        FileFilter pngFilter = new SimpleFilter("png", "PNG");
-        FileFilter pnmFilter = new SimpleFilter("pnm;pbm;pgm;ppm", "PNM");
-        FileFilter tiffFilter = new SimpleFilter("tif;tiff", "TIFF");
-
-        FileFilter pdfFilter = new SimpleFilter("pdf", "PDF");
-        FileFilter textFilter = new SimpleFilter("txt", bundle.getString("UTF-8_Text"));
-
-        jFileChooser.setAcceptAllFileFilterUsed(false);
-        jFileChooser.addChoosableFileFilter(allImageFilter);
-        jFileChooser.addChoosableFileFilter(bmpFilter);
-        jFileChooser.addChoosableFileFilter(gifFilter);
-        jFileChooser.addChoosableFileFilter(jpegFilter);
-        jFileChooser.addChoosableFileFilter(jpeg2000Filter);
-        jFileChooser.addChoosableFileFilter(pngFilter);
-        jFileChooser.addChoosableFileFilter(pnmFilter);
-        jFileChooser.addChoosableFileFilter(tiffFilter);
-        jFileChooser.addChoosableFileFilter(pdfFilter);
-        jFileChooser.addChoosableFileFilter(textFilter);
-
-        filterIndex = prefs.getInt("filterIndex", 0);
-        fileFilters = jFileChooser.getChoosableFileFilters();
-        if (filterIndex < fileFilters.length) {
-            jFileChooser.setFileFilter(fileFilters[filterIndex]);
-        }
-
-        wordWrapOn = prefs.getBoolean("wordWrap", false);
-
-        jTextArea1.setLineWrap(wordWrapOn);
-        jCheckBoxMenuWordWrap.setSelected(wordWrapOn);
-
-        font = new Font(
-                prefs.get("fontName", MAC_OS_X ? "Lucida Grande" : "Tahoma"),
-                prefs.getInt("fontStyle", Font.PLAIN),
-                prefs.getInt("fontSize", 12));
-        jTextArea1.setFont(font);
-        setSize(
-                snap(prefs.getInt("frameWidth", 500), 300, screen.width),
-                snap(prefs.getInt("frameHeight", 360), 150, screen.height));
-        setLocation(
-                snap(
-                prefs.getInt("frameX", (screen.width - getWidth()) / 2),
-                screen.x, screen.x + screen.width - getWidth()),
-                snap(
-                prefs.getInt("frameY", screen.y + (screen.height - getHeight()) / 3),
-                screen.y, screen.y + screen.height - getHeight()));
-
-        if (installedLanguageCodes == null) {
-            JOptionPane.showMessageDialog(Gui.this, bundle.getString("Tesseract_is_not_found._Please_specify_its_path_in_Settings_menu."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-        }
-
-        populatePopupMenu();
-        rawListener = new RawListener();
-        this.jTextArea1.getDocument().addUndoableEditListener(rawListener);
-        undoSupport.addUndoableEditListener(new SupportListener());
-        m_undo.discardAllEdits();
-        updateUndoRedo();
-        updateCutCopyDelete(false);
-
-        // Populate MRU List
+    /**
+     * Populates MRU List.
+     */
+    private void populateMRUList() {
         String[] fileNames = prefs.get("MruList", "").split(File.pathSeparator);
         for (String fileName : fileNames) {
             if (!fileName.equals("")) {
@@ -248,41 +262,6 @@ public class Gui extends JFrame {
             }
         }
         updateMRUMenu();
-
-        // Paste image from clipboard
-        KeyEventDispatcher dispatcher = new KeyEventDispatcher() {
-
-            @Override
-            public boolean dispatchKeyEvent(KeyEvent e) {
-                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_V && e.getID() == KeyEvent.KEY_PRESSED) {
-                    try {
-                        Image image = ImageHelper.getClipboardImage();
-                        if (image != null) {
-                            File tempFile = File.createTempFile("tmp", ".png");
-                            ImageIO.write((BufferedImage) image, "png", tempFile);
-                            openFile(tempFile);
-                            tempFile.deleteOnExit();
-                            e.consume();
-//                            return true; // not dispatch the event to the component, in this case, the textarea
-                        }
-                    } catch (Exception ex) {
-                    }
-                }
-                return false;
-            }
-        };
-
-        DefaultKeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(dispatcher);
-
-        // assign F7 key to spellcheck
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "spellcheck");
-        getRootPane().getActionMap().put("spellcheck", new AbstractAction() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jToggleButtonSpellCheck.doClick();
-            }
-        });
     }
 
     void populatePopupMenuWithSuggestions(Point p) {
@@ -667,8 +646,38 @@ public class Gui extends JFrame {
         jFileChooser.setCurrentDirectory(currentDirectory == null ? null : new File(currentDirectory));
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui"); // NOI18N
         jFileChooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText")); // NOI18N
+        FileFilter allImageFilter = new SimpleFilter("bmp;gif;jpg;jpeg;jp2;png;pnm;pbm;pgm;ppm;tif;tiff;pdf", bundle.getString("All_Image_Files"));
+        FileFilter bmpFilter = new SimpleFilter("bmp", "Bitmap");
+        FileFilter gifFilter = new SimpleFilter("gif", "GIF");
+        FileFilter jpegFilter = new SimpleFilter("jpg;jpeg", "JPEG");
+        FileFilter jpeg2000Filter = new SimpleFilter("jp2", "JPEG 2000");
+        FileFilter pngFilter = new SimpleFilter("png", "PNG");
+        FileFilter pnmFilter = new SimpleFilter("pnm;pbm;pgm;ppm", "PNM");
+        FileFilter tiffFilter = new SimpleFilter("tif;tiff", "TIFF");
+
+        FileFilter pdfFilter = new SimpleFilter("pdf", "PDF");
+        FileFilter textFilter = new SimpleFilter("txt", bundle.getString("UTF-8_Text"));
+
+        jFileChooser.setAcceptAllFileFilterUsed(false);
+        jFileChooser.addChoosableFileFilter(allImageFilter);
+        jFileChooser.addChoosableFileFilter(bmpFilter);
+        jFileChooser.addChoosableFileFilter(gifFilter);
+        jFileChooser.addChoosableFileFilter(jpegFilter);
+        jFileChooser.addChoosableFileFilter(jpeg2000Filter);
+        jFileChooser.addChoosableFileFilter(pngFilter);
+        jFileChooser.addChoosableFileFilter(pnmFilter);
+        jFileChooser.addChoosableFileFilter(tiffFilter);
+        jFileChooser.addChoosableFileFilter(pdfFilter);
+        jFileChooser.addChoosableFileFilter(textFilter);
+
+        filterIndex = prefs.getInt("filterIndex", 0);
+        fileFilters = jFileChooser.getChoosableFileFilters();
+        if (filterIndex < fileFilters.length) {
+            jFileChooser.setFileFilter(fileFilters[filterIndex]);
+        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle(APP_NAME);
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(500, 360));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -1355,6 +1364,8 @@ public class Gui extends JFrame {
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         try {
+            Properties config = new Properties();
+            config.loadFromXML(getClass().getResourceAsStream("config.xml"));
             String version = config.getProperty("Version");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date releaseDate = sdf.parse(config.getProperty("ReleaseDate"));
@@ -1606,7 +1617,6 @@ public class Gui extends JFrame {
     }//GEN-LAST:event_jMenuItemSaveAsActionPerformed
 
     boolean saveFileDlg() {
-        outputDirectory = prefs.get("outputDirectory", null);
         JFileChooser saveChooser = new JFileChooser(outputDirectory);
         FileFilter textFilter = new SimpleFilter("txt", bundle.getString("UTF-8_Text"));
         saveChooser.addChoosableFileFilter(textFilter);
