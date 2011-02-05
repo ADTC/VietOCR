@@ -31,7 +31,7 @@ namespace VietOCR.NET
             InitializeComponent();
         }
 
-        protected override void oCRToolStripMenuItem_Click(object sender, EventArgs e)
+        protected override void ocrToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.pictureBox1.Image == null)
             {
@@ -59,7 +59,7 @@ namespace VietOCR.NET
             }
         }
 
-        protected override void oCRAllPagesToolStripMenuItem_Click(object sender, EventArgs e)
+        protected override void ocrAllPagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.pictureBox1.Image == null)
             {

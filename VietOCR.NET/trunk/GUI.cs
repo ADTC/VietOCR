@@ -117,9 +117,7 @@ namespace VietOCR.NET
             InitializeComponent();
 
             //rectNormal = DesktopBounds;
-            lookupISO639 = new Dictionary<string, string>();
-            lookupISO_3_1_Codes = new Dictionary<string, string>();
-            LoadLang();
+            SetupforTesseract();
             this.toolStripCbLang.Items.AddRange(installedLanguages);
 
             //// Set system event.
@@ -150,15 +148,16 @@ namespace VietOCR.NET
             seea.Cancel = !OkToTrash();
         }
 
-        void LoadLang()
+        void SetupforTesseract()
         {
-            string xmlFilePath = null;
+            lookupISO639 = new Dictionary<string, string>();
+            lookupISO_3_1_Codes = new Dictionary<string, string>();
 
             try
             {
                 string tessdataDir = Path.Combine(baseDir, "tessdata");
                 installedLanguageCodes = Directory.GetFiles(tessdataDir, "*.inttemp");
-                xmlFilePath = Path.Combine(baseDir, "Data/ISO639-3.xml");
+                string xmlFilePath = Path.Combine(baseDir, "Data/ISO639-3.xml");
                 Utilities.Utilities.LoadFromXML(lookupISO639, xmlFilePath);
                 xmlFilePath = Path.Combine(baseDir, "Data/ISO639-1.xml");
                 Utilities.Utilities.LoadFromXML(lookupISO_3_1_Codes, xmlFilePath);
@@ -197,12 +196,12 @@ namespace VietOCR.NET
             }
         }
 
-        protected virtual void oCRToolStripMenuItem_Click(object sender, EventArgs e)
+        protected virtual void ocrToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
 
-        protected virtual void oCRAllPagesToolStripMenuItem_Click(object sender, EventArgs e)
+        protected virtual void ocrAllPagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }

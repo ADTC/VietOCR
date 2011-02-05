@@ -359,13 +359,13 @@ namespace VietOCR.NET
             // 
             this.oCRToolStripMenuItem.Name = "oCRToolStripMenuItem";
             resources.ApplyResources(this.oCRToolStripMenuItem, "oCRToolStripMenuItem");
-            this.oCRToolStripMenuItem.Click += new System.EventHandler(this.oCRToolStripMenuItem_Click);
+            this.oCRToolStripMenuItem.Click += new System.EventHandler(this.ocrToolStripMenuItem_Click);
             // 
             // oCRAllPagesToolStripMenuItem
             // 
             this.oCRAllPagesToolStripMenuItem.Name = "oCRAllPagesToolStripMenuItem";
             resources.ApplyResources(this.oCRAllPagesToolStripMenuItem, "oCRAllPagesToolStripMenuItem");
-            this.oCRAllPagesToolStripMenuItem.Click += new System.EventHandler(this.oCRAllPagesToolStripMenuItem_Click);
+            this.oCRAllPagesToolStripMenuItem.Click += new System.EventHandler(this.ocrAllPagesToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
