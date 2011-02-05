@@ -278,9 +278,28 @@
     <Content Include="Hunspellx86.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="ChangeCaseDialog.sk-SK.resx">
+      <DependentUpon>ChangeCaseDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TextBoxContextMenuStrip.sk-SK.resx">
+      <DependentUpon>TextBoxContextMenuStrip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DownloadDialog.sk-SK.resx">
+      <DependentUpon>DownloadDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI.sk-SK.resx">
+      <DependentUpon>GUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUIWithPostprocess.resx">
       <DependentUpon>GUIWithPostprocess.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ImageInfoDialog.sk-SK.resx">
+      <DependentUpon>ImageInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsDialog.sk-SK.resx">
+      <DependentUpon>OptionsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.sk-SK.resx" />
     <EmbeddedResource Include="readme_cs_lt.html" />
     <Content Include="samples\vietsample1.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -428,6 +447,9 @@
       <DependentUpon>SplitPdfDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SplitPdfDialog.resx">
+      <DependentUpon>SplitPdfDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplitPdfDialog.sk-SK.resx">
       <DependentUpon>SplitPdfDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SplitPdfDialog.vi-VN.resx">
