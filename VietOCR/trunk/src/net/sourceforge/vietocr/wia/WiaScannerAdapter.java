@@ -52,7 +52,7 @@ public final class WiaScannerAdapter {
         } catch (Exception ex) {
             String message = "Error Scanning Image";
             if (ex.getMessage().toLowerCase().contains("cancelled")) {
-                message = "Scanner Operation";
+                message = "Scanning Operation";
             }
             throw new WiaOperationException(message, ex);
         } finally {
