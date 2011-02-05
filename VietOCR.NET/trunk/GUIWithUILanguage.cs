@@ -20,8 +20,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using Vietpad.NET.Controls;
 using System.Globalization;
+using Vietpad.NET.Controls;
 
 namespace VietOCR.NET
 {
@@ -36,7 +36,7 @@ namespace VietOCR.NET
             //
             // Settings UI Language submenu
             //
-            EventHandler eh1 = new EventHandler(MenuKeyboardUILangOnClick);
+            EventHandler eh = new EventHandler(MenuKeyboardUILangOnClick);
 
             List<ToolStripRadioButtonMenuItem> ar = new List<ToolStripRadioButtonMenuItem>();
 
@@ -48,7 +48,7 @@ namespace VietOCR.NET
                 miuil.Tag = ci.Name;
                 miuil.Text = ci.Parent.DisplayName + " (" + ci.Parent.NativeName + ")";
                 miuil.CheckOnClick = true;
-                miuil.Click += eh1;
+                miuil.Click += eh;
                 ar.Add(miuil);
             }
 
