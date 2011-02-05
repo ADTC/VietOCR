@@ -25,6 +25,15 @@ import net.sourceforge.vietocr.wia.*;
 //import uk.org.jsane.JSane_Gui.Swing.JSane_Scan_Dialog;
 
 public class GuiWithScan extends Gui {
+
+    public GuiWithScan() {
+        // Hide Scan buttons for non-Windows OS because WIA Automation is Windows only
+        if (!WINDOWS) {
+            this.jButtonScan.setVisible(false);
+            this.jMenuItemScan.setVisible(false);
+        }
+    }
+
     /**
      * Access scanner and scan documents via WIA.
      *
