@@ -91,12 +91,6 @@ namespace VietOCR.NET
             VietKeyHandler.InputMethod = (InputMethods)Enum.Parse(typeof(InputMethods), selectedInputMethod);
         }
 
-        protected override void SetVisibleInputMethodMenuitem(bool visible)
-        {
-            this.vietInputMethodToolStripMenuItem.Visible = visible;
-            this.toolStripMenuItemInputMethod.Visible = visible;
-        }
-
         protected override void LoadRegistryInfo(RegistryKey regkey)
         {
             base.LoadRegistryInfo(regkey);
