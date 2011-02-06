@@ -5,7 +5,7 @@ Version 3.0 (3 October 2010)
 - Replace old format (2.0x) language data with new format (3.0) language data
 - Change datafile suffix from .inttemp to .traineddata
 
-Version 3.1 (port changes from Version 2.0) (5 February 2011)
+Version 3.1 (port changes from Version 2.0) (6 February 2011)
 - Upgrade JACOB library to version 1.15-M4
 - Add support for spellcheck suggestion in context menu
 - Improve program accessibility and usability
