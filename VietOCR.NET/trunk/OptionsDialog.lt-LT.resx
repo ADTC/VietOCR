@@ -182,13 +182,13 @@
     <value>338, 102</value>
   </data>
   <data name="tabPage1.Text" xml:space="preserve">
-    <value>&amp;Stebimasis aplankas</value>
+    <value>Stebimasis aplankas</value>
   </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>338, 102</value>
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
-    <value>&amp;DangAmbigs.txt</value>
+    <value>DangAmbigs.txt</value>
   </data>
   <data name="textBoxOutput.Location" type="System.Drawing.Point, System.Drawing">
     <value>114, 39</value>
