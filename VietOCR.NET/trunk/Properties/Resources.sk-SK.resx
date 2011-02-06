@@ -282,4 +282,7 @@
   <data name="created" xml:space="preserve">
     <value> bol vytvorený.</value>
   </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Prezerať</value>
+  </data>
 </root>
