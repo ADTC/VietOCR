@@ -166,7 +166,7 @@
     <value>Stav procesu dávkového spracovania</value>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Sťahovanie...</value>
+    <value>Sťahovanie…</value>
   </data>
   <data name="Downloadcanceled" xml:space="preserve">
     <value>Sťahovanie zrušené.</value>
@@ -199,7 +199,7 @@
     <value>Reštartujte prosím program, nech môže zaregistrovať nové jazykové balíky.</value>
   </data>
   <data name="readme" xml:space="preserve">
-    <value>readme_cs.html</value>
+    <value>readme_cs_sk.html</value>
   </data>
   <data name="Add_to_Dictionary" xml:space="preserve">
     <value>Pridať do slovníka</value>
