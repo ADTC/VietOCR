@@ -131,9 +131,6 @@
   <data name="textBoxNumOfPages.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;textBoxTo.Type" xml:space="preserve">
-    <value>VietOCR.NET.SplitPdfDialog+NumericTextBox, VietOCR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;buttonBrowseInput.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -143,20 +140,23 @@
   <data name="labelNumOfPages.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="textBoxOutput.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
   <data name="&gt;&gt;textBoxOutput.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="buttonBrowseOutput.Location" type="System.Drawing.Point, System.Drawing">
     <value>222, 45</value>
   </data>
+  <data name="&gt;&gt;textBoxNumOfPages.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
   <data name="labelOutput.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 13</value>
   </data>
-  <data name="&gt;&gt;textBoxTo.ZOrder" xml:space="preserve">
-    <value>12</value>
+  <data name="&gt;&gt;buttonBrowseOutput.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonFiles.Name" xml:space="preserve">
+    <value>radioButtonFiles</value>
   </data>
   <data name="&gt;&gt;labelTo.Name" xml:space="preserve">
     <value>labelTo</value>
@@ -180,8 +180,17 @@
   <data name="&gt;&gt;labelInput.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelFrom.Name" xml:space="preserve">
-    <value>labelFrom</value>
+  <data name="&gt;&gt;textBoxFrom.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="radioButtonPages.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="labelNumOfPages.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 13</value>
+  </data>
+  <data name="&gt;&gt;radioButtonPages.Name" xml:space="preserve">
+    <value>radioButtonPages</value>
   </data>
   <data name="&gt;&gt;buttonSplit.ZOrder" xml:space="preserve">
     <value>15</value>
@@ -194,6 +203,9 @@
   </data>
   <data name="textBoxInput.Location" type="System.Drawing.Point, System.Drawing">
     <value>63, 21</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+    <value>14</value>
   </data>
   <data name="labelOutput.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -219,9 +231,6 @@
   <data name="textBoxTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 20</value>
   </data>
-  <data name="labelOutput.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;textBoxOutput.Name" xml:space="preserve">
     <value>textBoxOutput</value>
   </data>
@@ -230,12 +239,6 @@
   </data>
   <data name="buttonSplit.Location" type="System.Drawing.Point, System.Drawing">
     <value>93, 135</value>
-  </data>
-  <data name="radioButtonPages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>34, 80</value>
-  </data>
-  <data name="radioButtonPages.Text" xml:space="preserve">
-    <value>Pages</value>
   </data>
   <data name="&gt;&gt;radioButtonFiles.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -261,9 +264,6 @@
   <data name="&gt;&gt;buttonSplit.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonBrowseInput.Name" xml:space="preserve">
-    <value>buttonBrowseInput</value>
-  </data>
   <data name="radioButtonPages.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 17</value>
   </data>
@@ -276,14 +276,14 @@
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>174, 135</value>
   </data>
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;labelNumOfPages.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="textBoxOutput.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 20</value>
-  </data>
-  <data name="&gt;&gt;buttonSplit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="textBoxNumOfPages.Location" type="System.Drawing.Point, System.Drawing">
     <value>211, 100</value>
@@ -291,26 +291,20 @@
   <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;labelOutput.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;labelInput.Name" xml:space="preserve">
     <value>labelInput</value>
   </data>
   <data name="textBoxNumOfPages.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 20</value>
   </data>
-  <data name="labelNumOfPages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 13</value>
+  <data name="labelTo.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;labelOutput.Name" xml:space="preserve">
     <value>labelOutput</value>
   </data>
-  <data name="&gt;&gt;labelNumOfPages.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="textBoxNumOfPages.Text" xml:space="preserve">
-    <value>15</value>
+  <data name="buttonBrowseInput.Text" xml:space="preserve">
+    <value>...</value>
   </data>
   <data name="labelTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -326,6 +320,9 @@
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
+  </data>
+  <data name="&gt;&gt;labelFrom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="labelTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>19, 13</value>
@@ -351,6 +348,9 @@
   <data name="buttonBrowseInput.Location" type="System.Drawing.Point, System.Drawing">
     <value>222, 19</value>
   </data>
+  <data name="&gt;&gt;buttonBrowseOutput.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="&gt;&gt;textBoxTo.Name" xml:space="preserve">
     <value>textBoxTo</value>
   </data>
@@ -360,8 +360,8 @@
   <data name="buttonBrowseInput.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;buttonBrowseOutput.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;textBoxTo.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
   <data name="&gt;&gt;textBoxOutput.Parent" xml:space="preserve">
     <value>$this</value>
@@ -378,8 +378,11 @@
   <data name="radioButtonPages.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelNumOfPages.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
+    <value>buttonCancel</value>
+  </data>
+  <data name="buttonSplit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Cancel</value>
@@ -387,17 +390,14 @@
   <data name="&gt;&gt;textBoxNumOfPages.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBoxFrom.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="&gt;&gt;textBoxNumOfPages.Name" xml:space="preserve">
+    <value>textBoxNumOfPages</value>
   </data>
   <data name="&gt;&gt;textBoxFrom.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textBoxInput.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="labelInput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
   </data>
   <data name="&gt;&gt;radioButtonFiles.Parent" xml:space="preserve">
     <value>$this</value>
@@ -411,8 +411,8 @@
   <data name="&gt;&gt;labelOutput.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonFiles.Name" xml:space="preserve">
-    <value>radioButtonFiles</value>
+  <data name="&gt;&gt;labelOutput.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;textBoxFrom.Name" xml:space="preserve">
     <value>textBoxFrom</value>
@@ -426,11 +426,11 @@
   <data name="&gt;&gt;labelTo.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="buttonSplit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="labelInput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
   </data>
-  <data name="&gt;&gt;textBoxNumOfPages.Name" xml:space="preserve">
-    <value>textBoxNumOfPages</value>
+  <data name="&gt;&gt;labelFrom.Name" xml:space="preserve">
+    <value>labelFrom</value>
   </data>
   <data name="&gt;&gt;labelTo.Parent" xml:space="preserve">
     <value>$this</value>
@@ -438,11 +438,14 @@
   <data name="textBoxFrom.Location" type="System.Drawing.Point, System.Drawing">
     <value>154, 77</value>
   </data>
+  <data name="labelOutput.Text" xml:space="preserve">
+    <value>Output:</value>
+  </data>
   <data name="&gt;&gt;labelNumOfPages.Name" xml:space="preserve">
     <value>labelNumOfPages</value>
   </data>
   <data name="radioButtonFiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>34, 103</value>
+    <value>28, 103</value>
   </data>
   <data name="labelInput.Text" xml:space="preserve">
     <value>Input:</value>
@@ -453,11 +456,8 @@
   <data name="&gt;&gt;buttonBrowseInput.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="labelTo.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="&gt;&gt;textBoxTo.Type" xml:space="preserve">
+    <value>VietOCR.NET.SplitPdfDialog+NumericTextBox, VietOCR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="labelFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
@@ -465,8 +465,8 @@
   <data name="textBoxTo.Location" type="System.Drawing.Point, System.Drawing">
     <value>211, 77</value>
   </data>
-  <data name="&gt;&gt;radioButtonPages.Name" xml:space="preserve">
-    <value>radioButtonPages</value>
+  <data name="radioButtonPages.Text" xml:space="preserve">
+    <value>Pages</value>
   </data>
   <data name="buttonBrowseOutput.Size" type="System.Drawing.Size, System.Drawing">
     <value>27, 23</value>
@@ -477,8 +477,8 @@
   <data name="labelTo.Text" xml:space="preserve">
     <value>to:</value>
   </data>
-  <data name="buttonBrowseInput.Text" xml:space="preserve">
-    <value>...</value>
+  <data name="labelOutput.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;labelOutput.Parent" xml:space="preserve">
     <value>$this</value>
@@ -489,14 +489,14 @@
   <data name="textBoxInput.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;textBoxNumOfPages.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="labelNumOfPages.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
   <data name="&gt;&gt;labelFrom.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="radioButtonPages.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="&gt;&gt;buttonBrowseInput.Name" xml:space="preserve">
+    <value>buttonBrowseInput</value>
   </data>
   <data name="radioButtonFiles.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -504,20 +504,20 @@
   <data name="labelFrom.Text" xml:space="preserve">
     <value>from:</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
-    <value>buttonCancel</value>
+  <data name="&gt;&gt;radioButtonPages.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="textBoxNumOfPages.Text" xml:space="preserve">
+    <value>15</value>
   </data>
-  <data name="&gt;&gt;labelFrom.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="textBoxOutput.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <data name="buttonSplit.Text" xml:space="preserve">
     <value>Split</value>
   </data>
-  <data name="&gt;&gt;radioButtonPages.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="radioButtonPages.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 80</value>
   </data>
   <data name="&gt;&gt;textBoxOutput.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -525,11 +525,11 @@
   <data name="&gt;&gt;buttonSplit.Name" xml:space="preserve">
     <value>buttonSplit</value>
   </data>
-  <data name="&gt;&gt;buttonBrowseOutput.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonSplit.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="labelOutput.Text" xml:space="preserve">
-    <value>Output:</value>
+  <data name="&gt;&gt;labelNumOfPages.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
