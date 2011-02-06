@@ -109,9 +109,10 @@ Version 1.9 (11 November 2010)
 - Add support for a custom dictionary
 - List in correct order files generated from PDF conversion
 
-Version 2.0 (2 February 2011)
+Version 2.0 (6 February 2011)
 - Localize textbox's context menu
 - Add support for spellcheck suggestion in context menu
 - Improve program accessibility and usability
 - Add support for downloading and installing language data packs and appropriate spell dictionaries
-- Add UI localization for Lithuanian
+- Add UI localization for Lithuanian and Slovak
+- Refactor by breaking up large classes into smaller ones
