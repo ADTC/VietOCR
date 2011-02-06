@@ -301,7 +301,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.sk-SK.resx" />
     <EmbeddedResource Include="readme_cs_lt.html" />
-    <Content Include="readme_cs_sk.html" />
+    <EmbeddedResource Include="readme_cs_sk.html" />
     <Content Include="samples\vietsample1.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
