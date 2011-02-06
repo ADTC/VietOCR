@@ -279,4 +279,7 @@
   <data name="Save" xml:space="preserve">
     <value>Lưu</value>
   </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Xem</value>
+  </data>
 </root>

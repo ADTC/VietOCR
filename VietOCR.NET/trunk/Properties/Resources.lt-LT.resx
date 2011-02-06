@@ -282,4 +282,7 @@
   <data name="Select" xml:space="preserve">
     <value>Parinkti</value>
   </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Parinkti</value>
+  </data>
 </root>
