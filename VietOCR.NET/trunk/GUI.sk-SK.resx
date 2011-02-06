@@ -133,7 +133,7 @@
     <value>&amp;Koniec</value>
   </data>
   <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Možnosti…</value>
+    <value>M&amp;ožnosti…</value>
   </data>
   <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Nastavenia</value>
@@ -142,7 +142,7 @@
     <value>&amp;O VietOCR.NET</value>
   </data>
   <data name="imageToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Obrázok</value>
+    <value>O&amp;brázok</value>
   </data>
   <data name="oCRToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;OCR</value>
@@ -160,7 +160,7 @@
     <value>&amp;Post-spracovanie</value>
   </data>
   <data name="commandToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Príkaz</value>
+    <value>P&amp;ríkaz</value>
   </data>
   <data name="splitPdfToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Rozdeliť PDF</value>
@@ -667,7 +667,7 @@
     <value>imageToolStripMenuItem</value>
   </data>
   <data name="uiLanguageToolStripMenuItem.Text" xml:space="preserve">
-    <value>Jazyk po&amp;užívateľského rozhrania</value>
+    <value>&amp;Jazyk používateľského rozhrania</value>
   </data>
   <data name="toolStripButtonSpellCheck.ToolTipText" xml:space="preserve">
     <value>Kontrola preklepov</value>
@@ -814,7 +814,7 @@
     <value>Režim &amp;snímky obrazovky</value>
   </data>
   <data name="downloadLangDataToolStripMenuItem.Text" xml:space="preserve">
-    <value>S&amp;tiahnuť jazykové dáta…</value>
+    <value>Stiahnuť jazykové &amp;dáta…</value>
   </data>
   <data name="saveToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+S</value>
@@ -1411,18 +1411,12 @@
     <value>wordWrapToolStripMenuItem</value>
   </data>
   <data name="wordWrapToolStripMenuItem.Text" xml:space="preserve">
-    <value>Zala&amp;movať slová</value>
+    <value>&amp;Zalamovať slová</value>
   </data>
   <data name="changeCaseToolStripMenuItem.Text" xml:space="preserve">
     <value>Zmeniť &amp;veľkosť písmen…</value>
   </data>
   <data name="toolStripButtonCancelOCR.Text" xml:space="preserve">
     <value>Zrušiť OCR</value>
-  </data>
-  <data name="uILanguageToolStripMenuItem.Text1" xml:space="preserve">
-    <value>Jazyk po&amp;užívateľského rozhrania</value>
-  </data>
-  <data name="vietInputMethodToolStripMenuItem.Text1" xml:space="preserve">
-    <value>Vstupný reži&amp;m Viet</value>
   </data>
 </root>
