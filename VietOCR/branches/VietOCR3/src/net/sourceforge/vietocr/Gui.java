@@ -208,7 +208,8 @@ public class Gui extends JFrame {
                     return name.endsWith(DATAFILE_SUFFIX);
                 }
             });
-
+            Arrays.sort(installedLanguageCodes, Collator.getInstance());
+            
             File xmlFile = new File(baseDir, "data/ISO639-3.xml");
             lookupISO639.loadFromXML(new FileInputStream(xmlFile));
             xmlFile = new File(baseDir, "data/ISO639-1.xml");
