@@ -72,6 +72,10 @@ namespace VietOCR.NET
             this.checkBoxWatch.Checked = watchEnabled;
             this.textBoxDangAmbigs.Text = dangAmbigsPath;
             this.checkBoxDangAmbigs.Checked = dangAmbigsEnabled;
+
+            this.toolTip1.SetToolTip(this.btnWatch, "Browse");
+            this.toolTip1.SetToolTip(this.btnOutput, "Browse");
+            this.toolTip1.SetToolTip(this.btnDangAmbigs, "Browse");
         }
 
         protected override void OnClosed(EventArgs ea)

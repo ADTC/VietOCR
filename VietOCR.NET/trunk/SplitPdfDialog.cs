@@ -26,6 +26,8 @@ namespace VietOCR.NET
         {
             InitializeComponent();
             disableBoxes(!this.radioButtonPages.Checked);
+            this.toolTip1.SetToolTip(this.buttonBrowseInput, "Browse");
+            this.toolTip1.SetToolTip(this.buttonBrowseOutput, "Browse");
         }
 
         private void radioButtonPages_CheckedChanged(object sender, EventArgs e)
