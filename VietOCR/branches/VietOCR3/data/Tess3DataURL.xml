@@ -5,8 +5,8 @@
 <entry key="bul">http://tesseract-ocr.googlecode.com/files/bul.traineddata.gz</entry>
 <entry key="cat">http://tesseract-ocr.googlecode.com/files/cat.traineddata.gz</entry>
 <entry key="ces">http://tesseract-ocr.googlecode.com/files/ces.traineddata.gz</entry>
-<entry key="chi-sim">http://tesseract-ocr.googlecode.com/files/chi_sim.traineddata.gz</entry>
-<entry key="chi-tra">http://tesseract-ocr.googlecode.com/files/chi_tra.traineddata.gz</entry>
+<entry key="chi_sim">http://tesseract-ocr.googlecode.com/files/chi_sim.traineddata.gz</entry>
+<entry key="chi_tra">http://tesseract-ocr.googlecode.com/files/chi_tra.traineddata.gz</entry>
 <entry key="dan-frak">http://tesseract-ocr.googlecode.com/files/dan-frak.traineddata.gz</entry>
 <entry key="dan">http://tesseract-ocr.googlecode.com/files/dan.traineddata.gz</entry>
 <entry key="deu-frak">http://tesseract-ocr.googlecode.com/files/deu-frak.traineddata.gz</entry>
