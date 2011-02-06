@@ -163,7 +163,7 @@ Version 1.9 (2 October 2010)
 - Upgrade JACOB library to version 1.15-M3
 - Preset Tesseract path on Linux to /usr/bin, the default install location of Tesseract
 
-Version 2.0 (5 February 2011)
+Version 2.0 (6 February 2011)
 - Upgrade JACOB library to version 1.15-M4
 - Add support for spellcheck suggestion in context menu
 - Improve program accessibility and usability
