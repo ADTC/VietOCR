@@ -192,15 +192,13 @@ public class Gui extends JFrame {
             if (!tessdataDir.exists()) {
                 String TESSDATA_PREFIX = System.getenv("TESSDATA_PREFIX");
                 if (TESSDATA_PREFIX == null && !WINDOWS) { // if TESSDATA_PREFIX env var not set
-                    TESSDATA_PREFIX = "/usr/share/tesseract-ocr/"; // default install path of tessdata on Linux
-                    tessdataDir = new File(TESSDATA_PREFIX, "tessdata");
-                    if (!tessdataDir.exists()) {
+                    if (tessPath.equals("/usr/bin")) { // default install path of Tesseract on Linux
+                        TESSDATA_PREFIX = "/usr/share/tesseract-ocr/"; // default install path of tessdata on Linux
+                    } else {
                         TESSDATA_PREFIX = "/usr/local/share/"; // default make install path of tessdata on Linux
-                        tessdataDir = new File(TESSDATA_PREFIX, "tessdata");
                     }
-                } else {
-                    tessdataDir = new File(TESSDATA_PREFIX, "tessdata");
                 }
+                tessdataDir = new File(TESSDATA_PREFIX, "tessdata");
             }
 
             installedLanguageCodes = tessdataDir.list(new FilenameFilter() {
