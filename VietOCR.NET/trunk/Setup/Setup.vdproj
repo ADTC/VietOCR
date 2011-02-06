@@ -33,6 +33,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_13F48ECB453644279D133B791CFDCA5C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_1A4217B8EB0C413FB001C694900E70B1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -298,12 +304,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9305C06EB21AD40577B72DC9A6F45EE3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_C3EDDD34B6DE903B1544C63767D700BA"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -311,6 +311,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_1B642B25FC7D23D5624FAC8B0E7C8FC0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_9305C06EB21AD40577B72DC9A6F45EE3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -360,7 +366,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:VietOCR.NET-2.0-RC\\Setup.msi"
+        "OutputFilename" = "8:VietOCR.NET-2.0\\Setup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -461,6 +467,26 @@
             "TargetName" = "8:ISO639-1.xml"
             "Tag" = "8:"
             "Folder" = "8:_69B414EFD2C243ABA1307C6342D57521"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_13F48ECB453644279D133B791CFDCA5C"
+            {
+            "SourcePath" = "8:..\\readme_cs_sk.html"
+            "TargetName" = "8:readme_cs_sk.html"
+            "Tag" = "8:"
+            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1504,7 +1530,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:VietOCR.NET"
         "ProductCode" = "8:{085C08BC-0366-4AB1-B15C-50249F6CCB02}"
-        "PackageCode" = "8:{D57EE348-F540-4124-AD1A-CE97F0BE7CBC}"
+        "PackageCode" = "8:{A5C407AB-1BEC-4FB6-A8ED-C4CC2DAF044A}"
         "UpgradeCode" = "8:{2EF42973-7837-44E2-9085-FA4B5B40483E}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"

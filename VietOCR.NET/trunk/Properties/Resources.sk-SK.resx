@@ -124,7 +124,7 @@
     <value>Zdroj neexistuje.</value>
   </data>
   <data name="Clear_Recent_Files" xml:space="preserve">
-    <value>Vyčis&amp;tiť Nedávne súbory</value>
+    <value>&amp;Vyčistiť Nedávne súbory</value>
   </data>
   <data name="Select_Input_PDFs" xml:space="preserve">
     <value>Vyberte vstupné PDF</value>
