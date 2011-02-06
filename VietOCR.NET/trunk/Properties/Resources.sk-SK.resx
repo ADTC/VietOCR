@@ -160,7 +160,7 @@
     <value>Uložiť</value>
   </data>
   <data name="Page_" xml:space="preserve">
-    <value>Strana</value>
+    <value>Strana </value>
   </data>
   <data name="BatchProcessStatus" xml:space="preserve">
     <value>Stav procesu dávkového spracovania</value>
@@ -181,7 +181,7 @@
     <value>Spojenie PDF ukončené. </value>
   </data>
   <data name="check_output_in" xml:space="preserve">
-    <value>Skontrolujte prosím výstupný súbor v</value>
+    <value>Skontrolujte prosím výstupný súbor v </value>
   </data>
   <data name="Scanning" xml:space="preserve">
     <value>Skenovanie…</value>
