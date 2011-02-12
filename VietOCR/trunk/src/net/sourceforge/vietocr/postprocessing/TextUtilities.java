@@ -74,7 +74,7 @@ public class TextUtilities {
             String str;
             while ((str = bs.readLine()) != null) {
                 int index = str.indexOf('=');
-                if (index == -1) {
+                if (index == -1 || index == 0) {
                     continue;
                 }
 
