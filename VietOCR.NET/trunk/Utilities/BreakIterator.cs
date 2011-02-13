@@ -2,10 +2,10 @@
 * BreakIterator
 *
 * Attempt to mimic Java's BreakIterator class
-* to analyze word boundaries
+* to analyze word boundaries.
 *
 * @author: Quan Nguyen
-* @version: 1.3, 20 July 2005
+* @version: 1.4, 10 January 2011
 */
 
 using System.Text.RegularExpressions;
