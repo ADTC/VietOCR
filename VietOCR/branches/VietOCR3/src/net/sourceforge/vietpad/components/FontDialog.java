@@ -8,7 +8,7 @@
  *  http://www.spindoczine.com/sbe
  *  ===================================================
  */
-package net.sourceforge.vietpad;
+package net.sourceforge.vietpad.components;
 
 import java.awt.*;
 import java.awt.event.*;

@@ -17,7 +17,7 @@
  */
 
 
-package net.sourceforge.vietocr;
+package net.sourceforge.vietpad.components;
 
 import java.awt.*;
 import java.io.*;
@@ -32,7 +32,7 @@ import javax.swing.text.*;
  * @see: http://vietpad.sourceforge.net
  * @note: Modified to open external html links with default browser
  */
-class HtmlPane extends JScrollPane implements HyperlinkListener {
+public class HtmlPane extends JScrollPane implements HyperlinkListener {
     private JEditorPane html;
     private JTextField statusBar;
     private final ClassLoader cLoader;
