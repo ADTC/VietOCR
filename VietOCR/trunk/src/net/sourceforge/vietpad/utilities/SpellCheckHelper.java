@@ -15,8 +15,6 @@
  */
 package net.sourceforge.vietpad.utilities;
 
-import net.sourceforge.vietpad.utilities.WavyLineHighlighter;
-import net.sourceforge.vietocr.utilities.Utilities;
 import com.stibocatalog.hunspell.Hunspell;
 import java.awt.Color;
 //import java.util.logging.*;
@@ -30,6 +28,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.*;
 import net.sourceforge.vietocr.Gui;
+import net.sourceforge.vietocr.utilities.Utilities;
 
 public class SpellCheckHelper {
 
