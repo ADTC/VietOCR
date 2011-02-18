@@ -22,7 +22,7 @@ namespace VietOCR.NET.Controls
         private Bitmap myBitmap;
         private Graphics textBoxGraphics;
         private Graphics bufferGraphics;
-        private SpellChecker mySpellChecker;
+        private SpellCheckHelper mySpeller;
 
 
         /// <summary>
@@ -54,11 +54,11 @@ namespace VietOCR.NET.Controls
             }
         }
 
-        public CustomPaintTextBox(TextBoxBase clientTextBox, SpellChecker checker)
+        public CustomPaintTextBox(TextBoxBase clientTextBox, SpellCheckHelper speller)
         {
             //Set up the CustomPaintTextBox
             this.clientTextBox = clientTextBox;
-            this.mySpellChecker = checker;
+            this.mySpeller = speller;
 
             //Create a bitmap with the same dimensions as the textbox
             myBitmap = new Bitmap(clientTextBox.Width, clientTextBox.Height);
@@ -91,7 +91,7 @@ namespace VietOCR.NET.Controls
         //ByVal sender As Object, ByVal e As DoWorkEventArgs)
         private void CustomPaint()
         {
-            CharacterRange[] errorRanges = mySpellChecker.GetSpellingErrorRanges();
+            CharacterRange[] errorRanges = mySpeller.GetSpellingErrorRanges();
             if (errorRanges.Length == 0)
             {
                 return;
@@ -396,9 +396,9 @@ namespace VietOCR.NET.Controls
                         bufferGraphics = null;
                     }
 
-                    if (mySpellChecker != null)
+                    if (mySpeller != null)
                     {
-                        mySpellChecker = null;
+                        mySpeller = null;
                     }
                 }
 

@@ -65,7 +65,7 @@ namespace VietOCR.NET.Postprocessing
                 while ((str = sr.ReadLine()) != null)
                 {
                     int index = str.IndexOf('=');
-                    if (index == -1 || index == 0)
+                    if (index <= 0)
                     {
                         continue;
                     }

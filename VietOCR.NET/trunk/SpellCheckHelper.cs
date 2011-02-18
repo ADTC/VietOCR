@@ -13,7 +13,7 @@ using Net.SourceForge.Vietpad.Utilities;
 
 namespace VietOCR.NET
 {
-    class SpellChecker
+    class SpellCheckHelper
     {
         TextBoxBase textbox;
         string localeId;
@@ -22,7 +22,7 @@ namespace VietOCR.NET
         static List<CharacterRange> spellingErrorRanges = new List<CharacterRange>();
         static List<String> userWordList = new List<String>();
         static DateTime mapLastModified = DateTime.MinValue;
-        Hunspell spellDict;
+        Hunspell spellChecker;
         CustomPaintTextBox cntl;
 
         public CharacterRange[] GetSpellingErrorRanges()
@@ -30,7 +30,7 @@ namespace VietOCR.NET
             return spellingErrorRanges.ToArray();
         }
 
-        public SpellChecker(TextBoxBase textbox, string localeId)
+        public SpellCheckHelper(TextBoxBase textbox, string localeId)
         {
             this.textbox = textbox;
             this.localeId = localeId;
@@ -47,7 +47,7 @@ namespace VietOCR.NET
             try
             {
                 string dictPath = baseDir + "/dict/" + localeId;
-                spellDict = new Hunspell(dictPath + ".aff", dictPath + ".dic");
+                spellChecker = new Hunspell(dictPath + ".aff", dictPath + ".dic");
                 LoadUserDictionary();
 
                 listeners.Add(new System.EventHandler(this.textbox_TextChanged));
@@ -61,6 +61,21 @@ namespace VietOCR.NET
             {
                 MessageBox.Show(e.Message);
             }
+        }
+
+        public void DisableSpellCheck()
+        {
+            if (localeId == null)
+            {
+                return;
+            }
+
+            if (listeners.Count > 0)
+            {
+                this.textbox.TextChanged -= (System.EventHandler)listeners[0];
+                listeners.RemoveAt(0);
+            }
+            spellingErrorRanges.Clear();
         }
 
         public void SpellCheck()
@@ -102,7 +117,7 @@ namespace VietOCR.NET
 
             foreach (String word in words)
             {
-                if (!spellDict.Spell(word))
+                if (!spellChecker.Spell(word))
                 {
                     // is mispelled word in user.dic?
                     if (!userWordList.Contains(word.ToLower()))
@@ -134,21 +149,6 @@ namespace VietOCR.NET
             return words;
         }
 
-        public void DisableSpellCheck()
-        {
-            if (localeId == null)
-            {
-                return;
-            }
-
-            if (listeners.Count > 0)
-            {
-                this.textbox.TextChanged -= (System.EventHandler)listeners[0];
-                listeners.RemoveAt(0);
-            }
-            spellingErrorRanges.Clear();
-        }
-
         private void textbox_TextChanged(object sender, EventArgs e)
         {
             SpellCheck();
@@ -165,7 +165,7 @@ namespace VietOCR.NET
             }
             else
             {
-                return spellDict.Suggest(misspelled); // TODO: exception thrown here.
+                return spellChecker.Suggest(misspelled); // TODO: exception thrown here.
             }
         }
 
