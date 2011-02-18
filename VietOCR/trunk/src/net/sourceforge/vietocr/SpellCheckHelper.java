@@ -30,7 +30,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.*;
 
-public class SpellChecker {
+public class SpellCheckHelper {
 
     JTextComponent textComp;
     // define the highlighter
@@ -42,10 +42,16 @@ public class SpellChecker {
     static List<String> userWordList = new ArrayList<String>();
     static long mapLastModified = Long.MIN_VALUE;
 
-    public SpellChecker(JTextComponent textComp, String localeId) {
+    /**
+     * Constructor.
+     *
+     * @param textComp
+     * @param localeId
+     */
+    public SpellCheckHelper(JTextComponent textComp, String localeId) {
         this.textComp = textComp;
         this.localeId = localeId;
-        baseDir = Utilities.getBaseDir(SpellChecker.this);
+        baseDir = Utilities.getBaseDir(SpellCheckHelper.this);
     }
 
     public void enableSpellCheck() {
@@ -65,6 +71,13 @@ public class SpellChecker {
         }
     }
 
+    public void disableSpellCheck() {
+        if (lstList.size() > 0) {
+            this.textComp.getDocument().removeDocumentListener(lstList.remove(0));
+            this.textComp.getHighlighter().removeAllHighlights();
+        }
+    }
+    
     void spellCheck() {
         Highlighter hi = textComp.getHighlighter();
         hi.removeAllHighlights();
@@ -124,17 +137,6 @@ public class SpellChecker {
         }
 
         return words;
-    }
-
-    public void disableSpellCheck() {
-        if (localeId == null) {
-            return;
-        }
-
-        if (lstList.size() > 0) {
-            this.textComp.getDocument().removeDocumentListener(lstList.remove(0));
-            this.textComp.getHighlighter().removeAllHighlights();
-        }
     }
 
     public List<String> suggest(String misspelled) {

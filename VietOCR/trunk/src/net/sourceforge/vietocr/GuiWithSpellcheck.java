@@ -28,7 +28,7 @@ import javax.swing.text.BadLocationException;
 public class GuiWithSpellcheck extends GuiWithSettings {
 
     private int start, end;
-    private SpellChecker sp;
+    private SpellCheckHelper speller;
 
     @Override
     void populatePopupMenuWithSuggestions(Point pointClicked) {
@@ -53,11 +53,11 @@ public class GuiWithSpellcheck extends GuiWithSettings {
      * @param curWord
      */
     void makeSuggestions(final String curWord) {
-        if (sp == null || curWord == null || curWord.trim().length() == 0) {
+        if (speller == null || curWord == null || curWord.trim().length() == 0) {
             return;
         }
 
-        List<String> suggests = sp.suggest(curWord);
+        List<String> suggests = speller.suggest(curWord);
         if (suggests == null || suggests.isEmpty()) {
             return;
         }
@@ -68,14 +68,14 @@ public class GuiWithSpellcheck extends GuiWithSettings {
             public void actionPerformed(ActionEvent ae) {
                 String selectedWord = ae.getActionCommand();
                 if (selectedWord.equals("ignore.word")) {
-                    sp.ignoreWord(curWord);
+                    speller.ignoreWord(curWord);
                 } else if (selectedWord.equals("add.word")) {
-                    sp.addWord(curWord);
+                    speller.addWord(curWord);
                 } else {
                     jTextArea1.select(start, end);
                     jTextArea1.replaceSelection(selectedWord);
                 }
-                sp.spellCheck();
+                speller.spellCheck();
             }
         };
 
@@ -113,11 +113,11 @@ public class GuiWithSpellcheck extends GuiWithSettings {
             return;
         }
         
-        sp = new SpellChecker(this.jTextArea1, localeId);
+        speller = new SpellCheckHelper(this.jTextArea1, localeId);
         if (this.jToggleButtonSpellCheck.isSelected()) {
-            sp.enableSpellCheck();
+            speller.enableSpellCheck();
         } else {
-            sp.disableSpellCheck();
+            speller.disableSpellCheck();
         }
         this.jTextArea1.repaint();
     }
