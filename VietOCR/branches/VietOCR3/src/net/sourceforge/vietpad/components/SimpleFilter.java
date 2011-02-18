@@ -9,7 +9,7 @@
  *  ===================================================
  *
  */
-package net.sourceforge.vietpad;
+package net.sourceforge.vietpad.components;
 
 import java.io.File;
 
