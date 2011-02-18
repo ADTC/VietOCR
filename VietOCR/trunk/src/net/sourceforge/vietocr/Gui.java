@@ -31,8 +31,9 @@ import java.awt.dnd.DropTarget;
 import javax.swing.event.*;
 import javax.swing.filechooser.FileFilter;
 import net.sourceforge.vietocr.utilities.*;
-import net.sourceforge.vietpad.*;
 import net.sourceforge.vietpad.inputmethod.*;
+import net.sourceforge.vietpad.components.HtmlPane;
+import net.sourceforge.vietpad.components.SimpleFilter;
 
 public class Gui extends JFrame {
 

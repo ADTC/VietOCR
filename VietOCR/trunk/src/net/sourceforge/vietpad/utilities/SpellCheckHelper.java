@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.sourceforge.vietocr;
+package net.sourceforge.vietpad.utilities;
 
-import net.sourceforge.vietocr.utilities.WavyLineHighlighter;
+import net.sourceforge.vietpad.utilities.WavyLineHighlighter;
 import net.sourceforge.vietocr.utilities.Utilities;
 import com.stibocatalog.hunspell.Hunspell;
 import java.awt.Color;
@@ -29,6 +29,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.*;
+import net.sourceforge.vietocr.Gui;
 
 public class SpellCheckHelper {
 
@@ -78,7 +79,7 @@ public class SpellCheckHelper {
         }
     }
     
-    void spellCheck() {
+    public void spellCheck() {
         Highlighter hi = textComp.getHighlighter();
         hi.removeAllHighlights();
 

@@ -1,4 +1,4 @@
-package net.sourceforge.vietpad;
+package net.sourceforge.vietpad.utilities;
 
 import java.awt.Toolkit;
 import javax.swing.text.*;
@@ -10,7 +10,7 @@ import javax.swing.text.*;
  *@version    1.0.5, 19 April 2003
  *@see        http://vietpad.sourceforge.net
  */
-class LimitedLengthDocument extends PlainDocument {
+public class LimitedLengthDocument extends PlainDocument {
     private int max;
 
     public LimitedLengthDocument(int max) {
