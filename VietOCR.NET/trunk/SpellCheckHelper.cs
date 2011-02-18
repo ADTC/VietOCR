@@ -65,11 +65,6 @@ namespace VietOCR.NET
 
         public void DisableSpellCheck()
         {
-            if (localeId == null)
-            {
-                return;
-            }
-
             if (listeners.Count > 0)
             {
                 this.textbox.TextChanged -= (System.EventHandler)listeners[0];
