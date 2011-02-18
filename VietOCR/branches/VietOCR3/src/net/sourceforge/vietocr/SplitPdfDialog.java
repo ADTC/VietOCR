@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.text.*;
-import net.sourceforge.vietpad.SimpleFilter;
+import net.sourceforge.vietpad.components.SimpleFilter;
 
 public class SplitPdfDialog extends javax.swing.JDialog {
 

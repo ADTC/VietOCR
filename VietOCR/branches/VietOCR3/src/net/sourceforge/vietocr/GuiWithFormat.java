@@ -19,8 +19,8 @@ import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import net.sourceforge.vietpad.*;
 import net.sourceforge.vietpad.utilities.TextUtilities;
+import net.sourceforge.vietpad.components.FontDialog;
 
 public class GuiWithFormat extends GuiWithImage {
     private ChangeCaseDialog changeCaseDlg;
