@@ -158,6 +158,7 @@
     <Compile Include="GUIWithUILanguage.Designer.cs">
       <DependentUpon>GUIWithUILanguage.cs</DependentUpon>
     </Compile>
+    <Compile Include="SpellCheckHelper.cs" />
     <Compile Include="Utilities\FormLocalizer.cs" />
     <Compile Include="GUIWithOCR.cs">
       <SubType>Form</SubType>
@@ -237,7 +238,6 @@
     <Compile Include="Postprocessing\ProcessorFactory.cs" />
     <Compile Include="Postprocessing\TextUtilities.cs" />
     <Compile Include="Postprocessing\ViePP.cs" />
-    <Compile Include="SpellChecker.cs" />
     <Compile Include="SplitPdfArgs.cs" />
     <Compile Include="SplitPdfDialog.cs">
       <SubType>Form</SubType>

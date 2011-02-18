@@ -28,7 +28,7 @@ namespace VietOCR.NET
     public partial class GUIWithSpellcheck : VietOCR.NET.GUIWithSettings
     {
         private int start, end;
-        private SpellChecker sp;
+        private SpellCheckHelper sp;
         private string curWord;
 
         public GUIWithSpellcheck()
@@ -143,7 +143,7 @@ namespace VietOCR.NET
                 return;
             }
 
-            sp = new SpellChecker(this.textBox1, localeId);
+            sp = new SpellCheckHelper(this.textBox1, localeId);
 
             if (this.toolStripButtonSpellCheck.Checked)
             {
