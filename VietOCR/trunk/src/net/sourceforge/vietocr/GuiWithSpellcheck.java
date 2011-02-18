@@ -24,6 +24,7 @@ import java.util.Properties;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
+import net.sourceforge.vietpad.utilities.SpellCheckHelper;
 
 public class GuiWithSpellcheck extends GuiWithSettings {
 

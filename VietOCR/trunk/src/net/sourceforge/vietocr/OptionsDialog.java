@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
-import net.sourceforge.vietpad.SimpleFilter;
+import net.sourceforge.vietpad.components.SimpleFilter;
 
 /**
  *

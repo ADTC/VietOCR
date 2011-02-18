@@ -8,7 +8,7 @@
  *  http://www.spindoczine.com/sbe
  *  ===================================================
  */
-package net.sourceforge.vietpad;
+package net.sourceforge.vietpad.components;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import net.sourceforge.vietpad.utilities.LimitedLengthDocument;
 
 /**
  *  Open List
@@ -24,7 +25,7 @@ import javax.swing.event.ListSelectionListener;
  *@version    1.0.5, 19 April 2003
  *@see        <a href="http://vietpad.sourceforge.net">VietPad</a>
  */
-class OpenList extends JPanel implements ListSelectionListener, ActionListener {
+public class OpenList extends JPanel implements ListSelectionListener, ActionListener {
 
     protected JLabel m_title;
     protected JTextField m_text;
