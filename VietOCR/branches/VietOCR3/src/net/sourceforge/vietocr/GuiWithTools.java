@@ -21,7 +21,7 @@ import java.io.File;
 import java.util.Locale;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
-import net.sourceforge.vietpad.SimpleFilter;
+import net.sourceforge.vietpad.components.SimpleFilter;
 
 public class GuiWithTools extends GuiWithSpellcheck {
 
