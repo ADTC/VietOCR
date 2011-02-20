@@ -91,7 +91,7 @@ namespace VietOCR.NET.Controls
         //ByVal sender As Object, ByVal e As DoWorkEventArgs)
         private void CustomPaint()
         {
-            CharacterRange[] errorRanges = mySpeller.GetSpellingErrorRanges();
+            CharacterRange[] errorRanges = mySpeller.GetSpellingErrorRanges;
             if (errorRanges.Length == 0)
             {
                 return;
