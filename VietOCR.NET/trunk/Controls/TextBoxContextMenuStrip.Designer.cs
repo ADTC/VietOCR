@@ -138,7 +138,7 @@ namespace VietOCR.NET.Controls
             this.miDelete,
             this.miSeparator2,
             this.miSelectAll});
-            this.Opening += new System.ComponentModel.CancelEventHandler(this.StandardTextBoxContextMenuStrip_Opening);
+            this.Opening += new System.ComponentModel.CancelEventHandler(this.TextBoxContextMenuStrip_Opening);
             this.ResumeLayout(false);
 
         }
@@ -168,7 +168,7 @@ namespace VietOCR.NET.Controls
             resources.ApplyResources(this.miSelectAll, "miSelectAll");
         }
 
-        void StandardTextBoxContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        void TextBoxContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Get the text box that the context menu was popped on
             if (this.SourceControl is TextBox)
