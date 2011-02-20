@@ -28,7 +28,7 @@ namespace VietOCR.NET
     public partial class GUIWithSpellcheck : VietOCR.NET.GUIWithSettings
     {
         private int start, end;
-        private SpellCheckHelper sp;
+        private SpellCheckHelper speller;
         private string curWord;
 
         public GUIWithSpellcheck()
@@ -51,10 +51,9 @@ namespace VietOCR.NET
                     if (end != BreakIterator.DONE)
                     {
                         start = boundary.Previous();
+                        curWord = this.textBox1.Text.Substring(start, end - start);
+                        makeSuggestions(curWord);
                     }
-
-                    curWord = this.textBox1.Text.Substring(start, end - start);
-                    makeSuggestions(curWord);
                 }
             }
             finally
@@ -70,12 +69,12 @@ namespace VietOCR.NET
         /// <param name="curWord"></param>
         void makeSuggestions(string curWord)
         {
-            if (sp == null || curWord == null || curWord.Trim().Length == 0)
+            if (speller == null || curWord == null || curWord.Trim().Length == 0)
             {
                 return;
             }
 
-            List<String> suggests = sp.Suggest(curWord);
+            List<String> suggests = speller.Suggest(curWord);
             if (suggests == null || suggests.Count == 0)
             {
                 return;
@@ -114,14 +113,14 @@ namespace VietOCR.NET
             }
             else if (command.ToString() == "ignore.word")
             {
-                sp.IgnoreWord(curWord);
+                speller.IgnoreWord(curWord);
             }
             else if (command.ToString() == "add.word")
             {
-                sp.AddWord(curWord);
+                speller.AddWord(curWord);
             }
 
-            sp.SpellCheck();
+            speller.SpellCheck();
         }
 
         protected override void toolStripButtonSpellCheck_Click(object sender, EventArgs e)
@@ -143,15 +142,15 @@ namespace VietOCR.NET
                 return;
             }
 
-            sp = new SpellCheckHelper(this.textBox1, localeId);
+            speller = new SpellCheckHelper(this.textBox1, localeId);
 
             if (this.toolStripButtonSpellCheck.Checked)
             {
-                sp.EnableSpellCheck();
+                speller.EnableSpellCheck();
             }
             else
             {
-                sp.DisableSpellCheck();
+                speller.DisableSpellCheck();
             }
             this.textBox1.Refresh();
         }
