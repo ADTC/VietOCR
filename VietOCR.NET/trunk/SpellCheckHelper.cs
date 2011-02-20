@@ -25,9 +25,9 @@ namespace VietOCR.NET
         Hunspell spellChecker;
         CustomPaintTextBox cntl;
 
-        public CharacterRange[] GetSpellingErrorRanges()
+        public CharacterRange[] GetSpellingErrorRanges
         {
-            return spellingErrorRanges.ToArray();
+            get {return spellingErrorRanges.ToArray(); }
         }
 
         public SpellCheckHelper(TextBoxBase textbox, string localeId)
