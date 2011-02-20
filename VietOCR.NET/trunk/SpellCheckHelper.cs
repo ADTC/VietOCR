@@ -27,7 +27,7 @@ namespace VietOCR.NET
 
         public CharacterRange[] GetSpellingErrorRanges
         {
-            get {return spellingErrorRanges.ToArray(); }
+            get { return spellingErrorRanges.ToArray(); }
         }
 
         public SpellCheckHelper(TextBoxBase textbox, string localeId)
