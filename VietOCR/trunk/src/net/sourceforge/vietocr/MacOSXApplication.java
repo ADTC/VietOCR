@@ -45,7 +45,7 @@ class MacOSXApplication {
 
             @Override
             public void handleAbout(AboutEvent ae) {
-//                vietOCR.about();
+                vietOCR.about();
             }
         });
 
@@ -55,7 +55,7 @@ class MacOSXApplication {
             public void openFiles(OpenFilesEvent ofe) {
                 File droppedFile = ofe.getFiles().get(0);
                 if (droppedFile.isFile() && vietOCR.promptToSave()) {
-//                    vietOCR.openDocument(droppedFile);
+                    vietOCR.openFile(droppedFile);
                 }
             }
         });
@@ -64,7 +64,7 @@ class MacOSXApplication {
 
             @Override
             public void handlePreferences(PreferencesEvent pe) {
-//                vietOCR.preferences();
+                vietOCR.openOptionsDialog();
             }
         });
 
