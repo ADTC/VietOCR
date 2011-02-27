@@ -22,7 +22,7 @@ class MacOSXApplication {
      *
      *@param  vietOCR  calling instance of VietOCR
      */
-    public MacOSXApplication(final GuiWithTools vietOCR) {
+    public MacOSXApplication(final Gui vietOCR) {
         app = Application.getApplication();
 
 //        vietOCR.setMaximizedBounds(new Rectangle(

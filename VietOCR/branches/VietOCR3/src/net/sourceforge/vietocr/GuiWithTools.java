@@ -133,7 +133,7 @@ public class GuiWithTools extends GuiWithSpellcheck {
 
     @Override
     void mergePdf() {
-       JFileChooser jf = new JFileChooser();
+        JFileChooser jf = new JFileChooser();
         jf.setDialogTitle(bundle.getString("Select_Input_PDFs"));
         jf.setCurrentDirectory(imageFolder);
         jf.setMultiSelectionEnabled(true);
