@@ -91,6 +91,22 @@ public class Gui extends JFrame {
         bundle = java.util.ResourceBundle.getBundle("net.sourceforge.vietocr.Gui");
         initComponents();
 
+        if (MAC_OS_X) {
+            new MacOSXApplication(Gui.this);
+
+            // remove Exit menuitem
+            this.jMenuFile.remove(this.jSeparatorExit);
+            this.jMenuFile.remove(this.jMenuItemExit);
+
+            // remove About menuitem
+            this.jMenuHelp.remove(this.jSeparatorAbout);
+            this.jMenuHelp.remove(this.jMenuItemAbout);
+
+            // remove Options menuitem
+            this.jMenuSettings.remove(this.jSeparatorOptions);
+            this.jMenuSettings.remove(this.jMenuItemOptions);
+        }
+
         getInstalledLanguagePacks();
         populateOCRLanguageBox();
 
@@ -210,7 +226,7 @@ public class Gui extends JFrame {
                 }
             });
             Arrays.sort(installedLanguageCodes, Collator.getInstance());
-            
+
             File xmlFile = new File(baseDir, "data/ISO639-3.xml");
             lookupISO639.loadFromXML(new FileInputStream(xmlFile));
             xmlFile = new File(baseDir, "data/ISO639-1.xml");
@@ -600,7 +616,7 @@ public class Gui extends JFrame {
         jMenuItemSaveAs = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jMenuRecentFiles = new javax.swing.JMenu();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jSeparatorExit = new javax.swing.JPopupMenu.Separator();
         jMenuItemExit = new javax.swing.JMenuItem();
         jMenuCommand = new javax.swing.JMenu();
         jMenuItemOCR = new javax.swing.JMenuItem();
@@ -624,7 +640,7 @@ public class Gui extends JFrame {
         jMenuLookAndFeel = new javax.swing.JMenu();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItemDownloadLangData = new javax.swing.JMenuItem();
-        jSeparator12 = new javax.swing.JPopupMenu.Separator();
+        jSeparatorOptions = new javax.swing.JPopupMenu.Separator();
         jMenuItemOptions = new javax.swing.JMenuItem();
         jMenuTools = new javax.swing.JMenu();
         jMenuItemMergeTiff = new javax.swing.JMenuItem();
@@ -632,7 +648,7 @@ public class Gui extends JFrame {
         jMenuItemSplitPdf = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemHelp = new javax.swing.JMenuItem();
-        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        jSeparatorAbout = new javax.swing.JPopupMenu.Separator();
         jMenuItemAbout = new javax.swing.JMenuItem();
 
         currentDirectory = prefs.get("currentDirectory", null);
@@ -956,7 +972,7 @@ public class Gui extends JFrame {
         jMenuRecentFiles.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuRecentFiles.Mnemonic").charAt(0));
         jMenuRecentFiles.setText(bundle.getString("jMenuRecentFiles.Text")); // NOI18N
         jMenuFile.add(jMenuRecentFiles);
-        jMenuFile.add(jSeparator2);
+        jMenuFile.add(jSeparatorExit);
 
         jMenuItemExit.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemExit.Mnemonic").charAt(0));
         jMenuItemExit.setText(bundle.getString("jMenuItemExit.Text")); // NOI18N
@@ -1093,7 +1109,7 @@ public class Gui extends JFrame {
             }
         });
         jMenuSettings.add(jMenuItemDownloadLangData);
-        jMenuSettings.add(jSeparator12);
+        jMenuSettings.add(jSeparatorOptions);
 
         jMenuItemOptions.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemOptions.Mnemonic").charAt(0));
         jMenuItemOptions.setText(bundle.getString("jMenuItemOptions.Text")); // NOI18N
@@ -1149,7 +1165,7 @@ public class Gui extends JFrame {
             }
         });
         jMenuHelp.add(jMenuItemHelp);
-        jMenuHelp.add(jSeparator5);
+        jMenuHelp.add(jSeparatorAbout);
 
         jMenuItemAbout.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemAbout.Mnemonic").charAt(0));
         jMenuItemAbout.setText(bundle.getString("jMenuItemAbout.Text")); // NOI18N
@@ -1372,7 +1388,7 @@ public class Gui extends JFrame {
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     void about() {
-         try {
+        try {
             Properties config = new Properties();
             config.loadFromXML(getClass().getResourceAsStream("config.xml"));
             String version = config.getProperty("Version");
@@ -1385,9 +1401,9 @@ public class Gui extends JFrame {
                     + "\nhttp://vietocr.sourceforge.net", jMenuItemAbout.getText(), JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             System.err.println(e.getMessage());
-        }       
+        }
     }
-    
+
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
         quit();
     }//GEN-LAST:event_jMenuItemExitActionPerformed
@@ -2006,15 +2022,15 @@ public class Gui extends JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator11;
-    private javax.swing.JPopupMenu.Separator jSeparator12;
-    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
-    private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JToolBar.Separator jSeparator9;
+    private javax.swing.JPopupMenu.Separator jSeparatorAbout;
+    private javax.swing.JPopupMenu.Separator jSeparatorExit;
     private javax.swing.JPopupMenu.Separator jSeparatorInputMethod;
+    private javax.swing.JPopupMenu.Separator jSeparatorOptions;
     private javax.swing.JSplitPane jSplitPane1;
     protected javax.swing.JTextArea jTextArea1;
     protected javax.swing.JToggleButton jToggleButtonSpellCheck;

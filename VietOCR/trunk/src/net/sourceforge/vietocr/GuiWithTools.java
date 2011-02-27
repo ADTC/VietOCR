@@ -30,10 +30,6 @@ public class GuiWithTools extends GuiWithSpellcheck {
 
     public GuiWithTools() {
         imageFolder = new File(prefs.get("ImageFolder", System.getProperty("user.home")));
-
-//        if (MAC_OS_X) {
-//            new MacOSXApplication(this);
-//        }
     }
 
     @Override
