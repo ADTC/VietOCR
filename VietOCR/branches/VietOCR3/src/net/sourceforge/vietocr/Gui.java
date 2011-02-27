@@ -1368,7 +1368,11 @@ public class Gui extends JFrame {
     }
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
-        try {
+        about();
+    }//GEN-LAST:event_jMenuItemAboutActionPerformed
+
+    void about() {
+         try {
             Properties config = new Properties();
             config.loadFromXML(getClass().getResourceAsStream("config.xml"));
             String version = config.getProperty("Version");
@@ -1378,12 +1382,12 @@ public class Gui extends JFrame {
             JOptionPane.showMessageDialog(this, APP_NAME + ", " + version + " \u00a9 2007\n"
                     + "Java GUI Frontend for Tesseract 3.0x OCR Engine\n"
                     + DateFormat.getDateInstance(DateFormat.LONG).format(releaseDate)
-                    + "\nhttp://vietocr.sourceforge.net", ((JMenuItem) evt.getSource()).getText(), JOptionPane.INFORMATION_MESSAGE);
+                    + "\nhttp://vietocr.sourceforge.net", jMenuItemAbout.getText(), JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             System.err.println(e.getMessage());
-        }
-    }//GEN-LAST:event_jMenuItemAboutActionPerformed
-
+        }       
+    }
+    
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
         quit();
     }//GEN-LAST:event_jMenuItemExitActionPerformed
@@ -1458,7 +1462,7 @@ public class Gui extends JFrame {
     }//GEN-LAST:event_jMenuItemOpenActionPerformed
 
     /**
-     * Opens image file.
+     * Opens image or text file.
      *
      */
     public void openFile(final File selectedFile) {

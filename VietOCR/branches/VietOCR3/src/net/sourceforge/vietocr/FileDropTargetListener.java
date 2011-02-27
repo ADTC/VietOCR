@@ -1,10 +1,9 @@
-package net.sourceforge.vietocr.utilities;
+package net.sourceforge.vietocr;
 
 import java.awt.datatransfer.*;
 import java.awt.dnd.*;
 import java.io.*;
 import java.net.URI;
-import net.sourceforge.vietocr.Gui;
 
 /**
  *  File Drop Target Listener
