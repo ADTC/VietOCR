@@ -2,13 +2,7 @@ package net.sourceforge.vietocr;
 
 import com.apple.eawt.*;
 import com.apple.eawt.AppEvent.*;
-
-import java.awt.Color;
-import java.awt.Rectangle;
 import java.io.File;
-
-import javax.swing.BorderFactory;
-import javax.swing.JScrollPane;
 
 /**
  *  Mac OS X functionality for VietOCR.
@@ -26,21 +20,21 @@ class MacOSXApplication {
     /**
      *  Constructor for the MacOSXApplication object.
      *
-     *@param  vietPad  calling instance of VietPad
+     *@param  vietOCR  calling instance of VietOCR
      */
     public MacOSXApplication(final GuiWithTools vietOCR) {
         app = Application.getApplication();
 
 //        vietOCR.setMaximizedBounds(new Rectangle(
-//                Math.max(vietOCR.getWidth(), vietOCR.m_font.getSize() * ZOOM_LIMIT),
+//                Math.max(vietOCR.getWidth(), vietOCR.font.getSize() * ZOOM_LIMIT),
 //                Integer.MAX_VALUE));
 //        vietOCR.scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 //        vietOCR.scrollPane.setBorder(null); // line up scrollbars with grow box
 //        vietOCR.m_toolBar.setBorder(BorderFactory.createCompoundBorder(
 //                BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0.5765F, 0.5765F, 0.5765F)),
-//                vietOCR.m_toolBar.getBorder()));
+//                vietOCR.jToolBar.getBorder()));
         
-//        app.setDefaultMenuBar(vietPad.getJMenuBar());
+//        app.setDefaultMenuBar(vietOCR.getJMenuBar());
         app.setAboutHandler(new AboutHandler() {
 
             @Override
