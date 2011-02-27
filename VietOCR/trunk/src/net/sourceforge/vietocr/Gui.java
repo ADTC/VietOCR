@@ -1458,7 +1458,7 @@ public class Gui extends JFrame {
     }//GEN-LAST:event_jMenuItemOpenActionPerformed
 
     /**
-     * Opens image file.
+     * Opens image or text file.
      *
      */
     public void openFile(final File selectedFile) {
