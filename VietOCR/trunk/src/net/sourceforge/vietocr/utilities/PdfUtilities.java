@@ -18,7 +18,7 @@ package net.sourceforge.vietocr.utilities;
 import java.io.*;
 import java.util.*;
 import net.sf.ghost4j.*;
-import net.sf.ghost4j.document.PDFDocument;
+//import net.sf.ghost4j.document.PDFDocument;
 
 public class PdfUtilities {
 
@@ -201,25 +201,26 @@ public class PdfUtilities {
         return pageCount;
     }
 
-    /**
-     * Gets PDF Page Count using Ghost4J's new high-level API.
-     *
-     * @param inputPdfFile
-     * @return number of pages
-     */
-    public static int getPdfPageCount1(String inputPdfFile) {
-        int pageCount = 0;
-        
-        try {
-            // load PDF document
-            PDFDocument document = new PDFDocument();
-            document.load(new File(inputPdfFile));
-            pageCount = document.getPageCount();
-        } catch (Exception e) {
-            System.out.println("ERROR: " + e.getMessage());
-        }
-        return pageCount;
-    }
+//    /**
+//     * Gets PDF Page Count using Ghost4J's new high-level API available in Ghost4J 0.4.0.
+//     * (Taken out due to many required additional libraries.)
+//     *
+//     * @param inputPdfFile
+//     * @return number of pages
+//     */
+//    public static int getPdfPageCount1(String inputPdfFile) {
+//        int pageCount = 0;
+//
+//        try {
+//            // load PDF document
+//            PDFDocument document = new PDFDocument();
+//            document.load(new File(inputPdfFile));
+//            pageCount = document.getPageCount();
+//        } catch (Exception e) {
+//            System.out.println("ERROR: " + e.getMessage());
+//        }
+//        return pageCount;
+//    }
 
     /**
      * Merge PDF files.
