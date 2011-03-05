@@ -116,3 +116,7 @@ Version 2.0 (6 February 2011)
 - Add support for downloading and installing language data packs and appropriate spell dictionaries
 - Add UI localization for Lithuanian and Slovak
 - Refactor by breaking up large classes into smaller ones
+
+Version 2.0.1 Beta (6 March 2011)
+- Fix a bug which crashes the program when inline spellcheck suggests on empty text
+- Fix a bug which hangs the program if x.DangAmbigs.txt contains entries starting with an equal symbol (=)
