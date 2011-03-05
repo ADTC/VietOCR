@@ -171,5 +171,6 @@ Version 2.0 (6 February 2011)
 - Add UI localization for Lithuanian and Slovak
 - Refactor by breaking up large classes into smaller ones
 
-Version 2.0.1 Beta (27 February 2011)
+Version 2.0.1 Beta (5 March 2011)
 - Incorporate Apple Java Extensions
+- Fix a bug which hangs the program if x.DangAmbigs.txt contains entries starting with an equal symbol (=)
