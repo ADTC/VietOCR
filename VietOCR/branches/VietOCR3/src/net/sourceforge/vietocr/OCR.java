@@ -87,7 +87,8 @@ public class OCR {
                 String msg;
                 switch (w) {
                     case 1:
-                        msg = "Errors accessing files.";
+                        msg = outputGobbler.getMessage(); // get actual message from console
+//                        msg = "Errors accessing files.";
                         break;
                     case 29:
                         msg = "Cannot recognize the image or its selected region.";
@@ -116,11 +117,16 @@ public class OCR {
 class StreamGobbler extends Thread {
 
     InputStream is;
+    String outputMessage;
 
     StreamGobbler(InputStream is) {
         this.is = is;
     }
 
+    String getMessage() {
+        return outputMessage;
+    }
+    
     @Override
     public void run() {
         try {
@@ -129,6 +135,7 @@ class StreamGobbler extends Thread {
             String line = null;
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
+                outputMessage = line;
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
