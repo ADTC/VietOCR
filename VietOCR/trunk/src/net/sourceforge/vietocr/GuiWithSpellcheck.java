@@ -67,14 +67,14 @@ public class GuiWithSpellcheck extends GuiWithSettings {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                String selectedWord = ae.getActionCommand();
-                if (selectedWord.equals("ignore.word")) {
+                String selectedSuggestion = ae.getActionCommand();
+                if (selectedSuggestion.equals("ignore.word")) {
                     speller.ignoreWord(curWord);
-                } else if (selectedWord.equals("add.word")) {
+                } else if (selectedSuggestion.equals("add.word")) {
                     speller.addWord(curWord);
                 } else {
                     jTextArea1.select(start, end);
-                    jTextArea1.replaceSelection(selectedWord);
+                    jTextArea1.replaceSelection(selectedSuggestion);
                 }
                 speller.spellCheck();
             }
