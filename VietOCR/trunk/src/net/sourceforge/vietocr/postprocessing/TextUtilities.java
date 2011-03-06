@@ -21,6 +21,9 @@ import java.util.regex.*;
 
 public class TextUtilities {
 
+    private static Map<String, String> map;
+    private static long mapLastModified = Long.MIN_VALUE;
+
     /**
      * Corrects letter cases.
      *
@@ -66,9 +69,19 @@ public class TextUtilities {
     }
 
     public static Map<String, String> loadMap(String dangAmbigsFile) {
-        Map<String, String> map = new LinkedHashMap<String, String>();
-
         try {
+            File dataFile = new File(dangAmbigsFile);
+            long fileLastModified = dataFile.lastModified();
+            if (map == null) {
+                map = new LinkedHashMap<String, String>();
+            } else {
+                if (fileLastModified <= mapLastModified) {
+                    return map; // no need to reload map
+                }
+                map.clear();
+            }
+            mapLastModified = fileLastModified;
+
             InputStreamReader stream = new InputStreamReader(new FileInputStream(dangAmbigsFile), "UTF8");
             BufferedReader bs = new BufferedReader(stream);
             String str;
