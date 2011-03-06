@@ -8,6 +8,9 @@ namespace VietOCR.NET.Postprocessing
 {
     class TextUtilities
     {
+        private static Dictionary<string, string> map;
+        private static DateTime mapLastModified = DateTime.MinValue;
+
         /// <summary>
         /// Corrects letter cases.
         /// </summary>
@@ -55,10 +58,25 @@ namespace VietOCR.NET.Postprocessing
 
         public static Dictionary<string, string> LoadMap(string dangAmbigsFile)
         {
-            Dictionary<string, string> map = new Dictionary<string, string>();
-
             try
             {
+                FileInfo dataFile = new FileInfo(dangAmbigsFile);
+
+                DateTime fileLastModified = dataFile.LastWriteTime;
+                if (map == null)
+                {
+                    map = new Dictionary<string, string>();
+                }
+                else
+                {
+                    if (fileLastModified <= mapLastModified)
+                    {
+                        return map; // no need to reload map
+                    }
+                    map.Clear();
+                }
+                mapLastModified = fileLastModified;
+
                 StreamReader sr = new StreamReader(dangAmbigsFile, Encoding.UTF8);
                 string str;
 
