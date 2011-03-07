@@ -32,7 +32,7 @@ public class OCR {
     }
 
     /**
-     * @param tempImageFiles
+     * @param tiffFiles
      * @param lang
      * @return
      * @throws java.lang.Exception
@@ -84,23 +84,8 @@ public class OCR {
                 }
                 in.close();
             } else {
-                String msg;
-                switch (w) {
-                    case 1:
-                        msg = outputGobbler.getMessage(); // get actual message from console
-//                        msg = "Errors accessing files.";
-                        break;
-                    case 29:
-                        msg = "Cannot recognize the image or its selected region.";
-                        break;
-                    case 31:
-                        msg = "Unsupported image format.";
-                        break;
-                    default:
-                        msg = "Errors occurred.";
-                }
-
                 tempTessOutputFile.delete();
+                String msg = outputGobbler.getMessage(); // get actual message from the engine;
                 throw new RuntimeException(msg);
             }
         }
@@ -117,14 +102,14 @@ public class OCR {
 class StreamGobbler extends Thread {
 
     InputStream is;
-    String outputMessage;
+    StringBuilder outputMessage = new StringBuilder();
 
     StreamGobbler(InputStream is) {
         this.is = is;
     }
 
     String getMessage() {
-        return outputMessage;
+        return outputMessage.toString();
     }
     
     @Override
@@ -135,7 +120,7 @@ class StreamGobbler extends Thread {
             String line = null;
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
-                outputMessage = line;
+                outputMessage.append(line).append("\n");
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
