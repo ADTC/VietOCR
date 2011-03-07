@@ -86,6 +86,9 @@ public class OCR {
             } else {
                 tempTessOutputFile.delete();
                 String msg = outputGobbler.getMessage(); // get actual message from the engine;
+                if (msg.trim().length() == 0) {
+                    msg = "Errors occurred.";
+                }
                 throw new RuntimeException(msg);
             }
         }
@@ -111,7 +114,7 @@ class StreamGobbler extends Thread {
     String getMessage() {
         return outputMessage.toString();
     }
-    
+
     @Override
     public void run() {
         try {
