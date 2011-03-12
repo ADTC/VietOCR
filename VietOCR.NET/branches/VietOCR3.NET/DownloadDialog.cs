@@ -23,6 +23,7 @@ namespace VietOCR.NET
         long contentLength;
         string baseDir;
         const string DICTIONARY_FOLDER = "dict";
+        const string TESS_DATA = "tessdata";
 
         public DownloadDialog()
         {
@@ -40,7 +41,7 @@ namespace VietOCR.NET
             lookupISO639 = ((GUI)this.Owner).LookupISO639;
             lookupISO_3_1_Codes = ((GUI)this.Owner).LookupISO_3_1_Codes;
 
-            String xmlFilePath = Path.Combine(baseDir, "Data/Tess2DataURL.xml");
+            String xmlFilePath = Path.Combine(baseDir, "Data/Tess3DataURL.xml");
             availableLanguageCodes = new Dictionary<string, string>();
             Utilities.Utilities.LoadFromXML(availableLanguageCodes, xmlFilePath);
 
@@ -111,7 +112,7 @@ namespace VietOCR.NET
                     try
                     {
                         Uri uri = new Uri(availableLanguageCodes[key]);
-                        DownloadDataFile(uri, string.Empty);  // download language data pack
+                        DownloadDataFile(uri, TESS_DATA);  // download language data pack. In Tesseract 3.0, data is packaged not under a directory
 
                         if (lookupISO_3_1_Codes.ContainsKey(key))
                         {
@@ -226,7 +227,7 @@ namespace VietOCR.NET
                 }
                 else
                 {
-                    FileExtractor.ExtractCompressedFile(fileName, baseDir);
+                    FileExtractor.ExtractCompressedFile(fileName.Substring(TESS_DATA.Length), Path.Combine(baseDir, TESS_DATA));
                     numberOfDownloads++;
                 }
 
