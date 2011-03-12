@@ -101,7 +101,7 @@ namespace VietOCR.NET
             // Access registry to determine which UI Language to be loaded.
             // The desired locale must be known before initializing visual components
             // with language text. Waiting until OnLoad would be too late.
-            strRegKey += strProgName;
+            strRegKey += strProgName + "3";
 
             RegistryKey regkey = Registry.CurrentUser.OpenSubKey(strRegKey);
 
@@ -160,7 +160,7 @@ namespace VietOCR.NET
             try
             {
                 string tessdataDir = Path.Combine(baseDir, "tessdata");
-                installedLanguageCodes = Directory.GetFiles(tessdataDir, "*.inttemp");
+                installedLanguageCodes = Directory.GetFiles(tessdataDir, "*.traineddata");
                 string xmlFilePath = Path.Combine(baseDir, "Data/ISO639-3.xml");
                 Utilities.Utilities.LoadFromXML(lookupISO639, xmlFilePath);
                 xmlFilePath = Path.Combine(baseDir, "Data/ISO639-1.xml");
