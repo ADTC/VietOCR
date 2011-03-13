@@ -58,8 +58,8 @@ namespace VietOCR.NET
         {
             this.pictureBox1.Deselect();
             this.Cursor = Cursors.WaitCursor;
-            gmseDeskew deskew = new gmseDeskew();
-            deskew.New((Bitmap)this.pictureBox1.Image);
+
+            gmseDeskew deskew = new gmseDeskew((Bitmap)this.pictureBox1.Image);
             double imageSkewAngle = deskew.GetSkewAngle();
 
             if ((imageSkewAngle > MINIMUM_DESKEW_THRESHOLD || imageSkewAngle < -(MINIMUM_DESKEW_THRESHOLD)))
