@@ -21,6 +21,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
+using VietOCR.NET.Utilities;
 
 namespace VietOCR.NET
 {
@@ -55,13 +56,19 @@ namespace VietOCR.NET
 
         protected override void deskewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //ImageDeskew deskew = new ImageDeskew((BufferedImage)iioImageList.get(imageIndex).getRenderedImage());
-            //double imageSkewAngle = deskew.getSkewAngle();
+            this.pictureBox1.Deselect();
 
-            //if ((imageSkewAngle > MINIMUM_DESKEW_THRESHOLD || imageSkewAngle < -(MINIMUM_DESKEW_THRESHOLD)))
-            //{
-            //    rotateImage(-imageSkewAngle);
-            //}
+            gmseDeskew deskew = new gmseDeskew();
+            deskew.New((Bitmap)this.pictureBox1.Image);
+            double imageSkewAngle = deskew.GetSkewAngle();
+
+            if ((imageSkewAngle > MINIMUM_DESKEW_THRESHOLD || imageSkewAngle < -(MINIMUM_DESKEW_THRESHOLD)))
+            {
+                this.pictureBox1.Image = gmseDeskew.RotateImage((Bitmap)this.pictureBox1.Image, -imageSkewAngle);
+                imageList[imageIndex] = gmseDeskew.RotateImage((Bitmap)imageList[imageIndex], -imageSkewAngle);
+
+                adjustPictureBoxAfterRotate();
+            }
         }
 
         protected override void screenshotModeToolStripMenuItem_Click(object sender, EventArgs e)

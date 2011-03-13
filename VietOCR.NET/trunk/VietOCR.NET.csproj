@@ -232,6 +232,7 @@
     <Compile Include="HtmlHelpForm.Designer.cs">
       <DependentUpon>HtmlHelpForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\gmseDeskew.cs" />
     <Compile Include="Utilities\ImageHelper.cs" />
     <Compile Include="Utilities\PdfUtilities.cs" />
     <Compile Include="ImageInfoDialog.cs">
