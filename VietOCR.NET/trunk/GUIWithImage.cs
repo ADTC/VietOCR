@@ -27,6 +27,7 @@ namespace VietOCR.NET
     public partial class GUIWithImage : VietOCR.NET.GUIWithPostprocess
     {
         const string strScreenshotMode = "ScreenshotMode";
+        const double MINIMUM_DESKEW_THRESHOLD = 0.05d;
 
         public GUIWithImage()
         {
@@ -50,6 +51,17 @@ namespace VietOCR.NET
                 // Initial plan was to implement various image manipulation operations 
                 // (rotate, flip, sharpen, brighten, threshold, clean up,...) here.
             }
+        }
+
+        protected override void deskewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //ImageDeskew deskew = new ImageDeskew((BufferedImage)iioImageList.get(imageIndex).getRenderedImage());
+            //double imageSkewAngle = deskew.getSkewAngle();
+
+            //if ((imageSkewAngle > MINIMUM_DESKEW_THRESHOLD || imageSkewAngle < -(MINIMUM_DESKEW_THRESHOLD)))
+            //{
+            //    rotateImage(-imageSkewAngle);
+            //}
         }
 
         protected override void screenshotModeToolStripMenuItem_Click(object sender, EventArgs e)

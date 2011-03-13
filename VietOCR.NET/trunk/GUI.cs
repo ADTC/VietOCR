@@ -821,15 +821,7 @@ namespace VietOCR.NET
             // Rotating 270 degrees is equivalent to rotating -90 degrees.
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
             imageList[imageIndex].RotateFlip(RotateFlipType.Rotate270FlipNone);
-            this.pictureBox1.Size = new Size(this.pictureBox1.Height, this.pictureBox1.Width);
-            this.pictureBox1.Refresh();
-            // recalculate scale factors if in Fit Image mode
-            if (this.pictureBox1.SizeMode == PictureBoxSizeMode.StretchImage)
-            {
-                scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
-                scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
-            }
-            this.centerPicturebox();
+            adjustPictureBoxAfterRotate();
         }
 
         private void toolStripBtnRotateCW_Click(object sender, EventArgs e)
@@ -837,6 +829,11 @@ namespace VietOCR.NET
             this.pictureBox1.Deselect();
             this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
             imageList[imageIndex].RotateFlip(RotateFlipType.Rotate90FlipNone);
+            adjustPictureBoxAfterRotate();
+        }
+
+        protected void adjustPictureBoxAfterRotate()
+        {
             this.pictureBox1.Size = new Size(this.pictureBox1.Height, this.pictureBox1.Width);
             this.pictureBox1.Refresh();
             // recalculate scale factors if in Fit Image mode
@@ -1113,6 +1110,11 @@ namespace VietOCR.NET
         }
 
         protected virtual void downloadLangDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
+        }
+
+        protected virtual void deskewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
