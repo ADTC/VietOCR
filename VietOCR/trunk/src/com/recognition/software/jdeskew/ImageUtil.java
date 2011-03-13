@@ -9,16 +9,15 @@ package com.recognition.software.jdeskew;
 //import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
+//import java.io.File;
+//import java.io.IOException;
+//import javax.imageio.ImageIO;
 
 public class ImageUtil {
 
-    public static BufferedImage readImageFile(File imageFile) throws IOException {
-        return ImageIO.read(imageFile);
-    }
+//    public static BufferedImage readImageFile(File imageFile) throws IOException {
+//        return ImageIO.read(imageFile);
+//    }
 
     public static boolean isBlack(BufferedImage image, int x, int y) {
         if (image.getType() == BufferedImage.TYPE_BYTE_BINARY) {
@@ -57,7 +56,7 @@ public class ImageUtil {
             // ignore.
         }
 
-        return (luminance < luminanceCutOff);
+        return luminance < luminanceCutOff;
     }
 
 //    public static BufferedImage rotate(BufferedImage image, double angle, int cx, int cy) {

@@ -7,6 +7,20 @@ import java.awt.image.BufferedImage;
 
 public class ImageDeskew {
 
+    /**
+     * Representation of a line in the image.
+     */
+    public class HoughLine {
+
+        // count of points in the line
+        public int count = 0;
+        // index in matrix.
+        public int index = 0;
+        // the line is represented as all x, y that solve y * cos(alpha) - x *
+        // sin(alpha) = d
+        public double alpha;
+        public double d;
+    }
     // the source image
     private BufferedImage cImage;
     // the range of angles to search for lines
@@ -23,19 +37,6 @@ public class ImageDeskew {
     // count of points that fit in a line
     private int[] cHMatrix;
 
-    // representation of a line in the image
-    public class HoughLine {
-
-        // count of points in the line
-        public int count = 0;
-        // index in matrix.
-        public int index = 0;
-        // the line is represented as all x, y that solve y * cos(alpha) - x *
-        // sin(alpha) = d
-        public double alpha;
-        public double d;
-    }
-
     // constructor
     public ImageDeskew(BufferedImage image) {
         this.cImage = image;
@@ -45,80 +46,67 @@ public class ImageDeskew {
     public double getSkewAngle() {
         ImageDeskew.HoughLine[] hl;
         double sum = 0.0;
-        double count = 0.0;
+        int count = 0;
 
         // perform Hough Transformation
         calc();
-
         // top 20 of the detected lines in the image
         hl = getTop(20);
 
         if (hl.length >= 20) {
-
             // average angle of the lines
             for (int i = 0; i < 19; i++) {
                 sum += hl[i].alpha;
-                count += 1.0;
+                count++;
             }
-
             return (sum / count);
-
         } else {
             return 0.0d;
         }
-
     }
 
     // calculate the count lines in the image with most points
     private ImageDeskew.HoughLine[] getTop(int count) {
 
-        ImageDeskew.HoughLine[] hl;
-        hl = new ImageDeskew.HoughLine[count];
+        ImageDeskew.HoughLine[] hl = new ImageDeskew.HoughLine[count];
         for (int i = 0; i < count; i++) {
             hl[i] = new ImageDeskew.HoughLine();
         }
 
         ImageDeskew.HoughLine tmp;
-        int j = 0;
-        int alphaIndex;
-        int dIndex;
-
-        for (int i = 0; i < (count - 1); i++) {
-            hl[i] = new ImageDeskew.HoughLine();
-        }
 
         for (int i = 0; i < (this.cHMatrix.length - 1); i++) {
             if (this.cHMatrix[i] > hl[count - 1].count) {
                 hl[count - 1].count = this.cHMatrix[i];
                 hl[count - 1].index = i;
-                j = count - 1;
+                int j = count - 1;
                 while ((j > 0) && (hl[j].count > hl[j - 1].count)) {
                     tmp = hl[j];
                     hl[j] = hl[j - 1];
                     hl[j - 1] = tmp;
-                    j -= 1;
+                    j--;
                 }
             }
         }
 
-        for (int i = 0; i < (count - 1); i++) {
-            dIndex = hl[i].index / this.cSteps; // integer division, no
+        int alphaIndex;
+        int dIndex;
+        
+        for (int i = 0; i < count; i++) {
+            dIndex = hl[i].index / cSteps; // integer division, no
             // remainder
-            alphaIndex = hl[i].index - dIndex * this.cSteps;
+            alphaIndex = hl[i].index - dIndex * cSteps;
             hl[i].alpha = getAlpha(alphaIndex);
-            hl[i].d = dIndex + this.cDMin;
+            hl[i].d = dIndex + cDMin;
         }
 
         return hl;
-
     }
 
     // Hough Transformation
     private void calc() {
-
         int hMin = (int) ((this.cImage.getHeight()) / 4.0);
         int hMax = (int) ((this.cImage.getHeight()) * 3.0 / 4.0);
-
         init();
 
         for (int y = hMin; y < hMax; y++) {
