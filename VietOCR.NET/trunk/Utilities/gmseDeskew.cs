@@ -2,6 +2,7 @@
  * (c) GMSE GmbH 2006
  * Algorithm to deskew an image.
  * http://www.codeproject.com/KB/graphics/Deskew_an_Image.aspx
+ * C# translation: http://mdb-blog.blogspot.com/2010/10/c-how-to-deskew-image.html
  */
 
 using System.Drawing;
@@ -41,7 +42,7 @@ namespace VietOCR.NET.Utilities
         // Count of points that fit in a line.
         int[] cHMatrix;
 
-        public void New(Bitmap bmp)
+        public gmseDeskew(Bitmap bmp)
         {
             cBmp = bmp;
         }
