@@ -56,8 +56,9 @@ namespace VietOCR.NET
 
         protected override void deskewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.pictureBox1.Image == null)
+            if (imageList == null)
             {
+                MessageBox.Show(this, Properties.Resources.LoadImage, strProgName);
                 return;
             }
             this.pictureBox1.Deselect();
