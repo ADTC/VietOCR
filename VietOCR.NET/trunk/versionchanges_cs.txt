@@ -122,6 +122,6 @@ Version 2.0.1 (6 March 2011)
 - Fix a bug that hangs the program if x.DangAmbigs.txt contains an entry starting with an equal symbol (=)
 - Improve postprocessing performance by caching the word list used; reload only if changes
 
-Version 2.1 Beta (14 March 2011)
+Version 2.1 (13 March 2011)
 - Migrate project from VS2008 to VS2010
-- Incorporate deskew functionality
+- Incorporate deskew functionality using GMSE Deskew algorithm
