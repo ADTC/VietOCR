@@ -1530,7 +1530,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:VietOCR.NET"
         "ProductCode" = "8:{B154F150-636A-4655-8239-FE919E4C4EF9}"
-        "PackageCode" = "8:{77742444-24C7-489E-BA7B-D60E5F0047A4}"
+        "PackageCode" = "8:{3D3F8146-E34F-418A-9B35-207D18140F0D}"
         "UpgradeCode" = "8:{2EF42973-7837-44E2-9085-FA4B5B40483E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
