@@ -15,9 +15,13 @@
  */
 package net.sourceforge.vietocr;
 
+import com.recognition.software.jdeskew.ImageDeskew;
+import java.awt.image.BufferedImage;
 import javax.swing.JOptionPane;
 
 public class GuiWithImage extends GuiWithPostprocess {
+
+    private static final double MINIMUM_DESKEW_THRESHOLD = 0.05d;
 
     GuiWithImage() {
         this.jCheckBoxMenuItemScreenshotMode.setSelected(prefs.getBoolean("ScreenshotMode", false));
@@ -36,6 +40,16 @@ public class GuiWithImage extends GuiWithPostprocess {
             // Do nothing for now.
             // Initial plan was to implement various image manipulation operations
             // (rotate, flip, sharpen, brighten, threshold, clean up,...) here.
+        }
+    }
+
+    @Override
+    void deskewImage() {
+        ImageDeskew deskew = new ImageDeskew((BufferedImage)iioImageList.get(imageIndex).getRenderedImage());
+        double imageSkewAngle = deskew.getSkewAngle();
+
+        if ((imageSkewAngle > MINIMUM_DESKEW_THRESHOLD || imageSkewAngle < -(MINIMUM_DESKEW_THRESHOLD))) {
+            rotateImage(-imageSkewAngle);
         }
     }
 

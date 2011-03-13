@@ -44,7 +44,7 @@ public class FontDialog extends JDialog {
     public FontDialog(JFrame owner) {
         super(owner, true);
         setLocale(owner.getLocale());
-        bundle = ResourceBundle.getBundle("net.sourceforge.vietpad.FontDialog");
+        bundle = ResourceBundle.getBundle("net.sourceforge.vietpad.components.FontDialog");
         this.setTitle(bundle.getString("this.Title"));
         setResizable(false);
         initComponents();
