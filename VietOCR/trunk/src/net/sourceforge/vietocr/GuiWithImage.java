@@ -47,6 +47,10 @@ public class GuiWithImage extends GuiWithPostprocess {
 
     @Override
     void deskewImage() {
+        if (iioImageList == null) {
+            JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         getGlassPane().setVisible(true);
 
