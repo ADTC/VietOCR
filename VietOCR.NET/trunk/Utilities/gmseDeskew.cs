@@ -41,11 +41,15 @@ namespace VietOCR.NET.Utilities
         // Count of points that fit in a line.
         int[] cHMatrix;
 
+        public void New(Bitmap bmp)
+        {
+            cBmp = bmp;
+        }
+
         // Calculate the skew angle of the image cBmp.
         public double GetSkewAngle()
         {
             HougLine[] hl;
-            int i;
             double sum = 0;
             int count = 0;
 
@@ -53,10 +57,12 @@ namespace VietOCR.NET.Utilities
             Calc();
             // Top 20 of the detected lines in the image.
             hl = GetTop(20);
+
             // Average angle of the lines
-            for (i = 0; i < 19; i++)
+            for (int i = 0; i < 19; i++)
             {
-                sum += hl[i].Alpha; count += 1;
+                sum += hl[i].Alpha; 
+                count++;
             }
             return sum / count;
         }
@@ -64,31 +70,33 @@ namespace VietOCR.NET.Utilities
         // Calculate the Count lines in the image with most points.    
         private HougLine[] GetTop(int Count)
         {
-            HougLine[] hl;
-            int j;
-            HougLine tmp;
-            int AlphaIndex, dIndex;
-            hl = new HougLine[Count];
+            HougLine[] hl = new HougLine[Count];
             for (int i = 0; i < Count; i++)
             {
                 hl[i] = new HougLine();
             }
+
+            HougLine tmp;
+
             for (int i = 0; i < cHMatrix.Length - 1; i++)
             {
                 if (cHMatrix[i] > hl[Count - 1].Count)
                 {
                     hl[Count - 1].Count = cHMatrix[i];
                     hl[Count - 1].Index = i;
-                    j = Count - 1;
+                    int j = Count - 1;
                     while (j > 0 && hl[j].Count > hl[j - 1].Count)
                     {
                         tmp = hl[j];
                         hl[j] = hl[j - 1];
                         hl[j - 1] = tmp;
-                        j -= 1;
+                        j--;
                     }
                 }
             }
+
+            int AlphaIndex, dIndex;
+
             for (int i = 0; i < Count; i++)
             {
                 dIndex = hl[i].Index / cSteps;
@@ -99,26 +107,21 @@ namespace VietOCR.NET.Utilities
             return hl;
         }
 
-        public void New(Bitmap bmp)
-        {
-            cBmp = bmp;
-        }
-
         // Hough Transforamtion:   
         private void Calc()
         {
-            int x; int y;
             int hMin = cBmp.Height / 4;
             int hMax = cBmp.Height * 3 / 4;
             Init();
-            for (y = hMin; y < hMax; y++)
+
+            for (int y = hMin; y < hMax; y++)
             {
-                for (x = 1; x < cBmp.Width - 2; x++)
+                for (int x = 1; x < cBmp.Width - 2; x++)
                 {
                     // Only lower edges are considered.           
-                    if (IsBlack(x, y) == true)
+                    if (IsBlack(x, y))
                     {
-                        if (IsBlack(x, y + 1) == false)
+                        if (!IsBlack(x, y + 1))
                         {
                             Calc(x, y);
                         }
@@ -130,15 +133,18 @@ namespace VietOCR.NET.Utilities
         // Calculate all lines through the point (x,y). 
         private void Calc(int x, int y)
         {
-            double d; int dIndex; int Index;
+            double d; 
+            int dIndex; 
+            int index;
+
             for (int alpha = 0; alpha < cSteps - 1; alpha++)
             {
                 d = y * cCosA[alpha] - x * cSinA[alpha];
                 dIndex = (int)CalcDIndex(d);
-                Index = dIndex * cSteps + alpha;
+                index = dIndex * cSteps + alpha;
                 try
                 {
-                    cHMatrix[Index] += 1;
+                    cHMatrix[index] += 1;
                 }
                 catch (Exception ex)
                 {
@@ -154,10 +160,8 @@ namespace VietOCR.NET.Utilities
 
         private bool IsBlack(int x, int y)
         {
-            Color c;
-            double luminance;
-            c = cBmp.GetPixel(x, y);
-            luminance = (c.R * 0.299) + (c.G * 0.587) + (c.B * 0.114);
+            Color c = cBmp.GetPixel(x, y);
+            double luminance = (c.R * 0.299) + (c.G * 0.587) + (c.B * 0.114);
             return luminance < 140;
         }
 
