@@ -626,6 +626,8 @@ public class Gui extends JFrame {
         jMenuImage = new javax.swing.JMenu();
         jMenuItemMetadata = new javax.swing.JMenuItem();
         jSeparator11 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemDeskew = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jCheckBoxMenuItemScreenshotMode = new javax.swing.JCheckBoxMenuItem();
         jMenuFormat = new javax.swing.JMenu();
         jCheckBoxMenuWordWrap = new javax.swing.JCheckBoxMenuItem();
@@ -1032,6 +1034,15 @@ public class Gui extends JFrame {
         });
         jMenuImage.add(jMenuItemMetadata);
         jMenuImage.add(jSeparator11);
+
+        jMenuItemDeskew.setText("Deskew");
+        jMenuItemDeskew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDeskewActionPerformed(evt);
+            }
+        });
+        jMenuImage.add(jMenuItemDeskew);
+        jMenuImage.add(jSeparator2);
 
         jCheckBoxMenuItemScreenshotMode.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jCheckBoxMenuItemScreenshotMode.Mnemonic").charAt(0));
         jCheckBoxMenuItemScreenshotMode.setSelected(true);
@@ -1792,14 +1803,14 @@ public class Gui extends JFrame {
     }//GEN-LAST:event_jButtonScanActionPerformed
 
     private void jButtonRotateCCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateCCWActionPerformed
-        rotateImage(270);
+        rotateImage(270d);
     }//GEN-LAST:event_jButtonRotateCCWActionPerformed
 
     private void jButtonRotateCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateCWActionPerformed
-        rotateImage(90);
+        rotateImage(90d);
     }//GEN-LAST:event_jButtonRotateCWActionPerformed
 
-    void rotateImage(int angle) {
+    void rotateImage(double angle) {
         try {
             imageIcon = imageList.get(imageIndex).getRotatedImageIcon(Math.toRadians(angle));
             imageList.set(imageIndex, imageIcon); // persist the rotated image
@@ -1887,6 +1898,15 @@ public class Gui extends JFrame {
             this.jTextArea1.requestFocusInWindow();
         }
     }//GEN-LAST:event_jTextArea1MouseEntered
+
+    private void jMenuItemDeskewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeskewActionPerformed
+        // TODO add your handling code here:
+        deskewImage();
+    }//GEN-LAST:event_jMenuItemDeskewActionPerformed
+
+    void deskewImage() {
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
+    }
 
     void downloadLangDataActionPerformed() {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
@@ -1992,6 +2012,7 @@ public class Gui extends JFrame {
     protected javax.swing.JMenu jMenuInputMethod;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemChangeCase;
+    private javax.swing.JMenuItem jMenuItemDeskew;
     private javax.swing.JMenuItem jMenuItemDownloadLangData;
     private javax.swing.JMenuItem jMenuItemExit;
     private javax.swing.JMenuItem jMenuItemFont;
@@ -2022,6 +2043,7 @@ public class Gui extends JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator11;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator7;
