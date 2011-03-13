@@ -191,7 +191,7 @@ namespace VietOCR.NET.Utilities
         public static Bitmap RotateImage(Bitmap bmp, double angle)
         {
             Graphics g;
-            Bitmap tmp = new Bitmap(bmp.Width, bmp.Height, PixelFormat.Format32bppRgb);
+            Bitmap tmp = new Bitmap(bmp.Width, bmp.Height, PixelFormat.Format24bppRgb);
             tmp.SetResolution(bmp.HorizontalResolution, bmp.VerticalResolution);
             g = Graphics.FromImage(tmp);
             try
