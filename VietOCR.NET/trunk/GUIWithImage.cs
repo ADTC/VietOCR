@@ -57,7 +57,7 @@ namespace VietOCR.NET
         protected override void deskewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.pictureBox1.Deselect();
-
+            this.Cursor = Cursors.WaitCursor;
             gmseDeskew deskew = new gmseDeskew();
             deskew.New((Bitmap)this.pictureBox1.Image);
             double imageSkewAngle = deskew.GetSkewAngle();
@@ -69,6 +69,7 @@ namespace VietOCR.NET
 
                 adjustPictureBoxAfterRotate();
             }
+            this.Cursor = Cursors.Default;
         }
 
         protected override void screenshotModeToolStripMenuItem_Click(object sender, EventArgs e)
