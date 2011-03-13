@@ -1493,6 +1493,10 @@ public class Gui extends JFrame {
      *
      */
     public void openFile(final File selectedFile) {
+        if (!selectedFile.exists()) {
+            JOptionPane.showMessageDialog(this, bundle.getString("File_not_exist"), APP_NAME, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         // if text file, load it into textarea
         if (selectedFile.getName().endsWith(".txt")) {
             if (!promptToSave()) {
@@ -1900,7 +1904,6 @@ public class Gui extends JFrame {
     }//GEN-LAST:event_jTextArea1MouseEntered
 
     private void jMenuItemDeskewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeskewActionPerformed
-        // TODO add your handling code here:
         deskewImage();
     }//GEN-LAST:event_jMenuItemDeskewActionPerformed
 
