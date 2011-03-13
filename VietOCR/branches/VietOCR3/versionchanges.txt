@@ -19,3 +19,7 @@ Version 3.1.1 (7 March 2011)
 - Fix a bug which hangs the program if x.DangAmbigs.txt contains entries starting with an equal symbol (=)
 - Improve postprocessing performance by caching the word list used; reload only if changes
 - Improve error reporting by displaying actual messages output from the engine
+
+Version 3.1.2 (12 March 2011)
+- Fix a MissingResourceException associated with Font dialog
+- Incorporate deskew functionality using JDeskew library
