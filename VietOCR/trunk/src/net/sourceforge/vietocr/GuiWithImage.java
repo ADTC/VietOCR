@@ -16,8 +16,10 @@
 package net.sourceforge.vietocr;
 
 import com.recognition.software.jdeskew.ImageDeskew;
+import java.awt.Cursor;
 import java.awt.image.BufferedImage;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 public class GuiWithImage extends GuiWithPostprocess {
 
@@ -45,12 +47,23 @@ public class GuiWithImage extends GuiWithPostprocess {
 
     @Override
     void deskewImage() {
-        ImageDeskew deskew = new ImageDeskew((BufferedImage)iioImageList.get(imageIndex).getRenderedImage());
-        double imageSkewAngle = deskew.getSkewAngle();
+        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        getGlassPane().setVisible(true);
 
-        if ((imageSkewAngle > MINIMUM_DESKEW_THRESHOLD || imageSkewAngle < -(MINIMUM_DESKEW_THRESHOLD))) {
-            rotateImage(-imageSkewAngle);
-        }
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                ImageDeskew deskew = new ImageDeskew((BufferedImage) iioImageList.get(imageIndex).getRenderedImage());
+                double imageSkewAngle = deskew.getSkewAngle();
+
+                if ((imageSkewAngle > MINIMUM_DESKEW_THRESHOLD || imageSkewAngle < -(MINIMUM_DESKEW_THRESHOLD))) {
+                    rotateImage(-imageSkewAngle);
+                }
+                getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                getGlassPane().setVisible(false);
+            }
+        });
     }
 
     @Override
