@@ -56,6 +56,10 @@ namespace VietOCR.NET
 
         protected override void deskewToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (this.pictureBox1.Image == null)
+            {
+                return;
+            }
             this.pictureBox1.Deselect();
             this.Cursor = Cursors.WaitCursor;
 
