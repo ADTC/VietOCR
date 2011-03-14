@@ -819,16 +819,16 @@ namespace VietOCR.NET
         {
             this.pictureBox1.Deselect();
             // Rotating 270 degrees is equivalent to rotating -90 degrees.
-            this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
             imageList[imageIndex].RotateFlip(RotateFlipType.Rotate270FlipNone);
+            this.pictureBox1.Image = new Bitmap(imageList[imageIndex]);
             adjustPictureBoxAfterFlip();
         }
 
         private void toolStripBtnRotateCW_Click(object sender, EventArgs e)
         {
             this.pictureBox1.Deselect();
-            this.pictureBox1.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
             imageList[imageIndex].RotateFlip(RotateFlipType.Rotate90FlipNone);
+            this.pictureBox1.Image = new Bitmap(imageList[imageIndex]);
             adjustPictureBoxAfterFlip();
         }
 
