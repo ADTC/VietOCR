@@ -69,8 +69,8 @@ namespace VietOCR.NET
 
             if ((imageSkewAngle > MINIMUM_DESKEW_THRESHOLD || imageSkewAngle < -(MINIMUM_DESKEW_THRESHOLD)))
             {
-                this.pictureBox1.Image = ImageHelper.Rotate((Bitmap)this.pictureBox1.Image, -imageSkewAngle);
                 imageList[imageIndex] = ImageHelper.Rotate((Bitmap)imageList[imageIndex], -imageSkewAngle);
+                this.pictureBox1.Image = new Bitmap(imageList[imageIndex]);
             }
             this.Cursor = Cursors.Default;
         }
