@@ -21,12 +21,14 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
+using VietOCR.NET.Utilities;
 
 namespace VietOCR.NET
 {
     public partial class GUIWithImage : VietOCR.NET.GUIWithPostprocess
     {
         const string strScreenshotMode = "ScreenshotMode";
+        const double MINIMUM_DESKEW_THRESHOLD = 0.05d;
 
         public GUIWithImage()
         {
@@ -50,6 +52,27 @@ namespace VietOCR.NET
                 // Initial plan was to implement various image manipulation operations 
                 // (rotate, flip, sharpen, brighten, threshold, clean up,...) here.
             }
+        }
+
+        protected override void deskewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (imageList == null)
+            {
+                MessageBox.Show(this, Properties.Resources.LoadImage, strProgName);
+                return;
+            }
+            this.pictureBox1.Deselect();
+            this.Cursor = Cursors.WaitCursor;
+
+            gmseDeskew deskew = new gmseDeskew((Bitmap)this.pictureBox1.Image);
+            double imageSkewAngle = deskew.GetSkewAngle();
+
+            if ((imageSkewAngle > MINIMUM_DESKEW_THRESHOLD || imageSkewAngle < -(MINIMUM_DESKEW_THRESHOLD)))
+            {
+                imageList[imageIndex] = ImageHelper.Rotate((Bitmap)imageList[imageIndex], -imageSkewAngle);
+                this.pictureBox1.Image = new Bitmap(imageList[imageIndex]);
+            }
+            this.Cursor = Cursors.Default;
         }
 
         protected override void screenshotModeToolStripMenuItem_Click(object sender, EventArgs e)
