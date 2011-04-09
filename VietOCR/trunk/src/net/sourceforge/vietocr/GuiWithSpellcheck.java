@@ -100,7 +100,7 @@ public class GuiWithSpellcheck extends GuiWithSettings {
     }
 
     @Override
-    void spellCheckActionPerformed() {
+    void jToggleButtonSpellCheckActionPerformed(java.awt.event.ActionEvent evt) {
         Properties lookupISO_3_1_Codes = getLookupISO_3_1_Codes();
         String localeId = null;
 

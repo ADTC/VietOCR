@@ -27,7 +27,7 @@ public class GuiWithOCR extends GuiWithScan {
     private OcrWorker ocrWorker;
 
     @Override
-    void ocrActionPerformed() {
+    void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {
         if (jImageLabel.getIcon() == null) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -67,7 +67,7 @@ public class GuiWithOCR extends GuiWithScan {
     }
 
     @Override
-    void ocrAllActionPerformed() {
+    void jMenuItemOCRAllActionPerformed(java.awt.event.ActionEvent evt) {
         if (this.jImageLabel.getIcon() == null) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -110,7 +110,7 @@ public class GuiWithOCR extends GuiWithScan {
     }
 
     @Override
-    void cancelOCRActionPerformed() {
+    void jButtonCancelOCRActionPerformed(java.awt.event.ActionEvent evt) {
         if (ocrWorker != null && !ocrWorker.isDone()) {
             // Cancel current OCR op to begin a new one. You want only one OCR op at a time.
             ocrWorker.cancel(true);

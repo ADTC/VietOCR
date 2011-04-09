@@ -1233,21 +1233,12 @@ public class Gui extends JFrame {
         }
     }//GEN-LAST:event_jComboBoxLangItemStateChanged
 
-    private void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRActionPerformed
-        ocrActionPerformed();
-    }//GEN-LAST:event_jMenuItemOCRActionPerformed
-
-    void ocrActionPerformed() {
+    void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRActionPerformed
         // to be implemented in subclas
-    }
-
-    private void jMenuItemOCRAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRAllActionPerformed
-        ocrAllActionPerformed();
-    }//GEN-LAST:event_jMenuItemOCRAllActionPerformed
-
-    void ocrAllActionPerformed() {
+    }//GEN-LAST:event_jMenuItemOCRActionPerformed
+    void jMenuItemOCRAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRAllActionPerformed
         // to be implemented in subclass
-    }
+    }//GEN-LAST:event_jMenuItemOCRAllActionPerformed
 
     private void jMenuItemPostProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPostProcessActionPerformed
         postProcessActionPerformed();
@@ -1382,13 +1373,9 @@ public class Gui extends JFrame {
         }
     }//GEN-LAST:event_jButtonClearActionPerformed
 
-    private void jCheckBoxMenuWordWrapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuWordWrapActionPerformed
-        setLineWrap();
-    }//GEN-LAST:event_jCheckBoxMenuWordWrapActionPerformed
-
-    void setLineWrap() {
+    void jCheckBoxMenuWordWrapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuWordWrapActionPerformed
         // to be implemented in subclass
-    }
+    }//GEN-LAST:event_jCheckBoxMenuWordWrapActionPerformed
 
     protected static Locale getLocale(String selectedUILang) {
         return new Locale(selectedUILang);
@@ -1466,13 +1453,10 @@ public class Gui extends JFrame {
         System.exit(0);
     }
 
-    private void jMenuItemFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFontActionPerformed
-        openFontDialog(curLangCode);
+    void jMenuItemFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFontActionPerformed
+		JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }//GEN-LAST:event_jMenuItemFontActionPerformed
 
-    void openFontDialog(String langCode) {
-        // to be implemented in subclass
-    }
 
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
         if (jFileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -1826,98 +1810,43 @@ public class Gui extends JFrame {
         }
     }
 
-    private void jMenuItemOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOptionsActionPerformed
-        openOptionsDialog();
+    void jMenuItemOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOptionsActionPerformed
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }//GEN-LAST:event_jMenuItemOptionsActionPerformed
-
-    void openOptionsDialog() {
+    void jMenuItemChangeCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChangeCaseActionPerformed
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
-    }
-
-    private void jMenuItemChangeCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChangeCaseActionPerformed
-        openChangeCaseDialog();
     }//GEN-LAST:event_jMenuItemChangeCaseActionPerformed
-
-    void openChangeCaseDialog() {
+    void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRemoveLineBreaksActionPerformed
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
-    }
-
-    private void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRemoveLineBreaksActionPerformed
-        removeLineBreaks();
     }//GEN-LAST:event_jMenuItemRemoveLineBreaksActionPerformed
-
-    void removeLineBreaks() {
+    void jMenuItemMergeTiffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMergeTiffActionPerformed
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
-    }
-
-    private void jMenuItemMergeTiffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMergeTiffActionPerformed
-        mergeTiffs();
     }//GEN-LAST:event_jMenuItemMergeTiffActionPerformed
-
-    void mergeTiffs() {
+    void jMenuItemSplitPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSplitPdfActionPerformed
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
-    }
-
-    private void jMenuItemSplitPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSplitPdfActionPerformed
-        splitPdf();
     }//GEN-LAST:event_jMenuItemSplitPdfActionPerformed
-
-    void splitPdf() {
-        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
-    }
-
-    private void jButtonCancelOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelOCRActionPerformed
-        cancelOCRActionPerformed();
+    void jButtonCancelOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelOCRActionPerformed
     }//GEN-LAST:event_jButtonCancelOCRActionPerformed
-
-    void cancelOCRActionPerformed() {
-        // to be implemented in subclass
-    }
-    private void jMenuItemMergePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMergePdfActionPerformed
-        mergePdf();
+    void jMenuItemMergePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMergePdfActionPerformed
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }//GEN-LAST:event_jMenuItemMergePdfActionPerformed
-
-    void mergePdf() {
+    void jMenuItemMetadataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMetadataActionPerformed
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
-    }
-
-    private void jMenuItemMetadataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMetadataActionPerformed
-        readImageMetadata();
     }//GEN-LAST:event_jMenuItemMetadataActionPerformed
-
-    private void jToggleButtonSpellCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonSpellCheckActionPerformed
-        spellCheckActionPerformed();
-    }//GEN-LAST:event_jToggleButtonSpellCheckActionPerformed
-
-    void spellCheckActionPerformed() {
+    void jToggleButtonSpellCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonSpellCheckActionPerformed
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
-    }
-
-    private void jMenuItemDownloadLangDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDownloadLangDataActionPerformed
-        downloadLangDataActionPerformed();
+    }//GEN-LAST:event_jToggleButtonSpellCheckActionPerformed
+    void jMenuItemDownloadLangDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDownloadLangDataActionPerformed
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }//GEN-LAST:event_jMenuItemDownloadLangDataActionPerformed
-
     private void jTextArea1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseEntered
         if (!this.jTextArea1.isFocusOwner()) {
             this.jTextArea1.requestFocusInWindow();
         }
     }//GEN-LAST:event_jTextArea1MouseEntered
-
-    private void jMenuItemDeskewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeskewActionPerformed
-        deskewImage();
+    void jMenuItemDeskewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeskewActionPerformed
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }//GEN-LAST:event_jMenuItemDeskewActionPerformed
-
-    void deskewImage() {
-        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
-    }
-
-    void downloadLangDataActionPerformed() {
-        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
-    }
-
-    void readImageMetadata() {
-        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
-    }
 
     void changeUILanguage(final Locale locale) {
         if (locale.equals(Locale.getDefault())) {
