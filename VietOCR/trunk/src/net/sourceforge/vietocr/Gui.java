@@ -1239,14 +1239,9 @@ public class Gui extends JFrame {
     void jMenuItemOCRAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOCRAllActionPerformed
         // to be implemented in subclass
     }//GEN-LAST:event_jMenuItemOCRAllActionPerformed
-
-    private void jMenuItemPostProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPostProcessActionPerformed
-        postProcessActionPerformed();
-    }//GEN-LAST:event_jMenuItemPostProcessActionPerformed
-
-    void postProcessActionPerformed() {
+    void jMenuItemPostProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPostProcessActionPerformed
         // to be implemented in subclass
-    }
+    }//GEN-LAST:event_jMenuItemPostProcessActionPerformed
 
     private void jButtonPrevPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevPageActionPerformed
         ((JImageLabel) jImageLabel).deselect();
@@ -1454,9 +1449,8 @@ public class Gui extends JFrame {
     }
 
     void jMenuItemFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFontActionPerformed
-		JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }//GEN-LAST:event_jMenuItemFontActionPerformed
-
 
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
         if (jFileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -1773,19 +1767,9 @@ public class Gui extends JFrame {
         }
     }//GEN-LAST:event_formComponentResized
 
-    private void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemScanActionPerformed
+    void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemScanActionPerformed
         scaleX = scaleY = 1f;
-        performScan();
     }//GEN-LAST:event_jMenuItemScanActionPerformed
-
-    /**
-     * Access scanner and scan documents via WIA.
-     *
-     */
-    void performScan() {
-        // to be implemented in subclass
-    }
-
     private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonScanActionPerformed
         jMenuItemScanActionPerformed(evt);
     }//GEN-LAST:event_jButtonScanActionPerformed
