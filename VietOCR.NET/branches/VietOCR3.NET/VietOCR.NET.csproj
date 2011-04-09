@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -147,8 +147,13 @@
     <Compile Include="DownloadDialog.Designer.cs">
       <DependentUpon>DownloadDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUIWithPostprocess.cs">
+    <Compile Include="GUIWithImageOps.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIWithImageOps.Designer.cs">
+      <DependentUpon>GUIWithImageOps.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIWithPostprocess.cs">
     </Compile>
     <Compile Include="GUIWithPostprocess.Designer.cs">
       <DependentUpon>GUIWithPostprocess.cs</DependentUpon>
@@ -160,7 +165,6 @@
       <DependentUpon>GUIWithScan.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithUILanguage.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithUILanguage.Designer.cs">
       <DependentUpon>GUIWithUILanguage.cs</DependentUpon>
@@ -168,25 +172,21 @@
     <Compile Include="SpellCheckHelper.cs" />
     <Compile Include="Utilities\FormLocalizer.cs" />
     <Compile Include="GUIWithOCR.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithOCR.Designer.cs">
       <DependentUpon>GUIWithOCR.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithFormat.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithFormat.Designer.cs">
       <DependentUpon>GUIWithFormat.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithImage.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithImage.Designer.cs">
       <DependentUpon>GUIWithImage.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithInputMethod.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithInputMethod.Designer.cs">
       <DependentUpon>GUIWithInputMethod.cs</DependentUpon>
@@ -198,19 +198,16 @@
       <DependentUpon>GUIWithRegistry.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithSettings.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithSettings.Designer.cs">
       <DependentUpon>GUIWithSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithSpellcheck.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithSpellcheck.Designer.cs">
       <DependentUpon>GUIWithSpellcheck.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithTools.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithTools.Designer.cs">
       <DependentUpon>GUIWithTools.cs</DependentUpon>
@@ -297,6 +294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI.sk-SK.resx">
       <DependentUpon>GUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIWithImageOps.resx">
+      <DependentUpon>GUIWithImageOps.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIWithPostprocess.resx">
       <DependentUpon>GUIWithPostprocess.cs</DependentUpon>
