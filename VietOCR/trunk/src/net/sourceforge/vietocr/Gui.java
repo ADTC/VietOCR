@@ -42,7 +42,7 @@ public class Gui extends JFrame {
     static final boolean MAC_OS_X = System.getProperty("os.name").startsWith("Mac");
     static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
     static final String UTF8 = "UTF-8";
-    ResourceBundle bundle;
+    public final String EOL = System.getProperty("line.separator");
     static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
     private int filterIndex;
     private FileFilter[] fileFilters;
@@ -52,7 +52,7 @@ public class Gui extends JFrame {
     private int imageTotal;
     private List<ImageIconScalable> imageList;
     protected List<IIOImage> iioImageList;
-    public final String EOL = System.getProperty("line.separator");
+    protected ResourceBundle bundle;
     private String currentDirectory;
     private String outputDirectory;
     protected String tessPath;
