@@ -32,7 +32,7 @@ public class GuiWithPostprocess extends GuiWithOCR {
     }
 
     @Override
-    void postProcessActionPerformed() {
+    void jMenuItemPostProcessActionPerformed(java.awt.event.ActionEvent evt) {
         if (curLangCode == null) {
             return;
         }
