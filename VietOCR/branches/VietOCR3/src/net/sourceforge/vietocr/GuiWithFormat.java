@@ -41,12 +41,12 @@ public class GuiWithFormat extends GuiWithImage {
     }
 
     @Override
-    void setLineWrap() {
+    void jCheckBoxMenuWordWrapActionPerformed(java.awt.event.ActionEvent evt) {
         this.jTextArea1.setLineWrap(wordWrapOn = jCheckBoxMenuWordWrap.isSelected());
     }
 
     @Override
-    void openFontDialog(String langCode) {
+    void jMenuItemFontActionPerformed(java.awt.event.ActionEvent evt) {
         FontDialog dlg = new FontDialog(this);
         dlg.setAttributes(font);
 
@@ -55,7 +55,7 @@ public class GuiWithFormat extends GuiWithImage {
         try {
             File xmlFile = new File(baseDir, "data/pangram.xml");
             prop.loadFromXML(new FileInputStream(xmlFile));
-            dlg.setPreviewText(prop.getProperty(langCode));
+            dlg.setPreviewText(prop.getProperty(curLangCode));
         } catch (IOException ioe) {
             JOptionPane.showMessageDialog(null, ioe.getMessage(), APP_NAME, JOptionPane.ERROR_MESSAGE);
             ioe.printStackTrace();
@@ -71,7 +71,7 @@ public class GuiWithFormat extends GuiWithImage {
     }
 
     @Override
-    void openChangeCaseDialog() {
+    void jMenuItemChangeCaseActionPerformed(java.awt.event.ActionEvent evt) {
         if (changeCaseDlg == null) {
             changeCaseDlg = new ChangeCaseDialog(GuiWithFormat.this, false);
             // non-modal
@@ -119,7 +119,7 @@ public class GuiWithFormat extends GuiWithImage {
     }
 
     @Override
-    void removeLineBreaks() {
+    void jMenuItemRemoveLineBreaksActionPerformed(java.awt.event.ActionEvent evt) {
         if (jTextArea1.getSelectedText() == null) {
             jTextArea1.selectAll();
 

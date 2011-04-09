@@ -33,7 +33,7 @@ public class GuiWithTools extends GuiWithSpellcheck {
     }
 
     @Override
-    void mergeTiffs() {
+    void jMenuItemMergeTiffActionPerformed(java.awt.event.ActionEvent evt) {
         JFileChooser jf = new JFileChooser();
         jf.setDialogTitle(bundle.getString("Select_Input_Images"));
         jf.setCurrentDirectory(imageFolder);
@@ -132,7 +132,7 @@ public class GuiWithTools extends GuiWithSpellcheck {
     }
 
     @Override
-    void mergePdf() {
+    void jMenuItemMergePdfActionPerformed(java.awt.event.ActionEvent evt) {
         JFileChooser jf = new JFileChooser();
         jf.setDialogTitle(bundle.getString("Select_Input_PDFs"));
         jf.setCurrentDirectory(imageFolder);
@@ -212,7 +212,7 @@ public class GuiWithTools extends GuiWithSpellcheck {
     }
 
     @Override
-    void splitPdf() {
+    void jMenuItemSplitPdfActionPerformed(java.awt.event.ActionEvent evt) {
         SplitPdfDialog dialog = new SplitPdfDialog(this, true);
         if (dialog.showDialog() == JOptionPane.OK_OPTION) {
             final SplitPdfArgs args = dialog.getArgs();
