@@ -24,7 +24,7 @@ using VietOCR.NET.Controls;
 
 namespace VietOCR.NET
 {
-    public partial class GUIWithOCR : VietOCR.NET.GUIWithScan
+    public partial class GUIWithOCR : VietOCR.NET.GUIWithImageOps
     {
         public GUIWithOCR()
         {

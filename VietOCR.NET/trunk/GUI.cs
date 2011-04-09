@@ -60,7 +60,7 @@ namespace VietOCR.NET
         }
 
         protected int imageIndex;
-        private int imageTotal;
+        protected int imageTotal;
         protected IList<Image> imageList;
 
         private Rectangle rect = Rectangle.Empty;
@@ -88,9 +88,7 @@ namespace VietOCR.NET
         const string strFilterIndex = "FilterIndex";
         const string strMruList = "MruList";
 
-        private bool IsFitForZoomIn = false;
-        private const float ZOOM_FACTOR = 1.25f;
-        private Point curScrollPos;
+        protected Point curScrollPos;
         protected Point pointClicked;
         protected readonly string baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
@@ -469,52 +467,6 @@ namespace VietOCR.NET
             }
         }
 
-        private void toolStripBtnPrev_Click(object sender, EventArgs e)
-        {
-            this.pictureBox1.Deselect();
-            imageIndex--;
-            if (imageIndex < 0)
-            {
-                imageIndex = 0;
-            }
-            else
-            {
-                this.toolStripStatusLabel1.Text = null;
-                displayImage();
-
-                // recalculate scale factors if in Fit Image mode
-                if (this.pictureBox1.SizeMode == PictureBoxSizeMode.StretchImage)
-                {
-                    scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
-                    scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
-                }
-            }
-            setButton();
-        }
-
-        private void toolStripBtnNext_Click(object sender, EventArgs e)
-        {
-            this.pictureBox1.Deselect();
-            imageIndex++;
-            if (imageIndex > imageTotal - 1)
-            {
-                imageIndex = imageTotal - 1;
-            }
-            else
-            {
-                this.toolStripStatusLabel1.Text = null;
-                displayImage();
-
-                // recalculate scale factors if in Fit Image mode
-                if (this.pictureBox1.SizeMode == PictureBoxSizeMode.StretchImage)
-                {
-                    scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
-                    scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
-                }
-            }
-            setButton();
-        }
-
         protected bool OkToTrash()
         {
             if (!textModified)
@@ -543,7 +495,7 @@ namespace VietOCR.NET
             return (this.textFilename != null && this.textFilename.Length > 1) ?
                 Path.GetFileName(this.textFilename) : Properties.Resources.Untitled;
         }
-        void setButton()
+        protected void setButton()
         {
             if (imageIndex == 0)
             {
@@ -564,36 +516,37 @@ namespace VietOCR.NET
             }
         }
 
-        private void toolStripBtnFitImage_Click(object sender, EventArgs e)
+        protected virtual void toolStripBtnPrev_Click(object sender, EventArgs e)
         {
-            this.toolStripBtnFitImage.Enabled = false;
-            this.toolStripBtnActualSize.Enabled = true;
-            this.toolStripBtnZoomIn.Enabled = false;
-            this.toolStripBtnZoomOut.Enabled = false;
-            curScrollPos = this.splitContainer2.Panel2.AutoScrollPosition;
-            this.splitContainer2.Panel2.AutoScrollPosition = Point.Empty;
-            this.pictureBox1.Deselect();
-
-            this.pictureBox1.Dock = DockStyle.Fill;
-            this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
-            scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
-
-        private void toolStripBtnActualSize_Click(object sender, EventArgs e)
+        protected virtual void toolStripBtnNext_Click(object sender, EventArgs e)
         {
-            this.toolStripBtnFitImage.Enabled = true;
-            this.toolStripBtnActualSize.Enabled = false;
-            this.toolStripBtnZoomIn.Enabled = true;
-            this.toolStripBtnZoomOut.Enabled = true;
-
-            this.pictureBox1.Deselect();
-            this.pictureBox1.Size = this.pictureBox1.Image.Size;
-            this.pictureBox1.Dock = DockStyle.None;
-            this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-            scaleX = scaleY = 1f;
-            this.centerPicturebox();
-            this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(curScrollPos.X), Math.Abs(curScrollPos.Y));
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
+        }
+        protected virtual void toolStripBtnFitImage_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
+        }
+        protected virtual void toolStripBtnActualSize_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
+        }
+        protected virtual void toolStripBtnZoomIn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
+        }
+        protected virtual void toolStripBtnZoomOut_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
+        }
+        protected virtual void toolStripBtnRotateCCW_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
+        }
+        protected virtual void toolStripBtnRotateCW_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(TO_BE_IMPLEMENTED, strProgName);
         }
 
         /// <summary>
@@ -726,7 +679,7 @@ namespace VietOCR.NET
             setButton();
         }
 
-        void displayImage()
+        protected void displayImage()
         {
             this.lblCurIndex.Text = Properties.Resources.Page_ + (imageIndex + 1) + Properties.Resources._of_ + imageTotal;
             this.pictureBox1.Image = new Bitmap(imageList[imageIndex]);
@@ -740,7 +693,7 @@ namespace VietOCR.NET
             this.centerPicturebox();
         }
 
-        private void centerPicturebox()
+        protected void centerPicturebox()
         {
             int x = 0;
             int y = 0;
@@ -813,110 +766,6 @@ namespace VietOCR.NET
                     this.textBox1.SelectionLength = 0;
                 }
             }
-        }
-
-        private void toolStripBtnRotateCCW_Click(object sender, EventArgs e)
-        {
-            this.pictureBox1.Deselect();
-            // Rotating 270 degrees is equivalent to rotating -90 degrees.
-            imageList[imageIndex].RotateFlip(RotateFlipType.Rotate270FlipNone);
-            this.pictureBox1.Image = new Bitmap(imageList[imageIndex]);
-            adjustPictureBoxAfterFlip();
-        }
-
-        private void toolStripBtnRotateCW_Click(object sender, EventArgs e)
-        {
-            this.pictureBox1.Deselect();
-            imageList[imageIndex].RotateFlip(RotateFlipType.Rotate90FlipNone);
-            this.pictureBox1.Image = new Bitmap(imageList[imageIndex]);
-            adjustPictureBoxAfterFlip();
-        }
-
-        private void adjustPictureBoxAfterFlip()
-        {
-            this.pictureBox1.Size = new Size(this.pictureBox1.Height, this.pictureBox1.Width);
-            this.pictureBox1.Refresh();
-            // recalculate scale factors if in Fit Image mode
-            if (this.pictureBox1.SizeMode == PictureBoxSizeMode.StretchImage)
-            {
-                scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
-                scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
-            }
-            this.centerPicturebox();
-        }
-
-        private void toolStripBtnZoomIn_Click(object sender, EventArgs e)
-        {
-            this.pictureBox1.Deselect();
-            IsFitForZoomIn = true;
-            this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-
-            // Zoom works best if you first fit the image according to its true aspect ratio.
-            Fit();
-            // Make the PictureBox dimensions larger by 25% to effect the Zoom.
-            this.pictureBox1.Width = Convert.ToInt32(this.pictureBox1.Width * ZOOM_FACTOR);
-            this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height * ZOOM_FACTOR);
-            scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
-            scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
-            this.centerPicturebox();
-        }
-
-        private void toolStripBtnZoomOut_Click(object sender, EventArgs e)
-        {
-            this.pictureBox1.Deselect();
-            // StretchImage SizeMode works best for zooming.
-            this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            // Zoom works best if you first fit the image according to its true aspect ratio.
-            Fit();
-            // Make the PictureBox dimensions smaller by 25% to effect the Zoom.
-            this.pictureBox1.Width = Convert.ToInt32(this.pictureBox1.Width / ZOOM_FACTOR);
-            this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height / ZOOM_FACTOR);
-            scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
-            scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
-            this.centerPicturebox();
-        }
-
-        // This method makes the image fit properly in the PictureBox. You might think 
-        // that the AutoSize SizeMode enum would make the image appear in the PictureBox 
-        // according to its true aspect ratio within the fixed bounds of the PictureBox.
-        // However, it merely expands or shrinks the PictureBox.
-        private void Fit()
-        {
-            // if Fit was called by the Zoom In button, then center the image. This is
-            // only needed when working with images that are smaller than the PictureBox.
-            // Feel free to uncomment the line that sets the SizeMode and then see how
-            // it causes Zoom In for small images to show unexpected behavior.
-
-            if ((this.pictureBox1.Image.Width < this.pictureBox1.Width) &&
-                (this.pictureBox1.Image.Height < this.pictureBox1.Height))
-            {
-                if (!IsFitForZoomIn)
-                {
-                    this.pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-                }
-            }
-            //CalculateAspectRatioAndSetDimensions();
-        }
-
-        // Calculates and returns the image's aspect ratio, and sets 
-        // its proper dimensions. This is used for Fit() and for saving thumbnails
-        // of images.
-        private double CalculateAspectRatioAndSetDimensions()
-        {
-            // Calculate the proper aspect ratio and set the image's dimensions.
-            double ratio;
-
-            if (this.pictureBox1.Image.Width > this.pictureBox1.Image.Height)
-            {
-                ratio = this.pictureBox1.Image.Width / this.pictureBox1.Image.Height;
-                this.pictureBox1.Height = Convert.ToInt32(Convert.ToDouble(this.pictureBox1.Width) / ratio);
-            }
-            else
-            {
-                ratio = this.pictureBox1.Image.Height / this.pictureBox1.Image.Width;
-                this.pictureBox1.Width = Convert.ToInt32(Convert.ToDouble(this.pictureBox1.Height) / ratio);
-            }
-            return ratio;
         }
 
         /// <summary>

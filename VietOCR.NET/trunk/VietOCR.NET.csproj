@@ -140,6 +140,12 @@
     <Compile Include="DownloadDialog.Designer.cs">
       <DependentUpon>DownloadDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUIWithImageOps.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIWithImageOps.Designer.cs">
+      <DependentUpon>GUIWithImageOps.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUIWithPostprocess.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI.sk-SK.resx">
       <DependentUpon>GUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIWithImageOps.resx">
+      <DependentUpon>GUIWithImageOps.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIWithPostprocess.resx">
       <DependentUpon>GUIWithPostprocess.cs</DependentUpon>
