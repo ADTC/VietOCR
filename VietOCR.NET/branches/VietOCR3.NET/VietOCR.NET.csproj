@@ -154,6 +154,7 @@
       <DependentUpon>GUIWithImageOps.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithPostprocess.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithPostprocess.Designer.cs">
       <DependentUpon>GUIWithPostprocess.cs</DependentUpon>
@@ -165,6 +166,7 @@
       <DependentUpon>GUIWithScan.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithUILanguage.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithUILanguage.Designer.cs">
       <DependentUpon>GUIWithUILanguage.cs</DependentUpon>
@@ -172,21 +174,25 @@
     <Compile Include="SpellCheckHelper.cs" />
     <Compile Include="Utilities\FormLocalizer.cs" />
     <Compile Include="GUIWithOCR.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithOCR.Designer.cs">
       <DependentUpon>GUIWithOCR.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithFormat.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithFormat.Designer.cs">
       <DependentUpon>GUIWithFormat.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithImage.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithImage.Designer.cs">
       <DependentUpon>GUIWithImage.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithInputMethod.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithInputMethod.Designer.cs">
       <DependentUpon>GUIWithInputMethod.cs</DependentUpon>
@@ -198,16 +204,19 @@
       <DependentUpon>GUIWithRegistry.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithSettings.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithSettings.Designer.cs">
       <DependentUpon>GUIWithSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithSpellcheck.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithSpellcheck.Designer.cs">
       <DependentUpon>GUIWithSpellcheck.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIWithTools.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIWithTools.Designer.cs">
       <DependentUpon>GUIWithTools.cs</DependentUpon>
