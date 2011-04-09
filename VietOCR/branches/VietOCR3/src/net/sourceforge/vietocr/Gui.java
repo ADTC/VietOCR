@@ -49,8 +49,8 @@ public class Gui extends JFrame {
     protected Font font;
     private final Rectangle screen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
     protected int imageIndex;
-    private int imageTotal;
-    private List<ImageIconScalable> imageList;
+    int imageTotal;
+    List<ImageIconScalable> imageList;
     protected List<IIOImage> iioImageList;
     protected ResourceBundle bundle;
     private String currentDirectory;
@@ -61,15 +61,14 @@ public class Gui extends JFrame {
     protected String curLangCode = "eng";
     private String[] installedLanguageCodes;
     private String[] installedLanguages;
-    private ImageIconScalable imageIcon;
-    private boolean isFitImageSelected;
+    ImageIconScalable imageIcon;
+    boolean isFitImageSelected;
     protected boolean wordWrapOn;
     protected float scaleX = 1f;
     protected float scaleY = 1f;
     protected static String selectedUILang = "en";
-    private int originalW, originalH;
-    private final float ZOOM_FACTOR = 1.25f;
-    private Point curScrollPos;
+    int originalW, originalH;
+    Point curScrollPos;
     private File textFile;
     private java.util.List<String> mruList = new java.util.ArrayList<String>();
     private String strClearRecentFiles;
@@ -1242,123 +1241,33 @@ public class Gui extends JFrame {
     void jMenuItemPostProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPostProcessActionPerformed
         // to be implemented in subclass
     }//GEN-LAST:event_jMenuItemPostProcessActionPerformed
-
-    private void jButtonPrevPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevPageActionPerformed
-        ((JImageLabel) jImageLabel).deselect();
-        imageIndex--;
-        if (imageIndex < 0) {
-            imageIndex = 0;
-        } else {
-            this.jLabelStatus.setText(null);
-            jProgressBar1.setString(null);
-            jProgressBar1.setVisible(false);
-            displayImage();
-        }
-        setButton();
+    void jButtonPrevPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevPageActionPerformed
+        // to be implemented in subclass
     }//GEN-LAST:event_jButtonPrevPageActionPerformed
-
-    private void jButtonNextPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextPageActionPerformed
-        ((JImageLabel) jImageLabel).deselect();
-        imageIndex++;
-        if (imageIndex > imageTotal - 1) {
-            imageIndex = imageTotal - 1;
-        } else {
-            this.jLabelStatus.setText(null);
-            jProgressBar1.setString(null);
-            jProgressBar1.setVisible(false);
-            displayImage();
-        }
-        setButton();
+    void jButtonNextPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextPageActionPerformed
+        // to be implemented in subclass
     }//GEN-LAST:event_jButtonNextPageActionPerformed
-
-    private void jButtonFitImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFitImageActionPerformed
-        this.jButtonFitImage.setEnabled(false);
-        this.jButtonActualSize.setEnabled(true);
-        this.jButtonZoomIn.setEnabled(false);
-        this.jButtonZoomOut.setEnabled(false);
-        ((JImageLabel) jImageLabel).deselect();
-        curScrollPos = this.jScrollPane2.getViewport().getViewPosition();
-        scaleX = (float) originalW / (float) this.jScrollPane2.getWidth();
-        scaleY = (float) originalH / (float) this.jScrollPane2.getHeight();
-        fitImageChange(this.jScrollPane2.getWidth(), this.jScrollPane2.getHeight());
-        isFitImageSelected = true;
+    void jButtonFitImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFitImageActionPerformed
+        // to be implemented in subclass
     }//GEN-LAST:event_jButtonFitImageActionPerformed
-
-    private void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualSizeActionPerformed
-        this.jButtonFitImage.setEnabled(true);
-        this.jButtonActualSize.setEnabled(false);
-        this.jButtonZoomIn.setEnabled(true);
-        this.jButtonZoomOut.setEnabled(true);
-        ((JImageLabel) jImageLabel).deselect();
-        fitImageChange(originalW, originalH);
-        scaleX = scaleY = 1f;
-        isFitImageSelected = false;
+    void jButtonActualSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualSizeActionPerformed
+        // to be implemented in subclass
     }//GEN-LAST:event_jButtonActualSizeActionPerformed
-
-    void fitImageChange(final int width, final int height) {
-        SwingUtilities.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                imageIcon.setScaledSize(width, height);
-                jScrollPane2.getViewport().setViewPosition(curScrollPos);
-                jImageLabel.revalidate();
-                jScrollPane2.repaint();
-            }
-        });
-    }
-
-    private void jButtonZoomOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomOutActionPerformed
-        ((JImageLabel) jImageLabel).deselect();
-        doChange(false);
-        isFitImageSelected = false;
+    void jButtonZoomOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomOutActionPerformed
+        // to be implemented in subclass
     }//GEN-LAST:event_jButtonZoomOutActionPerformed
-
-    private void jButtonZoomInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomInActionPerformed
-        ((JImageLabel) jImageLabel).deselect();
-        doChange(true);
-        isFitImageSelected = false;
+    void jButtonZoomInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomInActionPerformed
+        // to be implemented in subclass
     }//GEN-LAST:event_jButtonZoomInActionPerformed
-
-    void doChange(final boolean isZoomIn) {
-        SwingUtilities.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                int width = imageIcon.getIconWidth();
-                int height = imageIcon.getIconHeight();
-
-                if (isZoomIn) {
-                    imageIcon.setScaledSize((int) (width * ZOOM_FACTOR), (int) (height * ZOOM_FACTOR));
-                } else {
-                    imageIcon.setScaledSize((int) (width / ZOOM_FACTOR), (int) (height / ZOOM_FACTOR));
-                }
-                jImageLabel.revalidate();
-                jScrollPane2.repaint();
-
-                if (isZoomIn) {
-                    scaleX /= ZOOM_FACTOR;
-                    scaleY /= ZOOM_FACTOR;
-                } else {
-                    scaleX *= ZOOM_FACTOR;
-                    scaleY *= ZOOM_FACTOR;
-                }
-            }
-        });
-    }
-
     private void jButtonOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOpenActionPerformed
         jMenuItemOpenActionPerformed(evt);
     }//GEN-LAST:event_jButtonOpenActionPerformed
-
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         jMenuItemSaveActionPerformed(evt);
     }//GEN-LAST:event_jButtonSaveActionPerformed
-
     private void jButtonOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOCRActionPerformed
         jMenuItemOCRActionPerformed(evt);
     }//GEN-LAST:event_jButtonOCRActionPerformed
-
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
         if (textFile == null || promptToSave()) {
             this.jTextArea1.setText(null);
@@ -1367,11 +1276,12 @@ public class Gui extends JFrame {
             updateSave(false);
         }
     }//GEN-LAST:event_jButtonClearActionPerformed
-
     void jCheckBoxMenuWordWrapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuWordWrapActionPerformed
         // to be implemented in subclass
     }//GEN-LAST:event_jCheckBoxMenuWordWrapActionPerformed
-
+    void jMenuItemFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFontActionPerformed
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
+    }//GEN-LAST:event_jMenuItemFontActionPerformed
     protected static Locale getLocale(String selectedUILang) {
         return new Locale(selectedUILang);
     }
@@ -1447,10 +1357,6 @@ public class Gui extends JFrame {
 
         System.exit(0);
     }
-
-    void jMenuItemFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFontActionPerformed
-        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
-    }//GEN-LAST:event_jMenuItemFontActionPerformed
 
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
         if (jFileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -1766,33 +1672,32 @@ public class Gui extends JFrame {
             });
         }
     }//GEN-LAST:event_formComponentResized
+    void fitImageChange(final int width, final int height) {
+        SwingUtilities.invokeLater(new Runnable() {
 
+            @Override
+            public void run() {
+                imageIcon.setScaledSize(width, height);
+                jScrollPane2.getViewport().setViewPosition(curScrollPos);
+                jImageLabel.revalidate();
+                jScrollPane2.repaint();
+            }
+        });
+    }
     void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemScanActionPerformed
-        scaleX = scaleY = 1f;
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }//GEN-LAST:event_jMenuItemScanActionPerformed
     private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonScanActionPerformed
         jMenuItemScanActionPerformed(evt);
     }//GEN-LAST:event_jButtonScanActionPerformed
 
-    private void jButtonRotateCCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateCCWActionPerformed
-        rotateImage(270d);
+    void jButtonRotateCCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateCCWActionPerformed
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }//GEN-LAST:event_jButtonRotateCCWActionPerformed
 
-    private void jButtonRotateCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateCWActionPerformed
-        rotateImage(90d);
+    void jButtonRotateCWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotateCWActionPerformed
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }//GEN-LAST:event_jButtonRotateCWActionPerformed
-
-    void rotateImage(double angle) {
-        try {
-            imageIcon = imageList.get(imageIndex).getRotatedImageIcon(Math.toRadians(angle));
-            imageList.set(imageIndex, imageIcon); // persist the rotated image
-            iioImageList.get(imageIndex).setRenderedImage((BufferedImage) imageIcon.getImage());
-            displayImage();
-        } catch (OutOfMemoryError oome) {
-//            oome.printStackTrace();
-            JOptionPane.showMessageDialog(this, oome.getMessage(), bundle.getString("OutOfMemoryError"), JOptionPane.ERROR_MESSAGE);
-        }
-    }
 
     void jMenuItemOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOptionsActionPerformed
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
@@ -1810,6 +1715,7 @@ public class Gui extends JFrame {
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }//GEN-LAST:event_jMenuItemSplitPdfActionPerformed
     void jButtonCancelOCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelOCRActionPerformed
+        JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }//GEN-LAST:event_jButtonCancelOCRActionPerformed
     void jMenuItemMergePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMergePdfActionPerformed
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
@@ -1897,10 +1803,10 @@ public class Gui extends JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonActualSize;
+    javax.swing.JButton jButtonActualSize;
     protected javax.swing.JButton jButtonCancelOCR;
     private javax.swing.JButton jButtonClear;
-    private javax.swing.JButton jButtonFitImage;
+    javax.swing.JButton jButtonFitImage;
     private javax.swing.JButton jButtonNextPage;
     protected javax.swing.JButton jButtonOCR;
     private javax.swing.JButton jButtonOpen;
@@ -1909,8 +1815,8 @@ public class Gui extends JFrame {
     private javax.swing.JButton jButtonRotateCW;
     private javax.swing.JButton jButtonSave;
     protected javax.swing.JButton jButtonScan;
-    private javax.swing.JButton jButtonZoomIn;
-    private javax.swing.JButton jButtonZoomOut;
+    javax.swing.JButton jButtonZoomIn;
+    javax.swing.JButton jButtonZoomOut;
     protected javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemScreenshotMode;
     protected javax.swing.JCheckBoxMenuItem jCheckBoxMenuWordWrap;
     protected javax.swing.JComboBox jComboBoxLang;

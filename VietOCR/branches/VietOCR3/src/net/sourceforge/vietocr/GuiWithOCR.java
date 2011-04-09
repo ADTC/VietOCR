@@ -22,7 +22,7 @@ import java.util.List;
 import javax.imageio.IIOImage;
 import javax.swing.*;
 
-public class GuiWithOCR extends GuiWithScan {
+public class GuiWithOCR extends GuiWithImageOps {
 
     private OcrWorker ocrWorker;
 
