@@ -39,7 +39,9 @@ public class GuiWithScan extends Gui {
      *
      */
     @Override
-    void performScan() {
+    void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {
+        super.jMenuItemScanActionPerformed(evt);
+        
         jLabelStatus.setText(bundle.getString("Scanning..."));
         jProgressBar1.setIndeterminate(true);
         jProgressBar1.setString(bundle.getString("Scanning..."));

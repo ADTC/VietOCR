@@ -107,7 +107,7 @@ public class GuiWithSettings extends GuiWithLaF {
     }
 
     @Override
-    protected void openOptionsDialog() {
+    void jMenuItemOptionsActionPerformed(java.awt.event.ActionEvent evt) {
         if (optionsDialog == null) {
             optionsDialog = new OptionsDialog(this, true);
         }
@@ -138,7 +138,7 @@ public class GuiWithSettings extends GuiWithLaF {
     }
 
     @Override
-    void downloadLangDataActionPerformed() {
+    void jMenuItemDownloadLangDataActionPerformed(java.awt.event.ActionEvent evt) {
         DownloadDialog dialog = new DownloadDialog(this, true);
         dialog.setVisible(true);
     }

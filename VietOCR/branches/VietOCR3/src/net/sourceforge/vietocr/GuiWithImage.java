@@ -30,7 +30,7 @@ public class GuiWithImage extends GuiWithPostprocess {
     }
 
     @Override
-    void readImageMetadata() {
+    void jMenuItemMetadataActionPerformed(java.awt.event.ActionEvent evt) {
         if (iioImageList == null) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -46,7 +46,7 @@ public class GuiWithImage extends GuiWithPostprocess {
     }
 
     @Override
-    void deskewImage() {
+    void jMenuItemDeskewActionPerformed(java.awt.event.ActionEvent evt) {
         if (iioImageList == null) {
             JOptionPane.showMessageDialog(this, bundle.getString("Please_load_an_image."), APP_NAME, JOptionPane.INFORMATION_MESSAGE);
             return;
