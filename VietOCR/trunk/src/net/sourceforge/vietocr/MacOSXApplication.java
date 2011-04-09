@@ -58,7 +58,7 @@ class MacOSXApplication {
 
             @Override
             public void handlePreferences(PreferencesEvent pe) {
-                vietOCR.openOptionsDialog();
+                vietOCR.jMenuItemOptionsActionPerformed(null);
             }
         });
 
