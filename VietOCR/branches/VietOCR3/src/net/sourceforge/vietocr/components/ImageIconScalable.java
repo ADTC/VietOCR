@@ -2,7 +2,7 @@
  * Core Java Technologies Tech Tips, February 20, 2003: Providing a Scalable Image Icon
  * http://java.sun.com/developer/JDCTechTips/2003/tt0220.html#2
  */
-package net.sourceforge.vietocr;
+package net.sourceforge.vietocr.components;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

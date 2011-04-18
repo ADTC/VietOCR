@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.sourceforge.vietocr;
+package net.sourceforge.vietocr.components;
 
 import java.awt.event.*;
 import javax.swing.*;
