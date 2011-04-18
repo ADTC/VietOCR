@@ -21,6 +21,7 @@ import java.io.*;
 import java.util.List;
 import javax.imageio.IIOImage;
 import javax.swing.*;
+import net.sourceforge.vietocr.components.JImageLabel;
 
 public class GuiWithOCR extends GuiWithImageOps {
 

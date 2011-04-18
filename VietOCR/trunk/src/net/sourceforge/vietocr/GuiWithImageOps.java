@@ -18,6 +18,7 @@ package net.sourceforge.vietocr;
 import java.awt.image.BufferedImage;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import net.sourceforge.vietocr.components.JImageLabel;
 
 public class GuiWithImageOps extends GuiWithScan {
 
