@@ -956,6 +956,30 @@ namespace VietOCR.NET
             {
                 this.toolStripButtonSpellCheck.PerformClick();
             }
+            else if (e.Control && e.Shift && (e.KeyCode == Keys.Oemplus || e.KeyCode == Keys.Add))
+            {
+                this.toolStripBtnRotateCW.PerformClick();
+            }
+            else if (e.Control && e.Shift && (e.KeyCode == Keys.OemMinus || e.KeyCode == Keys.Subtract))
+            {
+                this.toolStripBtnRotateCCW.PerformClick();
+            }    
+            else if (e.Control && (e.KeyCode == Keys.Oemplus || e.KeyCode == Keys.Add))
+            {
+                this.toolStripBtnZoomIn.PerformClick();
+            }
+            else if (e.Control && (e.KeyCode == Keys.OemMinus || e.KeyCode == Keys.Subtract))
+            {
+                this.toolStripBtnZoomOut.PerformClick();
+            }
+            else if (e.Control && (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1))
+            {
+                this.toolStripBtnActualSize.PerformClick();
+            }
+            else if (e.Control && (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2))
+            {
+                this.toolStripBtnFitImage.PerformClick();
+            }
         }
 
         protected virtual void downloadLangDataToolStripMenuItem_Click(object sender, EventArgs e)
