@@ -148,18 +148,38 @@ public class Gui extends JFrame {
 
             @Override
             public boolean dispatchKeyEvent(KeyEvent e) {
-                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_V && e.getID() == KeyEvent.KEY_PRESSED) {
-                    try {
-                        Image image = ImageHelper.getClipboardImage();
-                        if (image != null) {
-                            File tempFile = File.createTempFile("tmp", ".png");
-                            ImageIO.write((BufferedImage) image, "png", tempFile);
-                            openFile(tempFile);
-                            tempFile.deleteOnExit();
-                            e.consume();
+                if (e.getID() == KeyEvent.KEY_PRESSED) {
+                    if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_V) {
+                        try {
+                            Image image = ImageHelper.getClipboardImage();
+                            if (image != null) {
+                                File tempFile = File.createTempFile("tmp", ".png");
+                                ImageIO.write((BufferedImage) image, "png", tempFile);
+                                openFile(tempFile);
+                                tempFile.deleteOnExit();
+                                e.consume();
 //                            return true; // not dispatch the event to the component, in this case, the textarea
+                            }
+                        } catch (Exception ex) {
                         }
-                    } catch (Exception ex) {
+                    } else if (e.getKeyCode() == KeyEvent.VK_F7) {
+                        jToggleButtonSpellCheck.doClick();
+                    } else if (e.isControlDown() && e.isShiftDown() && (e.getKeyCode() == KeyEvent.VK_EQUALS || e.getKeyCode() == KeyEvent.VK_ADD)) {
+                        jButtonRotateCW.doClick();
+                    } else if (e.isControlDown() && e.isShiftDown() && (e.getKeyCode() == KeyEvent.VK_MINUS || e.getKeyCode() == KeyEvent.VK_SUBTRACT)) {
+                        jButtonRotateCCW.doClick();
+                    } else if (e.isControlDown() && (e.getKeyCode() == KeyEvent.VK_EQUALS || e.getKeyCode() == KeyEvent.VK_ADD)) {
+                        jButtonZoomIn.doClick();
+                    } else if (e.isControlDown() && (e.getKeyCode() == KeyEvent.VK_MINUS || e.getKeyCode() == KeyEvent.VK_SUBTRACT)) {
+                        jButtonZoomOut.doClick();
+                    } else if (e.isControlDown() && (e.getKeyCode() == KeyEvent.VK_1 || e.getKeyCode() == KeyEvent.VK_NUMPAD1)) {
+                        jButtonActualSize.doClick();
+                    } else if (e.isControlDown() && (e.getKeyCode() == KeyEvent.VK_2 || e.getKeyCode() == KeyEvent.VK_NUMPAD2)) {
+                        jButtonFitImage.doClick();
+                    } else if (!jTextArea1.isFocusOwner() && e.getKeyCode() == KeyEvent.VK_LEFT) {
+                        jButtonPrevPage.doClick();
+                    } else if (!jTextArea1.isFocusOwner() && e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                        jButtonNextPage.doClick();
                     }
                 }
                 return false;
@@ -167,15 +187,15 @@ public class Gui extends JFrame {
         };
         DefaultKeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(dispatcher);
 
-        // Assign F7 key to spellcheck
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "spellcheck");
-        getRootPane().getActionMap().put("spellcheck", new AbstractAction() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jToggleButtonSpellCheck.doClick();
-            }
-        });
+//        // Assign F7 key to spellcheck
+//        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "spellcheck");
+//        getRootPane().getActionMap().put("spellcheck", new AbstractAction() {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                jToggleButtonSpellCheck.doClick();
+//            }
+//        });
     }
 
     /**
