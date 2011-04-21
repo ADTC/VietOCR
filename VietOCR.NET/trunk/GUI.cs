@@ -979,6 +979,14 @@ namespace VietOCR.NET
             else if (e.Control && (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2))
             {
                 this.toolStripBtnFitImage.PerformClick();
+            } 
+            else if (!this.textBox1.Focused && e.KeyCode == Keys.Left) 
+            {
+                this.toolStripBtnPrev.PerformClick();
+            }
+            else if (!this.textBox1.Focused && e.KeyCode == Keys.Right)
+            {
+                this.toolStripBtnNext.PerformClick();
             }
         }
 
