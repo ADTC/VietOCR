@@ -979,15 +979,29 @@ namespace VietOCR.NET
             else if (e.Control && (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2))
             {
                 this.toolStripBtnFitImage.PerformClick();
-            } 
-            else if (!this.textBox1.Focused && e.KeyCode == Keys.Left) 
+            }
+        }
+
+        /// <summary>
+        /// This method is for Left and Right arrows used in navigating the image pages.
+        /// The GUI_KeyDown method has problems with these keys on first key entries.
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (!this.textBox1.Focused && keyData == Keys.Left)
             {
                 this.toolStripBtnPrev.PerformClick();
+                return true;
             }
-            else if (!this.textBox1.Focused && e.KeyCode == Keys.Right)
+            else if (!this.textBox1.Focused && keyData == Keys.Right)
             {
                 this.toolStripBtnNext.PerformClick();
+                return true;
             }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         protected virtual void downloadLangDataToolStripMenuItem_Click(object sender, EventArgs e)
