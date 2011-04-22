@@ -168,14 +168,14 @@ namespace VietOCR.NET
             // Feel free to uncomment the line that sets the SizeMode and then see how
             // it causes Zoom In for small images to show unexpected behavior.
 
-            if ((this.pictureBox1.Image.Width < this.pictureBox1.Width) &&
-                (this.pictureBox1.Image.Height < this.pictureBox1.Height))
-            {
-                if (!isFitForZoomIn)
-                {
-                    this.pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-                }
-            }
+            //if ((this.pictureBox1.Image.Width < this.pictureBox1.Width) &&
+            //    (this.pictureBox1.Image.Height < this.pictureBox1.Height))
+            //{
+            //    if (!isFitForZoomIn)
+            //    {
+            //        this.pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            //    }
+            //}
             //CalculateAspectRatioAndSetDimensions();
         }
 
