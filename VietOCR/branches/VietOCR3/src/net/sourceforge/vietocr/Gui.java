@@ -836,6 +836,11 @@ public class Gui extends JFrame {
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         jImageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jImageLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jImageLabelMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jImageLabel);
 
         jPanel1.add(jScrollPane2, java.awt.BorderLayout.CENTER);
@@ -1758,6 +1763,10 @@ public class Gui extends JFrame {
     void jMenuItemDeskewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeskewActionPerformed
         JOptionPane.showMessageDialog(this, TO_BE_IMPLEMENTED);
     }//GEN-LAST:event_jMenuItemDeskewActionPerformed
+
+    private void jImageLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jImageLabelMouseClicked
+        jImageLabel.requestFocusInWindow();
+    }//GEN-LAST:event_jImageLabelMouseClicked
 
     void changeUILanguage(final Locale locale) {
         if (locale.equals(Locale.getDefault())) {
