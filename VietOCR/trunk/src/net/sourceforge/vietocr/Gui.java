@@ -143,12 +143,12 @@ public class Gui extends JFrame {
                 prefs.getInt("frameY", screen.y + (screen.height - getHeight()) / 3),
                 screen.y, screen.y + screen.height - getHeight()));
 
-        // Paste image from clipboard
         KeyEventDispatcher dispatcher = new KeyEventDispatcher() {
 
             @Override
             public boolean dispatchKeyEvent(KeyEvent e) {
                 if (e.getID() == KeyEvent.KEY_PRESSED) {
+                    // Paste image from clipboard
                     if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_V) {
                         try {
                             Image image = ImageHelper.getClipboardImage();
@@ -176,9 +176,9 @@ public class Gui extends JFrame {
                         jButtonActualSize.doClick();
                     } else if (e.isControlDown() && (e.getKeyCode() == KeyEvent.VK_2 || e.getKeyCode() == KeyEvent.VK_NUMPAD2)) {
                         jButtonFitImage.doClick();
-                    } else if (!jTextArea1.isFocusOwner() && e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    } else if (!jTextArea1.isFocusOwner() && e.isControlDown() && e.getKeyCode() == KeyEvent.VK_LEFT) {
                         jButtonPrevPage.doClick();
-                    } else if (!jTextArea1.isFocusOwner() && e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    } else if (!jTextArea1.isFocusOwner() && e.isControlDown() && e.getKeyCode() == KeyEvent.VK_RIGHT) {
                         jButtonNextPage.doClick();
                     }
                 }
