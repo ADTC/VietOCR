@@ -1025,7 +1025,24 @@ namespace VietOCR.NET
                 curScrollPos = this.splitContainer2.Panel2.AutoScrollPosition;
                 this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(curScrollPos.X), Math.Abs(curScrollPos.Y) + 10);
             }
-
+            else if (keyData == (Keys.Control | Keys.Home))
+            {
+                this.splitContainer2.Panel2.AutoScrollPosition = Point.Empty;
+            }
+            else if (keyData == (Keys.Control | Keys.End))
+            {
+                this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(this.splitContainer2.Panel2.HorizontalScroll.Maximum), Math.Abs(this.splitContainer2.Panel2.VerticalScroll.Maximum));
+            }
+            else if (keyData == Keys.PageUp)
+            {
+                curScrollPos = this.splitContainer2.Panel2.AutoScrollPosition;
+                this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(curScrollPos.X), Math.Abs(curScrollPos.Y) - this.splitContainer2.Panel2.VerticalScroll.LargeChange);
+            }
+            else if (keyData == Keys.PageDown)
+            {
+                curScrollPos = this.splitContainer2.Panel2.AutoScrollPosition;
+                this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(curScrollPos.X), Math.Abs(curScrollPos.Y) + this.splitContainer2.Panel2.VerticalScroll.LargeChange);
+            }
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
