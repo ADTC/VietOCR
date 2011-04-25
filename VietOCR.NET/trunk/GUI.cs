@@ -991,12 +991,12 @@ namespace VietOCR.NET
         /// <returns></returns>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (!this.textBox1.Focused && keyData == Keys.Left)
+            if (!this.textBox1.Focused && keyData == (Keys.Control | Keys.Left))
             {
                 this.toolStripBtnPrev.PerformClick();
                 return true;
             }
-            else if (!this.textBox1.Focused && keyData == Keys.Right)
+            else if (!this.textBox1.Focused && keyData == (Keys.Control | Keys.Right))
             {
                 this.toolStripBtnNext.PerformClick();
                 return true;
