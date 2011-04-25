@@ -10,7 +10,7 @@ namespace VietOCR.NET
 {
     public partial class GUIWithImageOps : VietOCR.NET.GUIWithScan
     {
-        private bool isFitForZoomIn = false;
+        //private bool isFitForZoomIn = false;
         private const float ZOOM_FACTOR = 1.25f;
 
         public GUIWithImageOps()
@@ -128,7 +128,7 @@ namespace VietOCR.NET
         protected override void toolStripBtnZoomIn_Click(object sender, EventArgs e)
         {
             this.pictureBox1.Deselect();
-            isFitForZoomIn = true;
+            //isFitForZoomIn = true;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
             // Zoom works best if you first fit the image according to its true aspect ratio.
@@ -144,7 +144,7 @@ namespace VietOCR.NET
         protected override void toolStripBtnZoomOut_Click(object sender, EventArgs e)
         {
             this.pictureBox1.Deselect();
-            isFitForZoomIn = false;
+            //isFitForZoomIn = false;
             // StretchImage SizeMode works best for zooming.
             this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             // Zoom works best if you first fit the image according to its true aspect ratio.
