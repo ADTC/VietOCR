@@ -901,14 +901,14 @@ namespace VietOCR.NET
 
         protected override void OnResize(EventArgs e)
         {
-            bool scrollbarsVisible = this.splitContainer2.Panel2.VerticalScroll.Visible && this.splitContainer2.Panel2.HorizontalScroll.Visible;
+            bool isCentered = this.splitContainer2.Panel2.AutoScrollPosition == Point.Empty;
             base.OnResize(e);
             if (this.pictureBox1.Image != null)
             {
                 this.pictureBox1.Deselect();
                 scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
                 scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
-                if (!scrollbarsVisible)
+                if (isCentered)
                 {
                     this.centerPicturebox();
                 }
