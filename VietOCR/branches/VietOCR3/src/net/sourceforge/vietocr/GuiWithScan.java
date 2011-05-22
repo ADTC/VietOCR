@@ -16,32 +16,29 @@
 package net.sourceforge.vietocr;
 
 import java.awt.Cursor;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import net.sourceforge.vietocr.components.ImageIconScalable;
+import net.sourceforge.vietocr.utilities.ImageIOHelper;
 import net.sourceforge.vietocr.wia.*;
-//import uk.org.jsane.JSane_Base.JSane_Base_Frame;
-//import uk.org.jsane.JSane_Gui.Swing.JSane_Scan_Dialog;
+import uk.co.mmscomputing.device.scanner.*;
+import uk.co.mmscomputing.device.sane.*;
 
-public class GuiWithScan extends Gui {
+public class GuiWithScan extends Gui implements ScannerListener {
 
-    public GuiWithScan() {
-        // Hide Scan buttons for non-Windows OS because WIA Automation is Windows only
-        if (!WINDOWS) {
-            this.jButtonScan.setVisible(false);
-            this.jMenuItemScan.setVisible(false);
-        }
-    }
+    Scanner scanner;
 
     /**
-     * Access scanner and scan documents via WIA.
+     * Access scanner and scan documents via Windows WIA or Linux Sane.
      *
      */
     @Override
     void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {
         scaleX = scaleY = 1f;
-        
+
         jLabelStatus.setText(bundle.getString("Scanning..."));
         jProgressBar1.setIndeterminate(true);
         jProgressBar1.setString(bundle.getString("Scanning..."));
@@ -56,21 +53,24 @@ public class GuiWithScan extends Gui {
             @Override
             public void run() {
                 try {
-                    File tempImageFile = File.createTempFile("tmp", WINDOWS ? ".bmp" : ".png");
-
-                    if (tempImageFile.exists()) {
-                        tempImageFile.delete();
-                    }
                     if (WINDOWS) {
+                        File tempImageFile = File.createTempFile("tmp", WINDOWS ? ".bmp" : ".png");
+
+                        if (tempImageFile.exists()) {
+                            tempImageFile.delete();
+                        }
                         WiaScannerAdapter adapter = new WiaScannerAdapter(); // with MS WIA
                         // The reason for not using PNG format is that jai-imageio library would throw an "I/O error reading PNG header" error.
                         tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
-                    } else {
-//                        JSane_Base_Frame frame = JSane_Scan_Dialog.getScan("localhost", 6566); // with SANE
-//                        ImageIO.write(frame.getImage(false), "png", tempImageFile);
+                        openFile(tempImageFile);
+                        tempImageFile.deleteOnExit();
+                    } else { // Linux
+                        scanner = Scanner.getDevice();
+                        scanner.addListener(GuiWithScan.this);
+                        scanner.acquire();
                     }
-                    openFile(tempImageFile);
-                    tempImageFile.deleteOnExit();
+                } catch (ScannerIOException se) {
+                    JOptionPane.showMessageDialog(null, se.getMessage(), "Error Scanning Image", JOptionPane.ERROR_MESSAGE);
                 } catch (IOException ioe) {
                     JOptionPane.showMessageDialog(null, ioe.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
                 } catch (WiaOperationException woe) {
@@ -82,15 +82,61 @@ public class GuiWithScan extends Gui {
                     }
                     JOptionPane.showMessageDialog(null, msg, "Scanner Operation Error", JOptionPane.ERROR_MESSAGE);
                 } finally {
-                    jLabelStatus.setText(bundle.getString("Scanning_completed"));
-                    jProgressBar1.setIndeterminate(false);
-                    jProgressBar1.setString(bundle.getString("Scanning_completed"));
-                    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-                    getGlassPane().setVisible(false);
-                    jMenuItemScan.setEnabled(true);
-                    jButtonScan.setEnabled(true);
+                    if (WINDOWS) {
+                        scanCompleted();
+                    }
                 }
             }
         });
+    }
+
+    /**
+     * Sane scanning.
+     * 
+     * @param type
+     * @param metadata 
+     */
+    @Override
+    public void update(ScannerIOMetadata.Type type, ScannerIOMetadata metadata) {
+        if (type.equals(ScannerIOMetadata.ACQUIRED)) {
+            BufferedImage scannedImage = metadata.getImage();
+
+            try {
+                iioImageList = ImageIOHelper.getIIOImageList(scannedImage);
+                imageList = ImageIconScalable.getImageList(iioImageList);
+                loadImage();
+                setTitle("Scanned image - " + APP_NAME);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                scanCompleted();
+            }
+        } else if (type.equals(ScannerIOMetadata.NEGOTIATE)) {
+            SaneDevice device = (SaneDevice) metadata.getDevice();
+            try {
+                device.setResolution(300);
+                device.setOption("mode", "True Gray");
+                device.setOption("source", "FlatBed");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (type.equals(ScannerIOMetadata.STATECHANGE)) {
+            System.out.println(metadata.getStateStr());
+            if (metadata.getStateStr().equals("CLOSED")) {
+                scanCompleted();
+            }
+        } else if (type.equals(ScannerIOMetadata.EXCEPTION)) {
+            metadata.getException().printStackTrace();
+        }
+    }
+
+    void scanCompleted() {
+        jLabelStatus.setText(bundle.getString("Scanning_completed"));
+        jProgressBar1.setIndeterminate(false);
+        jProgressBar1.setString(bundle.getString("Scanning_completed"));
+        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        getGlassPane().setVisible(false);
+        jMenuItemScan.setEnabled(true);
+        jButtonScan.setEnabled(true);
     }
 }

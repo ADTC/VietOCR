@@ -274,6 +274,19 @@ public class ImageIOHelper {
     }
 
     /**
+     * Gets a list of <code>IIOImage</code> objects for a <code>BufferedImage</code>.
+     * @param bi input image
+     * @return a list of <code>IIOImage</code> objects
+     * @throws IOException 
+     */
+    public static List<IIOImage> getIIOImageList(BufferedImage bi) throws IOException {
+        List<IIOImage> iioImageList = new ArrayList<IIOImage>();
+        IIOImage oimage = new IIOImage(bi, null, null);
+        iioImageList.add(oimage);
+        return iioImageList;
+    }
+
+    /**
      * Merges multiple images into one TIFF image.
      * 
      * @param inputImages an array of image files
@@ -325,7 +338,7 @@ public class ImageIOHelper {
      */
     public static Map<String, String> readImageData(IIOImage oimage) {
         Map<String, String> dict = new HashMap<String, String>();
-        
+
         IIOMetadata imageMetadata = oimage.getMetadata();
         if (imageMetadata != null) {
             IIOMetadataNode dimNode = (IIOMetadataNode) imageMetadata.getAsTree("javax_imageio_1.0");
