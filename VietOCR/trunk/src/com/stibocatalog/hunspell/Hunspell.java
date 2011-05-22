@@ -1,14 +1,10 @@
 package com.stibocatalog.hunspell;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.UnsupportedEncodingException;
-import java.lang.UnsatisfiedLinkError;
-import java.lang.UnsupportedOperationException;
-import java.nio.charset.CharacterCodingException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
