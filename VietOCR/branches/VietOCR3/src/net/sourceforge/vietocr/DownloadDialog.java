@@ -130,6 +130,7 @@ public class DownloadDialog extends javax.swing.JDialog {
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         jButtonDownload.setText(bundle.getString("jButtonDownload.Text")); // NOI18N
+        jButtonDownload.setEnabled(false);
         jButtonDownload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDownloadActionPerformed(evt);
@@ -172,6 +173,11 @@ public class DownloadDialog extends javax.swing.JDialog {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("Available_Languages"))); // NOI18N
 
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -377,6 +383,10 @@ public class DownloadDialog extends javax.swing.JDialog {
         }
         this.jButtonCancel.setEnabled(false);
     }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        this.jButtonDownload.setEnabled(this.jList1.getSelectedIndex() != -1);
+    }//GEN-LAST:event_jList1ValueChanged
 
     /**
      * @param args the command line arguments
