@@ -60,18 +60,23 @@
         <p>
             VietOCR cũng có cung cấp hỗ trợ tải xuống và cài đặt các language packs được chọn
             qua <em>Tải dữ liệu ngôn ngữ</em> menu item. Tùy theo địa điểm của thư mục <tt>tessdata</tt>,
-            bạn có thể được yêu cầu chạy chương trình với quyền root hay admin để có thể cài đặt
-            dữ liệu đã được tải vào thư mục đó nếu nó nằm trong một system folder, như là trong <tt>/usr</tt>
-            trên Linux hoặc <tt>C:\Program Files</tt> trên Windows.</p>
+            bạn có thể được yêu cầu chạy chương trình với quyền root hay admin để có thể cài
+            đặt dữ liệu đã được tải vào thư mục đó nếu nó nằm trong một system folder, như là
+            trong <tt>/usr</tt> trên Linux hoặc <tt>C:\Program Files</tt> trên Windows.</p>
         <p>
-            Hỗ trợ quét văn bản được cung cấp qua Windows Image Acquisition Library v2.0, thư
-            viện này đòi hỏi Windows XP Service Pack 1 (SP1) hoặc mới hơn. Thư viện này đến
-            tiêu chuẩn với Windows Vista và 7. Để cài đặt WIA Library trên Windows XP, copy file <tt>wiaaut.dll</tt>
-            vào <tt>System32</tt> directory (thường đặt ở <tt>C:\Windows\System32</tt>) và chạy
-            lệnh từ command line:</p>
+            Hỗ trợ quét văn bản trên Windows được cung cấp qua Windows Image Acquisition Library
+            v2.0, thư viện này đòi hỏi Windows XP Service Pack 1 (SP1) hoặc mới hơn. Thư viện
+            này đến tiêu chuẩn với Windows Vista và 7. Để cài đặt WIA Library trên Windows XP,
+            copy file <tt>wiaaut.dll</tt> vào <tt>System32</tt> directory (thường đặt ở <tt>C:\Windows\System32</tt>)
+            và chạy lệnh từ command line:</p>
         <blockquote>
             <p>
                 <tt>regsvr32 C:\Windows\System32\wiaaut.dll</tt></p>
+        </blockquote>
+        <p>
+            Trên Linux, scanning đòi hỏi cài đặt các gói SANE packages:</p>
+        <blockquote>
+            <tt>sudo apt-get install libsane sane sane-utils libsane-extras xsane</tt>
         </blockquote>
         <p>
             Hỗ trợ cho PDF được khả thi qua <a href="http://sourceforge.net/projects/ghostscript/">
