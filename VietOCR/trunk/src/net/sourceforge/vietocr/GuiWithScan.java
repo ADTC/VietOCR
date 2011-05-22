@@ -16,32 +16,36 @@
 package net.sourceforge.vietocr;
 
 import java.awt.Cursor;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import net.sourceforge.vietocr.wia.*;
-//import uk.org.jsane.JSane_Base.JSane_Base_Frame;
-//import uk.org.jsane.JSane_Gui.Swing.JSane_Scan_Dialog;
+import uk.co.mmscomputing.device.scanner.*;
+import uk.co.mmscomputing.device.sane.*;
 
-public class GuiWithScan extends Gui {
+public class GuiWithScan extends Gui implements ScannerListener {
+
+    BufferedImage scannedImage;
 
     public GuiWithScan() {
-        // Hide Scan buttons for non-Windows OS because WIA Automation is Windows only
-        if (!WINDOWS) {
-            this.jButtonScan.setVisible(false);
-            this.jMenuItemScan.setVisible(false);
-        }
+//        // Hide Scan buttons for non-Windows OS because WIA Automation is Windows only
+//        if (!WINDOWS) {
+//            this.jButtonScan.setVisible(false);
+//            this.jMenuItemScan.setVisible(false);
+//        }
     }
 
     /**
-     * Access scanner and scan documents via WIA.
+     * Access scanner and scan documents via Windows WIA or Linux Sane.
      *
      */
     @Override
     void jMenuItemScanActionPerformed(java.awt.event.ActionEvent evt) {
         scaleX = scaleY = 1f;
-        
+
         jLabelStatus.setText(bundle.getString("Scanning..."));
         jProgressBar1.setIndeterminate(true);
         jProgressBar1.setString(bundle.getString("Scanning..."));
@@ -65,12 +69,20 @@ public class GuiWithScan extends Gui {
                         WiaScannerAdapter adapter = new WiaScannerAdapter(); // with MS WIA
                         // The reason for not using PNG format is that jai-imageio library would throw an "I/O error reading PNG header" error.
                         tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
-                    } else {
-//                        JSane_Base_Frame frame = JSane_Scan_Dialog.getScan("localhost", 6566); // with SANE
-//                        ImageIO.write(frame.getImage(false), "png", tempImageFile);
+                    } else { // Linux
+                        Scanner scanner = Scanner.getDevice();
+                        scanner.addListener(GuiWithScan.this);
+                        System.out.println("Device Name: " + scanner.getSelectedDeviceName());
+                        scanner.acquire();
+                        if (scannedImage != null) {
+                            ImageIO.write(scannedImage, "png", tempImageFile);
+                        }
                     }
                     openFile(tempImageFile);
                     tempImageFile.deleteOnExit();
+                } catch (ScannerIOException se) {
+//                    se.printStackTrace();
+                    JOptionPane.showMessageDialog(null, se.getMessage(), "Error Scanning Image", JOptionPane.ERROR_MESSAGE);
                 } catch (IOException ioe) {
                     JOptionPane.showMessageDialog(null, ioe.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
                 } catch (WiaOperationException woe) {
@@ -92,5 +104,29 @@ public class GuiWithScan extends Gui {
                 }
             }
         });
+    }
+
+    /**
+     * Sane scanning.
+     * 
+     * @param type
+     * @param metadata 
+     */
+    @Override
+    public void update(ScannerIOMetadata.Type type, ScannerIOMetadata metadata) {
+        if (type.equals(ScannerIOMetadata.ACQUIRED)) {
+            scannedImage = metadata.getImage();
+        } else if (type.equals(ScannerIOMetadata.NEGOTIATE)) {
+            SaneDevice device = (SaneDevice) metadata.getDevice();
+            try {
+                device.setResolution(300);
+                device.setOption("mode", "True Gray");
+                device.setOption("source", "FlatBed");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (type.equals(ScannerIOMetadata.EXCEPTION)) {
+            metadata.getException().printStackTrace();
+        }
     }
 }
