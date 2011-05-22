@@ -42,6 +42,7 @@ public class Gui extends JFrame {
     public static final String TO_BE_IMPLEMENTED = "To be implemented in subclass";
     static final boolean MAC_OS_X = System.getProperty("os.name").startsWith("Mac");
     static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
+//    static final boolean LINUX = System.getProperty("os.name").equals("Linux");
     static final String UTF8 = "UTF-8";
     public final String EOL = System.getProperty("line.separator");
     static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr");
