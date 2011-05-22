@@ -19,24 +19,17 @@ import java.awt.Cursor;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import net.sourceforge.vietocr.components.ImageIconScalable;
+import net.sourceforge.vietocr.utilities.ImageIOHelper;
 import net.sourceforge.vietocr.wia.*;
 import uk.co.mmscomputing.device.scanner.*;
 import uk.co.mmscomputing.device.sane.*;
 
 public class GuiWithScan extends Gui implements ScannerListener {
 
-    BufferedImage scannedImage;
-
-    public GuiWithScan() {
-//        // Hide Scan buttons for non-Windows OS because WIA Automation is Windows only
-//        if (!WINDOWS) {
-//            this.jButtonScan.setVisible(false);
-//            this.jMenuItemScan.setVisible(false);
-//        }
-    }
+    Scanner scanner;
 
     /**
      * Access scanner and scan documents via Windows WIA or Linux Sane.
@@ -60,28 +53,23 @@ public class GuiWithScan extends Gui implements ScannerListener {
             @Override
             public void run() {
                 try {
-                    File tempImageFile = File.createTempFile("tmp", WINDOWS ? ".bmp" : ".png");
-
-                    if (tempImageFile.exists()) {
-                        tempImageFile.delete();
-                    }
                     if (WINDOWS) {
+                        File tempImageFile = File.createTempFile("tmp", WINDOWS ? ".bmp" : ".png");
+
+                        if (tempImageFile.exists()) {
+                            tempImageFile.delete();
+                        }
                         WiaScannerAdapter adapter = new WiaScannerAdapter(); // with MS WIA
                         // The reason for not using PNG format is that jai-imageio library would throw an "I/O error reading PNG header" error.
                         tempImageFile = adapter.ScanImage(FormatID.wiaFormatBMP, tempImageFile.getCanonicalPath());
+                        openFile(tempImageFile);
+                        tempImageFile.deleteOnExit();
                     } else { // Linux
-                        Scanner scanner = Scanner.getDevice();
+                        scanner = Scanner.getDevice();
                         scanner.addListener(GuiWithScan.this);
-                        System.out.println("Device Name: " + scanner.getSelectedDeviceName());
                         scanner.acquire();
-                        if (scannedImage != null) {
-                            ImageIO.write(scannedImage, "png", tempImageFile);
-                        }
                     }
-                    openFile(tempImageFile);
-                    tempImageFile.deleteOnExit();
                 } catch (ScannerIOException se) {
-//                    se.printStackTrace();
                     JOptionPane.showMessageDialog(null, se.getMessage(), "Error Scanning Image", JOptionPane.ERROR_MESSAGE);
                 } catch (IOException ioe) {
                     JOptionPane.showMessageDialog(null, ioe.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
@@ -94,13 +82,9 @@ public class GuiWithScan extends Gui implements ScannerListener {
                     }
                     JOptionPane.showMessageDialog(null, msg, "Scanner Operation Error", JOptionPane.ERROR_MESSAGE);
                 } finally {
-                    jLabelStatus.setText(bundle.getString("Scanning_completed"));
-                    jProgressBar1.setIndeterminate(false);
-                    jProgressBar1.setString(bundle.getString("Scanning_completed"));
-                    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-                    getGlassPane().setVisible(false);
-                    jMenuItemScan.setEnabled(true);
-                    jButtonScan.setEnabled(true);
+                    if (WINDOWS) {
+                        scanCompleted();
+                    }
                 }
             }
         });
@@ -115,7 +99,18 @@ public class GuiWithScan extends Gui implements ScannerListener {
     @Override
     public void update(ScannerIOMetadata.Type type, ScannerIOMetadata metadata) {
         if (type.equals(ScannerIOMetadata.ACQUIRED)) {
-            scannedImage = metadata.getImage();
+            BufferedImage scannedImage = metadata.getImage();
+
+            try {
+                iioImageList = ImageIOHelper.getIIOImageList(scannedImage);
+                imageList = ImageIconScalable.getImageList(iioImageList);
+                loadImage();
+                setTitle("Scanned image - " + APP_NAME);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                scanCompleted();
+            }
         } else if (type.equals(ScannerIOMetadata.NEGOTIATE)) {
             SaneDevice device = (SaneDevice) metadata.getDevice();
             try {
@@ -125,8 +120,23 @@ public class GuiWithScan extends Gui implements ScannerListener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else if (type.equals(ScannerIOMetadata.STATECHANGE)) {
+            System.out.println(metadata.getStateStr());
+            if (metadata.getStateStr().equals("CLOSED")) {
+                scanCompleted();
+            }
         } else if (type.equals(ScannerIOMetadata.EXCEPTION)) {
             metadata.getException().printStackTrace();
         }
+    }
+
+    void scanCompleted() {
+        jLabelStatus.setText(bundle.getString("Scanning_completed"));
+        jProgressBar1.setIndeterminate(false);
+        jProgressBar1.setString(bundle.getString("Scanning_completed"));
+        getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        getGlassPane().setVisible(false);
+        jMenuItemScan.setEnabled(true);
+        jButtonScan.setEnabled(true);
     }
 }
