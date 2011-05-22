@@ -1442,59 +1442,35 @@ public class Gui extends JFrame {
         this.jMenuItemOCR.setEnabled(false);
         this.jMenuItemOCRAll.setEnabled(false);
 
-        SwingWorker loadWorker = new SwingWorker<File, Void>() {
+        SwingWorker loadWorker = new SwingWorker<Void, Void>() {
 
             @Override
-            protected File doInBackground() throws Exception {
+            protected Void doInBackground() throws Exception {
                 iioImageList = ImageIOHelper.getIIOImageList(selectedFile);
                 imageList = ImageIconScalable.getImageList(iioImageList);
-                return selectedFile;
+                return null;
             }
 
             @Override
             protected void done() {
                 jProgressBar1.setIndeterminate(false);
-
-                try {
-                    loadImage(get());
-                    jLabelStatus.setText(bundle.getString("Loading_completed"));
-                    jProgressBar1.setString(bundle.getString("Loading_completed"));
-                    updateMRUList(selectedFile.getPath());
-                } catch (InterruptedException ignore) {
-//                    ignore.printStackTrace();
-                    jLabelStatus.setText("Loading canceled.");
-                    jProgressBar1.setString("Loading canceled.");
-                } catch (java.util.concurrent.ExecutionException e) {
-                    String why = null;
-                    Throwable cause = e.getCause();
-                    if (cause != null) {
-                        if (cause instanceof OutOfMemoryError) {
-                            why = bundle.getString("OutOfMemoryError");
-                        } else {
-                            why = cause.getMessage();
-                        }
-                    } else {
-                        why = e.getMessage();
-                    }
-                    e.printStackTrace();
-//                    jLabelStatus.setText(null);
-//                    jProgressBar1.setString(null);
-                    JOptionPane.showMessageDialog(Gui.this, why, APP_NAME, JOptionPane.ERROR_MESSAGE);
-                    jProgressBar1.setVisible(false);
-                } finally {
-                    getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-                    getGlassPane().setVisible(false);
-                    jButtonOCR.setEnabled(true);
-                    jMenuItemOCR.setEnabled(true);
-                    jMenuItemOCRAll.setEnabled(true);
-                }
+                loadImage();
+                setTitle(selectedFile.getName() + " - " + APP_NAME);
+                jLabelStatus.setText(bundle.getString("Loading_completed"));
+                jProgressBar1.setString(bundle.getString("Loading_completed"));
+                updateMRUList(selectedFile.getPath());
+                getGlassPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                getGlassPane().setVisible(false);
+                jButtonOCR.setEnabled(true);
+                jMenuItemOCR.setEnabled(true);
+                jMenuItemOCRAll.setEnabled(true);
             }
         };
 
         loadWorker.execute();
     }
 
-    void loadImage(File selectedFile) {
+    void loadImage() {
         if (imageList == null) {
             JOptionPane.showMessageDialog(this, bundle.getString("Cannotloadimage"), APP_NAME, JOptionPane.ERROR_MESSAGE);
             return;
@@ -1506,8 +1482,6 @@ public class Gui extends JFrame {
         isFitImageSelected = false;
 
         displayImage();
-
-        this.setTitle(selectedFile.getName() + " - " + APP_NAME);
 
         ((JImageLabel) jImageLabel).deselect();
 
