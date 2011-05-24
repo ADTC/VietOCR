@@ -49,6 +49,11 @@
                 <tt>regsvr32 C:\Windows\System32\wiaaut.dll</tt></p>
         </blockquote>
         <p>
+            Linux, skenavimo reikia įdiegti SANE paketai:</p>
+        <blockquote>
+            <tt>sudo apt-get install libsane sane sane-utils libsane-extras xsane</tt>
+        </blockquote>
+        <p>
             PDF failų palaikymas galimas naudojant „<a href="http://sourceforge.net/projects/ghostscript/">GPL Ghostscript</a>“ priemonę. Ją įdiegus, reikia užtikrinti, kad dinaminė biblioteka (<tt>gsdll32.dll</tt> arba <tt>libgs.so</tt>) patektų į sisteminės failų paieškos kelią, papildant atitinkamą aplinkos kintamąjį. „Windows“ sistemoje tai yra kintamasis <tt>Path</tt>, kurį galite redaguoti, atvėrę Valdymo skydą, jame spustelėję piktogramą „Sistema“, tada atverę kortelę „Išsamiau“ ir spustelėję mygtuką „Aplinkos kintamieji“. Pavyzdžiui, „GhostScript 8.71“ atveju, kintamąjį <tt>Path</tt> reikėtų papildyti tokia eilute:</p>
         <blockquote>
             <p>
