@@ -279,7 +279,7 @@ public class DownloadDialog extends javax.swing.JDialog {
                         destFolderPath = tessdataDir;
                     }
                     FileExtractor.extractCompressedFile(downloadedFile.getPath(), destFolderPath.getPath());
-                    if (destFolder.equals("tesseract")) {
+                    if (destFolder.equals("tesseract/tessdata")) {
                         numberOfDownloads++;
                     }
 
