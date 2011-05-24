@@ -15,4 +15,5 @@
   <entry key="vie">http://sourceforge.net/projects/vietocr/files/lang%20data%20for%20tesseract-ocr/vietnamese%20language%20pack/tesseract-2.03.vie.zip</entry>
   <entry key="vie-1">http://sourceforge.net/projects/vietocr/files/lang%20data%20for%20tesseract-ocr/vietnamese%20language%20pack/tesseract-2.03.vie-1.vni-tcvn3.zip</entry>
   <entry key="eus">http://tesseract-ocr.googlecode.com/files/tesseract-2.04.eus.tar.gz</entry>
+  <entry key="heb">http://roidayan.com/downloads/tesseract-ocr-hebrew/tesseract-2.00.heb.tar.gz</entry>
 </properties>
