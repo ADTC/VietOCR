@@ -606,6 +606,12 @@ public class Gui extends JFrame {
                 updateCutCopyDelete(e.getDot() != e.getMark());
             }
         });
+
+        jTextArea1.setCaret(new javax.swing.text.DefaultCaret() {
+            public void setSelectionVisible(boolean visible) {
+                super.setSelectionVisible(true);
+            }
+        });
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(20);
