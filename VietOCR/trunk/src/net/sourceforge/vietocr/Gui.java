@@ -1332,7 +1332,7 @@ public class Gui extends JFrame {
             Date releaseDate = sdf.parse(config.getProperty("ReleaseDate"));
 
             JOptionPane.showMessageDialog(this, APP_NAME + ", " + version + " \u00a9 2007\n"
-                    + "Java GUI Frontend for Tesseract 2.0x OCR Engine\n"
+                    + "Java GUI Frontend for Tesseract 2.04 OCR Engine\n"
                     + DateFormat.getDateInstance(DateFormat.LONG).format(releaseDate)
                     + "\nhttp://vietocr.sourceforge.net", jMenuItemAbout.getText(), JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
