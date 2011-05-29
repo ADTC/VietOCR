@@ -180,3 +180,7 @@ Version 2.0.1 (7 March 2011)
 Version 2.0.2 (13 March 2011)
 - Fix a MissingResourceException associated with Font dialog
 - Incorporate deskew functionality using JDeskew library
+
+Version 2.0.3 (28 May 2011)
+- Refactoring
+- Improve program usability, enabling image nagivation with keyboard
