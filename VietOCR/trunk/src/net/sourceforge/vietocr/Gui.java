@@ -612,7 +612,14 @@ public class Gui extends JFrame {
                 super.setSelectionVisible(true);
             }
         });
-        jTextArea1.getCaret().setBlinkRate(((Integer) UIManager.get("TextField.caretBlinkRate")).intValue());
+
+        int blinkRate = 500;
+        Object o = UIManager.get("TextArea.caretBlinkRate");
+        if ((o != null) && (o instanceof Integer)) {
+            Integer rate = (Integer) o;
+            blinkRate = rate.intValue();
+        }
+        jTextArea1.getCaret().setBlinkRate(blinkRate);
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(20);
