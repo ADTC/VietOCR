@@ -21,7 +21,7 @@ import java.util.*;
 public class OCR {
 
     private final String LANG_OPTION = "-l";
-    private final String EOL = System.getProperty("line.separator");
+    private final String EOL = "\n";
     private String tessPath;
     final static String OUTPUT_FILE_NAME = "TessOutput";
     final static String FILE_EXTENSION = ".txt";
