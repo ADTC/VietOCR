@@ -97,6 +97,7 @@ namespace VietOCR.NET
 
         protected override void toolStripBtnRotateCCW_Click(object sender, EventArgs e)
         {
+            this.centerPicturebox();
             this.pictureBox1.Deselect();
             // Rotating 270 degrees is equivalent to rotating -90 degrees.
             imageList[imageIndex].RotateFlip(RotateFlipType.Rotate270FlipNone);
@@ -106,6 +107,7 @@ namespace VietOCR.NET
 
         protected override void toolStripBtnRotateCW_Click(object sender, EventArgs e)
         {
+            this.centerPicturebox();
             this.pictureBox1.Deselect();
             imageList[imageIndex].RotateFlip(RotateFlipType.Rotate90FlipNone);
             this.pictureBox1.Image = new Bitmap(imageList[imageIndex]);
