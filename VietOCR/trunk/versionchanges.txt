@@ -183,5 +183,5 @@ Version 2.0.2 (13 March 2011)
 
 Version 2.0.3 (1 June 2011)
 - Refactoring
-- Improve program usability, enabling image nagivation with keyboard
+- Improve program usability, enabling image nagivation and manipulation with keyboard
 - Fix an EOL issue, which impacts Remove Line Breaks functionality
