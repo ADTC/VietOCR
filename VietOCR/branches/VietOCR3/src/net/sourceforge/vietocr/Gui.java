@@ -30,6 +30,7 @@ import javax.swing.undo.*;
 import java.awt.dnd.DropTarget;
 import javax.swing.event.*;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.text.DefaultEditorKit;
 import net.sourceforge.vietocr.utilities.*;
 import net.sourceforge.vietocr.components.*;
 import net.sourceforge.vietpad.inputmethod.*;
@@ -620,6 +621,7 @@ public class Gui extends JFrame {
             blinkRate = rate.intValue();
         }
         jTextArea1.getCaret().setBlinkRate(blinkRate);
+        jTextArea1.getDocument().putProperty(DefaultEditorKit.EndOfLineStringProperty, System.getProperty("line.separator"));
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(20);
