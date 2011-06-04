@@ -125,6 +125,7 @@ Version 2.0.1 (6 March 2011)
 Version 2.0.2 (13 March 2011)
 - Incorporate deskew functionality using GMSE Deskew algorithm
 
-Version 2.0.3 (1 June 2011)
+Version 2.0.3 (4 June 2011)
 - Refactoring
 - Improve program usability, enabling image nagivation and manipulation with keyboard
+- Fix an installation issue that was unable to uninstall previous versions
