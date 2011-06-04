@@ -38,6 +38,7 @@ import net.sourceforge.vietocr.utilities.Utilities;
 public class DownloadDialog extends javax.swing.JDialog {
 
     final static int BUFFER_SIZE = 1024;
+    final static String DICTIONARY_FOLDER = "dict";
     final String tmpdir = System.getProperty("java.io.tmpdir");
     private Properties availableLanguageCodes;
     private Properties availableDictionaries;
@@ -216,7 +217,7 @@ public class DownloadDialog extends javax.swing.JDialog {
                         if (availableDictionaries.containsKey(iso_3_1_Code)) {
                             url = new URL(availableDictionaries.getProperty(iso_3_1_Code));
                             ++numOfConcurrentTasks;
-                            downloadDataFile(url, "dict"); // download dictionary
+                            downloadDataFile(url, DICTIONARY_FOLDER); // download dictionary
                         }
                     }
                 } catch (Exception e) {
@@ -273,7 +274,7 @@ public class DownloadDialog extends javax.swing.JDialog {
                     File downloadedFile = get();
                     
                     File destFolderPath;
-                    if (Gui.WINDOWS || destFolder.equals("dict")) {
+                    if (Gui.WINDOWS || destFolder.equals(DICTIONARY_FOLDER)) {
                         destFolderPath = new File(baseDir, destFolder);
                     } else {
                         destFolderPath = tessdataDir;
