@@ -572,9 +572,9 @@ namespace VietOCR.NET
                         this.textBox1.Modified = false;
                     }
                 }
-                catch
+                catch (Exception e)
                 {
-                    //ignore
+                    MessageBox.Show(this, e.Message, strProgName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return;
             }
@@ -650,7 +650,6 @@ namespace VietOCR.NET
             this.pictureBox1.Dock = DockStyle.None;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             scaleX = scaleY = 1f;
-            this.splitContainer2.Panel2.AutoScrollPosition = curScrollPos = Point.Empty;
 
             displayImage();
 
@@ -689,6 +688,7 @@ namespace VietOCR.NET
                 this.pictureBox1.Width = Convert.ToInt32(this.pictureBox1.Width / scaleX);
                 this.pictureBox1.Height = Convert.ToInt32(this.pictureBox1.Height / scaleY);
             }
+            curScrollPos = Point.Empty;
             this.splitContainer2.Panel2.AutoScrollPosition = Point.Empty;
             this.centerPicturebox();
         }
@@ -901,13 +901,17 @@ namespace VietOCR.NET
 
         protected override void OnResize(EventArgs e)
         {
+            bool isCentered = this.splitContainer2.Panel2.AutoScrollPosition == Point.Empty;
             base.OnResize(e);
             if (this.pictureBox1.Image != null)
             {
                 this.pictureBox1.Deselect();
                 scaleX = (float)this.pictureBox1.Image.Width / (float)this.pictureBox1.Width;
                 scaleY = (float)this.pictureBox1.Image.Height / (float)this.pictureBox1.Height;
-                this.centerPicturebox();
+                if (isCentered)
+                {
+                    this.centerPicturebox();
+                }
             }
         }
 
@@ -956,6 +960,90 @@ namespace VietOCR.NET
             {
                 this.toolStripButtonSpellCheck.PerformClick();
             }
+            else if (e.Control && e.Shift && (e.KeyCode == Keys.Oemplus || e.KeyCode == Keys.Add))
+            {
+                this.toolStripBtnRotateCW.PerformClick();
+            }
+            else if (e.Control && e.Shift && (e.KeyCode == Keys.OemMinus || e.KeyCode == Keys.Subtract))
+            {
+                this.toolStripBtnRotateCCW.PerformClick();
+            }
+            else if (e.Control && (e.KeyCode == Keys.Oemplus || e.KeyCode == Keys.Add))
+            {
+                this.toolStripBtnZoomIn.PerformClick();
+            }
+            else if (e.Control && (e.KeyCode == Keys.OemMinus || e.KeyCode == Keys.Subtract))
+            {
+                this.toolStripBtnZoomOut.PerformClick();
+            }
+            else if (e.Control && (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1))
+            {
+                this.toolStripBtnActualSize.PerformClick();
+            }
+            else if (e.Control && (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2))
+            {
+                this.toolStripBtnFitImage.PerformClick();
+            }
+        }
+
+        /// <summary>
+        /// This method is for Left and Right arrows used in navigating the image pages.
+        /// The GUI_KeyDown method seems to skip these keys on first key entries.
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (!this.textBox1.Focused && keyData == (Keys.Control | Keys.Left))
+            {
+                this.toolStripBtnPrev.PerformClick();
+                return true;
+            }
+            else if (!this.textBox1.Focused && keyData == (Keys.Control | Keys.Right))
+            {
+                this.toolStripBtnNext.PerformClick();
+                return true;
+            }
+            else if (keyData == Keys.Left)
+            {
+                curScrollPos = this.splitContainer2.Panel2.AutoScrollPosition;
+                this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(curScrollPos.X) - 10, Math.Abs(curScrollPos.Y));
+            }
+            else if (keyData == Keys.Right)
+            {
+                curScrollPos = this.splitContainer2.Panel2.AutoScrollPosition;
+                this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(curScrollPos.X) + 10, Math.Abs(curScrollPos.Y));
+            }
+            else if (keyData == Keys.Up)
+            {
+                curScrollPos = this.splitContainer2.Panel2.AutoScrollPosition;
+                this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(curScrollPos.X), Math.Abs(curScrollPos.Y) - 10);
+            }
+            else if (keyData == Keys.Down)
+            {
+                curScrollPos = this.splitContainer2.Panel2.AutoScrollPosition;
+                this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(curScrollPos.X), Math.Abs(curScrollPos.Y) + 10);
+            }
+            else if (keyData == (Keys.Control | Keys.Home))
+            {
+                this.splitContainer2.Panel2.AutoScrollPosition = Point.Empty;
+            }
+            else if (keyData == (Keys.Control | Keys.End))
+            {
+                this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(this.splitContainer2.Panel2.HorizontalScroll.Maximum), Math.Abs(this.splitContainer2.Panel2.VerticalScroll.Maximum));
+            }
+            else if (keyData == Keys.PageUp)
+            {
+                curScrollPos = this.splitContainer2.Panel2.AutoScrollPosition;
+                this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(curScrollPos.X), Math.Abs(curScrollPos.Y) - this.splitContainer2.Panel2.VerticalScroll.LargeChange);
+            }
+            else if (keyData == Keys.PageDown)
+            {
+                curScrollPos = this.splitContainer2.Panel2.AutoScrollPosition;
+                this.splitContainer2.Panel2.AutoScrollPosition = new Point(Math.Abs(curScrollPos.X), Math.Abs(curScrollPos.Y) + this.splitContainer2.Panel2.VerticalScroll.LargeChange);
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         protected virtual void downloadLangDataToolStripMenuItem_Click(object sender, EventArgs e)
