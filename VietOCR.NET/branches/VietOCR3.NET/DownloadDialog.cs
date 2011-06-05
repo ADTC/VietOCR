@@ -258,5 +258,10 @@ namespace VietOCR.NET
                 }
             }
         }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.buttonDownload.Enabled = this.listBox1.SelectedIndex != -1;
+        }
     }
 }
