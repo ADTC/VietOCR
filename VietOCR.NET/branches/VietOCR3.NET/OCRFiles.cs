@@ -19,7 +19,6 @@ using System.Text;
 using System.Drawing;
 using System.Threading;
 using System.ComponentModel;
-using tesseract;
 using System.IO;
 using System.Diagnostics;
 
@@ -27,6 +26,8 @@ namespace VietOCR.NET
 {
     class OCRFiles
     {
+        const string FILE_EXTENSION = ".txt";
+
         Rectangle rect = Rectangle.Empty;
         BackgroundWorker worker;
 
@@ -36,12 +37,12 @@ namespace VietOCR.NET
         /// <param name="tiffFiles"></param>
         /// <param name="lang"></param>
         /// <returns></returns>
-        string RecognizeText(List<string> tiffFiles, string lang)
+        public string RecognizeText(List<string> tiffFiles, string lang)
         {
             string tempTessOutputFile = Path.GetTempFileName();
             File.Delete(tempTessOutputFile);
-            tempTessOutputFile = Path.ChangeExtension(tempTessOutputFile, ".txt");
-            string outputFileName = Path.GetFileNameWithoutExtension(tempTessOutputFile); // chop the .txt extension
+            tempTessOutputFile = Path.ChangeExtension(tempTessOutputFile, FILE_EXTENSION);
+            string outputFileName = tempTessOutputFile.Substring(0, tempTessOutputFile.Length - FILE_EXTENSION.Length); // chop the .txt extension
             FileInfo fiTempTessOutputFile = new FileInfo(tempTessOutputFile);
 
             // Start the child process.
@@ -52,7 +53,7 @@ namespace VietOCR.NET
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.FileName = "tesseract.exe";
-            p.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            //p.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             StringBuilder result = new StringBuilder();
 
