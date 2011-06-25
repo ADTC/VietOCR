@@ -18,6 +18,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using VietOCR.NET.Utilities;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace VietOCR.NET
 {
@@ -34,6 +36,11 @@ namespace VietOCR.NET
         public IList<Image> ClonedImages
         {
             get { return Clone(images); }
+        }
+
+        public List<string> ImageFiles
+        {
+            get { return CreateImageFiles(ClonedImages); }
         }
 
         int index;
@@ -112,6 +119,22 @@ namespace VietOCR.NET
             }
 
             return clonedImages;
+        }
+
+        private List<string> CreateImageFiles(IList<Image> images)
+        {
+            List<string> files = new List<string>();
+
+            foreach (Image image in images)
+            {
+                string tempImageFile = Path.GetTempFileName();
+                File.Delete(tempImageFile);
+                tempImageFile = Path.ChangeExtension(tempImageFile, ".tif");
+                image.Save(tempImageFile, ImageFormat.Tiff);
+                files.Add(tempImageFile);
+            }
+
+            return files;
         }
 
         public bool ScreenshotMode

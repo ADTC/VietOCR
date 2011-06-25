@@ -118,6 +118,33 @@ namespace VietOCR.NET
             this.toolStripButtonCancelOCR.Enabled = false;
         }
 
+        //[System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        //private void backgroundWorkerOcr_DoWork(object sender, DoWorkEventArgs e)
+        //{
+        //    // Get the BackgroundWorker that raised this event.
+        //    BackgroundWorker worker = sender as BackgroundWorker;
+
+        //    OCRImageEntity entity = (OCRImageEntity)e.Argument;
+        //    OCR ocrEngine = new OCR();
+
+        //    // Assign the result of the computation to the Result property of the DoWorkEventArgs
+        //    // object. This is will be available to the RunWorkerCompleted eventhandler.
+        //    //e.Result = ocrEngine.RecognizeText(entity.ClonedImages, entity.Lang, entity.Rect, worker, e);
+        //    IList<Image> images = entity.ClonedImages;
+
+        //    for (int i = 0; i < images.Count; i++)
+        //    {
+        //        if (worker.CancellationPending)
+        //        {
+        //            e.Cancel = true;
+        //            break;
+        //        }
+
+        //        string result = ocrEngine.RecognizeText(((List<Image>)images).GetRange(i, 1), entity.Language, entity.Rect, worker, e);
+        //        worker.ReportProgress(i, result); // i is not really percentage
+        //    }
+        //}
+
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void backgroundWorkerOcr_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -125,14 +152,14 @@ namespace VietOCR.NET
             BackgroundWorker worker = sender as BackgroundWorker;
 
             OCRImageEntity entity = (OCRImageEntity)e.Argument;
-            OCR ocrEngine = new OCR();
+            OCRFiles ocrEngine = new OCRFiles();
 
             // Assign the result of the computation to the Result property of the DoWorkEventArgs
             // object. This is will be available to the RunWorkerCompleted eventhandler.
             //e.Result = ocrEngine.RecognizeText(entity.ClonedImages, entity.Lang, entity.Rect, worker, e);
-            IList<Image> images = entity.ClonedImages;
+            IList<string> workingImageFiles = entity.ImageFiles;
 
-            for (int i = 0; i < images.Count; i++)
+            for (int i = 0; i < workingImageFiles.Count; i++)
             {
                 if (worker.CancellationPending)
                 {
@@ -140,8 +167,9 @@ namespace VietOCR.NET
                     break;
                 }
 
-                string result = ocrEngine.RecognizeText(((List<Image>)images).GetRange(i, 1), entity.Language, entity.Rect, worker, e);
+                string result = ocrEngine.RecognizeText(((List<string>)workingImageFiles).GetRange(i, 1), entity.Language, worker, e);
                 worker.ReportProgress(i, result); // i is not really percentage
+                File.Delete(workingImageFiles[i]);
             }
         }
 

@@ -36,7 +36,7 @@ namespace VietOCR.NET
         /// <param name="tiffFiles"></param>
         /// <param name="lang"></param>
         /// <returns></returns>
-        string RecognizeText(IList<FileInfo> tiffFiles, string lang)
+        string RecognizeText(List<string> tiffFiles, string lang)
         {
             string tempTessOutputFile = Path.GetTempFileName();
             File.Delete(tempTessOutputFile);
@@ -56,9 +56,9 @@ namespace VietOCR.NET
 
             StringBuilder result = new StringBuilder();
 
-            foreach (FileInfo tiffFile in tiffFiles)
+            foreach (string tiffFile in tiffFiles)
             {
-                p.StartInfo.Arguments = string.Format("{0} {1} -l {2}", tiffFile.FullName, outputFileName, lang);
+                p.StartInfo.Arguments = string.Format("{0} {1} -l {2}", tiffFile, outputFileName, lang);
                 p.Start();
 
                 // Read the output stream first and then wait.
@@ -97,7 +97,7 @@ namespace VietOCR.NET
         /// <param name="lang">the language OCR is going to be performed for</param>
         /// <returns>result text</returns>
         //[System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public string RecognizeText(IList<FileInfo> tiffFiles, string lang, BackgroundWorker worker, DoWorkEventArgs e)
+        public string RecognizeText(List<string> tiffFiles, string lang, BackgroundWorker worker, DoWorkEventArgs e)
         {
             // Abort the operation if the user has canceled.
             // Note that a call to CancelAsync may have set 
