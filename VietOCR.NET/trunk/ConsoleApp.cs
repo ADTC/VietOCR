@@ -51,6 +51,10 @@ namespace VietOCR.NET
 
                 // postprocess to correct common OCR errors
                 result = Processor.PostProcess(result, curLangCode);
+                // correct common errors caused by OCR
+                result = TextUtilities.CorrectOCRErrors(result);
+                // correct letter cases
+                result = TextUtilities.CorrectLetterCases(result);
 
                 using (StreamWriter sw = new StreamWriter(outputFile.FullName + ".txt", false, new System.Text.UTF8Encoding()))
                 {
