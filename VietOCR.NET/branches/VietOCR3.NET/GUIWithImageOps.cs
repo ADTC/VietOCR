@@ -10,7 +10,7 @@ namespace VietOCR.NET
 {
     public partial class GUIWithImageOps : VietOCR.NET.GUIWithScan
     {
-        private bool isFitForZoomIn = false;
+        //private bool isFitForZoomIn = false;
         private const float ZOOM_FACTOR = 1.25f;
 
         public GUIWithImageOps()
@@ -97,6 +97,7 @@ namespace VietOCR.NET
 
         protected override void toolStripBtnRotateCCW_Click(object sender, EventArgs e)
         {
+            this.centerPicturebox();
             this.pictureBox1.Deselect();
             // Rotating 270 degrees is equivalent to rotating -90 degrees.
             imageList[imageIndex].RotateFlip(RotateFlipType.Rotate270FlipNone);
@@ -106,6 +107,7 @@ namespace VietOCR.NET
 
         protected override void toolStripBtnRotateCW_Click(object sender, EventArgs e)
         {
+            this.centerPicturebox();
             this.pictureBox1.Deselect();
             imageList[imageIndex].RotateFlip(RotateFlipType.Rotate90FlipNone);
             this.pictureBox1.Image = new Bitmap(imageList[imageIndex]);
@@ -128,7 +130,7 @@ namespace VietOCR.NET
         protected override void toolStripBtnZoomIn_Click(object sender, EventArgs e)
         {
             this.pictureBox1.Deselect();
-            isFitForZoomIn = true;
+            //isFitForZoomIn = true;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
             // Zoom works best if you first fit the image according to its true aspect ratio.
@@ -144,7 +146,7 @@ namespace VietOCR.NET
         protected override void toolStripBtnZoomOut_Click(object sender, EventArgs e)
         {
             this.pictureBox1.Deselect();
-            isFitForZoomIn = false;
+            //isFitForZoomIn = false;
             // StretchImage SizeMode works best for zooming.
             this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             // Zoom works best if you first fit the image according to its true aspect ratio.
@@ -168,14 +170,14 @@ namespace VietOCR.NET
             // Feel free to uncomment the line that sets the SizeMode and then see how
             // it causes Zoom In for small images to show unexpected behavior.
 
-            if ((this.pictureBox1.Image.Width < this.pictureBox1.Width) &&
-                (this.pictureBox1.Image.Height < this.pictureBox1.Height))
-            {
-                if (!isFitForZoomIn)
-                {
-                    this.pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-                }
-            }
+            //if ((this.pictureBox1.Image.Width < this.pictureBox1.Width) &&
+            //    (this.pictureBox1.Image.Height < this.pictureBox1.Height))
+            //{
+            //    if (!isFitForZoomIn)
+            //    {
+            //        this.pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            //    }
+            //}
             //CalculateAspectRatioAndSetDimensions();
         }
 
