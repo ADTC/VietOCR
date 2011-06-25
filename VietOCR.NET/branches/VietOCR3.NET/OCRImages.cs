@@ -25,12 +25,12 @@ namespace VietOCR.NET
         /// <summary>
         /// Recognize text
         /// </summary>
-        /// <param name="imageEntities"></param>
+        /// <param name="images"></param>
         /// <param name="index"></param>
         /// <param name="lang"></param>
         /// <returns></returns>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public override string RecognizeText(IList<Image> imageEntities, string lang)
+        public override string RecognizeText(IList<Image> images, string lang)
         {
             // To be implemented when a working DLL becomes available.
 
@@ -40,7 +40,7 @@ namespace VietOCR.NET
 
             //StringBuilder strB = new StringBuilder();
 
-            //foreach (Image image in imageEntities)
+            //foreach (Image image in images)
             //{
             //    string result = ocr.DoOCR(image, rect);
 
