@@ -17,6 +17,8 @@ namespace VietOCR.NET
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public override string RecognizeText(IList<Image> imageEntities, string lang)
         {
+            // To be implemented when a working DLL becomes available.
+
             //tessnet3.Tesseract ocr = new tessnet3.Tesseract();
 
             //ocr.Init(null, lang, 3);
