@@ -23,6 +23,7 @@ import javax.imageio.IIOImage;
 import javax.swing.*;
 import javax.swing.Timer;
 import net.sourceforge.vietocr.postprocessing.Processor;
+import net.sourceforge.vietocr.postprocessing.TextUtilities;
 
 public class GuiWithSettings extends GuiWithLaF {
 
@@ -82,6 +83,10 @@ public class GuiWithSettings extends GuiWithLaF {
 
                                 // postprocess to correct common OCR errors
                                 result = Processor.postProcess(result, curLangCode);
+                                // correct common errors caused by OCR
+                                result = TextUtilities.correctOCRErrors(result);
+                                // correct letter cases
+                                result = TextUtilities.correctLetterCases(result);
 
                                 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(outputFolder, imageFile.getName() + ".txt")), UTF8));
                                 out.write(result);

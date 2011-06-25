@@ -21,6 +21,7 @@ import java.io.*;
 import java.util.List;
 import javax.imageio.IIOImage;
 import net.sourceforge.vietocr.postprocessing.Processor;
+import net.sourceforge.vietocr.postprocessing.TextUtilities;
 
 public class ConsoleApp {
 
@@ -73,7 +74,11 @@ public class ConsoleApp {
 
             // postprocess to correct common OCR errors
             result = Processor.postProcess(result, curLangCode);
-
+            // correct common errors caused by OCR
+            result = TextUtilities.correctOCRErrors(result);
+            // correct letter cases
+            result = TextUtilities.correctLetterCases(result);
+            
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile.getPath() + ".txt"), Gui.UTF8));
             out.write(result);
             out.close();
