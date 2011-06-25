@@ -26,7 +26,7 @@ namespace VietOCR.NET
 {
     abstract class OCR<T>
     {
-        Rectangle rect = Rectangle.Empty;
+        protected Rectangle rect = Rectangle.Empty;
         BackgroundWorker worker;
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
