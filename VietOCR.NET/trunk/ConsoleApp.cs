@@ -46,7 +46,7 @@ namespace VietOCR.NET
 
                 IList<Image> imageList = ImageIOHelper.GetImageList(imageFile);
 
-                OCR ocrEngine = new OCR();
+                OCR<Image> ocrEngine = new OCRImages();
                 string result = ocrEngine.RecognizeText(imageList, curLangCode);
 
                 // postprocess to correct common OCR errors

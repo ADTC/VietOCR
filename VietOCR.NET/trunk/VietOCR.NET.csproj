@@ -164,6 +164,7 @@
     <Compile Include="GUIWithUILanguage.Designer.cs">
       <DependentUpon>GUIWithUILanguage.cs</DependentUpon>
     </Compile>
+    <Compile Include="OCRImages.cs" />
     <Compile Include="SpellCheckHelper.cs" />
     <Compile Include="Utilities\FormLocalizer.cs" />
     <Compile Include="GUIWithOCR.cs">

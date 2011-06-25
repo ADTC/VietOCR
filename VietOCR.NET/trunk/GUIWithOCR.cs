@@ -125,7 +125,7 @@ namespace VietOCR.NET
             BackgroundWorker worker = sender as BackgroundWorker;
 
             OCRImageEntity entity = (OCRImageEntity)e.Argument;
-            OCR ocrEngine = new OCR();
+            OCR<Image> ocrEngine = new OCRImages();
 
             // Assign the result of the computation to the Result property of the DoWorkEventArgs
             // object. This is will be available to the RunWorkerCompleted eventhandler.
