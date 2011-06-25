@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_00FF8CC9CE3F2418FC616D315DC05D07"
+        "OwnerKey" = "8:_1AE33DD3BC5E45C5BAFCBE03FA080309"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_01E8ACAA64E34EEEA09F16EB42F6EDC4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -33,7 +39,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1859226551F02EE3C8C75923F36A131B"
+        "MsmKey" = "8:_15D015BC673444169E251805E3BC0C91"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1A334484E87D858BD4A35B952AA8ADDB"
         "OwnerKey" = "8:_1AE33DD3BC5E45C5BAFCBE03FA080309"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -51,25 +63,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1E8B04A14BCBDB6CBF98FD037B122B6A"
-        "OwnerKey" = "8:_1AE33DD3BC5E45C5BAFCBE03FA080309"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_25090383349F40DEB01FD950BC960067"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_45A431F15885637493C836993C8D41A6"
-        "OwnerKey" = "8:_1AE33DD3BC5E45C5BAFCBE03FA080309"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_496092CB502DCEA005CE97A492A9C954"
+        "MsmKey" = "8:_2BBB6125AC814DEE1726A39E43DDE9BF"
         "OwnerKey" = "8:_1AE33DD3BC5E45C5BAFCBE03FA080309"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -82,6 +82,12 @@
         "Entry"
         {
         "MsmKey" = "8:_6C90B05A45B5417B8DFB48BCFF682FB5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6C9CA7D30CA54DFF95147144D6F7E094"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -129,13 +135,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_8D71CDFBC9E3BF60D04FAB86887A877E"
-        "OwnerKey" = "8:_45A431F15885637493C836993C8D41A6"
+        "MsmKey" = "8:_9B27517C9C2E4081A338E06B8C14E5B2"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9B27517C9C2E4081A338E06B8C14E5B2"
+        "MsmKey" = "8:_A191BB4B44CB4319909B812DA3580DAB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -149,6 +155,12 @@
         {
         "MsmKey" = "8:_B18FE5F11C474AB3AE059853F4C170F0"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B3BB2624293521F1BF8B66D4F37EC53A"
+        "OwnerKey" = "8:_1AE33DD3BC5E45C5BAFCBE03FA080309"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -189,8 +201,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_DCB1AA2306CF03CF7633E675CF665769"
-        "OwnerKey" = "8:_1AE33DD3BC5E45C5BAFCBE03FA080309"
+        "MsmKey" = "8:_DC70B91A0044462C91B78B876A235322"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -220,31 +232,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1859226551F02EE3C8C75923F36A131B"
+        "OwnerKey" = "8:_1A334484E87D858BD4A35B952AA8ADDB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1E8B04A14BCBDB6CBF98FD037B122B6A"
+        "OwnerKey" = "8:_00FF8CC9CE3F2418FC616D315DC05D07"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DCB1AA2306CF03CF7633E675CF665769"
+        "OwnerKey" = "8:_2BBB6125AC814DEE1726A39E43DDE9BF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_496092CB502DCEA005CE97A492A9C954"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_45A431F15885637493C836993C8D41A6"
+        "OwnerKey" = "8:_B3BB2624293521F1BF8B66D4F37EC53A"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -329,14 +335,46 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:2.0.50727 "
+                "Version" = "8:3.5.30729"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=9832"
+                "FrameworkVersion" = "8:2.0.50727 "
                 }
             }
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_00FF8CC9CE3F2418FC616D315DC05D07"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:VietKeyInput, Version=2.0.3745.38743, Culture=neutral, PublicKeyToken=7c2367f2fb8ce189, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_00FF8CC9CE3F2418FC616D315DC05D07"
+                    {
+                    "Name" = "8:VietKeyInput.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:VietKeyInput.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_01E8ACAA64E34EEEA09F16EB42F6EDC4"
             {
             "SourcePath" = "8:..\\dict\\vi_VN.dic"
@@ -397,15 +435,40 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1859226551F02EE3C8C75923F36A131B"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_15D015BC673444169E251805E3BC0C91"
+            {
+            "SourcePath" = "8:..\\V3.01"
+            "TargetName" = "8:V3.01"
+            "Tag" = "8:"
+            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1A334484E87D858BD4A35B952AA8ADDB"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Interop.WIA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_1A334484E87D858BD4A35B952AA8ADDB"
+                    {
+                    "Name" = "8:Interop.WIA.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
-            "SourcePath" = "8:ICSharpCode.SharpZipLib.dll"
+            "SourcePath" = "8:Interop.WIA.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
@@ -443,32 +506,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1E8B04A14BCBDB6CBF98FD037B122B6A"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:NHunspell, Version=0.9.6.0, Culture=neutral, PublicKeyToken=1ac793ea843b4366, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:NHunspell.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_25090383349F40DEB01FD950BC960067"
             {
             "SourcePath" = "8:..\\dict\\en_US.dic"
@@ -489,41 +526,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_45A431F15885637493C836993C8D41A6"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2BBB6125AC814DEE1726A39E43DDE9BF"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Interop.WIA, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64"
+            "AssemblyAsmDisplayName" = "8:NHunspell, Version=0.9.6.0, Culture=neutral, PublicKeyToken=1ac793ea843b4366, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_2BBB6125AC814DEE1726A39E43DDE9BF"
+                    {
+                    "Name" = "8:NHunspell.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
-            "SourcePath" = "8:Interop.WIA.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_496092CB502DCEA005CE97A492A9C954"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:VietKeyInput, Version=2.0.3745.38743, Culture=neutral, PublicKeyToken=7c2367f2fb8ce189, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:VietKeyInput.dll"
+            "SourcePath" = "8:NHunspell.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
@@ -565,6 +581,26 @@
             {
             "SourcePath" = "8:..\\readme_cs.html"
             "TargetName" = "8:readme_cs.html"
+            "Tag" = "8:"
+            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6C9CA7D30CA54DFF95147144D6F7E094"
+            {
+            "SourcePath" = "8:..\\liblept.dll"
+            "TargetName" = "8:liblept.dll"
             "Tag" = "8:"
             "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
             "Condition" = "8:"
@@ -721,12 +757,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8D71CDFBC9E3BF60D04FAB86887A877E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9B27517C9C2E4081A338E06B8C14E5B2"
             {
-            "SourcePath" = "8:wiaaut.dll"
-            "TargetName" = "8:wiaaut.dll"
+            "SourcePath" = "8:..\\samples\\vietsample2.tif"
+            "TargetName" = "8:vietsample2.tif"
             "Tag" = "8:"
-            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
+            "Folder" = "8:_01DB017D98454EC9B137623356AF645E"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -738,15 +774,15 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9B27517C9C2E4081A338E06B8C14E5B2"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A191BB4B44CB4319909B812DA3580DAB"
             {
-            "SourcePath" = "8:..\\samples\\vietsample2.tif"
-            "TargetName" = "8:vietsample2.tif"
+            "SourcePath" = "8:..\\tesseract.exe"
+            "TargetName" = "8:tesseract.exe"
             "Tag" = "8:"
-            "Folder" = "8:_01DB017D98454EC9B137623356AF645E"
+            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -799,6 +835,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B3BB2624293521F1BF8B66D4F37EC53A"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_B3BB2624293521F1BF8B66D4F37EC53A"
+                    {
+                    "Name" = "8:ICSharpCode.SharpZipLib.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:ICSharpCode.SharpZipLib.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B806045611FE443D8AEE3504D14270DF"
@@ -921,16 +988,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DCB1AA2306CF03CF7633E675CF665769"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DC70B91A0044462C91B78B876A235322"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:tessnet2_64, Version=2.0.4.0, Culture=neutral, PublicKeyToken=1550524b5ba07e29, processorArchitecture=AMD64"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:tessnet2_64.dll"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\Hunspellx86.dll"
+            "TargetName" = "8:Hunspellx86.dll"
             "Tag" = "8:"
             "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
             "Condition" = "8:"
@@ -944,7 +1005,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DF0571E234C74A99BFF1F1B37D4A2296"
@@ -1140,10 +1201,9 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:VietOCR.NET"
-        "ProductCode" = "8:{1DB691A0-E3EF-48C1-913F-B54B157F108C}"
-        "PackageCode" = "8:{EF9B4AFF-CDD2-4480-BE18-4348165D33A1}"
-        "UpgradeCode" = "8:{2EF42973-7837-44E2-9085-FA4B5B40483E}"
-        "AspNetVersion" = "8:4.0.30319.0"
+        "ProductCode" = "8:{E85EC650-BB2F-4FCF-9AD7-4343010F8591}"
+        "PackageCode" = "8:{03AFB7B2-6E02-47E0-9003-501C1466F174}"
+        "UpgradeCode" = "8:{E53F3670-7B1D-405A-AC8A-2207B69BDDDB}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
@@ -1153,7 +1213,7 @@
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://vietunicode.sf.net/forum"
         "Title" = "8:Setup for VietOCR.NET"
-        "Subject" = "8:Installer for VietOCR.NET v2.0"
+        "Subject" = "8:Installer for VietOCR.NET v3.0"
         "ARPCONTACT" = "8:Quan Nguyen"
         "Keywords" = "8:Vietnamese OCR"
         "ARPCOMMENTS" = "8:http://vietocr.sf.net"
@@ -1690,7 +1750,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_1AE33DD3BC5E45C5BAFCBE03FA080309"
             {
-            "SourcePath" = "8:..\\obj\\Debug\\VietOCR.exe"
+            "SourcePath" = "8:..\\obj\\Release\\VietOCR.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
