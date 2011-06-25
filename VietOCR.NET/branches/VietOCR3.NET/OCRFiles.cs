@@ -24,12 +24,9 @@ using System.Diagnostics;
 
 namespace VietOCR.NET
 {
-    class OCRFiles
+    class OCRFiles : OCR<string>
     {
         const string FILE_EXTENSION = ".txt";
-
-        Rectangle rect = Rectangle.Empty;
-        BackgroundWorker worker;
 
         /// <summary>
         /// Recognizes TIFF files.
@@ -37,7 +34,8 @@ namespace VietOCR.NET
         /// <param name="tiffFiles"></param>
         /// <param name="lang"></param>
         /// <returns></returns>
-        public string RecognizeText(List<string> tiffFiles, string lang)
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public override string RecognizeText(IList<string> tiffFiles, string lang)
         {
             string tempTessOutputFile = Path.GetTempFileName();
             File.Delete(tempTessOutputFile);
@@ -53,7 +51,6 @@ namespace VietOCR.NET
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.FileName = "tesseract.exe";
-            //p.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             StringBuilder result = new StringBuilder();
 
@@ -88,41 +85,6 @@ namespace VietOCR.NET
 
             fiTempTessOutputFile.Delete();
             return result.ToString();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="images">list of images</param>
-        /// <param name="index">index of page (frame) of image; -1 for all</param>
-        /// <param name="lang">the language OCR is going to be performed for</param>
-        /// <returns>result text</returns>
-        //[System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public string RecognizeText(List<string> tiffFiles, string lang, BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            // Abort the operation if the user has canceled.
-            // Note that a call to CancelAsync may have set 
-            // CancellationPending to true just after the
-            // last invocation of this method exits, so this 
-            // code will not have the opportunity to set the 
-            // DoWorkEventArgs.Cancel flag to true. This means
-            // that RunWorkerCompletedEventArgs.Cancelled will
-            // not be set to true in your RunWorkerCompleted
-            // event handler. This is a race condition.
-            this.worker = worker;
-
-            if (worker.CancellationPending)
-            {
-                e.Cancel = true;
-                return String.Empty;
-            }
-
-            return RecognizeText(tiffFiles, lang);
-        }
-
-        void ProgressEvent(int percent)
-        {
-            worker.ReportProgress(percent);
         }
     }
 }
