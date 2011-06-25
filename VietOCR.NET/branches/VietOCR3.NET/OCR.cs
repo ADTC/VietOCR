@@ -19,13 +19,14 @@ using System.Text;
 using System.Drawing;
 using System.Threading;
 using System.ComponentModel;
+using System.IO;
+using System.Diagnostics;
 
 namespace VietOCR.NET
 {
     class OCR
     {
         Rectangle rect = Rectangle.Empty;
-        ManualResetEvent m_event;
         BackgroundWorker worker;
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -44,47 +45,22 @@ namespace VietOCR.NET
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public string RecognizeText(IList<Image> images, string lang)
         {
-            using (tessnet2.Tesseract ocr = new tessnet2.Tesseract())
-            {
-                ocr.Init(null, lang, false);
+            //tessnet3.Tesseract ocr = new tessnet3.Tesseract();
 
-                StringBuilder strB = new StringBuilder();
+            //ocr.Init(null, lang, 3);
 
-                foreach (Bitmap image in images)
-                {
-                    // If the OcrDone delegate is not null then this'll be the multithreaded version
-                    //ocr.OcrDone = new tessnet2.Tesseract.OcrDoneHandler(Finished);
-                    // For event to work, must use the multithreaded version
-                    //ocr.ProgressEvent += new tessnet2.Tesseract.ProgressHandler(ProgressEvent);
+            //StringBuilder strB = new StringBuilder();
 
-                    m_event = new ManualResetEvent(false);
+            //foreach (Bitmap image in images)
+            //{
+            //    string result = ocr.DoOCR(image, rect);
 
-                    List<tessnet2.Word> result = ocr.DoOCR(image, rect);
+            //    if (result == null) return String.Empty;
+            //    strB.Append(result);
 
-                    // Wait here it's finished
-                    //m_event.WaitOne();
-
-                    if (result == null) return String.Empty;
-
-                    for (int i = 0; i < tessnet2.Tesseract.LineCount(result); i++)
-                    {
-                        strB.AppendLine(tessnet2.Tesseract.GetLineText(result, i));
-                    }
-
-                    //int lineIndex = 0;
-                    //foreach (tessnet2.Word word in result)
-                    //{
-                    //    if (lineIndex != word.LineIndex)
-                    //    {
-                    //        strB.AppendLine();
-                    //        lineIndex = word.LineIndex;
-                    //    }
-                    //    strB.Append(new string(' ', word.Blanks)).Append(word.Text);
-                    //}
-                    //strB.AppendLine();
-                }
-                return strB.ToString();
-            }
+            //}
+            //return strB.ToString();
+            return null;
         }
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -93,7 +69,7 @@ namespace VietOCR.NET
             rect = selection;
             return RecognizeText(images, lang, worker, e);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -122,10 +98,6 @@ namespace VietOCR.NET
             }
 
             return RecognizeText(images, lang);
-        }
-        public void Finished(List<tessnet2.Word> result)
-        {
-            m_event.Set();
         }
 
         void ProgressEvent(int percent)
