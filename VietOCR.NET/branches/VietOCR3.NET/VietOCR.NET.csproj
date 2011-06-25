@@ -317,7 +317,9 @@
     <EmbeddedResource Include="Properties\Resources.sk-SK.resx" />
     <EmbeddedResource Include="readme_cs_lt.html" />
     <EmbeddedResource Include="readme_cs_sk.html" />
-    <Content Include="liblept.dll" />
+    <Content Include="liblept.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="samples\vietsample1.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -446,7 +448,9 @@
     <Content Include="samples\vietsample2.tif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="tesseract.exe" />
+    <Content Include="tesseract.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="versionchanges_cs.txt" />
   </ItemGroup>
   <ItemGroup>
