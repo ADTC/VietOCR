@@ -118,7 +118,7 @@ namespace VietOCR.NET
 
             try
             {
-                OCR ocrEngine = new OCR();
+                OCR<Image> ocrEngine = new OCRImages();
                 string result = ocrEngine.RecognizeText(imageList, curLangCode);
 
                 // postprocess to correct common OCR errors
