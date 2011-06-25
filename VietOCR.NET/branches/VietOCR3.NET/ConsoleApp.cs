@@ -44,13 +44,19 @@ namespace VietOCR.NET
                     curLangCode = args[3];
                 }
 
-                IList<Image> imageList = ImageIOHelper.GetImageList(imageFile);
+                //IList<Image> imageList = ImageIOHelper.GetImageList(imageFile);
 
-                OCR ocrEngine = new OCR();
-                string result = ocrEngine.RecognizeText(imageList, curLangCode);
+                OCR<string> ocrEngine = new OCRFiles();
+                IList<string> files = new List<string>();
+                files.Add(imageFile.FullName);
+                string result = ocrEngine.RecognizeText(files, curLangCode);
 
                 // postprocess to correct common OCR errors
                 result = Processor.PostProcess(result, curLangCode);
+                // correct common errors caused by OCR
+                result = TextUtilities.CorrectOCRErrors(result);
+                // correct letter cases
+                result = TextUtilities.CorrectLetterCases(result);
 
                 using (StreamWriter sw = new StreamWriter(outputFile.FullName + ".txt", false, new System.Text.UTF8Encoding()))
                 {
