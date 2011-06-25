@@ -123,6 +123,10 @@ namespace VietOCR.NET
 
                 // postprocess to correct common OCR errors
                 result = Processor.PostProcess(result, curLangCode);
+                // correct common errors caused by OCR
+                result = TextUtilities.CorrectOCRErrors(result);
+                // correct letter cases
+                result = TextUtilities.CorrectLetterCases(result);
 
                 using (StreamWriter sw = new StreamWriter(Path.Combine(outputFolder, imageFile.Name + ".txt"), false, new System.Text.UTF8Encoding()))
                 {
