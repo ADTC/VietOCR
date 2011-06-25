@@ -22,87 +22,43 @@ using System.ComponentModel;
 
 namespace VietOCR.NET
 {
-    class OCR
+    abstract class OCR<T>
     {
-        Rectangle rect = Rectangle.Empty;
-        ManualResetEvent m_event;
+        protected Rectangle rect = Rectangle.Empty;
         BackgroundWorker worker;
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public string RecognizeText(IList<Image> images, string lang, Rectangle selection)
+        public string RecognizeText(IList<T> imageEntities, string lang, Rectangle selection)
         {
             rect = selection;
-            return RecognizeText(images, lang);
+            return RecognizeText(imageEntities, lang);
         }
         /// <summary>
         /// Recognize text
         /// </summary>
-        /// <param name="images"></param>
+        /// <param name="imageEntities"></param>
         /// <param name="index"></param>
         /// <param name="lang"></param>
         /// <returns></returns>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public string RecognizeText(IList<Image> images, string lang)
-        {
-            using (tessnet2.Tesseract ocr = new tessnet2.Tesseract())
-            {
-                ocr.Init(null, lang, false);
-
-                StringBuilder strB = new StringBuilder();
-
-                foreach (Bitmap image in images)
-                {
-                    // If the OcrDone delegate is not null then this'll be the multithreaded version
-                    //ocr.OcrDone = new tessnet2.Tesseract.OcrDoneHandler(Finished);
-                    // For event to work, must use the multithreaded version
-                    //ocr.ProgressEvent += new tessnet2.Tesseract.ProgressHandler(ProgressEvent);
-
-                    m_event = new ManualResetEvent(false);
-
-                    List<tessnet2.Word> result = ocr.DoOCR(image, rect);
-
-                    // Wait here it's finished
-                    //m_event.WaitOne();
-
-                    if (result == null) return String.Empty;
-
-                    for (int i = 0; i < tessnet2.Tesseract.LineCount(result); i++)
-                    {
-                        strB.AppendLine(tessnet2.Tesseract.GetLineText(result, i));
-                    }
-
-                    //int lineIndex = 0;
-                    //foreach (tessnet2.Word word in result)
-                    //{
-                    //    if (lineIndex != word.LineIndex)
-                    //    {
-                    //        strB.AppendLine();
-                    //        lineIndex = word.LineIndex;
-                    //    }
-                    //    strB.Append(new string(' ', word.Blanks)).Append(word.Text);
-                    //}
-                    //strB.AppendLine();
-                }
-                return strB.ToString();
-            }
-        }
+        public abstract string RecognizeText(IList<T> imageEntities, string lang);
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public string RecognizeText(IList<Image> images, string lang, Rectangle selection, BackgroundWorker worker, DoWorkEventArgs e)
+        public string RecognizeText(IList<T> imageEntities, string lang, Rectangle selection, BackgroundWorker worker, DoWorkEventArgs e)
         {
             rect = selection;
-            return RecognizeText(images, lang, worker, e);
+            return RecognizeText(imageEntities, lang, worker, e);
         }
         
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="images">list of images</param>
+        /// <param name="imageEntities">list of imageEntity</param>
         /// <param name="index">index of page (frame) of image; -1 for all</param>
         /// <param name="lang">the language OCR is going to be performed for</param>
         /// <returns>result text</returns>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public string RecognizeText(IList<Image> images, string lang, BackgroundWorker worker, DoWorkEventArgs e)
+        public string RecognizeText(IList<T> imageEntities, string lang, BackgroundWorker worker, DoWorkEventArgs e)
         {
             // Abort the operation if the user has canceled.
             // Note that a call to CancelAsync may have set 
@@ -121,11 +77,7 @@ namespace VietOCR.NET
                 return String.Empty;
             }
 
-            return RecognizeText(images, lang);
-        }
-        public void Finished(List<tessnet2.Word> result)
-        {
-            m_event.Set();
+            return RecognizeText(imageEntities, lang);
         }
 
         void ProgressEvent(int percent)
