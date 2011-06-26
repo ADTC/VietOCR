@@ -156,6 +156,11 @@ namespace VietOCR.NET
 
             IList<string> workingImageFiles = entity.ImageFiles;
 
+            foreach (string workingImageFile in workingImageFiles)
+            {
+                tempFileCollection.AddFile(workingImageFile, false); // to be deleted when program exits
+            }
+
             for (int i = 0; i < workingImageFiles.Count; i++)
             {
                 if (worker.CancellationPending)
@@ -166,7 +171,6 @@ namespace VietOCR.NET
 
                 string result = ocrEngine.RecognizeText(((List<string>)workingImageFiles).GetRange(i, 1), entity.Language, worker, e);
                 worker.ReportProgress(i, result); // i is not really percentage
-                File.Delete(workingImageFiles[i]);
             }
         }
 
