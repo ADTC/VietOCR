@@ -135,6 +135,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8F735BC804077654D82F5F56211712FD"
+        "OwnerKey" = "8:_1A334484E87D858BD4A35B952AA8ADDB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_9B27517C9C2E4081A338E06B8C14E5B2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -757,6 +763,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F735BC804077654D82F5F56211712FD"
+            {
+            "SourcePath" = "8:wiaaut.dll"
+            "TargetName" = "8:wiaaut.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9B27517C9C2E4081A338E06B8C14E5B2"
             {
             "SourcePath" = "8:..\\samples\\vietsample2.tif"
@@ -1098,7 +1124,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_62E5121B93304E73845F4D594BA48305"
             {
-            "DefaultLocation" = "8:[ProgramFiles64Folder]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFilesFolder]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
@@ -1200,9 +1226,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:VietOCR.NET"
+        "ProductName" = "8:VietOCR3.NET"
         "ProductCode" = "8:{E85EC650-BB2F-4FCF-9AD7-4343010F8591}"
-        "PackageCode" = "8:{03AFB7B2-6E02-47E0-9003-501C1466F174}"
+        "PackageCode" = "8:{B9FBD6CF-7A42-46A2-86CC-DB6E0979B805}"
         "UpgradeCode" = "8:{E53F3670-7B1D-405A-AC8A-2207B69BDDDB}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
@@ -1222,7 +1248,7 @@
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:1"
+        "TargetPlatform" = "3:0"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
