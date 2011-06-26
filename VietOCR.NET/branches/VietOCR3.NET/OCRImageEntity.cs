@@ -38,7 +38,7 @@ namespace VietOCR.NET
             get { return Clone(images); }
         }
 
-        public List<string> ImageFiles
+        public IList<string> ImageFiles
         {
             get { return CreateImageFiles(ClonedImages); }
         }
@@ -121,9 +121,9 @@ namespace VietOCR.NET
             return clonedImages;
         }
 
-        private List<string> CreateImageFiles(IList<Image> images)
+        private IList<string> CreateImageFiles(IList<Image> images)
         {
-            List<string> files = new List<string>();
+            IList<string> files = new List<string>();
 
             foreach (Image image in images)
             {
