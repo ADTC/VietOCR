@@ -41,7 +41,6 @@ namespace VietOCR.NET
             File.Delete(tempTessOutputFile);
             tempTessOutputFile = Path.ChangeExtension(tempTessOutputFile, FILE_EXTENSION);
             string outputFileName = tempTessOutputFile.Substring(0, tempTessOutputFile.Length - FILE_EXTENSION.Length); // chop the .txt extension
-            FileInfo fiTempTessOutputFile = new FileInfo(tempTessOutputFile);
 
             // Start the child process.
             Process p = new Process();
@@ -74,7 +73,7 @@ namespace VietOCR.NET
                 }
                 else
                 {
-                    fiTempTessOutputFile.Delete();
+                    File.Delete(tempTessOutputFile);
                     if (error.Trim().Length == 0)
                     {
                         error = "Errors occurred.";
@@ -83,7 +82,7 @@ namespace VietOCR.NET
                 }
             }
 
-            fiTempTessOutputFile.Delete();
+            File.Delete(tempTessOutputFile);
             return result.ToString();
         }
     }
