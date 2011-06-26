@@ -38,5 +38,6 @@
 <entry key="tgl">http://tesseract-ocr.googlecode.com/files/tgl.traineddata.gz</entry>
 <entry key="tur">http://tesseract-ocr.googlecode.com/files/tur.traineddata.gz</entry>
 <entry key="ukr">http://tesseract-ocr.googlecode.com/files/ukr.traineddata.gz</entry>
-<entry key="vie">http://tesseract-ocr.googlecode.com/files/vie.traineddata.gz</entry>
+<entry key="vie">http://sourceforge.net/projects/vietocr/files/lang%20data%20for%20tesseract-ocr/vietnamese%20language%20pack/tesseract-3.01.vie.zip</entry>
+<entry key="vie-1">http://sourceforge.net/projects/vietocr/files/lang%20data%20for%20tesseract-ocr/vietnamese%20language%20pack/tesseract-3.01.vie-1.vni-tcvn3.zip</entry>
 </properties>
