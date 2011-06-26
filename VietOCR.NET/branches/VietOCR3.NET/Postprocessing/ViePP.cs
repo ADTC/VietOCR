@@ -73,6 +73,7 @@ namespace VietOCR.NET.Postprocessing
                     Regex.Replace(
                     Regex.Replace(
                     Regex.Replace(
+                    Regex.Replace(
                     Regex.Replace(nfdText,
                         "(?i)(?<![q])(u)(?=o\u031B" + TONE + "\\p{L})", "$1\u031B"), // uo+n to u+o+n 
                         "(?i)(?<=u\u031B)(o)(?=" + TONE + "\\p{L})", "$1\u031B"), // u+on to u+o+n
@@ -86,7 +87,8 @@ namespace VietOCR.NET.Postprocessing
                         "(?i)(?<=[aeo]\u0302)h", "\u0301n"), // a^+h to a^acute+n
                         "(?i)(?<=[uo]" + TONE + ")['\u2018]", "\u031B"), // u'+left-single-quote) to u+' 
                         "(?i)(?<=" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})l\\b", "t"), // vowel+diacritics+l to vowel+diacritics+t
-                        "(?i)(?<=" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})ll\\b", "u") // vowel+diacritics+ll to vowel+diacritics+u
+                        "(?i)(?<=" + VOWEL + "\\p{IsCombiningDiacriticalMarks}{0,2})ll\\b", "u"), // vowel+diacritics+ll to vowel+diacritics+u
+                        "\\B\\$(?="+ VOWEL + ")", "S") // replace leading $ followed by vowel with S
                     ;
 
             return nfdText.Normalize();
