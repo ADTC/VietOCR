@@ -19,8 +19,6 @@ using System.Text;
 using System.Drawing;
 using System.Threading;
 using System.ComponentModel;
-using System.IO;
-using System.Diagnostics;
 
 namespace VietOCR.NET
 {
