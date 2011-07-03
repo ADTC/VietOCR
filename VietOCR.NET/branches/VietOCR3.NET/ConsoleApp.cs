@@ -44,12 +44,10 @@ namespace VietOCR.NET
                     curLangCode = args[3];
                 }
 
-                //IList<Image> imageList = ImageIOHelper.GetImageList(imageFile);
+                IList<Image> imageList = ImageIOHelper.GetImageList(imageFile);
 
-                OCR<string> ocrEngine = new OCRFiles();
-                IList<string> files = new List<string>();
-                files.Add(imageFile.FullName);
-                string result = ocrEngine.RecognizeText(files, curLangCode);
+                OCR<Image> ocrEngine = new OCRImages();
+                string result = ocrEngine.RecognizeText(imageList, curLangCode);
 
                 // postprocess to correct common OCR errors
                 result = Processor.PostProcess(result, curLangCode);

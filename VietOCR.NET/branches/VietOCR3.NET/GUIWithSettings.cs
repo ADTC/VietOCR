@@ -109,19 +109,17 @@ namespace VietOCR.NET
                 return;
             }
 
-            //IList<Image> imageList = ImageIOHelper.GetImageList(imageFile);
-            //if (imageList == null)
-            //{
-            //    this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { "    **  " + Properties.Resources.Cannotprocess + imageFile.Name + "  **" });
-            //    return;
-            //}
+            IList<Image> imageList = ImageIOHelper.GetImageList(imageFile);
+            if (imageList == null)
+            {
+                this.statusForm.TextBox.BeginInvoke(new UpdateStatusEvent(this.WorkerUpdate), new Object[] { "    **  " + Properties.Resources.Cannotprocess + imageFile.Name + "  **" });
+                return;
+            }
 
             try
             {
-                OCR<string> ocrEngine = new OCRFiles();
-                IList<string> files = new List<string>();
-                files.Add(imageFile.FullName);
-                string result = ocrEngine.RecognizeText(files, curLangCode);
+                OCR<Image> ocrEngine = new OCRImages();
+                string result = ocrEngine.RecognizeText(imageList, curLangCode);
 
                 // postprocess to correct common OCR errors
                 result = Processor.PostProcess(result, curLangCode);

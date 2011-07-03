@@ -17,11 +17,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using System.IO;
+using OCR.TesseractWrapper;
 
 namespace VietOCR.NET
 {
     class OCRImages : OCR<Image>
     {
+        readonly string basedir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        const string TESSDATA = "tessdata/";
+        const int oem = 3;
+
         /// <summary>
         /// Recognize text
         /// </summary>
@@ -32,24 +38,21 @@ namespace VietOCR.NET
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public override string RecognizeText(IList<Image> images, string lang)
         {
-            // To be implemented when a working DLL becomes available.
+            string tessdata = Path.Combine(basedir, TESSDATA);
+            TesseractProcessor processor = new TesseractProcessor();
+            processor.Init(tessdata, lang, oem);
 
-            //tessnet3.Tesseract ocr = new tessnet3.Tesseract();
+            StringBuilder strB = new StringBuilder();
 
-            //ocr.Init(null, lang, 3);
+            foreach (Image image in images)
+            {
+                string text = processor.Recognize(image, rect);
 
-            //StringBuilder strB = new StringBuilder();
+                if (text == null) return String.Empty;
+                strB.Append(text);
+            }
 
-            //foreach (Image image in images)
-            //{
-            //    string result = ocr.DoOCR(image, rect);
-
-            //    if (result == null) return String.Empty;
-            //    strB.Append(result);
-
-            //}
-            //return strB.ToString();
-            return null;
+            return strB.ToString().Replace("\n", Environment.NewLine);
         }
     }
 }
