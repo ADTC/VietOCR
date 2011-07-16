@@ -35,8 +35,8 @@
             <a href="http://www.microsoft.com/downloads/details.aspx?familyid=5B2C0358-915B-4EB5-9B1D-10E506DA9D0F&displaylang=en">
                 Microsoft .NET Framework 2.0 Redistributable</a>.</p>
         <p>
-            Nếu bạn gặp FileLoadException với message &quot;<i>Could not load file or assembly &#39;tessnet2,
-                Version=2.0.4.0, Culture=neutral, PublicKeyToken=null&#39; or one of its dependencies.
+            Nếu bạn gặp FileLoadException với message &quot;<i>Could not load file or assembly &#39;tesseract,
+                Version=1.0.0.0, Culture=neutral, PublicKeyToken=null&#39; or one of its dependencies.
                 This application has failed to start because the application configuration is incorrect.
                 Reinstalling the application may fix this problem. (Exception from HRESULT: 0x800736B1)</i>&quot;
             trong khi đang chạy VietOCR.NET, xin hãy cài đặt Microsoft Visual C++ 2008 SP1 Redistributable
@@ -50,9 +50,10 @@
             bạn hãy chỉ định một folder khác trong Install Installation Folder dialog.</p>
         <p>
             Hỗ trợ quét văn bản được cung cấp qua Windows Image Acquisition Library v2.0, thư
-            viện này đòi hỏi Windows XP Service Pack 1 (SP1) hoặc mới hơn; thư viện này đã được tích hợp sẵn trong Vista and 7. Để cài đặt WIA Library,
-            copy file <tt>wiaaut.dll</tt> vào <tt>System32</tt> directory (thường đặt ở <tt>C:\Windows\System32</tt>)
-            và chạy lệnh từ command line:</p>
+            viện này đòi hỏi Windows XP Service Pack 1 (SP1) hoặc mới hơn; thư viện này đã được
+            tích hợp sẵn trong Vista and 7. Để cài đặt WIA Library, copy file <tt>wiaaut.dll</tt>
+            vào <tt>System32</tt> directory (thường đặt ở <tt>C:\Windows\System32</tt>) và chạy
+            lệnh từ command line:</p>
         <blockquote>
             <p>
                 <tt>regsvr32 C:\Windows\System32\wiaaut.dll</tt></p>
@@ -100,9 +101,9 @@
             chất của ảnh quét. Thông số tiêu biểu cho quét ảnh là 300 DPI và 1 bpp (bit per
             pixel) trắng đen hoặc 8 bpp grayscale dạng không nén (uncompressed) TIFF hay PNG.</p>
         <p>
-            Chế độ <em>Screenshot Mode</em> cung cấp độ nhận dạng tốt hơn cho những hình
-            ảnh có độ phân giải thấp, chẳng hạn như ảnh in màn hình, bằng cách rescaling chúng
-            tới 300 DPI.</p>
+            Chế độ <em>Screenshot Mode</em> cung cấp độ nhận dạng tốt hơn cho những hình ảnh
+            có độ phân giải thấp, chẳng hạn như ảnh in màn hình, bằng cách rescaling chúng tới
+            300 DPI.</p>
         <p>
             Ngoài thuật toán hậu xử lý xây trong chương trình, bạn có thể thêm cách thức thay
             thế từ ngữ đặc riêng của bạn qua một tập tin text có tên <tt>x.DangAmbigs.txt</tt>,
