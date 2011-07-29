@@ -8,3 +8,4 @@ Version 3.1 (2 August 2011)
 - Integrate tesseractdotnet .NET wrapper DLL x86 (r48+) based on Tesseract 3.01 (r596)
 - Remove tesseract.exe file
 - Trap OutOfMemory exceptions that intermittently occur during drawing of selection boxes
+- Refactor
