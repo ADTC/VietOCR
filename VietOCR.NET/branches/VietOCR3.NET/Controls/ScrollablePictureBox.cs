@@ -120,8 +120,16 @@ namespace VietOCR.NET.Controls
                 blackPen.MiterLimit = 0;
                 blackPen.DashPattern = new float[] { 6, 6 };
                 blackPen.DashOffset = offset;
-                g.DrawRectangle(blackPen, rect);
-
+                
+                try
+                {
+                    g.DrawRectangle(blackPen, rect);
+                }
+                catch
+                {
+                    Console.WriteLine(rect);
+                }
+                
                 blackPen.Dispose();
             }
 
