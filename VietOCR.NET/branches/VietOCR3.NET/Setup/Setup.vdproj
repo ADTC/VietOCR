@@ -39,12 +39,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1A334484E87D858BD4A35B952AA8ADDB"
-        "OwnerKey" = "8:_1AE33DD3BC5E45C5BAFCBE03FA080309"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_1A4217B8EB0C413FB001C694900E70B1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -69,13 +63,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_619F106385E94FDD98C8F324E6C76A01"
+        "MsmKey" = "8:_2F6BD11A46FE4E149AC88CC92114595A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_631C83A1062F43A8A87112067F7BACDF"
+        "MsmKey" = "8:_619F106385E94FDD98C8F324E6C76A01"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -131,6 +125,12 @@
         {
         "MsmKey" = "8:_9B27517C9C2E4081A338E06B8C14E5B2"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A1CB5FBCAFB23C4DF57F666F370A7461"
+        "OwnerKey" = "8:_1AE33DD3BC5E45C5BAFCBE03FA080309"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -226,19 +226,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1A334484E87D858BD4A35B952AA8ADDB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_869C6C81D4FD5F42336BFAC0D432AB52"
+        "OwnerKey" = "8:_A1CB5FBCAFB23C4DF57F666F370A7461"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_00FF8CC9CE3F2418FC616D315DC05D07"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_869C6C81D4FD5F42336BFAC0D432AB52"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -435,37 +435,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1A334484E87D858BD4A35B952AA8ADDB"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Interop.WIA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_1A334484E87D858BD4A35B952AA8ADDB"
-                    {
-                    "Name" = "8:Interop.WIA.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Interop.WIA.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1A4217B8EB0C413FB001C694900E70B1"
             {
             "SourcePath" = "8:..\\dict\\en_US.aff"
@@ -537,12 +506,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_619F106385E94FDD98C8F324E6C76A01"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2F6BD11A46FE4E149AC88CC92114595A"
             {
-            "SourcePath" = "8:..\\tessdata\\eng.traineddata"
-            "TargetName" = "8:eng.traineddata"
+            "SourcePath" = "8:..\\liblept168.dll"
+            "TargetName" = "8:liblept168.dll"
             "Tag" = "8:"
-            "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
+            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -557,12 +526,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_631C83A1062F43A8A87112067F7BACDF"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_619F106385E94FDD98C8F324E6C76A01"
             {
-            "SourcePath" = "8:..\\liblept168d.dll"
-            "TargetName" = "8:liblept168d.dll"
+            "SourcePath" = "8:..\\tessdata\\eng.traineddata"
+            "TargetName" = "8:eng.traineddata"
             "Tag" = "8:"
-            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
+            "Folder" = "8:_35FC6CB1793B426D875C640C58E25CD1"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -766,6 +735,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A1CB5FBCAFB23C4DF57F666F370A7461"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Interop.WIA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_A1CB5FBCAFB23C4DF57F666F370A7461"
+                    {
+                    "Name" = "8:Interop.WIA.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Interop.WIA.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_62E5121B93304E73845F4D594BA48305"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ABCA1E305BB24C2AA880338C9D6EC3E9"
