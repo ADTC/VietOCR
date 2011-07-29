@@ -31,3 +31,6 @@ Version 3.1.3 (4 June 2011)
 - Improve program usability, enabling image nagivation and manipulation with keyboard
 - Fix an EOL issue that broke Remove Line Breaks functionality on Windows
 - Replace Vietnamese language pack with an improved version
+
+Version 3.1.4 (1 August 2011)
+- Update Tesseract 3.01 to r596
