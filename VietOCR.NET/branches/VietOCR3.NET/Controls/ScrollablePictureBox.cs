@@ -125,9 +125,9 @@ namespace VietOCR.NET.Controls
                 {
                     g.DrawRectangle(blackPen, rect);
                 }
-                catch
+                catch (OutOfMemoryException e)
                 {
-                    Console.WriteLine(rect);
+                    Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace + Environment.NewLine + rect);
                 }
                 
                 blackPen.Dispose();
