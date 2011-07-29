@@ -259,7 +259,11 @@ public class DownloadDialog extends javax.swing.JDialog {
                     bout.write(buffer, 0, bytesRead);
                     byteCount += bytesRead;
                     if (contentLength != 0) {
-                        setProgress(100 * byteCount / contentLength);
+                        int progressPercent = 100 * byteCount / contentLength;
+                        if (progressPercent > 100) {
+                            progressPercent = 100;
+                        }
+                        setProgress(progressPercent);
                     }
                 }
 
