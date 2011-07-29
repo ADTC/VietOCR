@@ -126,6 +126,10 @@ Version 2.0.2 (13 March 2011)
 - Incorporate deskew functionality using GMSE Deskew algorithm
 
 Version 2.0.3 (4 June 2011)
-- Refactoring
+- Refactor
 - Improve program usability, enabling image nagivation and manipulation with keyboard
 - Fix an installation issue that was unable to uninstall previous versions
+
+Version 2.0.4 (1 August 2011)
+- Trap OutOfMemory exceptions that intermittently occur during drawing of selection boxes
+- Refactor
