@@ -127,7 +127,7 @@ namespace VietOCR.NET.Controls
                 }
                 catch (OutOfMemoryException e)
                 {
-                    Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace + Environment.NewLine + rect);
+                    Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace + Environment.NewLine + rect.ToString());
                 }
 
                 blackPen.Dispose();
