@@ -9,3 +9,6 @@ Version 3.1 (1 August 2011)
 - Remove tesseract.exe file
 - Trap OutOfMemory exceptions that intermittently occur during drawing of selection boxes
 - Refactor
+
+Version 3.1.1 (13 August 2011)
+- Fix a bug in which the arrow keys would scroll the picturebox even when the textbox has focus
