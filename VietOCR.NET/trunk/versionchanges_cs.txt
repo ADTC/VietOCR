@@ -133,3 +133,6 @@ Version 2.0.3 (4 June 2011)
 Version 2.0.4 (1 August 2011)
 - Trap OutOfMemory exceptions that intermittently occur during drawing of selection boxes
 - Refactor
+
+Version 2.0.5 (14 August 2011)
+- Fix a bug in which the arrow keys would scroll the picturebox even when the textbox has focus
