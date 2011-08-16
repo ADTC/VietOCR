@@ -202,7 +202,6 @@ namespace VietOCR.NET
             {
                 // Finally, handle the case where the operation succeeded.
                 this.toolStripStatusLabel1.Text = Properties.Resources.OCRcompleted;
-                this.textBox1.Focus();
                 //this.textBox1.AppendText(e.Result.ToString());
             }
 
