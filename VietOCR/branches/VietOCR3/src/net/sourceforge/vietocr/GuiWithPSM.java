@@ -22,37 +22,63 @@ import javax.swing.JRadioButtonMenuItem;
 
 public class GuiWithPSM extends GuiWithSettings {
 
-    String psModes = "0 - Orientation and script detection (OSD) only;"
-            + "1 - Automatic page segmentation with OSD;"
-            + "2 - Automatic page segmentation, but no OSD, or OCR;"
-            + "3 - Fully automatic page segmentation, but no OSD (default);"
-            + "4 - Assume a single column of text of variable sizes;"
-            + "5 - Assume a single uniform block of vertically aligned text;"
-            + "6 - Assume a single uniform block of text;"
-            + "7 - Treat the image as a single text line;"
-            + "8 - Treat the image as a single word;"
-            + "9 - Treat the image as a single word in a circle;"
-            + "10 - Treat the image as a single character";
+    public enum PageSegMode {
+
+        PSM_OSD_ONLY("0", "0 - Orientation and script detection (OSD) only"),
+        PSM_AUTO_OSD("1", "1 - Automatic page segmentation with OSD"),
+        PSM_AUTO_ONLY("2", "2 - Automatic page segmentation, but no OSD, or OCR"),
+        PSM_AUTO("3", "3 - Fully automatic page segmentation, but no OSD (default)"),
+        PSM_SINGLE_COLUMN("4", "4 - Assume a single column of text of variable sizes"),
+        PSM_SINGLE_BLOCK_VERT_TEXT("5", "5 - Assume a single uniform block of vertically aligned text"),
+        PSM_SINGLE_BLOCK("6", "6 - Assume a single uniform block of text"),
+        PSM_SINGLE_LINE("7", "7 - Treat the image as a single text line"),
+        PSM_SINGLE_WORD("8", "8 - Treat the image as a single word"),
+        PSM_CIRCLE_WORD("9", "9 - Treat the image as a single word in a circle"),
+        PSM_SINGLE_CHAR("10", "10 - Treat the image as a single character");
+        
+        private final String val;
+        private final String desc;
+
+        PageSegMode(String val, String desc) {
+            this.val = val;
+            this.desc = desc;
+        }
+
+        String getVal() {
+            return val;
+        }
+
+        String getDesc() {
+            return desc;
+        }
+    }
 
     public GuiWithPSM() {
-        currentPSM = prefs.get("psm", "3");
-        
-        ButtonGroup groupPSM = new ButtonGroup();
+        selectedPSM = prefs.get("PageSegmentationMode", "3");
+
         ActionListener psmLst = new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                currentPSM = ae.getActionCommand();
+                selectedPSM = ae.getActionCommand();
             }
         };
 
         // build PSM submenu
-
-        for (String mode : psModes.split(";")) {
-            JRadioButtonMenuItem radioItem = new JRadioButtonMenuItem(mode, mode.startsWith(currentPSM));
+        ButtonGroup groupPSM = new ButtonGroup();
+        for (PageSegMode mode : PageSegMode.values()) {
+            JRadioButtonMenuItem radioItem = new JRadioButtonMenuItem(mode.getDesc(), mode.getVal().equals(selectedPSM));
+            radioItem.setActionCommand(mode.getVal());
             radioItem.addActionListener(psmLst);
             groupPSM.add(radioItem);
             this.jMenuPSM.add(radioItem);
         }
+    }
+
+    @Override
+    void quit() {
+        prefs.put("PageSegmentationMode", selectedPSM);
+
+        super.quit();
     }
 }
