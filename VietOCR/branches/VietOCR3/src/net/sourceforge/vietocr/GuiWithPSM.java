@@ -35,7 +35,6 @@ public class GuiWithPSM extends GuiWithSettings {
         PSM_SINGLE_WORD("8", "8 - Treat the image as a single word"),
         PSM_CIRCLE_WORD("9", "9 - Treat the image as a single word in a circle"),
         PSM_SINGLE_CHAR("10", "10 - Treat the image as a single character");
-        
         private final String val;
         private final String desc;
 
@@ -52,9 +51,10 @@ public class GuiWithPSM extends GuiWithSettings {
             return desc;
         }
     }
+    private final String strPSM = "PageSegMode";
 
     public GuiWithPSM() {
-        selectedPSM = prefs.get("PageSegMode", "3");
+        selectedPSM = prefs.get(strPSM, "3");
 
         ActionListener psmLst = new ActionListener() {
 
@@ -77,7 +77,7 @@ public class GuiWithPSM extends GuiWithSettings {
 
     @Override
     void quit() {
-        prefs.put("PageSegMode", selectedPSM);
+        prefs.put(strPSM, selectedPSM);
 
         super.quit();
     }

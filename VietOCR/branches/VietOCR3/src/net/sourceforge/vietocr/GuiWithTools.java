@@ -25,11 +25,12 @@ import net.sourceforge.vietpad.components.SimpleFilter;
 
 public class GuiWithTools extends GuiWithSpellcheck {
 
+    private final String strImageFolder = "ImageFolder";
     File imageFolder;
     FileFilter selectedFilter;
 
     public GuiWithTools() {
-        imageFolder = new File(prefs.get("ImageFolder", System.getProperty("user.home")));
+        imageFolder = new File(prefs.get(strImageFolder, System.getProperty("user.home")));
     }
 
     @Override
@@ -296,7 +297,7 @@ public class GuiWithTools extends GuiWithSpellcheck {
 
     @Override
     void quit() {
-        prefs.put("ImageFolder", imageFolder.getPath());
+        prefs.put(strImageFolder, imageFolder.getPath());
         super.quit();
     }
 
@@ -304,7 +305,7 @@ public class GuiWithTools extends GuiWithSpellcheck {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        selectedUILang = prefs.get("UILanguage", "en");
+        selectedUILang = prefs.get(strUILanguage, "en");
         Locale.setDefault(getLocale(selectedUILang));
 
         java.awt.EventQueue.invokeLater(new Runnable() {
