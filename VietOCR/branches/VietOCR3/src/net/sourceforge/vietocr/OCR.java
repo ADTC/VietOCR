@@ -19,7 +19,22 @@ import java.io.*;
 import java.util.*;
 
 public class OCR {
-
+    public enum ePageSegMode
+    {
+        PSM_OSD_ONLY,
+        PSM_AUTO_OSD,
+        PSM_AUTO_ONLY,
+        PSM_AUTO,
+        PSM_SINGLE_COLUMN,
+        PSM_SINGLE_BLOCK_VERT_TEXT,
+        PSM_SINGLE_BLOCK,
+        PSM_SINGLE_LINE,
+        PSM_SINGLE_WORD,
+        PSM_CIRCLE_WORD,
+        PSM_SINGLE_CHAR,
+        PSM_COUNT
+    }
+    
     private final String LANG_OPTION = "-l";
     private final String PSM_OPTION = "-psm";
     private final String EOL = "\n";
