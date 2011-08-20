@@ -21,14 +21,20 @@ import java.util.*;
 public class OCR {
 
     private final String LANG_OPTION = "-l";
+    private final String PSM_OPTION = "-psm";
     private final String EOL = "\n";
     private String tessPath;
     final static String OUTPUT_FILE_NAME = "TessOutput";
     final static String FILE_EXTENSION = ".txt";
+    private String psm = "3"; // Fully automatic page segmentation, but no OSD (default)
 
     /** Creates a new instance of OCR */
     public OCR(String tessPath) {
         this.tessPath = tessPath;
+    }
+
+    public void setPSM(String mode) {
+        psm = mode;
     }
 
     /**
@@ -47,6 +53,8 @@ public class OCR {
         cmd.add(outputFileName);
         cmd.add(LANG_OPTION);
         cmd.add(lang);
+        cmd.add(PSM_OPTION);
+        cmd.add(psm);
 
         ProcessBuilder pb = new ProcessBuilder();
         pb.directory(new File(System.getProperty("user.home")));
