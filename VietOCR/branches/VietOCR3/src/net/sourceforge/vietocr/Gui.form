@@ -391,6 +391,16 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemDownloadLangDataActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator5">
+            </MenuItem>
+            <Menu class="javax.swing.JMenu" name="jMenuPSM">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Page Segmentation Mode"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+              </AuxValues>
+            </Menu>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparatorOptions">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemOptions">

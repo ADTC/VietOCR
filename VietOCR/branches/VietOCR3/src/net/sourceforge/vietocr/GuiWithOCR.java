@@ -26,6 +26,7 @@ import net.sourceforge.vietocr.components.JImageLabel;
 public class GuiWithOCR extends GuiWithImageOps {
 
     private OcrWorker ocrWorker;
+    protected String currentPSM = "3";
 
     @Override
     void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +134,8 @@ public class GuiWithOCR extends GuiWithImageOps {
         @Override
         protected Void doInBackground() throws Exception {
             OCR ocrEngine = new OCR(tessPath);
+            ocrEngine.setPSM(currentPSM); // set page segmentation mode
+            
             workingFiles = entity.getClonedImageFiles();
 
             for (int i = 0; i < workingFiles.size(); i++) {

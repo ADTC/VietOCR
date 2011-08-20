@@ -679,6 +679,8 @@ public class Gui extends JFrame {
         jMenuLookAndFeel = new javax.swing.JMenu();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItemDownloadLangData = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        jMenuPSM = new javax.swing.JMenu();
         jSeparatorOptions = new javax.swing.JPopupMenu.Separator();
         jMenuItemOptions = new javax.swing.JMenuItem();
         jMenuTools = new javax.swing.JMenu();
@@ -1162,6 +1164,10 @@ public class Gui extends JFrame {
             }
         });
         jMenuSettings.add(jMenuItemDownloadLangData);
+        jMenuSettings.add(jSeparator5);
+
+        jMenuPSM.setText("Page Segmentation Mode");
+        jMenuSettings.add(jMenuPSM);
         jMenuSettings.add(jSeparatorOptions);
 
         jMenuItemOptions.setMnemonic(java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui").getString("jMenuItemOptions.Mnemonic").charAt(0));
@@ -1874,6 +1880,7 @@ public class Gui extends JFrame {
     protected javax.swing.JMenuItem jMenuItemScan;
     private javax.swing.JMenuItem jMenuItemSplitPdf;
     protected javax.swing.JMenu jMenuLookAndFeel;
+    protected javax.swing.JMenu jMenuPSM;
     private javax.swing.JMenu jMenuRecentFiles;
     private javax.swing.JMenu jMenuSettings;
     private javax.swing.JMenu jMenuTools;
@@ -1889,6 +1896,7 @@ public class Gui extends JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JToolBar.Separator jSeparator9;
