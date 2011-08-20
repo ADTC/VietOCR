@@ -26,6 +26,8 @@ namespace VietOCR.NET
 {
     public partial class GUIWithOCR : VietOCR.NET.GUIWithImageOps
     {
+        protected string currentPSM = "3";
+
         public GUIWithOCR()
         {
             InitializeComponent();
@@ -126,6 +128,7 @@ namespace VietOCR.NET
 
             OCRImageEntity entity = (OCRImageEntity)e.Argument;
             OCR<Image> ocrEngine = new OCRImages();
+            ocrEngine.PSM = currentPSM;
 
             // Assign the result of the computation to the Result property of the DoWorkEventArgs
             // object. This is will be available to the RunWorkerCompleted eventhandler.

@@ -10,5 +10,7 @@ Version 3.1 (1 August 2011)
 - Trap OutOfMemory exceptions that intermittently occur during drawing of selection boxes
 - Refactor
 
-Version 3.1.1 (13 August 2011)
+Version 3.1.1 Beta (19 August 2011)
 - Fix a bug in which the arrow keys would scroll the picturebox even when the textbox has focus
+- Update tesseractdotnet .NET wrapper DLL x86 (r48+) based on Tesseract 3.01 (r604)
+- Add support for specifying PSM to Tesseract engine

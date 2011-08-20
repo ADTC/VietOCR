@@ -159,6 +159,12 @@
     <Compile Include="GUIWithPostprocess.Designer.cs">
       <DependentUpon>GUIWithPostprocess.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUIWithPSM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIWithPSM.Designer.cs">
+      <DependentUpon>GUIWithPSM.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUIWithScan.cs">
       <SubType>Form</SubType>
     </Compile>
