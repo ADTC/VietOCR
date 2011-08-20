@@ -41,6 +41,7 @@ namespace VietOCR.NET
             string tessdata = Path.Combine(basedir, TESSDATA);
             TesseractProcessor processor = new TesseractProcessor();
             processor.Init(tessdata, lang, oem);
+            processor.SetPageSegMode((ePageSegMode)Enum.Parse(typeof(ePageSegMode), PSM));
 
             StringBuilder strB = new StringBuilder();
 

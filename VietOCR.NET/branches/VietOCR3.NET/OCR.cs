@@ -26,6 +26,13 @@ namespace VietOCR.NET
     {
         protected Rectangle rect = Rectangle.Empty;
         BackgroundWorker worker;
+        private string psm = "3";
+
+        public string PSM
+        {
+            get { return psm; }
+            set { psm = value; }
+        }
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public string RecognizeText(IList<T> imageEntities, string lang, Rectangle selection)
