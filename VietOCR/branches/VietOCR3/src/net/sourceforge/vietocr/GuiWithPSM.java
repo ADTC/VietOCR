@@ -39,16 +39,16 @@ public class GuiWithPSM extends GuiWithSettings {
         private final String val;
         private final String desc;
 
-        PageSegMode(String val, String desc) {
+        private PageSegMode(String val, String desc) {
             this.val = val;
             this.desc = desc;
         }
 
-        String getVal() {
+        public String getVal() {
             return val;
         }
 
-        String getDesc() {
+        public String getDesc() {
             return desc;
         }
     }
