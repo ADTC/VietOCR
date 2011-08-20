@@ -24,10 +24,11 @@ import net.sourceforge.vietpad.inputmethod.VietKeyListener;
 
 public class GuiWithInputMethod extends GuiWithFormat {
 
+    private final String strInputMethod = "inputMethod";
     private String selectedInputMethod;
 
     public GuiWithInputMethod() {
-        selectedInputMethod = prefs.get("inputMethod", "Telex");
+        selectedInputMethod = prefs.get(strInputMethod, "Telex");
 
         initComponents();
     }
@@ -63,7 +64,7 @@ public class GuiWithInputMethod extends GuiWithFormat {
 
     @Override
     void quit() {
-        prefs.put("inputMethod", selectedInputMethod);
+        prefs.put(strInputMethod, selectedInputMethod);
 
         super.quit();
     }

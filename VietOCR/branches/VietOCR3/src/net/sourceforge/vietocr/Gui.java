@@ -45,6 +45,23 @@ public class Gui extends JFrame {
     static final boolean WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
 //    static final boolean LINUX = System.getProperty("os.name").equals("Linux");
     static final String UTF8 = "UTF-8";
+    static final String strUILanguage = "UILanguage";
+    private static final String strLookAndFeel = "lookAndFeel";
+    private static final String strWindowState = "windowState";
+    private static final String strLangCode = "langCode";
+    private static final String strTessDir = "TesseractDirectory";
+    private static final String strMruList = "MruList";
+    private static final String strFrameWidth = "frameWidth";
+    private static final String strFrameHeight = "frameHeight";
+    private static final String strFrameX = "frameX";
+    private static final String strFrameY = "frameY";
+    private static final String strCurrentDirectory = "currentDirectory";
+    private static final String strOutputDirectory = "outputDirectory";
+    private static final String strFontName = "fontName";
+    private static final String strFontSize = "fontSize";
+    private static final String strFontStyle = "fontStyle";
+    private static final String strWordWrap = "wordWrap";
+    private static final String strFilterIndex = "filterIndex";
     public final String EOL = System.getProperty("line.separator");
     static final Preferences prefs = Preferences.userRoot().node("/net/sourceforge/vietocr3");
     private int filterIndex;
@@ -86,7 +103,7 @@ public class Gui extends JFrame {
      */
     public Gui() {
         try {
-            UIManager.setLookAndFeel(prefs.get("lookAndFeel", UIManager.getSystemLookAndFeelClassName()));
+            UIManager.setLookAndFeel(prefs.get(strLookAndFeel, UIManager.getSystemLookAndFeelClassName()));
         } catch (Exception e) {
             // keep default LAF
         }
@@ -127,7 +144,7 @@ public class Gui extends JFrame {
                     @Override
                     public void windowOpened(WindowEvent e) {
                         updateSave(false);
-                        setExtendedState(prefs.getInt("windowState", Frame.NORMAL));
+                        setExtendedState(prefs.getInt(strWindowState, Frame.NORMAL));
                         populateMRUList();
                         populatePopupMenu();
                         addUndoSupport();
@@ -135,14 +152,14 @@ public class Gui extends JFrame {
                 });
 
         setSize(
-                snap(prefs.getInt("frameWidth", 500), 300, screen.width),
-                snap(prefs.getInt("frameHeight", 360), 150, screen.height));
+                snap(prefs.getInt(strFrameWidth, 500), 300, screen.width),
+                snap(prefs.getInt(strFrameHeight, 360), 150, screen.height));
         setLocation(
                 snap(
-                prefs.getInt("frameX", (screen.width - getWidth()) / 2),
+                prefs.getInt(strFrameX, (screen.width - getWidth()) / 2),
                 screen.x, screen.x + screen.width - getWidth()),
                 snap(
-                prefs.getInt("frameY", screen.y + (screen.height - getHeight()) / 3),
+                prefs.getInt(strFrameY, screen.y + (screen.height - getHeight()) / 3),
                 screen.y, screen.y + screen.height - getHeight()));
 
         KeyEventDispatcher dispatcher = new KeyEventDispatcher() {
@@ -220,7 +237,7 @@ public class Gui extends JFrame {
         if (WINDOWS) {
             tessPath = new File(baseDir, "tesseract").getPath();
         } else {
-            tessPath = prefs.get("TesseractDirectory", "/usr/bin");
+            tessPath = prefs.get(strTessDir, "/usr/bin");
         }
 
         lookupISO639 = new Properties();
@@ -282,7 +299,7 @@ public class Gui extends JFrame {
 
         DefaultComboBoxModel model = new DefaultComboBoxModel(installedLanguages);
         jComboBoxLang.setModel(model);
-        jComboBoxLang.setSelectedItem(prefs.get("langCode", null));
+        jComboBoxLang.setSelectedItem(prefs.get(strLangCode, null));
         if (installedLanguageCodes != null && jComboBoxLang.getSelectedIndex() != -1) {
             curLangCode = installedLanguageCodes[jComboBoxLang.getSelectedIndex()];
         }
@@ -292,7 +309,7 @@ public class Gui extends JFrame {
      * Populates MRU List.
      */
     private void populateMRUList() {
-        String[] fileNames = prefs.get("MruList", "").split(File.pathSeparator);
+        String[] fileNames = prefs.get(strMruList, "").split(File.pathSeparator);
         for (String fileName : fileNames) {
             if (!fileName.equals("")) {
                 mruList.add(fileName);
@@ -692,8 +709,8 @@ public class Gui extends JFrame {
         jSeparatorAbout = new javax.swing.JPopupMenu.Separator();
         jMenuItemAbout = new javax.swing.JMenuItem();
 
-        currentDirectory = prefs.get("currentDirectory", null);
-        outputDirectory = prefs.get("outputDirectory", null);
+        currentDirectory = prefs.get(strCurrentDirectory, null);
+        outputDirectory = prefs.get(strOutputDirectory, null);
         jFileChooser.setCurrentDirectory(currentDirectory == null ? null : new File(currentDirectory));
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/sourceforge/vietocr/Gui"); // NOI18N
         jFileChooser.setDialogTitle(bundle.getString("jButtonOpen.ToolTipText")); // NOI18N
@@ -721,7 +738,7 @@ public class Gui extends JFrame {
         jFileChooser.addChoosableFileFilter(pdfFilter);
         jFileChooser.addChoosableFileFilter(textFilter);
 
-        filterIndex = prefs.getInt("filterIndex", 0);
+        filterIndex = prefs.getInt(strFilterIndex, 0);
         fileFilters = jFileChooser.getChoosableFileFilters();
         if (filterIndex < fileFilters.length) {
             jFileChooser.setFileFilter(fileFilters[filterIndex]);
@@ -840,14 +857,14 @@ public class Gui extends JFrame {
             }
         });
         jScrollPane1.setViewportView(jTextArea1);
-        wordWrapOn = prefs.getBoolean("wordWrap", false);
+        wordWrapOn = prefs.getBoolean(strWordWrap, false);
         jTextArea1.setLineWrap(wordWrapOn);
         jCheckBoxMenuWordWrap.setSelected(wordWrapOn);
 
         font = new Font(
-            prefs.get("fontName", MAC_OS_X ? "Lucida Grande" : "Tahoma"),
-            prefs.getInt("fontStyle", Font.PLAIN),
-            prefs.getInt("fontSize", 12));
+            prefs.get(strFontName, MAC_OS_X ? "Lucida Grande" : "Tahoma"),
+            prefs.getInt(strFontStyle, Font.PLAIN),
+            prefs.getInt(strFontSize, 12));
         jTextArea1.setFont(font);
 
         jSplitPane1.setRightComponent(jScrollPane1);
@@ -1364,45 +1381,44 @@ public class Gui extends JFrame {
         if (!promptToSave()) {
             return;
         }
-        prefs.put("UILanguage", selectedUILang);
+        prefs.put(strUILanguage, selectedUILang);
 
         if (currentDirectory != null) {
-            prefs.put("currentDirectory", currentDirectory);
+            prefs.put(strCurrentDirectory, currentDirectory);
         }
         if (outputDirectory != null) {
-            prefs.put("outputDirectory", outputDirectory);
+            prefs.put(strOutputDirectory, outputDirectory);
         }
 
         if (!WINDOWS) {
-            prefs.put("TesseractDirectory", tessPath);
+            prefs.put(strTessDir, tessPath);
         }
 
-        prefs.put("lookAndFeel", UIManager.getLookAndFeel().getClass().getName());
-        prefs.put("fontName", font.getName());
-        prefs.putInt("fontSize", font.getSize());
-        prefs.putInt("fontStyle", font.getStyle());
-        prefs.put("lookAndFeel", UIManager.getLookAndFeel().getClass().getName());
-        prefs.putInt("windowState", getExtendedState());
+        prefs.put(strFontName, font.getName());
+        prefs.putInt(strFontSize, font.getSize());
+        prefs.putInt(strFontStyle, font.getStyle());
+        prefs.put(strLookAndFeel, UIManager.getLookAndFeel().getClass().getName());
+        prefs.putInt(strWindowState, getExtendedState());
         if (this.jComboBoxLang.getSelectedIndex() != -1) {
-            prefs.put("langCode", this.jComboBoxLang.getSelectedItem().toString());
+            prefs.put(strLangCode, this.jComboBoxLang.getSelectedItem().toString());
         }
 
-        prefs.putBoolean("wordWrap", wordWrapOn);
+        prefs.putBoolean(strWordWrap, wordWrapOn);
 
         StringBuilder buf = new StringBuilder();
         for (int i = 0; i < this.mruList.size(); i++) {
             buf.append(this.mruList.get(i)).append(File.pathSeparatorChar);
         }
-        prefs.put("MruList", buf.toString());
+        prefs.put(strMruList, buf.toString());
 
         if (getExtendedState() == NORMAL) {
-            prefs.putInt("frameHeight", getHeight());
-            prefs.putInt("frameWidth", getWidth());
-            prefs.putInt("frameX", getX());
-            prefs.putInt("frameY", getY());
+            prefs.putInt(strFrameHeight, getHeight());
+            prefs.putInt(strFrameWidth, getWidth());
+            prefs.putInt(strFrameX, getX());
+            prefs.putInt(strFrameY, getY());
         }
 
-        prefs.putInt("filterIndex", filterIndex);
+        prefs.putInt(strFilterIndex, filterIndex);
 
         System.exit(0);
     }
@@ -1818,7 +1834,7 @@ public class Gui extends JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        selectedUILang = prefs.get("UILanguage", "en");
+        selectedUILang = prefs.get(strUILanguage, "en");
         Locale.setDefault(getLocale(selectedUILang));
 
         java.awt.EventQueue.invokeLater(new Runnable() {

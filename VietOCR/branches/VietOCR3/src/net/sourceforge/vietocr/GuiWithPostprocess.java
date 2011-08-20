@@ -23,12 +23,14 @@ import net.sourceforge.vietocr.postprocessing.Processor;
 
 public class GuiWithPostprocess extends GuiWithOCR {
 
+    private final String strDangAmbigsPath = "DangAmbigsPath";
+    private final String strDangAmbigs = "DangAmbigs";
     protected String dangAmbigsPath;
     protected boolean dangAmbigsOn;
 
     public GuiWithPostprocess() {
-        dangAmbigsPath = prefs.get("DangAmbigsPath", new File(baseDir, "data").getPath());
-        dangAmbigsOn = prefs.getBoolean("dangAmbigs", true);
+        dangAmbigsPath = prefs.get(strDangAmbigsPath, new File(baseDir, "data").getPath());
+        dangAmbigsOn = prefs.getBoolean(strDangAmbigs, true);
     }
 
     @Override
@@ -102,8 +104,8 @@ public class GuiWithPostprocess extends GuiWithOCR {
 
     @Override
     void quit() {
-        prefs.put("DangAmbigsPath", dangAmbigsPath);
-        prefs.putBoolean("dangAmbigs", dangAmbigsOn);
+        prefs.put(strDangAmbigsPath, dangAmbigsPath);
+        prefs.putBoolean(strDangAmbigs, dangAmbigsOn);
 
         super.quit();
     }
