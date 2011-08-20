@@ -26,7 +26,7 @@ namespace VietOCR.NET
 {
     public partial class GUIWithOCR : VietOCR.NET.GUIWithImageOps
     {
-        protected string currentPSM = "3";
+        protected string selectedPSM = "PSM_AUTO"; // 3 - Fully automatic page segmentation, but no OSD (default)
 
         public GUIWithOCR()
         {
@@ -128,7 +128,7 @@ namespace VietOCR.NET
 
             OCRImageEntity entity = (OCRImageEntity)e.Argument;
             OCR<Image> ocrEngine = new OCRImages();
-            ocrEngine.PSM = currentPSM;
+            ocrEngine.PSM = selectedPSM;
 
             // Assign the result of the computation to the Result property of the DoWorkEventArgs
             // object. This is will be available to the RunWorkerCompleted eventhandler.
