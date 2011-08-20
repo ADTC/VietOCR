@@ -54,7 +54,7 @@ public class GuiWithPSM extends GuiWithSettings {
     }
 
     public GuiWithPSM() {
-        selectedPSM = prefs.get("PageSegmentationMode", "3");
+        selectedPSM = prefs.get("PageSegMode", "3");
 
         ActionListener psmLst = new ActionListener() {
 
@@ -64,7 +64,7 @@ public class GuiWithPSM extends GuiWithSettings {
             }
         };
 
-        // build PSM submenu
+        // build PageSegMode submenu
         ButtonGroup groupPSM = new ButtonGroup();
         for (PageSegMode mode : PageSegMode.values()) {
             JRadioButtonMenuItem radioItem = new JRadioButtonMenuItem(mode.getDesc(), mode.getVal().equals(selectedPSM));
@@ -77,7 +77,7 @@ public class GuiWithPSM extends GuiWithSettings {
 
     @Override
     void quit() {
-        prefs.put("PageSegmentationMode", selectedPSM);
+        prefs.put("PageSegMode", selectedPSM);
 
         super.quit();
     }
