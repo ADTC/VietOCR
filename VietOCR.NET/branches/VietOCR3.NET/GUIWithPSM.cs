@@ -43,7 +43,7 @@ namespace VietOCR.NET
             psmDict.Add("PSM_SINGLE_WORD", "8 - Treat the image as a single word");
             psmDict.Add("PSM_CIRCLE_WORD", "9 - Treat the image as a single word in a circle");
             psmDict.Add("PSM_SINGLE_CHAR", "10 - Treat the image as a single character");
-            psmDict.Add("PSM_COUNT", "11 - Get Count");
+            psmDict.Add("PSM_COUNT", "11 - Number of enum entries");
 
             InitializeComponent();
 
@@ -56,6 +56,10 @@ namespace VietOCR.NET
 
             foreach (string mode in Enum.GetNames(typeof(ePageSegMode)))
             {
+                if ((ePageSegMode)Enum.Parse(typeof(ePageSegMode), mode) == ePageSegMode.PSM_COUNT)
+                {
+                    continue;
+                }
                 ToolStripRadioButtonMenuItem psmItem = new ToolStripRadioButtonMenuItem();
                 psmItem.Text = psmDict[mode];
                 psmItem.Tag = mode;
