@@ -23,10 +23,11 @@ import javax.swing.SwingUtilities;
 
 public class GuiWithImage extends GuiWithPostprocess {
 
+    private final String strScreenshotMode = "ScreenshotMode";
     private static final double MINIMUM_DESKEW_THRESHOLD = 0.05d;
 
     GuiWithImage() {
-        this.jCheckBoxMenuItemScreenshotMode.setSelected(prefs.getBoolean("ScreenshotMode", false));
+        this.jCheckBoxMenuItemScreenshotMode.setSelected(prefs.getBoolean(strScreenshotMode, false));
     }
 
     @Override
@@ -72,7 +73,7 @@ public class GuiWithImage extends GuiWithPostprocess {
 
     @Override
     void quit() {
-        prefs.putBoolean("ScreenshotMode", this.jCheckBoxMenuItemScreenshotMode.isSelected());
+        prefs.putBoolean(strScreenshotMode, this.jCheckBoxMenuItemScreenshotMode.isSelected());
 
         super.quit();
     }

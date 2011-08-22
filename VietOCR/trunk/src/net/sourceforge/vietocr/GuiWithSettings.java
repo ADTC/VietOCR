@@ -27,6 +27,10 @@ import net.sourceforge.vietocr.postprocessing.TextUtilities;
 
 public class GuiWithSettings extends GuiWithLaF {
 
+    private final String strWatchFolder = "WatchFolder";
+    private final String strOutputFolder = "OutputFolder";
+    private final String strWatchEnabled = "WatchEnabled";
+    
     private String watchFolder;
     private String outputFolder;
     private boolean watchEnabled;
@@ -35,9 +39,9 @@ public class GuiWithSettings extends GuiWithLaF {
     private Watcher watcher;
 
     public GuiWithSettings() {
-        watchFolder = prefs.get("WatchFolder", System.getProperty("user.home"));
-        outputFolder = prefs.get("OutputFolder", System.getProperty("user.home"));
-        watchEnabled = prefs.getBoolean("WatchEnabled", false);
+        watchFolder = prefs.get(strWatchFolder, System.getProperty("user.home"));
+        outputFolder = prefs.get(strOutputFolder, System.getProperty("user.home"));
+        watchEnabled = prefs.getBoolean(strWatchEnabled, false);
 
         statusFrame = new StatusFrame();
         statusFrame.setTitle(bundle.getString("statusFrame.Title"));
@@ -150,9 +154,9 @@ public class GuiWithSettings extends GuiWithLaF {
 
     @Override
     void quit() {
-        prefs.put("WatchFolder", watchFolder);
-        prefs.put("OutputFolder", outputFolder);
-        prefs.putBoolean("WatchEnabled", watchEnabled);
+        prefs.put(strWatchFolder, watchFolder);
+        prefs.put(strOutputFolder, outputFolder);
+        prefs.putBoolean(strWatchEnabled, watchEnabled);
         super.quit();
     }
 
@@ -177,7 +181,7 @@ public class GuiWithSettings extends GuiWithLaF {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        selectedUILang = prefs.get("UILanguage", "en");
+        selectedUILang = prefs.get(strUILanguage, "en");
         Locale.setDefault(getLocale(selectedUILang));
 
         java.awt.EventQueue.invokeLater(new Runnable() {
