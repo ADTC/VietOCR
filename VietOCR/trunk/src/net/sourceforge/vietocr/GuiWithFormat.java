@@ -24,6 +24,10 @@ import net.sourceforge.vietpad.utilities.TextUtilities;
 import net.sourceforge.vietpad.components.FontDialog;
 
 public class GuiWithFormat extends GuiWithImage {
+
+    private final String strSelectedCase = "selectedCase";
+    private final String strChangeCaseX = "changeCaseX";
+    private final String strChangeCaseY = "changeCaseY";
     private ChangeCaseDialog changeCaseDlg;
 
     @Override
@@ -63,7 +67,7 @@ public class GuiWithFormat extends GuiWithImage {
         } catch (Exception exc) {
             exc.printStackTrace();
         }
-        
+
         dlg.setVisible(true);
         if (dlg.succeeded()) {
             jTextArea1.setFont(font = dlg.getFont());
@@ -76,10 +80,10 @@ public class GuiWithFormat extends GuiWithImage {
         if (changeCaseDlg == null) {
             changeCaseDlg = new ChangeCaseDialog(GuiWithFormat.this, false);
             // non-modal
-            changeCaseDlg.setSelectedCase(prefs.get("selectedCase", "UPPER CASE"));
+            changeCaseDlg.setSelectedCase(prefs.get(strSelectedCase, "UPPER CASE"));
             changeCaseDlg.setLocation(
-                    prefs.getInt("changeCaseX", changeCaseDlg.getX()),
-                    prefs.getInt("changeCaseY", changeCaseDlg.getY()));
+                    prefs.getInt(strChangeCaseX, changeCaseDlg.getX()),
+                    prefs.getInt(strChangeCaseY, changeCaseDlg.getY()));
         }
         if (jTextArea1.getSelectedText() == null) {
             jTextArea1.selectAll();
@@ -90,7 +94,9 @@ public class GuiWithFormat extends GuiWithImage {
     @Override
     void quit() {
         if (changeCaseDlg != null) {
-            prefs.put("selectedCase", changeCaseDlg.getSelectedCase());
+            prefs.put(strSelectedCase, changeCaseDlg.getSelectedCase());
+            prefs.putInt(strChangeCaseX, changeCaseDlg.getX());
+            prefs.putInt(strChangeCaseY, changeCaseDlg.getY());
         }
         super.quit();
     }
