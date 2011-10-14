@@ -61,6 +61,12 @@ public class ConsoleApp {
             } else if (args.length == 6) {
                 curLangCode = args[3];
                 psm = args[5];
+                try {
+                    Integer.parseInt(psm);
+                } catch (Exception e) {
+                    System.err.println("Invalid input value.");
+                    return;
+                }
             }
 
             String tessPath;
