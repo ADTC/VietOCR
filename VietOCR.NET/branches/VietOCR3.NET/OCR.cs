@@ -26,7 +26,7 @@ namespace VietOCR.NET
     {
         protected Rectangle rect = Rectangle.Empty;
         BackgroundWorker worker;
-        private string psm = "3";
+        private string psm = "3"; // or alternatively, "PSM_AUTO"; // 3 - Fully automatic page segmentation, but no OSD (default)
 
         public string PSM
         {
