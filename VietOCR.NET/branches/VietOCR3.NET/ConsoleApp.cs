@@ -19,7 +19,7 @@ namespace VietOCR.NET
         {
             try
             {
-                if (args[0] == "-?" || args[0] == "-help" || args.Length == 1 || args.Length == 3)
+                if (args[0] == "-?" || args[0] == "-help" || args.Length == 1 || args.Length == 3 || args.Length == 5)
                 {
                     Console.WriteLine("Usage: vietocr imagefile outputfile [-l lang] [-psm pagesegmode]");
                     return;
@@ -33,18 +33,34 @@ namespace VietOCR.NET
                     return;
                 }
 
-                string curLangCode;
+                string curLangCode = "eng"; //default language
+                string psm = "3"; // or alternatively, "PSM_AUTO"; // 3 - Fully automatic page segmentation, but no OSD (default)
 
-                if (args.Length == 2)
+                if (args.Length == 4)
                 {
-                    curLangCode = "eng"; //default language
+                    if (args[2].Equals("-l"))
+                    {
+                        curLangCode = args[3];
+                    }
+                    else if (args[2].Equals("-psm"))
+                    {
+                        psm = args[3];
+                    }
                 }
-                else
+                else if (args.Length == 6)
                 {
                     curLangCode = args[3];
+                    psm = args[5];
+                    try
+                    {
+                        Int16.Parse(psm);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Invalid input value.");
+                        return;
+                    }
                 }
-
-                string psm = "3"; // or alternatively, "PSM_AUTO"; // 3 - Fully automatic page segmentation, but no OSD (default)
 
                 IList<Image> imageList = ImageIOHelper.GetImageList(imageFile);
 
