@@ -26,7 +26,7 @@ import net.sourceforge.vietocr.components.JImageLabel;
 public class GuiWithOCR extends GuiWithImageOps {
 
     private OcrWorker ocrWorker;
-    protected String selectedPSM = "3";
+    protected String selectedPSM = "3"; // 3 - Fully automatic page segmentation, but no OSD (default)
 
     @Override
     void jMenuItemOCRActionPerformed(java.awt.event.ActionEvent evt) {
