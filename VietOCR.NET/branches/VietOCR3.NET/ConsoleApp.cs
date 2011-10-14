@@ -44,7 +44,7 @@ namespace VietOCR.NET
                     curLangCode = args[3];
                 }
 
-                String psm = "3"; // Fully automatic page segmentation, but no OSD (default)
+                string psm = "3"; // or alternatively, "PSM_AUTO"; // 3 - Fully automatic page segmentation, but no OSD (default)
 
                 IList<Image> imageList = ImageIOHelper.GetImageList(imageFile);
 
