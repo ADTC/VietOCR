@@ -33,7 +33,7 @@ public class ConsoleApp {
         List<File> tempTiffFiles = null;
 
         try {
-            if (args[0].equals("-?") || args[0].equals("-help") || args.length == 1 || args.length == 3) {
+            if (args[0].equals("-?") || args[0].equals("-help") || args.length == 1 || args.length == 3 || args.length == 5) {
                 System.err.println("Usage: java -jar VietOCR.jar\n"
                         + "       (to launch the program in GUI mode)\n\n"
                         + "   or  java -jar VietOCR.jar imagefile outputfile [-l lang] [-psm pagesegmode]\n"
@@ -49,16 +49,20 @@ public class ConsoleApp {
                 return;
             }
 
-            String curLangCode;
+            String curLangCode = "eng"; //default language
+            String psm = "3"; // Fully automatic page segmentation, but no OSD (default)
 
-            if (args.length == 2) {
-                curLangCode = "eng"; //default language
-            } else {
+            if (args.length == 4) {
+                if (args[2].equals("-l")) {
+                    curLangCode = args[3];
+                } else if (args[2].equals("-psm")) {
+                    psm = args[3];
+                }
+            } else if (args.length == 6) {
                 curLangCode = args[3];
+                psm = args[5];
             }
 
-            String psm = "3"; // Fully automatic page segmentation, but no OSD (default)
-            
             String tessPath;
 
             File baseDir = Utilities.getBaseDir(this);
