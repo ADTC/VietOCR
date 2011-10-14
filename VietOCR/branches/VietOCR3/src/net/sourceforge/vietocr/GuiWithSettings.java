@@ -81,6 +81,7 @@ public class GuiWithSettings extends GuiWithLaF {
 
                             try {
                                 OCR ocrEngine = new OCR(tessPath);
+                                ocrEngine.setPSM(selectedPSM);
                                 List<IIOImage> iioImageList = ImageIOHelper.getIIOImageList(imageFile);
                                 tempTiffFiles = ImageIOHelper.createTiffFiles(iioImageList, -1);
                                 String result = ocrEngine.recognizeText(tempTiffFiles, curLangCode);
