@@ -36,7 +36,7 @@ public class ConsoleApp {
             if (args[0].equals("-?") || args[0].equals("-help") || args.length == 1 || args.length == 3) {
                 System.err.println("Usage: java -jar VietOCR.jar\n"
                         + "       (to launch the program in GUI mode)\n\n"
-                        + "   or  java -jar VietOCR.jar imagefile outputfile [-l langcode]\n"
+                        + "   or  java -jar VietOCR.jar imagefile outputfile [-l lang] [-psm pagesegmode]\n"
                         + "       (to execute the program in command-line mode)");
                 return;
             }
@@ -57,6 +57,8 @@ public class ConsoleApp {
                 curLangCode = args[3];
             }
 
+            String psm = "3"; // Fully automatic page segmentation, but no OSD (default)
+            
             String tessPath;
 
             File baseDir = Utilities.getBaseDir(this);
@@ -68,6 +70,7 @@ public class ConsoleApp {
             }
 
             OCR ocrEngine = new OCR(tessPath);
+            ocrEngine.setPSM(psm);
             List<IIOImage> iioImageList = ImageIOHelper.getIIOImageList(imageFile);
             tempTiffFiles = ImageIOHelper.createTiffFiles(iioImageList, -1);
             String result = ocrEngine.recognizeText(tempTiffFiles, curLangCode);
