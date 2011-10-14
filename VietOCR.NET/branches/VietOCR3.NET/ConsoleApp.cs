@@ -21,7 +21,7 @@ namespace VietOCR.NET
             {
                 if (args[0] == "-?" || args[0] == "-help" || args.Length == 1 || args.Length == 3)
                 {
-                    Console.WriteLine("Usage: vietocr imagefile outputfile [-l langcode]");
+                    Console.WriteLine("Usage: vietocr imagefile outputfile [-l lang] [-psm pagesegmode]");
                     return;
                 }
                 FileInfo imageFile = new FileInfo(args[0]);
@@ -44,9 +44,12 @@ namespace VietOCR.NET
                     curLangCode = args[3];
                 }
 
+                String psm = "3"; // Fully automatic page segmentation, but no OSD (default)
+
                 IList<Image> imageList = ImageIOHelper.GetImageList(imageFile);
 
                 OCR<Image> ocrEngine = new OCRImages();
+                ocrEngine.PSM = psm;
                 string result = ocrEngine.RecognizeText(imageList, curLangCode);
 
                 // postprocess to correct common OCR errors
