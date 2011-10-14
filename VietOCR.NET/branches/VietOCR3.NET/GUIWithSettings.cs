@@ -119,6 +119,7 @@ namespace VietOCR.NET
             try
             {
                 OCR<Image> ocrEngine = new OCRImages();
+                ocrEngine.PSM = selectedPSM;
                 string result = ocrEngine.RecognizeText(imageList, curLangCode);
 
                 // postprocess to correct common OCR errors
