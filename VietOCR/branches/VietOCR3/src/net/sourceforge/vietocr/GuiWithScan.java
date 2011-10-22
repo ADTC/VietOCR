@@ -82,9 +82,9 @@ public class GuiWithScan extends Gui implements ScannerListener {
                     }
                     JOptionPane.showMessageDialog(null, msg, "Scanner Operation Error", JOptionPane.ERROR_MESSAGE);
                 } finally {
-                    if (WINDOWS) {
+//                    if (WINDOWS) {
                         scanCompleted();
-                    }
+//                    }
                 }
             }
         });
