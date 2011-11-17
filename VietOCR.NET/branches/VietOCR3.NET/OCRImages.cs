@@ -47,7 +47,12 @@ namespace VietOCR.NET
 
             foreach (Image image in images)
             {
-                string text = processor.Recognize(image, rect);
+                //if (rect != Rectangle.Empty)
+                //{
+                //    processor.UseROI = true;
+                //    processor.ROI = rect;
+                //}
+                string text = processor.Recognize(image);
 
                 if (text == null) return String.Empty;
                 strB.Append(text);
