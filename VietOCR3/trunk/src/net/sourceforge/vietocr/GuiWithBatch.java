@@ -20,8 +20,10 @@ import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.IIOImage;
 import javax.swing.*;
 import javax.swing.Timer;
+import net.sourceforge.tess4j.util.ImageIOHelper;
 import net.sourceforge.vietocr.util.Watcher;
 
 public class GuiWithBatch extends GuiWithSettings {
@@ -72,12 +74,40 @@ public class GuiWithBatch extends GuiWithSettings {
 //                        queue.clear();
                 return;
             }
+            
+            File workingFile = null;
+            
+            if (this.jCheckBoxMenuItemScreenshotMode.isSelected()) {
+                statusFrame.getTextArea().append("Screenshot mode is ON. ");
+                try {
+                    List<IIOImage> iioImageList = ImageIOHelper.getIIOImageList(imageFile);
+                    OCRImageEntity entity = new OCRImageEntity(iioImageList, inputfilename, -1, null, curLangCode);
+                    entity.setScreenshotMode(this.jCheckBoxMenuItemScreenshotMode.isSelected());
+                    if (!tessLibEnabled) {
+                        List<File> workingFiles = entity.getClonedImageFiles();
+                        workingFile = workingFiles.get(0);
+                        statusFrame.getTextArea().append("Working file set. " + (workingFile==null?"null":workingFile.toString()));
+                    } else {
+                        statusFrame.getTextArea().append("Working file not set!");
+                    }
+                } catch (Exception e) {
+                    logger.log(Level.WARNING, e.getMessage(), e);
+                    statusFrame.getTextArea().append(e.getMessage());
+                } finally {
+                    statusFrame.getTextArea().append("\n");
+                }
+            }
+            
+            // Local variable defined in an enclosing scope must be final or effectively final
+            final File finalWorkingFile = workingFile;
 
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        OCRHelper.performOCR(imageFile, new File(outputFolder, imageFile.getName()), tessPath, curLangCode, selectedPSM, outputFormat);
+                        OCRHelper.performOCR(
+                                (finalWorkingFile==null ? imageFile : finalWorkingFile),
+                                new File(outputFolder, imageFile.getName()), tessPath, curLangCode, selectedPSM, outputFormat);
                     } catch (Exception e) {
                         logger.log(Level.WARNING, e.getMessage(), e);
                         statusFrame.getTextArea().append("\t** " + bundle.getString("Cannotprocess") + " " + imageFile.getName() + " **\n");
